@@ -1,0 +1,31 @@
+<svg viewBox="0 0 600 800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="contactGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a0f0a"/>
+      <stop offset="50%" style="stop-color:#0a0705"/>
+      <stop offset="100%" style="stop-color:#080808"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="800" fill="url(#contactGrad)"/>
+  
+  <!-- Abstract geometric shapes - ellipses -->
+  <ellipse cx="300" cy="280" rx="160" ry="110" fill="none" stroke="#FF6B35" stroke-width="2" opacity="0.25"/>
+  <ellipse cx="300" cy="280" rx="120" ry="80" fill="none" stroke="#FF6B35" stroke-width="2" opacity="0.4"/>
+  <ellipse cx="300" cy="280" rx="70" ry="50" fill="#FF6B35" opacity="0.15"/>
+  
+  <!-- Wave pattern -->
+  <g opacity="0.12" fill="none" stroke="#FF6B35" stroke-width="1">
+    <path d="M 100 450 Q 200 430 300 450 T 500 450"/>
+    <path d="M 100 480 Q 200 460 300 480 T 500 480"/>
+    <path d="M 100 510 Q 200 490 300 510 T 500 510"/>
+    <path d="M 100 540 Q 200 520 300 540 T 500 540"/>
+    <path d="M 100 570 Q 200 550 300 570 T 500 570"/>
+  </g>
+  
+  <!-- Abstract frame -->
+  <path d="M 140 500 L 300 600 L 460 500 L 460 700 L 140 700 Z" fill="none" stroke="#FF6B35" stroke-width="1" opacity="0.2"/>
+  <path d="M 165 520 L 300 605 L 435 520 L 435 680 L 165 680 Z" fill="#FF6B35" opacity="0.08"/>
+  
+  <!-- Text -->
+  <text x="300" y="720" text-anchor="middle" fill="#FF6B35" font-family="Arial, sans-serif" font-size="28" font-weight="bold" opacity="0.3">CONTACT</text>
+</svg>

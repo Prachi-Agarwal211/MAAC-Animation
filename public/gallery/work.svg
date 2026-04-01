@@ -1,0 +1,31 @@
+<svg viewBox="0 0 600 800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="workGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a1a"/>
+      <stop offset="50%" style="stop-color:#0a0a0a"/>
+      <stop offset="100%" style="stop-color:#080808"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="800" fill="url(#workGrad)"/>
+  
+  <!-- Abstract geometric shapes -->
+  <circle cx="300" cy="280" r="140" fill="none" stroke="#c8ff00" stroke-width="2" opacity="0.25"/>
+  <circle cx="300" cy="280" r="100" fill="none" stroke="#c8ff00" stroke-width="2" opacity="0.4"/>
+  <circle cx="300" cy="280" r="60" fill="#c8ff00" opacity="0.15"/>
+  
+  <!-- Grid pattern -->
+  <g opacity="0.1">
+    <line x1="100" y1="400" x2="500" y2="400" stroke="#c8ff00" stroke-width="1"/>
+    <line x1="100" y1="450" x2="500" y2="450" stroke="#c8ff00" stroke-width="1"/>
+    <line x1="100" y1="500" x2="500" y2="500" stroke="#c8ff00" stroke-width="1"/>
+    <line x1="100" y1="550" x2="500" y2="550" stroke="#c8ff00" stroke-width="1"/>
+    <line x1="100" y1="600" x2="500" y2="600" stroke="#c8ff00" stroke-width="1"/>
+  </g>
+  
+  <!-- Abstract frame -->
+  <rect x="120" y="420" width="360" height="280" rx="8" fill="none" stroke="#c8ff00" stroke-width="1" opacity="0.2"/>
+  <rect x="150" y="450" width="300" height="220" rx="4" fill="#c8ff00" opacity="0.08"/>
+  
+  <!-- Text -->
+  <text x="300" y="720" text-anchor="middle" fill="#c8ff00" font-family="Arial, sans-serif" font-size="28" font-weight="bold" opacity="0.3">WORK</text>
+</svg>

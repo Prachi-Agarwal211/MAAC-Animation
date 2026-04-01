@@ -1,0 +1,1824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MAAC — Motion-first digital experiences">
+  <title>MAAC | Creative Studio</title>
+  
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- Fonts: Syne (display) + DM Sans (body) -->
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Splitting.js for text animation -->
+  <script src="https://unpkg.com/splitting/dist/splitting.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/splitting/dist/splitting.css">
+  
+  <style>
+    /* ============================================
+       CSS CUSTOM PROPERTIES
+       ============================================ */
+    :root {
+      /* Palette — Obsidian Lime */
+      --c-bg: #080808;
+      --c-surface: #101010;
+      --c-accent: #c8ff00;
+      --c-text: #f5f0e8;
+      --c-muted: #6b6b6b;
+      --c-overlay: rgba(0, 0, 0, 0.6);
+      
+      /* Type scale (fluid) */
+      --t-hero: clamp(3rem, 12vw, 11rem);
+      --t-h1: clamp(2.5rem, 8vw, 7rem);
+      --t-h2: clamp(1.5rem, 4vw, 3.5rem);
+      --t-body: clamp(0.95rem, 1.2vw, 1.1rem);
+      --t-label: clamp(0.7rem, 0.9vw, 0.85rem);
+      --t-eyebrow: clamp(0.75rem, 1vw, 0.9rem);
+      
+      /* Motion */
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-expo: cubic-bezier(0.7, 0, 0.84, 0);
+      --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+      --dur-fast: 0.35s;
+      --dur-mid: 0.65s;
+      --dur-slow: 1.2s;
+      --dur-slower: 2s;
+      
+      /* Spacing */
+      --space-xs: clamp(0.5rem, 1vw, 1rem);
+      --space-sm: clamp(1rem, 2vw, 2rem);
+      --space-md: clamp(2rem, 4vw, 4rem);
+      --space-lg: clamp(4rem, 8vw, 8rem);
+      --space-xl: clamp(6rem, 12vw, 12rem);
+    }
+    
+    /* ============================================
+       RESET & BASE
+       ============================================ */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    html {
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background-color: var(--c-bg);
+      color: var(--c-text);
+      line-height: 1.5;
+      overflow-x: hidden;
+      cursor: none; /* Custom cursor */
+    }
+    
+    body.has-cursor {
+      cursor: none;
+    }
+    
+    body:not(.has-cursor) {
+      cursor: auto;
+    }
+    
+    img, video {
+      max-width: 100%;
+      display: block;
+    }
+    
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    
+    button {
+      border: none;
+      background: none;
+      font-family: inherit;
+      cursor: none;
+    }
+    
+    /* ============================================
+       CUSTOM CURSOR (Desktop Only)
+       ============================================ */
+    .cursor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 9999;
+      mix-blend-mode: difference;
+    }
+    
+    .cursor__dot {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: var(--c-accent);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+    }
+    
+    .cursor__ring {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--c-accent);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0.6;
+    }
+    
+    .cursor--hover .cursor__ring {
+      transform: translate(-50%, -50%) scale(2);
+      background: rgba(200, 255, 0, 0.1);
+    }
+    
+    /* ============================================
+       PRELOADER
+       ============================================ */
+    .preloader {
+      position: fixed;
+      inset: 0;
+      background: var(--c-bg);
+      z-index: 10000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .preloader__curtain {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--c-bg);
+      transform: scaleY(0);
+      transform-origin: bottom;
+    }
+    
+    .preloader__content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+    }
+    
+    .preloader__logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2rem, 5vw, 4rem);
+      letter-spacing: -0.02em;
+      margin-bottom: var(--space-sm);
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    
+    .preloader__counter {
+      font-family: 'DM Sans', sans-serif;
+      font-size: var(--t-label);
+      font-weight: 500;
+      color: var(--c-muted);
+      opacity: 0;
+    }
+    
+    .preloader__counter span {
+      color: var(--c-accent);
+    }
+    
+    /* ============================================
+       GRAIN OVERLAY
+       ============================================ */
+    .grain {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9000;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    }
+    
+    /* ============================================
+       NAVIGATION
+       ============================================ */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: var(--space-sm) var(--space-md);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      mix-blend-mode: difference;
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    
+    .nav__logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+    
+    .nav__menu {
+      display: flex;
+      gap: var(--space-md);
+    }
+    
+    .nav__link {
+      font-size: var(--t-label);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .nav__link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: var(--c-accent);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform var(--dur-mid) var(--ease-out-expo);
+    }
+    
+    .nav__link:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+    
+    /* ============================================
+       HERO SECTION
+       ============================================ */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100svh;
+      overflow: hidden;
+    }
+    
+    .hero__media {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+    
+    .hero__video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+    }
+    
+    .hero__overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        ellipse at center,
+        transparent 0%,
+        rgba(0, 0, 0, 0.4) 50%,
+        rgba(0, 0, 0, 0.8) 100%
+      );
+      z-index: 1;
+    }
+    
+    .hero__gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(8, 8, 8, 0.6) 70%,
+        var(--c-bg) 100%
+      );
+      z-index: 2;
+    }
+    
+    .hero__content {
+      position: relative;
+      z-index: 10;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 var(--space-md);
+      mix-blend-mode: difference;
+    }
+    
+    .hero__inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    
+    /* Eyebrow */
+    .hero__eyebrow {
+      font-size: var(--t-eyebrow);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--c-text);
+      margin-bottom: var(--space-sm);
+      overflow: hidden;
+    }
+    
+    .hero__eyebrow .char {
+      opacity: 0;
+      transform: translateY(100%);
+    }
+    
+    /* Title */
+    .hero__title {
+      font-family: 'Syne', sans-serif;
+      font-size: var(--t-hero);
+      font-weight: 800;
+      line-height: 0.9;
+      letter-spacing: -0.03em;
+      color: var(--c-text);
+      margin-bottom: var(--space-sm);
+      text-transform: uppercase;
+    }
+    
+    .hero__title .word {
+      display: inline-block;
+      overflow: hidden;
+    }
+    
+    .hero__title .word-inner {
+      display: block;
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    
+    .hero__title .accent {
+      color: var(--c-accent);
+    }
+    
+    /* Subtitle */
+    .hero__subtitle {
+      font-size: var(--t-body);
+      font-weight: 300;
+      max-width: 500px;
+      color: var(--c-text);
+      margin-bottom: var(--space-md);
+      overflow: hidden;
+    }
+    
+    .hero__subtitle .line {
+      display: block;
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    
+    /* CTA Button */
+    .hero__cta-wrapper {
+      overflow: hidden;
+    }
+    
+    .hero__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      padding: var(--space-sm) var(--space-md);
+      border: 1px solid var(--c-text);
+      border-radius: 100px;
+      font-size: var(--t-label);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--c-text);
+      position: relative;
+      overflow: hidden;
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    
+    .hero__cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--c-accent);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform var(--dur-mid) var(--ease-out-expo);
+      z-index: -1;
+    }
+    
+    .hero__cta:hover::before {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+    
+    .hero__cta:hover {
+      color: var(--c-bg);
+      border-color: var(--c-accent);
+    }
+    
+    .hero__cta__arrow {
+      transition: transform var(--dur-fast) var(--ease-out-expo);
+    }
+    
+    .hero__cta:hover .hero__cta__arrow {
+      transform: translateX(4px);
+    }
+    
+    /* Scroll Indicator */
+    .hero__scroll {
+      position: absolute;
+      bottom: var(--space-md);
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-xs);
+      opacity: 0;
+    }
+    
+    .hero__scroll-text {
+      font-size: var(--t-label);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--c-text);
+    }
+    
+    .hero__scroll-line {
+      width: 1px;
+      height: 60px;
+      background: linear-gradient(
+        to bottom,
+        var(--c-accent) 0%,
+        transparent 100%
+      );
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero__scroll-line::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      background: var(--c-accent);
+      animation: scrollDown 1.5s ease-in-out infinite;
+    }
+    
+    @keyframes scrollDown {
+      0% { transform: translateY(-100%); }
+      100% { transform: translateY(200%); }
+    }
+    
+    /* ============================================
+       ABOUT SECTION (Demo for scroll)
+       ============================================ */
+    .about {
+      position: relative;
+      padding: var(--space-xl) var(--space-md);
+      background: var(--c-bg);
+    }
+    
+    .about__inner {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    .about__eyebrow {
+      font-size: var(--t-eyebrow);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--c-accent);
+      margin-bottom: var(--space-sm);
+    }
+    
+    .about__title {
+      font-family: 'Syne', sans-serif;
+      font-size: var(--t-h1);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--c-text);
+      margin-bottom: var(--space-md);
+    }
+    
+    .about__text {
+      font-size: var(--t-body);
+      font-weight: 300;
+      max-width: 700px;
+      color: var(--c-muted);
+      line-height: 1.8;
+    }
+
+    /* ============================================
+       GALLERY SECTION (Interactive Expandable Cards)
+       ============================================ */
+    .gallery {
+      position: relative;
+      padding: var(--space-xl) var(--space-md);
+      background: var(--c-surface);
+      overflow: hidden;
+    }
+
+    .gallery__header {
+      max-width: 1400px;
+      margin: 0 auto var(--space-lg);
+    }
+
+    .gallery__eyebrow {
+      font-size: var(--t-eyebrow);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--c-accent);
+      margin-bottom: var(--space-sm);
+      overflow: hidden;
+    }
+
+    .gallery__eyebrow .char {
+      opacity: 0;
+      transform: translateY(100%);
+    }
+
+    .gallery__title {
+      font-family: 'Syne', sans-serif;
+      font-size: var(--t-h1);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--c-text);
+    }
+
+    .gallery__title .word-inner {
+      display: block;
+      opacity: 0;
+      transform: translateY(100%);
+    }
+
+    .gallery__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-md);
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    /* Card Styles */
+    .gallery__card {
+      position: relative;
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      cursor: none;
+      border-radius: 4px;
+    }
+
+    .gallery__card:focus-visible {
+      outline: 2px solid var(--c-accent);
+      outline-offset: 4px;
+    }
+
+    .gallery__card-media {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    .gallery__card-image {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      transform: scale(1.2);
+      transition: transform 0.8s var(--ease-out-expo);
+    }
+
+    .gallery__card:hover .gallery__card-image {
+      transform: scale(1);
+    }
+
+    .gallery__card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(8, 8, 8, 0.2) 0%,
+        rgba(8, 8, 8, 0.6) 50%,
+        rgba(8, 8, 8, 0.95) 100%
+      );
+      z-index: 1;
+    }
+
+    .gallery__card-curtain {
+      position: absolute;
+      inset: 0;
+      background: var(--c-bg);
+      transform: scaleY(0);
+      transform-origin: bottom;
+      z-index: 2;
+      transition: transform 0.6s var(--ease-out-expo);
+    }
+
+    .gallery__card.is-active .gallery__card-curtain {
+      transform: scaleY(1);
+      transform-origin: top;
+    }
+
+    .gallery__card-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: var(--space-md);
+      z-index: 3;
+      transform: translateY(0);
+      transition: transform 0.5s var(--ease-out-expo);
+    }
+
+    .gallery__card:hover .gallery__card-content {
+      transform: translateY(-10px);
+    }
+
+    .gallery__card-number {
+      font-size: var(--t-label);
+      font-weight: 500;
+      color: var(--c-accent);
+      margin-bottom: var(--space-xs);
+      opacity: 0.8;
+    }
+
+    .gallery__card-title {
+      font-family: 'Syne', sans-serif;
+      font-size: var(--t-h2);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: var(--c-text);
+      margin-bottom: var(--space-xs);
+      text-transform: uppercase;
+    }
+
+    .gallery__card-desc {
+      font-size: var(--t-body);
+      font-weight: 300;
+      color: var(--c-muted);
+      margin-bottom: var(--space-sm);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.4s var(--ease-out-expo);
+      max-height: 0;
+      overflow: hidden;
+    }
+
+    .gallery__card:hover .gallery__card-desc {
+      opacity: 1;
+      transform: translateY(0);
+      max-height: 100px;
+    }
+
+    .gallery__card-arrow {
+      width: 48px;
+      height: 48px;
+      border: 1px solid var(--c-accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--c-accent);
+      transition: all 0.3s var(--ease-out-expo);
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .gallery__card:hover .gallery__card-arrow {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .gallery__card:hover .gallery__card-arrow {
+      background: var(--c-accent);
+      color: var(--c-bg);
+    }
+
+    .gallery__card-arrow svg {
+      transition: transform 0.3s var(--ease-out-expo);
+    }
+
+    .gallery__card:hover .gallery__card-arrow svg {
+      transform: translateX(4px) rotate(-45deg);
+    }
+
+    /* Modal Styles */
+    .gallery__modal {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .gallery__modal.is-active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .gallery__modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(8, 8, 8, 0.95);
+      backdrop-filter: blur(10px);
+    }
+
+    .gallery__modal-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1400px;
+      height: 90svh;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: var(--space-lg);
+      padding: var(--space-md);
+      transform: scale(0.9) translateY(50px);
+      transition: all 0.6s var(--ease-out-expo);
+    }
+
+    .gallery__modal.is-active .gallery__modal-content {
+      transform: scale(1) translateY(0);
+    }
+
+    .gallery__modal-close {
+      position: absolute;
+      top: var(--space-md);
+      right: var(--space-md);
+      z-index: 10;
+      width: 56px;
+      height: 56px;
+      border: 1px solid var(--c-muted);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--c-text);
+      background: rgba(8, 8, 8, 0.8);
+      cursor: none;
+      transition: all 0.3s var(--ease-out-expo);
+    }
+
+    .gallery__modal-close:hover {
+      border-color: var(--c-accent);
+      color: var(--c-accent);
+      transform: rotate(90deg);
+    }
+
+    .gallery__modal-media {
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+    }
+
+    .gallery__modal-image {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      transform: scale(1.1);
+      opacity: 0;
+      transition: all 0.8s var(--ease-out-expo);
+    }
+
+    .gallery__modal.is-active .gallery__modal-image {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    .gallery__modal-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: var(--space-md);
+    }
+
+    .gallery__modal-number {
+      font-size: var(--t-label);
+      font-weight: 500;
+      color: var(--c-accent);
+      margin-bottom: var(--space-sm);
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .gallery__modal-title {
+      font-family: 'Syne', sans-serif;
+      font-size: var(--t-h1);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: var(--c-text);
+      margin-bottom: var(--space-md);
+      text-transform: uppercase;
+      opacity: 0;
+      transform: translateY(40px);
+    }
+
+    .gallery__modal-desc {
+      font-size: var(--t-body);
+      font-weight: 300;
+      color: var(--c-muted);
+      line-height: 1.8;
+      margin-bottom: var(--space-lg);
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .gallery__modal-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      padding: var(--space-sm) var(--space-md);
+      border: 1px solid var(--c-text);
+      border-radius: 100px;
+      font-size: var(--t-label);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--c-text);
+      width: fit-content;
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .gallery__modal-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--c-accent);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform var(--dur-mid) var(--ease-out-expo);
+      z-index: -1;
+    }
+
+    .gallery__modal-cta:hover::before {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    .gallery__modal-cta:hover {
+      color: var(--c-bg);
+      border-color: var(--c-accent);
+    }
+
+    .gallery__modal-arrow {
+      transition: transform var(--dur-fast) var(--ease-out-expo);
+    }
+
+    .gallery__modal-cta:hover .gallery__modal-arrow {
+      transform: translateX(4px);
+    }
+
+    /* ============================================
+       MOBILE PARITY
+       ============================================ */
+    @media (max-width: 767px) {
+      .nav__menu {
+        display: none;
+      }
+
+      .hero__content {
+        padding: 0 var(--space-sm);
+      }
+
+      .hero__title {
+        line-height: 0.95;
+      }
+
+      /* Gallery Mobile Styles */
+      .gallery {
+        padding: var(--space-lg) var(--space-sm);
+      }
+
+      .gallery__grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-sm);
+      }
+
+      .gallery__card {
+        aspect-ratio: 16/9;
+      }
+
+      .gallery__card-desc {
+        opacity: 1;
+        transform: translateY(0);
+        max-height: 100px;
+      }
+
+      .gallery__card-arrow {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .gallery__modal-content {
+        grid-template-columns: 1fr;
+        height: 95svh;
+        gap: var(--space-sm);
+      }
+
+      .gallery__modal-media {
+        flex: 1;
+      }
+
+      .gallery__modal-info {
+        padding: var(--space-sm);
+        justify-content: flex-end;
+      }
+
+      .gallery__modal-title {
+        font-size: var(--t-h2);
+      }
+
+      .gallery__modal-close {
+        width: 44px;
+        height: 44px;
+        top: var(--space-sm);
+        right: var(--space-sm);
+      }
+    }
+    
+    /* Touch device — disable custom cursor */
+    @media (hover: none) {
+      .cursor {
+        display: none;
+      }
+      
+      body {
+        cursor: auto;
+      }
+      
+      button, a {
+        cursor: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- ============================================
+       PRELOADER
+       ============================================ -->
+  <div class="preloader" aria-label="Loading">
+    <div class="preloader__curtain"></div>
+    <div class="preloader__content">
+      <div class="preloader__logo">MAAC</div>
+      <div class="preloader__counter"><span>0</span>%</div>
+    </div>
+  </div>
+  
+  <!-- ============================================
+       CUSTOM CURSOR
+       ============================================ -->
+  <div class="cursor" aria-hidden="true">
+    <div class="cursor__dot"></div>
+    <div class="cursor__ring"></div>
+  </div>
+  
+  <!-- ============================================
+       GRAIN OVERLAY
+       ============================================ -->
+  <div class="grain" aria-hidden="true"></div>
+  
+  <!-- ============================================
+       NAVIGATION
+       ============================================ -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <a href="/" class="nav__logo magnetic">MAAC</a>
+    <div class="nav__menu">
+      <a href="/work" class="nav__link magnetic">Work</a>
+      <a href="/studio" class="nav__link magnetic">Studio</a>
+      <a href="/contact" class="nav__link magnetic">Contact</a>
+    </div>
+  </nav>
+  
+  <!-- ============================================
+       HERO SECTION
+       ============================================ -->
+  <section class="hero" data-hero>
+    <div class="hero__media">
+      <video 
+        class="hero__video" 
+        autoplay 
+        muted 
+        loop 
+        playsinline
+        preload="metadata"
+        poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1920 1080'%3E%3Crect fill='%23080808' width='1920' height='1080'/%3E%3C/svg%3E"
+      >
+        <source src="./intro.webm" type="video/webm">
+        <source src="./intro.mp4" type="video/mp4">
+      </video>
+      <div class="hero__overlay"></div>
+      <div class="hero__gradient"></div>
+    </div>
+    
+    <div class="hero__content">
+      <div class="hero__inner">
+        <p class="hero__eyebrow" data-split="chars">Creative Studio</p>
+        <h1 class="hero__title" data-split="words">
+          <span class="word"><span class="word-inner">Unleash</span></span>
+          <span class="word"><span class="word-inner accent">Wild</span></span>
+        </h1>
+        <p class="hero__subtitle" data-split="lines">
+          <span class="line">We craft motion-first digital experiences</span>
+          <span class="line">that emerge from the darkness.</span>
+        </p>
+        <div class="hero__cta-wrapper">
+          <a href="#work" class="hero__cta magnetic">
+            <span>Explore Work</span>
+            <svg class="hero__cta__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="hero__scroll" aria-hidden="true">
+      <span class="hero__scroll-text">Scroll</span>
+      <div class="hero__scroll-line"></div>
+    </div>
+  </section>
+  
+  <!-- ============================================
+       ABOUT SECTION (For scroll demo)
+       ============================================ -->
+  <section class="about" id="about">
+    <div class="about__inner">
+      <p class="about__eyebrow" data-split="chars">About MAAC</p>
+      <h2 class="about__title" data-split="words">
+        <span class="word"><span class="word-inner">Predatory</span></span>
+        <span class="word"><span class="word-inner">Creative</span></span>
+        <span class="word"><span class="word-inner accent">Excellence</span></span>
+      </h2>
+      <p class="about__text">
+        Like a tiger emerging from the shadows, MAAC represents bold creative presence.
+        We are a motion-first digital studio crafting unforgettable brand experiences
+        that command attention and leave lasting impressions.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================
+       GALLERY SECTION (Interactive Expandable Cards)
+       ============================================ -->
+  <section class="gallery" id="gallery" aria-label="Featured Work">
+    <div class="gallery__header">
+      <p class="gallery__eyebrow" data-split="chars">Selected Work</p>
+      <h2 class="gallery__title" data-split="words">
+        <span class="word"><span class="word-inner">Explore</span></span>
+        <span class="word"><span class="word-inner">Our</span></span>
+        <span class="word"><span class="word-inner accent">Universe</span></span>
+      </h2>
+    </div>
+
+    <div class="gallery__grid">
+      <!-- Card 1: Work -->
+      <div class="gallery__card" data-category="work" tabindex="0" role="button" aria-label="View Work category">
+        <div class="gallery__card-media">
+          <div class="gallery__card-image" style="background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1600&q=80')"></div>
+          <div class="gallery__card-overlay"></div>
+          <div class="gallery__card-curtain"></div>
+        </div>
+        <div class="gallery__card-content">
+          <div class="gallery__card-number">01</div>
+          <h3 class="gallery__card-title">Work</h3>
+          <p class="gallery__card-desc">Motion-driven brand experiences</p>
+          <div class="gallery__card-arrow">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M7 17L17 7M17 7H7M17 7v10"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Studio -->
+      <div class="gallery__card" data-category="studio" tabindex="0" role="button" aria-label="View Studio category">
+        <div class="gallery__card-media">
+          <div class="gallery__card-image" style="background-image: url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=1600&q=80')"></div>
+          <div class="gallery__card-overlay"></div>
+          <div class="gallery__card-curtain"></div>
+        </div>
+        <div class="gallery__card-content">
+          <div class="gallery__card-number">02</div>
+          <h3 class="gallery__card-title">Studio</h3>
+          <p class="gallery__card-desc">Behind the creative process</p>
+          <div class="gallery__card-arrow">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M7 17L17 7M17 7H7M17 7v10"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: Contact -->
+      <div class="gallery__card" data-category="contact" tabindex="0" role="button" aria-label="View Contact category">
+        <div class="gallery__card-media">
+          <div class="gallery__card-image" style="background-image: url('https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?w=1600&q=80')"></div>
+          <div class="gallery__card-overlay"></div>
+          <div class="gallery__card-curtain"></div>
+        </div>
+        <div class="gallery__card-content">
+          <div class="gallery__card-number">03</div>
+          <h3 class="gallery__card-title">Contact</h3>
+          <p class="gallery__card-desc">Start your next project</p>
+          <div class="gallery__card-arrow">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M7 17L17 7M17 7H7M17 7v10"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Expanded View Modal -->
+    <div class="gallery__modal" aria-hidden="true">
+      <div class="gallery__modal-backdrop"></div>
+      <div class="gallery__modal-content">
+        <button class="gallery__modal-close" aria-label="Close expanded view">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 6L6 18M6 6l12 12"/>
+          </svg>
+        </button>
+        <div class="gallery__modal-media">
+          <div class="gallery__modal-image"></div>
+        </div>
+        <div class="gallery__modal-info">
+          <div class="gallery__modal-number">01</div>
+          <h3 class="gallery__modal-title"></h3>
+          <p class="gallery__modal-desc"></p>
+          <a href="#" class="gallery__modal-cta magnetic">
+            <span>Explore</span>
+            <svg class="gallery__modal-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- ============================================
+       SCRIPTS
+       ============================================ -->
+  <!-- GSAP Core + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollSmoother.min.js"></script>
+  
+  <!-- Lenis Smooth Scroll -->
+  <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
+  
+  <script>
+    // ============================================
+    // WAIT FOR DOM
+    // ============================================
+    document.addEventListener('DOMContentLoaded', () => {
+      
+      // ============================================
+      // REGISTER GSAP PLUGINS
+      // ============================================
+      gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+      
+      // ============================================
+      // DETECT TOUCH DEVICE
+      // ============================================
+      const isTouchDevice = () => {
+        return (('ontouchstart' in window) ||
+          (navigator.maxTouchPoints > 0) ||
+          (navigator.msMaxTouchPoints > 0));
+      };
+      
+      const isMobile = window.matchMedia('(max-width: 767px)').matches;
+      
+      // ============================================
+      // LENIS SMOOTH SCROLL
+      // ============================================
+      const lenis = new Lenis({
+        lerp: isTouchDevice() ? 0.05 : 0.08,
+        smoothWheel: true,
+        touchMultiplier: isTouchDevice() ? 2 : 1
+      });
+      
+      lenis.on('scroll', ScrollTrigger.update);
+      
+      gsap.ticker.add((time) => {
+        lenis.raf(time * 1000);
+      });
+      
+      gsap.ticker.lagSmoothing(0);
+      
+      // ============================================
+      // CUSTOM CURSOR (Desktop Only)
+      // ============================================
+      if (!isTouchDevice()) {
+        document.body.classList.add('has-cursor');
+        
+        const cursor = document.querySelector('.cursor');
+        const dot = document.querySelector('.cursor__dot');
+        const ring = document.querySelector('.cursor__ring');
+        
+        // Initial position
+        gsap.set([dot, ring], { xPercent: -50, yPercent: -50 });
+        
+        // Follow cursor
+        document.addEventListener('mousemove', (e) => {
+          gsap.to(dot, {
+            x: e.clientX,
+            y: e.clientY,
+            duration: 0.1,
+            ease: 'power2.out'
+          });
+          gsap.to(ring, {
+            x: e.clientX,
+            y: e.clientY,
+            duration: 0.4,
+            ease: 'expo.out'
+          });
+        });
+        
+        // Magnetic hover effect on interactive elements
+        const magneticElements = document.querySelectorAll('.magnetic');
+        
+        magneticElements.forEach((el) => {
+          el.addEventListener('mouseenter', () => {
+            cursor.classList.add('cursor--hover');
+            gsap.to(ring, {
+              scale: 2.5,
+              opacity: 0.4,
+              duration: 0.3,
+              ease: 'expo.out'
+            });
+          });
+          
+          el.addEventListener('mouseleave', () => {
+            cursor.classList.remove('cursor--hover');
+            gsap.to(ring, {
+              scale: 1,
+              opacity: 1,
+              duration: 0.3,
+              ease: 'expo.out'
+            });
+          });
+          
+          // Magnetic pull effect
+          el.addEventListener('mousemove', (e) => {
+            const rect = el.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            const deltaX = e.clientX - centerX;
+            const deltaY = e.clientY - centerY;
+            
+            gsap.to(el, {
+              x: deltaX * 0.3,
+              y: deltaY * 0.3,
+              duration: 0.3,
+              ease: 'expo.out'
+            });
+          });
+          
+          el.addEventListener('mouseleave', () => {
+            gsap.to(el, {
+              x: 0,
+              y: 0,
+              duration: 0.5,
+              ease: 'elastic.out(1, 0.5)'
+            });
+          });
+        });
+      }
+      
+      // ============================================
+      // PRELOADER ANIMATION
+      // ============================================
+      const runPreloader = () => {
+        const tl = gsap.timeline({
+          onComplete: () => {
+            // Initialize hero animations after preloader
+            initHeroAnimations();
+            // Refresh ScrollTrigger after preloader
+            ScrollTrigger.refresh();
+          }
+        });
+        
+        // Logo fade in
+        tl.to('.preloader__logo', {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: 'expo.out'
+        }, 0);
+        
+        // Counter fade in
+        tl.to('.preloader__counter', {
+          opacity: 1,
+          duration: 0.5,
+          ease: 'expo.out'
+        }, 0.3);
+        
+        // Number count-up animation
+        const counterElement = document.querySelector('.preloader__counter span');
+        let count = 0;
+        
+        const counterTl = gsap.timeline({
+          repeat: -1,
+          repeatDelay: 0.5,
+          yoyo: true
+        });
+        
+        counterTl.to(counterElement, {
+          innerText: 100,
+          duration: 2,
+          ease: 'none',
+          snap: { innerText: 1 },
+          onUpdate: function() {
+            count = Math.round(this.targets()[0].innerText);
+            counterElement.innerText = count;
+          }
+        });
+        
+        // Stop counter at 100
+        setTimeout(() => {
+          counterTl.kill();
+          counterElement.innerText = 100;
+        }, 2000);
+        
+        // Curtain wipe
+        tl.to('.preloader__curtain', {
+          scaleY: 1,
+          transformOrigin: 'top',
+          duration: 1,
+          ease: 'expo.inOut',
+          delay: 0.5
+        }, 2);
+        
+        // Preloader fade out
+        tl.to('.preloader', {
+          opacity: 0,
+          duration: 0.5,
+          ease: 'expo.out',
+          onComplete: () => {
+            document.querySelector('.preloader').style.display = 'none';
+          }
+        }, 3);
+        
+        // Video fade in
+        tl.to('.hero__video', {
+          opacity: 1,
+          duration: 1.5,
+          ease: 'expo.out'
+        }, 2.5);
+      };
+      
+      // ============================================
+      // HERO ANIMATIONS
+      // ============================================
+      const initHeroAnimations = () => {
+        const tl = gsap.timeline({
+          defaults: { ease: 'expo.out' }
+        });
+        
+        // Initialize Splitting.js
+        Splitting();
+        
+        // Re-split for custom animation structure
+        const eyebrow = document.querySelector('.hero__eyebrow');
+        const title = document.querySelector('.hero__title');
+        const subtitle = document.querySelector('.hero__subtitle');
+        
+        // Manual split for eyebrow (chars)
+        if (eyebrow) {
+          const chars = eyebrow.textContent.split('');
+          eyebrow.innerHTML = chars.map(char => 
+            `<span class="char">${char === ' ' ? '&nbsp;' : char}</span>`
+          ).join('');
+        }
+        
+        // Nav fade in
+        tl.to('.nav', {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          delay: 0.2
+        });
+        
+        // Eyebrow chars stagger in
+        tl.to('.hero__eyebrow .char', {
+          opacity: 1,
+          y: 0,
+          stagger: { amount: 0.3, from: 'start' },
+          duration: 0.8
+        }, '-=0.6');
+        
+        // Title words slide up
+        tl.to('.hero__title .word-inner', {
+          opacity: 1,
+          y: 0,
+          stagger: { amount: 0.4, from: 'start' },
+          duration: 1.2
+        }, '-=0.4');
+        
+        // Subtitle lines slide up
+        tl.to('.hero__subtitle .line', {
+          opacity: 1,
+          y: 0,
+          stagger: { amount: 0.3, from: 'start' },
+          duration: 1
+        }, '-=0.8');
+        
+        // CTA button slide up
+        tl.to('.hero__cta', {
+          opacity: 1,
+          y: 0,
+          duration: 0.8
+        }, '-=0.6');
+        
+        // Scroll indicator fade in
+        tl.to('.hero__scroll', {
+          opacity: 1,
+          duration: 1
+        }, '-=0.4');
+      };
+      
+      // ============================================
+      // SCROLL-TRIGGERED ANIMATIONS
+      // ============================================
+      const initScrollAnimations = () => {
+        const mm = gsap.matchMedia();
+        
+        // Desktop animations
+        mm.add('(min-width: 768px)', () => {
+          // About section text reveal
+          gsap.from('.about__text', {
+            opacity: 0,
+            y: 60,
+            duration: 1.2,
+            ease: 'expo.out',
+            scrollTrigger: {
+              trigger: '.about',
+              start: 'top 70%',
+              toggleActions: 'play none none reverse'
+            }
+          });
+          
+          // About title word reveal
+          gsap.utils.toArray('.about__title .word-inner').forEach((word, i) => {
+            gsap.from(word, {
+              opacity: 0,
+              y: 80,
+              duration: 1,
+              ease: 'expo.out',
+              delay: i * 0.1,
+              scrollTrigger: {
+                trigger: '.about__title',
+                start: 'top 75%',
+                toggleActions: 'play none none reverse'
+              }
+            });
+          });
+        });
+        
+        // Mobile animations (simpler)
+        mm.add('(max-width: 767px)', () => {
+          gsap.from('.about__text', {
+            opacity: 0,
+            y: 40,
+            duration: 1,
+            ease: 'expo.out',
+            scrollTrigger: {
+              trigger: '.about',
+              start: 'top 75%',
+              toggleActions: 'play none none reverse'
+            }
+          });
+        });
+      };
+      
+      // ============================================
+      // GALLERY INTERACTIVE CARDS
+      // ============================================
+      const initGallery = () => {
+        const cards = document.querySelectorAll('.gallery__card');
+        const modal = document.querySelector('.gallery__modal');
+        const modalClose = document.querySelector('.gallery__modal-close');
+        const modalImage = document.querySelector('.gallery__modal-image');
+        const modalNumber = document.querySelector('.gallery__modal-number');
+        const modalTitle = document.querySelector('.gallery__modal-title');
+        const modalDesc = document.querySelector('.gallery__modal-desc');
+        const modalCta = document.querySelector('.gallery__modal-cta');
+
+        let activeCard = null;
+        let modalAnimationTl = null;
+
+        // Card data
+        const cardData = {
+          work: {
+            title: 'Work',
+            desc: 'Motion-driven brand experiences that command attention. From concept to execution, we craft digital narratives that resonate with audiences and elevate brands through strategic visual storytelling.',
+            image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1600&q=80'
+          },
+          studio: {
+            title: 'Studio',
+            desc: 'Behind the creative process. Meet the minds shaping the future of motion design. Our studio is a playground for experimentation, where bold ideas meet technical excellence.',
+            image: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=1600&q=80'
+          },
+          contact: {
+            title: 'Contact',
+            desc: 'Ready to start your next project? Let\'s create something extraordinary together. Reach out and let\'s discuss how we can bring your vision to life.',
+            image: 'https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?w=1600&q=80'
+          }
+        };
+
+        // Open modal
+        const openModal = (card) => {
+          const category = card.dataset.category;
+          const data = cardData[category];
+          const number = card.querySelector('.gallery__card-number').textContent;
+
+          if (!data) return;
+
+          activeCard = card;
+
+          // Set modal content
+          modalImage.style.backgroundImage = `url('${data.image}')`;
+          modalNumber.textContent = number;
+          modalTitle.textContent = data.title;
+          modalDesc.textContent = data.desc;
+
+          // Show modal
+          modal.setAttribute('aria-hidden', 'false');
+          modal.classList.add('is-active');
+          card.classList.add('is-active');
+
+          // Disable body scroll
+          document.body.style.overflow = 'hidden';
+
+          // Animate modal content
+          if (modalAnimationTl) {
+            modalAnimationTl.kill();
+          }
+
+          modalAnimationTl = gsap.timeline({
+            delay: 0.3,
+            defaults: { ease: 'expo.out', duration: 1 }
+          });
+
+          modalAnimationTl.to(modalNumber, {
+            opacity: 1,
+            y: 0,
+            duration: 0.6
+          }, 0);
+
+          modalAnimationTl.to(modalTitle, {
+            opacity: 1,
+            y: 0,
+            duration: 0.8
+          }, 0.1);
+
+          modalAnimationTl.to(modalDesc, {
+            opacity: 1,
+            y: 0,
+            duration: 0.7
+          }, 0.2);
+
+          modalAnimationTl.to(modalCta, {
+            opacity: 1,
+            y: 0,
+            duration: 0.6
+          }, 0.3);
+
+          // Add magnetic effect to modal CTA
+          if (!isTouchDevice()) {
+            modalCta.addEventListener('mouseenter', () => {
+              document.querySelector('.cursor').classList.add('cursor--hover');
+            });
+            modalCta.addEventListener('mouseleave', () => {
+              document.querySelector('.cursor').classList.remove('cursor--hover');
+            });
+          }
+        };
+
+        // Close modal
+        const closeModal = () => {
+          if (!activeCard) return;
+
+          modal.setAttribute('aria-hidden', 'true');
+          modal.classList.remove('is-active');
+          activeCard.classList.remove('is-active');
+
+          // Enable body scroll
+          document.body.style.overflow = '';
+
+          // Reset modal content opacity
+          gsap.set([modalNumber, modalTitle, modalDesc, modalCta], {
+            opacity: 0,
+            y: 30
+          });
+
+          activeCard = null;
+        };
+
+        // Event listeners
+        cards.forEach((card) => {
+          // Click handler
+          card.addEventListener('click', () => {
+            openModal(card);
+          });
+
+          // Keyboard handler
+          card.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              openModal(card);
+            }
+          });
+
+          // Hover animation with GSAP
+          if (!isTouchDevice()) {
+            card.addEventListener('mouseenter', () => {
+              gsap.to(card.querySelector('.gallery__card-image'), {
+                scale: 1,
+                duration: 0.8,
+                ease: 'expo.out'
+              });
+            });
+
+            card.addEventListener('mouseleave', () => {
+              gsap.to(card.querySelector('.gallery__card-image'), {
+                scale: 1.2,
+                duration: 0.8,
+                ease: 'expo.out'
+              });
+            });
+          }
+        });
+
+        // Close modal handlers
+        modalClose.addEventListener('click', closeModal);
+        modal.querySelector('.gallery__modal-backdrop').addEventListener('click', closeModal);
+
+        // ESC key to close
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && modal.classList.contains('is-active')) {
+            closeModal();
+          }
+        });
+      };
+
+      // ============================================
+      // GALLERY SCROLL ANIMATIONS
+      // ============================================
+      const initGalleryScrollAnimations = () => {
+        const mm = gsap.matchMedia();
+
+        // Desktop animations
+        mm.add('(min-width: 768px)', () => {
+          // Gallery header reveal
+          gsap.utils.toArray('.gallery__eyebrow .char').forEach((char, i) => {
+            gsap.from(char, {
+              opacity: 0,
+              y: '100%',
+              duration: 0.6,
+              ease: 'expo.out',
+              scrollTrigger: {
+                trigger: '.gallery',
+                start: 'top 75%',
+                toggleActions: 'play none none reverse'
+              }
+            });
+          });
+
+          gsap.utils.toArray('.gallery__title .word-inner').forEach((word, i) => {
+            gsap.from(word, {
+              opacity: 0,
+              y: '100%',
+              duration: 1,
+              ease: 'expo.out',
+              delay: i * 0.1,
+              scrollTrigger: {
+                trigger: '.gallery',
+                start: 'top 70%',
+                toggleActions: 'play none none reverse'
+              }
+            });
+          });
+
+          // Cards stagger reveal
+          gsap.from('.gallery__card', {
+            opacity: 0,
+            y: 80,
+            stagger: { amount: 0.4, from: 'start' },
+            duration: 1.2,
+            ease: 'expo.out',
+            scrollTrigger: {
+              trigger: '.gallery__grid',
+              start: 'top 75%',
+              toggleActions: 'play none none reverse'
+            }
+          });
+        });
+
+        // Mobile animations (simpler)
+        mm.add('(max-width: 767px)', () => {
+          gsap.from('.gallery__card', {
+            opacity: 0,
+            y: 40,
+            stagger: { amount: 0.3, from: 'start' },
+            duration: 1,
+            ease: 'expo.out',
+            scrollTrigger: {
+              trigger: '.gallery__grid',
+              start: 'top 80%',
+              toggleActions: 'play none none reverse'
+            }
+          });
+        });
+      };
+
+      // ============================================
+      // PARALLAX VIDEO EFFECT (Desktop Only)
+      // ============================================
+      if (!isMobile && !isTouchDevice()) {
+        gsap.to('.hero__video', {
+          yPercent: 15,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '.hero',
+            start: 'top top',
+            end: 'bottom top',
+            scrub: true
+          }
+        });
+      }
+      
+      // ============================================
+      // NAV HIDE/SHOW ON SCROLL
+      // ============================================
+      let lastScrollY = 0;
+      
+      ScrollTrigger.create({
+        onUpdate: (self) => {
+          const currentScrollY = self.scroll();
+          const direction = currentScrollY > lastScrollY ? 'down' : 'up';
+          
+          if (currentScrollY > 100) {
+            gsap.to('.nav', {
+              y: direction === 'down' ? -100 : 0,
+              duration: 0.4,
+              ease: 'expo.out'
+            });
+          }
+          
+          lastScrollY = currentScrollY;
+        }
+      });
+      
+      // ============================================
+      // RUN ANIMATIONS
+      // ============================================
+      runPreloader();
+      initScrollAnimations();
+      initGallery();
+      initGalleryScrollAnimations();
+    });
+  </script>
+</body>
+</html>

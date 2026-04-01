@@ -1,0 +1,30 @@
+<svg viewBox="0 0 600 800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="studioGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a0a0a"/>
+      <stop offset="50%" style="stop-color:#0a0505"/>
+      <stop offset="100%" style="stop-color:#080808"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="800" fill="url(#studioGrad)"/>
+  
+  <!-- Abstract geometric shapes - rotated squares -->
+  <rect x="200" y="180" width="200" height="200" fill="none" stroke="#E31837" stroke-width="2" opacity="0.25" transform="rotate(15 300 280)"/>
+  <rect x="230" y="210" width="140" height="140" fill="none" stroke="#E31837" stroke-width="1.5" opacity="0.4" transform="rotate(15 300 280)"/>
+  <rect x="260" y="240" width="80" height="80" fill="#E31837" opacity="0.12" transform="rotate(15 300 280)"/>
+  
+  <!-- Diagonal lines -->
+  <g opacity="0.15">
+    <line x1="100" y1="450" x2="500" y2="550" stroke="#E31837" stroke-width="1"/>
+    <line x1="100" y1="480" x2="500" y2="580" stroke="#E31837" stroke-width="1"/>
+    <line x1="100" y1="510" x2="500" y2="610" stroke="#E31837" stroke-width="1"/>
+    <line x1="100" y1="540" x2="500" y2="640" stroke="#E31837" stroke-width="1"/>
+  </g>
+  
+  <!-- Abstract frame -->
+  <rect x="140" y="480" width="320" height="240" rx="6" fill="none" stroke="#E31837" stroke-width="1" opacity="0.2" transform="rotate(-5 300 600)"/>
+  <rect x="165" y="500" width="270" height="200" rx="4" fill="#E31837" opacity="0.08" transform="rotate(-5 300 600)"/>
+  
+  <!-- Text -->
+  <text x="300" y="720" text-anchor="middle" fill="#E31837" font-family="Arial, sans-serif" font-size="28" font-weight="bold" opacity="0.3">STUDIO</text>
+</svg>

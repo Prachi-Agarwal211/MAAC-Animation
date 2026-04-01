@@ -1,0 +1,314 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #0F0F1A;
+  --foreground: #F8FAFC;
+  --primary: #E31837;
+  --primary-dark: #B8132C;
+  --accent: #FF6B35;
+  --secondary: #1A1A2E;
+  
+  /* Tiger palette */
+  --tiger-black: #080808;
+  --tiger-surface: #101010;
+  --tiger-accent: #c8ff00;
+  --tiger-text: #f5f0e8;
+  --tiger-muted: #6b6b6b;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto; /* Let Lenis handle smooth scroll */
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), sans-serif;
+  overflow-x: clip; /* Prevent horizontal scroll from effects */
+}
+
+/* === CUSTOM CURSOR === */
+.custom-cursor__dot,
+.custom-cursor__follower {
+  will-change: transform;
+}
+
+@media (hover: none) {
+  .custom-cursor__dot,
+  .custom-cursor__follower {
+    display: none;
+  }
+}
+
+/* === SCROLL INDICATOR ANIMATION === */
+@keyframes scroll-indicator {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+.animate-scroll-indicator {
+  animation: scroll-indicator 1.5s ease-in-out infinite;
+}
+
+/* === MAACX HERO SPECIFIC === */
+.maacx-hero {
+  --maacx-red: #E31837;
+  --maacx-red-dark: #B8132C;
+  --maacx-orange: #FF6B35;
+}
+
+/* === PULSE RING ANIMATION === */
+@keyframes pulse-ring {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+}
+
+/* === GRADIENT RADIAL UTILITY === */
+.bg-gradient-radial {
+  background: radial-gradient(var(--tw-gradient-stops));
+}
+
+/* === SPLITTING.JS STYLES === */
+.splitting .char {
+  display: inline-block;
+}
+
+.splitting .word {
+  display: inline-block;
+  white-space: pre;
+}
+
+/* === PRELOADER STYLES === */
+.preloader__grain svg {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+/* === VIDEO MASK UTILITY === */
+.hero__video-mask {
+  will-change: transform, opacity;
+}
+
+.hero__video {
+  will-change: transform, opacity;
+}
+
+/* === SELECTION === */
+::selection {
+  background: rgba(200, 255, 0, 0.3);
+  color: #080808;
+}
+
+/* Glass morphism effect */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(227, 24, 55, 0.3);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 60px rgba(227, 24, 55, 0.15);
+}
+
+/* 3D card transform */
+.card-3d {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.card-3d-inner {
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #E31837 0%, #FF6B35 50%, #E31837 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s linear infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+/* Neon glow */
+.neon-glow {
+  text-shadow:
+    0 0 10px rgba(227, 24, 55, 0.5),
+    0 0 20px rgba(227, 24, 55, 0.3),
+    0 0 40px rgba(227, 24, 55, 0.2);
+}
+
+/* Button styles */
+.btn-primary {
+  position: relative;
+  padding: 14px 36px;
+  background: linear-gradient(135deg, #E31837, #FF6B35);
+  color: white;
+  font-weight: 600;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.btn-primary::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #FF6B35, #E31837);
+  transition: left 0.3s ease;
+  z-index: -1;
+}
+
+.btn-primary:hover::before {
+  left: 0;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(227, 24, 55, 0.4);
+}
+
+.btn-outline {
+  position: relative;
+  padding: 14px 36px;
+  background: transparent;
+  color: #E31837;
+  font-weight: 600;
+  border-radius: 8px;
+  border: 2px solid #E31837;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.btn-outline::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: #E31837;
+  transition: width 0.3s ease;
+  z-index: -1;
+}
+
+.btn-outline:hover::before {
+  width: 100%;
+}
+
+.btn-outline:hover {
+  color: white;
+}
+
+/* Image placeholder */
+.image-placeholder {
+  background: linear-gradient(135deg, rgba(227, 24, 55, 0.1), rgba(255, 107, 53, 0.1));
+  border: 2px dashed rgba(227, 24, 55, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.875rem;
+  border-radius: 12px;
+  min-height: 200px;
+}
+
+.video-placeholder {
+  background: linear-gradient(135deg, rgba(227, 24, 55, 0.05), rgba(255, 107, 53, 0.05));
+  border: 2px dashed rgba(227, 24, 55, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
+  min-height: 400px;
+}
+
+/* Mega menu */
+.mega-menu {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mega-menu.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Marquee */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee {
+  animation: marquee 30s linear infinite;
+}
+
+.marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Ticker tape */
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.ticker-content {
+  display: flex;
+  animation: ticker 25s linear infinite;
+}
