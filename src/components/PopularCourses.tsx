@@ -18,27 +18,50 @@ export default function PopularCourses() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isMobile, setIsMobile] = useState<boolean | null>(null);
-  
+  const [isMobile, setIsMobile] = useState<boolean | null>(null); // null = not yet mounted (SSR)
+  const [hasMounted, setHasMounted] = useState(false);
+  const resizeTimerRef = useRef<NodeJS.Timeout>();
+
   // Touch swipe support for desktop
   const touchStartX = useRef<number>(0);
   const touchEndX = useRef<number>(0);
 
+  // Mark component as mounted (client-side only)
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+
+    const checkMobile = () => {
+      const wasMobile = isMobile;
+      setIsMobile(window.innerWidth < 768);
+
+      // Clear GSAP scroll triggers on breakpoint change to prevent conflicts
+      if (wasMobile !== null && wasMobile !== (window.innerWidth < 768)) {
+        ScrollTrigger.refresh();
+      }
+    };
+
+    // Debounced resize handler
+    const handleResize = () => {
+      if (resizeTimerRef.current) clearTimeout(resizeTimerRef.current);
+      resizeTimerRef.current = setTimeout(checkMobile, 300);
+    };
+
     checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      if (resizeTimerRef.current) clearTimeout(resizeTimerRef.current);
+    };
+  }, [isMobile]);
 
   // GSAP horizontal scroll on desktop ONLY (≥768px)
   useEffect(() => {
     // Guard: only run on desktop
-    if (typeof window === "undefined" || window.innerWidth < 768) return;
-    
-    // Skip if mobile or refs not ready
-    if (isMobile === true || !sectionRef.current || !trackRef.current) return;
+    if (isMobile || typeof window === "undefined") return;
 
     const ctx = gsap.context(() => {
       const track = trackRef.current;
@@ -78,7 +101,6 @@ export default function PopularCourses() {
 
     return () => {
       ctx.revert();
-      ScrollTrigger.getAll().forEach((st) => st.kill());
     };
   }, [isMobile]);
 
@@ -86,21 +108,20 @@ export default function PopularCourses() {
   const handleScroll = () => {
     if (!trackRef.current || !isMobile) return;
     const el = trackRef.current;
-    const cardWidth = el.firstElementChild?.clientWidth || 0;
     const gap = 24;
-    const index = Math.round(el.scrollLeft / (cardWidth + gap));
+    const index = Math.round(el.scrollLeft / (el.firstElementChild?.clientWidth || 0 + gap));
     setActiveIndex(Math.min(index, coursesData.popularCourses.length - 1));
   };
 
   // Scroll to active card on desktop when index changes (from touch swipe)
   useEffect(() => {
-    if (!trackRef.current || isMobile !== false || !trackRef.current.firstElementChild) return;
-    
+    if (!trackRef.current || !isMobile || !trackRef.current.firstElementChild) return;
+
     const card = trackRef.current.firstElementChild as HTMLElement;
     const cardWidth = card.clientWidth || 400;
     const gap = 24;
     const scrollPosition = activeIndex * (cardWidth + gap);
-    
+
     gsap.to(trackRef.current, {
       x: -scrollPosition,
       duration: 0.5,
@@ -120,8 +141,7 @@ export default function PopularCourses() {
   const handleTouchEnd = () => {
     const swipeThreshold = 50;
     const diff = touchStartX.current - touchEndX.current;
-    const cardWidth = 400; // Approximate card width + gap
-    
+
     if (Math.abs(diff) > swipeThreshold) {
       if (diff > 0) {
         // Swiped left - next card
@@ -133,8 +153,48 @@ export default function PopularCourses() {
     }
   };
 
-  // Don't render until isMobile is determined
-  if (isMobile === null) return null;
+  // Render skeleton during SSR to prevent hydration mismatch
+  if (!hasMounted || isMobile === null) {
+    return (
+      <section ref={sectionRef} className="relative bg-[#0C0C0C]" style={{ minHeight: "100vh" }}>
+        <div className="atmosphere-blob" style={{
+          width: "600px", height: "600px", opacity: 0.04,
+          background: "radial-gradient(circle, rgba(227,24,55,0.4) 0%, transparent 70%)",
+          top: "50%", left: "50%", transform: "translate(-50%, -50%)",
+        }} />
+
+        {/* Header */}
+        <div className="pc-heading text-center pt-24 md:pt-32 pb-12 md:pb-16 relative z-10 max-w-7xl mx-auto px-4">
+          <p className="text-[#E31837] text-xs font-semibold tracking-[0.12em] uppercase mb-4">Master Your Craft</p>
+          <h2 className="font-display font-bold text-[clamp(2rem,4vw,3.5rem)] text-[#F0EBE1] leading-[1.08] tracking-tight mb-4 pb-1">
+            Popular <span className="gradient-text">Courses</span>
+          </h2>
+          <p className="text-[#A8A29C] text-lg max-w-2xl mx-auto">
+            Master industry-standard tools and techniques with our most sought-after programs
+          </p>
+        </div>
+
+        {/* Loading skeleton */}
+        <div className="relative z-10 px-[10vw] pb-8">
+          <div className="flex gap-6">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="flex-shrink-0 w-[380px]">
+                <div className="glass-card rounded-2xl overflow-hidden h-[480px] animate-pulse">
+                  <div className="h-[200px] bg-white/5" />
+                  <div className="p-6 space-y-4">
+                    <div className="h-6 w-24 bg-white/5 rounded-full" />
+                    <div className="h-8 w-48 bg-white/5 rounded" />
+                    <div className="h-4 w-full bg-white/5 rounded" />
+                    <div className="h-4 w-3/4 bg-white/5 rounded" />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section ref={sectionRef} className="relative bg-[#0C0C0C]" style={{ minHeight: isMobile ? "auto" : "100vh" }}>

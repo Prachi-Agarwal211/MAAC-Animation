@@ -1,13 +1,13 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, memo } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { awardsData } from "@/data/siteData";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function Awards() {
+function Awards() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -79,3 +79,5 @@ export default function Awards() {
     </section>
   );
 }
+
+export default memo(Awards);

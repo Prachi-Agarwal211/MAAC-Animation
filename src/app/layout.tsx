@@ -81,58 +81,9 @@ export default function RootLayout({
 
           <CustomCursor />
 
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "EducationalOrganization",
-                name: "MAAC Jaipur — Maya Academy of Advanced Cinematics",
-                alternateName: "Maya Academy of Advanced Cinematics - Jaipur",
-                url: "https://maacjaipur.com",
-                logo: "https://maacjaipur.com/logo.png",
-                description: "Rajasthan's leading animation, VFX, and multimedia institute with 30+ years of excellence",
-                address: {
-                  "@type": "PostalAddress",
-                  streetAddress: "711-712, Ambition Tower, 7th Floor, D-46B, Malan Ka Chauraha, Agrasain Circle",
-                  addressLocality: "Jaipur",
-                  addressRegion: "Rajasthan",
-                  postalCode: "302001",
-                  addressCountry: "IN",
-                },
-                geo: {
-                  "@type": "GeoCoordinates",
-                  latitude: 26.8466,
-                  longitude: 75.8069,
-                },
-                telephone: "+91-7300001589",
-                email: "maacanimationjaipur@gmail.com",
-                openingHours: "Mo-Sa 09:00-19:00",
-                priceRange: "₹₹",
-                hasOfferCatalog: {
-                  "@type": "OfferCatalog",
-                  name: "Animation & VFX Courses",
-                  itemListElement: [
-                    { "@type": "Course", "name": "3D Animation", "description": "Advanced 3D animation training with industry-standard tools" },
-                    { "@type": "Course", "name": "VFX", "description": "Visual effects for film and TV using compositing and motion tracking" },
-                    { "@type": "Course", "name": "Game Design", "description": "Game design and development for next-gen gaming platforms" },
-                    { "@type": "Course", "name": "Digital Filmmaking", "description": "Complete filmmaking program from pre-production to post-production" },
-                    { "@type": "Course", "name": "Digital Media & Design", "description": "Graphic design, web design, UI/UX, and motion graphics" },
-                  ],
-                },
-                sameAs: [
-                  "https://www.facebook.com/MAAClndia",
-                  "https://www.instagram.com/maacjaipurcscheme",
-                  "https://www.youtube.com/@maac-jaipur-cscheme",
-                  "https://www.linkedin.com/company/maac-jaipur-cscheme",
-                ],
-              }),
-            }}
-          />
-
           <LenisProvider>
             <Navbar />
-            <main id="main-content" className="page-wrapper">{children}</main>
+            <main id="main-content" tabIndex={-1} className="page-wrapper">{children}</main>
             <FloatingCTA whatsapp="+917300001589" phone="+917300001589" />
             <Analytics />
             <SpeedInsights />

@@ -157,7 +157,7 @@ export const localBusinessSchema = {
     "latitude": 26.8466,
     "longitude": 75.8069
   },
-  "telephone": "+91-141-4035604",
+  "telephone": "+91-7300001589",
   "email": "maacanimationjaipur@gmail.com",
   "openingHours": "Mo-Sa 09:00-19:00",
   "priceRange": "₹₹",

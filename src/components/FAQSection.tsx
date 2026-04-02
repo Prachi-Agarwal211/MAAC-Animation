@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, memo } from "react";
 import { faqSchema } from "@/lib/structured-data";
 
 const faqs = faqSchema.mainEntity.slice(0, 6); // Show top 6 FAQs
@@ -12,7 +12,7 @@ interface FAQ {
   };
 }
 
-export default function FAQSection() {
+function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
@@ -81,18 +81,6 @@ export default function FAQSection() {
           })}
         </div>
 
-        {/* Schema.org JSON-LD */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "FAQPage",
-              "mainEntity": faqs
-            }),
-          }}
-        />
-
         {/* Contact CTA */}
         <div className="text-center mt-12">
           <p className="text-[#6b6b6b] text-sm mb-4">
@@ -109,3 +97,5 @@ export default function FAQSection() {
     </section>
   );
 }
+
+export default memo(FAQSection);

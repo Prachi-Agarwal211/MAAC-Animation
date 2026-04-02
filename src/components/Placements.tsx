@@ -1,13 +1,13 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, memo } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { placementCompanies } from "@/data/siteData";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function Placements() {
+function Placements() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -88,3 +88,5 @@ export default function Placements() {
     </section>
   );
 }
+
+export default memo(Placements);

@@ -9,41 +9,36 @@ import VideoModal from "@/components/VideoModal";
 gsap.registerPlugin(ScrollTrigger);
 
 // Video carousel data - all videos with their metadata
-// Note: All testimonial videos are .mp4 files, so srcWebm and srcMp4 point to the same file
 const HERO_VIDEOS = [
   {
     id: 1,
     name: "Intro",
-    srcWebm: "/intro.webm",
-    srcMp4: "/intro.mp4",
+    webm: "/intro.webm",
+    mp4: "/intro.mp4",
     poster: "/images/hero-poster.webp",
   },
   {
     id: 2,
     name: "Aakanksha",
-    srcWebm: "/hero%20section/AAKANKSHA%20..mp4",
-    srcMp4: "/hero%20section/AAKANKSHA%20..mp4",
+    mp4: "/hero-section/AAKANKSHA.mp4",
     poster: "/images/hero-poster.webp",
   },
   {
     id: 3,
     name: "Abhilash S",
-    srcWebm: "/hero%20section/ABHILASH%20S.mp4",
-    srcMp4: "/hero%20section/ABHILASH%20S.mp4",
+    mp4: "/hero-section/ABHILASH S.mp4",
     poster: "/images/hero-poster.webp",
   },
   {
     id: 4,
     name: "Emon Mandal",
-    srcWebm: "/hero%20section/EMON%20MANDAL.mp4",
-    srcMp4: "/hero%20section/EMON%20MANDAL.mp4",
+    mp4: "/hero-section/EMON MANDAL.mp4",
     poster: "/images/hero-poster.webp",
   },
   {
     id: 5,
     name: "Nayan Satyawan Mestry",
-    srcWebm: "/hero%20section/NAYAN%20SATYAWAN%20MESTRY.mp4",
-    srcMp4: "/hero%20section/NAYAN%20SATYAWAN%20MESTRY.mp4",
+    mp4: "/hero-section/NAYAN SATYAWAN MESTRY.mp4",
     poster: "/images/hero-poster.webp",
   },
 ];
@@ -67,7 +62,7 @@ export default function MAACXHero() {
   const [preloaderDone, setPreloaderDone] = useState(false);
   const [showVideoModal, setShowVideoModal] = useState(false);
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
+  const isTransitioningRef = useRef(false);
   const [isPaused, setIsPaused] = useState(false);
   
   // Touch swipe support
@@ -85,12 +80,12 @@ export default function MAACXHero() {
 
   // Rotate to next video
   const goToNextVideo = useCallback(() => {
-    setIsTransitioning(true);
+    isTransitioningRef.current = true;
     setCurrentVideoIndex((prev) => (prev + 1) % HERO_VIDEOS.length);
 
     // Reset transitioning flag after animation completes
     setTimeout(() => {
-      setIsTransitioning(false);
+      isTransitioningRef.current = false;
     }, 1500);
   }, []);
 
@@ -106,7 +101,7 @@ export default function MAACXHero() {
   const handleTouchEnd = () => {
     const swipeThreshold = 50; // Minimum swipe distance
     const diff = touchStartX.current - touchEndX.current;
-    
+
     if (Math.abs(diff) > swipeThreshold) {
       if (diff > 0) {
         // Swiped left - next video
@@ -161,13 +156,13 @@ export default function MAACXHero() {
 
     const ctx = gsap.context(() => {
       const currentVideoEl = videoRefs.current[currentVideoIndex];
-      
+
       if (currentVideoEl) {
         // If not the first render, animate transition
-        if (currentVideoIndex !== 0 || !isTransitioning) {
+        if (currentVideoIndex !== 0 || !isTransitioningRef.current) {
           const prevIndex = (currentVideoIndex - 1 + HERO_VIDEOS.length) % HERO_VIDEOS.length;
           const prevVideoEl = videoRefs.current[prevIndex];
-          
+
           if (prevVideoEl && prevIndex !== currentVideoIndex) {
             // Fade out previous video
             gsap.to(prevVideoEl, {
@@ -280,19 +275,26 @@ export default function MAACXHero() {
       // Add count-up animation to stats values
       const stats = containerRef.current?.querySelectorAll(".maacx-stat-value");
       stats?.forEach((stat) => {
-        const finalValue = parseInt(stat.textContent?.replace(/\D/g, "") || "0");
-        gsap.to(stat, {
-          textContent: finalValue,
+        const element = stat as HTMLElement;
+        // Extract the numeric value and suffix from the element's text
+        const textContent = element.textContent?.trim() || "0";
+        const match = textContent.match(/(\d+)(.*)/);
+        const finalValue = match ? parseInt(match[1], 10) : 0;
+        const suffix = match ? match[2] : "+";
+
+        // Use gsap.to() with counter object, not DOM element textContent
+        const counter = { val: 0 };
+        gsap.to(counter, {
+          val: finalValue,
           duration: 2,
           ease: "expo.out",
           scrollTrigger: {
-            trigger: stat,
+            trigger: element,
             start: "top 80%",
             once: true,
           },
-          snap: { textContent: 1 },
-          onUpdate: function() {
-            stat.textContent = Math.round(this.targets()[0].textContent) + "+";
+          onUpdate: () => {
+            element.textContent = Math.round(counter.val) + suffix;
           },
         });
       });
@@ -300,7 +302,6 @@ export default function MAACXHero() {
 
     return () => {
       ctx.revert();
-      ScrollTrigger.getAll().forEach((st) => st.kill());
     };
   }, [preloaderDone]);
 
@@ -346,17 +347,13 @@ export default function MAACXHero() {
                 muted
                 loop
                 playsInline
-                preload={index === 0 ? "auto" : "none"}
+                preload={index === 0 ? "auto" : index === 1 ? "metadata" : "none"}
                 poster={video.poster}
+                width={1920}
+                height={1080}
               >
-                {video.srcWebm.endsWith(".webm") ? (
-                  <source src={video.srcWebm} type="video/webm" />
-                ) : (
-                  <source src={video.srcMp4} type="video/mp4" />
-                )}
-                {video.srcMp4 !== video.srcWebm && (
-                  <source src={video.srcMp4} type="video/mp4" />
-                )}
+                {video.webm && <source src={video.webm} type="video/webm" />}
+                <source src={video.mp4} type="video/mp4" />
               </video>
             ))}
           </div>
@@ -365,15 +362,17 @@ export default function MAACXHero() {
           <div className="absolute inset-0 z-[2] bg-black/50" />
           
           {/* Video navigation indicators */}
-          <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-[3] flex items-center gap-2">
+          <div className="absolute bottom-[72px] left-1/2 -translate-x-1/2 z-[3] flex items-center gap-2">
             {HERO_VIDEOS.map((video, index) => (
               <button
                 key={video.id}
                 onClick={() => {
-                  if (isTransitioning || index === currentVideoIndex) return;
-                  setIsTransitioning(true);
+                  if (isTransitioningRef.current || index === currentVideoIndex) return;
+                  isTransitioningRef.current = true;
                   setCurrentVideoIndex(index);
-                  setTimeout(() => setIsTransitioning(false), 1500);
+                  setTimeout(() => {
+                    isTransitioningRef.current = false;
+                  }, 1500);
                 }}
                 className={`group relative h-2 rounded-full transition-all duration-500 ${
                   index === currentVideoIndex
@@ -381,10 +380,10 @@ export default function MAACXHero() {
                     : "w-2 bg-white/30 hover:bg-white/50"
                 }`}
                 aria-label={`Show ${video.name} video`}
-                disabled={isTransitioning || index === currentVideoIndex}
+                disabled={isTransitioningRef.current || index === currentVideoIndex}
               >
                 {/* Progress bar for current video */}
-                {index === currentVideoIndex && !isTransitioning && (
+                {index === currentVideoIndex && !isTransitioningRef.current && (
                   <div
                     className="absolute inset-0 bg-[#E31837] rounded-full origin-left"
                     style={{
@@ -524,7 +523,7 @@ export default function MAACXHero() {
       <VideoModal
         isOpen={showVideoModal}
         onClose={() => setShowVideoModal(false)}
-        videoUrl={HERO_VIDEOS[currentVideoIndex].srcMp4}
+        videoUrl={HERO_VIDEOS[currentVideoIndex].mp4}
       />
     </>
   );

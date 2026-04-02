@@ -1,11 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, memo } from "react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { testimonialsData } from "@/data/siteData";
 
-export default function Testimonials() {
+function Testimonials() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
   const startXRef = useRef<number>(0);
@@ -63,7 +62,11 @@ export default function Testimonials() {
             onBlur={() => setIsPaused(false)}
           >
             <div className="text-5xl text-[#E31837]/30 font-display mb-6">&ldquo;</div>
-            <p className="text-[#A8A29C] text-lg md:text-xl leading-relaxed mb-8 min-h-[120px] transition-all duration-500">
+            <p 
+              className="text-[#A8A29C] text-lg md:text-xl leading-relaxed mb-8 min-h-[120px] transition-all duration-500"
+              aria-live="polite"
+              aria-atomic="true"
+            >
               {testimonialsData[active].text}
             </p>
             <div className="flex items-center justify-center gap-4">
@@ -94,3 +97,5 @@ export default function Testimonials() {
     </section>
   );
 }
+
+export default memo(Testimonials);

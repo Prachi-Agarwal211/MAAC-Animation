@@ -12,9 +12,10 @@ import Placements from "@/components/Placements";
 import ApplyNow from "@/components/ApplyNow";
 import Footer from "@/components/Footer";
 import FAQSection from "@/components/FAQSection";
-import { localBusinessSchema, videoSchema, breadcrumbSchema } from "@/lib/structured-data";
+import { localBusinessSchema, videoSchema, breadcrumbSchema, faqSchema } from "@/lib/structured-data";
 
-export const dynamic = "force-dynamic";
+// ISR: Revalidate every hour
+export const revalidate = 3600;
 
 // Step 11: Gradient section dividers between dark↔cream transitions
 const DarkToCream = () => (
@@ -37,6 +38,7 @@ export default function Home() {
             breadcrumb: breadcrumbSchema([
               { name: "Home", url: "https://maacjaipur.com" },
             ]),
+            faq: faqSchema,
           }),
         }}
       />

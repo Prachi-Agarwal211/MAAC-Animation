@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect } from "react";
-import { initLenis } from "@/lib/lenis";
+import { useEffect, useRef } from "react";
+import { destroyLenis } from "@/lib/lenis";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
 
@@ -12,68 +12,89 @@ export default function LenisProvider({
 }: {
   children: React.ReactNode;
 }) {
+  const initializedRef = useRef(false);
+
   useEffect(() => {
-    const lenis = initLenis();
+    // Prevent double initialization in Strict Mode
+    if (initializedRef.current) return;
+    initializedRef.current = true;
 
-    // Global scroll-reveal: any element with .scroll-reveal class fades up on enter
-    const revealElements = gsap.utils.toArray(".scroll-reveal");
-    revealElements.forEach((el) => {
-      gsap.fromTo(
-        el as Element,
-        { opacity: 0, y: 40 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.9,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: el as Element,
-            start: "top 85%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
-    });
-
-    // Simple GSAP text reveal for headings with [data-splitting] attribute
-    // (Replaced Splitting.js to avoid SSR issues and memory leaks)
-    if (typeof window !== "undefined") {
-      const headings = gsap.utils.toArray<HTMLElement>("[data-splitting]");
-      headings.forEach((heading) => {
-        // Wrap text content in spans for animation (simple approach without Splitting.js)
-        const text = heading.textContent;
-        heading.innerHTML = text
-          ?.split(" ")
-          .map((word) => `<span class="word" style="display:inline-block; white-space:nowrap;">${word}</span>`)
-          .join(" ") || "";
-
-        const words = heading.querySelectorAll(".word");
+    destroyLenis(); // This will re-init if needed
+    const ctx = gsap.context(() => {
+      // Global scroll-reveal
+      const revealElements = gsap.utils.toArray(".scroll-reveal");
+      revealElements.forEach((el) => {
         gsap.fromTo(
-          words,
-          { y: "110%", opacity: 0 },
+          el as Element,
+          { opacity: 0, y: 40 },
           {
-            y: "0%",
             opacity: 1,
-            duration: 0.8,
-            stagger: 0.06,
-            ease: "expo.out",
+            y: 0,
+            duration: 0.9,
+            ease: "power3.out",
             scrollTrigger: {
-              trigger: heading,
+              trigger: el as Element,
               start: "top 85%",
               toggleActions: "play none none reverse",
             },
           }
         );
       });
-    }
+
+      // GSAP text reveal for headings - delay until after hydration
+      // Use requestAnimationFrame to ensure this runs after React commits
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          const headings = gsap.utils.toArray<HTMLElement>("[data-splitting]");
+          headings.forEach((heading) => {
+            if (heading.dataset.splittingDone) return;
+            heading.dataset.splittingDone = "true";
+
+            const text = heading.textContent;
+            if (!text) return;
+
+            // Clear text content and rebuild with spans
+            heading.textContent = "";
+            const words = text.split(" ");
+            words.forEach((word, index) => {
+              const span = document.createElement("span");
+              span.className = "word";
+              span.style.display = "inline-block";
+              span.style.whiteSpace = "nowrap";
+              span.textContent = word;
+              heading.appendChild(span);
+
+              // Add space between words (except after last word)
+              if (index < words.length - 1) {
+                heading.appendChild(document.createTextNode(" "));
+              }
+            });
+
+            const wordElements = heading.querySelectorAll(".word");
+            gsap.fromTo(
+              wordElements,
+              { y: "110%", opacity: 0 },
+              {
+                y: "0%",
+                opacity: 1,
+                duration: 0.8,
+                stagger: 0.06,
+                ease: "expo.out",
+                scrollTrigger: {
+                  trigger: heading,
+                  start: "top 85%",
+                  toggleActions: "play none none reverse",
+                },
+              }
+            );
+          });
+        }, 0);
+      });
+    });
 
     return () => {
-      lenis?.destroy();
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-      gsap.globalTimeline.clear();
-      // Kill any pending text reveal animations
-      gsap.killTweensOf("[data-splitting]");
-      gsap.killTweensOf(".word");
+      ctx.revert(); // Only kills THIS component's GSAP instances
+      destroyLenis(); // Properly destroys lenis singleton
     };
   }, []);
 

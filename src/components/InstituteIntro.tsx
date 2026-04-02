@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 function CountUpStat({ number, suffix, label }: { number: number; suffix: string; label: string }) {
   const [count, setCount] = useState(0);
@@ -138,11 +137,13 @@ export default function InstituteIntro() {
                     </svg>
                   </div>
                 </div>
-                {/* Thumbnail */}
+                {/* Thumbnail - using gradient placeholder instead of external image */}
                 <div
-                  className="absolute inset-0 bg-cover bg-center"
-                  style={{ backgroundImage: "url('https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&q=80')" }}
+                  className="absolute inset-0 bg-gradient-to-br from-[#1a1a1a] to-[#0C0C0C]"
                 />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="text-6xl opacity-20">🎬</div>
+                </div>
                 <div className="absolute inset-0 bg-black/30" />
               </div>
             </div>

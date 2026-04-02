@@ -2,6 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const workItems = [
   { 
@@ -44,32 +47,74 @@ interface VideoModalProps {
 function VideoModal({ video, title, category, onClose }: VideoModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const previousActiveElement = useRef<Element | null>(null);
   const [isMuted, setIsMuted] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [showControls, setShowControls] = useState(true);
   const controlsTimeoutRef = useRef<NodeJS.Timeout>();
 
+  // Focus trap: focus close button when modal opens
+  useEffect(() => {
+    if (video) {
+      previousActiveElement.current = document.activeElement;
+      setTimeout(() => closeButtonRef.current?.focus(), 100);
+    } else {
+      previousActiveElement.current = null;
+    }
+  }, [video]);
+
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.fromTo(modalRef.current, 
-        { opacity: 0 }, 
+      gsap.fromTo(modalRef.current,
+        { opacity: 0 },
         { opacity: 1, duration: 0.4, ease: "power2.out" }
       );
-      gsap.fromTo(".modal-content", 
-        { scale: 0.92, y: 60, opacity: 0 }, 
+      gsap.fromTo(".modal-content",
+        { scale: 0.92, y: 60, opacity: 0 },
         { scale: 1, y: 0, opacity: 1, duration: 0.6, ease: "expo.out" }
       );
-      gsap.fromTo(".modal-glow", 
-        { scale: 0.8, opacity: 0 }, 
+      gsap.fromTo(".modal-glow",
+        { scale: 0.8, opacity: 0 },
         { scale: 1.2, opacity: 0.5, duration: 1.2, ease: "power1.out" }
       );
     }, modalRef);
 
     document.body.style.overflow = "hidden";
-    
+
+    // Keyboard handler for focus trap
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+      
+      if (e.key === "Tab") {
+        const focusableElements = modalRef.current?.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusableElements && focusableElements.length > 0) {
+          const firstElement = focusableElements[0] as HTMLElement;
+          const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement;
+          
+          if (e.shiftKey && document.activeElement === firstElement) {
+            e.preventDefault();
+            lastElement.focus();
+          } else if (!e.shiftKey && document.activeElement === lastElement) {
+            e.preventDefault();
+            firstElement.focus();
+          }
+        }
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
     return () => {
       ctx.revert();
       document.body.style.overflow = "unset";
+      document.removeEventListener("keydown", handleKeyDown);
+      // Restore focus
+      if (previousActiveElement.current instanceof HTMLElement) {
+        previousActiveElement.current.focus();
+      }
     };
   }, []);
 
@@ -112,7 +157,8 @@ function VideoModal({ video, title, category, onClose }: VideoModalProps) {
       {/* Ambient Glow */}
       <div className="modal-glow absolute w-[600px] h-[600px] bg-[#E31837]/30 rounded-full blur-[200px] pointer-events-none" />
       
-      <button 
+      <button
+        ref={closeButtonRef}
         onClick={onClose}
         className={`absolute top-4 md:top-6 right-4 md:right-6 z-50 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center text-white/70 hover:text-white hover:bg-[#E31837]/80 transition-all duration-300 ${!showControls ? 'opacity-0 hover:opacity-100' : 'opacity-100'}`}
         aria-label="Close modal"
@@ -308,7 +354,6 @@ export default function StudentWork() {
     }, sectionRef);
     return () => {
       ctx.revert();
-      ScrollTrigger.getAll().forEach((st) => st.kill());
     };
   }, []);
 

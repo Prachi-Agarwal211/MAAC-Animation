@@ -1,4 +1,85 @@
-# Fixed Memory Leaks
+# Fixed Bugs
+
+## Date: 2026-04-03
+
+### Summary
+Fixed hydration mismatch errors causing "Failed to execute 'insertBefore' on 'Node'" and related React hydration issues.
+
+---
+
+## 1. Hydration Mismatch - LenisProvider.tsx DOM Manipulation
+
+**Root Cause:**
+- The `LenisProvider` component was using `heading.innerHTML = ...` to split text into word spans for GSAP animations
+- This DOM manipulation happened during/after hydration, causing React to detect a mismatch between server HTML and client DOM
+- The error manifested as: `Failed to execute 'insertBefore' on 'Node': the node before which to insert is not a child of this node`
+
+**Solution:**
+- Replaced `innerHTML` assignment with safe DOM manipulation using `document.createElement()` and `appendChild()`
+- Added `initializedRef` to prevent double-initialization in React Strict Mode
+- The text splitting now happens entirely outside React's render cycle using native DOM APIs
+
+**Files Changed:**
+- `src/components/LenisProvider.tsx`
+
+**Key Changes:**
+```typescript
+// BEFORE (causes hydration mismatch):
+heading.innerHTML = text?.split(" ").map((word) => `<span class="word">...</span>`).join(" ") || "";
+
+// AFTER (safe DOM manipulation):
+heading.textContent = "";
+const words = text.split(" ");
+words.forEach((word, index) => {
+  const span = document.createElement("span");
+  span.className = "word";
+  span.textContent = word;
+  heading.appendChild(span);
+  if (index < words.length - 1) {
+    heading.appendChild(document.createTextNode(" "));
+  }
+});
+```
+
+---
+
+## 2. Hydration Mismatch - PopularCourses.tsx Mobile Detection
+
+**Root Cause:**
+- The component used `useState<boolean>(true)` for `isMobile` state
+- Server rendered with `isMobile = true`, but client detected `isMobile = false` on desktop after hydration
+- This caused different HTML structures (different widths, classes, and styles) between server and client
+- The mismatch triggered hydration warnings and potential UI flickering
+
+**Solution:**
+- Changed initial state to `useState<boolean | null>(null)` to represent "not yet mounted"
+- Added `hasMounted` state to track client-side mount status
+- Render a skeleton loader during SSR/initial mount
+- Only render the full component after mobile detection completes on client
+
+**Files Changed:**
+- `src/components/PopularCourses.tsx`
+
+**Key Changes:**
+```typescript
+// BEFORE (causes hydration mismatch):
+const [isMobile, setIsMobile] = useState<boolean>(true);
+
+// AFTER (safe SSR):
+const [isMobile, setIsMobile] = useState<boolean | null>(null);
+const [hasMounted, setHasMounted] = useState(false);
+
+useEffect(() => {
+  setHasMounted(true);
+}, []);
+
+// Render skeleton during SSR
+if (!hasMounted || isMobile === null) {
+  return <SkeletonLoader />;
+}
+```
+
+---
 
 ## Date: 2026-04-02
 

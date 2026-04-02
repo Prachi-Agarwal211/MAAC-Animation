@@ -1,19 +1,16 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
 export default function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
   const followerRef = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Only show on non-touch devices
+    // Only show on non-touch devices - use CSS media query
     if (typeof window === "undefined") return;
-    if (window.matchMedia("(hover: none)").matches) return;
-
-    setIsVisible(true);
+    if (window.matchMedia("(pointer: coarse)").matches) return;
 
     const cursor = cursorRef.current;
     const follower = followerRef.current;
@@ -53,8 +50,6 @@ export default function CustomCursor() {
       });
     };
   }, []);
-
-  if (!isVisible) return null;
 
   return (
     <>

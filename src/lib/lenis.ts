@@ -3,9 +3,9 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 let lenis: Lenis | null = null;
+let tickerCallback: ((time: number) => void) | null = null;
 
 export const initLenis = () => {
-  // Return existing instance if already initialized
   if (lenis) return lenis;
 
   lenis = new Lenis({
@@ -15,16 +15,16 @@ export const initLenis = () => {
     infinite: false,
   });
 
-  // Correct GSAP + Lenis sync
   lenis.on('scroll', ScrollTrigger.update);
 
-  // GSAP ticker passes seconds, lenis needs milliseconds
-  gsap.ticker.add((time: number) => {
+  // Store ticker callback reference for cleanup
+  tickerCallback = (time: number) => {
     lenis!.raf(time * 1000);
-  });
+  };
+  
+  gsap.ticker.add(tickerCallback);
   gsap.ticker.lagSmoothing(0);
 
-  // Refresh ScrollTrigger on resize and font load
   window.addEventListener('resize', () => ScrollTrigger.refresh());
   if (typeof document !== 'undefined' && document.fonts?.ready) {
     document.fonts.ready.then(() => ScrollTrigger.refresh());
@@ -34,3 +34,15 @@ export const initLenis = () => {
 };
 
 export const getLenis = () => lenis;
+
+// NEW: Proper destroy function that resets singleton
+export const destroyLenis = () => {
+  if (lenis) {
+    lenis.destroy();
+    if (tickerCallback) {
+      gsap.ticker.remove(tickerCallback);
+      tickerCallback = null;
+    }
+    lenis = null;
+  }
+};

@@ -104,6 +104,8 @@ export default function Footer() {
                 { label: "Home", href: "/" }, { label: "About Us", href: "/about" },
                 { label: "Courses", href: "/courses" }, { label: "Placements", href: "/placements" },
                 { label: "Gallery", href: "/gallery" }, { label: "Contact Us", href: "/contact" },
+                { label: "Malviya Nagar", href: "/locations/malviya-nagar" },
+                { label: "Vaishali Nagar", href: "/locations/vaishali-nagar" },
               ].map((link) => (
                 <li key={link.label}>
                   <Link href={link.href} className="text-[#A8A29C] text-sm hover:text-[#E31837] transition-colors duration-300 py-1 inline-block">{link.label}</Link>

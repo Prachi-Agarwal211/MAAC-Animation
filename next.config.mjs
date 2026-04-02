@@ -1,5 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Image optimization configuration
+  images: {
+    formats: ["image/avif", "image/webp"],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    minimumCacheTTL: 31536000,
+  },
   // Video caching headers for better performance
   async headers() {
     return [
@@ -25,26 +32,20 @@ const nextConfig = {
         ],
       },
       {
-        // Cache student work videos
-        source: "/student work/:path*",
+        // Cache student work videos (fixed path with hyphen)
+        source: "/student-work/:path*",
         headers: [
           { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
         ],
       },
       {
-        // Cache hero section videos
-        source: "/hero section/:path*",
+        // Cache hero section videos (fixed path with hyphen)
+        source: "/hero-section/:path*",
         headers: [
           { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
         ],
       },
     ];
-  },
-  // Image optimization configuration
-  images: {
-    formats: ["image/avif", "image/webp"],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
 };
 

@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { contactInfo } from "@/data/siteData";
 import MagneticButton from "@/components/ui/MagneticButton";
 
@@ -10,6 +9,8 @@ export default function ApplyNow() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     name: "", phone: "", email: "", course: "", city: "", message: "",
   });
@@ -41,10 +42,22 @@ export default function ApplyNow() {
     return Object.keys(errs).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
-    setSubmitted(true);
+    
+    setIsSubmitting(true);
+    setSubmitError(null);
+    
+    try {
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      setSubmitted(true);
+    } catch {
+      setSubmitError('Something went wrong. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (submitted) {
@@ -185,11 +198,31 @@ export default function ApplyNow() {
 
             <div className="flex justify-center">
               <MagneticButton>
-                <button type="submit" className="btn btn-primary py-4 text-base font-display w-full">
-                  Submit Enquiry
+                <button 
+                  type="submit" 
+                  disabled={isSubmitting}
+                  className="btn btn-primary py-4 text-base font-display w-full disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                      </svg>
+                      Submitting...
+                    </>
+                  ) : (
+                    'Submit Enquiry'
+                  )}
                 </button>
               </MagneticButton>
             </div>
+            
+            {submitError && (
+              <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm text-center">
+                {submitError}
+              </div>
+            )}
 
             <p className="text-[#6B6560] text-xs text-center flex items-center justify-center gap-1">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>

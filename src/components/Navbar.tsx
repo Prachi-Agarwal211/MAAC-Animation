@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { navLinks, contactInfo } from "@/data/siteData";
 import { useUIStore } from "@/lib/store";
 
@@ -55,6 +54,9 @@ export default function Navbar() {
     } else {
       document.body.style.overflow = "";
     }
+    return () => {
+      document.body.style.overflow = ""; // Always restore on unmount
+    };
   }, [mobileMenuOpen]);
 
   // Keyboard navigation
