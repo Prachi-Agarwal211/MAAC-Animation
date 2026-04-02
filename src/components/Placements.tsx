@@ -9,107 +9,80 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Placements() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const headingRef = useRef<HTMLDivElement>(null);
-  const tickerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.fromTo(
-        headingRef.current,
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 75%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
-
-      // Infinite marquee animation
-      if (tickerRef.current) {
-        const ticker = tickerRef.current;
-        const content = ticker.querySelector(".ticker-inner");
-        if (content) {
-          gsap.to(content, {
-            x: "-50%",
-            duration: 25,
-            repeat: -1,
-            ease: "none",
-          });
-        }
-      }
+      gsap.fromTo(".pl-heading", { opacity: 0, y: 50 }, {
+        opacity: 1, y: 0, duration: 0.8, ease: "expo.out",
+        scrollTrigger: { trigger: sectionRef.current, start: "top 75%" },
+      });
     }, sectionRef);
-
     return () => ctx.revert();
   }, []);
 
-  const doubledCompanies = [...placementCompanies, ...placementCompanies];
+  const row1 = [...placementCompanies, ...placementCompanies];
+  const row2 = [...placementCompanies.slice(7).reverse(), ...placementCompanies.slice(7).reverse()];
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative py-24 md:py-32 overflow-hidden bg-[#0f0f0f]"
-    >
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div ref={headingRef} className="text-center mb-16">
-          <p className="text-[#E31837] text-xs font-ui font-semibold tracking-[0.2em] uppercase mb-4">
-            Career Support
-          </p>
-          <h2 className="font-display font-bold text-[clamp(2rem,4vw,3.5rem)] text-[#f5f0e8] leading-[1.05] tracking-tight mb-4">
-            Work With The <span className="gradient-text">Best</span>
+    <section ref={sectionRef} className="relative py-24 md:py-32 overflow-hidden bg-[#0C0C0C]">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="pl-heading text-center mb-16">
+          <p className="text-[#E31837] text-xs font-semibold tracking-[0.15em] uppercase mb-4">Career Support</p>
+          <h2 className="font-display font-bold text-[clamp(2rem,4vw,3.5rem)] text-[#F0EBE1] leading-[1.05] tracking-tight mb-4">
+            Our Alumni Work At The <span className="gradient-text">Best</span>
           </h2>
-          <p className="text-[#6b6b6b] text-lg max-w-2xl mx-auto">
-            Our students are hired by the world&apos;s best studios. They
-            dominate the industry with their exceptional work.
+          <p className="text-[#A8A29C] text-lg max-w-2xl mx-auto">
+            Our students are hired by the world&apos;s top studios
           </p>
         </div>
+      </div>
 
-        {/* Company Logos Ticker */}
-        <div ref={tickerRef} className="overflow-hidden mb-12">
-          <div className="ticker-inner flex items-center gap-8 whitespace-nowrap">
-            {doubledCompanies.map((company, index) => (
-              <div
-                key={index}
-                className="glass-card rounded-2xl px-8 py-4 flex-shrink-0 hover:bg-white/10 transition-colors duration-300 cursor-default"
-              >
-                {/* Logo placeholder */}
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-                    <span className="text-sm font-bold text-primary">
-                      {company.charAt(0)}
-                    </span>
-                  </div>
-                  <span className="text-gray-300 font-medium text-sm">
-                    {company}
-                  </span>
+      {/* Red Stats Ticker Bar */}
+      <div className="stats-ticker-bar py-3 mb-12">
+        <div className="animate-ticker flex items-center gap-12 whitespace-nowrap">
+          {["95% Placement Rate", "500+ Partner Companies", "₹15L Highest Package", "NSDC Certified", "30+ Years Legacy"].map((item, i) => (
+            <span key={i} className="text-white font-medium text-sm flex items-center gap-3">
+              <span className="w-1.5 h-1.5 rounded-full bg-white/60" />
+              {item}
+            </span>
+          ))}
+          {["95% Placement Rate", "500+ Partner Companies", "₹15L Highest Package", "NSDC Certified", "30+ Years Legacy"].map((item, i) => (
+            <span key={`d-${i}`} className="text-white font-medium text-sm flex items-center gap-3">
+              <span className="w-1.5 h-1.5 rounded-full bg-white/60" />
+              {item}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Marquee Row 1 */}
+        <div className="overflow-hidden mb-4">
+          <div className="animate-marquee flex items-center gap-4">
+            {row1.map((company, i) => (
+              <div key={`${company}-${i}`} className="flex-shrink-0 bg-white/[0.03] border border-white/5 rounded-xl px-6 py-4 flex items-center gap-3 hover:bg-white/[0.06] hover:border-[#E31837]/20 transition-all duration-300">
+                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#E31837]/20 to-[#FF6B35]/20 flex items-center justify-center flex-shrink-0">
+                  <span className="text-xs font-bold text-[#E31837]">{company.charAt(0)}</span>
                 </div>
+                <span className="text-[#A8A29C] text-sm font-medium whitespace-nowrap">{company}</span>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Logo grid placeholder for actual company logos */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-          {placementCompanies.slice(0, 12).map((company, index) => (
-            <div
-              key={index}
-              className="image-placeholder h-24 rounded-2xl"
-            >
-              <div className="text-center">
-                <span className="text-lg font-bold text-primary/50">
-                  {company.charAt(0)}
-                </span>
-                <span className="text-[10px] block mt-1">Add Logo</span>
+        {/* Marquee Row 2 — reverse */}
+        <div className="overflow-hidden">
+          <div className="animate-marquee-reverse flex items-center gap-4">
+            {row2.map((company, i) => (
+              <div key={`${company}-r-${i}`} className="flex-shrink-0 bg-white/[0.03] border border-white/5 rounded-xl px-6 py-4 flex items-center gap-3 hover:bg-white/[0.06] hover:border-[#E31837]/20 transition-all duration-300">
+                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#FF6B35]/20 to-[#E31837]/20 flex items-center justify-center flex-shrink-0">
+                  <span className="text-xs font-bold text-[#FF6B35]">{company.charAt(0)}</span>
+                </div>
+                <span className="text-[#A8A29C] text-sm font-medium whitespace-nowrap">{company}</span>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

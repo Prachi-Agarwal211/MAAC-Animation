@@ -17,7 +17,6 @@ interface FlipCardProps {
     subtitle: string;
     description: string;
     fullDescription: string;
-    image: string;
     icon: string;
     careers: string[];
   };

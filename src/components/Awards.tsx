@@ -9,96 +9,62 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Awards() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const headingRef = useRef<HTMLDivElement>(null);
-  const cardsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.fromTo(
-        headingRef.current,
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 75%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
+      gsap.fromTo(".aw-heading", { opacity: 0, y: 50 }, {
+        opacity: 1, y: 0, duration: 0.8, ease: "expo.out",
+        scrollTrigger: { trigger: sectionRef.current, start: "top 75%" },
+      });
 
-      if (cardsRef.current) {
-        gsap.fromTo(
-          cardsRef.current.children,
-          { opacity: 0, y: 40, scale: 0.9 },
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 0.6,
-            stagger: 0.1,
-            ease: "back.out(1.3)",
-            scrollTrigger: {
-              trigger: cardsRef.current,
-              start: "top 80%",
-              toggleActions: "play none none reverse",
-            },
-          }
-        );
-      }
+      gsap.fromTo(".aw-card", { opacity: 0, y: 40 }, {
+        opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: "expo.out",
+        scrollTrigger: { trigger: ".aw-grid", start: "top 80%" },
+      });
     }, sectionRef);
-
     return () => ctx.revert();
   }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative py-24 md:py-32 overflow-hidden bg-[#080808]"
-    >
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
-      <div className="absolute top-1/3 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[150px]" />
+    <section ref={sectionRef} className="relative overflow-hidden">
+      {/* Cream section with clip-path */}
+      <div className="bg-[#F5F0E8] py-20 md:py-28 section-clip-light">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Header */}
+          <div className="aw-heading text-center mb-16">
+            <p className="text-[#E31837] text-xs font-semibold tracking-[0.15em] uppercase mb-4">Recognition</p>
+            <h2 className="font-display font-bold text-[clamp(2rem,4vw,3.5rem)] text-[#0C0C0C] leading-[1.05] tracking-tight mb-4">
+              Awards & <span className="text-[#E31837]">Recognition</span>
+            </h2>
+            <p className="text-[#4A4540] text-lg max-w-2xl mx-auto">
+              Celebrated by industry leaders for our commitment to excellence
+            </p>
+          </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div ref={headingRef} className="text-center mb-16">
-          <p className="text-[#E31837] text-xs font-ui font-semibold tracking-[0.2em] uppercase mb-4">
-            Recognition
-          </p>
-          <h2 className="font-display font-bold text-[clamp(2rem,4vw,3.5rem)] text-[#f5f0e8] leading-[1.05] tracking-tight mb-4">
-            Awards & <span className="gradient-text">Recognition</span>
-          </h2>
-          <p className="text-[#6b6b6b] text-lg max-w-2xl mx-auto">
-            Celebrated by industry leaders for our commitment to excellence in
-            animation and VFX education
-          </p>
-        </div>
+          {/* Magazine-style grid */}
+          <div className="aw-grid grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
+            {awardsData.map((award, index) => (
+              <div key={index} className="aw-card relative bg-white rounded-2xl p-8 overflow-hidden group hover:shadow-xl transition-shadow duration-500">
+                {/* Large year watermark */}
+                <span className="absolute -top-4 -right-4 font-display font-extrabold text-[6rem] md:text-[8rem] leading-none text-[#E31837]/[0.08] pointer-events-none select-none">
+                  {award.year}
+                </span>
 
-        {/* Awards Grid */}
-        <div
-          ref={cardsRef}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
-        >
-          {awardsData.map((award, index) => (
-            <div
-              key={index}
-              className="glass-card rounded-2xl p-6 text-center group"
-            >
-              {/* Award image placeholder */}
-              <div className="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                <span className="text-4xl">🏆</span>
+                {/* Abstract SVG badge */}
+                <div className="w-12 h-12 rounded-full bg-[#E31837]/10 flex items-center justify-center mb-4">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E31837" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                </div>
+
+                <p className="text-[#7A7570] text-xs font-semibold tracking-[0.15em] uppercase mb-2">{award.year}</p>
+                <h3 className="font-display font-bold text-xl md:text-2xl text-[#0C0C0C] mb-1 relative z-10">
+                  {award.name}
+                </h3>
+                <p className="text-[#7A7570] text-sm">{award.org}</p>
               </div>
-              {/* Award image placeholder */}
-              <div className="image-placeholder h-32 mb-4">
-                <span className="text-xs">Add Award Image</span>
-              </div>
-              <p className="text-gray-300 text-sm font-medium leading-relaxed">
-                {award}
-              </p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

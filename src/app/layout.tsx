@@ -1,15 +1,10 @@
 import type { Metadata } from "next";
-import { Poppins, Inter, Syne } from "next/font/google";
+import { Inter, Syne } from "next/font/google";
 import "./globals.css";
 import LenisProvider from "@/components/LenisProvider";
 import CustomCursor from "@/components/hero/CustomCursor";
-
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
-  variable: "--font-poppins",
-  display: "swap",
-});
+import FloatingCTA from "@/components/FloatingCTA";
+import Navbar from "@/components/Navbar";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -26,26 +21,27 @@ const syne = Syne({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://maacindia.com"),
+  metadataBase: new URL("https://maacjaipur.com"),
   title: {
-    default: "MAAC India — Animation, VFX & Multimedia Courses",
-    template: "%s | MAAC India",
+    default: "MAAC Jaipur — Best Animation, VFX & Multimedia Institute",
+    template: "%s | MAAC Jaipur",
   },
   description:
-    "Join MAAC, India's leading institute for Animation, VFX, Gaming & Multimedia. 30+ years of excellence, 95% placement rate, 100+ centers.",
+    "Join MAAC Jaipur, Rajasthan's leading institute for Animation, VFX, Gaming & Multimedia. 30+ years of excellence, 95% placement rate, NSDC certified B.Voc degree.",
   keywords: [
-    "animation courses india",
-    "vfx training",
+    "animation courses jaipur",
+    "vfx training jaipur",
     "3d animation institute",
     "maac jaipur",
-    "game design course",
-    "best animation institute india",
+    "game design course jaipur",
+    "best animation institute rajasthan",
+    "b.voc animation vfx",
   ],
   openGraph: {
     type: "website",
     locale: "en_IN",
-    url: "https://maacindia.com",
-    siteName: "MAAC India",
+    url: "https://maacjaipur.com",
+    siteName: "MAAC Jaipur",
     images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
   },
   twitter: {
@@ -61,11 +57,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth bg-[#080808]">
+    <html lang="en" className="scroll-smooth bg-[#0C0C0C]">
       <body
-        className={`${poppins.variable} ${inter.variable} ${syne.variable} font-body antialiased bg-[#080808] text-[#f5f0e8]`}
+        className={`${inter.variable} ${syne.variable} font-body antialiased bg-[#0C0C0C] text-[#F0EBE1]`}
       >
-        {/* Skip to main content — accessibility */}
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-[9999] bg-[#E31837] text-white px-4 py-2 rounded"
@@ -73,34 +68,31 @@ export default function RootLayout({
           Skip to main content
         </a>
 
-        {/* Premium film grain overlay — fixed, pointer-events-none */}
-        <div className="noise-overlay" aria-hidden="true" />
+        <div className="grain-overlay" aria-hidden="true" />
 
-        {/* Global custom cursor — auto-hides on touch devices */}
         <CustomCursor />
 
-        {/* JSON-LD Structured Data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "EducationalOrganization",
-              name: "MAAC India",
-              alternateName: "Maya Academy of Advanced Cinematics",
-              url: "https://maacindia.com",
-              logo: "https://maacindia.com/logo.png",
+              name: "MAAC Jaipur",
+              alternateName: "Maya Academy of Advanced Cinematics - Jaipur",
+              url: "https://maacjaipur.com",
+              logo: "https://maacjaipur.com/logo.png",
               description:
-                "India's leading animation, VFX, and multimedia institute",
+                "Rajasthan's leading animation, VFX, and multimedia institute",
               address: {
                 "@type": "PostalAddress",
-                streetAddress: "A-65, MIDC, Marol, Andheri (E)",
-                addressLocality: "Mumbai",
-                addressRegion: "Maharashtra",
-                postalCode: "400093",
+                streetAddress: "C-44, Malviya Nagar Industrial Area",
+                addressLocality: "Jaipur",
+                addressRegion: "Rajasthan",
+                postalCode: "302017",
                 addressCountry: "IN",
               },
-              telephone: "+91-22-68282300",
+              telephone: "+91-141-4035604",
               sameAs: [
                 "https://www.facebook.com/MAAClndia",
                 "https://www.instagram.com/maacindia",
@@ -111,7 +103,9 @@ export default function RootLayout({
         />
 
         <LenisProvider>
-          <main id="main-content">{children}</main>
+          <Navbar />
+          <main id="main-content" className="page-wrapper">{children}</main>
+          <FloatingCTA whatsapp="+911414035604" phone="+911414035604" />
         </LenisProvider>
       </body>
     </html>

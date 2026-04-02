@@ -1,4 +1,3 @@
-import Navbar from "@/components/Navbar";
 import MAACXHero from "@/components/hero/MAACXHero";
 import VerticalCardGallery from "@/components/VerticalCardGallery";
 import InstituteIntro from "@/components/InstituteIntro";
@@ -18,21 +17,24 @@ export const dynamic = "force-dynamic";
 
 export default function Home() {
   return (
-    <main className="overflow-hidden">
-      <Navbar />
+    <div className="overflow-hidden">
       <MAACXHero />
       <VerticalCardGallery />
       <InstituteIntro />
       <CareerCreatorComparison />
-      <CourseCategories />
+      <section id="courses">
+        <CourseCategories />
+      </section>
       <IndustryPartners />
       <PopularCourses />
       <StudentWork />
       <Testimonials />
       <Awards />
-      <Placements />
+      <section id="placements">
+        <Placements />
+      </section>
       <ApplyNow />
       <Footer />
-    </main>
+    </div>
   );
 }

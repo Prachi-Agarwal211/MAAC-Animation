@@ -23,6 +23,12 @@ export const initLenis = () => {
   });
   gsap.ticker.lagSmoothing(0);
 
+  // Refresh ScrollTrigger on resize and font load
+  window.addEventListener('resize', () => ScrollTrigger.refresh());
+  if (typeof document !== 'undefined' && document.fonts?.ready) {
+    document.fonts.ready.then(() => ScrollTrigger.refresh());
+  }
+
   return lenis;
 };
 
