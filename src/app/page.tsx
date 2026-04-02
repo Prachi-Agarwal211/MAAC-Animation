@@ -1,5 +1,4 @@
 import Navbar from "@/components/Navbar";
-// import Hero from "@/components/Hero";
 import MAACXHero from "@/components/hero/MAACXHero";
 import VerticalCardGallery from "@/components/VerticalCardGallery";
 import InstituteIntro from "@/components/InstituteIntro";
@@ -13,6 +12,9 @@ import Awards from "@/components/Awards";
 import Placements from "@/components/Placements";
 import ApplyNow from "@/components/ApplyNow";
 import Footer from "@/components/Footer";
+
+// Force dynamic rendering to avoid SSR issues with client-side components
+export const dynamic = "force-dynamic";
 
 export default function Home() {
   return (

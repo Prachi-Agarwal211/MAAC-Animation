@@ -72,7 +72,7 @@ export default function IndustryPartners() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-16 md:py-20 overflow-hidden bg-dark"
+      className="relative py-16 md:py-20 overflow-hidden bg-[#080808]"
     >
       {/* Background decoration */}
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
@@ -82,10 +82,13 @@ export default function IndustryPartners() {
         {/* Heading */}
         <h2
           ref={headingRef}
-          className="text-center text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2"
+          className="text-center text-2xl sm:text-3xl md:text-4xl font-bold text-[#f5f0e8] mb-2"
         >
-          Our Industry <span className="gradient-text">Knowledge Partners</span>
+          Our Industry <span className="gradient-text">Partners</span>
         </h2>
+        <p className="text-center text-[#E31837] text-xs font-ui font-semibold tracking-[0.2em] uppercase mb-8">
+          Knowledge Partners
+        </p>
 
         {/* Partners Grid */}
         <div

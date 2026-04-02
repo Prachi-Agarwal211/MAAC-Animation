@@ -209,13 +209,13 @@ export default function VerticalCardGallery() {
       <div className="max-w-[1600px] mx-auto px-6 md:px-12 lg:px-20">
         {/* Header */}
         <div className="mb-16 md:mb-20 text-center md:text-left">
-          <p className="vcg-eyebrow text-[#c8ff00] text-xs md:text-sm font-semibold tracking-[0.2em] uppercase mb-6">
+          <p className="vcg-eyebrow text-[#E31837] text-xs md:text-sm font-ui font-semibold tracking-[0.2em] uppercase mb-6">
             Empower Your Future
           </p>
-          <h2 className="vcg-title text-white font-display font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[0.9] tracking-tight mb-4">
+          <h2 className="vcg-title font-display font-bold text-[clamp(2.5rem,6vw,7rem)] leading-[0.9] tracking-tight mb-4 text-[#f5f0e8]">
             Creative Careers That Click
           </h2>
-          <h2 className="vcg-title text-[#c8ff00] font-display font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[0.9] tracking-tight mb-6">
+          <h2 className="vcg-title font-display font-bold text-[clamp(2.5rem,6vw,7rem)] leading-[0.9] tracking-tight mb-6 text-[#E31837]">
             Think MAAC
           </h2>
           <p className="vcg-description text-gray-400 text-sm md:text-base leading-relaxed max-w-3xl">
@@ -236,7 +236,7 @@ export default function VerticalCardGallery() {
                 }}
                 className={`vcg-card group relative w-16 sm:w-20 md:w-24 lg:w-28 h-[400px] sm:h-[500px] md:h-[600px] cursor-pointer overflow-hidden rounded-2xl transition-all duration-500 ease-out ${
                   activeIndex === index
-                    ? 'ring-2 ring-[#c8ff00] ring-offset-4 ring-offset-[#080808]'
+                    ? 'ring-2 ring-[#E31837] ring-offset-4 ring-offset-[#080808]'
                     : ''
                 }`}
                 onClick={() => handleCardClick(index)}
@@ -273,7 +273,7 @@ export default function VerticalCardGallery() {
 
                 {/* Active Indicator */}
                 <div
-                  className={`absolute bottom-0 left-0 right-0 h-1 bg-[#c8ff00] transform transition-transform duration-500 ease-out ${
+                  className={`absolute bottom-0 left-0 right-0 h-1 bg-[#E31837] transform transition-transform duration-500 ease-out ${
                     activeIndex === index ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-50'
                   }`}
                 />
@@ -295,10 +295,10 @@ export default function VerticalCardGallery() {
 
             {/* Active Card Info Overlay */}
             <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
-              <span className="inline-block text-[#c8ff00] text-xs font-semibold tracking-wider uppercase mb-3">
+              <span className="inline-block text-[#E31837] text-xs font-ui font-semibold tracking-wider uppercase mb-3">
                 {cardItems[activeIndex].title}
               </span>
-              <div className="h-0.5 w-16 bg-[#c8ff00]" />
+              <div className="h-0.5 w-16 bg-[#E31837]" />
             </div>
           </div>
 
@@ -314,7 +314,7 @@ export default function VerticalCardGallery() {
                   }}
                   className={`vcg-card group relative w-16 sm:w-20 md:w-24 lg:w-28 h-[400px] sm:h-[500px] md:h-[600px] cursor-pointer overflow-hidden rounded-2xl transition-all duration-500 ease-out ${
                     activeIndex === realIndex
-                      ? 'ring-2 ring-[#c8ff00] ring-offset-4 ring-offset-[#080808]'
+                      ? 'ring-2 ring-[#E31837] ring-offset-4 ring-offset-[#080808]'
                       : ''
                   }`}
                   onClick={() => handleCardClick(realIndex)}
@@ -351,7 +351,7 @@ export default function VerticalCardGallery() {
 
                   {/* Active Indicator */}
                   <div
-                    className={`absolute bottom-0 left-0 right-0 h-1 bg-[#c8ff00] transform transition-transform duration-500 ease-out ${
+                    className={`absolute bottom-0 left-0 right-0 h-1 bg-[#E31837] transform transition-transform duration-500 ease-out ${
                       activeIndex === realIndex ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-50'
                     }`}
                   />
@@ -369,7 +369,7 @@ export default function VerticalCardGallery() {
             <div
               key={item.id}
               className={`flex-shrink-0 w-[280px] h-[400px] rounded-2xl overflow-hidden cursor-pointer snap-center transition-all duration-300 ${
-                activeIndex === index ? 'ring-2 ring-[#c8ff00]' : ''
+                activeIndex === index ? 'ring-2 ring-[#E31837]' : ''
               }`}
               onClick={() => handleCardClick(index)}
             >

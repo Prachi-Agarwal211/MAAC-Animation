@@ -68,10 +68,9 @@ export default function ApplyNow() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-24 md:py-32 overflow-hidden"
+      className="relative py-24 md:py-32 overflow-hidden bg-[#080808]"
     >
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-dark via-dark-50 to-dark" />
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
       <div className="absolute top-1/4 -right-48 w-96 h-96 bg-primary/10 rounded-full blur-[150px]" />
       <div className="absolute bottom-1/4 -left-48 w-96 h-96 bg-accent/8 rounded-full blur-[150px]" />
@@ -80,13 +79,13 @@ export default function ApplyNow() {
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left - Content */}
           <div ref={headingRef}>
-            <span className="inline-block px-4 py-1.5 rounded-full glass text-xs text-primary font-medium tracking-wider uppercase mb-4">
+            <p className="text-[#E31837] text-xs font-ui font-semibold tracking-[0.2em] uppercase mb-4">
               Get Started
-            </span>
-            <h2 className="font-heading font-bold text-3xl sm:text-4xl md:text-5xl text-white mb-6">
+            </p>
+            <h2 className="font-display font-bold text-[clamp(2rem,4vw,3.5rem)] text-[#f5f0e8] leading-[1.05] tracking-tight mb-6">
               Apply <span className="gradient-text">Now</span>
             </h2>
-            <p className="text-gray-400 text-lg leading-relaxed mb-8">
+            <p className="text-[#6b6b6b] text-lg leading-relaxed mb-8">
               Take the first step towards your creative career. Fill in the form
               and our team will get in touch with you to discuss the best course
               for your goals.
@@ -129,7 +128,7 @@ export default function ApplyNow() {
             className="glass rounded-3xl p-8 md:p-10 space-y-5"
             style={{ transformStyle: "preserve-3d" }}
           >
-            <h3 className="font-heading font-bold text-xl text-white mb-2">
+            <h3 className="font-display font-bold text-xl text-[#f5f0e8] mb-2">
               Enquiry Form
             </h3>
 
@@ -204,7 +203,7 @@ export default function ApplyNow() {
 
             <button
               type="submit"
-              className="w-full btn-primary py-4 text-base font-heading"
+              className="w-full btn-primary py-4 text-base font-display"
             >
               Submit Enquiry
             </button>

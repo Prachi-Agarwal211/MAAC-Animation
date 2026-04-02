@@ -1,4 +1,6 @@
 import Lenis from 'lenis';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 let lenis: Lenis | null = null;
 
@@ -6,28 +8,20 @@ export const initLenis = () => {
   if (lenis) return lenis;
 
   lenis = new Lenis({
-    lerp: 0.08,
+    lerp: 0.1,
     smoothWheel: true,
     touchMultiplier: 2,
     infinite: false,
   });
 
-  // Connect to GSAP ScrollTrigger
-  lenis.on('scroll', () => {
-    if (typeof window !== 'undefined') {
-      const win = window as unknown as { ScrollTrigger?: { update: () => void } };
-      win.ScrollTrigger?.update();
-    }
-  });
+  // Correct GSAP + Lenis sync
+  lenis.on('scroll', ScrollTrigger.update);
 
-  // Sync with GSAP ticker
-  const raf = (time: number) => {
-    if (lenis) {
-      lenis.raf(time * 1000);
-    }
-    requestAnimationFrame(raf);
-  };
-  requestAnimationFrame(raf);
+  // GSAP ticker passes seconds, lenis needs milliseconds
+  gsap.ticker.add((time: number) => {
+    lenis!.raf(time * 1000);
+  });
+  gsap.ticker.lagSmoothing(0);
 
   return lenis;
 };

@@ -52,13 +52,13 @@ export default function PlacementsPage() {
         <div className="absolute bottom-0 -right-32 w-96 h-96 bg-accent/10 rounded-full blur-[120px]" />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 placements-hero">
-          <span className="inline-block px-4 py-1.5 rounded-full glass text-xs text-primary font-medium tracking-wider uppercase mb-4">
+          <p className="text-[#E31837] text-xs font-ui font-semibold tracking-[0.2em] uppercase mb-4">
             Career Support
-          </span>
-          <h1 className="font-heading font-extrabold text-4xl sm:text-5xl md:text-6xl text-white mb-6">
+          </p>
+          <h1 className="font-display font-extrabold text-[clamp(2.5rem,5vw,5rem)] text-[#f5f0e8] leading-[1.05] tracking-tight mb-6">
             Work With The <span className="gradient-text">Best</span>
           </h1>
-          <p className="text-gray-400 text-lg max-w-2xl">
+          <p className="text-[#6b6b6b] text-lg max-w-2xl">
             Our students are hired by the world&apos;s best studios. They
             dominate the industry with their exceptional and unusual work.
           </p>
@@ -77,17 +77,17 @@ export default function PlacementsPage() {
               { number: "15L", label: "Highest Package" },
             ].map((stat) => (
               <div key={stat.label} className="glass-card rounded-2xl p-6 text-center">
-                <div className="text-3xl md:text-4xl font-heading font-bold gradient-text mb-1">
+                <div className="text-3xl md:text-4xl font-display font-bold gradient-text mb-1">
                   {stat.number}
                 </div>
-                <div className="text-gray-400 text-sm">{stat.label}</div>
+                <div className="text-[#6b6b6b] text-sm">{stat.label}</div>
               </div>
             ))}
           </div>
 
           {/* Companies Grid */}
           <div className="text-center mb-12">
-            <h2 className="font-heading font-bold text-3xl sm:text-4xl text-white">
+            <h2 className="font-display font-bold text-3xl sm:text-4xl text-[#f5f0e8]">
               Our <span className="gradient-text">Placement Partners</span>
             </h2>
           </div>
@@ -117,14 +117,14 @@ export default function PlacementsPage() {
       </section>
 
       {/* Success Stories placeholder */}
-      <section className="relative py-24 bg-gradient-to-b from-dark to-dark-50">
+      <section className="relative py-24 bg-[#0f0f0f]">
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="font-heading font-bold text-3xl sm:text-4xl text-white mb-4">
+            <h2 className="font-display font-bold text-3xl sm:text-4xl text-[#f5f0e8] mb-4">
               Success <span className="gradient-text">Stories</span>
             </h2>
-            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+            <p className="text-[#6b6b6b] text-lg max-w-2xl mx-auto">
               Hear from our alumni who are now working at top studios worldwide.
             </p>
           </div>
@@ -142,10 +142,10 @@ export default function PlacementsPage() {
                       <span className="text-xs">Add Success Story Image</span>
                     </div>
                   </div>
-                  <h3 className="font-heading font-semibold text-white mb-2">
+                  <h3 className="font-display font-semibold text-[#f5f0e8] mb-2">
                     {story}
                   </h3>
-                  <p className="text-gray-400 text-sm">
+                  <p className="text-[#6b6b6b] text-sm">
                     Add success story description here...
                   </p>
                 </div>

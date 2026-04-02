@@ -115,7 +115,7 @@ export default function CareerCreatorComparison() {
             <div className="ccc-header-content lg:col-span-2">
               {/* Heading */}
               <h2 className="text-white font-display font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-[1.1] tracking-tight mb-6">
-                Two Paths, One Goal: <span className="text-[#c8ff00]">Your Success</span>
+                Two Paths, One Goal: <span className="gradient-text">Your Success</span>
               </h2>
 
               {/* Logos */}
@@ -124,15 +124,15 @@ export default function CareerCreatorComparison() {
                   <span className="bg-gradient-to-r from-[#E31837] to-[#FF6B35] bg-clip-text text-transparent">
                     CAREER
                   </span>
-                  <span className="bg-gradient-to-r from-[#FF6B35] to-[#FF8C42] bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-[#FF6B35] to-[#FF8C5A] bg-clip-text text-transparent">
                     X
                   </span>
                 </h3>
                 <h3 className="text-2xl md:text-3xl lg:text-4xl font-display font-extrabold tracking-tight">
-                  <span className="bg-gradient-to-r from-[#D4208E] to-[#A832A0] bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-[#FF6B35] to-[#FF8C5A] bg-clip-text text-transparent">
                     CREATOR
                   </span>
-                  <span className="bg-gradient-to-r from-[#A832A0] to-[#8B3AB8] bg-clip-text text-transparent">
+                  <span className="text-[#FF8C5A]">
                     X
                   </span>
                 </h3>
@@ -167,7 +167,7 @@ export default function CareerCreatorComparison() {
                 
                 {/* Decorative Frame */}
                 <div className="absolute top-0 right-0 w-16 h-16 border-t-2 border-r-2 border-[#E31837]" />
-                <div className="absolute bottom-0 left-0 w-16 h-16 border-b-2 border-l-2 border-[#D4208E]" />
+                <div className="absolute bottom-0 left-0 w-16 h-16 border-b-2 border-l-2 border-[#FF6B35]" />
               </div>
             </div>
           </div>
@@ -189,7 +189,7 @@ export default function CareerCreatorComparison() {
                   <span className="bg-gradient-to-r from-[#E31837] to-[#FF6B35] bg-clip-text text-transparent">
                     CAREER
                   </span>
-                  <span className="bg-gradient-to-r from-[#FF6B35] to-[#FF8C42] bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-[#FF6B35] to-[#FF8C5A] bg-clip-text text-transparent">
                     X
                   </span>
                 </h3>
@@ -234,19 +234,19 @@ export default function CareerCreatorComparison() {
           </div>
 
           {/* CreatorX Card */}
-          <div className="ccc-card-creator group relative bg-[#0a0a0a] rounded-2xl p-8 md:p-10 lg:p-12 overflow-hidden border border-white/5 hover:border-[#D4208E]/30 transition-all duration-500">
+          <div className="ccc-card-creator group relative bg-[#0a0a0a] rounded-2xl p-8 md:p-10 lg:p-12 overflow-hidden border border-white/5 hover:border-[#E31837]/30 transition-all duration-500">
             {/* Background Gradient */}
-            <div className="absolute inset-0 bg-gradient-to-br from-[#D4208E]/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-            
+            <div className="absolute inset-0 bg-gradient-to-br from-[#E31837]/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+
             {/* Content */}
             <div className="relative z-10">
               {/* Logo */}
               <div className="mb-8">
                 <h3 className="text-3xl md:text-4xl font-display font-extrabold tracking-tight">
-                  <span className="bg-gradient-to-r from-[#D4208E] to-[#A832A0] bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-[#FF6B35] to-[#FF8C5A] bg-clip-text text-transparent">
                     CREATOR
                   </span>
-                  <span className="bg-gradient-to-r from-[#A832A0] to-[#8B3AB8] bg-clip-text text-transparent">
+                  <span className="text-[#FF8C5A]">
                     X
                   </span>
                 </h3>
@@ -260,31 +260,31 @@ export default function CareerCreatorComparison() {
               {/* Features List */}
               <ul className="space-y-4">
                 <li className="ccc-bullet flex items-start gap-3">
-                  <span className="w-2 h-2 rounded-full bg-[#D4208E] mt-2 flex-shrink-0" />
+                  <span className="w-2 h-2 rounded-full bg-[#E31837] mt-2 flex-shrink-0" />
                   <span className="text-gray-400 text-sm md:text-base leading-relaxed">
                     Entrepreneurship readiness
                   </span>
                 </li>
                 <li className="ccc-bullet flex items-start gap-3">
-                  <span className="w-2 h-2 rounded-full bg-[#D4208E] mt-2 flex-shrink-0" />
+                  <span className="w-2 h-2 rounded-full bg-[#E31837] mt-2 flex-shrink-0" />
                   <span className="text-gray-400 text-sm md:text-base leading-relaxed">
                     Prep for gig economy & freelance work
                   </span>
                 </li>
                 <li className="ccc-bullet flex items-start gap-3">
-                  <span className="w-2 h-2 rounded-full bg-[#D4208E] mt-2 flex-shrink-0" />
+                  <span className="w-2 h-2 rounded-full bg-[#E31837] mt-2 flex-shrink-0" />
                   <span className="text-gray-400 text-sm md:text-base leading-relaxed">
                     Project & client management
                   </span>
                 </li>
                 <li className="ccc-bullet flex items-start gap-3">
-                  <span className="w-2 h-2 rounded-full bg-[#D4208E] mt-2 flex-shrink-0" />
+                  <span className="w-2 h-2 rounded-full bg-[#E31837] mt-2 flex-shrink-0" />
                   <span className="text-gray-400 text-sm md:text-base leading-relaxed">
                     IP creation & monetisation
                   </span>
                 </li>
                 <li className="ccc-bullet flex items-start gap-3">
-                  <span className="w-2 h-2 rounded-full bg-[#D4208E] mt-2 flex-shrink-0" />
+                  <span className="w-2 h-2 rounded-full bg-[#E31837] mt-2 flex-shrink-0" />
                   <span className="text-gray-400 text-sm md:text-base leading-relaxed">
                     Training directly from industry experts
                   </span>
@@ -299,7 +299,7 @@ export default function CareerCreatorComparison() {
 
         {/* Bottom Decorative Line */}
         <div className="relative mt-16 md:mt-20">
-          <div className="absolute left-0 right-0 top-0 h-px bg-gradient-to-r from-transparent via-[#E31837]/50 to-[#D4208E]/50" />
+          <div className="absolute left-0 right-0 top-0 h-px bg-gradient-to-r from-transparent via-[#E31837]/50 to-[#FF6B35]/50" />
         </div>
       </div>
     </div>

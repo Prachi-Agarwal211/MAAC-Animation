@@ -11,11 +11,11 @@ export default function Footer() {
         <div className="absolute inset-0 bg-dark/80" />
 
         <div className="relative max-w-4xl mx-auto px-4 text-center">
-          <h2 className="font-heading font-bold text-3xl sm:text-4xl text-white mb-4">
+          <h2 className="font-display font-bold text-3xl sm:text-4xl text-[#f5f0e8] mb-4">
             Think <span className="gradient-text">MAAC</span>. Think{" "}
             <span className="gradient-text">Creative Career</span>.
           </h2>
-          <p className="text-gray-400 text-lg mb-8">
+          <p className="text-[#6b6b6b] text-lg mb-8">
             Join thousands of successful alumni who transformed their creative
             passion into rewarding careers.
           </p>
@@ -32,15 +32,15 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-3 mb-6">
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-                <span className="text-white font-extrabold text-lg font-heading">
+                <span className="text-[#f5f0e8] font-extrabold text-lg font-display">
                   M
                 </span>
               </div>
               <div>
-                <h3 className="text-white font-heading font-bold text-lg leading-none">
+                <h3 className="text-[#f5f0e8] font-display font-bold text-lg leading-none">
                   MAAC
                 </h3>
-                <p className="text-gray-500 text-[10px] tracking-[0.2em] uppercase">
+                <p className="text-[#6b6b6b] text-[10px] tracking-[0.2em] uppercase">
                   India
                 </p>
               </div>
@@ -72,7 +72,7 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-white font-heading font-semibold mb-6">
+            <h4 className="text-[#f5f0e8] font-display font-semibold mb-6">
               Quick Links
             </h4>
             <ul className="space-y-3">
@@ -98,7 +98,7 @@ export default function Footer() {
 
           {/* Courses */}
           <div>
-            <h4 className="text-white font-heading font-semibold mb-6">
+            <h4 className="text-[#f5f0e8] font-display font-semibold mb-6">
               Our Courses
             </h4>
             <ul className="space-y-3">
@@ -127,7 +127,7 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="text-white font-heading font-semibold mb-6">
+            <h4 className="text-[#f5f0e8] font-display font-semibold mb-6">
               Contact Us
             </h4>
             <div className="space-y-4">

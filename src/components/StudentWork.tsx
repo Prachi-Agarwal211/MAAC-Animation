@@ -64,7 +64,7 @@ export default function StudentWork() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-24 md:py-32 overflow-hidden bg-gradient-to-b from-dark to-dark-50"
+      className="relative py-24 md:py-32 overflow-hidden bg-[#080808]"
     >
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-accent/5 rounded-full blur-[120px]" />
@@ -72,13 +72,13 @@ export default function StudentWork() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div ref={headingRef} className="text-center mb-16">
-          <span className="inline-block px-4 py-1.5 rounded-full glass text-xs text-primary font-medium tracking-wider uppercase mb-4">
+          <p className="text-[#E31837] text-xs font-ui font-semibold tracking-[0.2em] uppercase mb-4">
             Student Showcase
-          </span>
-          <h2 className="font-heading font-bold text-3xl sm:text-4xl md:text-5xl text-white mb-4">
+          </p>
+          <h2 className="font-display font-bold text-[clamp(2rem,4vw,3.5rem)] text-[#f5f0e8] leading-[1.05] tracking-tight mb-4">
             Student <span className="gradient-text">Work</span>
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          <p className="text-[#6b6b6b] text-lg max-w-2xl mx-auto">
             Explore the incredible creations by our students — from 3D animations
             to stunning VFX sequences
           </p>
@@ -110,11 +110,11 @@ export default function StudentWork() {
               </div>
 
               {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
-                <span className="text-primary text-xs font-medium uppercase tracking-wider mb-1">
+              <div className="absolute inset-0 bg-gradient-to-t from-[#080808]/90 via-[#080808]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
+                <span className="text-[#E31837] text-xs font-medium uppercase tracking-wider mb-1">
                   {item.category}
                 </span>
-                <h3 className="text-white font-heading font-semibold text-lg">
+                <h3 className="text-[#f5f0e8] font-display font-semibold text-lg">
                   {item.title}
                 </h3>
               </div>

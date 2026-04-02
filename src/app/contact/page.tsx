@@ -55,13 +55,13 @@ export default function ContactPage() {
         <div className="absolute top-1/3 -left-32 w-96 h-96 bg-primary/10 rounded-full blur-[120px]" />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 contact-hero">
-          <span className="inline-block px-4 py-1.5 rounded-full glass text-xs text-primary font-medium tracking-wider uppercase mb-4">
+          <p className="text-[#E31837] text-xs font-ui font-semibold tracking-[0.2em] uppercase mb-4">
             Get In Touch
-          </span>
-          <h1 className="font-heading font-extrabold text-4xl sm:text-5xl md:text-6xl text-white mb-6">
+          </p>
+          <h1 className="font-display font-extrabold text-[clamp(2.5rem,5vw,5rem)] text-[#f5f0e8] leading-[1.05] tracking-tight mb-6">
             Contact <span className="gradient-text">Us</span>
           </h1>
-          <p className="text-gray-400 text-lg max-w-2xl">
+          <p className="text-[#6b6b6b] text-lg max-w-2xl">
             Have questions about our courses? Want to schedule a campus visit?
             Reach out to us and we&apos;ll be happy to help.
           </p>
@@ -80,10 +80,10 @@ export default function ContactPage() {
                   📍
                 </div>
                 <div>
-                  <h3 className="text-white font-heading font-semibold mb-1">
+                  <h3 className="text-[#f5f0e8] font-display font-semibold mb-1">
                     Address
                   </h3>
-                  <p className="text-gray-400 text-sm leading-relaxed">
+                  <p className="text-[#6b6b6b] text-sm leading-relaxed">
                     MAAC India (Maya Academy of Advanced Cinematics)
                     <br />
                     Aptech House, A-65, MIDC, Marol, Andheri (E)
@@ -98,12 +98,12 @@ export default function ContactPage() {
                   📞
                 </div>
                 <div>
-                  <h3 className="text-white font-heading font-semibold mb-1">
+                  <h3 className="text-[#f5f0e8] font-display font-semibold mb-1">
                     Phone
                   </h3>
                   <a
                     href="tel:+912268282300"
-                    className="text-gray-400 text-sm hover:text-primary transition-colors"
+                    className="text-[#6b6b6b] text-sm hover:text-primary transition-colors"
                   >
                     +91-22-68282300
                   </a>
@@ -115,12 +115,12 @@ export default function ContactPage() {
                   ✉️
                 </div>
                 <div>
-                  <h3 className="text-white font-heading font-semibold mb-1">
+                  <h3 className="text-[#f5f0e8] font-display font-semibold mb-1">
                     Email
                   </h3>
                   <a
                     href="mailto:info@maacindia.com"
-                    className="text-gray-400 text-sm hover:text-primary transition-colors"
+                    className="text-[#6b6b6b] text-sm hover:text-primary transition-colors"
                   >
                     info@maacindia.com
                   </a>
@@ -141,7 +141,7 @@ export default function ContactPage() {
               onSubmit={handleSubmit}
               className="contact-form glass rounded-3xl p-8 md:p-10 space-y-5"
             >
-              <h3 className="font-heading font-bold text-xl text-white mb-2">
+              <h3 className="font-display font-bold text-xl text-[#f5f0e8] mb-2">
                 Send us a Message
               </h3>
 
@@ -204,7 +204,7 @@ export default function ContactPage() {
                 className="w-full px-5 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/30 transition-all resize-none"
               />
 
-              <button type="submit" className="w-full btn-primary py-4 text-base font-heading">
+              <button type="submit" className="w-full btn-primary py-4 text-base font-display">
                 Send Message
               </button>
             </form>

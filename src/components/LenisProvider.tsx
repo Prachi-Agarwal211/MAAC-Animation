@@ -13,13 +13,8 @@ export default function LenisProvider({
   children: React.ReactNode;
 }) {
   useEffect(() => {
-    // Initialize Lenis smooth scroll
+    // Initialize Lenis smooth scroll (GSAP sync is handled in initLenis)
     const lenis = initLenis();
-
-    // Expose ScrollTrigger to window for lenis.ts
-    if (typeof window !== "undefined") {
-      (window as unknown as { ScrollTrigger: typeof ScrollTrigger }).ScrollTrigger = ScrollTrigger;
-    }
 
     return () => {
       lenis?.destroy();

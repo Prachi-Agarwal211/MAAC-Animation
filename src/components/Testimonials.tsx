@@ -44,7 +44,7 @@ export default function Testimonials() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-24 md:py-32 overflow-hidden"
+      className="relative py-24 md:py-32 overflow-hidden bg-[#0f0f0f]"
     >
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
       <div className="absolute top-1/2 -left-32 w-64 h-64 bg-primary/8 rounded-full blur-[100px]" />
@@ -52,10 +52,10 @@ export default function Testimonials() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div ref={headingRef} className="text-center mb-16">
-          <span className="inline-block px-4 py-1.5 rounded-full glass text-xs text-primary font-medium tracking-wider uppercase mb-4">
+          <p className="text-[#E31837] text-xs font-ui font-semibold tracking-[0.2em] uppercase mb-4">
             Testimonials
-          </span>
-          <h2 className="font-heading font-bold text-3xl sm:text-4xl md:text-5xl text-white mb-4">
+          </p>
+          <h2 className="font-display font-bold text-[clamp(2rem,4vw,3.5rem)] text-[#f5f0e8] leading-[1.05] tracking-tight mb-4">
             What Our <span className="gradient-text">Students Say</span>
           </h2>
         </div>
@@ -70,14 +70,14 @@ export default function Testimonials() {
             </p>
             <div className="flex items-center justify-center gap-4">
               {/* Avatar placeholder */}
-              <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary/30 to-accent/30 flex items-center justify-center text-white font-heading font-bold text-lg">
+              <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary/30 to-accent/30 flex items-center justify-center text-[#f5f0e8] font-display font-bold text-lg">
                 {testimonialsData[active].name.charAt(0)}
               </div>
               <div className="text-left">
-                <h4 className="text-white font-heading font-semibold">
+                <h4 className="text-[#f5f0e8] font-display font-semibold">
                   {testimonialsData[active].name}
                 </h4>
-                <p className="text-primary text-sm">
+                <p className="text-[#E31837] text-sm">
                   {testimonialsData[active].role}
                 </p>
               </div>

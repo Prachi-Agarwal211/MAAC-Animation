@@ -85,13 +85,13 @@ export default function AboutPage() {
         <div className="absolute bottom-0 -right-32 w-96 h-96 bg-accent/10 rounded-full blur-[120px]" />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 about-hero-content">
-          <span className="inline-block px-4 py-1.5 rounded-full glass text-xs text-primary font-medium tracking-wider uppercase mb-4">
+          <p className="text-[#E31837] text-xs font-ui font-semibold tracking-[0.2em] uppercase mb-4">
             About MAAC
-          </span>
-          <h1 className="font-heading font-extrabold text-4xl sm:text-5xl md:text-6xl text-white mb-6">
+          </p>
+          <h1 className="font-display font-extrabold text-[clamp(2.5rem,5vw,5rem)] text-[#f5f0e8] leading-[1.05] tracking-tight mb-6">
             About <span className="gradient-text">MAAC</span>
           </h1>
-          <p className="text-gray-400 text-lg md:text-xl max-w-3xl leading-relaxed">
+          <p className="text-[#6b6b6b] text-lg md:text-xl max-w-3xl leading-relaxed">
             Welcome to Maya Academy of Advanced Cinematics, the premier
             destination for aspiring animators and visual effects artists. Established
             with a vision to nurture creative talents and provide world-class
@@ -117,10 +117,10 @@ export default function AboutPage() {
               <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center text-3xl mb-6">
                 🎯
               </div>
-              <h3 className="font-heading font-bold text-2xl text-white mb-4">
+              <h3 className="font-display font-bold text-2xl text-[#f5f0e8] mb-4">
                 Our Mission
               </h3>
-              <p className="text-gray-400 leading-relaxed">
+              <p className="text-[#6b6b6b] leading-relaxed">
                 To inspire, educate, and empower aspiring artists to unleash
                 their creativity and achieve their dreams. We strive to provide a
                 conducive learning environment where students can experiment,
@@ -131,10 +131,10 @@ export default function AboutPage() {
               <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center text-3xl mb-6">
                 🌟
               </div>
-              <h3 className="font-heading font-bold text-2xl text-white mb-4">
+              <h3 className="font-display font-bold text-2xl text-[#f5f0e8] mb-4">
                 Our Vision
               </h3>
-              <p className="text-gray-400 leading-relaxed">
+              <p className="text-[#6b6b6b] leading-relaxed">
                 To be the global leader in animation and VFX education, setting
                 benchmarks for creative excellence and producing industry-ready
                 professionals who shape the future of entertainment, media, and
@@ -146,11 +146,11 @@ export default function AboutPage() {
       </section>
 
       {/* Timeline */}
-      <section className="timeline-section relative py-24 bg-gradient-to-b from-dark to-dark-50">
+      <section className="timeline-section relative py-24 bg-[#0f0f0f]">
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="font-heading font-bold text-3xl sm:text-4xl text-white mb-4">
+            <h2 className="font-display font-bold text-3xl sm:text-4xl text-[#f5f0e8] mb-4">
               Our <span className="gradient-text">History</span>
             </h2>
           </div>
@@ -169,13 +169,13 @@ export default function AboutPage() {
                 >
                   <div className={`flex-1 ${index % 2 === 0 ? "md:text-right" : "md:text-left"}`}>
                     <div className="glass-card rounded-2xl p-6 inline-block">
-                      <span className="text-primary font-heading font-bold text-lg">
+                      <span className="text-[#E31837] font-display font-bold text-lg">
                         {item.year}
                       </span>
-                      <h3 className="text-white font-heading font-semibold text-xl mt-2 mb-1">
+                      <h3 className="text-[#f5f0e8] font-display font-semibold text-xl mt-2 mb-1">
                         {item.title}
                       </h3>
-                      <p className="text-gray-400 text-sm">{item.description}</p>
+                      <p className="text-[#6b6b6b] text-sm">{item.description}</p>
                     </div>
                   </div>
 
@@ -197,13 +197,13 @@ export default function AboutPage() {
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <span className="inline-block px-4 py-1.5 rounded-full glass text-xs text-primary font-medium tracking-wider uppercase mb-4">
+            <p className="text-[#E31837] text-xs font-ui font-semibold tracking-[0.2em] uppercase mb-4">
               Our Team
-            </span>
-            <h2 className="font-heading font-bold text-3xl sm:text-4xl text-white mb-4">
+            </p>
+            <h2 className="font-display font-bold text-3xl sm:text-4xl text-[#f5f0e8] mb-4">
               Experienced <span className="gradient-text">Faculty</span>
             </h2>
-            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+            <p className="text-[#6b6b6b] text-lg max-w-2xl mx-auto">
               Learn from industry professionals with years of experience in top
               animation studios and production houses.
             </p>
@@ -219,11 +219,11 @@ export default function AboutPage() {
                 <div className="image-placeholder w-28 h-28 mx-auto rounded-full mb-4">
                   <span className="text-2xl opacity-50">👤</span>
                 </div>
-                <h3 className="font-heading font-semibold text-white group-hover:text-primary transition-colors">
+                <h3 className="font-display font-semibold text-[#f5f0e8] group-hover:text-primary transition-colors">
                   {member.name}
                 </h3>
-                <p className="text-primary text-sm mb-1">{member.role}</p>
-                <p className="text-gray-500 text-xs">{member.experience}</p>
+                <p className="text-[#E31837] text-sm mb-1">{member.role}</p>
+                <p className="text-[#6b6b6b] text-xs">{member.experience}</p>
               </div>
             ))}
           </div>

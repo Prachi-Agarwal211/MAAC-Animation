@@ -35,7 +35,7 @@ export default function Navbar() {
       ref={navRef}
       className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${
         isScrolled
-          ? "bg-dark/90 backdrop-blur-xl shadow-2xl shadow-black/20 py-2"
+          ? "bg-[#080808]/95 backdrop-blur-2xl border-b border-white/5 shadow-2xl shadow-black/20 py-2"
           : "bg-transparent py-4"
       }`}
     >
@@ -45,16 +45,16 @@ export default function Navbar() {
           <div ref={logoRef}>
             <Link href="/" className="flex items-center gap-3">
               <div className="relative w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-                <span className="text-white font-extrabold text-xl font-heading">
+                <span className="text-[#f5f0e8] font-extrabold text-xl font-display">
                   M
                 </span>
                 <div className="absolute -inset-0.5 rounded-xl bg-gradient-to-br from-primary to-accent opacity-30 blur-sm -z-10" />
               </div>
               <div>
-                <h1 className="text-white font-heading font-bold text-xl leading-none">
+                <h1 className="text-[#f5f0e8] font-display font-bold text-xl leading-none">
                   MAAC
                 </h1>
-                <p className="text-gray-400 text-[10px] tracking-[0.2em] uppercase">
+                <p className="text-[#6b6b6b] text-[10px] tracking-[0.2em] uppercase">
                   India
                 </p>
               </div>

@@ -9,8 +9,11 @@ gsap.registerPlugin(ScrollTrigger);
 export default function InstituteIntro() {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Scroll animations
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) return;
+
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -88,22 +91,22 @@ export default function InstituteIntro() {
   }, []);
 
   return (
-    <div ref={containerRef} className="institute-section relative bg-[#080808] py-12 md:py-16 overflow-hidden">
+    <div ref={containerRef} className="institute-section relative bg-[#0f0f0f] py-12 md:py-16 overflow-hidden">
       {/* Container */}
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
-        
+
         {/* Top Section: Title and Description */}
         <div className="mb-12 md:mb-16">
           <div className="flex items-start gap-4 mb-6">
-            <div className="w-1 h-12 bg-[#c8ff00] flex-shrink-0" />
+            <div className="w-1 h-12 bg-[#E31837] flex-shrink-0" />
             <h2 className="institute-title font-display font-bold text-2xl sm:text-3xl md:text-4xl leading-tight">
-              <span className="bg-gradient-to-r from-[#c8ff00] to-[#a8e000] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#E31837] to-[#FF6B35] bg-clip-text text-transparent">
                 Join The Best Animation Institute in Jaipur
               </span>
             </h2>
           </div>
-          
-          <p className="institute-description text-gray-200 text-sm md:text-base leading-relaxed max-w-5xl">
+
+          <p className="institute-description text-[#6b6b6b] text-sm md:text-base leading-relaxed max-w-5xl">
             Welcome to Maya Academy of Advanced Cinematics popularly known as MAAC. Best Animation Institute In Jaipur when we speak about Best 3D Animation and Visual Effect Training Institute the name that comes in our mind is MAAC. Our centre is well equipped with a high-end experienced training team who expertize in 3D Animation, 2D Animation, VFX, Film Making, Multimedia courses, Gaming, Web Designing, Graphic Designing, Autocad courses and various other long term and short term courses. We are proud to say that we are one of the leading 2D and 3D Animation and VFX Training Institute in Rajasthan.
           </p>
         </div>
@@ -116,50 +119,34 @@ export default function InstituteIntro() {
             <div className="relative aspect-video rounded-2xl overflow-hidden bg-[#0a0a0a] border border-white/10">
               {/* 
                 ================================================================
-                VIDEO CONTAINER - Replace the src below with your video URL
-                You can use:
-                1. YouTube embed: Change to iframe with YouTube embed URL
-                2. Local video: Use <video> tag with your file path
-                3. Vimeo/other: Use their embed code
+                VIDEO CONTAINER - Replace the src below with your actual MAAC video
+                Option 1: Local video file (current, with placeholder poster)
+                Option 2: YouTube embed (uncomment below)
                 ================================================================
               */}
               
-              {/* Option 1: YouTube Embed (Currently Active) */}
-              <iframe
-                className="absolute inset-0 w-full h-full"
-                src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0&controls=1&rel=0&modestbranding=1"
-                title="MAAC Institute Video"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-
-              {/* 
-                ================================================================
-                Option 2: Local Video File (Uncomment to use)
-                Replace '/videos/your-video.mp4' with your actual video path
-                ================================================================
-              */}
-              {/* <video
-                className="absolute inset-0 w-full h-full"
+              {/* Option 1: Local Video File */}
+              <video
+                className="absolute inset-0 w-full h-full object-cover"
                 controls
                 preload="metadata"
-                poster="/images/video-poster.jpg"
+                poster="/images/institute-poster.jpg"
               >
-                <source src="/videos/your-video.mp4" type="video/mp4" />
+                <source src="/videos/institute-intro.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
-              </video> */}
+              </video>
 
               {/* 
                 ================================================================
-                Option 3: Vimeo Embed (Uncomment to use)
-                Replace the video ID with your Vimeo video ID
+                Option 2: YouTube Embed (Uncomment to use with real video ID)
+                Replace YOUR_ACTUAL_VIDEO_ID with your MAAC YouTube embed ID
                 ================================================================
               */}
               {/* <iframe
                 className="absolute inset-0 w-full h-full"
-                src="https://player.vimeo.com/video/YOUR_VIDEO_ID"
+                src="https://www.youtube.com/embed/YOUR_ACTUAL_VIDEO_ID?autoplay=0&controls=1&rel=0&modestbranding=1"
                 title="MAAC Institute Video"
-                allow="autoplay; fullscreen; picture-in-picture"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               /> */}
 
@@ -169,13 +156,13 @@ export default function InstituteIntro() {
           {/* Right: Text Content */}
           <div className="institute-text-content">
             <h3 className="institute-subtitle font-display font-bold text-2xl sm:text-3xl md:text-4xl leading-tight mb-6">
-              <span className="bg-gradient-to-r from-[#00d4ff] to-[#0099ff] bg-clip-text text-transparent">
-                Unveiling the Marvels of Maac Animation Institute in Jaipur
+              <span className="bg-gradient-to-r from-[#E31837] to-[#FF6B35] bg-clip-text text-transparent">
+                Unveiling the Marvels of MAAC Animation Institute in Jaipur
               </span>
             </h3>
-            
-            <p className="institute-subtitle-desc text-gray-200 text-sm md:text-base leading-relaxed">
-              Welcome to Maac <strong className="text-white">Best Animation Institute In Jaipur</strong>, the premier destination for aspiring animators and visual effects artists in Jaipur. Established with a vision to nurture creative talents and provide them with world-class education, Maac Animation Institute stands as a beacon of excellence in the field of animation and multimedia.
+
+            <p className="institute-subtitle-desc text-[#6b6b6b] text-sm md:text-base leading-relaxed">
+              Welcome to MAAC <strong className="text-[#f5f0e8]">Best Animation Institute In Jaipur</strong>, the premier destination for aspiring animators and visual effects artists in Jaipur. Established with a vision to nurture creative talents and provide them with world-class education, MAAC Animation Institute stands as a beacon of excellence in the field of animation and multimedia.
             </p>
           </div>
         </div>

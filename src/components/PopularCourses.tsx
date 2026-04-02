@@ -56,7 +56,7 @@ export default function PopularCourses() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-24 md:py-32 overflow-hidden"
+      className="relative py-24 md:py-32 overflow-hidden bg-[#0f0f0f]"
     >
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/3 rounded-full blur-[200px]" />
@@ -64,13 +64,13 @@ export default function PopularCourses() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div ref={headingRef} className="text-center mb-16">
-          <span className="inline-block px-4 py-1.5 rounded-full glass text-xs text-primary font-medium tracking-wider uppercase mb-4">
+          <p className="text-[#E31837] text-xs font-ui font-semibold tracking-[0.2em] uppercase mb-4">
             Master Your Craft
-          </span>
-          <h2 className="font-heading font-bold text-3xl sm:text-4xl md:text-5xl text-white mb-4">
+          </p>
+          <h2 className="font-display font-bold text-[clamp(2rem,4vw,3.5rem)] text-[#f5f0e8] leading-[1.05] tracking-tight mb-4">
             Popular <span className="gradient-text">Courses</span>
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          <p className="text-[#6b6b6b] text-lg max-w-2xl mx-auto">
             Master industry-standard tools and techniques with our most
             sought-after programs
           </p>
@@ -105,11 +105,11 @@ export default function PopularCourses() {
                   </span>
                 </div>
 
-                <h3 className="font-heading font-bold text-xl text-white mb-1 group-hover:text-primary transition-colors duration-300">
+                <h3 className="font-display font-bold text-xl text-[#f5f0e8] mb-1 group-hover:text-primary transition-colors duration-300">
                   {course.name}
                 </h3>
-                <p className="text-gray-400 text-sm mb-3">{course.fullName}</p>
-                <p className="text-gray-500 text-sm leading-relaxed mb-4">
+                <p className="text-[#6b6b6b] text-sm mb-3">{course.fullName}</p>
+                <p className="text-[#6b6b6b] text-sm leading-relaxed mb-4">
                   {course.description}
                 </p>
 

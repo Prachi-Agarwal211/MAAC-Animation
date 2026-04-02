@@ -56,7 +56,7 @@ export default function Awards() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-24 md:py-32 overflow-hidden bg-gradient-to-b from-dark-50 to-dark"
+      className="relative py-24 md:py-32 overflow-hidden bg-[#080808]"
     >
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
       <div className="absolute top-1/3 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[150px]" />
@@ -64,13 +64,13 @@ export default function Awards() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div ref={headingRef} className="text-center mb-16">
-          <span className="inline-block px-4 py-1.5 rounded-full glass text-xs text-primary font-medium tracking-wider uppercase mb-4">
+          <p className="text-[#E31837] text-xs font-ui font-semibold tracking-[0.2em] uppercase mb-4">
             Recognition
-          </span>
-          <h2 className="font-heading font-bold text-3xl sm:text-4xl md:text-5xl text-white mb-4">
+          </p>
+          <h2 className="font-display font-bold text-[clamp(2rem,4vw,3.5rem)] text-[#f5f0e8] leading-[1.05] tracking-tight mb-4">
             Awards & <span className="gradient-text">Recognition</span>
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          <p className="text-[#6b6b6b] text-lg max-w-2xl mx-auto">
             Celebrated by industry leaders for our commitment to excellence in
             animation and VFX education
           </p>

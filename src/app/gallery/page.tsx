@@ -54,13 +54,13 @@ export default function GalleryPage() {
       <section className="relative pt-32 pb-16 overflow-hidden">
         <div className="absolute inset-0 bg-hero-pattern" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 gallery-hero">
-          <span className="inline-block px-4 py-1.5 rounded-full glass text-xs text-primary font-medium tracking-wider uppercase mb-4">
+          <p className="text-[#E31837] text-xs font-ui font-semibold tracking-[0.2em] uppercase mb-4">
             Showcase
-          </span>
-          <h1 className="font-heading font-extrabold text-4xl sm:text-5xl md:text-6xl text-white mb-6">
+          </p>
+          <h1 className="font-display font-extrabold text-[clamp(2.5rem,5vw,5rem)] text-[#f5f0e8] leading-[1.05] tracking-tight mb-6">
             Student <span className="gradient-text">Gallery</span>
           </h1>
-          <p className="text-gray-400 text-lg max-w-2xl">
+          <p className="text-[#6b6b6b] text-lg max-w-2xl">
             Explore the incredible work created by our talented students across
             animation, VFX, gaming, and design programs.
           </p>
@@ -99,10 +99,10 @@ export default function GalleryPage() {
 
                 {/* Hover overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-5">
-                  <span className="text-primary text-xs font-medium uppercase tracking-wider">
+                  <span className="text-[#E31837] text-xs font-medium uppercase tracking-wider">
                     {item.category}
                   </span>
-                  <h3 className="text-white font-heading font-semibold">
+                  <h3 className="text-[#f5f0e8] font-display font-semibold">
                     Student Project #{item.id}
                   </h3>
                 </div>
