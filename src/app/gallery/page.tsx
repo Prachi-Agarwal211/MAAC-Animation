@@ -5,8 +5,6 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Footer from "@/components/Footer";
 
-gsap.registerPlugin(ScrollTrigger);
-
 const galleryItems = Array.from({ length: 12 }).map((_, i) => ({
   id: i + 1,
   category: ["Animation", "VFX", "Gaming", "Design"][i % 4],

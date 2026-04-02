@@ -6,8 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
 import Footer from "@/components/Footer";
 import { coursesData } from "@/data/siteData";
-
-gsap.registerPlugin(ScrollTrigger);
+import { getCourseSchema, breadcrumbSchema } from "@/lib/structured-data";
 
 interface FlipCardProps {
   course: {
@@ -153,6 +152,30 @@ export default function CoursesPage() {
 
   return (
     <main ref={pageRef} className="overflow-hidden bg-[#080808]">
+      {/* Structured Data - Course Schema for each program */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            "itemListElement": coursesData.popularCourses.map((course, i) => ({
+              "@type": "ListItem",
+              "position": i + 1,
+              "item": getCourseSchema(course.fullName, course.description, course.duration)
+            }))
+          }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema([
+            { name: "Home", url: "https://maacjaipur.com" },
+            { name: "Courses", url: "https://maacjaipur.com/courses" },
+          ])),
+        }}
+      />
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 overflow-hidden bg-[#080808]">

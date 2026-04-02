@@ -40,6 +40,7 @@ export default function ContactPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    // TODO: Add actual form submission API call
     alert("Thank you for contacting us! We will get back to you soon.");
     setFormData({ name: "", phone: "", email: "", course: "", message: "" });
   };
@@ -49,11 +50,11 @@ export default function ContactPage() {
 
       {/* Hero */}
       <section className="relative pt-32 pb-16 overflow-hidden">
-        <div className="absolute inset-0 bg-hero-pattern" />
-        <div className="absolute top-1/3 -left-32 w-96 h-96 bg-primary/10 rounded-full blur-[120px]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0C0C0C] to-[#0a0a0a]" />
+        <div className="absolute top-1/3 -left-32 w-96 h-96 bg-[#E31837]/10 rounded-full blur-[120px]" />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 contact-hero">
-          <p className="text-[#E31837] text-xs font-ui font-semibold tracking-[0.2em] uppercase mb-4">
+          <p className="text-[#E31837] text-xs font-semibold tracking-[0.2em] uppercase mb-4">
             Get In Touch
           </p>
           <h1 className="font-display font-extrabold text-[clamp(2.5rem,5vw,5rem)] text-[#f5f0e8] leading-[1.05] tracking-tight mb-6">
@@ -68,59 +69,61 @@ export default function ContactPage() {
 
       {/* Contact Content */}
       <section className="relative py-16">
-        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#E31837]/30 to-transparent" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Contact Info */}
             <div className="contact-info space-y-6">
               <div className="glass-card rounded-2xl p-6 flex gap-4">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 text-xl">
-                  📍
+                <div className="w-12 h-12 rounded-xl bg-[#E31837]/10 flex items-center justify-center flex-shrink-0">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E31837" strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
                 </div>
                 <div>
                   <h3 className="text-[#f5f0e8] font-display font-semibold mb-1">
                     Address
                   </h3>
                   <p className="text-[#6b6b6b] text-sm leading-relaxed">
-                    MAAC India (Maya Academy of Advanced Cinematics)
+                    MAAC Jaipur (Maya Academy of Advanced Cinematics)
                     <br />
-                    Aptech House, A-65, MIDC, Marol, Andheri (E)
+                    711-712, Ambition Tower, 7th Floor
                     <br />
-                    Mumbai, Maharashtra 400093
+                    D-46B, Malan Ka Chauraha, Agrasain Circle
+                    <br />
+                    Subhash Marg, Jaipur, Rajasthan 302001
                   </p>
                 </div>
               </div>
 
               <div className="glass-card rounded-2xl p-6 flex gap-4">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 text-xl">
-                  📞
+                <div className="w-12 h-12 rounded-xl bg-[#E31837]/10 flex items-center justify-center flex-shrink-0">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E31837" strokeWidth="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.12.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.58 2.81.7A2 2 0 0122 16.92z"/></svg>
                 </div>
                 <div>
                   <h3 className="text-[#f5f0e8] font-display font-semibold mb-1">
                     Phone
                   </h3>
                   <a
-                    href="tel:+912268282300"
-                    className="text-[#6b6b6b] text-sm hover:text-primary transition-colors"
+                    href="tel:+917300001589"
+                    className="text-[#6b6b6b] text-sm hover:text-[#E31837] transition-colors"
                   >
-                    +91-22-68282300
+                    +91-7300001589
                   </a>
                 </div>
               </div>
 
               <div className="glass-card rounded-2xl p-6 flex gap-4">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 text-xl">
-                  ✉️
+                <div className="w-12 h-12 rounded-xl bg-[#E31837]/10 flex items-center justify-center flex-shrink-0">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E31837" strokeWidth="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                 </div>
                 <div>
                   <h3 className="text-[#f5f0e8] font-display font-semibold mb-1">
                     Email
                   </h3>
                   <a
-                    href="mailto:info@maacindia.com"
-                    className="text-[#6b6b6b] text-sm hover:text-primary transition-colors"
+                    href="mailto:maacanimationjaipur@gmail.com"
+                    className="text-[#6b6b6b] text-sm hover:text-[#E31837] transition-colors"
                   >
-                    info@maacindia.com
+                    maacanimationjaipur@gmail.com
                   </a>
                 </div>
               </div>

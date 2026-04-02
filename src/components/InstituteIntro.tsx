@@ -4,11 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger);
-
 function CountUpStat({ number, suffix, label }: { number: number; suffix: string; label: string }) {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
+  const frameRef = useRef<number>();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -24,14 +23,17 @@ function CountUpStat({ number, suffix, label }: { number: number; suffix: string
             if (t < 1) frame = requestAnimationFrame(tick);
           };
           frame = requestAnimationFrame(tick);
+          frameRef.current = frame;
           observer.disconnect();
-          return () => cancelAnimationFrame(frame);
         }
       },
       { threshold: 0.5 }
     );
     if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      if (frameRef.current) cancelAnimationFrame(frameRef.current);
+    };
   }, [number]);
 
   return (

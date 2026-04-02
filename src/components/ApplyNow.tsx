@@ -5,8 +5,6 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { contactInfo } from "@/data/siteData";
 
-gsap.registerPlugin(ScrollTrigger);
-
 export default function ApplyNow() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLFormElement>(null);

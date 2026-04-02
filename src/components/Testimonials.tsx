@@ -5,12 +5,11 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { testimonialsData } from "@/data/siteData";
 
-gsap.registerPlugin(ScrollTrigger);
-
 export default function Testimonials() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
-  let startX = 0;
+  const startXRef = useRef<number>(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -21,16 +20,18 @@ export default function Testimonials() {
     }, sectionRef);
 
     const interval = setInterval(() => {
-      setActive((prev) => (prev + 1) % testimonialsData.length);
+      if (!isPaused) {
+        setActive((prev) => (prev + 1) % testimonialsData.length);
+      }
     }, 5000);
 
     return () => { ctx.revert(); clearInterval(interval); };
-  }, []);
+  }, [isPaused]);
 
-  // Step 8: Touch swipe support on mobile
-  const handleTouchStart = (e: React.TouchEvent) => { startX = e.touches[0].clientX; };
+  // Touch swipe support on mobile
+  const handleTouchStart = (e: React.TouchEvent) => { startXRef.current = e.touches[0].clientX; };
   const handleTouchEnd = (e: React.TouchEvent) => {
-    const diff = startX - e.changedTouches[0].clientX;
+    const diff = startXRef.current - e.changedTouches[0].clientX;
     if (Math.abs(diff) > 50) {
       setActive(prev => diff > 0
         ? Math.min(prev + 1, testimonialsData.length - 1)
@@ -56,6 +57,10 @@ export default function Testimonials() {
             className="glass-card rounded-3xl p-8 md:p-12 text-center mb-8"
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+            onFocus={() => setIsPaused(true)}
+            onBlur={() => setIsPaused(false)}
           >
             <div className="text-5xl text-[#E31837]/30 font-display mb-6">&ldquo;</div>
             <p className="text-[#A8A29C] text-lg md:text-xl leading-relaxed mb-8 min-h-[120px] transition-all duration-500">

@@ -4,8 +4,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Footer from "@/components/Footer";
-
-gsap.registerPlugin(ScrollTrigger);
+import { localBusinessSchema, breadcrumbSchema } from "@/lib/structured-data";
 
 const milestones = [
   { year: "1986", title: "Foundation", description: "MAAC was established as a premier animation education brand under Aptech." },
@@ -75,6 +74,19 @@ export default function AboutPage() {
 
   return (
     <main ref={pageRef} className="overflow-hidden">
+      {/* Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            ...localBusinessSchema,
+            breadcrumb: breadcrumbSchema([
+              { name: "Home", url: "https://maacjaipur.com" },
+              { name: "About", url: "https://maacjaipur.com/about" },
+            ]),
+          }),
+        }}
+      />
 
       {/* Hero */}
       <section className="relative pt-32 pb-20 overflow-hidden">

@@ -11,6 +11,8 @@ import Awards from "@/components/Awards";
 import Placements from "@/components/Placements";
 import ApplyNow from "@/components/ApplyNow";
 import Footer from "@/components/Footer";
+import FAQSection from "@/components/FAQSection";
+import { localBusinessSchema, videoSchema, breadcrumbSchema } from "@/lib/structured-data";
 
 export const dynamic = "force-dynamic";
 
@@ -25,6 +27,20 @@ const CreamToDark = () => (
 export default function Home() {
   return (
     <div className="overflow-hidden">
+      {/* Structured Data for SEO/GEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            ...localBusinessSchema,
+            video: videoSchema,
+            breadcrumb: breadcrumbSchema([
+              { name: "Home", url: "https://maacjaipur.com" },
+            ]),
+          }),
+        }}
+      />
+
       <MAACXHero />
       <VerticalCardGallery />
       <DarkToCream />
@@ -47,6 +63,7 @@ export default function Home() {
         <Placements />
       </section>
       <ApplyNow />
+      <FAQSection />
       <Footer />
     </div>
   );

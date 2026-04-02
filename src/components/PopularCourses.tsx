@@ -5,8 +5,6 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { coursesData } from "@/data/siteData";
 
-gsap.registerPlugin(ScrollTrigger);
-
 const courseGradients = [
   "linear-gradient(135deg, #1a0505 0%, #0C0C0C 100%)",
   "linear-gradient(135deg, #0a1a0a 0%, #0C0C0C 100%)",
@@ -20,16 +18,19 @@ export default function PopularCourses() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState<boolean | null>(null);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    setIsMobile(window.innerWidth < 768);
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   // GSAP horizontal scroll on desktop
   useEffect(() => {
-    if (isMobile || !sectionRef.current || !trackRef.current) return;
+    if (isMobile !== true || !sectionRef.current || !trackRef.current) return;
 
     const ctx = gsap.context(() => {
       const track = trackRef.current;
@@ -72,13 +73,16 @@ export default function PopularCourses() {
 
   // Mobile: simple CSS scroll with dots
   const handleScroll = () => {
-    if (!trackRef.current || isMobile === false) return;
+    if (!trackRef.current || !isMobile) return;
     const el = trackRef.current;
     const cardWidth = el.firstElementChild?.clientWidth || 0;
     const gap = 24;
     const index = Math.round(el.scrollLeft / (cardWidth + gap));
     setActiveIndex(Math.min(index, coursesData.popularCourses.length - 1));
   };
+
+  // Don't render until isMobile is determined
+  if (isMobile === null) return null;
 
   return (
     <section ref={sectionRef} className="relative bg-[#0C0C0C]" style={{ minHeight: isMobile ? "auto" : "100vh" }}>

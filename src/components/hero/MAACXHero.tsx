@@ -8,35 +8,33 @@ import VideoModal from "@/components/VideoModal";
 
 gsap.registerPlugin(ScrollTrigger);
 
+/**
+ * MAACX Hero Component - Clean Professional Design
+ *
+ * Layout:
+ * - Left side: Content (badge, headline, subtitle, program, CTAs) - bottom aligned
+ * - Right side: Stats card (desktop only) - bottom aligned
+ * - Removed duplicate stats from left side
+ * - Professional Inter font throughout
+ * - Cleaner, more spacious layout
+ */
 export default function MAACXHero() {
   const containerRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [mounted, setMounted] = useState(false);
   const [preloaderDone, setPreloaderDone] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
   const [showVideoModal, setShowVideoModal] = useState(false);
 
+  // Check mount status
   useEffect(() => {
     setMounted(true);
   }, []);
-
-  useEffect(() => {
-    let mounted = true;
-    import("splitting").then((mod) => {
-      if (mounted) mod.default({ target: ".maacx-split-chars", by: "chars" });
-    });
-    return () => { mounted = false; };
-  }, []);
-
-  useEffect(() => {
-    if (!mounted) return;
-    setIsMobile(window.innerWidth < 768);
-  }, [mounted]);
 
   const handlePreloaderComplete = useCallback(() => {
     setPreloaderDone(true);
   }, []);
 
+  // GSAP animations - simplified fade-up
   useEffect(() => {
     if (!preloaderDone) return;
 
@@ -49,93 +47,72 @@ export default function MAACXHero() {
 
       const tl = gsap.timeline();
 
+      // Video fade-in
       tl.from(".maacx-video", {
         opacity: 0,
-        scale: 1.08,
-        duration: 1.5,
+        scale: 1.05,
+        duration: 1,
         ease: "expo.out",
       });
 
-      tl.from(".maacx-headline .char", {
+      // Badge
+      tl.from(".maacx-badge", {
         opacity: 0,
-        y: 80,
-        rotateX: -45,
-        stagger: 0.04,
-        duration: 0.9,
-        ease: "expo.out",
-      }, "-=1.0");
-
-      tl.from(".maacx-headline-accent", {
-        opacity: 0,
-        y: 50,
-        duration: 0.8,
+        y: 15,
+        duration: 0.4,
         ease: "expo.out",
       }, "-=0.6");
 
-      tl.from(".maacx-badge", {
-        opacity: 0,
-        y: 20,
-        duration: 0.6,
-        ease: "expo.out",
-      }, "-=0.4");
-
-      tl.from(".maacx-subtitle", {
-        opacity: 0,
-        y: 30,
-        duration: 0.7,
-        ease: "expo.out",
-      }, "-=0.5");
-
-      tl.from(".maacx-cta-row", {
-        opacity: 0,
-        y: 20,
-        duration: 0.6,
-        ease: "expo.out",
-      }, "-=0.5");
-
-      tl.from(".maacx-trust", {
+      // Headline - "Big Leaps" - smaller, cleaner
+      tl.from(".maacx-headline", {
         opacity: 0,
         y: 15,
+        duration: 0.4,
+        ease: "expo.out",
+      }, "-=0.3");
+
+      // Subtitle - "Begin with the Right Course" - smaller
+      tl.from(".maacx-subtitle-text", {
+        opacity: 0,
+        y: 12,
+        duration: 0.35,
+        ease: "expo.out",
+      }, "-=0.3");
+
+      // Program badge
+      tl.from(".maacx-program-badge", {
+        opacity: 0,
+        y: 15,
+        duration: 0.4,
+        ease: "expo.out",
+      }, "-=0.3");
+
+      // CTA buttons
+      tl.from(".maacx-cta-row", {
+        opacity: 0,
+        y: 15,
+        duration: 0.4,
+        ease: "expo.out",
+      }, "-=0.3");
+
+      // Right side stats card (desktop)
+      tl.from(".maacx-content-right", {
+        opacity: 0,
+        x: 20,
         duration: 0.5,
         ease: "expo.out",
       }, "-=0.3");
 
-      tl.from(".maacx-info-item", {
-        opacity: 0,
-        x: 30,
-        stagger: 0.1,
-        duration: 0.8,
-        ease: "expo.out",
-      }, "-=0.8");
-
+      // Scroll indicator
       tl.from(".maacx-scroll", {
         opacity: 0,
         y: 10,
-        duration: 0.5,
-      }, "-=0.3");
-
-      // Parallax (desktop)
-      if (!isMobile) {
-        gsap.to(".maacx-video", {
-          yPercent: -12,
-          ease: "none",
-          scrollTrigger: { trigger: ".maacx-hero", start: "top top", end: "bottom top", scrub: 1 },
-        });
-        gsap.to(".maacx-content-left", {
-          yPercent: 6,
-          ease: "none",
-          scrollTrigger: { trigger: ".maacx-hero", start: "top top", end: "bottom top", scrub: 1 },
-        });
-        gsap.to(".maacx-info-card", {
-          yPercent: 12,
-          ease: "none",
-          scrollTrigger: { trigger: ".maacx-hero", start: "top top", end: "bottom top", scrub: 1 },
-        });
-      }
+        duration: 0.3,
+      }, "-=0.2");
     }, containerRef);
 
     return () => ctx.revert();
-  }, [preloaderDone, isMobile]);
+  }, [preloaderDone]);
 
   if (!mounted) return <div className="h-screen w-full bg-[#080808]" />;
   if (!preloaderDone) return <Preloader onComplete={handlePreloaderComplete} />;
@@ -144,19 +121,22 @@ export default function MAACXHero() {
     <>
       <section
         ref={containerRef}
-        className="maacx-hero relative min-h-[100svh] w-full bg-[#080808]"
+        className="maacx-hero relative min-h-[100svh] w-full bg-[#080808] overflow-hidden"
       >
-        {/* Video Background */}
+        {/* Background Layer */}
         <div className="absolute inset-0 z-0">
-          {/* Layer 0: CSS gradient fallback */}
-          <div className="absolute inset-0 z-0" style={{
-            background: `
-              radial-gradient(ellipse 80% 60% at 70% 40%, rgba(180,20,40,0.35) 0%, transparent 60%),
-              radial-gradient(ellipse 60% 80% at 30% 60%, rgba(100,10,20,0.2) 0%, transparent 50%),
-              linear-gradient(160deg, #0A0A0A 0%, #1a0508 40%, #0A0A0A 100%)
-            `
-          }} />
-          
+          {/* Gradient base */}
+          <div
+            className="absolute inset-0 z-0"
+            style={{
+              background: `
+                radial-gradient(ellipse 80% 60% at 50% 50%, rgba(180,20,40,0.25) 0%, transparent 60%),
+                linear-gradient(160deg, #0A0A0A 0%, #1a0508 40%, #0A0A0A 100%)
+              `,
+            }}
+          />
+
+          {/* Video background */}
           <video
             ref={videoRef}
             className="maacx-video absolute inset-0 h-full w-full object-cover"
@@ -171,128 +151,115 @@ export default function MAACXHero() {
             <source src="/intro.mp4" type="video/mp4" />
           </video>
 
-          {/* Overlay gradient - Layer 2 */}
-          <div className="absolute inset-0 z-[2] bg-gradient-to-r from-black/85 via-black/50 to-black/20" />
-
-          {/* Tiger atmospheric glow - Layer 3 (right side only) */}
-          <div className="absolute right-0 top-0 bottom-0 w-1/2 z-[3] hidden md:block overflow-hidden">
-            <div style={{
-              position: 'absolute', right: '-5%', top: '50%',
-              transform: 'translateY(-50%)',
-              width: '600px', height: '600px',
-              opacity: 0.12,
-              background: `
-                radial-gradient(circle at 60% 40%, rgba(227,24,55,0.4) 0%, transparent 50%)
-              `,
-              maskImage: `url('/images/tiger-mask.svg')`,  
-              WebkitMaskImage: `url('/images/tiger-mask.svg')`,
-              maskSize: 'contain', maskRepeat: 'no-repeat'
-            }} />
-          </div>
+          {/* Uniform overlay */}
+          <div className="absolute inset-0 z-[2] bg-black/50" />
         </div>
 
-        {/* Content — Left */}
-        <div className="maacx-content-left absolute left-0 top-1/2 -translate-y-1/2 z-30 w-full md:max-w-[60%] px-6 md:px-12 lg:px-20">
-          {/* Badge */}
+        {/* Left Side Content - Bottom Aligned */}
+        <div className="maacx-content-left absolute left-0 bottom-0 z-30 w-full max-w-[500px] px-6 md:px-12 lg:px-16 pb-12 md:pb-16">
+          {/* Accreditation Badge - Cleaner */}
           <div className="maacx-badge mb-5">
-            <span className="inline-block px-4 py-2 bg-black/40 backdrop-blur-sm border border-white/15 rounded-full text-[#E31837] text-[10px] md:text-xs font-bold tracking-[0.15em] uppercase">
+            <span className="inline-block px-3.5 py-1.5 bg-black/30 backdrop-blur-sm border border-white/10 rounded-full text-[#E31837] text-[9px] md:text-xs font-semibold tracking-[0.12em] uppercase">
               NSDC / MESC Partner
             </span>
           </div>
 
-          {/* Headline */}
-          <h1 className="mb-4 pb-1">
-            <span className="maacx-headline maacx-split-chars block text-white font-display font-extrabold text-[clamp(2.8rem,7vw,6rem)] leading-[1.08] tracking-tight">
+          {/* Headline - Left Aligned, Professional Size */}
+          <h1 className="mb-3 text-left">
+            <span className="maacx-headline block text-white font-sans font-bold text-[clamp(2rem,5vw,3.5rem)] leading-[1.15] tracking-tight">
               Big Leaps
-            </span>
-            <span className="maacx-headline-accent block text-[#E31837] font-display font-extrabold text-[clamp(2rem,5vw,5rem)] leading-[1.08] tracking-tight mt-1">
-              Begin with the Right Course
             </span>
           </h1>
 
-          {/* Program badge */}
-          <div className="maacx-subtitle mb-7">
-            <span className="inline-block px-5 py-3 bg-[#E31837] rounded-lg text-white text-base md:text-lg font-bold shadow-2xl">
+          {/* Subtitle - Red, left aligned, smaller */}
+          <div className="maacx-subtitle-text mb-5">
+            <span className="block text-[#E31837] font-sans font-medium text-[clamp(1rem,2.5vw,1.5rem)] leading-[1.3]">
+              Begin with the Right Course
+            </span>
+          </div>
+
+          {/* Program Badge - Cleaner */}
+          <div className="maacx-program-badge mb-6">
+            <span className="inline-block px-4 py-2.5 bg-[#E31837] rounded-lg text-white text-sm md:text-base font-semibold shadow-xl">
               B.Voc in 3D Animation & VFX
             </span>
           </div>
 
-          {/* CTA Row */}
-          <div className="maacx-cta-row flex flex-wrap items-center gap-4 mb-6">
-            <a href="#courses" className="btn btn-primary group">
-              <span>Explore Courses</span>
-              <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          {/* CTA Buttons - Cleaner */}
+          <div className="maacx-cta-row flex flex-wrap items-center gap-3 md:gap-4 mb-6">
+            {/* Primary CTA */}
+            <a
+              href="#courses"
+              className="btn btn-primary group inline-flex items-center gap-2 px-5 py-2.5"
+            >
+              <span className="text-xs md:text-sm">Explore Courses</span>
+              <svg
+                className="w-3.5 h-3.5 md:w-4 md:h-4 transition-transform group-hover:translate-x-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
               </svg>
             </a>
+
+            {/* Secondary CTA - Showreel */}
             <button
-              className="btn btn-ghost group"
+              className="btn btn-ghost group inline-flex items-center gap-2 px-4 py-2.5"
               onClick={() => setShowVideoModal(true)}
+              aria-label="Watch Showreel"
             >
-              <svg className="w-5 h-5 text-[#E31837]" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z" />
-              </svg>
-              <span>Watch Showreel</span>
+              <div className="w-9 h-9 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center group-hover:bg-[#E31837]/20 transition-colors">
+                <svg
+                  className="w-3.5 h-3.5 text-[#E31837] ml-0.5"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </div>
+              <span className="text-xs md:text-sm font-medium">Showreel</span>
             </button>
-          </div>
-
-          {/* Trust row */}
-          <div className="maacx-trust flex flex-wrap items-center gap-3 text-[#A8A29C] text-sm">
-            <span>30+ Years</span>
-            <span className="w-1 h-1 rounded-full bg-[#E31837]" />
-            <span>95% Placements</span>
-            <span className="w-1 h-1 rounded-full bg-[#E31837]" />
-            <span>NSDC Certified</span>
-          </div>
-        </div>
-
-        {/* Info Card — Right (desktop) */}
-        <div className="maacx-content-right absolute right-0 top-1/2 -translate-y-1/2 z-20 hidden md:block px-6 md:px-12 lg:px-20">
-          <div className="maacx-info-card backdrop-blur-xl bg-black/35 border border-white/10 rounded-2xl p-6 md:p-8 max-w-[300px]">
-            {[
-              { value: "30+", label: "YEARS", sub: "Legacy of Excellence" },
-              { value: "95%", label: "PLACEMENT", sub: "Rate Guaranteed" },
-              { value: "100+", label: "CENTERS", sub: "Across India" },
-            ].map((item, i) => (
-              <div
-                key={i}
-                className={`maacx-info-item flex items-start gap-4 ${
-                  i < 2 ? "pb-5 mb-5 border-b border-white/10" : "pt-0"
-                }`}
-              >
-                <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-[#E31837] to-[#FF6B35] flex items-center justify-center">
-                  <span className="text-white font-bold text-lg">{item.value}</span>
-                </div>
-                <div>
-                  <h3 className="text-white font-bold text-base tracking-wide">{item.label}</h3>
-                  <p className="text-[#6b6b6b] text-xs tracking-widest uppercase mt-0.5">{item.sub}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Mobile Stats Strip */}
-        <div className="md:hidden absolute bottom-24 left-0 right-0 z-20 px-6">
-          <div className="flex items-center justify-between bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl px-4 py-3">
-            {[
-              { v: "30+", l: "Years" },
-              { v: "95%", l: "Placed" },
-              { v: "100+", l: "Centers" },
-            ].map((s, i) => (
-              <div key={i} className="text-center">
-                <span className="block text-[#E31837] font-display font-bold text-xl">{s.v}</span>
-                <span className="block text-[#6b6b6b] text-[10px] uppercase tracking-wide">{s.l}</span>
-              </div>
-            ))}
           </div>
         </div>
 
         {/* Scroll Indicator */}
-        <div className="maacx-scroll absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 hidden md:flex">
-          <span className="text-white/40 text-[9px] tracking-[0.3em] uppercase">Scroll</span>
+        <div className="maacx-scroll absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2">
+          <span className="text-white/40 text-[9px] tracking-[0.3em] uppercase">
+            Scroll
+          </span>
           <div className="w-0.5 h-12 bg-gradient-to-b from-white/40 to-transparent relative overflow-hidden">
             <div className="absolute top-0 w-full h-4 bg-white animate-[scrollLine_1.8s_ease-in-out_infinite]" />
+          </div>
+        </div>
+
+        {/* Right Side Stats - Bottom Aligned (Desktop Only) */}
+        <div className="maacx-content-right absolute right-0 bottom-0 z-20 hidden lg:block px-12 lg:px-20 pb-12 md:pb-16">
+          <div className="backdrop-blur-xl bg-black/20 border border-white/10 rounded-xl p-6 max-w-[240px]">
+            {[
+              { value: "30+", label: "Years Legacy" },
+              { value: "95%", label: "Placement Rate" },
+              { value: "100+", label: "Centers Across India" },
+            ].map((item, i) => (
+              <div
+                key={i}
+                className={`flex items-center gap-3 ${
+                  i < 2 ? "pb-4 mb-4 border-b border-white/10" : ""
+                }`}
+              >
+                <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-gradient-to-br from-[#E31837] to-[#FF6B35] flex items-center justify-center">
+                  <span className="text-white font-bold text-sm">{item.value}</span>
+                </div>
+                <div>
+                  <p className="text-white font-medium text-xs">{item.label}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>

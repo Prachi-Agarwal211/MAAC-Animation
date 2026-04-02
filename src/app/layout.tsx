@@ -5,6 +5,9 @@ import LenisProvider from "@/components/LenisProvider";
 import CustomCursor from "@/components/hero/CustomCursor";
 import FloatingCTA from "@/components/FloatingCTA";
 import Navbar from "@/components/Navbar";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Providers } from "./providers";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -66,71 +69,75 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${syne.variable} font-body antialiased bg-[#0C0C0C] text-[#F0EBE1]`}
       >
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-[9999] bg-[#E31837] text-white px-4 py-2 rounded"
-        >
-          Skip to main content
-        </a>
+        <Providers>
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-[9999] bg-[#E31837] text-white px-4 py-2 rounded"
+          >
+            Skip to main content
+          </a>
 
-        <div className="grain-overlay" aria-hidden="true" />
+          <div className="grain-overlay" aria-hidden="true" />
 
-        <CustomCursor />
+          <CustomCursor />
 
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "EducationalOrganization",
-              name: "MAAC Jaipur — Maya Academy of Advanced Cinematics",
-              alternateName: "Maya Academy of Advanced Cinematics - Jaipur",
-              url: "https://maacjaipur.com",
-              logo: "https://maacjaipur.com/logo.png",
-              description: "Rajasthan's leading animation, VFX, and multimedia institute with 30+ years of excellence",
-              address: {
-                "@type": "PostalAddress",
-                streetAddress: "C-44, Malviya Nagar Industrial Area",
-                addressLocality: "Jaipur",
-                addressRegion: "Rajasthan",
-                postalCode: "302017",
-                addressCountry: "IN",
-              },
-              geo: {
-                "@type": "GeoCoordinates",
-                latitude: 26.8466,
-                longitude: 75.8069,
-              },
-              telephone: "+91-141-4035604",
-              email: "jaipur@maacindia.com",
-              openingHours: "Mo-Sa 09:00-19:00",
-              priceRange: "₹₹",
-              hasOfferCatalog: {
-                "@type": "OfferCatalog",
-                name: "Animation & VFX Courses",
-                itemListElement: [
-                  { "@type": "Course", "name": "3D Animation", "description": "Advanced 3D animation training with industry-standard tools" },
-                  { "@type": "Course", "name": "VFX", "description": "Visual effects for film and TV using compositing and motion tracking" },
-                  { "@type": "Course", "name": "Game Design", "description": "Game design and development for next-gen gaming platforms" },
-                  { "@type": "Course", "name": "Digital Filmmaking", "description": "Complete filmmaking program from pre-production to post-production" },
-                  { "@type": "Course", "name": "Digital Media & Design", "description": "Graphic design, web design, UI/UX, and motion graphics" },
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "EducationalOrganization",
+                name: "MAAC Jaipur — Maya Academy of Advanced Cinematics",
+                alternateName: "Maya Academy of Advanced Cinematics - Jaipur",
+                url: "https://maacjaipur.com",
+                logo: "https://maacjaipur.com/logo.png",
+                description: "Rajasthan's leading animation, VFX, and multimedia institute with 30+ years of excellence",
+                address: {
+                  "@type": "PostalAddress",
+                  streetAddress: "711-712, Ambition Tower, 7th Floor, D-46B, Malan Ka Chauraha, Agrasain Circle",
+                  addressLocality: "Jaipur",
+                  addressRegion: "Rajasthan",
+                  postalCode: "302001",
+                  addressCountry: "IN",
+                },
+                geo: {
+                  "@type": "GeoCoordinates",
+                  latitude: 26.8466,
+                  longitude: 75.8069,
+                },
+                telephone: "+91-7300001589",
+                email: "maacanimationjaipur@gmail.com",
+                openingHours: "Mo-Sa 09:00-19:00",
+                priceRange: "₹₹",
+                hasOfferCatalog: {
+                  "@type": "OfferCatalog",
+                  name: "Animation & VFX Courses",
+                  itemListElement: [
+                    { "@type": "Course", "name": "3D Animation", "description": "Advanced 3D animation training with industry-standard tools" },
+                    { "@type": "Course", "name": "VFX", "description": "Visual effects for film and TV using compositing and motion tracking" },
+                    { "@type": "Course", "name": "Game Design", "description": "Game design and development for next-gen gaming platforms" },
+                    { "@type": "Course", "name": "Digital Filmmaking", "description": "Complete filmmaking program from pre-production to post-production" },
+                    { "@type": "Course", "name": "Digital Media & Design", "description": "Graphic design, web design, UI/UX, and motion graphics" },
+                  ],
+                },
+                sameAs: [
+                  "https://www.facebook.com/MAAClndia",
+                  "https://www.instagram.com/maacjaipurcscheme",
+                  "https://www.youtube.com/@maac-jaipur-cscheme",
+                  "https://www.linkedin.com/company/maac-jaipur-cscheme",
                 ],
-              },
-              sameAs: [
-                "https://www.facebook.com/MAAClndia",
-                "https://www.instagram.com/maacjaipurcscheme",
-                "https://www.youtube.com/@maac-jaipur-cscheme",
-                "https://www.linkedin.com/company/maac-jaipur-cscheme",
-              ],
-            }),
-          }}
-        />
+              }),
+            }}
+          />
 
-        <LenisProvider>
-          <Navbar />
-          <main id="main-content" className="page-wrapper">{children}</main>
-          <FloatingCTA whatsapp="+917300001589" phone="+917300001589" />
-        </LenisProvider>
+          <LenisProvider>
+            <Navbar />
+            <main id="main-content" className="page-wrapper">{children}</main>
+            <FloatingCTA whatsapp="+917300001589" phone="+917300001589" />
+            <Analytics />
+            <SpeedInsights />
+          </LenisProvider>
+        </Providers>
       </body>
     </html>
   );

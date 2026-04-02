@@ -62,7 +62,7 @@ export default function FloatingCTA({ whatsapp, phone }: FloatingCTAProps) {
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="fab-pulse relative flex items-center justify-center w-[52px] h-[52px] rounded-full bg-[#25D366] text-white shadow-lg hover:shadow-xl transition-shadow"
+        className="group fab-pulse relative flex items-center justify-center w-[52px] h-[52px] rounded-full bg-[#25D366] text-white shadow-lg hover:shadow-xl transition-shadow"
         aria-label="Chat on WhatsApp"
         onMouseEnter={() => handleMouseEnter(whatsappRef.current)}
         onMouseLeave={() => handleMouseLeave(whatsappRef.current)}
@@ -85,7 +85,7 @@ export default function FloatingCTA({ whatsapp, phone }: FloatingCTAProps) {
       <a
         ref={callRef}
         href={callUrl}
-        className="fab-pulse relative flex items-center justify-center w-[52px] h-[52px] rounded-full bg-[#E31837] text-white shadow-lg hover:shadow-xl transition-shadow"
+        className="group fab-pulse relative flex items-center justify-center w-[52px] h-[52px] rounded-full bg-[#E31837] text-white shadow-lg hover:shadow-xl transition-shadow"
         aria-label="Call us"
         onMouseEnter={() => handleMouseEnter(callRef.current)}
         onMouseLeave={() => handleMouseLeave(callRef.current)}

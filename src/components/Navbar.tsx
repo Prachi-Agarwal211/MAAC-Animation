@@ -3,12 +3,19 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { navLinks, contactInfo } from "@/data/siteData";
+import { useUIStore } from "@/lib/store";
 
 export default function Navbar() {
+  const { 
+    mobileMenuOpen, 
+    megaMenuOpen, 
+    toggleMobileMenu, 
+    setMegaMenu,
+    closeAllMenus 
+  } = useUIStore();
   const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [megaMenuOpen, setMegaMenuOpen] = useState<string | null>(null);
   const [demoBarVisible, setDemoBarVisible] = useState(false);
   const navRef = useRef<HTMLElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
@@ -37,7 +44,7 @@ export default function Navbar() {
   // Mobile menu animation
   useEffect(() => {
     if (!mobileMenuRef.current) return;
-    if (mobileOpen) {
+    if (mobileMenuOpen) {
       const links = mobileMenuRef.current.querySelectorAll(".mobile-link");
       gsap.fromTo(
         links,
@@ -48,19 +55,18 @@ export default function Navbar() {
     } else {
       document.body.style.overflow = "";
     }
-  }, [mobileOpen]);
+  }, [mobileMenuOpen]);
 
   // Keyboard navigation
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        setMobileOpen(false);
-        setMegaMenuOpen(null);
+        closeAllMenus();
       }
     };
     document.addEventListener("keydown", handleEscape);
     return () => document.removeEventListener("keydown", handleEscape);
-  }, []);
+  }, [closeAllMenus]);
 
   const whatsappNumber = contactInfo.whatsapp.replace(/[^0-9]/g, "");
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=Hi%20MAAC%20Jaipur`;
@@ -130,8 +136,8 @@ export default function Navbar() {
                   <div
                     key={link.label}
                     className="relative"
-                    onMouseEnter={() => link.children && setMegaMenuOpen(link.label)}
-                    onMouseLeave={() => setMegaMenuOpen(null)}
+                    onMouseEnter={() => link.children && setMegaMenu(link.label)}
+                    onMouseLeave={() => setMegaMenu(null)}
                   >
                     <Link
                       href={link.href}
@@ -179,11 +185,11 @@ export default function Navbar() {
               </div>
 
               {/* Mobile Menu Toggle */}
-              <button onClick={() => setMobileOpen(!mobileOpen)} className="lg:hidden relative w-11 h-11 flex items-center justify-center" aria-label={mobileOpen ? "Close menu" : "Open menu"} aria-expanded={mobileOpen}>
+              <button onClick={toggleMobileMenu} className="lg:hidden relative w-11 h-11 flex items-center justify-center" aria-label={mobileMenuOpen ? "Close menu" : "Open menu"} aria-expanded={mobileMenuOpen}>
                 <div className="flex flex-col items-center justify-center gap-1.5">
-                  <span className={`block w-6 h-0.5 bg-white transition-all duration-300 ${mobileOpen ? "rotate-45 translate-y-2" : ""}`} />
-                  <span className={`block w-6 h-0.5 bg-white transition-all duration-300 ${mobileOpen ? "opacity-0" : ""}`} />
-                  <span className={`block w-6 h-0.5 bg-white transition-all duration-300 ${mobileOpen ? "-rotate-45 -translate-y-2" : ""}`} />
+                  <span className={`block w-6 h-0.5 bg-white transition-all duration-300 ${mobileMenuOpen ? "rotate-45 translate-y-2" : ""}`} />
+                  <span className={`block w-6 h-0.5 bg-white transition-all duration-300 ${mobileMenuOpen ? "opacity-0" : ""}`} />
+                  <span className={`block w-6 h-0.5 bg-white transition-all duration-300 ${mobileMenuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
                 </div>
               </button>
             </div>
@@ -192,16 +198,16 @@ export default function Navbar() {
       </header>
 
       {/* ── Mobile Full-Screen Menu ── */}
-      <div ref={mobileMenuRef} className={`fixed inset-0 z-[5000] lg:hidden bg-[#0C0C0C]/98 backdrop-blur-xl transition-all duration-500 ${mobileOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"}`}>
+      <div ref={mobileMenuRef} className={`fixed inset-0 z-[5000] lg:hidden bg-[#0C0C0C]/98 backdrop-blur-xl transition-all duration-500 ${mobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"}`}>
         <div className="flex flex-col h-full pt-20 pb-8 px-6">
           <nav className="flex-1 space-y-2">
             {navLinks.map((link) => (
               <div key={link.label}>
-                <Link href={link.href} onClick={() => setMobileOpen(false)} className="mobile-link block py-4 text-2xl font-display font-bold text-white hover:text-[#E31837] transition-colors">{link.label}</Link>
+                <Link href={link.href} onClick={toggleMobileMenu} className="mobile-link block py-4 text-2xl font-display font-bold text-white hover:text-[#E31837] transition-colors">{link.label}</Link>
                 {link.children && (
                   <div className="mobile-link ml-4 space-y-2 mt-2">
                     {link.children.map((child) => (
-                      <Link key={child.label} href={child.href} onClick={() => setMobileOpen(false)} className="block py-2 text-base text-[#A8A29C] hover:text-white transition-colors">{child.label}</Link>
+                      <Link key={child.label} href={child.href} onClick={toggleMobileMenu} className="block py-2 text-base text-[#A8A29C] hover:text-white transition-colors">{child.label}</Link>
                     ))}
                   </div>
                 )}
@@ -211,7 +217,7 @@ export default function Navbar() {
           <div className="mobile-link space-y-4 pt-6 border-t border-white/10">
             <a href={`tel:${contactInfo.phone}`} className="flex items-center justify-center gap-2 w-full py-4 bg-[#E31837] text-white rounded-xl font-bold">Call Now</a>
             <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 w-full py-4 bg-[#25D366] text-white rounded-xl font-bold">WhatsApp</a>
-            <Link href="/contact" onClick={() => setMobileOpen(false)} className="mobile-link block text-center py-4 bg-white/10 text-white rounded-xl font-bold hover:bg-white/20 transition-colors">Book Free Demo</Link>
+            <Link href="/contact" onClick={toggleMobileMenu} className="mobile-link block text-center py-4 bg-white/10 text-white rounded-xl font-bold hover:bg-white/20 transition-colors">Book Free Demo</Link>
           </div>
         </div>
       </div>

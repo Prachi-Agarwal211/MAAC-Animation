@@ -44,7 +44,7 @@ export default function Footer() {
             <Link href="/contact" className="btn bg-white text-[#E31837] hover:bg-gray-100 text-sm">
               Book Free Demo
             </Link>
-            <a href="https://wa.me/911414035604" target="_blank" rel="noopener noreferrer" className="btn bg-white/10 text-white border border-white/20 hover:bg-white/20 text-sm">
+            <a href="https://wa.me/917300001589" target="_blank" rel="noopener noreferrer" className="btn bg-white/10 text-white border border-white/20 hover:bg-white/20 text-sm">
               WhatsApp Us
             </a>
           </div>
@@ -170,8 +170,15 @@ export default function Footer() {
           </div>
 
           <AccordionSection title="Quick Links">
-            {["Home", "About Us", "Courses", "Placements", "Gallery", "Contact Us"].map((l) => (
-              <Link key={l} href={`/${l.toLowerCase().replace(" ", "-")}`} className="block py-2 text-[#A8A29C] text-sm">{l}</Link>
+            {[
+              { label: "Home", href: "/" },
+              { label: "About Us", href: "/about" },
+              { label: "Courses", href: "/courses" },
+              { label: "Placements", href: "/placements" },
+              { label: "Gallery", href: "/gallery" },
+              { label: "Contact Us", href: "/contact" },
+            ].map((link) => (
+              <Link key={link.label} href={link.href} className="block py-2 text-[#A8A29C] text-sm">{link.label}</Link>
             ))}
           </AccordionSection>
 

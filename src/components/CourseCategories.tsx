@@ -6,8 +6,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
 import { coursesData } from "@/data/siteData";
 
-gsap.registerPlugin(ScrollTrigger);
-
 // SVG Icons per category
 const CategoryIcon = ({ type }: { type: string }) => {
   const icons: Record<string, JSX.Element> = {
@@ -85,7 +83,7 @@ function SlideUpCard({ course, index }: SlideCardProps) {
       });
     }, cardRef);
     return () => ctx.revert();
-  }, [index]);
+  }, []); // index is stable from map, no need to re-run
 
   return (
     <div

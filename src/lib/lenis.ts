@@ -5,6 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 let lenis: Lenis | null = null;
 
 export const initLenis = () => {
+  // Return existing instance if already initialized
   if (lenis) return lenis;
 
   lenis = new Lenis({

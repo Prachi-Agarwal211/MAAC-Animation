@@ -4,8 +4,6 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger);
-
 const featureCards = [
   { 
     title: "Transformative Educational Events",
@@ -93,11 +91,11 @@ export default function VerticalCardGallery() {
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    const isMobile = window.innerWidth < 768;
     
-    if (isMobile) {
-      // Mobile: simple staggered fade-up
-      const ctx = gsap.context(() => {
+    const checkMobile = () => window.innerWidth < 768;
+    const ctx = gsap.context(() => {
+      if (checkMobile()) {
+        // Mobile: simple staggered fade-up
         gsap.fromTo(".feature-card-mobile",
           { opacity: 0, y: 60 },
           {
@@ -112,56 +110,53 @@ export default function VerticalCardGallery() {
             }
           }
         );
-      }, wrapperRef);
-      return () => ctx.revert();
-    }
+      } else {
+        // Desktop: pinned scroll with GSAP
+        const cards = gsap.utils.toArray<HTMLElement>(".feature-card");
+        const heading = headingRef.current;
 
-    // Desktop: pinned scroll with GSAP
-    const ctx = gsap.context(() => {
-      const cards = gsap.utils.toArray<HTMLElement>(".feature-card");
-      const heading = headingRef.current;
-      
-      // Timeline for card reveals
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: wrapperRef.current,
-          start: "top top",
-          end: "bottom bottom",
-          scrub: 1,
-          pin: stickyRef.current,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-        }
-      });
-
-      // Parallax effect for heading
-      if (heading) {
-        gsap.to(heading, {
-          yPercent: 30,
-          opacity: 0.5,
+        // Timeline for card reveals
+        const tl = gsap.timeline({
           scrollTrigger: {
             trigger: wrapperRef.current,
             start: "top top",
             end: "bottom bottom",
-            scrub: true,
+            scrub: 1,
+            pin: stickyRef.current,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
           }
         });
-      }
 
-      // Cards fly in from right sequentially
-      cards.forEach((card, i) => {
-        tl.fromTo(card,
-          { x: "120%", opacity: 0, rotation: 8 },
-          { 
-            x: 0, 
-            opacity: 1, 
-            rotation: 0, 
-            duration: 1, 
-            ease: "power2.out" 
-          },
-          i * 0.5
-        );
-      });
+        // Parallax effect for heading
+        if (heading) {
+          gsap.to(heading, {
+            yPercent: 30,
+            opacity: 0.5,
+            scrollTrigger: {
+              trigger: wrapperRef.current,
+              start: "top top",
+              end: "bottom bottom",
+              scrub: true,
+            }
+          });
+        }
+
+        // Cards fly in from right sequentially
+        cards.forEach((card, i) => {
+          tl.fromTo(card,
+            { x: "120%", opacity: 0, rotation: 8 },
+            {
+              x: 0,
+              opacity: 1,
+              rotation: 0,
+              duration: 1,
+              ease: "power2.out"
+            },
+            i * 0.5
+          );
+        });
+      }
     }, wrapperRef);
 
     return () => ctx.revert();
