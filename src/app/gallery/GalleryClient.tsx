@@ -46,7 +46,6 @@ export default function GalleryClient() {
 
     return () => {
       ctx.revert();
-      gsap.globalTimeline.clear();
     };
   }, []);
 
@@ -54,7 +53,7 @@ export default function GalleryClient() {
     <main ref={pageRef} className="overflow-hidden">
 
       {/* Hero */}
-      <section className="relative pt-32 pb-16 overflow-hidden">
+      <section className="relative pt-20 md:pt-32 pb-16 md:pb-20 overflow-hidden">
         <div className="absolute inset-0 bg-hero-pattern" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 gallery-hero">
           <p className="text-[#E31837] text-xs font-inter font-semibold tracking-[0.2em] uppercase mb-4">

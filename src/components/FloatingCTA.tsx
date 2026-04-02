@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
+import { useUIStore } from "@/lib/store";
 
 interface FloatingCTAProps {
   whatsapp: string;
@@ -10,6 +11,7 @@ interface FloatingCTAProps {
 
 export default function FloatingCTA({ whatsapp, phone }: FloatingCTAProps) {
   const [isVisible, setIsVisible] = useState(false);
+  const { mobileMenuOpen } = useUIStore();
   const containerRef = useRef<HTMLDivElement>(null);
   const whatsappRef = useRef<HTMLAnchorElement>(null);
   const callRef = useRef<HTMLAnchorElement>(null);
@@ -52,9 +54,9 @@ export default function FloatingCTA({ whatsapp, phone }: FloatingCTAProps) {
   return (
     <div
       ref={containerRef}
-      className={`fixed bottom-6 right-6 z-[9000] flex flex-col items-center gap-3 ${
-        isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
-      } transition-opacity duration-300`}
+      className={`fixed bottom-6 right-6 flex flex-col items-center gap-3 transition-all duration-300 ${
+        isVisible && !mobileMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+      } z-[999]`}
     >
       {/* WhatsApp Button */}
       <div className="relative group">

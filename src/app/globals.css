@@ -53,7 +53,7 @@
 
 @keyframes progress {
   from { transform: scaleX(0); }
-  to { transform: scaleX(1); }
+  to   { transform: scaleX(1); }
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -244,6 +244,11 @@ body.demo-bar-visible .page-wrapper {
    SECTION DIVIDERS
    ═══════════════════════════════════════════════════════ */
 
+/* ADD — section-clip-light is used in IndustryPartners but never defined */
+.section-clip-light {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
 .section-fade {
   position: relative;
 }
@@ -257,8 +262,16 @@ body.demo-bar-visible .page-wrapper {
   background: linear-gradient(90deg, transparent, rgba(227,24,55,0.2), transparent);
 }
 
+/* ADD — border-l-3 is used in InstituteIntro blockquote, not valid Tailwind */
+.border-l-3 {
+  border-left-width: 3px;
+}
 
-
+/* ADD — year watermark needs mobile cap to prevent overflow */
+.aw-year-watermark {
+  font-size: clamp(3rem, 15vw, 8rem);
+  line-height: 1;
+}
 /* ═══════════════════════════════════════════════════════
    ANIMATIONS
    ═══════════════════════════════════════════════════════ */

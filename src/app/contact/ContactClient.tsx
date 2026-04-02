@@ -42,7 +42,6 @@ export default function ContactClient() {
 
     return () => {
       ctx.revert();
-      gsap.globalTimeline.clear();
     };
   }, []);
 
@@ -77,7 +76,7 @@ export default function ContactClient() {
     <main ref={pageRef} className="overflow-hidden">
 
       {/* Hero */}
-      <section className="relative pt-32 pb-16 overflow-hidden">
+      <section className="relative pt-20 md:pt-32 pb-16 md:pb-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-[#0C0C0C] to-[#0a0a0a]" />
         <div className="absolute top-1/3 -left-32 w-96 h-96 bg-[#E31837]/10 rounded-full blur-[120px]" />
 

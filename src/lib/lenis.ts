@@ -6,6 +6,11 @@ let lenis: Lenis | null = null;
 let tickerCallback: ((time: number) => void) | null = null;
 
 export const initLenis = () => {
+  // DISABLE on touch devices (mobile/tablet)
+  if (typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches) {
+    return null;
+  }
+  
   if (lenis) return lenis;
 
   lenis = new Lenis({

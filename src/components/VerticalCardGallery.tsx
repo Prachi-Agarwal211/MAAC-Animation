@@ -73,11 +73,52 @@ export default function VerticalCardGallery() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    const ctx = gsap.context(() => {
-      // Mobile: simple staggered fade-up animation
-      if (window.innerWidth < 768) {
+    const mm = gsap.matchMedia();
+    
+    mm.add("(min-width: 768px)", () => {
+      // Desktop: pinned horizontal scroll
+      const ctx = gsap.context(() => {
+        const track = cardsContainerRef.current;
+        if (!track) return;
+        
+        const totalWidth = track.scrollWidth - window.innerWidth;
+        if (totalWidth <= 0) return;
+
+        ScrollTrigger.create({
+          trigger: containerRef.current,
+          start: "top top",
+          end: () => `+=${totalWidth}`,
+          pin: true,
+          pinSpacing: true, // was false - this was causing collapse
+          scrub: 1,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+        });
+
+        gsap.to(track, {
+          x: () => -totalWidth,
+          ease: "none",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top top",
+            end: () => `+=${totalWidth}`,
+            scrub: 1,
+            invalidateOnRefresh: true,
+          },
+        });
+      }, containerRef);
+
+      return () => ctx.revert();
+    });
+    
+    mm.add("(max-width: 767px)", () => {
+      // Mobile: simple staggered reveal
+      const ctx = gsap.context(() => {
+        const cards = gsap.utils.toArray(".feature-card-mobile");
+        if (cards.length === 0) return;
+        
         gsap.fromTo(
-          ".feature-card-mobile",
+          cards,
           { opacity: 0, y: 60 },
           {
             opacity: 1,
@@ -92,58 +133,12 @@ export default function VerticalCardGallery() {
             },
           }
         );
-        return;
-      }
+      }, containerRef);
+      
+      return () => ctx.revert();
+    });
 
-      // Desktop: pinned horizontal scroll with GSAP
-      const totalWidth = cardsContainerRef.current!.scrollWidth;
-      const containerWidth = window.innerWidth;
-      const scrollDistance = totalWidth - containerWidth;
-
-      // Pin the container
-      ScrollTrigger.create({
-        trigger: containerRef.current,
-        start: "top top",
-        end: () => `+=${scrollDistance}`,
-        pin: true,
-        pinSpacing: false,
-        scrub: 1,
-        invalidateOnRefresh: true,
-      });
-
-      // Horizontal scroll animation
-      gsap.to(cardsContainerRef.current, {
-        x: () => -scrollDistance,
-        ease: "none",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top top",
-          end: () => `+=${scrollDistance}`,
-          scrub: 1,
-          invalidateOnRefresh: true,
-        },
-      });
-
-      // Parallax effect for heading
-      if (headingRef.current) {
-        gsap.to(headingRef.current, {
-          yPercent: 20,
-          opacity: 0.7,
-          ease: "none",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top top",
-            end: () => `+=${scrollDistance}`,
-            scrub: true,
-          },
-        });
-      }
-    }, containerRef);
-
-    return () => {
-      ctx.revert();
-      // Don't kill global ScrollTriggers - let each component manage its own
-    };
+    return () => mm.revert();
   }, []);
 
   return (
@@ -164,10 +159,10 @@ export default function VerticalCardGallery() {
             <p className="text-[#E31837] text-xs font-semibold tracking-[0.15em] uppercase mb-6">
               Empower Your Future
             </p>
-            <h2 data-splitting className="font-display font-bold text-[clamp(2.5rem, 5vw, 4rem)] leading-[1.05] tracking-tight text-[#F0EBE1] mb-4">
+            <h2 data-splitting className="font-display font-bold text-[clamp(2.5rem,5vw,4rem)] leading-[1.05] tracking-tight text-[#F0EBE1] mb-4">
               Creative Careers That Click
             </h2>
-            <h2 data-splitting className="font-display font-bold text-[clamp(2.5rem, 5vw, 4rem)] leading-[1.05] tracking-tight text-[#E31837] mb-6">
+            <h2 data-splitting className="font-display font-bold text-[clamp(2.5rem,5vw,4rem)] leading-[1.05] tracking-tight text-[#E31837] mb-6">
               Think MAAC
             </h2>
             <p className="text-[#A8A29C] text-base leading-relaxed max-w-md">
@@ -193,8 +188,13 @@ export default function VerticalCardGallery() {
               >
                 {/* Image area — top 55% */}
                 <div className="relative h-[55%] overflow-hidden bg-gradient-to-br from-[#1a1a1a] via-[#2a1a1a] to-[#1a1a1a]">
-                  <div className="absolute inset-0 flex items-center justify-center text-8xl opacity-20">
-                    {card.imageFallback}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-15">
+                    <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                      <rect x="10" y="10" width="60" height="60" rx="8"
+                        stroke={card.color} strokeWidth="1.5" fill="none"/>
+                      <path d="M10 40 L40 10 L70 40 L40 70 Z"
+                        stroke={card.color} strokeWidth="1" fill="none"/>
+                    </svg>
                   </div>
                   <div className="absolute bottom-0 left-0 w-full h-[3px] bg-gradient-to-r from-[#E31837] to-[#FF6B35]" />
                 </div>
@@ -226,10 +226,10 @@ export default function VerticalCardGallery() {
           <p className="text-[#E31837] text-xs font-semibold tracking-[0.15em] uppercase mb-6 text-center">
             Empower Your Future
           </p>
-          <h2 className="font-display font-bold text-[clamp(1.75rem, 4vw, 2.5rem)] leading-[1.05] tracking-tight text-[#F0EBE1] mb-3 text-center">
+          <h2 className="font-display font-bold text-[clamp(1.75rem,4vw,2.5rem)] leading-[1.05] tracking-tight text-[#F0EBE1] mb-3 text-center">
             Creative Careers That Click
           </h2>
-          <h2 className="font-display font-bold text-[clamp(1.75rem, 4vw, 2.5rem)] leading-[1.05] tracking-tight text-[#E31837] mb-4 text-center">
+          <h2 className="font-display font-bold text-[clamp(1.75rem,4vw,2.5rem)] leading-[1.05] tracking-tight text-[#E31837] mb-4 text-center">
             Think MAAC
           </h2>
           <p className="text-[#A8A29C] text-sm leading-relaxed max-w-md mx-auto mb-10 text-center">
@@ -249,8 +249,13 @@ export default function VerticalCardGallery() {
               >
                 {/* Image area — aspect-[16/9] */}
                 <div className="relative w-full aspect-[16/9] overflow-hidden bg-gradient-to-br from-[#1a1a1a] via-[#2a1a1a] to-[#1a1a1a]">
-                  <div className="absolute inset-0 flex items-center justify-center text-6xl opacity-20">
-                    {card.imageFallback}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-15">
+                    <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                      <rect x="10" y="10" width="60" height="60" rx="8"
+                        stroke={card.color} strokeWidth="1.5" fill="none"/>
+                      <path d="M10 40 L40 10 L70 40 L40 70 Z"
+                        stroke={card.color} strokeWidth="1" fill="none"/>
+                    </svg>
                   </div>
                 </div>
 

@@ -17,7 +17,7 @@ const workItems = [
   { 
     title: "FAST LIFE", 
     category: "Short Film",
-    video: "/student-work/FAST LIFE.mp4",
+    video: "/student-work/FAST%20LIFE.mp4",
     description: "Fast-paced urban storytelling",
     duration: "3:12"
   },
@@ -31,7 +31,7 @@ const workItems = [
   { 
     title: "THE PLASTIC PLAGUE", 
     category: "Documentary",
-    video: "/student-work/THE PLASTIC PLAGUE.mp4",
+    video: "/student-work/THE%20PLASTIC%20PLAGUE.mp4",
     description: "Environmental awareness film",
     duration: "5:20"
   },
@@ -52,7 +52,18 @@ function VideoModal({ video, title, category, onClose }: VideoModalProps) {
   const [isMuted, setIsMuted] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [showControls, setShowControls] = useState(true);
+  const [progress, setProgress] = useState(0);
   const controlsTimeoutRef = useRef<NodeJS.Timeout>();
+
+  useEffect(() => {
+    const videoEl = videoRef.current;
+    if (!videoEl) return;
+    const updateProgress = () => {
+      setProgress((videoEl.currentTime / videoEl.duration) * 100);
+    };
+    videoEl.addEventListener("timeupdate", updateProgress);
+    return () => videoEl.removeEventListener("timeupdate", updateProgress);
+  }, []);
 
   // Focus trap: focus close button when modal opens
   useEffect(() => {
@@ -232,8 +243,14 @@ function VideoModal({ video, title, category, onClose }: VideoModalProps) {
             {/* Bottom Controls */}
             <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6">
               {/* Progress Bar */}
-              <div className="w-full h-1 bg-white/20 rounded-full mb-4 overflow-hidden">
-                <div className="h-full bg-[#E31837] rounded-full animate-pulse" style={{ width: '35%' }} />
+              <div className="w-full h-1 bg-white/20 rounded-full mb-4 overflow-hidden cursor-pointer" onClick={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                const pos = (e.clientX - rect.left) / rect.width;
+                if (videoRef.current) {
+                  videoRef.current.currentTime = pos * videoRef.current.duration;
+                }
+              }}>
+                <div className="h-full bg-[#E31837] rounded-full transition-all duration-100" style={{ width: `${progress}%` }} />
               </div>
               
               <div className="flex items-center justify-between">
@@ -419,7 +436,7 @@ export default function StudentWork() {
                 }}
               >
                 {/* Video Preview */}
-                <div className="relative aspect-[4/3] bg-[#0a0a0a]">
+                <div className="relative aspect-[16/10] sm:aspect-[4/3] bg-[#0a0a0a]">
                   {/* Loading State */}
                   {!loadedVideos[index] && (
                     <div className="absolute inset-0 flex items-center justify-center bg-[#0a0a0a]">

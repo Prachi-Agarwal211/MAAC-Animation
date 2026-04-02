@@ -9,34 +9,14 @@ import VideoModal from "@/components/VideoModal";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Video carousel data - all videos with their metadata
-const HERO_VIDEOS = [
-  {
-    id: 1,
-    name: "Intro",
-    webm: "/intro.webm",
-    mp4: "/intro.mp4",
-  },
-  {
-    id: 2,
-    name: "Aakanksha",
-    mp4: "/hero-section-compressed/AAKANKSHA.mp4",
-  },
-  {
-    id: 3,
-    name: "Abhilash S",
-    mp4: "/hero-section-compressed/ABHILASH S.mp4",
-  },
-  {
-    id: 4,
-    name: "Emon Mandal",
-    mp4: "/hero-section-compressed/EMON MANDAL.mp4",
-  },
-  {
-    id: 5,
-    name: "Nayan Satyawan Mestry",
-    mp4: "/hero-section-compressed/NAYAN SATYAWAN MESTRY.mp4",
-  },
+const HERO_VIDEOS: Array<{
+  id: number; name: string; mp4: string; webm?: string; poster: string;
+}> = [
+  { id: 1, name: "Intro",        webm: "/intro.webm", mp4: "/intro.mp4",                                    poster: "/posters/intro.jpg" },
+  { id: 2, name: "Aakanksha",    mp4: "/hero-section-compressed/AAKANKSHA.mp4",                             poster: "/posters/hero-default.jpg" },
+  { id: 3, name: "Abhilash S",   mp4: "/hero-section-compressed/ABHILASH S.mp4",                           poster: "/posters/hero-default.jpg" },
+  { id: 4, name: "Emon Mandal",  mp4: "/hero-section-compressed/EMON MANDAL.mp4",                         poster: "/posters/hero-default.jpg" },
+  { id: 5, name: "Nayan",        mp4: "/hero-section-compressed/NAYAN SATYAWAN MESTRY.mp4",               poster: "/posters/hero-default.jpg" },
 ];
 
 const VIDEO_INTERVAL = 8000; // 8 seconds per video
@@ -77,9 +57,11 @@ export default function MAACXHero() {
     setPreloaderDone(true);
   }, []);
 
-  // Rotate to next video
   const goToNextVideo = useCallback(() => {
+    if (isTransitioningRef.current) return;
+    isTransitioningRef.current = true;
     setCurrentVideoIndex((prev) => (prev + 1) % HERO_VIDEOS.length);
+    setTimeout(() => { isTransitioningRef.current = false; }, 800);
   }, []);
 
   // Video error handler - marks failed videos as loaded to skip loading indicator
@@ -161,47 +143,23 @@ export default function MAACXHero() {
   // Handle video play/pause when index changes
   useEffect(() => {
     if (!preloaderDone) return;
-
-    // Pause all videos first
-    videoRefs.current.forEach((videoEl) => {
-      if (videoEl) {
-        videoEl.pause();
-      }
-    });
-
-    // Play current video with better error handling
+    
     const currentVideo = videoRefs.current[currentVideoIndex];
-    if (currentVideo) {
-      // Reset to start
-      currentVideo.currentTime = 0;
-      
-      // Wait for video to be ready before playing
-      const playVideo = async () => {
-        try {
-          // Wait for loadedmetadata or timeout
-          await Promise.race([
-            new Promise((resolve) => {
-              if (currentVideo.readyState >= 2) {
-                resolve(true);
-              } else {
-                currentVideo.addEventListener('loadedmetadata', resolve, { once: true });
-                // Timeout after 2 seconds
-                setTimeout(resolve, 2000);
-              }
-            })
-          ]);
-          
-          // Try to play
-          await currentVideo.play();
-        } catch (err: any) {
-          // Ignore autoplay errors - video will play on user interaction
-          if (err.name !== 'AbortError') {
-            console.warn(`Video play issue:`, err.message);
-          }
+    if (!currentVideo) return;
+    
+    // Cancel any pending play on previous videos
+    videoRefs.current.forEach((v, i) => {
+      if (i !== currentVideoIndex && v) v.pause();
+    });
+    
+    currentVideo.currentTime = 0;
+    const playPromise = currentVideo.play();
+    if (playPromise) {
+      playPromise.catch((err) => {
+        if (err.name !== 'AbortError' && err.name !== 'NotAllowedError') {
+          console.warn('Video play:', err.message);
         }
-      };
-      
-      playVideo();
+      });
     }
   }, [currentVideoIndex, preloaderDone]);
 
@@ -321,7 +279,7 @@ export default function MAACXHero() {
           preloaderDone ? "opacity-0" : "opacity-100"
         }`}
       >
-        {!preloaderDone && <Preloader onComplete={handlePreloaderComplete} />}
+        {!mounted ? null : !preloaderDone && <Preloader onComplete={handlePreloaderComplete} />}
       </div>
       <section
         ref={containerRef}
@@ -354,16 +312,6 @@ export default function MAACXHero() {
                   index === currentVideoIndex ? "opacity-100" : "opacity-0"
                 }`}
               >
-                {/* Optimized Poster Image */}
-                <Image
-                  src={video.poster}
-                  alt={`MAACx Video ${index + 1}`}
-                  fill
-                  priority={index === 0}
-                  className="object-cover -z-10"
-                  sizes="100vw"
-                  quality={85}
-                />
                 <video
                   ref={(el) => {
                     videoRefs.current[index] = el;
@@ -376,6 +324,7 @@ export default function MAACXHero() {
                   loop
                   playsInline
                   preload={index === 0 ? "auto" : "metadata"}
+                  poster={video.poster}
                   width={1920}
                   height={1080}
                   onError={() => handleVideoError(index)}
@@ -390,8 +339,8 @@ export default function MAACXHero() {
           {/* Uniform overlay */}
           <div className="absolute inset-0 z-[2] bg-black/50" />
           
-          {/* Video navigation indicators */}
-          <div className="absolute bottom-[72px] left-1/2 -translate-x-1/2 z-[3] flex items-center gap-2">
+          {/* Video navigation indicators - desktop only */}
+          <div className="absolute bottom-[72px] left-1/2 -translate-x-1/2 z-[3] flex items-center gap-2 hidden lg:block">
             {HERO_VIDEOS.map((video, index) => (
               <button
                 key={video.id}
@@ -410,9 +359,10 @@ export default function MAACXHero() {
                 {/* Progress bar for current video */}
                 {index === currentVideoIndex && (
                   <div
+                    key={currentVideoIndex}
                     className="absolute inset-0 bg-[#E31837] rounded-full origin-left"
                     style={{
-                      animation: `progress ${VIDEO_INTERVAL / 1000}s linear`,
+                      animation: `progress ${VIDEO_INTERVAL / 1000}s linear forwards`,
                     }}
                   />
                 )}
@@ -456,6 +406,10 @@ export default function MAACXHero() {
             {/* Primary CTA */}
             <a
               href="#courses"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById('courses')?.scrollIntoView({ behavior: 'smooth' });
+              }}
               className="btn btn-primary group inline-flex items-center gap-2 px-5 py-2.5"
             >
               <span className="text-xs md:text-sm">Explore Courses</span>
@@ -504,18 +458,23 @@ export default function MAACXHero() {
           </div>
         </div>
 
-        {/* Mobile stats strip — only on mobile */}
-        <div className="absolute bottom-16 left-0 right-0 z-20 flex lg:hidden items-center justify-center gap-0 border-t border-white/10">
-          {[
-            { value: "30+", label: "Years" },
-            { value: "95%", label: "Placement" },
-            { value: "100+", label: "Centers" },
-          ].map((stat, i) => (
-            <div key={i} className={`flex-1 text-center py-3 ${i < 2 ? "border-r border-white/10" : ""}`}>
-              <div className="text-white font-bold text-base">{stat.value}</div>
-              <div className="text-white/40 text-[9px] uppercase tracking-wider">{stat.label}</div>
-            </div>
-          ))}
+        {/* Mobile: Combined stats strip + video dots */}
+        <div className="absolute bottom-0 left-0 right-0 z-20 lg:hidden flex items-stretch border-t border-white/10 bg-black/40 backdrop-blur-sm">
+          {[{ value: "30+", label: "Years" }, { value: "95%", label: "Placement" }, { value: "100+", label: "Centers" }]
+            .map((stat, i) => (
+              <div key={i} className={`flex-1 text-center py-2.5 ${i < 2 ? "border-r border-white/10" : ""}`}>
+                <div className="text-white font-bold text-sm leading-none">{stat.value}</div>
+                <div className="text-white/50 text-[9px] uppercase tracking-widest mt-0.5">{stat.label}</div>
+              </div>
+            ))}
+          <div className="flex items-center gap-1.5 px-4 border-l border-white/10">
+            {HERO_VIDEOS.map((_, i) => (
+              <button key={i} onClick={() => setCurrentVideoIndex(i)}
+                className={`h-1.5 rounded-full transition-all duration-500 ${
+                  i === currentVideoIndex ? "w-4 bg-[#E31837]" : "w-1.5 bg-white/25"
+                }`} aria-label={`Video ${i + 1}`} />
+            ))}
+          </div>
         </div>
 
         {/* Right Side Stats - Bottom Aligned (Desktop Only) */}

@@ -197,7 +197,7 @@ export default function CoursesClient() {
       />
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 overflow-hidden bg-[#080808]">
+      <section className="relative pt-20 md:pt-32 pb-16 md:pb-20 overflow-hidden bg-[#080808]">
         <div className="absolute top-1/4 -right-32 w-96 h-96 bg-primary/15 rounded-full blur-[120px]" />
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
 

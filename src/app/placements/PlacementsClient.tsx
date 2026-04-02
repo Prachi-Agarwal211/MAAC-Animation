@@ -39,7 +39,6 @@ export default function PlacementsClient() {
 
     return () => {
       ctx.revert();
-      gsap.globalTimeline.clear();
     };
   }, []);
 
@@ -47,7 +46,7 @@ export default function PlacementsClient() {
     <main ref={pageRef} className="overflow-hidden">
 
       {/* Hero */}
-      <section className="relative pt-32 pb-16 overflow-hidden">
+      <section className="relative pt-20 md:pt-32 pb-16 md:pb-20 overflow-hidden">
         <div className="absolute inset-0 bg-hero-pattern" />
         <div className="absolute bottom-0 -right-32 w-96 h-96 bg-accent/10 rounded-full blur-[120px]" />
 

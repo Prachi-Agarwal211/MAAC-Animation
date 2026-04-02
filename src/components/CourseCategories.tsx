@@ -1,13 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import Link from "next/link";
 import { coursesData } from "@/data/siteData";
 
 // SVG Icons per category
 const CategoryIcon = ({ type }: { type: string }) => {
-  const icons: Record<string, JSX.Element> = {
+  const icons: Record<string, React.ReactElement> = {
     animation: (
       <svg width="64" height="64" viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <rect x="8" y="8" width="48" height="48" rx="4" />
@@ -71,6 +71,7 @@ interface SlideCardProps {
 
 function SlideUpCard({ course, index }: SlideCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
+  const [isTapped, setIsTapped] = useState(false);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -87,6 +88,7 @@ function SlideUpCard({ course, index }: SlideCardProps) {
     <div
       ref={cardRef}
       className="relative w-full min-h-[360px] md:min-h-[480px] rounded-2xl overflow-hidden cursor-pointer group"
+      onClick={() => setIsTapped(prev => !prev)}
     >
       {/* Top section — dark gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#161616] to-[#0C0C0C]" />
@@ -99,14 +101,18 @@ function SlideUpCard({ course, index }: SlideCardProps) {
       </div>
 
       {/* Bottom red section — always visible */}
-      <div className="absolute bottom-0 left-0 right-0 h-[40%] bg-[#E31837] flex flex-col justify-center p-6 z-10 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-[-60%]">
+      <div className={`absolute bottom-0 left-0 right-0 h-[40%] bg-[#E31837] flex flex-col justify-center p-6 z-10 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        isTapped ? '-translate-y-[60%]' : 'group-hover:-translate-y-[60%]'
+      }`}>
         <h3 className="text-white font-display font-bold text-xl md:text-2xl mb-1">{course.title}</h3>
         <p className="text-white/70 text-sm">{course.description}</p>
       </div>
 
       {/* Slide-up panel with details */}
       <div
-        className="absolute bottom-0 left-0 right-0 bg-[#0C0C0C]/95 backdrop-blur-sm p-6 z-20 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] translate-y-full group-hover:translate-y-0"
+        className={`absolute bottom-0 left-0 right-0 bg-[#0C0C0C]/95 backdrop-blur-sm p-6 z-20 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          isTapped ? 'translate-y-0' : 'translate-y-full group-hover:translate-y-0'
+        }`}
       >
         <p className="text-[#A8A29C] text-sm leading-relaxed mb-3">{course.fullDescription}</p>
         <div className="mb-4">
@@ -117,7 +123,7 @@ function SlideUpCard({ course, index }: SlideCardProps) {
             ))}
           </div>
         </div>
-        <Link href="/contact" className="btn btn-primary text-xs py-2 px-5">
+        <Link href="/courses" className="btn btn-primary text-xs py-2 px-5">
           View Details
         </Link>
       </div>

@@ -32,8 +32,29 @@ export default function Preloader({ onComplete }: PreloaderProps) {
   }, [onComplete]);
 
   useEffect(() => {
-    const skipTimer = setTimeout(() => setShowSkip(true), 5000);
-    const fallbackTimer = setTimeout(triggerExit, 8000);
+    const skipTimer = setTimeout(() => setShowSkip(true), 3000); // was 5000
+    const fallbackTimer = setTimeout(triggerExit, 6000); // was 8000
+
+    const video = videoRef.current;
+    if (video) {
+      // Mobile: if video stalls for > 1.5s, bail out
+      const onStall = () => setTimeout(triggerExit, 1500);
+      video.addEventListener('stalled', onStall, { once: true });
+      // Also handle waiting (buffering) timeout
+      let waitTimer: NodeJS.Timeout;
+      const onWaiting = () => { waitTimer = setTimeout(triggerExit, 2000); };
+      const onPlaying = () => clearTimeout(waitTimer);
+      video.addEventListener('waiting', onWaiting);
+      video.addEventListener('playing', onPlaying);
+      return () => {
+        clearTimeout(skipTimer);
+        clearTimeout(fallbackTimer);
+        clearTimeout(waitTimer);
+        video.removeEventListener('stalled', onStall);
+        video.removeEventListener('waiting', onWaiting);
+        video.removeEventListener('playing', onPlaying);
+      };
+    }
     return () => {
       clearTimeout(skipTimer);
       clearTimeout(fallbackTimer);
@@ -65,7 +86,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
       {showSkip && (
         <button
           onClick={triggerExit}
-          className="absolute bottom-8 right-8 z-30 px-4 py-1.5 text-xs text-white/60 bg-black/40 border border-white/10 rounded-full backdrop-blur-sm hover:text-white transition-colors"
+          className="absolute bottom-8 right-6 z-30 px-5 py-2 text-sm text-white bg-white/10 border border-white/20 rounded-full backdrop-blur-sm hover:bg-white/20 active:scale-95 transition-all"
           aria-label="Skip intro"
         >
           Skip →

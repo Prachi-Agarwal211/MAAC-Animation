@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
+import VideoModal from "@/components/VideoModal";
 
 function CountUpStat({ number, suffix, label }: { number: number; suffix: string; label: string }) {
   const [count, setCount] = useState(0);
@@ -47,6 +48,7 @@ function CountUpStat({ number, suffix, label }: { number: number; suffix: string
 
 export default function InstituteIntro() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -105,8 +107,13 @@ export default function InstituteIntro() {
             <div>
               <div className="flex items-start gap-3 mb-6">
                 <div className="w-1 h-12 bg-[#E31837] flex-shrink-0 rounded-full" />
-                <h2 data-splitting className="institute-title font-display font-bold text-[clamp(1.5rem,3vw,2.5rem)] leading-tight text-white">
-                  Join <span className="inline-block bg-[#E31837] text-white px-2 py-0.5 rounded">The Best Animation Institute</span> In Jaipur
+                <h2 className="institute-title font-display font-bold text-[clamp(1.5rem,3vw,2.5rem)] leading-tight text-white">
+                  Join the <br className="hidden sm:block"/>
+                  <span className="bg-[#E31837] text-white px-2 py-0.5 rounded whitespace-nowrap">
+                    Best Animation Institute
+                  </span>
+                  <br className="hidden sm:block"/>
+                  In Jaipur
                 </h2>
               </div>
 
@@ -120,7 +127,7 @@ export default function InstituteIntro() {
               </div>
 
               {/* Pull Quote */}
-              <blockquote className="institute-quote mt-8 border-l-3 border-[#E31837] pl-5 py-2">
+              <blockquote className="institute-quote mt-8 pl-5 py-2" style={{ borderLeft: '3px solid #E31837' }}>
                 <p className="text-[#F0EBE1] text-lg italic font-display leading-relaxed">
                   &ldquo;MAAC gave me the skills and confidence to land my dream job at a top VFX studio.&rdquo;
                 </p>
@@ -132,7 +139,14 @@ export default function InstituteIntro() {
             <div className="institute-video-container relative">
               <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl bg-[#0C0C0C]">
                 {/* Custom play button overlay */}
-                <div className="absolute inset-0 flex items-center justify-center z-10 cursor-pointer group" id="play-overlay">
+                <div
+                  className="absolute inset-0 flex items-center justify-center z-10 cursor-pointer group"
+                  onClick={() => setShowModal(true)}
+                  role="button"
+                  tabIndex={0}
+                  aria-label="Play showreel video"
+                  onKeyDown={(e) => e.key === 'Enter' && setShowModal(true)}
+                >
                   <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-[#E31837] flex items-center justify-center shadow-lg shadow-[#E31837]/40 group-hover:scale-110 transition-transform">
                     <svg className="w-6 h-6 md:w-8 md:h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
                       <polygon points="5,3 19,12 5,21" />
@@ -152,6 +166,14 @@ export default function InstituteIntro() {
           </div>
         </div>
       </div>
+
+      {showModal && (
+        <VideoModal
+          isOpen={showModal}
+          onClose={() => setShowModal(false)}
+          videoUrl="/intro.mp4"
+        />
+      )}
     </div>
   );
 }
