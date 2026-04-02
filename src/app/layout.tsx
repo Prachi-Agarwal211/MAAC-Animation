@@ -23,11 +23,11 @@ const syne = Syne({
 export const metadata: Metadata = {
   metadataBase: new URL("https://maacjaipur.com"),
   title: {
-    default: "MAAC Jaipur — Best Animation, VFX & Multimedia Institute",
+    default: "MAAC Jaipur — Best Animation & VFX Institute in Rajasthan",
     template: "%s | MAAC Jaipur",
   },
   description:
-    "Join MAAC Jaipur, Rajasthan's leading institute for Animation, VFX, Gaming & Multimedia. 30+ years of excellence, 95% placement rate, NSDC certified B.Voc degree.",
+    "Join MAAC Jaipur, Rajasthan's #1 Animation & VFX institute. 30+ years, 95% placement, NSDC certified B.Voc degree. Courses in 3D Animation, VFX, Gaming, Filmmaking. Free demo class available.",
   keywords: [
     "animation courses jaipur",
     "vfx training jaipur",
@@ -36,13 +36,18 @@ export const metadata: Metadata = {
     "game design course jaipur",
     "best animation institute rajasthan",
     "b.voc animation vfx",
+    "animation institute jaipur",
+    "vfx courses jaipur",
+    "3d animation jaipur",
   ],
   openGraph: {
     type: "website",
     locale: "en_IN",
     url: "https://maacjaipur.com",
     siteName: "MAAC Jaipur",
-    images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
+    title: "Best Animation Institute in Jaipur | MAAC",
+    description: "Rajasthan's leading Animation, VFX and Multimedia institute with 30+ years of excellence",
+    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "MAAC Jaipur Animation Institute" }],
   },
   twitter: {
     card: "summary_large_image",
@@ -78,12 +83,11 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "EducationalOrganization",
-              name: "MAAC Jaipur",
+              name: "MAAC Jaipur — Maya Academy of Advanced Cinematics",
               alternateName: "Maya Academy of Advanced Cinematics - Jaipur",
               url: "https://maacjaipur.com",
               logo: "https://maacjaipur.com/logo.png",
-              description:
-                "Rajasthan's leading animation, VFX, and multimedia institute",
+              description: "Rajasthan's leading animation, VFX, and multimedia institute with 30+ years of excellence",
               address: {
                 "@type": "PostalAddress",
                 streetAddress: "C-44, Malviya Nagar Industrial Area",
@@ -92,11 +96,31 @@ export default function RootLayout({
                 postalCode: "302017",
                 addressCountry: "IN",
               },
+              geo: {
+                "@type": "GeoCoordinates",
+                latitude: 26.8466,
+                longitude: 75.8069,
+              },
               telephone: "+91-141-4035604",
+              email: "jaipur@maacindia.com",
+              openingHours: "Mo-Sa 09:00-19:00",
+              priceRange: "₹₹",
+              hasOfferCatalog: {
+                "@type": "OfferCatalog",
+                name: "Animation & VFX Courses",
+                itemListElement: [
+                  { "@type": "Course", "name": "3D Animation", "description": "Advanced 3D animation training with industry-standard tools" },
+                  { "@type": "Course", "name": "VFX", "description": "Visual effects for film and TV using compositing and motion tracking" },
+                  { "@type": "Course", "name": "Game Design", "description": "Game design and development for next-gen gaming platforms" },
+                  { "@type": "Course", "name": "Digital Filmmaking", "description": "Complete filmmaking program from pre-production to post-production" },
+                  { "@type": "Course", "name": "Digital Media & Design", "description": "Graphic design, web design, UI/UX, and motion graphics" },
+                ],
+              },
               sameAs: [
                 "https://www.facebook.com/MAAClndia",
-                "https://www.instagram.com/maacindia",
-                "https://www.youtube.com/maacindia",
+                "https://www.instagram.com/maacjaipurcscheme",
+                "https://www.youtube.com/@maac-jaipur-cscheme",
+                "https://www.linkedin.com/company/maac-jaipur-cscheme",
               ],
             }),
           }}
@@ -105,7 +129,7 @@ export default function RootLayout({
         <LenisProvider>
           <Navbar />
           <main id="main-content" className="page-wrapper">{children}</main>
-          <FloatingCTA whatsapp="+911414035604" phone="+911414035604" />
+          <FloatingCTA whatsapp="+917300001589" phone="+917300001589" />
         </LenisProvider>
       </body>
     </html>

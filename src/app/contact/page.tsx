@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export default function ContactPage() {
@@ -47,7 +46,6 @@ export default function ContactPage() {
 
   return (
     <main ref={pageRef} className="overflow-hidden">
-      <Navbar />
 
       {/* Hero */}
       <section className="relative pt-32 pb-16 overflow-hidden">

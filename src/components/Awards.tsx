@@ -27,13 +27,22 @@ export default function Awards() {
 
   return (
     <section ref={sectionRef} className="relative overflow-hidden">
-      {/* Cream section with clip-path */}
-      <div className="bg-[#F5F0E8] py-20 md:py-28 section-clip-light">
+      {/* Angled divider transition from dark to cream (replaces section-clip-light to fix shadow clipping) */}
+      <div className="relative h-16 overflow-hidden -mb-1" style={{ background: "#0C0C0C" }}>
+        <div style={{
+          position: "absolute", bottom: 0, left: 0, right: 0, height: "100%",
+          background: "#F5F0E8",
+          clipPath: "polygon(0 100%, 100% 0%, 100% 100%)",
+        }} />
+      </div>
+
+      {/* Cream section (no clip-path — preserves card shadows) */}
+      <div className="bg-[#F5F0E8] py-20 md:py-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <div className="aw-heading text-center mb-16">
-            <p className="text-[#E31837] text-xs font-semibold tracking-[0.15em] uppercase mb-4">Recognition</p>
-            <h2 className="font-display font-bold text-[clamp(2rem,4vw,3.5rem)] text-[#0C0C0C] leading-[1.05] tracking-tight mb-4">
+            <p className="text-[#E31837] text-xs font-semibold tracking-[0.12em] uppercase mb-4">Recognition</p>
+            <h2 className="font-display font-bold text-[clamp(2rem,4vw,3.5rem)] text-[#0C0C0C] leading-[1.08] tracking-tight mb-4 pb-1">
               Awards & <span className="text-[#E31837]">Recognition</span>
             </h2>
             <p className="text-[#4A4540] text-lg max-w-2xl mx-auto">
@@ -50,14 +59,14 @@ export default function Awards() {
                   {award.year}
                 </span>
 
-                {/* Abstract SVG badge */}
+                {/* SVG badge */}
                 <div className="w-12 h-12 rounded-full bg-[#E31837]/10 flex items-center justify-center mb-4">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E31837" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
                   </svg>
                 </div>
 
-                <p className="text-[#7A7570] text-xs font-semibold tracking-[0.15em] uppercase mb-2">{award.year}</p>
+                <p className="text-[#7A7570] text-xs font-semibold tracking-[0.12em] uppercase mb-2">{award.year}</p>
                 <h3 className="font-display font-bold text-xl md:text-2xl text-[#0C0C0C] mb-1 relative z-10">
                   {award.name}
                 </h3>

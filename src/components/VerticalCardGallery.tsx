@@ -1,203 +1,251 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const cardItems = [
-  { id: 1, title: "Transformative Educational Events" },
-  { id: 2, title: "Learn from Industry Game Changers" },
-  { id: 3, title: "Exclusive Industry Exposure" },
-  { id: 4, title: "Portfolio that speaks volumes" },
-  { id: 5, title: "Industry-Grade Facilities" },
-  { id: 6, title: "Courses Built For Future" },
-  { id: 7, title: "Creative Careers That Click" },
-];
-
-const placeholderImages = [
-  "https://images.unsplash.com/photo-1544531586-fde5298cdd40?w=800&q=80",
-  "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=80",
-  "https://images.unsplash.com/photo-1560420025-9e93a405c8b3?w=800&q=80",
-  "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800&q=80",
-  "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80",
-  "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80",
-  "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80",
+const featureCards = [
+  { 
+    title: "Transformative Educational Events",
+    desc: "Industry workshops, masterclasses, and live projects that prepare you for real studio environments.",
+    icon: (
+      <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-16 h-16">
+        <rect x="8" y="8" width="48" height="48" rx="4" />
+        <line x1="20" y1="8" x2="20" y2="56" />
+        <line x1="44" y1="8" x2="44" y2="56" />
+        <line x1="8" y1="32" x2="56" y2="32" />
+      </svg>
+    )
+  },
+  { 
+    title: "Learn from Industry Game Changers",
+    desc: "Mentorship from professionals who have worked on blockbuster films, AAA games, and award-winning animations.",
+    icon: (
+      <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-16 h-16">
+        <circle cx="32" cy="20" r="8" />
+        <path d="M16 56v-4a16 16 0 0 1 32 0v4" />
+        <path d="M8 56v-2a10 10 0 0 1 10-10" />
+        <path d="M56 56v-2a10 10 0 0 0-10-10" />
+      </svg>
+    )
+  },
+  { 
+    title: "Exclusive Industry Exposure",
+    desc: "Studio visits, live briefs, and internship opportunities with top animation and VFX companies.",
+    icon: (
+      <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-16 h-16">
+        <circle cx="32" cy="32" r="24" />
+        <path d="M32 8v48M8 32h48" />
+        <circle cx="32" cy="32" r="8" strokeDasharray="4 2" />
+      </svg>
+    )
+  },
+  { 
+    title: "Portfolio That Speaks Volumes",
+    desc: "Graduate with a professional showreel and portfolio that showcases your skills to potential employers.",
+    icon: (
+      <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-16 h-16">
+        <rect x="12" y="16" width="40" height="32" rx="2" />
+        <circle cx="32" cy="32" r="6" />
+        <path d="M20 16V12a4 4 0 0 1 4-4h16a4 4 0 0 1 4 4v4" />
+      </svg>
+    )
+  },
+  { 
+    title: "Industry-Grade Facilities",
+    desc: "State-of-the-art labs, rendering farms, and production suites equipped with latest software and hardware.",
+    icon: (
+      <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-16 h-16">
+        <rect x="8" y="8" width="48" height="48" rx="4" />
+        <circle cx="32" cy="32" r="12" />
+        <path d="M32 20v24M20 32h24" />
+      </svg>
+    )
+  },
+  { 
+    title: "Courses Built For Future",
+    desc: "Curriculum updated regularly with emerging technologies like AI, VR, AR, and real-time rendering.",
+    icon: (
+      <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-16 h-16">
+        <path d="M32 8l6 12h12l-10 8 4 12-12-8-12 8 4-12-10-8h12z" />
+        <circle cx="32" cy="32" r="6" strokeDasharray="4 2" />
+      </svg>
+    )
+  },
+  { 
+    title: "Creative Careers That Click",
+    desc: "Placement support, career counseling, and alumni network that helps you land your dream job.",
+    icon: (
+      <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-16 h-16">
+        <path d="M32 8C18 8 8 18 8 32s10 24 24 24 24-10 24-24S46 8 32 8z" />
+        <path d="M24 32l6 6 10-10" />
+      </svg>
+    )
+  },
 ];
 
 export default function VerticalCardGallery() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(3);
-  const imageContainerRef = useRef<HTMLDivElement>(null);
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const stickyRef = useRef<HTMLDivElement>(null);
+  const headingRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const isMobile = window.innerWidth < 768;
+    
+    if (isMobile) {
+      // Mobile: simple staggered fade-up
+      const ctx = gsap.context(() => {
+        gsap.fromTo(".feature-card-mobile",
+          { opacity: 0, y: 60 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+            stagger: 0.1,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: ".feature-list-mobile",
+              start: "top 75%",
+            }
+          }
+        );
+      }, wrapperRef);
+      return () => ctx.revert();
+    }
+
+    // Desktop: pinned scroll with GSAP
     const ctx = gsap.context(() => {
-      gsap.fromTo(".vcg-eyebrow", { opacity: 0, y: 40 }, {
-        opacity: 1, y: 0, duration: 1, ease: "expo.out",
-        scrollTrigger: { trigger: ".vcg-section", start: "top 75%" },
-      });
-
+      const cards = gsap.utils.toArray<HTMLElement>(".feature-card");
+      const heading = headingRef.current;
+      
+      // Timeline for card reveals
       const tl = gsap.timeline({
-        scrollTrigger: { trigger: ".vcg-section", start: "top 75%" },
+        scrollTrigger: {
+          trigger: wrapperRef.current,
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 1,
+          pin: stickyRef.current,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+        }
       });
-      tl.fromTo(".vcg-title", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 1.2, ease: "expo.out" })
-        .fromTo(".vcg-description", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1, ease: "expo.out" }, "-=0.8");
 
-      gsap.fromTo(".vcg-card", { opacity: 0, scaleY: 0, transformOrigin: "bottom" }, {
-        opacity: 1, scaleY: 1, duration: 1.2, stagger: 0.1, ease: "expo.out",
-        scrollTrigger: { trigger: ".vcg-cards-container", start: "top 80%" },
+      // Parallax effect for heading
+      if (heading) {
+        gsap.to(heading, {
+          yPercent: 30,
+          opacity: 0.5,
+          scrollTrigger: {
+            trigger: wrapperRef.current,
+            start: "top top",
+            end: "bottom bottom",
+            scrub: true,
+          }
+        });
+      }
+
+      // Cards fly in from right sequentially
+      cards.forEach((card, i) => {
+        tl.fromTo(card,
+          { x: "120%", opacity: 0, rotation: 8 },
+          { 
+            x: 0, 
+            opacity: 1, 
+            rotation: 0, 
+            duration: 1, 
+            ease: "power2.out" 
+          },
+          i * 0.5
+        );
       });
-    }, containerRef);
+    }, wrapperRef);
 
     return () => ctx.revert();
   }, []);
 
-  useEffect(() => {
-    if (imageContainerRef.current) {
-      gsap.fromTo(imageContainerRef.current, { opacity: 0, scale: 1.05 }, {
-        opacity: 1, scale: 1, duration: 0.5, ease: "expo.out",
-      });
-    }
-  }, [activeIndex]);
-
-  const handleCardClick = (index: number) => {
-    if (index === activeIndex) return;
-    setActiveIndex(index);
-  };
-
   return (
-    <div ref={containerRef} id="vertical-gallery" className="vcg-section relative bg-[#111111] py-24 md:py-32 overflow-hidden">
-      {/* Atmospheric blob */}
-      <div className="atmosphere-blob blob-red" style={{ top: "-100px", right: "-100px" }} />
-
-      <div className="relative max-w-[1600px] mx-auto px-6 md:px-12 lg:px-20 z-10">
-        {/* Header */}
-        <div className="mb-16 md:mb-20 text-center md:text-left">
-          <p className="vcg-eyebrow text-[#E31837] text-xs md:text-sm font-semibold tracking-[0.15em] uppercase mb-6">
-            Empower Your Future
-          </p>
-          <h2 className="vcg-title font-display font-bold text-[clamp(2.5rem,6vw,7rem)] leading-[0.9] tracking-tight mb-2 text-[#F0EBE1]">
-            Creative Careers That Click
-          </h2>
-          <h2 className="vcg-title font-display font-bold text-[clamp(2.5rem,6vw,7rem)] leading-[0.9] tracking-tight mb-6 text-[#E31837]">
-            Think MAAC
-          </h2>
-          <p className="vcg-description text-[#A8A29C] text-base leading-relaxed max-w-3xl">
-            Train in animation, VFX, gaming, and digital content creation with expert-led courses that prepare you for real industry success.
-          </p>
-        </div>
-
-        {/* Gallery — Desktop */}
-        <div className="vcg-cards-container hidden md:flex items-center justify-center gap-4 lg:gap-6">
-          <div className="flex gap-2 lg:gap-3">
-            {cardItems.slice(0, 3).map((item, index) => (
-              <div
-                key={item.id}
-                ref={(el) => { cardsRef.current[index] = el; }}
-                className={`vcg-card group relative cursor-pointer overflow-hidden rounded-2xl transition-all duration-500 ease-out ${
-                  activeIndex === index ? "w-[260px]" : "w-[112px]"
-                } h-[500px] lg:h-[600px]`}
-                onClick={() => handleCardClick(index)}
-                tabIndex={0}
-                role="button"
-                aria-label={`View ${item.title}`}
-              >
-                <div className="absolute inset-0 bg-[#E31837] transition-all duration-500 group-hover:bg-[#D42026]" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60" />
-                <div className="absolute inset-0 flex items-center justify-center p-4">
-                  <h3
-                    className="text-white font-display font-bold text-lg text-center uppercase tracking-wide"
-                    style={{ writingMode: "vertical-rl", textOrientation: "mixed" }}
-                  >
-                    {item.title}
-                  </h3>
-                </div>
-                <div className={`absolute bottom-0 left-0 right-0 h-1 bg-[#E31837] transform transition-transform duration-500 ${
-                  activeIndex === index ? "scale-x-100" : "scale-x-0 group-hover:scale-x-50"
-                }`} />
-              </div>
-            ))}
+    <>
+      {/* Desktop: Pinned scroll section */}
+      <div ref={wrapperRef} className="vcg-wrapper relative h-[400vh] hidden md:block">
+        <div ref={stickyRef} className="vcg-sticky sticky top-0 h-screen overflow-hidden bg-[#0C0C0C]">
+          {/* Atmospheric blob */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div className="w-[800px] h-[800px] rounded-full bg-[radial-gradient(circle,rgba(227,24,55,0.06)_0%,transparent_70%)]" />
           </div>
 
-          {/* Center Image */}
-          <div className="relative w-[400px] lg:w-[480px] h-[500px] lg:h-[600px] rounded-2xl overflow-hidden shadow-2xl">
-            <div
-              ref={imageContainerRef}
-              className="absolute inset-0 w-full h-full bg-cover bg-center transition-all duration-700"
-              style={{ backgroundImage: `url(${placeholderImages[activeIndex]})` }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
-            <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
-              <span className="inline-block text-[#E31837] text-xs font-semibold tracking-wider uppercase mb-3">
-                {cardItems[activeIndex].title}
-              </span>
-              <div className="h-0.5 w-16 bg-[#E31837]" />
+          <div className="relative max-w-[1600px] mx-auto px-12 lg:px-20 h-full flex">
+            {/* Left: Fixed heading */}
+            <div ref={headingRef} className="w-2/5 flex flex-col justify-center pt-20">
+              <p className="text-[#E31837] text-xs font-semibold tracking-[0.15em] uppercase mb-6">
+                Empower Your Future
+              </p>
+              <h2 className="font-display font-bold text-[clamp(2.5rem,5vw,5rem)] leading-[1.05] tracking-tight text-[#F0EBE1] mb-4">
+                Creative Careers That Click
+              </h2>
+              <h2 className="font-display font-bold text-[clamp(2.5rem,5vw,5rem)] leading-[1.05] tracking-tight text-[#E31837] mb-6">
+                Think MAAC
+              </h2>
+              <p className="text-[#A8A29C] text-base leading-relaxed max-w-lg">
+                Train in animation, VFX, gaming, and digital content creation with expert-led courses that prepare you for real industry success.
+              </p>
+            </div>
+
+            {/* Right: Card stack */}
+            <div className="w-3/5 flex items-center justify-center relative">
+              {featureCards.map((card, i) => (
+                <div
+                  key={i}
+                  className="feature-card absolute w-full max-w-xl p-8 rounded-2xl bg-white/[0.04] border border-white/[0.08] backdrop-blur-sm"
+                  style={{ 
+                    borderLeft: '3px solid #E31837',
+                    willChange: 'transform, opacity'
+                  }}
+                >
+                  <div className="text-[#E31837] mb-6">{card.icon}</div>
+                  <h3 className="font-display font-bold text-2xl text-white mb-3">{card.title}</h3>
+                  <p className="text-[#A8A29C] text-base leading-relaxed">{card.desc}</p>
+                </div>
+              ))}
             </div>
           </div>
-
-          <div className="flex gap-2 lg:gap-3">
-            {cardItems.slice(3, 7).map((item, index) => {
-              const realIndex = index + 3;
-              return (
-                <div
-                  key={item.id}
-                  ref={(el) => { cardsRef.current[realIndex] = el; }}
-                  className={`vcg-card group relative cursor-pointer overflow-hidden rounded-2xl transition-all duration-500 ease-out ${
-                    activeIndex === realIndex ? "w-[260px]" : "w-[112px]"
-                  } h-[500px] lg:h-[600px]`}
-                  onClick={() => handleCardClick(realIndex)}
-                  tabIndex={0}
-                  role="button"
-                  aria-label={`View ${item.title}`}
-                >
-                  <div className="absolute inset-0 bg-[#E31837] transition-all duration-500 group-hover:bg-[#D42026]" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60" />
-                  <div className="absolute inset-0 flex items-center justify-center p-4">
-                    <h3
-                      className="text-white font-display font-bold text-lg text-center uppercase tracking-wide"
-                      style={{ writingMode: "vertical-rl", textOrientation: "mixed" }}
-                    >
-                      {item.title}
-                    </h3>
-                  </div>
-                  <div className={`absolute bottom-0 left-0 right-0 h-1 bg-[#E31837] transform transition-transform duration-500 ${
-                    activeIndex === realIndex ? "scale-x-100" : "scale-x-0 group-hover:scale-x-50"
-                  }`} />
-                </div>
-              );
-            })}
-          </div>
         </div>
+      </div>
 
-        {/* Mobile — Horizontal Scroll */}
-        <div className="md:hidden">
-          <div className="flex overflow-x-auto gap-4 pb-4 snap-x snap-mandatory scrollbar-hide hscroll-container">
-            {cardItems.map((item, index) => (
+      {/* Mobile: Simple vertical list */}
+      <div className="md:hidden bg-[#0C0C0C] py-24 px-6">
+        <div className="max-w-3xl mx-auto">
+          <p className="text-[#E31837] text-xs font-semibold tracking-[0.15em] uppercase mb-6 text-center">
+            Empower Your Future
+          </p>
+          <h2 className="font-display font-bold text-[clamp(2rem,4vw,3.5rem)] leading-[1.05] tracking-tight text-[#F0EBE1] mb-4 text-center">
+            Creative Careers That Click
+          </h2>
+          <h2 className="font-display font-bold text-[clamp(2rem,4vw,3.5rem)] leading-[1.05] tracking-tight text-[#E31837] mb-6 text-center">
+            Think MAAC
+          </h2>
+          <p className="text-[#A8A29C] text-base leading-relaxed max-w-lg mx-auto mb-12 text-center">
+            Train in animation, VFX, gaming, and digital content creation with expert-led courses that prepare you for real industry success.
+          </p>
+
+          <div className="feature-list-mobile space-y-6">
+            {featureCards.map((card, i) => (
               <div
-                key={item.id}
-                className={`hscroll-card flex-shrink-0 w-[280px] h-[380px] rounded-2xl overflow-hidden cursor-pointer snap-center transition-all duration-300 ${
-                  activeIndex === index ? "ring-2 ring-[#E31837]" : ""
-                }`}
-                onClick={() => handleCardClick(index)}
+                key={i}
+                className="feature-card-mobile p-6 rounded-2xl bg-white/[0.04] border border-white/[0.08]"
+                style={{ borderLeft: '3px solid #E31837' }}
               >
-                <div className="relative h-full bg-[#E31837]">
-                  <div className="absolute inset-0 flex items-center justify-center p-6">
-                    <h3 className="text-white font-display font-bold text-lg text-center uppercase tracking-wide">
-                      {item.title}
-                    </h3>
-                  </div>
-                </div>
+                <div className="text-[#E31837] mb-4">{card.icon}</div>
+                <h3 className="font-display font-bold text-xl text-white mb-2">{card.title}</h3>
+                <p className="text-[#A8A29C] text-sm leading-relaxed">{card.desc}</p>
               </div>
             ))}
           </div>
-          <p className="text-[#6B6560] text-sm text-center mt-4 flex items-center justify-center gap-2">
-            <span>Swipe</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </p>
         </div>
       </div>
-    </div>
+    </>
   );
 }

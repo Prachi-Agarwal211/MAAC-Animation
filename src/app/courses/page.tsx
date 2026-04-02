@@ -4,7 +4,6 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
-import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { coursesData } from "@/data/siteData";
 
@@ -154,7 +153,6 @@ export default function CoursesPage() {
 
   return (
     <main ref={pageRef} className="overflow-hidden bg-[#080808]">
-      <Navbar />
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 overflow-hidden bg-[#080808]">

@@ -10,6 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 export default function Testimonials() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
+  let startX = 0;
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -26,20 +27,36 @@ export default function Testimonials() {
     return () => { ctx.revert(); clearInterval(interval); };
   }, []);
 
+  // Step 8: Touch swipe support on mobile
+  const handleTouchStart = (e: React.TouchEvent) => { startX = e.touches[0].clientX; };
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    const diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) {
+      setActive(prev => diff > 0
+        ? Math.min(prev + 1, testimonialsData.length - 1)
+        : Math.max(prev - 1, 0)
+      );
+    }
+  };
+
   return (
     <section ref={sectionRef} className="relative py-24 md:py-32 overflow-hidden bg-[#0C0C0C]">
-      <div className="atmosphere-blob blob-red" style={{ top: "30%", left: "-100px" }} />
+      <div className="atmosphere-blob blob-red" style={{ top: "30%", left: "-100px", width: "400px", height: "400px" }} />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
         <div className="tm-heading text-center mb-16">
-          <p className="text-[#E31837] text-xs font-semibold tracking-[0.15em] uppercase mb-4">Testimonials</p>
-          <h2 className="font-display font-bold text-[clamp(2rem,4vw,3.5rem)] text-[#F0EBE1] leading-[1.05] tracking-tight mb-4">
+          <p className="text-[#E31837] text-xs font-semibold tracking-[0.12em] uppercase mb-4">Testimonials</p>
+          <h2 className="font-display font-bold text-[clamp(2rem,4vw,3.5rem)] text-[#F0EBE1] leading-[1.08] tracking-tight mb-4 pb-1">
             What Our <span className="gradient-text">Students Say</span>
           </h2>
         </div>
 
         <div className="max-w-4xl mx-auto">
-          <div className="glass-card rounded-3xl p-8 md:p-12 text-center mb-8">
+          <div
+            className="glass-card rounded-3xl p-8 md:p-12 text-center mb-8"
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+          >
             <div className="text-5xl text-[#E31837]/30 font-display mb-6">&ldquo;</div>
             <p className="text-[#A8A29C] text-lg md:text-xl leading-relaxed mb-8 min-h-[120px] transition-all duration-500">
               {testimonialsData[active].text}

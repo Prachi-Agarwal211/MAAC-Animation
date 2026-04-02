@@ -3,7 +3,6 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -76,7 +75,6 @@ export default function AboutPage() {
 
   return (
     <main ref={pageRef} className="overflow-hidden">
-      <Navbar />
 
       {/* Hero */}
       <section className="relative pt-32 pb-20 overflow-hidden">

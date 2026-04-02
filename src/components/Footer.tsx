@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 
+import { contactInfo } from "@/data/siteData";
+
 const SocialIcon = ({ type }: { type: string }) => {
   const icons: Record<string, JSX.Element> = {
     facebook: <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>,
@@ -68,9 +70,22 @@ export default function Footer() {
               MAAC is India&apos;s leading Animation, VFX, and Multimedia education brand with 30+ years of excellence.
             </p>
             <div className="flex items-center gap-3">
-              {["facebook", "instagram", "youtube", "linkedin", "twitter"].map((social) => (
-                <a key={social} href="#" className="w-10 h-10 rounded-full glass flex items-center justify-center text-[#A8A29C] hover:text-[#E31837] hover:border-[#E31837]/30 transition-all duration-300" title={social}>
-                  <SocialIcon type={social} />
+              {[
+                { name: "facebook", url: contactInfo.social.facebook },
+                { name: "instagram", url: contactInfo.social.instagram },
+                { name: "youtube", url: contactInfo.social.youtube },
+                { name: "linkedin", url: contactInfo.social.linkedin },
+                { name: "twitter", url: contactInfo.social.twitter },
+              ].map((social) => (
+                <a
+                  key={social.name}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full glass flex items-center justify-center text-[#A8A29C] hover:text-[#E31837] hover:border-[#E31837]/30 transition-all duration-300"
+                  title={social.name}
+                >
+                  <SocialIcon type={social.name} />
                 </a>
               ))}
             </div>
@@ -119,19 +134,24 @@ export default function Footer() {
                 <div className="w-8 h-8 rounded-lg bg-[#E31837]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E31837" strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
                 </div>
-                <p className="text-[#A8A29C] text-sm leading-relaxed">MAAC Jaipur, C-44, Malviya Nagar Industrial Area, Jaipur, Rajasthan 302017</p>
+                <p className="text-[#A8A29C] text-sm leading-relaxed">711-712, Ambition Tower, 7th Floor, D-46B, Malan Ka Chauraha, Agrasain Circle, Subhash Marg, Jaipur, 302001</p>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-lg bg-[#E31837]/10 flex items-center justify-center flex-shrink-0">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E31837" strokeWidth="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.12.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.58 2.81.7A2 2 0 0122 16.92z"/></svg>
                 </div>
-                <a href="tel:+911414035604" className="text-[#A8A29C] text-sm hover:text-[#E31837] transition-colors">+91-141-4035604</a>
+                <div className="flex flex-col">
+                  <a href={`tel:${contactInfo.phone}`} className="text-[#A8A29C] text-sm hover:text-[#E31837] transition-colors">{contactInfo.phone}</a>
+                  {contactInfo.phoneSecondary && (
+                    <a href={`tel:${contactInfo.phoneSecondary}`} className="text-[#6B6560] text-xs hover:text-[#E31837] transition-colors">{contactInfo.phoneSecondary}</a>
+                  )}
+                </div>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-lg bg-[#E31837]/10 flex items-center justify-center flex-shrink-0">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E31837" strokeWidth="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                 </div>
-                <a href="mailto:jaipur@maacindia.com" className="text-[#A8A29C] text-sm hover:text-[#E31837] transition-colors">jaipur@maacindia.com</a>
+                <a href={`mailto:${contactInfo.email}`} className="text-[#A8A29C] text-sm hover:text-[#E31837] transition-colors">{contactInfo.email}</a>
               </div>
             </div>
           </div>
@@ -163,17 +183,34 @@ export default function Footer() {
 
           <AccordionSection title="Contact Us">
             <div className="space-y-3">
-              <p className="text-[#A8A29C] text-sm">MAAC Jaipur, C-44, Malviya Nagar Industrial Area, Jaipur 302017</p>
-              <a href="tel:+911414035604" className="block text-[#E31837] text-sm">+91-141-4035604</a>
-              <a href="mailto:jaipur@maacindia.com" className="block text-[#A8A29C] text-sm">jaipur@maacindia.com</a>
+              <p className="text-[#A8A29C] text-sm">{contactInfo.address}</p>
+              <div className="flex flex-col">
+                <a href={`tel:${contactInfo.phone}`} className="block text-[#E31837] text-sm">{contactInfo.phone}</a>
+                {contactInfo.phoneSecondary && (
+                  <a href={`tel:${contactInfo.phoneSecondary}`} className="block text-[#6B6560] text-xs">{contactInfo.phoneSecondary}</a>
+                )}
+              </div>
+              <a href={`mailto:${contactInfo.email}`} className="block text-[#A8A29C] text-sm">{contactInfo.email}</a>
             </div>
           </AccordionSection>
 
           {/* Social — always visible */}
           <div className="flex items-center gap-3 pt-6">
-            {["facebook", "instagram", "youtube", "linkedin", "twitter"].map((social) => (
-              <a key={social} href="#" className="w-10 h-10 rounded-full glass flex items-center justify-center text-[#A8A29C] hover:text-[#E31837] transition-all duration-300">
-                <SocialIcon type={social} />
+            {[
+              { name: "facebook", url: contactInfo.social.facebook },
+              { name: "instagram", url: contactInfo.social.instagram },
+              { name: "youtube", url: contactInfo.social.youtube },
+              { name: "linkedin", url: contactInfo.social.linkedin },
+              { name: "twitter", url: contactInfo.social.twitter },
+            ].map((social) => (
+              <a
+                key={social.name}
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full glass flex items-center justify-center text-[#A8A29C] hover:text-[#E31837] transition-all duration-300"
+              >
+                <SocialIcon type={social.name} />
               </a>
             ))}
           </div>

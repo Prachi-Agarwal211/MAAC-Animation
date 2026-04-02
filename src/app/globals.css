@@ -44,6 +44,14 @@
 }
 
 /* ═══════════════════════════════════════════════════════
+   KEYFRAME ANIMATIONS
+   ═══════════════════════════════════════════════════════ */
+@keyframes scrollLine {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(300%); }
+}
+
+/* ═══════════════════════════════════════════════════════
    BASE RESET
    ═══════════════════════════════════════════════════════ */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -60,7 +68,8 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  line-height: 1.05;
+  line-height: 1.08;
+  padding-bottom: 0.08em;
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -268,15 +277,20 @@ body.demo-bar-visible .page-wrapper {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
-.animate-marquee { animation: marquee 40s linear infinite; }
+.animate-marquee { animation: marquee 40s linear infinite; will-change: transform; }
 .animate-marquee:hover { animation-play-state: paused; }
 
 @keyframes marquee-reverse {
   0% { transform: translateX(-50%); }
   100% { transform: translateX(0); }
 }
-.animate-marquee-reverse { animation: marquee-reverse 40s linear infinite; }
+.animate-marquee-reverse { animation: marquee-reverse 40s linear infinite; will-change: transform; }
 .animate-marquee-reverse:hover { animation-play-state: paused; }
+
+@keyframes scrollLine {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(300%); }
+}
 
 @keyframes pulse-ring {
   0%   { transform: scale(1);   opacity: 0.6; }

@@ -1,0 +1,25 @@
+<svg viewBox="0 0 200 200" fill="white" xmlns="http://www.w3.org/2000/svg">
+  <!-- Tiger head silhouette -->
+  <path d="M100 10C120 10 135 20 145 30C155 40 160 55 160 70C160 90 150 105 140 115C130 125 115 135 100 140C85 135 70 125 60 115C50 105 40 90 40 70C40 55 45 40 55 30C65 20 80 10 100 10Z"/>
+  <!-- Ears -->
+  <path d="M55 30L45 15L65 25L55 30Z"/>
+  <path d="M145 30L155 15L135 25L145 30Z"/>
+  <!-- Eyes -->
+  <ellipse cx="80" cy="65" rx="8" ry="6"/>
+  <ellipse cx="120" cy="65" rx="8" ry="6"/>
+  <!-- Nose -->
+  <ellipse cx="100" cy="85" rx="12" ry="8"/>
+  <!-- Whiskers -->
+  <path d="M70 90L40 85" stroke="white" stroke-width="2"/>
+  <path d="M70 95L40 95" stroke="white" stroke-width="2"/>
+  <path d="M70 100L40 105" stroke="white" stroke-width="2"/>
+  <path d="M130 90L160 85" stroke="white" stroke-width="2"/>
+  <path d="M130 95L160 95" stroke="white" stroke-width="2"/>
+  <path d="M130 100L160 105" stroke="white" stroke-width="2"/>
+  <!-- Mouth -->
+  <path d="M90 100Q100 110 110 100" stroke="white" stroke-width="2" fill="none"/>
+  <!-- Stripes -->
+  <path d="M100 20L95 35L100 45L105 35L100 20Z"/>
+  <path d="M85 25L82 38L85 45L88 38L85 25Z"/>
+  <path d="M115 25L112 38L115 45L118 38L115 25Z"/>
+</svg>

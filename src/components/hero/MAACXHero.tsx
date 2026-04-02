@@ -144,10 +144,19 @@ export default function MAACXHero() {
     <>
       <section
         ref={containerRef}
-        className="maacx-hero relative h-screen w-full overflow-hidden bg-[#080808]"
+        className="maacx-hero relative min-h-[100svh] w-full bg-[#080808]"
       >
         {/* Video Background */}
         <div className="absolute inset-0 z-0">
+          {/* Layer 0: CSS gradient fallback */}
+          <div className="absolute inset-0 z-0" style={{
+            background: `
+              radial-gradient(ellipse 80% 60% at 70% 40%, rgba(180,20,40,0.35) 0%, transparent 60%),
+              radial-gradient(ellipse 60% 80% at 30% 60%, rgba(100,10,20,0.2) 0%, transparent 50%),
+              linear-gradient(160deg, #0A0A0A 0%, #1a0508 40%, #0A0A0A 100%)
+            `
+          }} />
+          
           <video
             ref={videoRef}
             className="maacx-video absolute inset-0 h-full w-full object-cover"
@@ -155,21 +164,31 @@ export default function MAACXHero() {
             muted
             loop
             playsInline
-            preload="auto"
+            preload="none"
             poster="/images/hero-poster.webp"
           >
             <source src="/intro.webm" type="video/webm" />
             <source src="/intro.mp4" type="video/mp4" />
           </video>
 
-          {/* Gradient fallback */}
-          <div className="absolute inset-0 z-5 bg-[radial-gradient(ellipse_at_30%_50%,#1a0505_0%,#080808_70%)]" />
+          {/* Overlay gradient - Layer 2 */}
+          <div className="absolute inset-0 z-[2] bg-gradient-to-r from-black/85 via-black/50 to-black/20" />
 
-          {/* Overlay gradient */}
-          <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/75 via-black/50 to-black/85" />
-
-          {/* Red radial accent */}
-          <div className="absolute inset-0 z-10 bg-[radial-gradient(ellipse_at_70%_60%,rgba(227,24,55,0.08)_0%,transparent_60%)]" />
+          {/* Tiger atmospheric glow - Layer 3 (right side only) */}
+          <div className="absolute right-0 top-0 bottom-0 w-1/2 z-[3] hidden md:block overflow-hidden">
+            <div style={{
+              position: 'absolute', right: '-5%', top: '50%',
+              transform: 'translateY(-50%)',
+              width: '600px', height: '600px',
+              opacity: 0.12,
+              background: `
+                radial-gradient(circle at 60% 40%, rgba(227,24,55,0.4) 0%, transparent 50%)
+              `,
+              maskImage: `url('/images/tiger-mask.svg')`,  
+              WebkitMaskImage: `url('/images/tiger-mask.svg')`,
+              maskSize: 'contain', maskRepeat: 'no-repeat'
+            }} />
+          </div>
         </div>
 
         {/* Content — Left */}
@@ -182,11 +201,11 @@ export default function MAACXHero() {
           </div>
 
           {/* Headline */}
-          <h1 className="mb-4">
-            <span className="maacx-headline maacx-split-chars block text-white font-display font-extrabold text-[clamp(2.8rem,7vw,6rem)] leading-[1.05] tracking-tight overflow-hidden">
+          <h1 className="mb-4 pb-1">
+            <span className="maacx-headline maacx-split-chars block text-white font-display font-extrabold text-[clamp(2.8rem,7vw,6rem)] leading-[1.08] tracking-tight">
               Big Leaps
             </span>
-            <span className="maacx-headline-accent block text-[#E31837] font-display font-extrabold text-[clamp(2rem,5vw,5rem)] leading-[1.05] tracking-tight overflow-hidden mt-1">
+            <span className="maacx-headline-accent block text-[#E31837] font-display font-extrabold text-[clamp(2rem,5vw,5rem)] leading-[1.08] tracking-tight mt-1">
               Begin with the Right Course
             </span>
           </h1>
@@ -270,14 +289,11 @@ export default function MAACXHero() {
         </div>
 
         {/* Scroll Indicator */}
-        <div className="maacx-scroll absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex-col items-center gap-2 hidden md:flex">
-          <span className="text-[#6b6b6b] text-[8px] tracking-[0.3em] uppercase">Scroll</span>
-          <svg width="16" height="24" viewBox="0 0 16 24" fill="none" className="opacity-40">
-            <rect x="1" y="1" width="14" height="22" rx="7" stroke="#6b6b6b" strokeWidth="1.5" />
-            <circle cx="8" cy="8" r="2" fill="#E31837">
-              <animate attributeName="cy" values="8;16;8" dur="1.6s" repeatCount="indefinite" />
-            </circle>
-          </svg>
+        <div className="maacx-scroll absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 hidden md:flex">
+          <span className="text-white/40 text-[9px] tracking-[0.3em] uppercase">Scroll</span>
+          <div className="w-0.5 h-12 bg-gradient-to-b from-white/40 to-transparent relative overflow-hidden">
+            <div className="absolute top-0 w-full h-4 bg-white animate-[scrollLine_1.8s_ease-in-out_infinite]" />
+          </div>
         </div>
       </section>
 

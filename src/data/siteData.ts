@@ -185,10 +185,18 @@ export const navLinks = [
 ];
 
 export const contactInfo = {
-  phone: "+91-141-4035604",
-  whatsapp: "+91-141-4035604",
-  email: "jaipur@maacindia.com",
-  address: "MAAC Jaipur, C-44, Malviya Nagar Industrial Area, Jaipur, Rajasthan 302017",
-  googleMapsUrl: "https://maps.google.com/?q=MAAC+Jaipur+Malviya+Nagar",
+  phone: "+91-7300001589",
+  phoneSecondary: "+91-9829294037",
+  whatsapp: "+91-7300001589",
+  email: "maacanimationjaipur@gmail.com",
+  address: "711-712, Ambition Tower, 7th Floor, D-46B, Malan Ka Chauraha, Agrasain Circle, Subhash Marg, Jaipur, 302001, RJ, IN",
+  googleMapsUrl: "https://maps.google.com/?q=MAAC+Jaipur+Subhash+Marg",
   hours: "Mon–Sat 9:00 AM – 7:00 PM",
+  social: {
+    instagram: "https://www.instagram.com/maacjaipurcscheme?igsh=OGluNWQybHI2cjBv&utm_source=qr",
+    linkedin: "https://www.linkedin.com/company/maac-jaipur-cscheme",
+    youtube: "https://youtube.com/@maac-jaipur-cscheme?si=QiPdIu3guJaDr3cB",
+    facebook: "https://www.facebook.com/MAAClndia",
+    twitter: "https://twitter.com/MAAClndia",
+  },
 };
