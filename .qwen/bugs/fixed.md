@@ -7,6 +7,165 @@ Fixed hydration mismatch errors causing "Failed to execute 'insertBefore' on 'No
 
 ---
 
+## 5. Hero Section & Scrolling Experience Improvements
+
+**Root Cause:**
+Multiple issues affecting user experience:
+1. Preloader timeout was too long (12s), causing unnecessary wait time
+2. VerticalCardGallery was killing ALL global ScrollTriggers on cleanup, breaking other components
+3. Video elements had no error handling - failed videos would hang indefinitely
+4. Touch navigation lacked haptic feedback for mobile users
+5. Feature cards referenced non-existent images, causing 404 errors and broken UI
+
+**Solution:**
+
+### Fix 1: Preloader Fallback Timer
+Reduced timeout from 12s to 8s for faster page access.
+
+**Files Changed:**
+- `src/components/hero/Preloader.tsx` (line 36)
+
+**Key Changes:**
+```typescript
+// BEFORE:
+const fallbackTimer = setTimeout(triggerExit, 12000);
+
+// AFTER:
+const fallbackTimer = setTimeout(triggerExit, 8000);
+```
+
+---
+
+### Fix 2: VerticalCardGallery ScrollTrigger Cleanup
+Stopped killing global ScrollTriggers - each component now manages its own.
+
+**Files Changed:**
+- `src/components/VerticalCardGallery.tsx` (line ~145)
+
+**Key Changes:**
+```typescript
+// BEFORE:
+return () => {
+  ctx.revert();
+  ScrollTrigger.getAll().forEach((st) => st.kill());
+};
+
+// AFTER:
+return () => {
+  ctx.revert();
+  // Don't kill global ScrollTriggers - let each component manage its own
+};
+```
+
+---
+
+### Fix 3: Hero Video Error Handling
+Added error handler to video elements to gracefully handle failed loads.
+
+**Files Changed:**
+- `src/components/hero/MAACXHero.tsx`
+
+**Key Changes:**
+```typescript
+// Added state:
+const [loadedVideos, setLoadedVideos] = useState<boolean[]>(
+  new Array(HERO_VIDEOS.length).fill(false)
+);
+
+// Added error handler:
+const handleVideoError = (index: number) => {
+  console.error(`Video ${HERO_VIDEOS[index].name} failed to load`);
+  setLoadedVideos(prev => {
+    const updated = [...prev];
+    updated[index] = true; // Mark as "loaded" to skip loading indicator
+    return updated;
+  });
+};
+
+// Added to video element:
+onError={() => handleVideoError(index)}
+```
+
+---
+
+### Fix 4: Touch Feedback
+Added haptic feedback to touch navigation for better mobile UX.
+
+**Files Changed:**
+- `src/components/hero/MAACXHero.tsx` (handleTouchEnd function)
+
+**Key Changes:**
+```typescript
+const handleTouchEnd = () => {
+  const swipeThreshold = 50;
+  const diff = touchStartX.current - touchEndX.current;
+  
+  if (Math.abs(diff) > swipeThreshold) {
+    // Haptic feedback
+    if (typeof navigator !== 'undefined' && navigator.vibrate) {
+      navigator.vibrate(10);
+    }
+    
+    if (diff > 0) {
+      goToNextVideo();
+    } else {
+      setCurrentVideoIndex((prev) => (prev - 1 + HERO_VIDEOS.length) % HERO_VIDEOS.length);
+    }
+  }
+};
+```
+
+---
+
+### Fix 5: Feature Card Placeholders
+Replaced missing images with gradient backgrounds and emoji placeholders.
+
+**Files Changed:**
+- `src/components/VerticalCardGallery.tsx` (desktop and mobile card areas)
+
+**Key Changes:**
+```typescript
+// BEFORE (desktop - image with fallback):
+<div className="relative h-[55%] overflow-hidden bg-[#111]">
+  {card.image ? (
+    <Image src={card.image} alt={card.title} fill className="object-cover" />
+  ) : (
+    <div className="w-full h-full flex items-center justify-center text-7xl opacity-40">
+      {card.imageFallback}
+    </div>
+  )}
+</div>
+
+// AFTER (desktop - gradient placeholder):
+<div className="relative h-[55%] overflow-hidden bg-gradient-to-br from-[#1a1a1a] via-[#2a1a1a] to-[#1a1a1a]">
+  <div className="absolute inset-0 flex items-center justify-center text-8xl opacity-20">
+    {card.imageFallback}
+  </div>
+  <div className="absolute bottom-0 left-0 w-full h-[3px] bg-gradient-to-r from-[#E31837] to-[#FF6B35]" />
+</div>
+
+// Similar change applied to mobile cards with aspect-[16/9]
+```
+
+**Removed unused import:**
+- Removed `import Image from "next/image"` from VerticalCardGallery.tsx
+
+---
+
+**Verification:**
+- Build passes: `npm run build` ✅
+- No TypeScript errors ✅
+- ESLint warnings are non-critical (unused variables can be cleaned up separately)
+
+---
+
+## Date: 2026-04-03
+
+### Summary
+Fixed hydration mismatch errors causing "Failed to execute 'insertBefore' on 'Node'" and related React hydration issues.
+
+---
+
 ## 1. Hydration Mismatch - LenisProvider.tsx DOM Manipulation
 
 **Root Cause:**

@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -143,7 +142,7 @@ export default function VerticalCardGallery() {
 
     return () => {
       ctx.revert();
-      ScrollTrigger.getAll().forEach((st) => st.kill());
+      // Don't kill global ScrollTriggers - let each component manage its own
     };
   }, []);
 
@@ -193,32 +192,11 @@ export default function VerticalCardGallery() {
                 }}
               >
                 {/* Image area — top 55% */}
-                <div className="relative h-[55%] overflow-hidden bg-[#111]">
-                  {card.image ? (
-                    <Image
-                      src={card.image}
-                      alt={card.title}
-                      fill
-                      className="object-cover"
-                      sizes="380px"
-                      priority={index === 0}
-                      loading={index === 0 ? "eager" : "lazy"}
-                    />
-                  ) : (
-                    <div
-                      className="w-full h-full flex items-center justify-center text-7xl opacity-40"
-                      style={{ backgroundColor: `${card.color}15` }}
-                    >
-                      {card.imageFallback}
-                    </div>
-                  )}
-                  {/* Gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0C0C0C]/80 via-transparent to-transparent" />
-                  {/* Red accent line */}
-                  <div
-                    className="absolute bottom-0 left-0 w-full h-[3px]"
-                    style={{ backgroundColor: card.color }}
-                  />
+                <div className="relative h-[55%] overflow-hidden bg-gradient-to-br from-[#1a1a1a] via-[#2a1a1a] to-[#1a1a1a]">
+                  <div className="absolute inset-0 flex items-center justify-center text-8xl opacity-20">
+                    {card.imageFallback}
+                  </div>
+                  <div className="absolute bottom-0 left-0 w-full h-[3px] bg-gradient-to-r from-[#E31837] to-[#FF6B35]" />
                 </div>
 
                 {/* Text area — bottom 45% */}
@@ -270,26 +248,10 @@ export default function VerticalCardGallery() {
                 }}
               >
                 {/* Image area — aspect-[16/9] */}
-                <div className="relative w-full aspect-[16/9] overflow-hidden bg-[#111]">
-                  {card.image ? (
-                    <Image
-                      src={card.image}
-                      alt={card.title}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, 380px"
-                      loading="lazy"
-                    />
-                  ) : (
-                    <div
-                      className="w-full h-full flex items-center justify-center text-5xl opacity-40"
-                      style={{ backgroundColor: `${card.color}15` }}
-                    >
-                      {card.imageFallback}
-                    </div>
-                  )}
-                  {/* Gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0C0C0C]/90 via-transparent to-transparent" />
+                <div className="relative w-full aspect-[16/9] overflow-hidden bg-gradient-to-br from-[#1a1a1a] via-[#2a1a1a] to-[#1a1a1a]">
+                  <div className="absolute inset-0 flex items-center justify-center text-6xl opacity-20">
+                    {card.imageFallback}
+                  </div>
                 </div>
 
                 {/* Text area */}

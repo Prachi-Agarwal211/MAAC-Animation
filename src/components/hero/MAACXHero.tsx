@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Image from "next/image";
 import Preloader from "./Preloader";
 import VideoModal from "@/components/VideoModal";
 
@@ -15,31 +16,26 @@ const HERO_VIDEOS = [
     name: "Intro",
     webm: "/intro.webm",
     mp4: "/intro.mp4",
-    poster: "/images/hero-poster.webp",
   },
   {
     id: 2,
     name: "Aakanksha",
-    mp4: "/hero-section/AAKANKSHA.mp4",
-    poster: "/images/hero-poster.webp",
+    mp4: "/hero-section-compressed/AAKANKSHA.mp4",
   },
   {
     id: 3,
     name: "Abhilash S",
-    mp4: "/hero-section/ABHILASH S.mp4",
-    poster: "/images/hero-poster.webp",
+    mp4: "/hero-section-compressed/ABHILASH S.mp4",
   },
   {
     id: 4,
     name: "Emon Mandal",
-    mp4: "/hero-section/EMON MANDAL.mp4",
-    poster: "/images/hero-poster.webp",
+    mp4: "/hero-section-compressed/EMON MANDAL.mp4",
   },
   {
     id: 5,
     name: "Nayan Satyawan Mestry",
-    mp4: "/hero-section/NAYAN SATYAWAN MESTRY.mp4",
-    poster: "/images/hero-poster.webp",
+    mp4: "/hero-section-compressed/NAYAN SATYAWAN MESTRY.mp4",
   },
 ];
 
@@ -64,7 +60,10 @@ export default function MAACXHero() {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const isTransitioningRef = useRef(false);
   const [isPaused, setIsPaused] = useState(false);
-  
+  const [loadedVideos, setLoadedVideos] = useState<boolean[]>(
+    new Array(HERO_VIDEOS.length).fill(false)
+  );
+
   // Touch swipe support
   const touchStartX = useRef<number>(0);
   const touchEndX = useRef<number>(0);
@@ -80,14 +79,18 @@ export default function MAACXHero() {
 
   // Rotate to next video
   const goToNextVideo = useCallback(() => {
-    isTransitioningRef.current = true;
     setCurrentVideoIndex((prev) => (prev + 1) % HERO_VIDEOS.length);
-
-    // Reset transitioning flag after animation completes
-    setTimeout(() => {
-      isTransitioningRef.current = false;
-    }, 1500);
   }, []);
+
+  // Video error handler - marks failed videos as loaded to skip loading indicator
+  const handleVideoError = (index: number) => {
+    console.error(`Video ${HERO_VIDEOS[index].name} failed to load`);
+    setLoadedVideos(prev => {
+      const updated = [...prev];
+      updated[index] = true; // Mark as "loaded" to skip loading indicator
+      return updated;
+    });
+  };
 
   // Touch handlers for swipe navigation
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -103,6 +106,11 @@ export default function MAACXHero() {
     const diff = touchStartX.current - touchEndX.current;
 
     if (Math.abs(diff) > swipeThreshold) {
+      // Haptic feedback
+      if (typeof navigator !== 'undefined' && navigator.vibrate) {
+        navigator.vibrate(10);
+      }
+
       if (diff > 0) {
         // Swiped left - next video
         goToNextVideo();
@@ -150,50 +158,51 @@ export default function MAACXHero() {
     return () => observer.disconnect();
   }, []);
 
-  // Handle video transitions with GSAP
+  // Handle video play/pause when index changes
   useEffect(() => {
     if (!preloaderDone) return;
 
-    const ctx = gsap.context(() => {
-      const currentVideoEl = videoRefs.current[currentVideoIndex];
+    // Pause all videos first
+    videoRefs.current.forEach((videoEl) => {
+      if (videoEl) {
+        videoEl.pause();
+      }
+    });
 
-      if (currentVideoEl) {
-        // If not the first render, animate transition
-        if (currentVideoIndex !== 0 || !isTransitioningRef.current) {
-          const prevIndex = (currentVideoIndex - 1 + HERO_VIDEOS.length) % HERO_VIDEOS.length;
-          const prevVideoEl = videoRefs.current[prevIndex];
-
-          if (prevVideoEl && prevIndex !== currentVideoIndex) {
-            // Fade out previous video
-            gsap.to(prevVideoEl, {
-              opacity: 0,
-              duration: 0.8,
-              ease: "power2.inOut",
-            });
+    // Play current video with better error handling
+    const currentVideo = videoRefs.current[currentVideoIndex];
+    if (currentVideo) {
+      // Reset to start
+      currentVideo.currentTime = 0;
+      
+      // Wait for video to be ready before playing
+      const playVideo = async () => {
+        try {
+          // Wait for loadedmetadata or timeout
+          await Promise.race([
+            new Promise((resolve) => {
+              if (currentVideo.readyState >= 2) {
+                resolve(true);
+              } else {
+                currentVideo.addEventListener('loadedmetadata', resolve, { once: true });
+                // Timeout after 2 seconds
+                setTimeout(resolve, 2000);
+              }
+            })
+          ]);
+          
+          // Try to play
+          await currentVideo.play();
+        } catch (err: any) {
+          // Ignore autoplay errors - video will play on user interaction
+          if (err.name !== 'AbortError') {
+            console.warn(`Video play issue:`, err.message);
           }
         }
-
-        // Fade in current video
-        gsap.fromTo(
-          currentVideoEl,
-          { opacity: currentVideoIndex === 0 ? 1 : 0 },
-          { opacity: 1, duration: 0.8, ease: "power2.inOut" }
-        );
-
-        // Play current video
-        currentVideoEl.play().catch(() => {});
-        
-        // Pause all other videos
-        videoRefs.current.forEach((videoEl, index) => {
-          if (index !== currentVideoIndex && videoEl) {
-            videoEl.pause();
-            videoEl.currentTime = 0;
-          }
-        });
-      }
-    }, containerRef);
-
-    return () => ctx.revert();
+      };
+      
+      playVideo();
+    }
   }, [currentVideoIndex, preloaderDone]);
 
   // GSAP animations - simplified fade-up
@@ -305,11 +314,15 @@ export default function MAACXHero() {
     };
   }, [preloaderDone]);
 
-  if (!mounted) return <div className="h-screen w-full bg-[#080808]" />;
-  if (!preloaderDone) return <Preloader onComplete={handlePreloaderComplete} />;
-
   return (
     <>
+      <div 
+        className={`fixed inset-0 z-[9999] transition-opacity duration-700 pointer-events-none ${
+          preloaderDone ? "opacity-0" : "opacity-100"
+        }`}
+      >
+        {!preloaderDone && <Preloader onComplete={handlePreloaderComplete} />}
+      </div>
       <section
         ref={containerRef}
         className="maacx-hero relative min-h-[100svh] w-full bg-[#080808] overflow-hidden"
@@ -335,26 +348,42 @@ export default function MAACXHero() {
           {/* Video carousel - all videos layered */}
           <div className="absolute inset-0 z-[1]">
             {HERO_VIDEOS.map((video, index) => (
-              <video
+              <div
                 key={video.id}
-                ref={(el) => {
-                  videoRefs.current[index] = el;
-                }}
-                className={`maacx-video absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${
+                className={`absolute inset-0 transition-opacity duration-1000 ${
                   index === currentVideoIndex ? "opacity-100" : "opacity-0"
                 }`}
-                autoPlay={index === 0}
-                muted
-                loop
-                playsInline
-                preload={index === 0 ? "auto" : index === 1 ? "metadata" : "none"}
-                poster={video.poster}
-                width={1920}
-                height={1080}
               >
-                {video.webm && <source src={video.webm} type="video/webm" />}
-                <source src={video.mp4} type="video/mp4" />
-              </video>
+                {/* Optimized Poster Image */}
+                <Image
+                  src={video.poster}
+                  alt={`MAACx Video ${index + 1}`}
+                  fill
+                  priority={index === 0}
+                  className="object-cover -z-10"
+                  sizes="100vw"
+                  quality={85}
+                />
+                <video
+                  ref={(el) => {
+                    videoRefs.current[index] = el;
+                  }}
+                  className={`maacx-video absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${
+                    index === currentVideoIndex ? "opacity-100 z-10" : "opacity-0 z-0"
+                  }`}
+                  autoPlay={index === 0}
+                  muted
+                  loop
+                  playsInline
+                  preload={index === 0 ? "auto" : "metadata"}
+                  width={1920}
+                  height={1080}
+                  onError={() => handleVideoError(index)}
+                >
+                  {video.webm && <source src={video.webm} type="video/webm" />}
+                  <source src={video.mp4} type="video/mp4" />
+                </video>
+              </div>
             ))}
           </div>
 
@@ -367,12 +396,8 @@ export default function MAACXHero() {
               <button
                 key={video.id}
                 onClick={() => {
-                  if (isTransitioningRef.current || index === currentVideoIndex) return;
-                  isTransitioningRef.current = true;
+                  if (index === currentVideoIndex) return;
                   setCurrentVideoIndex(index);
-                  setTimeout(() => {
-                    isTransitioningRef.current = false;
-                  }, 1500);
                 }}
                 className={`group relative h-2 rounded-full transition-all duration-500 ${
                   index === currentVideoIndex
@@ -380,10 +405,10 @@ export default function MAACXHero() {
                     : "w-2 bg-white/30 hover:bg-white/50"
                 }`}
                 aria-label={`Show ${video.name} video`}
-                disabled={isTransitioningRef.current || index === currentVideoIndex}
+                disabled={index === currentVideoIndex}
               >
                 {/* Progress bar for current video */}
-                {index === currentVideoIndex && !isTransitioningRef.current && (
+                {index === currentVideoIndex && (
                   <div
                     className="absolute inset-0 bg-[#E31837] rounded-full origin-left"
                     style={{

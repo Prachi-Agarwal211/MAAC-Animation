@@ -33,7 +33,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
 
   useEffect(() => {
     const skipTimer = setTimeout(() => setShowSkip(true), 5000);
-    const fallbackTimer = setTimeout(triggerExit, 12000);
+    const fallbackTimer = setTimeout(triggerExit, 8000);
     return () => {
       clearTimeout(skipTimer);
       clearTimeout(fallbackTimer);

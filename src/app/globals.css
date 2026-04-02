@@ -210,10 +210,7 @@ body.demo-bar-visible .page-wrapper {
   background-color: var(--bg-secondary);
   position: relative;
 }
-.bg-light-section {
-  background-color: var(--bg-light);
-  color: var(--text-on-light);
-}
+
 .bg-gradient-section {
   background: linear-gradient(135deg, #0C0C0C 0%, #1A0505 50%, #0C0C0C 100%);
   position: relative;
@@ -246,12 +243,7 @@ body.demo-bar-visible .page-wrapper {
 /* ═══════════════════════════════════════════════════════
    SECTION DIVIDERS
    ═══════════════════════════════════════════════════════ */
-.section-clip-light {
-  clip-path: polygon(0 40px, 100% 0, 100% 100%, 0 100%);
-  margin-top: -40px;
-  position: relative;
-  z-index: 1;
-}
+
 .section-fade {
   position: relative;
 }
@@ -265,22 +257,7 @@ body.demo-bar-visible .page-wrapper {
   background: linear-gradient(90deg, transparent, rgba(227,24,55,0.2), transparent);
 }
 
-/* ═══════════════════════════════════════════════════════
-   CREAM SECTION OVERRIDES
-   ═══════════════════════════════════════════════════════ */
-.cream-section {
-  background: var(--bg-light);
-  color: var(--text-on-light);
-}
-.cream-section .section-label {
-  color: var(--red);
-}
-.cream-section .section-title {
-  color: var(--text-on-light);
-}
-.cream-section .section-desc {
-  color: var(--text-on-light-s);
-}
+
 
 /* ═══════════════════════════════════════════════════════
    ANIMATIONS

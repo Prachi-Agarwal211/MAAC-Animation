@@ -70,7 +70,6 @@ interface SlideCardProps {
 }
 
 function SlideUpCard({ course, index }: SlideCardProps) {
-  const [revealed, setRevealed] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -88,9 +87,6 @@ function SlideUpCard({ course, index }: SlideCardProps) {
     <div
       ref={cardRef}
       className="relative w-full min-h-[360px] md:min-h-[480px] rounded-2xl overflow-hidden cursor-pointer group"
-      onMouseEnter={() => setRevealed(true)}
-      onMouseLeave={() => setRevealed(false)}
-      onClick={() => setRevealed(!revealed)}
     >
       {/* Top section — dark gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#161616] to-[#0C0C0C]" />
@@ -103,23 +99,14 @@ function SlideUpCard({ course, index }: SlideCardProps) {
       </div>
 
       {/* Bottom red section — always visible */}
-      <div className="absolute bottom-0 left-0 right-0 h-[40%] bg-[#E31837] flex flex-col justify-center p-6 z-10 transition-transform duration-350"
-        style={{
-          transform: revealed ? "translateY(-60%)" : "translateY(0)",
-          transition: "transform 350ms cubic-bezier(0.4, 0, 0.2, 1)",
-        }}
-      >
+      <div className="absolute bottom-0 left-0 right-0 h-[40%] bg-[#E31837] flex flex-col justify-center p-6 z-10 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-[-60%]">
         <h3 className="text-white font-display font-bold text-xl md:text-2xl mb-1">{course.title}</h3>
         <p className="text-white/70 text-sm">{course.description}</p>
       </div>
 
       {/* Slide-up panel with details */}
       <div
-        className="absolute bottom-0 left-0 right-0 bg-[#0C0C0C]/95 backdrop-blur-sm p-6 z-20 transition-all duration-350"
-        style={{
-          transform: revealed ? "translateY(0)" : "translateY(100%)",
-          transition: "transform 350ms cubic-bezier(0.4, 0, 0.2, 1)",
-        }}
+        className="absolute bottom-0 left-0 right-0 bg-[#0C0C0C]/95 backdrop-blur-sm p-6 z-20 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] translate-y-full group-hover:translate-y-0"
       >
         <p className="text-[#A8A29C] text-sm leading-relaxed mb-3">{course.fullDescription}</p>
         <div className="mb-4">

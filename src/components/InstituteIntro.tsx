@@ -37,10 +37,10 @@ function CountUpStat({ number, suffix, label }: { number: number; suffix: string
 
   return (
     <div ref={ref} className="text-center px-4">
-      <div className="font-display font-extrabold text-[clamp(2.5rem,6vw,5rem)] leading-none text-[#0C0C0C] count-up">
+      <div className="font-display font-extrabold text-[clamp(2.5rem,6vw,5rem)] leading-none text-white count-up">
         {count}{suffix}
       </div>
-      <div className="text-[#7A7570] text-sm mt-2 font-inter">{label}</div>
+      <div className="text-[#A8A29C] text-sm mt-2 font-inter">{label}</div>
     </div>
   );
 }
@@ -80,35 +80,37 @@ export default function InstituteIntro() {
   }, []);
 
   return (
-    <div ref={containerRef} className="institute-section relative overflow-hidden">
-      {/* Cream bg with clip-path divider */}
+    <div ref={containerRef} className="institute-section relative overflow-hidden bg-[#0a0a0a]">
+      {/* Dark Theme wrapper */}
       <div
-        className="relative bg-[#F5F0E8] py-16 md:py-24 section-clip-light"
+        className="relative bg-gradient-to-b from-[#0C0C0C] via-[#111111] to-[#0C0C0C] py-16 md:py-24 section-fade"
       >
+        <div className="atmosphere-blob blob-red top-[-10%] right-[-10%] opacity-20" />
+        <div className="grain-overlay" />
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
           {/* Stat Bar */}
-          <div className="flex flex-wrap md:flex-nowrap items-center justify-between mb-16 md:mb-20 border-b border-[#0C0C0C]/10 pb-10">
+          <div className="relative z-10 flex flex-wrap md:flex-nowrap items-center justify-between mb-16 md:mb-20 border-b border-white/10 pb-10">
             <CountUpStat number={50} suffix="K+" label="Students Trained" />
-            <div className="hidden md:block w-px h-16 bg-[#0C0C0C]/10" />
+            <div className="hidden md:block w-px h-16 bg-white/10" />
             <CountUpStat number={30} suffix="+" label="Years Legacy" />
-            <div className="hidden md:block w-px h-16 bg-[#0C0C0C]/10" />
+            <div className="hidden md:block w-px h-16 bg-white/10" />
             <CountUpStat number={95} suffix="%" label="Placement Rate" />
-            <div className="hidden md:block w-px h-16 bg-[#0C0C0C]/10" />
+            <div className="hidden md:block w-px h-16 bg-white/10" />
             <CountUpStat number={100} suffix="+" label="Centers" />
           </div>
 
           {/* Content Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             {/* Left: Text */}
             <div>
               <div className="flex items-start gap-3 mb-6">
                 <div className="w-1 h-12 bg-[#E31837] flex-shrink-0 rounded-full" />
-                <h2 data-splitting className="institute-title font-display font-bold text-[clamp(1.5rem,3vw,2.5rem)] leading-tight text-[#0C0C0C]">
+                <h2 data-splitting className="institute-title font-display font-bold text-[clamp(1.5rem,3vw,2.5rem)] leading-tight text-white">
                   Join <span className="inline-block bg-[#E31837] text-white px-2 py-0.5 rounded">The Best Animation Institute</span> In Jaipur
                 </h2>
               </div>
 
-              <div className="institute-description space-y-4 text-[#4A4540] text-base leading-relaxed">
+              <div className="institute-description space-y-4 text-[#A8A29C] text-base leading-relaxed">
                 <p>
                   Welcome to Maya Academy of Advanced Cinematics — MAAC. Our centre is equipped with an expert training team specializing in 3D Animation, VFX, Film Making, Gaming, Web Design, and more.
                 </p>
@@ -119,10 +121,10 @@ export default function InstituteIntro() {
 
               {/* Pull Quote */}
               <blockquote className="institute-quote mt-8 border-l-3 border-[#E31837] pl-5 py-2">
-                <p className="text-[#0C0C0C] text-lg italic font-display leading-relaxed">
+                <p className="text-[#F0EBE1] text-lg italic font-display leading-relaxed">
                   &ldquo;MAAC gave me the skills and confidence to land my dream job at a top VFX studio.&rdquo;
                 </p>
-                <cite className="text-[#7A7570] text-sm mt-2 block not-italic">— Alumni, VFX Artist at DNEG</cite>
+                <cite className="text-[#6B6560] text-sm mt-2 block not-italic">— Alumni, VFX Artist at DNEG</cite>
               </blockquote>
             </div>
 

@@ -10,28 +10,28 @@ const workItems = [
   { 
     title: "ANANDI", 
     category: "Animation",
-    video: "/student work/ANANDI.mp4",
+    video: "/student-work/ANANDI.mp4",
     description: "A beautiful animated story",
     duration: "2:34"
   },
   { 
     title: "FAST LIFE", 
     category: "Short Film",
-    video: "/student work/FAST LIFE.mp4",
+    video: "/student-work/FAST LIFE.mp4",
     description: "Fast-paced urban storytelling",
     duration: "3:12"
   },
   { 
     title: "KARMA", 
     category: "Visual Effects",
-    video: "/student work/KARMA.mp4",
+    video: "/student-work/KARMA.mp4",
     description: "VFX-heavy narrative piece",
     duration: "4:05"
   },
   { 
     title: "THE PLASTIC PLAGUE", 
     category: "Documentary",
-    video: "/student work/THE PLASTIC PLAGUE.mp4",
+    video: "/student-work/THE PLASTIC PLAGUE.mp4",
     description: "Environmental awareness film",
     duration: "5:20"
   },

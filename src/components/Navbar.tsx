@@ -15,7 +15,6 @@ export default function Navbar() {
     closeAllMenus 
   } = useUIStore();
   const [isScrolled, setIsScrolled] = useState(false);
-  const [demoBarVisible, setDemoBarVisible] = useState(false);
   const navRef = useRef<HTMLElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
 
@@ -28,17 +27,6 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  // Demo bar — check localStorage
-  useEffect(() => {
-    const dismissed = localStorage.getItem("maac-demo-bar-dismissed");
-    if (!dismissed) setDemoBarVisible(true);
-  }, []);
-
-  const dismissDemoBar = () => {
-    setDemoBarVisible(false);
-    localStorage.setItem("maac-demo-bar-dismissed", "true");
-  };
 
   // Mobile menu animation
   useEffect(() => {
@@ -91,24 +79,6 @@ export default function Navbar() {
     <>
       {/* ═══════ SINGLE HEADER ELEMENT ═══════ */}
       <header ref={navRef} className="fixed left-0 right-0 z-[1000]">
-        {/* ── Demo Bar (inside header, not separate) ── */}
-        {demoBarVisible && (
-          <div className="relative w-full bg-[#E31837] text-white text-xs sm:text-sm py-2 text-center font-medium">
-            <span className="hidden sm:inline">🎓 Free Demo Class This Weekend — Limited Seats! </span>
-            <span className="sm:hidden">🎓 Free Demo Class! </span>
-            <Link href="/contact" className="underline font-bold hover:no-underline">
-              Book Now →
-            </Link>
-            <button
-              onClick={dismissDemoBar}
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white bg-transparent border-none cursor-pointer p-1"
-              aria-label="Dismiss"
-            >
-              ✕
-            </button>
-          </div>
-        )}
-
         {/* ── Main Nav Bar ── */}
         <div
           className={`transition-all duration-500 ${
