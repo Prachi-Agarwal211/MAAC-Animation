@@ -127,7 +127,7 @@ function VideoModal({ video, title, category, onClose }: VideoModalProps) {
         previousActiveElement.current.focus();
       }
     };
-  }, []);
+  }, [onClose]);
 
   useEffect(() => {
     if (videoRef.current) {

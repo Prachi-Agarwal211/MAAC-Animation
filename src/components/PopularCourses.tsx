@@ -5,6 +5,8 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { coursesData } from "@/data/siteData";
 
+gsap.registerPlugin(ScrollTrigger);
+
 const courseGradients = [
   "linear-gradient(135deg, #1a0505 0%, #0C0C0C 100%)",
   "linear-gradient(135deg, #0a1a0a 0%, #0C0C0C 100%)",

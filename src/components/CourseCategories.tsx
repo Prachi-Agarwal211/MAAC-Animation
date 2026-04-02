@@ -82,7 +82,7 @@ function SlideUpCard({ course, index }: SlideCardProps) {
       });
     }, cardRef);
     return () => ctx.revert();
-  }, []); // index is stable from map, no need to re-run
+  }, [index]); // index is stable from map, no need to re-run
 
   return (
     <div

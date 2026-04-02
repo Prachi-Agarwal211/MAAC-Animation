@@ -17,7 +17,7 @@ export async function submitContactForm(formData: FormData) {
     console.log("Form submission received:", { name, phone, course });
     
     return { success: true, message: "Application submitted successfully! We'll contact you soon." };
-  } catch (error) {
+  } catch {
     return { success: false, message: "Failed to submit form. Please try again." };
   }
 }

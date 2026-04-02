@@ -3,7 +3,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Image from "next/image";
 import Preloader from "./Preloader";
 import VideoModal from "@/components/VideoModal";
 
@@ -40,7 +39,7 @@ export default function MAACXHero() {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const isTransitioningRef = useRef(false);
   const [isPaused, setIsPaused] = useState(false);
-  const [loadedVideos, setLoadedVideos] = useState<boolean[]>(
+  const [, setLoadedVideos] = useState<boolean[]>(
     new Array(HERO_VIDEOS.length).fill(false)
   );
 
