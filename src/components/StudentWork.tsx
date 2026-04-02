@@ -269,6 +269,28 @@ export default function StudentWork() {
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const [loadedVideos, setLoadedVideos] = useState<boolean[]>(new Array(workItems.length).fill(false));
 
+  // IntersectionObserver for lazy loading videos
+  useEffect(() => {
+    const observerRef = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const video = entry.target as HTMLVideoElement;
+            if (video.preload === "none") {
+              video.preload = "metadata";
+            }
+            observerRef.unobserve(video);
+          }
+        });
+      },
+      { rootMargin: "200px" } // Start loading 200px before entering viewport
+    );
+
+    videoRefs.current.forEach((v) => v && observerRef.observe(v));
+
+    return () => observerRef.disconnect();
+  }, []);
+
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.fromTo(".sw-heading", { opacity: 0, y: 80 }, {
@@ -284,7 +306,10 @@ export default function StudentWork() {
         scrollTrigger: { trigger: sectionRef.current, start: "top 70%" },
       });
     }, sectionRef);
-    return () => ctx.revert();
+    return () => {
+      ctx.revert();
+      ScrollTrigger.getAll().forEach((st) => st.kill());
+    };
   }, []);
 
   const handleCardHover = (index: number, isHovering: boolean) => {
@@ -356,7 +381,7 @@ export default function StudentWork() {
                       <div className="w-8 h-8 border-2 border-[#E31837]/30 border-t-[#E31837] rounded-full animate-spin" />
                     </div>
                   )}
-                  
+
                   <video
                     ref={(el) => { videoRefs.current[index] = el }}
                     src={item.video}
@@ -364,7 +389,7 @@ export default function StudentWork() {
                     muted
                     loop
                     playsInline
-                    preload="metadata"
+                    preload="none"
                     onLoadedData={() => handleVideoLoad(index)}
                   />
                   

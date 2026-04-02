@@ -42,7 +42,7 @@ export default function Awards() {
           {/* Header */}
           <div className="aw-heading text-center mb-16">
             <p className="text-[#E31837] text-xs font-semibold tracking-[0.12em] uppercase mb-4">Recognition</p>
-            <h2 className="font-display font-bold text-[clamp(2rem,4vw,3.5rem)] text-[#0C0C0C] leading-[1.08] tracking-tight mb-4 pb-1">
+            <h2 data-splitting className="font-display font-bold text-[clamp(2rem,4vw,3.5rem)] text-[#0C0C0C] leading-[1.08] tracking-tight mb-4 pb-1">
               Awards & <span className="text-[#E31837]">Recognition</span>
             </h2>
             <p className="text-[#4A4540] text-lg max-w-2xl mx-auto">

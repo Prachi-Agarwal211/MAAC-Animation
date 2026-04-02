@@ -19,6 +19,10 @@ export default function PopularCourses() {
   const trackRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isMobile, setIsMobile] = useState<boolean | null>(null);
+  
+  // Touch swipe support for desktop
+  const touchStartX = useRef<number>(0);
+  const touchEndX = useRef<number>(0);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -28,9 +32,13 @@ export default function PopularCourses() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // GSAP horizontal scroll on desktop
+  // GSAP horizontal scroll on desktop ONLY (≥768px)
   useEffect(() => {
-    if (isMobile !== true || !sectionRef.current || !trackRef.current) return;
+    // Guard: only run on desktop
+    if (typeof window === "undefined" || window.innerWidth < 768) return;
+    
+    // Skip if mobile or refs not ready
+    if (isMobile === true || !sectionRef.current || !trackRef.current) return;
 
     const ctx = gsap.context(() => {
       const track = trackRef.current;
@@ -68,7 +76,10 @@ export default function PopularCourses() {
       });
     }, sectionRef);
 
-    return () => ctx.revert();
+    return () => {
+      ctx.revert();
+      ScrollTrigger.getAll().forEach((st) => st.kill());
+    };
   }, [isMobile]);
 
   // Mobile: simple CSS scroll with dots
@@ -79,6 +90,47 @@ export default function PopularCourses() {
     const gap = 24;
     const index = Math.round(el.scrollLeft / (cardWidth + gap));
     setActiveIndex(Math.min(index, coursesData.popularCourses.length - 1));
+  };
+
+  // Scroll to active card on desktop when index changes (from touch swipe)
+  useEffect(() => {
+    if (!trackRef.current || isMobile !== false || !trackRef.current.firstElementChild) return;
+    
+    const card = trackRef.current.firstElementChild as HTMLElement;
+    const cardWidth = card.clientWidth || 400;
+    const gap = 24;
+    const scrollPosition = activeIndex * (cardWidth + gap);
+    
+    gsap.to(trackRef.current, {
+      x: -scrollPosition,
+      duration: 0.5,
+      ease: "power3.out",
+    });
+  }, [activeIndex, isMobile]);
+
+  // Touch handlers for swipe navigation (desktop)
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    const swipeThreshold = 50;
+    const diff = touchStartX.current - touchEndX.current;
+    const cardWidth = 400; // Approximate card width + gap
+    
+    if (Math.abs(diff) > swipeThreshold) {
+      if (diff > 0) {
+        // Swiped left - next card
+        setActiveIndex((prev) => Math.min(prev + 1, coursesData.popularCourses.length - 1));
+      } else {
+        // Swiped right - previous card
+        setActiveIndex((prev) => Math.max(prev - 1, 0));
+      }
+    }
   };
 
   // Don't render until isMobile is determined
@@ -95,7 +147,7 @@ export default function PopularCourses() {
       {/* Header */}
       <div className="pc-heading text-center pt-24 md:pt-32 pb-12 md:pb-16 relative z-10 max-w-7xl mx-auto px-4">
         <p className="text-[#E31837] text-xs font-semibold tracking-[0.12em] uppercase mb-4">Master Your Craft</p>
-        <h2 className="font-display font-bold text-[clamp(2rem,4vw,3.5rem)] text-[#F0EBE1] leading-[1.08] tracking-tight mb-4 pb-1">
+        <h2 data-splitting className="font-display font-bold text-[clamp(2rem,4vw,3.5rem)] text-[#F0EBE1] leading-[1.08] tracking-tight mb-4 pb-1">
           Popular <span className="gradient-text">Courses</span>
         </h2>
         <p className="text-[#A8A29C] text-lg max-w-2xl mx-auto">
@@ -108,8 +160,11 @@ export default function PopularCourses() {
         <div
           ref={trackRef}
           onScroll={isMobile ? handleScroll : undefined}
-          className={`flex gap-6 ${isMobile ? "overflow-x-auto snap-x snap-mandatory pb-4 hscroll-container px-6" : "px-[10vw] pb-8"}`}
-          style={isMobile ? undefined : { willChange: "transform", flexWrap: "nowrap" }}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+          className={`flex gap-6 ${isMobile ? "overflow-x-auto snap-x snap-mandatory pb-4 hscroll-container px-6" : "block px-[10vw] pb-8"}`}
+          style={isMobile === false ? { willChange: "transform" } : { scrollSnapType: "x mandatory" }}
         >
           {coursesData.popularCourses.map((course, index) => (
             <div

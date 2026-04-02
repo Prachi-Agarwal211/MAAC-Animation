@@ -51,6 +51,11 @@
   100% { transform: translateY(300%); }
 }
 
+@keyframes progress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
 /* ═══════════════════════════════════════════════════════
    BASE RESET
    ═══════════════════════════════════════════════════════ */
@@ -131,8 +136,8 @@ body.demo-bar-visible .page-wrapper {
 .glass-card:hover {
   background: rgba(255, 255, 255, 0.05);
   border-color: var(--border-hover);
-  transform: translateY(-6px);
-  box-shadow: 0 24px 64px var(--red-glow);
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: 0 32px 80px rgba(227,24,55,0.15), 0 0 0 1px rgba(227,24,55,0.15);
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -212,6 +217,11 @@ body.demo-bar-visible .page-wrapper {
 .bg-gradient-section {
   background: linear-gradient(135deg, #0C0C0C 0%, #1A0505 50%, #0C0C0C 100%);
   position: relative;
+}
+
+/* Hero pattern background */
+.bg-hero-pattern {
+  background: linear-gradient(160deg, #0C0C0C 0%, #1a0508 40%, #0C0C0C 100%);
 }
 
 /* Atmospheric blobs */
@@ -307,6 +317,22 @@ body.demo-bar-visible .page-wrapper {
   border-radius: 50%;
   background: inherit;
   animation: pulse-ring 2s ease-out infinite;
+}
+
+/* Pulse animation for play buttons */
+@keyframes fab-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+.fab-pulse {
+  animation: fab-pulse 2s ease-in-out infinite;
 }
 
 @keyframes scroll-indicator {
@@ -452,11 +478,35 @@ body.demo-bar-visible .page-wrapper {
   transition: transform 0.3s var(--ease-expo-out);
 }
 
+/* Magnetic button hover effect */
+.magnetic-hover {
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.magnetic-hover:hover {
+  transform: translate(var(--magnetic-x, 0), var(--magnetic-y, 0));
+}
+
 /* ═══════════════════════════════════════════════════════
    SPLITTING.JS
    ═══════════════════════════════════════════════════════ */
 .splitting .char { display: inline-block; }
 .splitting .word { display: inline-block; white-space: pre; }
+
+/* Splitting.js word reveal styles */
+[data-splitting] {
+  overflow: hidden;
+  display: inline-block;
+}
+
+[data-splitting] .word {
+  overflow: hidden;
+  display: inline-block;
+}
+
+[data-splitting] .char {
+  display: inline-block;
+}
 
 /* ═══════════════════════════════════════════════════════
    CURSOR

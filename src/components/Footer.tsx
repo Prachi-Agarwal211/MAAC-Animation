@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 
 import { contactInfo } from "@/data/siteData";
+import MagneticButton from "@/components/ui/MagneticButton";
 
 const SocialIcon = ({ type }: { type: string }) => {
   const icons: Record<string, JSX.Element> = {
@@ -41,12 +42,16 @@ export default function Footer() {
             Ready to Start? Book a Free Demo Class Today
           </h2>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link href="/contact" className="btn bg-white text-[#E31837] hover:bg-gray-100 text-sm">
-              Book Free Demo
-            </Link>
-            <a href="https://wa.me/917300001589" target="_blank" rel="noopener noreferrer" className="btn bg-white/10 text-white border border-white/20 hover:bg-white/20 text-sm">
-              WhatsApp Us
-            </a>
+            <MagneticButton>
+              <Link href="/contact" className="btn bg-white text-[#E31837] hover:bg-gray-100 text-sm">
+                Book Free Demo
+              </Link>
+            </MagneticButton>
+            <MagneticButton>
+              <a href="https://wa.me/917300001589" target="_blank" rel="noopener noreferrer" className="btn bg-white/10 text-white border border-white/20 hover:bg-white/20 text-sm">
+                WhatsApp Us
+              </a>
+            </MagneticButton>
           </div>
         </div>
       </div>

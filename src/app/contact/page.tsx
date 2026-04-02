@@ -205,7 +205,7 @@ export default function ContactPage() {
                 className="w-full px-5 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/30 transition-all resize-none"
               />
 
-              <button type="submit" className="w-full btn-primary py-4 text-base font-display">
+              <button type="submit" className="w-full btn btn-primary py-4 text-base font-display">
                 Send Message
               </button>
             </form>

@@ -8,6 +8,48 @@ import VideoModal from "@/components/VideoModal";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Video carousel data - all videos with their metadata
+// Note: All testimonial videos are .mp4 files, so srcWebm and srcMp4 point to the same file
+const HERO_VIDEOS = [
+  {
+    id: 1,
+    name: "Intro",
+    srcWebm: "/intro.webm",
+    srcMp4: "/intro.mp4",
+    poster: "/images/hero-poster.webp",
+  },
+  {
+    id: 2,
+    name: "Aakanksha",
+    srcWebm: "/hero%20section/AAKANKSHA%20..mp4",
+    srcMp4: "/hero%20section/AAKANKSHA%20..mp4",
+    poster: "/images/hero-poster.webp",
+  },
+  {
+    id: 3,
+    name: "Abhilash S",
+    srcWebm: "/hero%20section/ABHILASH%20S.mp4",
+    srcMp4: "/hero%20section/ABHILASH%20S.mp4",
+    poster: "/images/hero-poster.webp",
+  },
+  {
+    id: 4,
+    name: "Emon Mandal",
+    srcWebm: "/hero%20section/EMON%20MANDAL.mp4",
+    srcMp4: "/hero%20section/EMON%20MANDAL.mp4",
+    poster: "/images/hero-poster.webp",
+  },
+  {
+    id: 5,
+    name: "Nayan Satyawan Mestry",
+    srcWebm: "/hero%20section/NAYAN%20SATYAWAN%20MESTRY.mp4",
+    srcMp4: "/hero%20section/NAYAN%20SATYAWAN%20MESTRY.mp4",
+    poster: "/images/hero-poster.webp",
+  },
+];
+
+const VIDEO_INTERVAL = 8000; // 8 seconds per video
+
 /**
  * MAACX Hero Component - Clean Professional Design
  *
@@ -20,10 +62,17 @@ gsap.registerPlugin(ScrollTrigger);
  */
 export default function MAACXHero() {
   const containerRef = useRef<HTMLElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const [mounted, setMounted] = useState(false);
   const [preloaderDone, setPreloaderDone] = useState(false);
   const [showVideoModal, setShowVideoModal] = useState(false);
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+  
+  // Touch swipe support
+  const touchStartX = useRef<number>(0);
+  const touchEndX = useRef<number>(0);
 
   // Check mount status
   useEffect(() => {
@@ -33,6 +82,124 @@ export default function MAACXHero() {
   const handlePreloaderComplete = useCallback(() => {
     setPreloaderDone(true);
   }, []);
+
+  // Rotate to next video
+  const goToNextVideo = useCallback(() => {
+    setIsTransitioning(true);
+    setCurrentVideoIndex((prev) => (prev + 1) % HERO_VIDEOS.length);
+
+    // Reset transitioning flag after animation completes
+    setTimeout(() => {
+      setIsTransitioning(false);
+    }, 1500);
+  }, []);
+
+  // Touch handlers for swipe navigation
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    const swipeThreshold = 50; // Minimum swipe distance
+    const diff = touchStartX.current - touchEndX.current;
+    
+    if (Math.abs(diff) > swipeThreshold) {
+      if (diff > 0) {
+        // Swiped left - next video
+        goToNextVideo();
+      } else {
+        // Swiped right - previous video
+        setCurrentVideoIndex((prev) => (prev - 1 + HERO_VIDEOS.length) % HERO_VIDEOS.length);
+      }
+    }
+  };
+
+  // Auto-rotate videos (pauses on hover)
+  useEffect(() => {
+    if (!preloaderDone || isPaused) return;
+
+    const interval = setInterval(goToNextVideo, VIDEO_INTERVAL);
+    return () => clearInterval(interval);
+  }, [preloaderDone, goToNextVideo, isPaused]);
+
+  // Dynamic preload upgrade when switching to lazy-loaded videos
+  useEffect(() => {
+    const nextVideo = videoRefs.current[currentVideoIndex];
+    if (nextVideo && nextVideo.preload === "none") {
+      nextVideo.preload = "auto";
+    }
+  }, [currentVideoIndex]);
+
+  // IntersectionObserver for lazy loading videos
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const video = entry.target as HTMLVideoElement;
+            if (video.preload === "none") {
+              video.preload = "auto";
+            }
+          }
+        });
+      },
+      { rootMargin: "500px" }
+    );
+    
+    videoRefs.current.forEach((v) => v && observer.observe(v));
+    
+    return () => observer.disconnect();
+  }, []);
+
+  // Handle video transitions with GSAP
+  useEffect(() => {
+    if (!preloaderDone) return;
+
+    const ctx = gsap.context(() => {
+      const currentVideoEl = videoRefs.current[currentVideoIndex];
+      
+      if (currentVideoEl) {
+        // If not the first render, animate transition
+        if (currentVideoIndex !== 0 || !isTransitioning) {
+          const prevIndex = (currentVideoIndex - 1 + HERO_VIDEOS.length) % HERO_VIDEOS.length;
+          const prevVideoEl = videoRefs.current[prevIndex];
+          
+          if (prevVideoEl && prevIndex !== currentVideoIndex) {
+            // Fade out previous video
+            gsap.to(prevVideoEl, {
+              opacity: 0,
+              duration: 0.8,
+              ease: "power2.inOut",
+            });
+          }
+        }
+
+        // Fade in current video
+        gsap.fromTo(
+          currentVideoEl,
+          { opacity: currentVideoIndex === 0 ? 1 : 0 },
+          { opacity: 1, duration: 0.8, ease: "power2.inOut" }
+        );
+
+        // Play current video
+        currentVideoEl.play().catch(() => {});
+        
+        // Pause all other videos
+        videoRefs.current.forEach((videoEl, index) => {
+          if (index !== currentVideoIndex && videoEl) {
+            videoEl.pause();
+            videoEl.currentTime = 0;
+          }
+        });
+      }
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, [currentVideoIndex, preloaderDone]);
 
   // GSAP animations - simplified fade-up
   useEffect(() => {
@@ -47,7 +214,7 @@ export default function MAACXHero() {
 
       const tl = gsap.timeline();
 
-      // Video fade-in
+      // Initial video fade-in (first video only)
       tl.from(".maacx-video", {
         opacity: 0,
         scale: 1.05,
@@ -109,9 +276,32 @@ export default function MAACXHero() {
         y: 10,
         duration: 0.3,
       }, "-=0.2");
+
+      // Add count-up animation to stats values
+      const stats = containerRef.current?.querySelectorAll(".maacx-stat-value");
+      stats?.forEach((stat) => {
+        const finalValue = parseInt(stat.textContent?.replace(/\D/g, "") || "0");
+        gsap.to(stat, {
+          textContent: finalValue,
+          duration: 2,
+          ease: "expo.out",
+          scrollTrigger: {
+            trigger: stat,
+            start: "top 80%",
+            once: true,
+          },
+          snap: { textContent: 1 },
+          onUpdate: function() {
+            stat.textContent = Math.round(this.targets()[0].textContent) + "+";
+          },
+        });
+      });
     }, containerRef);
 
-    return () => ctx.revert();
+    return () => {
+      ctx.revert();
+      ScrollTrigger.getAll().forEach((st) => st.kill());
+    };
   }, [preloaderDone]);
 
   if (!mounted) return <div className="h-screen w-full bg-[#080808]" />;
@@ -122,6 +312,11 @@ export default function MAACXHero() {
       <section
         ref={containerRef}
         className="maacx-hero relative min-h-[100svh] w-full bg-[#080808] overflow-hidden"
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
       >
         {/* Background Layer */}
         <div className="absolute inset-0 z-0">
@@ -136,23 +331,70 @@ export default function MAACXHero() {
             }}
           />
 
-          {/* Video background */}
-          <video
-            ref={videoRef}
-            className="maacx-video absolute inset-0 h-full w-full object-cover"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="none"
-            poster="/images/hero-poster.webp"
-          >
-            <source src="/intro.webm" type="video/webm" />
-            <source src="/intro.mp4" type="video/mp4" />
-          </video>
+          {/* Video carousel - all videos layered */}
+          <div className="absolute inset-0 z-[1]">
+            {HERO_VIDEOS.map((video, index) => (
+              <video
+                key={video.id}
+                ref={(el) => {
+                  videoRefs.current[index] = el;
+                }}
+                className={`maacx-video absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${
+                  index === currentVideoIndex ? "opacity-100" : "opacity-0"
+                }`}
+                autoPlay={index === 0}
+                muted
+                loop
+                playsInline
+                preload={index === 0 ? "auto" : "none"}
+                poster={video.poster}
+              >
+                {video.srcWebm.endsWith(".webm") ? (
+                  <source src={video.srcWebm} type="video/webm" />
+                ) : (
+                  <source src={video.srcMp4} type="video/mp4" />
+                )}
+                {video.srcMp4 !== video.srcWebm && (
+                  <source src={video.srcMp4} type="video/mp4" />
+                )}
+              </video>
+            ))}
+          </div>
 
           {/* Uniform overlay */}
           <div className="absolute inset-0 z-[2] bg-black/50" />
+          
+          {/* Video navigation indicators */}
+          <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-[3] flex items-center gap-2">
+            {HERO_VIDEOS.map((video, index) => (
+              <button
+                key={video.id}
+                onClick={() => {
+                  if (isTransitioning || index === currentVideoIndex) return;
+                  setIsTransitioning(true);
+                  setCurrentVideoIndex(index);
+                  setTimeout(() => setIsTransitioning(false), 1500);
+                }}
+                className={`group relative h-2 rounded-full transition-all duration-500 ${
+                  index === currentVideoIndex
+                    ? "w-8 bg-[#E31837]"
+                    : "w-2 bg-white/30 hover:bg-white/50"
+                }`}
+                aria-label={`Show ${video.name} video`}
+                disabled={isTransitioning || index === currentVideoIndex}
+              >
+                {/* Progress bar for current video */}
+                {index === currentVideoIndex && !isTransitioning && (
+                  <div
+                    className="absolute inset-0 bg-[#E31837] rounded-full origin-left"
+                    style={{
+                      animation: `progress ${VIDEO_INTERVAL / 1000}s linear`,
+                    }}
+                  />
+                )}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Left Side Content - Bottom Aligned */}
@@ -238,6 +480,20 @@ export default function MAACXHero() {
           </div>
         </div>
 
+        {/* Mobile stats strip — only on mobile */}
+        <div className="absolute bottom-16 left-0 right-0 z-20 flex lg:hidden items-center justify-center gap-0 border-t border-white/10">
+          {[
+            { value: "30+", label: "Years" },
+            { value: "95%", label: "Placement" },
+            { value: "100+", label: "Centers" },
+          ].map((stat, i) => (
+            <div key={i} className={`flex-1 text-center py-3 ${i < 2 ? "border-r border-white/10" : ""}`}>
+              <div className="text-white font-bold text-base">{stat.value}</div>
+              <div className="text-white/40 text-[9px] uppercase tracking-wider">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+
         {/* Right Side Stats - Bottom Aligned (Desktop Only) */}
         <div className="maacx-content-right absolute right-0 bottom-0 z-20 hidden lg:block px-12 lg:px-20 pb-12 md:pb-16">
           <div className="backdrop-blur-xl bg-black/20 border border-white/10 rounded-xl p-6 max-w-[240px]">
@@ -253,7 +509,7 @@ export default function MAACXHero() {
                 }`}
               >
                 <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-gradient-to-br from-[#E31837] to-[#FF6B35] flex items-center justify-center">
-                  <span className="text-white font-bold text-sm">{item.value}</span>
+                  <span className="maacx-stat-value text-white font-bold text-sm">{item.value}</span>
                 </div>
                 <div>
                   <p className="text-white font-medium text-xs">{item.label}</p>
@@ -268,7 +524,7 @@ export default function MAACXHero() {
       <VideoModal
         isOpen={showVideoModal}
         onClose={() => setShowVideoModal(false)}
-        videoUrl="/intro.mp4"
+        videoUrl={HERO_VIDEOS[currentVideoIndex].srcMp4}
       />
     </>
   );

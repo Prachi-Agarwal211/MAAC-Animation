@@ -63,6 +63,18 @@ export default function InstituteIntro() {
       tl.fromTo(".institute-description", { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 1, ease: "expo.out" }, "-=0.6");
       tl.fromTo(".institute-video-container", { opacity: 0, x: 60 }, { opacity: 1, x: 0, duration: 1, ease: "expo.out" }, "-=0.8");
       tl.fromTo(".institute-quote", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1, ease: "expo.out" }, "-=0.6");
+
+      // Add parallax to video container
+      gsap.to(".institute-video-container", {
+        yPercent: -15,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".institute-video-container",
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 1,
+        },
+      });
     }, containerRef);
 
     return () => ctx.revert();
@@ -92,7 +104,7 @@ export default function InstituteIntro() {
             <div>
               <div className="flex items-start gap-3 mb-6">
                 <div className="w-1 h-12 bg-[#E31837] flex-shrink-0 rounded-full" />
-                <h2 className="institute-title font-display font-bold text-[clamp(1.5rem,3vw,2.5rem)] leading-tight text-[#0C0C0C]">
+                <h2 data-splitting className="institute-title font-display font-bold text-[clamp(1.5rem,3vw,2.5rem)] leading-tight text-[#0C0C0C]">
                   Join <span className="inline-block bg-[#E31837] text-white px-2 py-0.5 rounded">The Best Animation Institute</span> In Jaipur
                 </h2>
               </div>
