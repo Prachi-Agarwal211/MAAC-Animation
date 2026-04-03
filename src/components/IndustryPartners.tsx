@@ -31,11 +31,11 @@ export default function IndustryPartners() {
   return (
     <section ref={sectionRef} className="relative overflow-hidden">
       {/* Dark Theme background */}
-      <div className="bg-[#0C0C0C]/50 border-y border-white/5 py-20 md:py-28">
+      <div className="border-y py-20 md:py-28" style={{ background: "linear-gradient(180deg, #0C0C0C 0%, #1C1208 50%, #0C0C0C 100%)", borderColor: "rgba(196,168,130,0.08)" }}>
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
           {/* Header */}
           <div className="partners-heading text-center mb-12">
-            <span className="inline-block px-4 py-1.5 bg-[#E31837]/10 text-[#E31837] text-xs font-semibold tracking-[0.15em] uppercase rounded-full mb-4">
+            <span className="inline-block px-4 py-1.5 text-xs font-semibold tracking-[0.15em] uppercase rounded-full mb-4" style={{ background: "rgba(196,168,130,0.1)", border: "1px solid rgba(196,168,130,0.2)", color: "#C4A882" }}>
               Knowledge Partners
             </span>
             <h2 className="font-display font-bold text-[clamp(1.8rem,3.5vw,3rem)] text-[#F0EBE1] leading-[1.05] tracking-tight">

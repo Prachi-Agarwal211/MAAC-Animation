@@ -75,7 +75,7 @@ export default function ApplyNow() {
   }
 
   const inputClass = (field: string) =>
-    `w-full px-5 py-4 rounded-xl bg-white/5 border ${errors[field] ? "border-red-500" : "border-white/10"} text-white placeholder-[#6B6560] focus:outline-none focus:border-[#E31837]/50 focus:ring-1 focus:ring-[#E31837]/30 transition-all duration-300 text-base`;
+    `w-full px-5 py-4 rounded-xl bg-white/5 border ${errors[field] ? "border-red-500" : "border-white/10"} text-[#F0EBE1] placeholder-[#6B6560] focus:outline-none focus:border-[#C4A882]/50 focus:ring-1 focus:ring-[#C4A882]/30 transition-all duration-300 text-base`;
 
   return (
     <section ref={sectionRef} className="relative py-24 md:py-32 overflow-hidden bg-gradient-section">
@@ -201,7 +201,7 @@ export default function ApplyNow() {
                 <button 
                   type="submit" 
                   disabled={isSubmitting}
-                  className="btn btn-primary py-4 text-base font-display w-full disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  className="btn bg-gradient-to-r from-[#E31837] to-[#C4132D] text-white py-4 text-base font-display w-full disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(227,24,55,0.2)] border border-[#E31837]/50"
                 >
                   {isSubmitting ? (
                     <>

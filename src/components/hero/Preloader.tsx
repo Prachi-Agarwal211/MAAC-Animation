@@ -10,88 +10,115 @@ interface PreloaderProps {
 export default function Preloader({ onComplete }: PreloaderProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const [showSkip, setShowSkip] = useState(false);
+  const progressBarRef = useRef<HTMLDivElement>(null);
   const completedRef = useRef(false);
+  const [progress, setProgress] = useState(0);
 
   const triggerExit = useCallback(() => {
     if (completedRef.current) return;
     completedRef.current = true;
-    const tl = gsap.timeline({
-      onComplete,
-      ease: "expo.inOut",
-    });
-    tl.to(".pl-curtain-top", {
-      yPercent: -100,
-      duration: 0.45,
-      force3D: true,
-    }).to(".pl-curtain-bottom", {
-      yPercent: 100,
-      duration: 0.45,
-      force3D: true,
-    }, "<");
+    console.log("Preloader: triggerExit initiated!");
+
+    // Native CSS Transition instead of GSAP (Removes dependency instability)
+    if (progressBarRef.current) {
+      progressBarRef.current.style.transition = 'width 0.3s ease-out';
+      progressBarRef.current.style.width = '100%';
+    }
+
+    // Wait exactly 300ms for progress bar to fake 100%, then fade out natively
+    setTimeout(() => {
+      if (wrapperRef.current) {
+        wrapperRef.current.style.transition = 'opacity 0.8s ease-in-out';
+        wrapperRef.current.style.opacity = '0';
+        wrapperRef.current.style.pointerEvents = 'none';
+        
+        // Notify parent 800ms later when fade-out is complete
+        setTimeout(() => {
+          onComplete();
+        }, 800);
+      } else {
+        onComplete();
+      }
+    }, 300);
+
   }, [onComplete]);
 
   useEffect(() => {
-    const skipTimer = setTimeout(() => setShowSkip(true), 3000); // was 5000
-    const fallbackTimer = setTimeout(triggerExit, 6000); // was 8000
-
     const video = videoRef.current;
+    console.log("Preloader: Component mounted. Video Element:", video);
+    
+    // Increased fallback to 15s to allow Next.js dev server enough time to compile and serve large MP4s
+    const fallback = setTimeout(() => {
+      console.log("Preloader: 15s fallback hit!");
+      triggerExit();
+    }, 15000);
+
     if (video) {
-      // Mobile: if video stalls for > 1.5s, bail out
-      const onStall = () => setTimeout(triggerExit, 1500);
-      video.addEventListener('stalled', onStall, { once: true });
-      // Also handle waiting (buffering) timeout
-      let waitTimer: NodeJS.Timeout;
-      const onWaiting = () => { waitTimer = setTimeout(triggerExit, 2000); };
-      const onPlaying = () => clearTimeout(waitTimer);
-      video.addEventListener('waiting', onWaiting);
-      video.addEventListener('playing', onPlaying);
+      // Standard Play initialization
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch((err) => {
+          console.warn("Preloader: Video autoplay prevented or delayed:", err);
+        });
+      }
+
+      // Update progress bar based on video time
+      const updateProgress = () => {
+        if (video.duration) {
+          const pct = (video.currentTime / video.duration) * 100;
+          setProgress(pct);
+          if (progressBarRef.current) {
+            progressBarRef.current.style.width = `${pct}%`;
+          }
+        }
+      };
+
+      video.addEventListener("timeupdate", updateProgress);
+
       return () => {
-        clearTimeout(skipTimer);
-        clearTimeout(fallbackTimer);
-        clearTimeout(waitTimer);
-        video.removeEventListener('stalled', onStall);
-        video.removeEventListener('waiting', onWaiting);
-        video.removeEventListener('playing', onPlaying);
+        clearTimeout(fallback);
+        video.removeEventListener("timeupdate", updateProgress);
       };
     }
-    return () => {
-      clearTimeout(skipTimer);
-      clearTimeout(fallbackTimer);
-    };
+
+    return () => clearTimeout(fallback);
   }, [triggerExit]);
 
   return (
-    <div
-      ref={wrapperRef}
-      className="fixed inset-0 z-[9999] bg-[#080808] overflow-hidden"
-    >
-      <div className="pl-curtain-top absolute inset-x-0 top-0 h-1/2 bg-[#080808] z-20 origin-top will-change-transform" />
-      <div className="pl-curtain-bottom absolute inset-x-0 bottom-0 h-1/2 bg-[#080808] z-20 origin-bottom will-change-transform" />
+    <div ref={wrapperRef} className="fixed inset-0 z-[9999] bg-[#000000] overflow-hidden pointer-events-auto flex items-center justify-center">
+      {/* Fallback Text in case video refuses to load */}
+      <div className="absolute inset-0 flex items-center justify-center z-0">
+        <span className="text-white/20 text-sm tracking-widest uppercase">Loading MAAC Experience...</span>
+      </div>
 
+      {/* Full screen intro video */}
       <video
         ref={videoRef}
-        className="absolute inset-0 w-full h-full object-cover z-10"
+        className="absolute inset-0 w-full h-full object-contain bg-black z-10"
         autoPlay
         muted
         playsInline
         preload="auto"
-        onEnded={triggerExit}
-        onError={triggerExit}
+        onEnded={() => {
+          console.log("Preloader: Video natural onEnded fired!");
+          triggerExit();
+        }}
+        onError={(e) => {
+          console.error("Preloader: Video loading ERROR natively fired! Check video path and codec.", e);
+          // Do not eagerly exit! We want to see the error, and fallback will exit it gracefully.
+        }}
       >
-        <source src="/intro.webm" type="video/webm" />
         <source src="/intro.mp4" type="video/mp4" />
       </video>
 
-      {showSkip && (
-        <button
-          onClick={triggerExit}
-          className="absolute bottom-8 right-6 z-30 px-5 py-2 text-sm text-white bg-white/10 border border-white/20 rounded-full backdrop-blur-sm hover:bg-white/20 active:scale-95 transition-all"
-          aria-label="Skip intro"
-        >
-          Skip →
-        </button>
-      )}
+      {/* Thin red loading bar — bottom only, no text */}
+      <div className="absolute bottom-0 left-0 right-0 z-30 h-[4px] bg-white/10">
+        <div
+          ref={progressBarRef}
+          className="h-full bg-[#E31837]"
+          style={{ width: `${progress}%`, transition: 'width 0.1s linear' }}
+        />
+      </div>
     </div>
   );
 }

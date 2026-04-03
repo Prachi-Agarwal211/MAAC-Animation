@@ -31,10 +31,7 @@ export default function CareerCreatorComparison() {
 
   return (
     <div ref={sectionRef} className="ccc-section relative overflow-hidden">
-      {/* Section divider — dark to split */}
-      <div className="relative h-16 overflow-hidden" style={{ background: "#0C0C0C" }}>
-        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "100%", background: "linear-gradient(to bottom, #0C0C0C, #0C0C0C)" }} />
-      </div>
+
 
       <div className="flex flex-col lg:flex-row">
         {/* LEFT HALF — CareerX */}
@@ -106,10 +103,7 @@ export default function CareerCreatorComparison() {
         </div>
       </div>
 
-      {/* Section divider — split to dark */}
-      <div className="relative h-16 overflow-hidden" style={{ background: "#0C0C0C" }}>
-        <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "100%", background: "linear-gradient(to bottom, #0C0C0C, #0C0C0C)" }} />
-      </div>
+
     </div>
   );
 }

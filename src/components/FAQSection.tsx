@@ -16,7 +16,7 @@ function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section className="py-24 bg-[#0C0C0C]">
+    <section className="py-24" style={{ background: "linear-gradient(180deg, #0C0C0C 0%, #120E0A 50%, #0C0C0C 100%)" }}>
       <div className="max-w-4xl mx-auto px-6 md:px-12">
         {/* Section Header */}
         <div className="text-center mb-16">

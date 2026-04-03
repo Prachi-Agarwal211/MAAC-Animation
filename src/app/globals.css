@@ -33,6 +33,19 @@
   --text-on-light-s: #4A4540;
   --text-on-light-m: #7A7570;
 
+  /* NEW — warm elegant palette */
+  --warm-dark:     #1C1410;
+  --rich-brown:    #2A1F1A;
+  --gold:          #8B7355;
+  --sand:          #C4A882;
+  --parchment:     #E8DCC8;
+  
+  /* Section backgrounds — all dark variants */
+  --section-dark:  #0C0C0C;
+  --section-mid:   #0F0D0B;
+  --section-warm:  #120E0A;
+  --section-card:  rgba(28, 20, 16, 0.6);
+
   /* Layout */
   --navbar-height: 80px;
   --demo-bar-height: 36px;
@@ -202,14 +215,7 @@ body.demo-bar-visible .page-wrapper {
 /* ═══════════════════════════════════════════════════════
    SECTION BACKGROUNDS
    ═══════════════════════════════════════════════════════ */
-.bg-dark {
-  background-color: var(--bg-primary);
-  position: relative;
-}
-.bg-mid {
-  background-color: var(--bg-secondary);
-  position: relative;
-}
+
 
 .bg-gradient-section {
   background: linear-gradient(135deg, #0C0C0C 0%, #1A0505 50%, #0C0C0C 100%);
@@ -218,7 +224,7 @@ body.demo-bar-visible .page-wrapper {
 
 /* Hero pattern background */
 .bg-hero-pattern {
-  background: linear-gradient(160deg, #0C0C0C 0%, #1a0508 40%, #0C0C0C 100%);
+  background: linear-gradient(160deg, #0C0C0C 0%, #1C0A0C 40%, #0C0C0C 100%);
 }
 
 /* Atmospheric blobs */
@@ -533,4 +539,81 @@ body.demo-bar-visible .page-wrapper {
 }
 .accordion-content.open {
   max-height: 500px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   WARM SECTION VARIANTS
+   ═══════════════════════════════════════════════════════ */
+.section-warm-dark {
+  background: linear-gradient(180deg, #0C0C0C 0%, #120E0A 50%, #0C0C0C 100%);
+}
+
+.section-editorial {
+  background: linear-gradient(160deg, #0F0D0B 0%, #1C1208 60%, #0F0D0B 100%);
+}
+
+/* Gold text */
+.text-gold {
+  color: var(--sand);
+}
+
+/* Warm gradient text */
+.gradient-text-warm {
+  background: linear-gradient(135deg, #C4A882 0%, #E31837 50%, #FF6B35 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ═══════════════════════════════════════════════════════
+   GLASS CARD — WARM VARIANT
+   ═══════════════════════════════════════════════════════ */
+.glass-card-warm {
+  background: rgba(28, 20, 16, 0.5);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(196, 168, 130, 0.12);
+  border-radius: 16px;
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+.glass-card-warm:hover {
+  border-color: rgba(196, 168, 130, 0.25);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(196,168,130,0.15);
+}
+
+/* ═══════════════════════════════════════════════════════
+   SCROLL EXPERIENCE — SECTION TRANSITIONS
+   ═══════════════════════════════════════════════════════ */
+.section-reveal {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+/* Floating grain for warm sections */
+.grain-warm {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 120px;
+  mix-blend-mode: overlay;
+}
+
+/* ═══════════════════════════════════════════════════════
+   STUDENT SHOWCASE — FULLSCREEN
+   ═══════════════════════════════════════════════════════ */
+.showcase-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ═══════════════════════════════════════════════════════
+   COUNTERS
+   ═══════════════════════════════════════════════════════ */
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
 }

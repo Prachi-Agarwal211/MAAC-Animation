@@ -19,7 +19,8 @@ export default function LenisProvider({
     if (initializedRef.current) return;
     initializedRef.current = true;
 
-    destroyLenis(); // This will re-init if needed
+    // Initialize Lenis (skip on touch devices - already handled in lenis.ts)
+    import("@/lib/lenis").then(({ initLenis }) => initLenis());
     const ctx = gsap.context(() => {
       // Global scroll-reveal
       const revealElements = gsap.utils.toArray(".scroll-reveal");

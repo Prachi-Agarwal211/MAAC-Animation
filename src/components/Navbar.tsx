@@ -15,8 +15,19 @@ export default function Navbar() {
     closeAllMenus 
   } = useUIStore();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [preloading, setPreloading] = useState(true);
   const navRef = useRef<HTMLElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // If not homepage, or if SSR/preloader already bypassed, reveal immediately
+    if (typeof window !== "undefined" && window.location.pathname !== "/") {
+      setPreloading(false);
+    }
+    const handlePreloaderDone = () => setPreloading(false);
+    window.addEventListener("maac:preloader_done", handlePreloaderDone);
+    return () => window.removeEventListener("maac:preloader_done", handlePreloaderDone);
+  }, []);
 
   // Scroll detection — threshold at 85% viewport height
   useEffect(() => {
@@ -78,7 +89,12 @@ export default function Navbar() {
   return (
     <>
       {/* ═══════ SINGLE HEADER ELEMENT ═══════ */}
-      <header ref={navRef} className="fixed left-0 right-0 z-[1000]">
+      <header 
+        ref={navRef} 
+        className={`fixed left-0 right-0 z-[1000] transition-opacity duration-700 ${
+          preloading ? "opacity-0 pointer-events-none" : "opacity-100"
+        }`}
+      >
         {/* ── Main Nav Bar ── */}
         <div
           className={`transition-all duration-500 ${

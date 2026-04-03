@@ -85,7 +85,7 @@ export default function InstituteIntro() {
     <div ref={containerRef} className="institute-section relative overflow-hidden bg-[#0a0a0a]">
       {/* Dark Theme wrapper */}
       <div
-        className="relative bg-gradient-to-b from-[#0C0C0C] via-[#111111] to-[#0C0C0C] py-16 md:py-24 section-fade"
+        className="relative bg-gradient-to-b from-[#0C0C0C] via-[#120E0A] to-[#0C0C0C] py-16 md:py-24 section-fade"
       >
         <div className="atmosphere-blob blob-red top-[-10%] right-[-10%] opacity-20" />
         <div className="grain-overlay" />
@@ -127,8 +127,8 @@ export default function InstituteIntro() {
               </div>
 
               {/* Pull Quote */}
-              <blockquote className="institute-quote mt-8 pl-5 py-2" style={{ borderLeft: '3px solid #E31837' }}>
-                <p className="text-[#F0EBE1] text-lg italic font-display leading-relaxed">
+              <blockquote className="institute-quote mt-8 pl-5 py-2" style={{ borderLeft: '3px solid #8B7355' }}>
+                <p className="text-[#E8DCC8] text-lg italic font-display leading-relaxed">
                   &ldquo;MAAC gave me the skills and confidence to land my dream job at a top VFX studio.&rdquo;
                 </p>
                 <cite className="text-[#6B6560] text-sm mt-2 block not-italic">— Alumni, VFX Artist at DNEG</cite>

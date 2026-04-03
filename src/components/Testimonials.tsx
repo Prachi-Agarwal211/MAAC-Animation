@@ -40,14 +40,14 @@ function Testimonials() {
   };
 
   return (
-    <section ref={sectionRef} className="relative py-24 md:py-32 overflow-hidden bg-[#0C0C0C]">
+    <section ref={sectionRef} className="relative py-24 md:py-32 overflow-hidden" style={{ background: "linear-gradient(180deg, #0C0C0C 0%, #17110C 50%, #0C0C0C 100%)" }}>
       <div className="atmosphere-blob blob-red" style={{ top: "30%", left: "-100px", width: "400px", height: "400px" }} />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
         <div className="tm-heading text-center mb-16">
           <p className="text-[#E31837] text-xs font-semibold tracking-[0.12em] uppercase mb-4">Testimonials</p>
           <h2 data-splitting className="font-display font-bold text-[clamp(2rem,4vw,3.5rem)] text-[#F0EBE1] leading-[1.08] tracking-tight mb-4 pb-1">
-            What Our <span className="gradient-text">Students Say</span>
+            What Our <span className="gradient-text-warm">Students Say</span>
           </h2>
         </div>
 

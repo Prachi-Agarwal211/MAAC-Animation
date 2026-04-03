@@ -1,284 +1,160 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import { useState } from "react";
 
 const featureCards = [
   {
     title: "Transformative Educational Events",
     desc: "Industry workshops, masterclasses, and live projects that bridge classroom learning with real-world experience",
-    icon: "🎬",
-    image: "/images/feature-events.webp",
-    imageFallback: "🎬",
     color: "#E31837",
+    svgPaths: [
+      <rect key="1" x="10" y="10" width="60" height="60" rx="8" stroke="currentColor" strokeWidth="1.5" fill="none"/>,
+      <path key="2" d="M10 40 L40 10 L70 40 L40 70 Z" stroke="currentColor" strokeWidth="1" fill="none"/>
+    ]
   },
   {
     title: "Industry-Ready Portfolio Development",
     desc: "Build a professional portfolio with live projects, animations, and visual effects work that showcases your skills",
-    icon: "🎨",
-    image: "/images/feature-portfolio.webp",
-    imageFallback: "🎨",
     color: "#FF6B35",
+    svgPaths: [
+      <circle key="1" cx="40" cy="40" r="30" stroke="currentColor" strokeWidth="1.5" fill="none"/>,
+      <circle key="2" cx="40" cy="40" r="15" stroke="currentColor" strokeWidth="1" fill="none"/>
+    ]
   },
   {
     title: "Exclusive Industry Exposure",
     desc: "Studio visits, live briefs, and internship opportunities with top animation and VFX companies",
-    icon: "🏢",
-    image: "/images/feature-exposure.webp",
-    imageFallback: "🏢",
     color: "#00B4D8",
+    svgPaths: [
+      <path key="1" d="M20 60 L20 20 L60 20 L60 60 Z" stroke="currentColor" strokeWidth="1.5" fill="none"/>,
+      <path key="2" d="M20 40 L60 40" stroke="currentColor" strokeWidth="1" fill="none"/>
+    ]
   },
   {
     title: "Portfolio That Speaks Volumes",
     desc: "Graduate with a professional showreel and portfolio that showcases your skills to potential employers",
-    icon: "📁",
-    image: "/images/feature-showreel.webp",
-    imageFallback: "📁",
     color: "#9D4EDD",
+    svgPaths: [
+      <rect key="1" x="15" y="15" width="50" height="50" rx="4" stroke="currentColor" strokeWidth="1.5" fill="none"/>,
+      <path key="2" d="M25 35 L55 35 M25 45 L45 45" stroke="currentColor" strokeWidth="1" fill="none"/>
+    ]
   },
   {
     title: "Industry-Grade Facilities",
     desc: "State-of-the-art labs, rendering farms, and production suites equipped with latest software and hardware",
-    icon: "🖥️",
-    image: "/images/feature-facilities.webp",
-    imageFallback: "🖥️",
     color: "#06D6A0",
+    svgPaths: [
+      <rect key="1" x="10" y="20" width="60" height="40" rx="4" stroke="currentColor" strokeWidth="1.5" fill="none"/>,
+      <path key="2" d="M30 60 L50 60 M40 60 L40 65 M20 65 L60 65" stroke="currentColor" strokeWidth="1" fill="none"/>
+    ]
   },
   {
     title: "Courses Built For Future",
     desc: "Curriculum updated regularly with emerging technologies like AI, VR, AR, and real-time rendering",
-    icon: "🚀",
-    image: "/images/feature-courses.webp",
-    imageFallback: "🚀",
     color: "#FFD166",
+    svgPaths: [
+      <path key="1" d="M40 10 L70 60 L10 60 Z" stroke="currentColor" strokeWidth="1.5" fill="none"/>,
+      <circle key="2" cx="40" cy="45" r="5" stroke="currentColor" strokeWidth="1" fill="none"/>
+    ]
   },
   {
     title: "Creative Careers That Click",
     desc: "Placement support, career counseling, and alumni network that helps you land your dream job",
-    icon: "💼",
-    image: "/images/feature-careers.webp",
-    imageFallback: "💼",
     color: "#EF476F",
+    svgPaths: [
+      <rect key="1" x="20" y="30" width="40" height="30" rx="2" stroke="currentColor" strokeWidth="1.5" fill="none"/>,
+      <path key="2" d="M30 30 L30 20 L50 20 L50 30" stroke="currentColor" strokeWidth="1" fill="none"/>
+    ]
   },
 ];
 
 export default function VerticalCardGallery() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const cardsContainerRef = useRef<HTMLDivElement>(null);
-  const headingRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    const mm = gsap.matchMedia();
-    
-    mm.add("(min-width: 768px)", () => {
-      // Desktop: pinned horizontal scroll
-      const ctx = gsap.context(() => {
-        const track = cardsContainerRef.current;
-        if (!track) return;
-        
-        const totalWidth = track.scrollWidth - window.innerWidth;
-        if (totalWidth <= 0) return;
-
-        ScrollTrigger.create({
-          trigger: containerRef.current,
-          start: "top top",
-          end: () => `+=${totalWidth}`,
-          pin: true,
-          pinSpacing: true, // was false - this was causing collapse
-          scrub: 1,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-        });
-
-        gsap.to(track, {
-          x: () => -totalWidth,
-          ease: "none",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top top",
-            end: () => `+=${totalWidth}`,
-            scrub: 1,
-            invalidateOnRefresh: true,
-          },
-        });
-      }, containerRef);
-
-      return () => ctx.revert();
-    });
-    
-    mm.add("(max-width: 767px)", () => {
-      // Mobile: simple staggered reveal
-      const ctx = gsap.context(() => {
-        const cards = gsap.utils.toArray(".feature-card-mobile");
-        if (cards.length === 0) return;
-        
-        gsap.fromTo(
-          cards,
-          { opacity: 0, y: 60 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            stagger: 0.12,
-            ease: "expo.out",
-            scrollTrigger: {
-              trigger: cardsContainerRef.current,
-              start: "top 85%",
-              toggleActions: "play none none reverse",
-            },
-          }
-        );
-      }, containerRef);
-      
-      return () => ctx.revert();
-    });
-
-    return () => mm.revert();
-  }, []);
+  const [activeIndex, setActiveIndex] = useState<number>(0);
 
   return (
-    <>
-      {/* Desktop: Horizontal pinned scroll (≥768px) */}
-      <div
-        ref={containerRef}
-        className="hidden md:block relative bg-[#0C0C0C] overflow-hidden"
-        style={{ willChange: "transform" }}
-      >
-        <div className="flex h-screen">
-          {/* LEFT (40%): Fixed heading + description with parallax */}
-          <div
-            ref={headingRef}
-            className="w-[40%] flex-shrink-0 flex flex-col justify-center px-8 lg:px-12 xl:px-16"
-            style={{ willChange: "transform, opacity" }}
-          >
-            <p className="text-[#E31837] text-xs font-semibold tracking-[0.15em] uppercase mb-6">
-              Empower Your Future
-            </p>
-            <h2 data-splitting className="font-display font-bold text-[clamp(2.5rem,5vw,4rem)] leading-[1.05] tracking-tight text-[#F0EBE1] mb-4">
-              Creative Careers That Click
-            </h2>
-            <h2 data-splitting className="font-display font-bold text-[clamp(2.5rem,5vw,4rem)] leading-[1.05] tracking-tight text-[#E31837] mb-6">
-              Think MAAC
-            </h2>
-            <p className="text-[#A8A29C] text-base leading-relaxed max-w-md">
-              Train in animation, VFX, gaming, and digital content creation with
-              expert-led courses that prepare you for real industry success.
-            </p>
-          </div>
-
-          {/* RIGHT (60%): Cards scroll horizontally */}
-          <div
-            ref={cardsContainerRef}
-            className="flex h-screen items-center"
-            style={{ willChange: "transform" }}
-          >
-            {featureCards.map((card, index) => (
-              <div
-                key={index}
-                className="feature-card flex-shrink-0 w-[380px] h-screen flex flex-col"
-                style={{
-                  marginRight: index < featureCards.length - 1 ? "32px" : "0",
-                  willChange: "transform",
-                }}
-              >
-                {/* Image area — top 55% */}
-                <div className="relative h-[55%] overflow-hidden bg-gradient-to-br from-[#1a1a1a] via-[#2a1a1a] to-[#1a1a1a]">
-                  <div className="absolute inset-0 flex items-center justify-center opacity-15">
-                    <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
-                      <rect x="10" y="10" width="60" height="60" rx="8"
-                        stroke={card.color} strokeWidth="1.5" fill="none"/>
-                      <path d="M10 40 L40 10 L70 40 L40 70 Z"
-                        stroke={card.color} strokeWidth="1" fill="none"/>
-                    </svg>
-                  </div>
-                  <div className="absolute bottom-0 left-0 w-full h-[3px] bg-gradient-to-r from-[#E31837] to-[#FF6B35]" />
-                </div>
-
-                {/* Text area — bottom 45% */}
-                <div className="flex-1 bg-[#0C0C0C] p-8 flex flex-col justify-center border-l border-white/5">
-                  <span
-                    className="text-xs font-semibold tracking-[0.15em] uppercase mb-3"
-                    style={{ color: card.color }}
-                  >
-                    0{index + 1}
-                  </span>
-                  <h3 className="font-display font-bold text-2xl text-white mb-3 leading-tight">
-                    {card.title}
-                  </h3>
-                  <p className="text-[#A8A29C] text-sm leading-relaxed">
-                    {card.desc}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile: Simple vertical list with staggered animation (<768px) */}
-      <div className="md:hidden bg-[#0C0C0C] py-16 px-4 sm:px-6">
-        <div ref={cardsContainerRef} className="max-w-3xl mx-auto">
-          <p className="text-[#E31837] text-xs font-semibold tracking-[0.15em] uppercase mb-6 text-center">
+    <div className="bg-[#0C0C0C] py-20 md:py-32 px-4 sm:px-6 lg:px-12 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-12 lg:gap-20 relative z-10">
+        
+        {/* Left Side: Sticky Headers */}
+        <div className="lg:w-[40%] lg:sticky lg:top-32 h-fit">
+          <p className="text-[#E31837] text-xs font-semibold tracking-[0.15em] uppercase mb-6">
             Empower Your Future
           </p>
-          <h2 className="font-display font-bold text-[clamp(1.75rem,4vw,2.5rem)] leading-[1.05] tracking-tight text-[#F0EBE1] mb-3 text-center">
-            Creative Careers That Click
+          <h2 className="font-display font-bold text-[clamp(2.5rem,5vw,4rem)] leading-[1.05] tracking-tight text-[#F0EBE1] mb-2">
+            Creative Careers
+            <br />
+            That Click
           </h2>
-          <h2 className="font-display font-bold text-[clamp(1.75rem,4vw,2.5rem)] leading-[1.05] tracking-tight text-[#E31837] mb-4 text-center">
+          <h2 className="font-display font-bold text-[clamp(2.5rem,5vw,4rem)] leading-[1.05] tracking-tight text-[#C4A882] mb-6 inline-block relative">
             Think MAAC
+            <div className="absolute -bottom-2 left-0 w-full h-[2px] bg-gradient-to-r from-[#C4A882] to-transparent opacity-50" />
           </h2>
-          <p className="text-[#A8A29C] text-sm leading-relaxed max-w-md mx-auto mb-10 text-center">
+          <p className="text-[#A8A29C] text-lg leading-relaxed max-w-md">
             Train in animation, VFX, gaming, and digital content creation with
             expert-led courses that prepare you for real industry success.
           </p>
+        </div>
 
-          <div className="space-y-4">
-            {featureCards.map((card, index) => (
-              <div
+        {/* Right Side: Accordion */}
+        <div className="lg:w-[60%] flex flex-col gap-4">
+          {featureCards.map((card, index) => {
+            const isActive = activeIndex === index;
+            return (
+              <div 
                 key={index}
-                className="feature-card-mobile rounded-2xl overflow-hidden bg-white/[0.04] border border-white/[0.08]"
-                style={{
-                  borderLeft: `3px solid ${card.color}`,
-                  willChange: "transform, opacity",
-                }}
+                className="group border border-white/10 rounded-2xl overflow-hidden bg-[#161616]/50 backdrop-blur-sm cursor-pointer transition-colors hover:bg-white/[0.04]"
+                onClick={() => setActiveIndex(isActive ? -1 : index)}
               >
-                {/* Image area — aspect-[16/9] */}
-                <div className="relative w-full aspect-[16/9] overflow-hidden bg-gradient-to-br from-[#1a1a1a] via-[#2a1a1a] to-[#1a1a1a]">
-                  <div className="absolute inset-0 flex items-center justify-center opacity-15">
-                    <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
-                      <rect x="10" y="10" width="60" height="60" rx="8"
-                        stroke={card.color} strokeWidth="1.5" fill="none"/>
-                      <path d="M10 40 L40 10 L70 40 L40 70 Z"
-                        stroke={card.color} strokeWidth="1" fill="none"/>
+                {/* Header (Always Visible) */}
+                <div className="p-6 md:p-8 flex items-center justify-between gap-4">
+                  <div className="flex items-center gap-6">
+                    <span 
+                      className="text-sm font-semibold tracking-widest hidden sm:block"
+                      style={{ color: isActive ? card.color : '#6B6560' }}
+                    >
+                      0{index + 1}
+                    </span>
+                    <h3 className={`font-display font-bold text-xl md:text-2xl transition-colors ${isActive ? 'text-white' : 'text-[#A8A29C]'}`}>
+                      {card.title}
+                    </h3>
+                  </div>
+                  <div 
+                    className={`w-8 h-8 rounded-full border flex items-center justify-center flex-shrink-0 transition-transform duration-500 ${isActive ? 'rotate-180 border-[#C4A882] bg-white/5' : 'border-white/10'}`}
+                  >
+                    <svg className={`w-4 h-4 transition-colors ${isActive ? 'text-[#C4A882]' : 'text-white/50'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
                   </div>
                 </div>
 
-                {/* Text area */}
-                <div className="p-5">
-                  <span
-                    className="text-xs font-semibold tracking-[0.12em] uppercase mb-2 block"
-                    style={{ color: card.color }}
-                  >
-                    0{index + 1}
-                  </span>
-                  <h3 className="font-display font-bold text-lg text-white mb-2 leading-tight">
-                    {card.title}
-                  </h3>
-                  <p className="text-[#A8A29C] text-sm leading-relaxed">
-                    {card.desc}
-                  </p>
+                {/* Collapsible Content */}
+                <div 
+                  className="grid transition-all duration-500 ease-in-out"
+                  style={{ gridTemplateRows: isActive ? '1fr' : '0fr' }}
+                >
+                  <div className="overflow-hidden">
+                    <div className="p-6 md:p-8 pt-0 border-t border-white/5 mt-2 flex flex-col sm:flex-row items-center gap-8 bg-black/20">
+                      {/* Left: SVG Graphic */}
+                      <div className="w-full sm:w-1/3 aspect-square max-w-[160px] rounded-xl flex items-center justify-center bg-[#080808] relative overflow-hidden border border-white/5">
+                         <div className="absolute inset-0 opacity-10" style={{ background: `radial-gradient(circle at center, ${card.color}, transparent 70%)` }} />
+                         <svg width="60" height="60" viewBox="0 0 80 80" className="relative z-10" style={{ color: card.color }}>
+                           {card.svgPaths}
+                         </svg>
+                      </div>
+                      
+                      {/* Right: Description */}
+                      <p className="text-[#A8A29C] text-base md:text-lg leading-relaxed flex-1">
+                        {card.desc}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
-            ))}
-          </div>
+            );
+          })}
         </div>
+
       </div>
-    </>
+    </div>
   );
 }

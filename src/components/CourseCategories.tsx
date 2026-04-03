@@ -2,8 +2,11 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
 import { coursesData } from "@/data/siteData";
+
+gsap.registerPlugin(ScrollTrigger);
 
 // SVG Icons per category
 const CategoryIcon = ({ type }: { type: string }) => {
@@ -69,25 +72,12 @@ interface SlideCardProps {
   index: number;
 }
 
-function SlideUpCard({ course, index }: SlideCardProps) {
-  const cardRef = useRef<HTMLDivElement>(null);
+function SlideUpCard({ course }: SlideCardProps) {
   const [isTapped, setIsTapped] = useState(false);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo(cardRef.current, { opacity: 0, y: 60 }, {
-        opacity: 1, y: 0, duration: 0.6, delay: index * 0.08,
-        ease: "expo.out",
-        scrollTrigger: { trigger: cardRef.current, start: "top 85%", toggleActions: "play none none reverse" },
-      });
-    }, cardRef);
-    return () => ctx.revert();
-  }, [index]); // index is stable from map, no need to re-run
 
   return (
     <div
-      ref={cardRef}
-      className="relative w-full min-h-[360px] md:min-h-[480px] rounded-2xl overflow-hidden cursor-pointer group"
+      className="category-card-item relative w-full min-h-[360px] md:min-h-[480px] rounded-2xl overflow-hidden cursor-pointer group"
       onClick={() => setIsTapped(prev => !prev)}
     >
       {/* Top section — dark gradient */}
@@ -95,7 +85,7 @@ function SlideUpCard({ course, index }: SlideCardProps) {
 
       {/* Icon area (top 60%) */}
       <div className="relative z-10 h-[60%] flex items-center justify-center pt-8">
-        <div className="text-[#E31837]/60 group-hover:text-[#E31837] transition-colors duration-300">
+        <div className="text-[#C4A882]/60 group-hover:text-[#C4A882] transition-colors duration-300">
           <CategoryIcon type={course.icon} />
         </div>
       </div>
@@ -134,8 +124,23 @@ function SlideUpCard({ course, index }: SlideCardProps) {
 export default function CourseCategories() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const cards = gsap.utils.toArray('.category-card-item');
+      if (cards.length > 0) {
+        gsap.fromTo(cards, 
+          { opacity: 0, y: 60 },
+          { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: "expo.out",
+            scrollTrigger: { trigger: sectionRef.current, start: "top 75%" }
+          }
+        );
+      }
+    }, sectionRef);
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section ref={sectionRef} id="courses" className="relative py-24 md:py-32 overflow-hidden bg-[#111111]">
+    <section ref={sectionRef} id="courses" className="relative py-24 md:py-32 overflow-hidden" style={{ background: "linear-gradient(180deg, #0C0C0C 0%, #17110C 50%, #0C0C0C 100%)" }}>
       <div className="atmosphere-blob blob-orange" style={{ bottom: "-100px", left: "-100px" }} />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
@@ -143,7 +148,7 @@ export default function CourseCategories() {
         <div className="text-center mb-16">
           <p className="text-[#E31837] text-xs font-semibold tracking-[0.15em] uppercase mb-4">Our Courses</p>
           <h2 className="font-display font-bold text-[clamp(2rem,4vw,3.5rem)] text-[#F0EBE1] leading-[1.05] tracking-tight mb-4">
-            Courses at <span className="gradient-text">MAAC</span>
+            Courses at <span className="gradient-text-warm">MAAC</span>
           </h2>
           <p className="text-[#A8A29C] text-lg max-w-2xl mx-auto">
             Step into the world of Animation, VFX, Gaming, Filmmaking, and Digital Media.

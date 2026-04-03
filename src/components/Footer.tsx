@@ -34,16 +34,16 @@ function AccordionSection({ title, children }: { title: string; children: React.
 
 export default function Footer() {
   return (
-    <footer className="relative bg-[#080808] border-t border-white/5">
+    <footer className="relative bg-[#0A0705] border-t border-white/5">
       {/* CTA Banner */}
-      <div className="bg-[#E31837] py-10 md:py-12">
+      <div className="py-10 md:py-12" style={{ background: "linear-gradient(135deg, #2A080C 0%, #170406 100%)", borderBottom: "1px solid rgba(227,24,55,0.15)" }}>
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="font-display font-bold text-2xl md:text-3xl text-white mb-6">
+          <h2 className="font-display font-bold text-2xl md:text-3xl text-[#F0EBE1] mb-6">
             Ready to Start? Book a Free Demo Class Today
           </h2>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <MagneticButton>
-              <Link href="/contact" className="btn bg-white text-[#E31837] hover:bg-gray-100 text-sm">
+              <Link href="/contact" className="btn bg-gradient-to-r from-[#E31837] to-[#C4132D] text-white hover:opacity-90 border border-[#E31837]/50 text-sm shadow-[0_0_20px_rgba(227,24,55,0.3)]">
                 Book Free Demo
               </Link>
             </MagneticButton>
@@ -63,7 +63,7 @@ export default function Footer() {
           {/* About */}
           <div>
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#E31837] to-[#FF6B35] flex items-center justify-center">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#2A080C] to-[#1C1410] border border-[#E31837]/30 flex items-center justify-center">
                 <svg width="18" height="22" viewBox="0 0 22 26" fill="none"><path d="M2 2L8 24H12L18 2M5 14H17" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
               </div>
               <div>
@@ -167,7 +167,7 @@ export default function Footer() {
         {/* Mobile Accordion */}
         <div className="md:hidden">
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#E31837] to-[#FF6B35] flex items-center justify-center">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#2A080C] to-[#1C1410] border border-[#E31837]/30 flex items-center justify-center">
               <svg width="18" height="22" viewBox="0 0 22 26" fill="none"><path d="M2 2L8 24H12L18 2M5 14H17" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
             </div>
             <div>
