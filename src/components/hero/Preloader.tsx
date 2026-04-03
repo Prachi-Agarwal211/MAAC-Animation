@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
-import gsap from "gsap";
 
 interface PreloaderProps {
   onComplete: () => void;
@@ -12,138 +11,158 @@ export default function Preloader({ onComplete }: PreloaderProps) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const progressBarRef = useRef<HTMLDivElement>(null);
   const completedRef = useRef(false);
-  const [progress, setProgress] = useState(0);
+  const timerRefs = useRef<ReturnType<typeof setTimeout>[]>([]);
+  const [videoLoaded, setVideoLoaded] = useState(false);
+
+  const clearAllTimers = useCallback(() => {
+    timerRefs.current.forEach(t => clearTimeout(t));
+    timerRefs.current = [];
+  }, []);
+
+  const addTimer = useCallback((fn: () => void, ms: number) => {
+    const t = setTimeout(fn, ms);
+    timerRefs.current.push(t);
+    return t;
+  }, []);
 
   const triggerExit = useCallback(() => {
     if (completedRef.current) return;
     completedRef.current = true;
-    console.log("Preloader: triggerExit initiated!");
+    clearAllTimers();
 
-    // Native CSS Transition instead of GSAP (Removes dependency instability)
-    if (progressBarRef.current) {
-      progressBarRef.current.style.transition = 'width 0.3s ease-out';
-      progressBarRef.current.style.width = '100%';
+    const wrapper = wrapperRef.current;
+    const bar = progressBarRef.current;
+
+    // Fill progress bar to 100%
+    if (bar) {
+      bar.style.transition = "width 0.4s cubic-bezier(0.4,0,0.2,1)";
+      bar.style.width = "100%";
     }
 
-    // Wait exactly 300ms for progress bar to fake 100%, then fade out natively
-    setTimeout(() => {
-      if (wrapperRef.current) {
-        wrapperRef.current.style.transition = 'opacity 0.8s ease-in-out';
-        wrapperRef.current.style.opacity = '0';
-        wrapperRef.current.style.pointerEvents = 'none';
-        
-        // Notify parent 800ms later when fade-out is complete
-        setTimeout(() => {
-          onComplete();
-        }, 800);
-      } else {
-        onComplete();
+    // Brief pause at 100%, then fade out
+    addTimer(() => {
+      if (wrapper) {
+        wrapper.style.transition = "opacity 0.7s cubic-bezier(0.4,0,0.2,1)";
+        wrapper.style.opacity = "0";
+        wrapper.style.pointerEvents = "none";
       }
-    }, 300);
-
-  }, [onComplete]);
+      // Call onComplete slightly before opacity finishes so hero is ready
+      addTimer(() => {
+        onComplete();
+      }, 650);
+    }, 350);
+  }, [onComplete, clearAllTimers, addTimer]);
 
   useEffect(() => {
     const video = videoRef.current;
-    console.log("Preloader: Component mounted. Video Element:", video);
-    
-    // Safety 1: Global fallback if everything hangs
-    const fallback = setTimeout(() => {
-      console.log("Preloader: 15s global fallback hit!");
-      triggerExit();
-    }, 15000);
+    if (!video) {
+      // No video element — bail immediately
+      addTimer(triggerExit, 100);
+      return () => clearAllTimers();
+    }
 
-    // Safety 2: Missing/corrupted file fast-abort
-    // If the video hasn't fired onLoadedData within 2.5 seconds, it's dead. Bypass instantly.
-    const fastAbortTimeout = setTimeout(() => {
-      if (video && video.readyState === 0) {
-        console.warn("Preloader: Video failed to load first frame (readyState 0) within 2.5s. Fast bypassing black screen.");
+    // Hard global fallback — never hang more than 12s
+    addTimer(triggerExit, 12000);
+
+    // If video completely fails to load any data within 3s, exit
+    const noDataFallback = addTimer(() => {
+      if (!completedRef.current && video.readyState === 0) {
         triggerExit();
       }
-    }, 2500);
+    }, 3000);
 
-    if (video) {
-      // Clear fast abort if data loads
-      const handleDataLoaded = () => {
-        clearTimeout(fastAbortTimeout);
-        console.log("Preloader: Video data successfully loaded!");
-        // Fade the video in nicely once frames exist to avoid the harsh black wall
-        if (videoRef.current) {
-          videoRef.current.style.opacity = '1';
-        }
-      };
-      video.addEventListener("loadeddata", handleDataLoaded);
+    const handleCanPlay = () => {
+      setVideoLoaded(true);
+      clearTimeout(noDataFallback);
+    };
 
-      // Standard Play initialization
-      const playPromise = video.play();
-      if (playPromise !== undefined) {
-        playPromise.catch((err) => {
-          console.warn("Preloader: Video autoplay prevented or delayed natively:", err);
-        });
-      }
+    const handleEnded = () => {
+      triggerExit();
+    };
 
-      // Update progress bar based on video time
-      const updateProgress = () => {
-        if (video.duration) {
-          const pct = (video.currentTime / video.duration) * 100;
-          setProgress(pct);
-          if (progressBarRef.current) {
-            progressBarRef.current.style.width = `${pct}%`;
-          }
-        }
-      };
+    const handleError = () => {
+      // Video failed — exit cleanly
+      addTimer(triggerExit, 300);
+    };
 
-      video.addEventListener("timeupdate", updateProgress);
+    const handleTimeUpdate = () => {
+      if (!video.duration || !progressBarRef.current) return;
+      const pct = Math.min((video.currentTime / video.duration) * 100, 95);
+      progressBarRef.current.style.width = `${pct}%`;
+    };
 
-      return () => {
-        clearTimeout(fallback);
-        clearTimeout(fastAbortTimeout);
-        video.removeEventListener("timeupdate", updateProgress);
-        video.removeEventListener("loadeddata", handleDataLoaded);
-      };
+    video.addEventListener("canplay", handleCanPlay);
+    video.addEventListener("ended", handleEnded);
+    video.addEventListener("error", handleError);
+    video.addEventListener("timeupdate", handleTimeUpdate);
+
+    // Attempt play — browser may block autoplay
+    const playAttempt = video.play();
+    if (playAttempt !== undefined) {
+      playAttempt.catch(() => {
+        // Autoplay blocked — show loading state, let fallback handle it
+      });
     }
 
     return () => {
-      clearTimeout(fallback);
-      clearTimeout(fastAbortTimeout);
-    }
-  }, [triggerExit]);
+      clearAllTimers();
+      video.removeEventListener("canplay", handleCanPlay);
+      video.removeEventListener("ended", handleEnded);
+      video.removeEventListener("error", handleError);
+      video.removeEventListener("timeupdate", handleTimeUpdate);
+    };
+  }, [triggerExit, addTimer, clearAllTimers]);
 
   return (
-    <div ref={wrapperRef} className="fixed inset-0 z-[9999] bg-[#0C0C0C] overflow-hidden pointer-events-auto flex items-center justify-center transition-opacity duration-800">
-      {/* Fallback Text in case video refuses to load */}
-      <div className="absolute inset-0 flex items-center justify-center z-0">
-        <span className="text-[#E31837] text-[10px] tracking-[0.3em] uppercase font-sans animate-pulse">Connecting to MAAC...</span>
+    <div
+      ref={wrapperRef}
+      className="fixed inset-0 z-[9999] bg-[#0C0C0C] overflow-hidden flex items-center justify-center"
+      style={{ willChange: "opacity" }}
+    >
+      {/* Fallback background shown before video loads */}
+      <div
+        className="absolute inset-0 flex flex-col items-center justify-center gap-6 z-0 transition-opacity duration-500"
+        style={{ opacity: videoLoaded ? 0 : 1 }}
+      >
+        {/* MAAC Logo Mark */}
+        <div className="flex items-center gap-3">
+          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#E31837] to-[#B8132C] flex items-center justify-center shadow-lg shadow-[#E31837]/30">
+            <svg viewBox="0 0 48 48" className="w-7 h-7 text-white" fill="currentColor">
+              <path d="M6 6v36l8-4V18l10 14 10-14v20l8 4V6L24 30 6 6z" />
+            </svg>
+          </div>
+          <span className="text-white font-display font-bold text-2xl tracking-tight">MAAC</span>
+        </div>
+        <p className="text-[#E31837] text-[10px] font-medium tracking-[0.3em] uppercase animate-pulse">
+          Loading
+        </p>
       </div>
 
-      {/* Full screen intro video */}
+      {/* Intro Video — full screen */}
       <video
         ref={videoRef}
-        className="absolute inset-0 w-full h-full object-contain z-10 opacity-0 transition-opacity duration-700"
+        className="absolute inset-0 w-full h-full object-contain z-10"
+        style={{
+          opacity: videoLoaded ? 1 : 0,
+          transition: "opacity 0.5s ease",
+        }}
         autoPlay
         muted
         playsInline
-        webkit-playsinline="true"
         preload="auto"
-        onEnded={() => {
-          console.log("Preloader: Video natural onEnded fired!");
-          triggerExit();
-        }}
-        onError={(e) => {
-          console.error("Preloader: Video loading ERROR natively fired!", e);
-        }}
+        onCanPlay={() => setVideoLoaded(true)}
       >
-        {/* Prioritize webm for significantly faster loading on Chrome without black frames */}
+        {/* WebM first for faster decode on Chrome/Firefox */}
         <source src="/intro.webm" type="video/webm" />
         <source src="/intro.mp4" type="video/mp4" />
       </video>
 
-      {/* Thin red loading bar — bottom only, no text */}
-      <div className="absolute bottom-0 left-0 right-0 z-30 h-[4px] bg-white/10">
+      {/* Progress bar — bottom strip */}
+      <div className="absolute bottom-0 left-0 right-0 z-30 h-[3px] bg-white/5">
         <div
           ref={progressBarRef}
-          className="h-full bg-[#E31837]"
-          style={{ width: `${progress}%`, transition: 'width 0.1s linear' }}
+          className="h-full bg-[#E31837] rounded-full"
+          style={{ width: "0%", transition: "width 0.15s linear" }}
         />
       </div>
     </div>

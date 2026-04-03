@@ -2,12 +2,14 @@
 
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import VideoModal from "@/components/VideoModal";
+
+gsap.registerPlugin(ScrollTrigger);
 
 function CountUpStat({ number, suffix, label }: { number: number; suffix: string; label: string }) {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
-  const frameRef = useRef<number>();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -15,33 +17,30 @@ function CountUpStat({ number, suffix, label }: { number: number; suffix: string
         if (entry.isIntersecting) {
           let frame: number;
           const start = performance.now();
-          const duration = 1500;
+          const duration = 1800;
           const tick = (now: number) => {
             const t = Math.min((now - start) / duration, 1);
-            const eased = 1 - Math.pow(1 - t, 3);
+            const eased = 1 - Math.pow(1 - t, 4);
             setCount(Math.round(eased * number));
             if (t < 1) frame = requestAnimationFrame(tick);
           };
           frame = requestAnimationFrame(tick);
-          frameRef.current = frame;
           observer.disconnect();
+          return () => cancelAnimationFrame(frame);
         }
       },
-      { threshold: 0.5 }
+      { threshold: 0.4 }
     );
     if (ref.current) observer.observe(ref.current);
-    return () => {
-      observer.disconnect();
-      if (frameRef.current) cancelAnimationFrame(frameRef.current);
-    };
+    return () => observer.disconnect();
   }, [number]);
 
   return (
-    <div ref={ref} className="text-center px-4">
-      <div className="font-display font-extrabold text-[clamp(2.5rem,6vw,5rem)] leading-none text-white count-up">
+    <div ref={ref} className="text-center px-4 group">
+      <div className="font-display font-extrabold text-[clamp(2.2rem,5vw,4rem)] leading-none text-white count-up tabular-nums">
         {count}{suffix}
       </div>
-      <div className="text-[#A8A29C] text-sm mt-2 font-inter">{label}</div>
+      <div className="text-[#6B6560] text-xs mt-2 font-inter tracking-widest uppercase">{label}</div>
     </div>
   );
 }
@@ -57,23 +56,22 @@ export default function InstituteIntro() {
 
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
-        scrollTrigger: { trigger: ".institute-section", start: "top 75%" },
+        scrollTrigger: { trigger: ".institute-section", start: "top 72%" },
       });
+      tl.fromTo(".institute-title", { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.9, ease: "expo.out" });
+      tl.fromTo(".institute-description", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.9, ease: "expo.out" }, "-=0.6");
+      tl.fromTo(".institute-video-container", { opacity: 0, x: 50 }, { opacity: 1, x: 0, duration: 0.9, ease: "expo.out" }, "-=0.7");
+      tl.fromTo(".institute-quote", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8, ease: "expo.out" }, "-=0.5");
+      tl.fromTo(".institute-badges", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6, ease: "expo.out" }, "-=0.4");
 
-      tl.fromTo(".institute-title", { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: 1, ease: "expo.out" });
-      tl.fromTo(".institute-description", { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 1, ease: "expo.out" }, "-=0.6");
-      tl.fromTo(".institute-video-container", { opacity: 0, x: 60 }, { opacity: 1, x: 0, duration: 1, ease: "expo.out" }, "-=0.8");
-      tl.fromTo(".institute-quote", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1, ease: "expo.out" }, "-=0.6");
-
-      // Add parallax to video container
       gsap.to(".institute-video-container", {
-        yPercent: -15,
+        yPercent: -10,
         ease: "none",
         scrollTrigger: {
           trigger: ".institute-video-container",
           start: "top bottom",
           end: "bottom top",
-          scrub: 1,
+          scrub: 1.5,
         },
       });
     }, containerRef);
@@ -83,41 +81,40 @@ export default function InstituteIntro() {
 
   return (
     <div ref={containerRef} className="institute-section relative overflow-hidden bg-[#0a0a0a]">
-      {/* Dark Theme wrapper */}
       <div
-        className="relative py-16 md:py-24 section-fade animated-mesh-bg"
+        className="relative py-20 md:py-28 section-fade animated-mesh-bg"
       >
-        <div className="atmosphere-blob blob-red top-[-10%] right-[-10%] opacity-20" />
-        <div className="grain-overlay" />
+        <div className="atmosphere-blob blob-red top-[-10%] right-[-10%] opacity-15" />
+        <div className="grain-warm" />
+
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
-          {/* Stat Bar */}
-          <div className="relative z-10 flex flex-wrap md:flex-nowrap items-center justify-between mb-16 md:mb-20 border-b border-white/10 pb-10">
+          {/* ── Stat Bar ── */}
+          <div className="relative z-10 flex flex-wrap md:flex-nowrap items-center justify-around md:justify-between mb-16 md:mb-24 pb-10 border-b border-white/8">
             <CountUpStat number={50} suffix="K+" label="Students Trained" />
-            <div className="hidden md:block w-px h-16 bg-white/10" />
+            <div className="hidden md:block w-px h-14 bg-white/8" />
             <CountUpStat number={30} suffix="+" label="Years Legacy" />
-            <div className="hidden md:block w-px h-16 bg-white/10" />
+            <div className="hidden md:block w-px h-14 bg-white/8" />
             <CountUpStat number={95} suffix="%" label="Placement Rate" />
-            <div className="hidden md:block w-px h-16 bg-white/10" />
+            <div className="hidden md:block w-px h-14 bg-white/8" />
             <CountUpStat number={100} suffix="+" label="Centers" />
           </div>
 
-          {/* Content Grid */}
-          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+          {/* ── Content Grid ── */}
+          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             {/* Left: Text */}
             <div>
-              <div className="flex items-start gap-3 mb-6">
-                <div className="w-1 h-12 bg-[#E31837] flex-shrink-0 rounded-full" />
-                <h2 className="institute-title font-display font-bold text-[clamp(1.5rem,3vw,2.5rem)] leading-tight text-white">
-                  Join the <br className="hidden sm:block"/>
-                  <span className="bg-[#E31837] text-white px-2 py-0.5 rounded whitespace-nowrap">
+              <div className="flex items-start gap-3 mb-7">
+                <div className="w-1 h-14 bg-[#E31837] flex-shrink-0 rounded-full mt-1" />
+                <h2 className="institute-title font-display font-bold text-[clamp(1.6rem,3.2vw,2.8rem)] leading-tight text-white">
+                  Join the{" "}
+                  <span className="bg-[#E31837] text-white px-2 py-0.5 rounded-md whitespace-nowrap">
                     Best Animation Institute
-                  </span>
-                  <br className="hidden sm:block"/>
+                  </span>{" "}
                   In Jaipur
                 </h2>
               </div>
 
-              <div className="institute-description space-y-4 text-[#A8A29C] text-base leading-relaxed">
+              <div className="institute-description space-y-4 text-[#A8A29C] text-base md:text-lg leading-relaxed mb-8">
                 <p>
                   Welcome to Maya Academy of Advanced Cinematics — MAAC. Our centre is equipped with an expert training team specializing in 3D Animation, VFX, Film Making, Gaming, Web Design, and more.
                 </p>
@@ -126,41 +123,94 @@ export default function InstituteIntro() {
                 </p>
               </div>
 
+              {/* Trust Badges */}
+              <div className="institute-badges flex flex-wrap gap-3 mb-8">
+                {["NSDC Partner", "MESC Certified", "Skill India", "B.Voc Degree"].map((badge) => (
+                  <span
+                    key={badge}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium"
+                    style={{
+                      background: "rgba(227,24,55,0.08)",
+                      border: "1px solid rgba(227,24,55,0.2)",
+                      color: "#E31837",
+                    }}
+                  >
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    {badge}
+                  </span>
+                ))}
+              </div>
+
               {/* Pull Quote */}
-              <blockquote className="institute-quote mt-8 pl-5 py-2" style={{ borderLeft: '3px solid #8B7355' }}>
-                <p className="text-[#E8DCC8] text-lg italic font-display leading-relaxed">
+              <blockquote className="institute-quote pl-5 py-1 border-l-3 border-[#8B7355]">
+                <p className="text-[#E8DCC8] text-base md:text-lg italic font-display leading-relaxed">
                   &ldquo;MAAC gave me the skills and confidence to land my dream job at a top VFX studio.&rdquo;
                 </p>
-                <cite className="text-[#6B6560] text-sm mt-2 block not-italic">— Alumni, VFX Artist at DNEG</cite>
+                <cite className="text-[#6B6560] text-sm mt-2 block not-italic">
+                  — Alumni, VFX Artist at DNEG
+                </cite>
               </blockquote>
             </div>
 
-            {/* Right: Video Player */}
+            {/* Right: Video */}
             <div className="institute-video-container relative">
-              <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl bg-[#0C0C0C]">
-                {/* Custom play button overlay */}
+              <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl shadow-black/50">
+                {/* Background gradient */}
+                <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a1a] to-[#080808]" />
+
+                {/* Placeholder icon */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="text-7xl opacity-10">🎬</div>
+                </div>
+
+                {/* Subtle red glow */}
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background: "radial-gradient(circle at 50% 60%, rgba(227,24,55,0.1) 0%, transparent 60%)",
+                  }}
+                />
+
+                {/* Overlay for click */}
                 <div
                   className="absolute inset-0 flex items-center justify-center z-10 cursor-pointer group"
                   onClick={() => setShowModal(true)}
                   role="button"
                   tabIndex={0}
-                  aria-label="Play showreel video"
-                  onKeyDown={(e) => e.key === 'Enter' && setShowModal(true)}
+                  aria-label="Play showreel"
+                  onKeyDown={(e) => e.key === "Enter" && setShowModal(true)}
                 >
-                  <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-[#E31837] flex items-center justify-center shadow-lg shadow-[#E31837]/40 group-hover:scale-110 transition-transform">
-                    <svg className="w-6 h-6 md:w-8 md:h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
-                      <polygon points="5,3 19,12 5,21" />
-                    </svg>
+                  <div className="relative">
+                    {/* Pulse rings */}
+                    <div className="absolute inset-0 rounded-full bg-[#E31837]/20 animate-ping" />
+                    <div
+                      className="w-18 h-18 md:w-20 md:h-20 rounded-full bg-[#E31837] flex items-center justify-center shadow-xl shadow-[#E31837]/40 group-hover:scale-110 transition-transform duration-300 relative"
+                      style={{ width: "72px", height: "72px" }}
+                    >
+                      <svg className="w-7 h-7 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
                   </div>
                 </div>
-                {/* Thumbnail - using gradient placeholder instead of external image */}
-                <div
-                  className="absolute inset-0 bg-gradient-to-br from-[#1a1a1a] to-[#0C0C0C]"
-                />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-6xl opacity-20">🎬</div>
-                </div>
-                <div className="absolute inset-0 bg-black/30" />
+
+                {/* Scrim */}
+                <div className="absolute inset-0 bg-black/20" />
+              </div>
+
+              {/* Floating stat card */}
+              <div
+                className="absolute -bottom-4 -right-4 rounded-xl px-5 py-4 hidden lg:block"
+                style={{
+                  background: "rgba(12,12,12,0.9)",
+                  border: "1px solid rgba(227,24,55,0.2)",
+                  backdropFilter: "blur(16px)",
+                }}
+              >
+                <div className="text-2xl font-display font-extrabold text-[#E31837]">15L+</div>
+                <div className="text-[#6B6560] text-xs uppercase tracking-wider mt-0.5">Highest Package</div>
               </div>
             </div>
           </div>
