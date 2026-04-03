@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Preloader from "./Preloader";
 import VideoModal from "@/components/VideoModal";
+import SplitTextReveal from "@/components/ui/SplitTextReveal";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -65,25 +66,7 @@ export default function MAACXHero() {
         y: 15,
         duration: 0.4,
         ease: "expo.out",
-      }, "-=0.6");
-
-      // Headline - "Big Leaps" - smaller, cleaner
-      tl.from(".maacx-headline", {
-        opacity: 0,
-        y: 15,
-        duration: 0.4,
-        ease: "expo.out",
-      }, "-=0.3");
-
-      // Subtitle - "Begin with the Right Course" - smaller
-      tl.from(".maacx-subtitle-text", {
-        opacity: 0,
-        y: 12,
-        duration: 0.35,
-        ease: "expo.out",
-      }, "-=0.3");
-
-
+      }, "-=0.2");
 
       // CTA buttons
       tl.from(".maacx-cta-row", {
@@ -91,7 +74,7 @@ export default function MAACXHero() {
         y: 15,
         duration: 0.4,
         ease: "expo.out",
-      }, "-=0.3");
+      }, "-=0.1");
 
       // Right side stats card (desktop)
       tl.from(".maacx-content-right", {
@@ -154,17 +137,6 @@ export default function MAACXHero() {
       >
         {/* Background Layer */}
         <div className="absolute inset-0 z-0">
-          {/* Gradient base */}
-          <div
-            className="absolute inset-0 z-0"
-            style={{
-              background: `
-                radial-gradient(ellipse 80% 60% at 50% 50%, rgba(180,20,40,0.25) 0%, transparent 60%),
-                linear-gradient(160deg, #0A0A0A 0%, #1a0508 40%, #0A0A0A 100%)
-              `,
-            }}
-          />
-
           {/* Single Infinity Loop Hero Video */}
           <div className="absolute inset-0 z-[1] opacity-100 transition-opacity duration-1000">
             {preloaderDone && (
@@ -180,9 +152,9 @@ export default function MAACXHero() {
               </video>
             )}
           </div>
-
-          {/* Uniform overlay */}
-          <div className="absolute inset-0 z-[2] bg-black/40 sm:bg-black/50" />
+          
+          {/* Extremely subtle bottom gradient only for text contrast, removed solid black fog */}
+          <div className="absolute inset-x-0 bottom-0 h-1/2 z-[2] bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
         </div>
 
         {/* Left Side Content - Bottom Aligned */}
@@ -194,23 +166,19 @@ export default function MAACXHero() {
             </span>
           </div>
 
-          {/* Headline - Left Aligned, Professional Size */}
+          {/* Headline - SplitText Animation */}
           <h1 className="mb-3 text-left">
-            <span className="maacx-headline block text-white font-sans font-bold text-[clamp(2rem,5vw,3.5rem)] leading-[1.15] tracking-tight">
-              Big Leaps
+            <span className="maacx-headline block text-white font-sans font-bold text-[clamp(2.5rem,6vw,4.5rem)] leading-[1.05] tracking-tight">
+              {preloaderDone && <SplitTextReveal delay={0.4} stagger={0.04}>Big Leaps</SplitTextReveal>}
             </span>
           </h1>
 
-          {/* Subtitle - Red, left aligned, smaller */}
-          <div className="maacx-subtitle-text mb-5">
-            <span className="block text-[#E31837] font-sans font-medium text-[clamp(1rem,2.5vw,1.5rem)] leading-[1.3]">
-              Begin with the Right Course
+          {/* Subtitle - SplitText Animation */}
+          <div className="maacx-subtitle-text mb-6">
+            <span className="block text-[#E31837] font-sans font-medium text-[clamp(1rem,2vw,1.25rem)] leading-[1.3] uppercase tracking-widest">
+              {preloaderDone && <SplitTextReveal delay={0.6} stagger={0.015}>Begin With The Right Course</SplitTextReveal>}
             </span>
-          </div>
-
-
-
-          {/* CTA Buttons - Cleaner */}
+          </div>          {/* CTA Buttons - Cleaner */}
           <div className="maacx-cta-row flex flex-wrap items-center gap-3 md:gap-4 mb-6">
             {/* Primary CTA */}
             <a

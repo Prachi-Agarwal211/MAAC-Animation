@@ -155,8 +155,8 @@ export default function CourseCategories() {
           </p>
         </div>
 
-        {/* Cards Grid — 2col mobile, 3col desktop */}
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+        {/* Cards Grid — 1col mobile, 2col tablet, 3col desktop */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {coursesData.categories.map((course, index) => (
             <SlideUpCard key={course.id} course={course} index={index} />
           ))}

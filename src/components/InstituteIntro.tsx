@@ -85,7 +85,7 @@ export default function InstituteIntro() {
     <div ref={containerRef} className="institute-section relative overflow-hidden bg-[#0a0a0a]">
       {/* Dark Theme wrapper */}
       <div
-        className="relative bg-gradient-to-b from-[#0C0C0C] via-[#120E0A] to-[#0C0C0C] py-16 md:py-24 section-fade"
+        className="relative py-16 md:py-24 section-fade animated-mesh-bg"
       >
         <div className="atmosphere-blob blob-red top-[-10%] right-[-10%] opacity-20" />
         <div className="grain-overlay" />

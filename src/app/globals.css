@@ -617,3 +617,19 @@ body.demo-bar-visible .page-wrapper {
   from { opacity: 0; transform: translateY(12px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+
+/* ═══════════════════════════════════════════════════════
+   AWWWARDS STYLE: Animated Mesh Deep Luxury Backgrounds
+   ═══════════════════════════════════════════════════════ */
+.animated-mesh-bg {
+  background: radial-gradient(circle at 15% 50%, rgba(45, 10, 15, 0.4) 0%, transparent 60%),
+              radial-gradient(circle at 85% 30%, rgba(35, 15, 10, 0.4) 0%, transparent 50%),
+              #0C0C0C;
+  background-size: 200% 200%;
+  animation: luxury-mesh-drift 15s ease-in-out infinite alternate;
+}
+
+@keyframes luxury-mesh-drift {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}

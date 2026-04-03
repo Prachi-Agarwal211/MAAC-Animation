@@ -25,8 +25,8 @@ export default function PopularCourses() {
     <section className="relative bg-[#0C0C0C] py-24 md:py-32 overflow-hidden">
       {/* Background Mesh */}
       <div className="absolute inset-0 pointer-events-none opacity-20">
-         <div className="absolute top-1/2 left-1/4 w-[500px] h-[500px] bg-[#C4A882]/10 blur-[100px] rounded-full -translate-y-1/2" />
-         <div className="absolute top-1/3 right-1/4 w-[400px] h-[400px] bg-[#E31837]/10 blur-[100px] rounded-full" />
+         <div className="absolute top-1/2 left-1/4 w-[250px] md:w-[500px] h-[250px] md:h-[500px] bg-[#C4A882]/10 blur-[60px] md:blur-[100px] rounded-full -translate-y-1/2" />
+         <div className="absolute top-1/3 right-1/4 w-[200px] md:w-[400px] h-[200px] md:h-[400px] bg-[#E31837]/10 blur-[60px] md:blur-[100px] rounded-full" />
       </div>
 
       {/* Header */}
