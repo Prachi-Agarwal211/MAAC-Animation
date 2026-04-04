@@ -25,12 +25,11 @@ echo Found ffmpeg! Compressing videos...
 echo.
 
 REM Compress hero video: 720p, CRF 28 for good quality/size balance
-echo [1/3] Compressing hero video.mp4 (427MB -^> target: ^<10MB)...
+echo [1/3] Compressing hero video.mp4 (full length - optimized for web)...
 ffmpeg -i "public\hero video.mp4" ^
     -vf "scale=1280:720:force_original_aspect_ratio=decrease" ^
-    -c:v libx264 -crf 28 -preset medium -profile:v main -level 3.1 ^
-    -c:a aac -b:a 64k -movflags +faststart ^
-    -t 30 ^
+    -c:v libx264 -crf 28 -preset medium -profile:v main -level 4.0 ^
+    -c:a aac -b:a 96k -movflags +faststart ^
     "public\hero-video-compressed.mp4" -y
 
 if %ERRORLEVEL% EQU 0 (
@@ -62,12 +61,11 @@ for %%f in ("public\intro.webm") do (
 echo.
 
 REM Create WebM version of hero video for better compression
-echo [3/3] Creating WebM version of hero video...
+echo [3/3] Creating WebM version of hero video (full length)...
 ffmpeg -i "public\hero video.mp4" ^
     -vf "scale=1280:720:force_original_aspect_ratio=decrease" ^
     -c:v libvpx-vp9 -crf 30 -b:v 0 -deadline good ^
-    -c:a libopus -b:a 64k -movflags +faststart ^
-    -t 30 ^
+    -c:a libopus -b:a 96k -movflags +faststart ^
     "public\hero-video.webm" -y
 
 if %ERRORLEVEL% EQU 0 (
