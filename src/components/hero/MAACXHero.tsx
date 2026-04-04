@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback } from "react";
 import gsap from "gsap";
+import { VolumeX, Volume2 } from "lucide-react";
 import VideoModal from "@/components/VideoModal";
 import SplitTextReveal from "@/components/ui/SplitTextReveal";
 
@@ -15,10 +16,53 @@ export default function MAACXHero() {
   const introVideoRef = useRef<HTMLVideoElement>(null);
   const heroVideoRef = useRef<HTMLVideoElement>(null);
   const introOverlayRef = useRef<HTMLDivElement>(null);
+  const progressRef = useRef<HTMLDivElement>(null);
+  const progressDotRef = useRef<HTMLDivElement>(null);
+  const animFrameRef = useRef<number>();
+  const progressStartRef = useRef<number>(0);
+
   const [introComplete, setIntroComplete] = useState(false);
-  const [showVideoModal, setShowVideoModal] = useState(false);
-  const hasAnimatedRef = useRef(false);
+  const [isMuted, setIsMuted] = useState(true);
+  const [showSkip, setShowSkip] = useState(false);
   const [videoError, setVideoError] = useState(false);
+  const hasAnimatedRef = useRef(false);
+
+  // Progress bar animation
+  useEffect(() => {
+    if (introComplete || videoError) return;
+
+    progressStartRef.current = Date.now();
+    const DURATION = 8000;
+
+    const animate = () => {
+      const elapsed = Date.now() - progressStartRef.current;
+      const pct = Math.min((elapsed / DURATION) * 100, 100);
+
+      if (progressRef.current) {
+        progressRef.current.style.width = `${pct}%`;
+      }
+      if (progressDotRef.current) {
+        progressDotRef.current.style.left = `${pct}%`;
+      }
+
+      if (pct < 100) {
+        animFrameRef.current = requestAnimationFrame(animate);
+      }
+    };
+
+    animFrameRef.current = requestAnimationFrame(animate);
+
+    return () => {
+      if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
+    };
+  }, [introComplete, videoError]);
+
+  // Show skip button after 2 seconds
+  useEffect(() => {
+    if (introComplete) return;
+    const timer = setTimeout(() => setShowSkip(true), 2000);
+    return () => clearTimeout(timer);
+  }, [introComplete]);
 
   // Handle intro video ending → sweep up
   const handleIntroEnded = useCallback(() => {
@@ -27,6 +71,9 @@ export default function MAACXHero() {
 
     const overlay = introOverlayRef.current;
     if (overlay) {
+      // Fade out UI elements first
+      gsap.to(".intro-ui-elements", { opacity: 0, duration: 0.3 });
+
       gsap.to(overlay, {
         yPercent: -100,
         duration: 0.9,
@@ -39,6 +86,13 @@ export default function MAACXHero() {
       });
     }
   }, [introComplete]);
+
+  // Mute video initially
+  useEffect(() => {
+    if (introVideoRef.current) {
+      introVideoRef.current.muted = true;
+    }
+  }, []);
 
   // Run hero entrance animations AFTER sweep completes
   useEffect(() => {
@@ -100,6 +154,9 @@ export default function MAACXHero() {
       {!introComplete && (
         <div
           ref={introOverlayRef}
+          role="dialog"
+          aria-label="Loading experience"
+          aria-modal="true"
           className="fixed inset-0 z-[9999]"
           style={{
             width: "100vw",
@@ -107,99 +164,144 @@ export default function MAACXHero() {
             backgroundColor: "#0C0C0C",
           }}
         >
-          {/* Video - explicitly sized */}
-          <video
-            ref={introVideoRef}
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "100%",
-              objectFit: "contain",
-            }}
-            autoPlay
-            muted
-            playsInline
-            preload="auto"
-            onEnded={handleIntroEnded}
-            onError={() => setVideoError(true)}
-          >
-            <source src={INTRO_VIDEO_WEBM} type="video/webm" />
-            <source src={INTRO_VIDEO_MP4} type="video/mp4" />
-          </video>
-
-          {/* Loading fallback (shown if video fails) */}
-          {videoError && (
-            <div
-              style={{
-                position: "absolute",
-                inset: 0,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "24px",
-              }}
-            >
-              <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                <div style={{
-                  width: "48px",
-                  height: "48px",
-                  borderRadius: "12px",
-                  background: "linear-gradient(135deg, #E31837, #B8132C)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}>
-                  <svg viewBox="0 0 48 48" style={{ width: "28px", height: "28px", color: "white" }} fill="currentColor">
-                    <path d="M6 6v36l8-4V18l10 14 10-14v20l8 4V6L24 30 6 6z" />
-                  </svg>
+          {videoError ? (
+            /* Loading fallback (shown if video fails) */
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-6">
+              <div className="relative">
+                <div
+                  className="w-16 h-16 rounded-2xl flex items-center justify-center"
+                  style={{
+                    background: "linear-gradient(135deg, #E31837, #C4132D)",
+                  }}
+                >
+                  <span className="text-white font-display font-bold text-3xl">M</span>
                 </div>
-                <span style={{ color: "white", fontWeight: 700, fontSize: "24px" }}>MAAC</span>
+                {/* Pulse ring animation */}
+                <div
+                  className="absolute inset-0 rounded-2xl animate-ping"
+                  style={{
+                    background: "linear-gradient(135deg, #E31837, #C4132D)",
+                    opacity: 0.3,
+                    animationDuration: "2s",
+                  }}
+                />
               </div>
-              <p style={{
-                color: "#E31837",
-                fontSize: "10px",
-                fontWeight: 500,
-                letterSpacing: "0.3em",
-                textTransform: "uppercase",
-              }}>
-                Loading
+              <p
+                className="text-white/40 text-xs tracking-[0.3em] uppercase"
+              >
+                Loading Experience
               </p>
             </div>
+          ) : (
+            <>
+              {/* Video - explicitly sized */}
+              <video
+                ref={introVideoRef}
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                }}
+                autoPlay
+                muted
+                playsInline
+                preload="auto"
+                onEnded={handleIntroEnded}
+                onError={() => setVideoError(true)}
+              >
+                <source src={INTRO_VIDEO_WEBM} type="video/webm" />
+                <source src={INTRO_VIDEO_MP4} type="video/mp4" />
+              </video>
+
+              {/* Dark vignette overlay on top of video */}
+              <div
+                className="absolute inset-0 z-[1]"
+                style={{
+                  background:
+                    "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.6) 100%)",
+                }}
+              />
+
+              {/* MAAC Logo/wordmark at top */}
+              <div className="intro-ui-elements absolute top-8 left-1/2 -translate-x-1/2 flex flex-col items-center z-10">
+                <div
+                  className="w-6 h-[2px] mb-2"
+                  style={{ backgroundColor: "#E31837" }}
+                />
+                <span className="text-white font-display font-bold text-sm tracking-[0.3em] uppercase">
+                  MAAC
+                </span>
+              </div>
+
+              {/* Mute toggle button (bottom-right) */}
+              <button
+                className="intro-ui-elements absolute bottom-6 right-6 z-10 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all"
+                onClick={() => {
+                  setIsMuted((m) => !m);
+                  if (introVideoRef.current) {
+                    introVideoRef.current.muted = !isMuted;
+                  }
+                }}
+                aria-label={isMuted ? "Unmute" : "Mute"}
+              >
+                {isMuted ? <VolumeX size={16} /> : <Volume2 size={16} />}
+              </button>
+
+              {/* Skip button (bottom-left, appears after 2s) */}
+              {showSkip && (
+                <button
+                  onClick={handleIntroEnded}
+                  className="intro-ui-elements absolute bottom-6 left-6 z-10 text-white/40 hover:text-white/80 text-xs tracking-[0.15em] uppercase transition-colors flex items-center gap-2"
+                >
+                  <span>Skip</span>
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <polyline points="13 17 18 12 13 7" />
+                    <polyline points="6 17 11 12 6 7" />
+                  </svg>
+                </button>
+              )}
+
+              {/* Premium progress bar */}
+              <div className="intro-ui-elements absolute bottom-0 left-0 right-0 z-10" style={{ height: "2px", backgroundColor: "rgba(255,255,255,0.08)" }}>
+                <div
+                  ref={progressRef}
+                  className="h-full"
+                  style={{
+                    background: "linear-gradient(90deg, #E31837, #FF6B35)",
+                    width: "0%",
+                  }}
+                />
+                {/* Glowing dot at leading edge */}
+                <div
+                  ref={progressDotRef}
+                  className="absolute top-1/2 -translate-y-1/2 rounded-full"
+                  style={{
+                    width: "6px",
+                    height: "6px",
+                    backgroundColor: "#E31837",
+                    boxShadow: "0 0 8px #E31837",
+                    left: "0%",
+                    transform: "translate(-50%, -50%)",
+                  }}
+                />
+              </div>
+            </>
           )}
-
-          {/* Progress bar */}
-          <div style={{
-            position: "absolute",
-            bottom: 0,
-            left: 0,
-            right: 0,
-            height: "3px",
-            backgroundColor: "rgba(255,255,255,0.05)",
-          }}>
-            <div
-              style={{
-                height: "100%",
-                backgroundColor: "#E31837",
-                width: "0%",
-                animation: "progressFill 8s linear forwards",
-              }}
-            />
-          </div>
-
-          <style jsx>{`
-            @keyframes progressFill {
-              from { width: 0%; }
-              to { width: 100%; }
-            }
-          `}</style>
         </div>
       )}
 
       {/* ═══════════════════════════════════════════════════════ */}
-      {/* HERO SECTION                                           */}
+      {/* HERO SECTION                                            */}
       {/* ═══════════════════════════════════════════════════════ */}
       <section
         ref={containerRef}
@@ -214,6 +316,7 @@ export default function MAACXHero() {
             loop
             playsInline
             preload="auto"
+            poster="/hero-poster.jpg"
           >
             <source src={HERO_VIDEO_WEBM} type="video/webm" />
             <source src={HERO_VIDEO_MP4} type="video/mp4" />
@@ -240,7 +343,7 @@ export default function MAACXHero() {
 
         {/* ── Content ── */}
         <div className="relative z-10 min-h-[100svh] flex flex-col justify-end px-5 sm:px-8 md:px-12 lg:px-16 pb-[100px] sm:pb-14 md:pb-16 lg:pb-20">
-          
+
           {/* Left side content */}
           <div className="w-full lg:max-w-[540px]">
             {/* Badge */}
@@ -268,7 +371,7 @@ export default function MAACXHero() {
               </span>
             </div>
 
-            {/* CTAs */}
+            {/* CTAs - only Explore Courses (showreel removed) */}
             <div className="maacx-cta-row flex flex-wrap items-center gap-3 md:gap-4">
               <a
                 href="#courses"
@@ -288,19 +391,6 @@ export default function MAACXHero() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </a>
-
-              <button
-                className="btn btn-ghost group inline-flex items-center gap-2.5 px-4 py-3"
-                onClick={() => setShowVideoModal(true)}
-                aria-label="Watch Showreel"
-              >
-                <div className="w-9 h-9 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center group-hover:bg-[#E31837]/20 transition-colors">
-                  <svg className="w-3.5 h-3.5 text-[#E31837] ml-0.5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                </div>
-                <span className="text-sm font-medium">Showreel</span>
-              </button>
             </div>
           </div>
 
@@ -342,7 +432,14 @@ export default function MAACXHero() {
         </div>
 
         {/* Mobile stats bar */}
-        <div className="lg:hidden absolute bottom-0 left-0 right-0 z-10 flex items-stretch border-t border-white/10" style={{ background: "rgba(0,0,0,0.7)", backdropFilter: "blur(12px)" }}>
+        <div
+          className="lg:hidden absolute bottom-0 left-0 right-0 z-10 flex items-stretch border-t border-white/10"
+          style={{
+            background: "rgba(0,0,0,0.7)",
+            backdropFilter: "blur(12px)",
+            paddingBottom: "max(0px, env(safe-area-inset-bottom))",
+          }}
+        >
           {[
             { value: "30+", label: "Years" },
             { value: "95%", label: "Placement" },
@@ -358,13 +455,6 @@ export default function MAACXHero() {
           ))}
         </div>
       </section>
-
-      {/* Video Modal */}
-      <VideoModal
-        isOpen={showVideoModal}
-        onClose={() => setShowVideoModal(false)}
-        videoUrl={HERO_VIDEO_MP4}
-      />
     </>
   );
 }

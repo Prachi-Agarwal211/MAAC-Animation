@@ -44,7 +44,7 @@ export default function PopularCourses() {
       <div className="relative z-10 max-w-[1920px] mx-auto">
         <div 
           ref={trackRef}
-          className="flex gap-6 overflow-x-auto snap-x snap-mandatory px-6 md:px-12 lg:px-24 pb-8 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+          className="flex gap-6 overflow-x-auto snap-x snap-mandatory px-4 sm:px-6 md:px-12 lg:px-24 pb-8 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
         >
           {coursesData.popularCourses.map((course, index) => (
             <div

@@ -54,9 +54,10 @@ export default function FloatingCTA({ whatsapp, phone }: FloatingCTAProps) {
   return (
     <div
       ref={containerRef}
-      className={`fixed bottom-6 right-6 flex flex-col items-center gap-3 transition-all duration-300 ${
+      className={`fixed right-6 flex flex-col items-center gap-3 transition-all duration-300 ${
         isVisible && !mobileMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
       } z-[999]`}
+      style={{ bottom: "max(24px, calc(24px + env(safe-area-inset-bottom)))" }}
     >
       {/* WhatsApp Button */}
       <div className="relative group">

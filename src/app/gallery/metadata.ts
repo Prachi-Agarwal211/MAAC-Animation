@@ -1,8 +1,9 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Gallery - maacanimationjaipur.com",
-  description: "Explore MAAC Jaipur's campus photos, student projects, events, and workshops. See our animation labs, VFX studios, and creative work in action.",
+  title: "Student Work Gallery | MAAC Animation Jaipur",
+  description:
+    "Explore MAAC Jaipur's campus photos, student projects, events, and workshops. See our animation labs, VFX studios, and creative work in action.",
   robots: {
     index: true,
     follow: true,
@@ -15,8 +16,8 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Gallery - maacanimationjaipur.com",
-    url: "https://www.maacanimationjaipur.com/gallery/",
+    title: "Student Work Gallery | MAAC Animation Jaipur",
+    url: "https://www.maacanimationjaipur.com/gallery",
     type: "article",
     siteName: "maacanimationjaipur.com",
     locale: "en_US",
@@ -25,15 +26,15 @@ export const metadata: Metadata = {
         url: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/06/Screenshot-2025-06-25-134820.png",
         width: 1200,
         height: 630,
-        alt: "Gallery - maacanimationjaipur.com",
+        alt: "Student Work Gallery | MAAC Animation Jaipur",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Gallery - maacanimationjaipur.com",
+    title: "Student Work Gallery | MAAC Animation Jaipur",
   },
   alternates: {
-    canonical: "https://www.maacanimationjaipur.com/gallery/",
+    canonical: "https://www.maacanimationjaipur.com/gallery",
   },
 };

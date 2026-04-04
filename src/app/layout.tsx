@@ -28,11 +28,11 @@ const syne = Syne({
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.maacanimationjaipur.com"),
   title: {
-    default: "Home animation institute in jaipur",
-    template: "%s - maacanimationjaipur.com",
+    default: "MAAC Animation Institute Jaipur | Best Animation & VFX Courses",
+    template: "%s | MAAC Jaipur",
   },
   description:
-    "MAAC is the high-end 3D Animation & VFX education brand of Aptech. Through its wide network of centres, MAAC has prepared thousands students",
+    "MAAC Jaipur — Rajasthan's #1 Animation Institute. B.Voc Degree in 3D Animation, VFX & Game Design. 95% Placements. NSDC Certified. Call +91-7300001589.",
   keywords: [
     "animation institute jaipur",
     "3d animation course jaipur",
@@ -53,9 +53,9 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://www.maacanimationjaipur.com",
     siteName: "maacanimationjaipur.com",
-    title: "Home animation institute in jaipur",
+    title: "MAAC Animation Institute Jaipur | Best Animation & VFX Courses",
     description:
-      "MAAC is the high-end 3D Animation & VFX education brand of Aptech. Through its wide network of centres, MAAC has prepared thousands students",
+      "MAAC Jaipur — Rajasthan's #1 Animation Institute. B.Voc Degree in 3D Animation, VFX & Game Design. 95% Placements. NSDC Certified.",
     images: [
       {
         url: "https://www.maacanimationjaipur.com/wp-content/uploads/2021/09/v-toy-sl-3.png",

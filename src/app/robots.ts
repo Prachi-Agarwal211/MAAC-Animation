@@ -26,6 +26,17 @@ export default function robots(): MetadataRoute.Robots {
           "/api/",
         ],
       },
+      // Google & Bing specific rules
+      {
+        userAgent: "Googlebot",
+        allow: "/",
+        disallow: ["/api/", "/admin/"],
+      },
+      {
+        userAgent: "Bingbot",
+        allow: "/",
+        disallow: ["/api/", "/admin/"],
+      },
       // AI Crawler rules
       {
         userAgent: "GPTBot",

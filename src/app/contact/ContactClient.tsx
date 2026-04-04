@@ -155,12 +155,19 @@ export default function ContactClient() {
                 </div>
               </div>
 
-              {/* Map placeholder */}
-              <div className="image-placeholder h-64 rounded-2xl">
-                <div className="text-center">
-                  <div className="text-4xl mb-2">🗺️</div>
-                  <span className="text-sm">Add Google Map Embed</span>
-                </div>
+              {/* Google Maps embed */}
+              <div className="rounded-2xl overflow-hidden h-64">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3558.1!2d75.787!3d26.912!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMAzMi5Bq!5e0!3m2!1sen!2sin!4v1234567890"
+                  width="100%"
+                  height="256"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="MAAC Animation Jaipur Location"
+                  className="rounded-2xl"
+                />
               </div>
             </div>
 

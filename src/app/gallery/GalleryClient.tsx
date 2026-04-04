@@ -51,6 +51,23 @@ export default function GalleryClient() {
 
   return (
     <main ref={pageRef} className="overflow-hidden">
+      {/* Structured Data - ImageGallery */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ImageGallery",
+            "name": "MAAC Animation Jaipur - Student Work Gallery",
+            "description": "Student projects and work from MAAC Animation Jaipur",
+            "url": "https://www.maacanimationjaipur.com/gallery",
+            "author": {
+              "@type": "EducationalOrganization",
+              "name": "MAAC Animation Jaipur"
+            }
+          })
+        }}
+      />
 
       {/* Hero */}
       <section className="relative pt-20 md:pt-32 pb-16 md:pb-20 overflow-hidden">

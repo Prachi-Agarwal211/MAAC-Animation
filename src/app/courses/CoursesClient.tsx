@@ -165,7 +165,6 @@ export default function CoursesClient() {
 
     return () => {
       ctx.revert();
-      gsap.globalTimeline.clear();
     };
   }, []);
 

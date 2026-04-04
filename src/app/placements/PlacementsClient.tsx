@@ -54,10 +54,13 @@ export default function PlacementsClient() {
           <p className="text-[#E31837] text-xs font-inter font-semibold tracking-[0.2em] uppercase mb-4">
             Career Support
           </p>
-          <h1 className="font-display font-extrabold text-[clamp(2.5rem,5vw,5rem)] text-[#f5f0e8] leading-[1.05] tracking-tight mb-6">
+          <h1 className="font-display font-extrabold text-[clamp(2.5rem,5vw,5rem)] text-[#f5f0e8] leading-[1.05] tracking-tight mb-2">
             Work With The <span className="gradient-text">Best</span>
           </h1>
-          <p className="text-[#6b6b6b] text-lg max-w-2xl">
+          <h2 className="text-[#6b6b6b] text-xl mt-2">
+            Animation & VFX Job Placements in Jaipur
+          </h2>
+          <p className="text-[#6b6b6b] text-lg max-w-2xl mt-4">
             Our students are hired by the world&apos;s best studios. They
             dominate the industry with their exceptional and unusual work.
           </p>

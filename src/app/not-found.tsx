@@ -17,7 +17,7 @@ const popularCourses = coursesData
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col pt-32 md:pt-40">
       {/* 404 Hero */}
       <section className="flex-1 flex items-center justify-center relative overflow-hidden">
         <div

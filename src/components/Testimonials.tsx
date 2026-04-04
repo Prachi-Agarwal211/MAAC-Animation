@@ -18,13 +18,18 @@ function Testimonials() {
       });
     }, sectionRef);
 
+    return () => { ctx.revert(); };
+  }, []);
+
+  // Auto-advance interval (separate from GSAP context)
+  useEffect(() => {
     const interval = setInterval(() => {
       if (!isPaused) {
         setActive((prev) => (prev + 1) % testimonialsData.length);
       }
     }, 5000);
 
-    return () => { ctx.revert(); clearInterval(interval); };
+    return () => clearInterval(interval);
   }, [isPaused]);
 
   // Touch swipe support on mobile

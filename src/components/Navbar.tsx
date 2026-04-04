@@ -49,11 +49,14 @@ export default function Navbar() {
         { x: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: "expo.out" }
       );
       document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
     }
     return () => {
-      document.body.style.overflow = ""; // Always restore on unmount
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
     };
   }, [mobileMenuOpen]);
 

@@ -144,6 +144,11 @@ export const localBusinessSchema = {
     "height": 600
   },
   "description": "Rajasthan's leading animation, VFX, and multimedia institute with 30+ years of excellence. Offering B.Voc degrees, diploma courses in 3D Animation, Visual Effects, Game Design, and Digital Filmmaking with 95% placement record.",
+  "foundingDate": "1998",
+  "numberOfEmployees": {
+    "@type": "QuantitativeValue",
+    "minValue": 20
+  },
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "711-712, Ambition Tower, 7th Floor, D-46B, Malan Ka Chauraha, Agrasain Circle, Subhash Marg, C Scheme",
@@ -154,8 +159,8 @@ export const localBusinessSchema = {
   },
   "geo": {
     "@type": "GeoCoordinates",
-    "latitude": 26.8466,
-    "longitude": 75.8069
+    "latitude": 26.9124,
+    "longitude": 75.7873
   },
   "telephone": "+919829294037",
   "email": "maacanimationjaipur@gmail.com",
@@ -205,7 +210,8 @@ export const localBusinessSchema = {
     "https://www.instagram.com/maacjaipurcscheme",
     "https://www.youtube.com/@maac-jaipur-cscheme",
     "https://www.linkedin.com/company/maac-jaipur-cscheme",
-    "https://twitter.com/MAAClndia"
+    "https://twitter.com/MAAClndia",
+    "https://g.co/kgs/maacjaipur"
   ],
   "aggregateRating": {
     "@type": "AggregateRating",

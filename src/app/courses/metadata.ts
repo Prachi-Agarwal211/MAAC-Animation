@@ -1,9 +1,9 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Courses animation courses",
+  title: "Animation & VFX Courses in Jaipur | MAAC Institute",
   description:
-    "MAAC is the high-end 3D Animation & VFX education brand of Aptech. Through its wide network of centres, MAAC has prepared thousands of students for careers in ...",
+    "Explore MAAC Jaipur's courses: 3D Animation, VFX, Game Design, Filmmaking, Digital Media. B.Voc Degree + Diplomas. NSDC Certified. 95% Placement.",
   keywords: [
     "animation courses jaipur",
     "vfx course fees jaipur",
@@ -16,9 +16,9 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     type: "article",
-    title: "Courses animation courses",
+    title: "Animation & VFX Courses in Jaipur | MAAC Institute",
     description:
-      "MAAC is the high-end 3D Animation & VFX education brand of Aptech. Through its wide network of centres, MAAC has prepared thousands of students for careers in ...",
+      "Explore MAAC Jaipur's courses: 3D Animation, VFX, Game Design, Filmmaking, Digital Media. B.Voc Degree + Diplomas. NSDC Certified.",
     url: "https://www.maacanimationjaipur.com/courses",
     siteName: "maacanimationjaipur.com",
     locale: "en_US",
@@ -27,12 +27,13 @@ export const metadata: Metadata = {
         url: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/06/DAFM.jpg",
         width: 1200,
         height: 630,
-        alt: "MAAC Jaipur Course Programs",
+        alt: "Animation & VFX Courses in Jaipur | MAAC Institute",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
+    title: "Animation & VFX Courses in Jaipur | MAAC Institute",
   },
   robots: {
     index: true,

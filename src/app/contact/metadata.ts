@@ -1,8 +1,9 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Contact us - maacanimationjaipur.com",
-  description: "Get in touch with MAAC Jaipur. Visit our campus at Ambition Tower, C Scheme, Jaipur or call us. Free demo classes and career counseling available.",
+  title: "Contact MAAC Animation Jaipur | Free Demo Class | +91-7300001589",
+  description:
+    "Contact MAAC Animation Jaipur. Visit us at Subhash Marg or call +91-7300001589. Book a free demo class. Career counseling available Mon-Sat 9AM-7PM.",
   robots: {
     index: true,
     follow: true,
@@ -15,29 +16,29 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Contact us - maacanimationjaipur.com",
+    title: "Contact MAAC Animation Jaipur | Free Demo Class",
     description:
-      "Address: 711-712, Ambition Tower, 7th Floor, D-46B, Malan Ka Chauraha, Agrasain Circle, Subhash Marg, C Scheme, Jaipur, Rajasthan 302001 Phone: 098292 94037, 9929059559,",
-    url: "https://www.maacanimationjaipur.com/contact-us/",
+      "Contact MAAC Animation Jaipur. Visit us at Subhash Marg or call +91-7300001589. Book a free demo class.",
+    url: "https://www.maacanimationjaipur.com/contact",
     type: "article",
     siteName: "maacanimationjaipur.com",
     locale: "en_US",
     images: [
       {
-        url: "https://www.maacanimationjaipur.com/wp-content/plugins/wpforms-lite/assets/images/submit-spin.svg",
+        url: "https://www.maacanimationjaipur.com/images/og-contact.jpg", // TODO: Add real OG image
         width: 1200,
         height: 630,
-        alt: "Contact us - maacanimationjaipur.com",
+        alt: "Contact MAAC Animation Jaipur",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Contact us - maacanimationjaipur.com",
+    title: "Contact MAAC Animation Jaipur | Free Demo Class | +91-7300001589",
     description:
-      "Address: 711-712, Ambition Tower, 7th Floor, D-46B, Malan Ka Chauraha, Agrasain Circle, Subhash Marg, C Scheme, Jaipur, Rajasthan 302001 Phone: 098292 94037, 9929059559,",
+      "Contact MAAC Animation Jaipur. Visit us at Subhash Marg or call +91-7300001589.",
   },
   alternates: {
-    canonical: "https://www.maacanimationjaipur.com/contact-us/",
+    canonical: "https://www.maacanimationjaipur.com/contact",
   },
 };

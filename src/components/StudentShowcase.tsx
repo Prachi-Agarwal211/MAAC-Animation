@@ -122,7 +122,7 @@ export default function StudentShowcase() {
               muted
               loop
               playsInline
-              preload={i === 0 ? "auto" : "none"}
+              preload={i === 0 ? "metadata" : "none"}
             />
           </div>
         ))}

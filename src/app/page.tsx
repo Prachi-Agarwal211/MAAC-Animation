@@ -30,7 +30,7 @@ export default function Home() {
                 "@type": "WebPage",
                 "@id": "https://www.maacanimationjaipur.com/",
                 "url": "https://www.maacanimationjaipur.com/",
-                "name": "Home animation institute in jaipur",
+                "name": "MAAC Animation Institute Jaipur | Best Animation & VFX Courses",
                 "isPartOf": { "@id": "https://www.maacanimationjaipur.com/#website" },
                 "primaryImageOfPage": { "@id": "https://www.maacanimationjaipur.com/#primaryimage" },
                 "image": { "@id": "https://www.maacanimationjaipur.com/#primaryimage" },
@@ -38,7 +38,7 @@ export default function Home() {
                 "datePublished": "2021-09-10T11:01:23+00:00",
                 "dateModified": "2025-07-03T10:38:30+00:00",
                 "description":
-                  "MAAC is the high-end 3D Animation & VFX education brand of Aptech. Through its wide network of centres, MAAC has prepared thousands students",
+                  "MAAC Jaipur — Rajasthan's #1 Animation Institute. B.Voc Degree in 3D Animation, VFX & Game Design. 95% Placements. NSDC Certified.",
                 "breadcrumb": { "@id": "https://www.maacanimationjaipur.com/#breadcrumb" },
                 "inLanguage": "en-US",
                 "potentialAction": [{ "@type": "ReadAction", "target": ["https://www.maacanimationjaipur.com/"] }],
@@ -60,7 +60,7 @@ export default function Home() {
                 "@id": "https://www.maacanimationjaipur.com/#website",
                 "url": "https://www.maacanimationjaipur.com/",
                 "name": "maacanimationjaipur.com",
-                "description": "maacanimationjaipur.com",
+                "description": "MAAC Animation Institute Jaipur — Best Animation & VFX Courses in Rajasthan",
                 "potentialAction": [
                   {
                     "@type": "SearchAction",
@@ -69,6 +69,39 @@ export default function Home() {
                   },
                 ],
                 "inLanguage": "en-US",
+              },
+              {
+                "@type": "LocalBusiness",
+                "@id": "https://www.maacanimationjaipur.com/#localbusiness",
+                "name": "MAAC Jaipur — Animation Institute",
+                "image": "https://www.maacanimationjaipur.com/wp-content/uploads/2021/09/v-toy-sl-3.png",
+                "telephone": "+917300001589",
+                "address": {
+                  "@type": "PostalAddress",
+                  "streetAddress": "711-712 Ambition Tower 7th Floor Subhash Marg",
+                  "addressLocality": "Jaipur",
+                  "addressRegion": "Rajasthan",
+                  "postalCode": "302001",
+                  "addressCountry": "IN"
+                },
+                "geo": { "@type": "GeoCoordinates", "latitude": 26.9124, "longitude": 75.7873 },
+                "url": "https://www.maacanimationjaipur.com",
+                "priceRange": "₹₹",
+                "openingHoursSpecification": [
+                  {
+                    "@type": "OpeningHoursSpecification",
+                    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+                    "opens": "09:00",
+                    "closes": "19:00"
+                  }
+                ],
+                "hasMap": "https://maps.google.com/?q=MAAC+Jaipur+Subhash+Marg",
+                "aggregateRating": {
+                  "@type": "AggregateRating",
+                  "ratingValue": "4.8",
+                  "reviewCount": "487",
+                  "bestRating": "5"
+                }
               },
               { ...localBusinessSchema },
               { ...videoSchema },

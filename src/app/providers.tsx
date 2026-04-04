@@ -20,7 +20,6 @@ export function Providers({ children }: { children: React.ReactNode }) {
 
     return () => {
       ctx.revert();
-      gsap.globalTimeline.clear();
     };
   }, [pathname]);
 

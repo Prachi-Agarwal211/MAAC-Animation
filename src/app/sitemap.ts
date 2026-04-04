@@ -60,6 +60,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.7,
     },
+    {
+      url: `${base}/locations/c-scheme`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${base}/locations/vaishali-nagar`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${base}/locations/mansarovar`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
 
     // Course Pages (19 courses)
     {
@@ -195,6 +213,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date("2025-06-24"),
       changeFrequency: "yearly",
       priority: 0.5,
+    },
+    {
+      url: `${base}/blog/animation-courses-jaipur`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    {
+      url: `${base}/blog/vfx-career-india`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    {
+      url: `${base}/blog/game-design-course-jaipur`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.6,
     },
   ];
 }

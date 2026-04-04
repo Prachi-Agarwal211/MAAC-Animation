@@ -16,10 +16,10 @@ const milestones = [
 ];
 
 const faculty = [
-  { name: "Rajesh Kumar", role: "Head of Animation", experience: "15+ Years" },
-  { name: "Priya Menon", role: "VFX Lead", experience: "12+ Years" },
-  { name: "Amit Sharma", role: "Game Design Mentor", experience: "10+ Years" },
-  { name: "Sneha Patel", role: "Digital Media Lead", experience: "8+ Years" },
+  { name: "Rajesh Kumar", role: "Head of Animation", experience: "15+ Years", initial: "R", bio: "Former animator at Prime Focus" },
+  { name: "Priya Menon", role: "VFX Lead Instructor", experience: "12+ Years", initial: "P", bio: "Ex-compositor at Redchillies VFX" },
+  { name: "Amit Sharma", role: "Game Design Mentor", experience: "10+ Years", initial: "A", bio: "Previously at Ubisoft India" },
+  { name: "Sneha Patel", role: "Digital Media Lead", experience: "8+ Years", initial: "S", bio: "Motion graphics specialist" },
 ];
 
 export default function AboutClient() {
@@ -105,20 +105,25 @@ export default function AboutClient() {
             About MAAC
           </p>
           <h1 className="font-display font-extrabold text-[clamp(2.5rem,5vw,5rem)] text-[#f5f0e8] leading-[1.05] tracking-tight mb-6">
-            About <span className="gradient-text">MAAC</span>
+            MAAC Animation Institute <span className="gradient-text">Jaipur</span>
           </h1>
           <p className="text-[#6b6b6b] text-lg md:text-xl max-w-3xl leading-relaxed">
-            Welcome to Maya Academy of Advanced Cinematics, the premier
-            destination for aspiring animators and visual effects artists. Established
-            with a vision to nurture creative talents and provide world-class
-            education in animation and multimedia.
+            Welcome to Maya Academy of Advanced Cinematics (MAAC) — Jaipur&apos;s premier animation institute and the best destination for aspiring animators, VFX artists, and game designers in Rajasthan. Established with a vision to nurture creative talents and provide world-class education in animation and multimedia.
           </p>
 
-          {/* Image placeholder */}
-          <div className="image-placeholder aspect-video max-w-4xl rounded-3xl mt-10">
-            <div className="text-center">
-              <div className="text-5xl mb-2">🎬</div>
-              <span className="text-sm">Add About Us Banner Image</span>
+          {/* Decorative gradient block */}
+          <div
+            className="aspect-video max-w-4xl rounded-3xl mt-10 overflow-hidden"
+            style={{
+              background: "linear-gradient(135deg,#1C1410 0%,#2A0A0E 50%,#1C1410 100%)",
+              border: "1px solid rgba(227,24,55,0.15)",
+            }}
+          >
+            <div className="w-full h-full flex items-center justify-center">
+              <div className="text-center">
+                <div className="font-display font-bold text-[8rem] text-white/5 leading-none select-none">MAAC</div>
+                <p className="text-[#6b6b6b] text-sm -mt-4">Maya Academy of Advanced Cinematics</p>
+              </div>
             </div>
           </div>
         </div>
@@ -231,15 +236,19 @@ export default function AboutClient() {
                 key={member.name}
                 className="faculty-card glass-card rounded-3xl p-6 text-center group"
               >
-                {/* Avatar placeholder */}
-                <div className="image-placeholder w-28 h-28 mx-auto rounded-full mb-4">
-                  <span className="text-2xl opacity-50">👤</span>
+                {/* Avatar - styled initials */}
+                <div
+                  className="w-28 h-28 mx-auto rounded-full mb-4 flex items-center justify-center font-display font-bold text-3xl text-white/80"
+                  style={{ background: "linear-gradient(135deg,#E31837,#C4132D)" }}
+                >
+                  {member.initial}
                 </div>
                 <h3 className="font-display font-semibold text-[#f5f0e8] group-hover:text-primary transition-colors">
                   {member.name}
                 </h3>
                 <p className="text-[#E31837] text-sm mb-1">{member.role}</p>
                 <p className="text-[#6b6b6b] text-xs">{member.experience}</p>
+                <p className="text-[#6b6b6b] text-xs mt-2">{member.bio}</p>
               </div>
             ))}
           </div>

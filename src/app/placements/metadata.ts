@@ -1,8 +1,9 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Placements - maacanimationjaipur.com",
-  description: "Our students work at top studios like DNEG, Prime Focus, and more. Explore MAAC Jaipur's placement record and dedicated career support for animation and VFX graduates.",
+  title: "Animation Job Placements Jaipur | MAAC Alumni at DNEG, MPC & More",
+  description:
+    "Our students work at top studios like DNEG, Prime Focus, and more. Explore MAAC Jaipur's placement record and dedicated career support for animation and VFX graduates.",
   robots: {
     index: true,
     follow: true,
@@ -15,10 +16,10 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Placements - maacanimationjaipur.com",
+    title: "Animation Job Placements Jaipur | MAAC Alumni at DNEG, MPC & More",
     description:
-      "WORK WITH THE BEST Our Students are hired by the best of the best. They dominate the industry with their",
-    url: "https://www.maacanimationjaipur.com/placements/",
+      "Our students are hired by the world's best studios. Explore MAAC Jaipur's 95% placement record.",
+    url: "https://www.maacanimationjaipur.com/placements",
     type: "article",
     siteName: "maacanimationjaipur.com",
     locale: "en_US",
@@ -27,17 +28,17 @@ export const metadata: Metadata = {
         url: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/07/Screenshot-2025-07-05-212138.png",
         width: 1200,
         height: 630,
-        alt: "Placements - maacanimationjaipur.com",
+        alt: "Animation Job Placements Jaipur | MAAC Alumni",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Placements - maacanimationjaipur.com",
+    title: "Animation Job Placements Jaipur | MAAC Alumni at DNEG, MPC & More",
     description:
-      "WORK WITH THE BEST Our Students are hired by the best of the best. They dominate the industry with their",
+      "Our students are hired by the world's best studios. Explore MAAC Jaipur's placement record.",
   },
   alternates: {
-    canonical: "https://www.maacanimationjaipur.com/placements/",
+    canonical: "https://www.maacanimationjaipur.com/placements",
   },
 };

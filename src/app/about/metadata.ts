@@ -1,8 +1,9 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About us - maacanimationjaipur.com",
-  description: "Learn about MAAC Animation Institute in Jaipur — your gateway to the captivating world of animation, VFX, and digital media. Explore our courses, expert faculty, and world-class campus.",
+  title: "About MAAC Animation Institute Jaipur | 30+ Years Excellence",
+  description:
+    "Learn about MAAC Jaipur — Rajasthan's leading animation institute with 30+ years of excellence. Expert faculty, NSDC certified courses, 95% placement record.",
   robots: {
     index: true,
     follow: true,
@@ -15,29 +16,29 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "About us - maacanimationjaipur.com",
+    title: "About MAAC Animation Institute Jaipur | 30+ Years Excellence",
     description:
-      "MAAC Animation Institute in Jaipur Introduction Welcome to MAAC Animation Institute in Jaipur, your gateway to the captivating world of",
-    url: "https://www.maacanimationjaipur.com/about-us-3/",
+      "Learn about MAAC Jaipur — Rajasthan's leading animation institute with 30+ years of excellence. Expert faculty, NSDC certified courses, 95% placement record.",
+    url: "https://www.maacanimationjaipur.com/about",
     type: "article",
     siteName: "maacanimationjaipur.com",
     locale: "en_US",
     images: [
       {
-        url: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/07/WhatsApp-Image-2025-07-09-at-11.52.52_01deb273-400x255.jpg",
-        width: 400,
-        height: 255,
-        alt: "About us - maacanimationjaipur.com",
+        url: "https://www.maacanimationjaipur.com/images/og-about.jpg", // TODO: Add real OG image
+        width: 1200,
+        height: 630,
+        alt: "About MAAC Animation Institute Jaipur",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "About us - maacanimationjaipur.com",
+    title: "About MAAC Animation Institute Jaipur | 30+ Years Excellence",
     description:
-      "MAAC Animation Institute in Jaipur Introduction Welcome to MAAC Animation Institute in Jaipur, your gateway to the captivating world of",
+      "Learn about MAAC Jaipur — Rajasthan's leading animation institute with 30+ years of excellence.",
   },
   alternates: {
-    canonical: "https://www.maacanimationjaipur.com/about-us-3/",
+    canonical: "https://www.maacanimationjaipur.com/about",
   },
 };

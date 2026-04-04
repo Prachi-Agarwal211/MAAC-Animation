@@ -4,7 +4,7 @@ import Script from "next/script";
 import { blogPosts } from "@/data/blog";
 
 export const metadata: Metadata = {
-  title: "Blog - MAAC Animation Jaipur",
+  title: "Animation Career Blog | MAAC Jaipur Insights",
   description:
     "Insights, tips, and career guidance from MAAC Animation Jaipur. Learn about animation, VFX, game design, and the creative industry.",
   keywords: [
