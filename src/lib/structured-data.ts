@@ -202,9 +202,9 @@ export const localBusinessSchema = {
   },
   "sameAs": [
     "https://www.facebook.com/MAAClndia",
-    "https://www.instagram.com/maacanimationjaipur",
-    "https://www.youtube.com/@maacanimationjaipur",
-    "https://www.linkedin.com/company/maacanimationjaipur",
+    "https://www.instagram.com/maacjaipurcscheme",
+    "https://www.youtube.com/@maac-jaipur-cscheme",
+    "https://www.linkedin.com/company/maac-jaipur-cscheme",
     "https://twitter.com/MAAClndia"
   ],
   "aggregateRating": {
