@@ -15,11 +15,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Animation Courses in Malviya Nagar | MAAC Jaipur",
     description: "Premium animation & VFX training in Malviya Nagar, Jaipur. B.Voc degree, 95% placement",
-    url: "https://maacjaipur.com/locations/malviya-nagar",
+    url: "https://www.maacanimationjaipur.com/locations/malviya-nagar",
     type: "website",
   },
   alternates: {
-    canonical: "https://maacjaipur.com/locations/malviya-nagar",
+    canonical: "https://www.maacanimationjaipur.com/locations/malviya-nagar",
   },
 };
 
@@ -34,7 +34,7 @@ export default function MalviyaNagarPage() {
             "@context": "https://schema.org",
             "@type": "EducationalOrganization",
             "name": "MAAC Jaipur - Malviya Nagar Center",
-            "url": "https://maacjaipur.com",
+            "url": "https://www.maacanimationjaipur.com",
             "address": {
               "@type": "PostalAddress",
               "streetAddress": "711-712, Ambition Tower, 7th Floor, Malviya Nagar",

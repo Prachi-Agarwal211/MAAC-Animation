@@ -1,35 +1,39 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "MAAC Jaipur Gallery — Campus, Events & Student Work",
-  description: "Explore MAAC Jaipur's state-of-the-art campus, student projects, events, and workshops. See our animation labs, VFX studios, and student showreels.",
-  keywords: [
-    "maac jaipur campus photos",
-    "animation student work jaipur",
-    "vfx projects maac",
-    "maac jaipur infrastructure",
-    "student showreel maac",
-  ],
+  title: "Gallery - maacanimationjaipur.com",
+  description: "Explore MAAC Jaipur's campus photos, student projects, events, and workshops. See our animation labs, VFX studios, and creative work in action.",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   openGraph: {
-    title: "MAAC Jaipur Gallery | Campus & Student Work",
-    description: "Tour our world-class campus, view student projects, and see our animation labs in action",
-    url: "https://maacjaipur.com/gallery",
-    type: "website",
+    title: "Gallery - maacanimationjaipur.com",
+    url: "https://www.maacanimationjaipur.com/gallery/",
+    type: "article",
+    siteName: "maacanimationjaipur.com",
+    locale: "en_US",
     images: [
       {
-        url: "/og-gallery.jpg",
+        url: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/06/Screenshot-2025-06-25-134820.png",
         width: 1200,
         height: 630,
-        alt: "MAAC Jaipur Campus Gallery",
+        alt: "Gallery - maacanimationjaipur.com",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "MAAC Jaipur Gallery | Campus & Student Work",
-    description: "Tour our world-class campus, view student projects, and see our animation labs in action",
+    title: "Gallery - maacanimationjaipur.com",
   },
   alternates: {
-    canonical: "https://maacjaipur.com/gallery",
+    canonical: "https://www.maacanimationjaipur.com/gallery/",
   },
 };

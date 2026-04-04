@@ -38,7 +38,7 @@ next-env.d.ts
 # data exports
 /MAAC WEBSITE DATA-20260402T150538Z-1-001
 
-# videos
+# videos - ignore large video files but allow optimized web videos
 *.mp4
 *.webm
 *.mov
@@ -46,3 +46,10 @@ next-env.d.ts
 *.mkv
 *.wmv
 *.flv
+
+# Exceptions for optimized web videos (must be under 15MB each)
+!public/intro.webm
+!public/intro.mp4
+!public/hero-video-compressed.mp4
+!public/hero-video.webm
+!public/student-work/*-compressed.mp4

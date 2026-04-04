@@ -7,6 +7,257 @@ const nextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 31536000,
   },
+  // 301 Redirects from WordPress URLs to Next.js routes
+  async redirects() {
+    return [
+      // Core page redirects (WordPress slugs → Next.js clean URLs)
+      {
+        source: "/work/",
+        destination: "/courses",
+        permanent: true,
+      },
+      {
+        source: "/contact-us/",
+        destination: "/contact",
+        permanent: true,
+      },
+      {
+        source: "/about-us-3/",
+        destination: "/about",
+        permanent: true,
+      },
+      {
+        source: "/apply-for-demo-class/",
+        destination: "/demo-class",
+        permanent: true,
+      },
+      {
+        source: "/apply-now-for-demo-class/",
+        destination: "/demo-class",
+        permanent: true,
+      },
+      {
+        source: "/dfm-digital-film-making/",
+        destination: "/courses/dfm",
+        permanent: true,
+      },
+
+      // Course redirects (WordPress → Next.js /courses/[slug])
+      {
+        source: "/3d-animation-course-in-jaipur/",
+        destination: "/courses/3d-animation",
+        permanent: true,
+      },
+      {
+        source: "/ad3d-course-in-jaipur/",
+        destination: "/courses/ad3d",
+        permanent: true,
+      },
+      {
+        source: "/d3d-course/",
+        destination: "/courses/d3d",
+        permanent: true,
+      },
+      {
+        source: "/dafm-course-in-jaipur/",
+        destination: "/courses/dafm",
+        permanent: true,
+      },
+      {
+        source: "/graphic-design-course-in-jaipur/",
+        destination: "/courses/graphic-design",
+        permanent: true,
+      },
+      {
+        source: "/apdmd-course-in-jaipur/",
+        destination: "/courses/apdmd",
+        permanent: true,
+      },
+      {
+        source: "/architectural-design/",
+        destination: "/courses/architectural-design",
+        permanent: true,
+      },
+      {
+        source: "/design-viz-pro-course-in-jaipur/",
+        destination: "/courses/design-viz-pro",
+        permanent: true,
+      },
+      {
+        source: "/gaming-design-course-in-jaipur/",
+        destination: "/courses/gaming-design",
+        permanent: true,
+      },
+      {
+        source: "/dgdi-course-in-jaipur/",
+        destination: "/courses/dgdi",
+        permanent: true,
+      },
+      {
+        source: "/vfx-course-in-jaipur/",
+        destination: "/courses/vfx",
+        permanent: true,
+      },
+      {
+        source: "/advfx-course-in-jaipur/",
+        destination: "/courses/advfx",
+        permanent: true,
+      },
+      {
+        source: "/vfx-plus-course-in-jaipur/",
+        destination: "/courses/vfx-plus",
+        permanent: true,
+      },
+      {
+        source: "/media-course-in-jaipur/",
+        destination: "/courses/media",
+        permanent: true,
+      },
+      {
+        source: "/ipvad-course-in-jaipur/",
+        destination: "/courses/ipvad",
+        permanent: true,
+      },
+      {
+        source: "/skill-enhancement-courses/",
+        destination: "/courses/skill-enhancement",
+        permanent: true,
+      },
+      {
+        source: "/ce-pro-course-in-jaipur/",
+        destination: "/courses/ce-pro",
+        permanent: true,
+      },
+      {
+        source: "/dfm-course-in-jaipur/",
+        destination: "/courses/dfm",
+        permanent: true,
+      },
+      {
+        source: "/max-pro-course-in-jaipur/",
+        destination: "/courses/max-pro",
+        permanent: true,
+      },
+
+      // Blog redirects
+      {
+        source: "/transitions-in-ux-design/",
+        destination: "/blog/transitions-in-ux-design",
+        permanent: true,
+      },
+      {
+        source: "/career-in-animation/",
+        destination: "/blog/career-in-animation",
+        permanent: true,
+      },
+
+      // Portfolio → Gallery redirect
+      {
+        source: "/portfolio/:path*",
+        destination: "/gallery",
+        permanent: true,
+      },
+      {
+        source: "/portfolio_page-:path*",
+        destination: "/gallery",
+        permanent: true,
+      },
+
+      // WooCommerce → Homepage (noindex pages)
+      {
+        source: "/cart/",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/checkout/",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/my-account/",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/shop/",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/wishlist/",
+        destination: "/",
+        permanent: true,
+      },
+
+      // WordPress taxonomy/demo content → Homepage
+      {
+        source: "/category/:path*",
+        destination: "/blog",
+        permanent: true,
+      },
+      {
+        source: "/project-cat/:path*",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/author/:path*",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/woodmart_slider/:path*",
+        destination: "/",
+        permanent: true,
+      },
+
+      // WordPress system paths → Homepage
+      {
+        source: "/wp-admin/:path*",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/wp-login.php",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/wp-content/:path*",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/wp-includes/:path*",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/xmlrpc.php",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/feed/:path*",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/trackback/",
+        destination: "/",
+        permanent: true,
+      },
+
+      // Non-www to www redirect (consolidate domain authority)
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "maacanimationjaipur.com" }],
+        destination: "https://www.maacanimationjaipur.com/:path*",
+        permanent: true,
+      },
+    ];
+  },
   // Video caching headers for better performance
   async headers() {
     return [

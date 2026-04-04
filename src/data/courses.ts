@@ -1,0 +1,588 @@
+export interface Course {
+  slug: string;
+  name: string;
+  fullName: string;
+  shortDescription: string;
+  fullDescription: string;
+  duration: string;
+  degree: string;
+  code: string;
+  tools: string[];
+  curriculum: { module: string; topics: string[] }[];
+  career: string[];
+  faq: { question: string; answer: string }[];
+  ogImage: string;
+  category: "animation" | "vfx" | "gaming" | "filmmaking" | "design" | "media";
+  priority: number;
+  eligibility: string;
+  highlights: string[];
+  oldUrls: string[];
+}
+
+export const coursesData: Course[] = [
+  {
+    slug: "3d-animation",
+    name: "3D Animation",
+    fullName: "3D Animation Institute In Jaipur",
+    shortDescription:
+      "Master high-quality 3D animation with industry-standard techniques, character rigging, and real studio workflows at MAAC Jaipur.",
+    fullDescription:
+      "Our comprehensive 3D Animation program transforms creative enthusiasts into industry-ready professionals. From foundational drawing skills to advanced character animation, you'll master the complete 3D pipeline using Autodesk Maya and 3ds Max. The curriculum covers modeling, texturing, rigging, lighting, and animation with real-world project experience. Graduate as a confident 3D Artist ready for top studios.",
+    duration: "18-24 Months",
+    degree: "Diploma / B.Voc",
+    code: "3DANIM",
+    tools: ["Autodesk Maya", "3ds Max", "ZBrush", "Substance Painter", "Arnold Renderer", "Mudbox"],
+    curriculum: [
+      { module: "Foundation & Art Fundamentals", topics: ["Sketching & Life Drawing", "Color Theory & Composition", "Storyboarding & Visual Narration", "Animation Principles (12 Laws)", "Pre-visualization Techniques"] },
+      { module: "3D Modeling & Sculpting", topics: ["Polygon Modeling Fundamentals", "Hard Surface Modeling", "Organic & Character Sculpting in ZBrush", "UV Unwrapping & Texture Painting", "Substance Painter Workflow"] },
+      { module: "Rigging & Animation", topics: ["Skeleton & Joint Systems", "Forward & Inverse Kinematics", "Character Rigging in Maya", "Body Mechanics & Walk Cycles", "Acting & Performance Animation"] },
+      { module: "Lighting, Rendering & Compositing", topics: ["3-Point Lighting Setup", "HDRI & Global Illumination", "Arnold Renderer Settings", "Multi-pass Rendering", "Nuke Compositing Basics"] },
+      { module: "Industry Project & Showreel", topics: ["Short Film Production", "Team Collaboration Workflow", "Showreel Creation", "Portfolio Development", "Interview Preparation"] },
+    ],
+    career: ["3D Animator", "Character Animator", "Storyboard Artist", "Lighting Artist", "Texture Artist", "Rigging Artist"],
+    faq: [
+      { question: "What is the duration of the 3D Animation course?", answer: "The course runs for 18-24 months depending on the track you choose. The Diploma track is 18 months, while the B.Voc degree track extends to 24 months including internship." },
+      { question: "Do I need prior drawing or art experience?", answer: "No prior experience is required. Our foundation module covers sketching, life drawing, and art fundamentals from scratch. However, a passion for art and animation is essential." },
+      { question: "What software will I learn?", answer: "You'll master industry-standard tools including Autodesk Maya, 3ds Max, ZBrush, Substance Painter, and Arnold Renderer — the same tools used in major studios worldwide." },
+      { question: "Is placement assistance provided?", answer: "Yes, we have a dedicated placement cell with a 95% placement rate. We provide showreel review, mock interviews, and connections with 500+ partner companies including DNEG, MPC, and Technicolor." },
+      { question: "Is this course NSDC certified?", answer: "Yes, the program is NSDC certified and offers a B.Voc degree option, recognized by UGC and valued by employers across the industry." },
+    ],
+    ogImage: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/06/3.jpg",
+    category: "animation",
+    priority: 1,
+    eligibility: "10+2 or Equivalent",
+    highlights: ["Industry-standard curriculum aligned with studio requirements", "Real-world project-based learning approach", "B.Voc degree option available", "95% placement assistance record", "Access to latest software and hardware"],
+    oldUrls: ["/3d-animation-course-in-jaipur/"],
+  },
+  {
+    slug: "ad3d",
+    name: "AD3D Edge",
+    fullName: "AD3D Course In Jaipur",
+    shortDescription: "Advanced program in 3D Animation with specialized training in character animation, visual storytelling, and studio pipeline.",
+    fullDescription:
+      "AD3D Edge is our advanced diploma program designed for students who want deep expertise in 3D animation. This intensive 12-month program covers advanced character animation, creature animation, and studio-level production workflows. You'll work on real studio projects and build a professional showreel that gets you hired.",
+    duration: "12 Months",
+    degree: "Advanced Diploma",
+    code: "AD3D",
+    tools: ["Autodesk Maya", "MotionBuilder", "ZBrush", "Substance Painter", "Arnold", "Nuke"],
+    curriculum: [
+      { module: "Advanced Character Animation", topics: ["Body Mechanics Advanced", "Creature & Quadruped Animation", "Facial Expression & Lip Sync", "Performance Capture Integration", "Advanced Acting Techniques"] },
+      { module: "Studio Pipeline & Workflow", topics: ["Asset Management Systems", "Version Control for Artists", "Collaborative Production Pipeline", "Quality Assurance Processes", "Deadline & Render Farm Management"] },
+      { module: "Specialization Tracks", topics: ["Character Animation Specialization", "Creature Animation Specialization", "Crowd Simulation with Massive", "Motion Capture Cleanup", "Animation Directing Basics"] },
+      { module: "Capstone Project", topics: ["Final Short Film Production", "Showreel Assembly", "Industry Mentor Review", "Portfolio Polish", "Job Search Strategy"] },
+    ],
+    career: ["Senior 3D Animator", "Character Animation Specialist", "Creature Animator", "Animation Lead", "Motion Capture Artist"],
+    faq: [
+      { question: "What is the difference between AD3D Edge and the regular 3D Animation course?", answer: "AD3D Edge is an advanced, intensive 12-month program focused on specialized character animation and studio pipeline skills. It's designed for students who want deeper expertise and faster industry entry." },
+      { question: "What are the prerequisites for this course?", answer: "Basic understanding of 3D fundamentals is preferred. If you're a complete beginner, we recommend starting with our foundation 3D Animation program first." },
+    ],
+    ogImage: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/06/AD3D-Edge.jpg",
+    category: "animation",
+    priority: 2,
+    eligibility: "10+2 or Equivalent + Basic 3D Knowledge",
+    highlights: ["Advanced specialization tracks", "Real studio project experience", "Industry mentor reviews", "Professional showreel development", "Fast-track to industry readiness"],
+    oldUrls: ["/ad3d-course-in-jaipur/"],
+  },
+  {
+    slug: "d3d",
+    name: "D3D",
+    fullName: "D3D Course",
+    shortDescription: "Comprehensive program in 3D Animation covering modeling, texturing, animation, and rendering for aspiring 3D artists.",
+    fullDescription:
+      "The D3D program provides a solid foundation in 3D animation production. Over 12 months, you'll learn the complete 3D pipeline — from concept art and modeling to final rendering. The course is structured to take you from beginner to job-ready 3D artist with hands-on project experience at every stage.",
+    duration: "12 Months",
+    degree: "Diploma",
+    code: "D3D",
+    tools: ["Autodesk Maya", "3ds Max", "V-Ray", "Photoshop", "ZBrush"],
+    curriculum: [
+      { module: "3D Foundations", topics: ["Interface & Navigation", "Polygon Modeling Basics", "Primitive & Complex Shapes", "Introduction to UV Mapping", "Basic Texturing Principles"] },
+      { module: "Modeling & Texturing", topics: ["Hard Surface Modeling", "Environment & Prop Creation", "UV Layout Optimization", "Substance Painter Texturing", "PBR Material Workflow"] },
+      { module: "Animation Fundamentals", topics: ["12 Principles of Animation", "Timing & Spacing", "Walk & Run Cycles", "Basic Character Animation", "Camera Animation"] },
+      { module: "Lighting & Rendering", topics: ["Lighting Types & Setup", "V-Ray Renderer", "Render Passes & Layers", "Post-Production Basics", "Final Output Delivery"] },
+    ],
+    career: ["3D Modeler", "Junior Animator", "Texture Artist", "Rendering Artist", "3D Generalist"],
+    faq: [
+      { question: "Is this course suitable for beginners?", answer: "Absolutely. D3D is designed as a comprehensive beginner-to-intermediate program that builds your skills from the ground up." },
+    ],
+    ogImage: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/06/3.jpg",
+    category: "animation",
+    priority: 3,
+    eligibility: "10+2 or Equivalent",
+    highlights: ["Beginner-friendly curriculum", "Complete 3D pipeline coverage", "Project-based learning", "Industry-recognized certification", "Career placement support"],
+    oldUrls: ["/d3d-course/"],
+  },
+  {
+    slug: "dafm",
+    name: "DAFM",
+    fullName: "DAFM - Digital Animation & Film Making",
+    shortDescription: "Master digital animation and filmmaking with comprehensive training in storyboard, editing, VFX, and post-production.",
+    fullDescription:
+      "DAFM combines the art of digital animation with the craft of filmmaking. This unique program teaches you the complete film production pipeline — from scriptwriting and storyboarding to shooting, VFX, editing, and final delivery. Perfect for aspiring filmmakers who want to leverage animation and VFX in their storytelling.",
+    duration: "12 Months",
+    degree: "Diploma",
+    code: "DAFM",
+    tools: ["Premiere Pro", "After Effects", "DaVinci Resolve", "Audition", "Cinema 4D", "Final Cut Pro"],
+    curriculum: [
+      { module: "Filmmaking Foundations", topics: ["Scriptwriting & Story Development", "Storyboarding & Animatics", "Cinematography Basics", "Camera Angles & Movements", "Lighting for Film"] },
+      { module: "Digital Editing", topics: ["Premiere Pro Workflow", "Non-Linear Editing Techniques", "Color Grading with DaVinci Resolve", "Audio Editing & Mixing", "Export Formats & Delivery"] },
+      { module: "VFX for Film", topics: ["Green Screen Compositing", "Motion Tracking", "CG Integration", "Particle Effects", "Title Design & Credits"] },
+      { module: "Short Film Production", topics: ["Pre-Production Planning", "On-Set Production", "Post-Production Workflow", "Film Festival Submission", "Portfolio Development"] },
+    ],
+    career: ["Film Editor", "Assistant Director", "VFX Coordinator", "Colorist", "Independent Filmmaker"],
+    faq: [
+      { question: "Do I need my own camera for this course?", answer: "No, the institute provides cameras and equipment for practical sessions. However, having a smartphone with a good camera is helpful for practice." },
+    ],
+    ogImage: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/06/DAFM.jpg",
+    category: "filmmaking",
+    priority: 4,
+    eligibility: "10+2 or Equivalent",
+    highlights: ["Complete filmmaking pipeline", "Hands-on film production", "Industry-standard editing tools", "Short film portfolio piece", "Festival submission guidance"],
+    oldUrls: ["/dafm-course-in-jaipur/"],
+  },
+  {
+    slug: "graphic-design",
+    name: "Graphic Design",
+    fullName: "Graphic Design Course in Jaipur",
+    shortDescription: "Dive into the world of creativity with MAAC Graphic Design Course in Jaipur comprehensive course in Jaipur, perfecting your design skills.",
+    fullDescription:
+      "Dive into the world of creativity with MAAC Graphic Design Course in Jaipur comprehensive course in Jaipur, perfecting your design skills. Learn typography, color theory, brand identity, UI/UX fundamentals, and digital illustration. Build a strong portfolio that showcases your unique creative voice and prepares you for a career in the design industry.",
+    duration: "6-12 Months",
+    degree: "Diploma / Certificate",
+    code: "GD",
+    tools: ["Photoshop", "Illustrator", "InDesign", "CorelDRAW", "Figma", "Canva Pro"],
+    curriculum: [
+      { module: "Design Fundamentals", topics: ["Elements & Principles of Design", "Color Theory & Psychology", "Typography & Font Pairing", "Layout & Composition", "Visual Hierarchy"] },
+      { module: "Digital Illustration", topics: ["Vector Art in Illustrator", "Digital Painting in Photoshop", "Icon Design", "Infographic Creation", "Pattern Design"] },
+      { module: "Brand Identity", topics: ["Logo Design Process", "Brand Guidelines Development", "Business Card & Stationery", "Packaging Design", "Brand Collateral"] },
+      { module: "UI/UX & Digital Design", topics: ["UI Design Principles", "Wireframing & Prototyping in Figma", "Responsive Design", "Social Media Design", "Web Banner Design"] },
+    ],
+    career: ["Graphic Designer", "Brand Designer", "UI Designer", "Social Media Designer", "Freelance Designer"],
+    faq: [
+      { question: "What is the duration of the Graphic Design course?", answer: "The course offers flexible tracks: a 6-month certificate program and a 12-month diploma program with deeper specialization." },
+    ],
+    ogImage: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/06/Graphic-Design-Course.jpg",
+    category: "design",
+    priority: 5,
+    eligibility: "10+2 or Equivalent",
+    highlights: ["Industry-standard design tools", "Real client project experience", "Portfolio development focus", "Freelance career guidance", "UI/UX fundamentals included"],
+    oldUrls: ["/graphic-design-course-in-jaipur/"],
+  },
+  {
+    slug: "apdmd",
+    name: "APDMD",
+    fullName: "APDMD - Advanced Program in Digital Media & Design",
+    shortDescription: "Discover top-notch APDMD course in Jaipur at MAAC Institute. Explore cutting-edge design and multimedia skills.",
+    fullDescription:
+      "Discover top-notch APDMD course in Jaipur at MAAC Institute. Explore cutting-edge design and multimedia skills. This 24-month advanced program covers graphic design, web design, UI/UX, motion graphics, video editing, and digital marketing. Become a versatile digital media professional capable of handling end-to-end creative projects.",
+    duration: "24 Months",
+    degree: "Advanced Diploma",
+    code: "APDMD",
+    tools: ["Photoshop", "Illustrator", "After Effects", "Premiere Pro", "Figma", "WordPress", "Dreamweaver"],
+    curriculum: [
+      { module: "Visual Design", topics: ["Advanced Graphic Design", "Typography Mastery", "Brand Identity Systems", "Print Production", "Packaging Design"] },
+      { module: "Web & UI/UX Design", topics: ["HTML/CSS Fundamentals", "WordPress Development", "Figma UI/UX Design", "Responsive Web Design", "User Research & Testing"] },
+      { module: "Motion Graphics & Video", topics: ["After Effects Advanced", "Motion Graphics Design", "Video Editing & Color Grading", "Title Sequences", "Broadcast Graphics"] },
+      { module: "Digital Marketing & Strategy", topics: ["SEO Fundamentals", "Social Media Strategy", "Content Marketing", "Google Analytics", "Campaign Management"] },
+      { module: "Capstone & Portfolio", topics: ["Client Project Management", "Freelance Business Setup", "Portfolio Website Creation", "Industry Internship", "Career Development"] },
+    ],
+    career: ["Digital Media Specialist", "UI/UX Designer", "Motion Graphics Artist", "Web Designer", "Digital Marketing Specialist"],
+    faq: [
+      { question: "Is this course suitable for someone with no design background?", answer: "Yes, APDMD starts from foundations and progressively builds advanced skills. No prior design experience is required." },
+    ],
+    ogImage: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/06/APDMD-300x300.jpg",
+    category: "media",
+    priority: 6,
+    eligibility: "10+2 or Equivalent",
+    highlights: ["Comprehensive 24-month program", "Multi-disciplinary skill set", "Digital marketing included", "Client project experience", "Freelance business training"],
+    oldUrls: ["/apdmd-course-in-jaipur/"],
+  },
+  {
+    slug: "architectural-design",
+    name: "Architectural Design",
+    fullName: "Architectural Visualization & Design",
+    shortDescription: "Master architectural visualization with 3D modeling, rendering, and walkthrough creation for the AEC industry.",
+    fullDescription:
+      "Our Architectural Design program trains you in the art and science of architectural visualization. Learn to create photorealistic 3D renders, animated walkthroughs, and interactive presentations for architects, real estate developers, and interior designers. Master AutoCAD, SketchUp, 3ds Max, and V-Ray to become an in-demand visualization professional.",
+    duration: "6-12 Months",
+    degree: "Diploma / Certificate",
+    code: "ARCHVIZ",
+    tools: ["AutoCAD", "SketchUp", "3ds Max", "V-Ray", "Lumion", "Photoshop"],
+    curriculum: [
+      { module: "Architectural Drawing & CAD", topics: ["AutoCAD Fundamentals", "Floor Plans & Elevations", "3D Modeling in AutoCAD", "Technical Drawing Standards", "Blueprint Reading"] },
+      { module: "3D Architectural Modeling", topics: ["SketchUp for Architecture", "3ds Max Modeling", "Interior Scene Creation", "Exterior Landscape Design", "Furniture & Asset Libraries"] },
+      { module: "Rendering & Visualization", topics: ["V-Ray Material Setup", "Interior Lighting Techniques", "Exterior Day/Night Renders", "Post-Production in Photoshop", "Panoramic Renders"] },
+      { module: "Walkthroughs & Presentations", topics: ["Lumion Animation", "Camera Path Animation", "VR Walkthrough Basics", "Client Presentation Skills", "Portfolio Development"] },
+    ],
+    career: ["Architectural Visualizer", "3D Rendering Artist", "Interior Visualization Specialist", "CAD Designer", "Freelance ArchViz Artist"],
+    faq: [
+      { question: "Do I need architecture background for this course?", answer: "No, the course starts from basics. However, an interest in architecture and spatial design is helpful." },
+    ],
+    ogImage: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/06/DAFM.jpg",
+    category: "design",
+    priority: 7,
+    eligibility: "10+2 or Equivalent",
+    highlights: ["Industry-standard ArchViz tools", "Real architectural project work", "Photorealistic rendering techniques", "Walkthrough animation skills", "High-demand career path"],
+    oldUrls: ["/architectural-design/"],
+  },
+  {
+    slug: "design-viz-pro",
+    name: "Design Viz Pro",
+    fullName: "Design Viz Pro Course in Jaipur",
+    shortDescription: "Unlock your creativity with our Design Viz Pro Course in Jaipur at MAAC Institute.",
+    fullDescription:
+      "Unlock your creativity with our Design Viz Pro Course in Jaipur at MAAC Institute. This 12-month program focuses on visual communication, 3D visualization, and creative design thinking. Perfect for aspiring designers who want to master both 2D and 3D design workflows for advertising, branding, and digital media.",
+    duration: "12 Months",
+    degree: "Diploma",
+    code: "DVP",
+    tools: ["Photoshop", "Illustrator", "Cinema 4D", "InDesign", "After Effects"],
+    curriculum: [
+      { module: "Visual Communication", topics: ["Design Thinking Process", "Visual Storytelling", "Brand Communication", "Advertising Design", "Campaign Visuals"] },
+      { module: "2D Design Mastery", topics: ["Advanced Photoshop Techniques", "Vector Illustration", "Typography Design", "Print Design Production", "Packaging Mockups"] },
+      { module: "3D Visualization", topics: ["Cinema 4D Fundamentals", "Product Visualization", "3D Typography", "Scene Composition", "Lighting & Rendering"] },
+      { module: "Motion & Presentation", topics: ["Motion Graphics Basics", "Animated Logos", "Presentation Design", "Client Pitching Skills", "Portfolio Curation"] },
+    ],
+    career: ["Visual Designer", "3D Visualization Artist", "Brand Designer", "Advertising Designer", "Creative Coordinator"],
+    faq: [
+      { question: "What makes Design Viz Pro different from Graphic Design?", answer: "Design Viz Pro combines 2D graphic design with 3D visualization and motion graphics, giving you a broader skill set for visual communication across multiple mediums." },
+    ],
+    ogImage: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/06/Design-Viz-Pro-Course-400x225.jpg",
+    category: "design",
+    priority: 8,
+    eligibility: "10+2 or Equivalent",
+    highlights: ["2D + 3D design combination", "Visual communication focus", "Advertising industry relevance", "Motion graphics included", "Professional portfolio development"],
+    oldUrls: ["/design-viz-pro-course-in-jaipur/"],
+  },
+  {
+    slug: "gaming-design",
+    name: "Gaming Design",
+    fullName: "Gaming Design Course In Jaipur",
+    shortDescription: "Master game design, 3D asset creation, level design, and game engine integration for next-gen gaming platforms.",
+    fullDescription:
+      "Our Gaming Design program prepares you for a career in the booming gaming industry. Learn game art creation, level design, character modeling for games, and engine integration with Unity and Unreal Engine. From concept art to final game-ready assets, you'll master the complete game art pipeline used by top gaming studios worldwide.",
+    duration: "18-24 Months",
+    degree: "Diploma / B.Voc",
+    code: "GD",
+    tools: ["Unity", "Unreal Engine", "Maya", "ZBrush", "Substance Painter", "Marmoset Toolbag"],
+    curriculum: [
+      { module: "Game Art Foundations", topics: ["Game Art Pipeline Overview", "Concept Art & Ideation", "Character Design for Games", "Environment Design", "Game Engine Introduction"] },
+      { module: "3D Game Asset Creation", topics: ["Low-Poly Modeling", "High-Poly Sculpting in ZBrush", "Baking Normal Maps", "PBR Texturing Workflow", "Substance Painter Mastery"] },
+      { module: "Level Design & Environment", topics: ["Level Design Principles", "Modular Asset Creation", "Terrain & Landscape Design", "Lighting for Games", "Post-Processing Effects"] },
+      { module: "Game Engine Integration", topics: ["Unity Asset Import Pipeline", "Unreal Engine Basics", "Blueprint Scripting Basics", "Animation Implementation", "Performance Optimization"] },
+      { module: "Capstone Game Project", topics: ["Team Game Development", "Version Control with Git", "Game Testing & QA", "Showreel Creation", "Industry Portfolio Review"] },
+    ],
+    career: ["Game Artist", "3D Environment Artist", "Character Artist", "Level Designer", "Technical Artist"],
+    faq: [
+      { question: "Do I need programming skills for this course?", answer: "No, this course focuses on game art and design. Basic scripting is covered but deep programming knowledge is not required." },
+      { question: "Which game engines will I learn?", answer: "You'll learn both Unity and Unreal Engine, the two most widely used engines in the gaming industry." },
+    ],
+    ogImage: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/06/2020-07-05_23-03-12-500x498-1.jpg",
+    category: "gaming",
+    priority: 9,
+    eligibility: "10+2 or Equivalent",
+    highlights: ["Next-gen game art pipeline", "Unity & Unreal Engine training", "Real game project experience", "Industry mentor guidance", "Gaming studio placements"],
+    oldUrls: ["/gaming-design-course-in-jaipur/"],
+  },
+  {
+    slug: "dgdi",
+    name: "DGDI",
+    fullName: "DGDI Course In Jaipur",
+    shortDescription: "Program in Game Design & Integration — learn game art, level design, and engine integration for gaming careers.",
+    fullDescription:
+      "The DGDI program is a focused 12-month course in Game Design & Integration. You'll learn to create game-ready assets, design engaging levels, and integrate art into game engines. This program is ideal for students who want a faster entry into the gaming industry with solid, job-ready skills.",
+    duration: "12 Months",
+    degree: "Diploma",
+    code: "DGDI",
+    tools: ["Unity", "Unreal Engine", "Maya", "Substance Painter", "Photoshop"],
+    curriculum: [
+      { module: "Game Design Fundamentals", topics: ["Game Design Principles", "Player Psychology", "Game Mechanics", "Level Design Theory", "Game Documentation"] },
+      { module: "Game Art Production", topics: ["Game-Ready Modeling", "Texture Creation", "Rigging for Games", "Game Animation Basics", "Asset Optimization"] },
+      { module: "Engine Integration", topics: ["Unity Workflow", "Unreal Engine Workflow", "Material Setup", "Lighting & Post-Processing", "Build & Deployment"] },
+      { module: "Final Project", topics: ["Solo Game Project", "Portfolio Assembly", "Industry Showreel", "Job Preparation"] },
+    ],
+    career: ["Game Artist", "Level Designer", "Game Asset Creator", "Junior Game Designer", "Technical Artist"],
+    faq: [
+      { question: "How is DGDI different from the Gaming Design course?", answer: "DGDI is a focused 12-month program covering core game design and integration skills, while the Gaming Design course is a more comprehensive 18-24 month program with deeper specialization." },
+    ],
+    ogImage: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/06/2020-07-05_23-03-12-500x498-1.jpg",
+    category: "gaming",
+    priority: 10,
+    eligibility: "10+2 or Equivalent",
+    highlights: ["Fast-track 12-month program", "Game-ready asset creation", "Dual engine training", "Solo capstone project", "Industry portfolio focus"],
+    oldUrls: ["/dgdi-course-in-jaipur/"],
+  },
+  {
+    slug: "vfx",
+    name: "VFX",
+    fullName: "VFX Courses In Jaipur - Maac Institute",
+    shortDescription: "Master visual effects for film, television, and OTT with industry-standard compositing, tracking, and CG integration.",
+    fullDescription:
+      "Our comprehensive VFX program trains you to create stunning visual effects for movies, TV shows, and OTT content. From basic compositing to advanced CG integration, you'll master the complete VFX pipeline using Nuke, After Effects, and Maya. Learn rotoscopy, paint prep, matchmoving, and particle effects — the same skills demanded by top VFX studios.",
+    duration: "18-24 Months",
+    degree: "Diploma / B.Voc",
+    code: "VFX",
+    tools: ["Nuke", "After Effects", "Maya", "Mocha Pro", "Houdini", "PFTrack"],
+    curriculum: [
+      { module: "VFX Foundations", topics: ["VFX Pipeline Overview", "Compositing Fundamentals", "Rotoscopy Techniques", "Paint & Prep Workflow", "Green Screen Keying"] },
+      { module: "Advanced Compositing", topics: ["Multi-pass Compositing", "CG Integration", "Matchmoving & Camera Tracking", "Wire & Rig Removal", "Set Extensions"] },
+      { module: "Simulation & Effects", topics: ["Particle Systems in Houdini", "Destruction & Dynamics", "Fluid Simulation", "Fire & Smoke Effects", "Crowd Simulation"] },
+      { module: "Studio Project", topics: ["VFX Shot Production", "Team Pipeline Workflow", "Quality Control Standards", "Showreel Assembly", "Studio Preparation"] },
+    ],
+    career: ["VFX Artist", "Compositor", "Roto Artist", "Matchmove Artist", "Paint Prep Artist", "CG Integration Artist"],
+    faq: [
+      { question: "What is the scope of VFX in India?", answer: "The Indian VFX industry is booming with OTT platforms, Bollywood, and regional cinema driving massive demand. Skilled VFX artists are recruited by studios like DNEG, MPC, Technicolor, and Redchillies VFX." },
+      { question: "Do I need to know 3D for VFX?", answer: "Basic 3D knowledge is helpful but not mandatory. The course covers necessary 3D fundamentals for CG integration. However, advanced 3D work is handled by the 3D team in most studios." },
+    ],
+    ogImage: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/07/Screenshot-2025-07-05-210336.png",
+    category: "vfx",
+    priority: 11,
+    eligibility: "10+2 or Equivalent",
+    highlights: ["Complete VFX pipeline training", "Industry-standard Nuke compositing", "Real VFX shot experience", "Studio-ready skill development", "95% placement assistance"],
+    oldUrls: ["/vfx-course-in-jaipur/"],
+  },
+  {
+    slug: "advfx",
+    name: "ADVFX",
+    fullName: "ADVFX - Advanced Program in Visual Effects",
+    shortDescription: "Advanced VFX program with specialized training in compositing, rotoscopy, paint prep, and CG integration.",
+    fullDescription:
+      "ADVFX is our advanced VFX program that takes your skills to the next level. Over 12 months, you'll master advanced compositing techniques, complex rotoscopy, detailed paint prep, and seamless CG integration. Work on real studio briefs and build a showreel that demonstrates professional-level VFX capabilities.",
+    duration: "12 Months",
+    degree: "Advanced Diploma",
+    code: "ADVFX",
+    tools: ["Nuke", "After Effects", "Mocha Pro", "Silhouette", "Flame"],
+    curriculum: [
+      { module: "Advanced Compositing", topics: ["Deep Compositing", "Stereoscopic Compositing", "Advanced Keying Techniques", "Multi-layer CG Integration", "Color Management & Pipeline"] },
+      { module: "Specialized Roto & Paint", topics: ["Complex Rotoscopy", "Hair & Fur Roto", "Advanced Paint Techniques", "Object Removal", "Set Cleanup"] },
+      { module: "Matchmove & Tracking", topics: ["3D Camera Tracking", "Object Tracking", "Planar Tracking with Mocha", "Survey Data Integration", "Lens Distortion"] },
+      { module: "Studio Briefs & Showreel", topics: ["Real Client Briefs", "Shot-by-shot Breakdown", "Showreel Polish", "Industry Review", "Job Application Strategy"] },
+    ],
+    career: ["Senior Compositor", "Lead Roto Artist", "Paint & Prep Supervisor", "Matchmove TD", "VFX Lead"],
+    faq: [
+      { question: "What are the prerequisites for ADVFX?", answer: "Basic understanding of VFX fundamentals is recommended. If you're new to VFX, consider starting with our foundation VFX program first." },
+    ],
+    ogImage: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/07/Screenshot-2025-07-05-210336.png",
+    category: "vfx",
+    priority: 12,
+    eligibility: "10+2 or Equivalent + VFX Basics",
+    highlights: ["Advanced specialization focus", "Real studio briefs", "Professional showreel development", "Senior-level skill building", "Industry mentor reviews"],
+    oldUrls: ["/advfx-course-in-jaipur/"],
+  },
+  {
+    slug: "vfx-plus",
+    name: "VFX Plus",
+    fullName: "VFX Plus - Program in Visual Effects",
+    shortDescription: "Focused VFX training covering compositing, motion graphics, and visual effects fundamentals in 6 months.",
+    fullDescription:
+      "VFX Plus is a focused 6-month program that gives you solid VFX foundations quickly. Perfect for career changers or working professionals who want to add VFX skills to their toolkit. Learn compositing, motion graphics, and basic visual effects using After Effects and Nuke.",
+    duration: "6 Months",
+    degree: "Certificate",
+    code: "VFXP",
+    tools: ["After Effects", "Nuke", "Premiere Pro", "Photoshop"],
+    curriculum: [
+      { module: "VFX Basics", topics: ["Compositing Fundamentals", "Keying & Masking", "Tracking Basics", "Rotoscopy Introduction", "Color Correction"] },
+      { module: "Motion Graphics", topics: ["After Effects Workflow", "Typography Animation", "Logo Animation", "Lower Thirds & Titles", "Social Media Graphics"] },
+      { module: "Practical VFX", topics: ["Green Screen Workflows", "Basic CG Integration", "Particle Effects", "Transitions & Effects", "Short VFX Sequence"] },
+    ],
+    career: ["Junior Compositor", "Motion Graphics Artist", "Video Editor with VFX Skills", "Freelance VFX Artist"],
+    faq: [
+      { question: "Is 6 months enough to learn VFX?", answer: "VFX Plus gives you solid foundations and practical skills for entry-level positions. For advanced specialization, consider our 18-24 month comprehensive VFX program." },
+    ],
+    ogImage: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/07/Screenshot-2025-07-05-210336.png",
+    category: "vfx",
+    priority: 13,
+    eligibility: "10+2 or Equivalent",
+    highlights: ["Fast 6-month program", "Compositing & motion graphics", "Career-friendly schedule", "Freelance-ready skills", "Industry software training"],
+    oldUrls: ["/vfx-plus-course-in-jaipur/"],
+  },
+  {
+    slug: "media",
+    name: "Media",
+    fullName: "Media - Digital Media Production",
+    shortDescription: "Comprehensive digital media production course covering video editing, content creation, and social media strategy.",
+    fullDescription:
+      "Our Media program is a comprehensive 12-month course in digital media production. Learn video editing, content creation, social media strategy, and digital storytelling. Perfect for aspiring content creators, social media managers, and digital media professionals who want to master the complete content production pipeline.",
+    duration: "12 Months",
+    degree: "Diploma",
+    code: "MEDIA",
+    tools: ["Premiere Pro", "After Effects", "DaVinci Resolve", "Audition", "Photoshop", "Final Cut Pro"],
+    curriculum: [
+      { module: "Content Creation", topics: ["Content Strategy", "Video Production Basics", "Audio Recording & Editing", "Photography for Digital Media", "Storytelling Techniques"] },
+      { module: "Video Editing", topics: ["Premiere Pro Mastery", "Advanced Editing Techniques", "Color Grading", "Multi-cam Editing", "Export & Delivery"] },
+      { module: "Motion Graphics & VFX", topics: ["After Effects Workflow", "Title Design", "Lower Thirds & Graphics", "Basic VFX Compositing", "Template Creation"] },
+      { module: "Social Media & Strategy", topics: ["Platform-Specific Content", "YouTube Strategy", "Instagram Reels & Stories", "Analytics & Optimization", "Monetization Strategies"] },
+    ],
+    career: ["Content Creator", "Video Editor", "Social Media Manager", "Digital Media Producer", "YouTube Creator"],
+    faq: [
+      { question: "Is this course good for aspiring YouTubers?", answer: "Absolutely. The course covers content strategy, video production, editing, and YouTube optimization — everything you need to start a professional YouTube channel." },
+    ],
+    ogImage: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/06/DAFM.jpg",
+    category: "media",
+    priority: 14,
+    eligibility: "10+2 or Equivalent",
+    highlights: ["Complete content production pipeline", "Social media strategy included", "YouTube optimization", "Real content projects", "Freelance career guidance"],
+    oldUrls: ["/media-course-in-jaipur/"],
+  },
+  {
+    slug: "ipvad",
+    name: "IPVAD",
+    fullName: "IPVAD - Integrated Program in Visual Art & Design",
+    shortDescription: "24-month integrated program combining visual art, design, animation, and digital media for comprehensive creative careers.",
+    fullDescription:
+      "IPVAD is our flagship 24-month integrated program that combines visual art, design, animation, and digital media into one comprehensive curriculum. This program creates well-rounded creative professionals who can work across multiple disciplines — from graphic design to animation, from video editing to motion graphics.",
+    duration: "24 Months",
+    degree: "Advanced Diploma",
+    code: "IPVAD",
+    tools: ["Photoshop", "Illustrator", "After Effects", "Premiere Pro", "Maya", "Figma"],
+    curriculum: [
+      { module: "Visual Art Foundations", topics: ["Drawing & Painting", "Color & Composition", "Art History & Styles", "Digital Art Techniques", "Creative Thinking"] },
+      { module: "Graphic Design", topics: ["Brand Identity", "Print Design", "Packaging Design", "Typography", "UI Design"] },
+      { module: "Animation & Motion", topics: ["2D Animation", "3D Modeling Basics", "Motion Graphics", "Character Animation", "Storyboarding"] },
+      { module: "Video & Digital Media", topics: ["Video Editing", "Color Grading", "Social Media Content", "Web Design", "Digital Marketing"] },
+      { module: "Industry Integration", topics: ["Internship", "Capstone Project", "Portfolio Development", "Career Planning", "Freelance Setup"] },
+    ],
+    career: ["Multimedia Artist", "Creative Director", "Digital Content Producer", "Brand Designer", "Motion Graphics Artist"],
+    faq: [
+      { question: "Is IPVAD suitable for someone unsure about their creative specialization?", answer: "Yes, IPVAD is perfect for students who want exposure to multiple creative fields before choosing a specialization. The broad curriculum helps you discover your strengths and interests." },
+    ],
+    ogImage: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/06/APDMD-300x300.jpg",
+    category: "media",
+    priority: 15,
+    eligibility: "10+2 or Equivalent",
+    highlights: ["Most comprehensive program", "Multi-disciplinary approach", "24-month deep dive", "Industry internship", "Versatile career options"],
+    oldUrls: ["/ipvad-course-in-jaipur/"],
+  },
+  {
+    slug: "skill-enhancement",
+    name: "Skill Enhancement",
+    fullName: "Skill Enhancement Courses",
+    shortDescription: "Short-term specialized courses to upskill in specific software, techniques, or creative disciplines.",
+    fullDescription:
+      "Our Skill Enhancement courses are short-term, focused programs designed for working professionals and students who want to upskill in specific areas. Whether you need to master a new software, learn a specialized technique, or update your portfolio, these 3-6 month courses deliver targeted, practical skills quickly.",
+    duration: "3-6 Months",
+    degree: "Certificate",
+    code: "SE",
+    tools: ["Varies by course", "Software-specific tools"],
+    curriculum: [
+      { module: "Software Mastery", topics: ["Advanced Tool Techniques", "Workflow Optimization", "Industry Best Practices", "Shortcut & Efficiency Tips", "Plugin & Extension Usage"] },
+      { module: "Specialized Techniques", topics: ["Advanced Compositing", "Character Rigging", "Environment Modeling", "Advanced Texturing", "Specialized Rendering"] },
+      { module: "Portfolio Enhancement", topics: ["Project Development", "Quality Improvement", "Industry Standards", "Showreel Update", "Self-Promotion"] },
+    ],
+    career: ["Specialized Artist", "Freelancer", "Independent Creator", "Upskilled Professional"],
+    faq: [
+      { question: "Who should take skill enhancement courses?", answer: "These courses are ideal for working professionals looking to learn new software, students wanting to strengthen specific skills, or anyone needing a quick skill upgrade." },
+      { question: "Can I combine multiple skill enhancement courses?", answer: "Yes, many students take multiple short courses to build a comprehensive skill set. Our counselors can help you plan the right combination." },
+    ],
+    ogImage: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/06/Graphic-Design-Course.jpg",
+    category: "design",
+    priority: 16,
+    eligibility: "Varies by Course",
+    highlights: ["Short-term focused learning", "Software-specific training", "Working professional friendly", "Quick skill acquisition", "Flexible scheduling"],
+    oldUrls: ["/skill-enhancement-courses/"],
+  },
+  {
+    slug: "ce-pro",
+    name: "CE Pro",
+    fullName: "CE Pro - Creative Entrepreneur Program",
+    shortDescription: "6-month program combining creative skills with business acumen for aspiring freelance creatives and entrepreneurs.",
+    fullDescription:
+      "CE Pro is a unique 6-month program that combines creative skill development with business training. Learn not just how to create stunning designs and animations, but also how to build a freelance career, manage clients, price your work, and grow a creative business. Perfect for aspiring freelance creatives and entrepreneurs.",
+    duration: "6 Months",
+    degree: "Certificate",
+    code: "CEP",
+    tools: ["Photoshop", "Illustrator", "After Effects", "Figma", "QuickBooks"],
+    curriculum: [
+      { module: "Creative Skills", topics: ["Advanced Graphic Design", "Motion Graphics", "Video Editing", "UI/UX Design", "Brand Development"] },
+      { module: "Business Fundamentals", topics: ["Freelance Business Setup", "Client Management", "Pricing Strategies", "Contracts & Agreements", "Financial Planning"] },
+      { module: "Marketing & Growth", topics: ["Personal Branding", "Social Media Marketing", "Portfolio Website", "Networking Strategies", "Client Acquisition"] },
+      { module: "Capstone Business Project", topics: ["Real Client Project", "Business Plan Development", "Portfolio Launch", "Marketing Campaign", "Revenue Strategy"] },
+    ],
+    career: ["Freelance Designer", "Creative Entrepreneur", "Independent Content Creator", "Small Agency Owner", "Brand Consultant"],
+    faq: [
+      { question: "Do I need creative experience for CE Pro?", answer: "Basic creative skills are helpful but not mandatory. The course includes creative skill training alongside business education." },
+    ],
+    ogImage: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/06/Graphic-Design-Course.jpg",
+    category: "design",
+    priority: 17,
+    eligibility: "10+2 or Equivalent",
+    highlights: ["Creative + Business training", "Freelance career focus", "Real client projects", "Business plan development", "Entrepreneur mindset"],
+    oldUrls: ["/ce-pro-course-in-jaipur/"],
+  },
+  {
+    slug: "dfm",
+    name: "DFM",
+    fullName: "DFM - Digital Film Making",
+    shortDescription: "Complete digital filmmaking course covering pre-production, shooting, editing, VFX, and post-production.",
+    fullDescription:
+      "DFM (Digital Film Making) is a comprehensive 12-month program that takes you through the complete filmmaking process. From scriptwriting and pre-production planning to shooting, editing, VFX, and final delivery — learn every aspect of modern digital filmmaking using industry-standard equipment and software.",
+    duration: "12 Months",
+    degree: "Diploma",
+    code: "DFM",
+    tools: ["Premiere Pro", "After Effects", "DaVinci Resolve", "Audition", "Final Cut Pro", "DSLR Cameras"],
+    curriculum: [
+      { module: "Pre-Production", topics: ["Scriptwriting", "Storyboarding", "Shot Planning", "Casting & Crew Management", "Production Design"] },
+      { module: "Production", topics: ["Camera Operation", "Lighting for Film", "Sound Recording", "Directing Basics", "On-Set Workflow"] },
+      { module: "Post-Production", topics: ["Video Editing", "Color Grading", "Audio Post-Production", "VFX Integration", "Title & Credits Design"] },
+      { module: "Distribution & Marketing", topics: ["Film Festival Strategy", "Online Distribution", "Marketing & PR", "Audience Building", "Monetization"] },
+    ],
+    career: ["Film Director", "Film Editor", "Cinematographer", "Producer", "Independent Filmmaker"],
+    faq: [
+      { question: "Will I get hands-on camera experience?", answer: "Yes, the course includes extensive hands-on training with DSLR cameras, lighting equipment, and professional audio gear." },
+    ],
+    ogImage: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/06/Graphic-Design-Course.jpg",
+    category: "filmmaking",
+    priority: 18,
+    eligibility: "10+2 or Equivalent",
+    highlights: ["Complete filmmaking pipeline", "Hands-on camera training", "Industry-standard post-production", "Film festival guidance", "Portfolio short film"],
+    oldUrls: ["/dfm-course-in-jaipur/"],
+  },
+  {
+    slug: "max-pro",
+    name: "MAX Pro",
+    fullName: "MAX Pro Course In Jaipur",
+    shortDescription: "Intensive 6-month program in 3D modeling, texturing, and visualization using Autodesk 3ds Max.",
+    fullDescription:
+      "MAX Pro is an intensive 6-month program focused on mastering Autodesk 3ds Max — the industry-standard software for 3D modeling, animation, and visualization. Whether you're targeting architecture visualization, game art, or product visualization, this course gives you deep, specialized expertise in 3ds Max workflows.",
+    duration: "6 Months",
+    degree: "Certificate",
+    code: "MAXP",
+    tools: ["3ds Max", "V-Ray", "Corona Renderer", "Photoshop", "Forest Pack"],
+    curriculum: [
+      { module: "3ds Max Fundamentals", topics: ["Interface & Navigation", "Modeling Tools", "Modifiers & Stacks", "Materials & Maps", "Camera Setup"] },
+      { module: "Advanced Modeling", topics: ["Spline Modeling", "Poly Modeling Advanced", "Organic Modeling", "Hard Surface Modeling", "Scene Organization"] },
+      { module: "Rendering & Visualization", topics: ["V-Ray Setup", "Corona Renderer", "HDRI Lighting", "Material Creation", "Post-Production"] },
+      { module: "Specialization Project", topics: ["ArchViz Scene", "Product Visualization", "Interior Scene", "Exterior Scene", "Portfolio Assembly"] },
+    ],
+    career: ["3ds Max Artist", "Architectural Visualizer", "Product Visualization Artist", "3D Generalist", "Freelance 3D Artist"],
+    faq: [
+      { question: "Is 3ds Max still relevant in the industry?", answer: "Absolutely. 3ds Max remains one of the most widely used 3D software in architecture visualization, game development, and advertising. It's especially dominant in the ArchViz industry." },
+    ],
+    ogImage: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/06/Max-pro.jpg",
+    category: "animation",
+    priority: 19,
+    eligibility: "10+2 or Equivalent",
+    highlights: ["Deep 3ds Max specialization", "V-Ray & Corona training", "ArchViz focus", "Quick 6-month program", "Industry-relevant projects"],
+    oldUrls: ["/max-pro-course-in-jaipur/"],
+  },
+];
+
+// Helper functions
+export function getCourseBySlug(slug: string): Course | undefined {
+  return coursesData.find((c) => c.slug === slug);
+}
+
+export function getCoursesByCategory(category: Course["category"]): Course[] {
+  return coursesData.filter((c) => c.category === category).sort((a, b) => a.priority - b.priority);
+}
+
+export function getAllCourseSlugs(): string[] {
+  return coursesData.map((c) => c.slug);
+}
+
+export const courseCategories = [
+  { id: "animation", title: "Animation", count: coursesData.filter((c) => c.category === "animation").length },
+  { id: "vfx", title: "Visual Effects", count: coursesData.filter((c) => c.category === "vfx").length },
+  { id: "gaming", title: "Game Design", count: coursesData.filter((c) => c.category === "gaming").length },
+  { id: "filmmaking", title: "Filmmaking", count: coursesData.filter((c) => c.category === "filmmaking").length },
+  { id: "design", title: "Design", count: coursesData.filter((c) => c.category === "design").length },
+  { id: "media", title: "Digital Media", count: coursesData.filter((c) => c.category === "media").length },
+];

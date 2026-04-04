@@ -87,8 +87,8 @@ export default function AboutClient() {
           __html: JSON.stringify({
             ...localBusinessSchema,
             breadcrumb: breadcrumbSchema([
-              { name: "Home", url: "https://maacjaipur.com" },
-              { name: "About", url: "https://maacjaipur.com/about" },
+              { name: "Home", url: "https://www.maacanimationjaipur.com" },
+              { name: "About", url: "https://www.maacanimationjaipur.com/about" },
             ]),
           }),
         }}

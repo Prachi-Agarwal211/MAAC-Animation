@@ -6,19 +6,18 @@ export default function ClientShell({ children }: { children: React.ReactNode })
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    // Only show once per session
     const shown = sessionStorage.getItem("maac_modal_shown");
     if (shown) return;
 
-    // Listen for preloader completion signal
+    // Show modal AFTER intro sweep completes (not before!)
     const handler = () => {
       setTimeout(() => {
         setShowModal(true);
         sessionStorage.setItem("maac_modal_shown", "1");
-      }, 1500);
+      }, 2000); // 2 seconds after hero revealed
     };
-    window.addEventListener("maac:preloader_done", handler, { once: true });
-    return () => window.removeEventListener("maac:preloader_done", handler);
+    window.addEventListener("maac:intro_revealed", handler, { once: true });
+    return () => window.removeEventListener("maac:intro_revealed", handler);
   }, []);
 
   return (

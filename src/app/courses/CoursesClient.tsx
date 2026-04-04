@@ -190,8 +190,8 @@ export default function CoursesClient() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(breadcrumbSchema([
-            { name: "Home", url: "https://maacjaipur.com" },
-            { name: "Courses", url: "https://maacjaipur.com/courses" },
+            { name: "Home", url: "https://www.maacanimationjaipur.com" },
+            { name: "Courses", url: "https://www.maacanimationjaipur.com/courses" },
           ])),
         }}
       />

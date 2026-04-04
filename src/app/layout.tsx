@@ -26,39 +26,62 @@ const syne = Syne({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://maacjaipur.com"),
+  metadataBase: new URL("https://www.maacanimationjaipur.com"),
   title: {
-    default: "MAAC Jaipur — Best Animation & VFX Institute in Rajasthan",
-    template: "%s | MAAC Jaipur",
+    default: "Home animation institute in jaipur",
+    template: "%s - maacanimationjaipur.com",
   },
   description:
-    "Join MAAC Jaipur, Rajasthan's #1 Animation & VFX institute. 30+ years, 95% placement, NSDC certified B.Voc degree. Courses in 3D Animation, VFX, Gaming, Filmmaking. Free demo class available.",
+    "MAAC is the high-end 3D Animation & VFX education brand of Aptech. Through its wide network of centres, MAAC has prepared thousands students",
   keywords: [
-    "animation courses jaipur",
+    "animation institute jaipur",
+    "3d animation course jaipur",
     "vfx training jaipur",
-    "3d animation institute",
-    "maac jaipur",
+    "maac animation jaipur",
     "game design course jaipur",
     "best animation institute rajasthan",
-    "b.voc animation vfx",
-    "animation institute jaipur",
+    "animation courses jaipur",
     "vfx courses jaipur",
-    "3d animation jaipur",
+    "graphic design course jaipur",
+    "filmmaking course jaipur",
   ],
+  verification: {
+    google: "dK9O7oyQ38md-k2VNjfTZJ64trKyvyLqSxlVik7Ak3M",
+  },
   openGraph: {
     type: "website",
-    locale: "en_IN",
-    url: "https://maacjaipur.com",
-    siteName: "MAAC Jaipur",
-    title: "Best Animation Institute in Jaipur | MAAC",
-    description: "Rajasthan's leading Animation, VFX and Multimedia institute with 30+ years of excellence",
-    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "MAAC Jaipur Animation Institute" }],
+    locale: "en_US",
+    url: "https://www.maacanimationjaipur.com",
+    siteName: "maacanimationjaipur.com",
+    title: "Home animation institute in jaipur",
+    description:
+      "MAAC is the high-end 3D Animation & VFX education brand of Aptech. Through its wide network of centres, MAAC has prepared thousands students",
+    images: [
+      {
+        url: "https://www.maacanimationjaipur.com/wp-content/uploads/2021/09/v-toy-sl-3.png",
+        width: 1200,
+        height: 630,
+        alt: "MAAC Animation Jaipur",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    site: "@MAAClndia",
   },
-  robots: { index: true, follow: true },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  alternates: {
+    canonical: "/",
+  },
 };
 
 export default function RootLayout({

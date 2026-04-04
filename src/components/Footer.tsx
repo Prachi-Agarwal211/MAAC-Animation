@@ -105,7 +105,6 @@ export default function Footer() {
                 { label: "Courses", href: "/courses" }, { label: "Placements", href: "/placements" },
                 { label: "Gallery", href: "/gallery" }, { label: "Contact Us", href: "/contact" },
                 { label: "Malviya Nagar", href: "/locations/malviya-nagar" },
-                { label: "Vaishali Nagar", href: "/locations/vaishali-nagar" },
               ].map((link) => (
                 <li key={link.label}>
                   <Link href={link.href} className="text-[#A8A29C] text-sm hover:text-[#E31837] transition-colors duration-300 py-1 inline-block">{link.label}</Link>
@@ -119,12 +118,12 @@ export default function Footer() {
             <h4 className="text-[#F0EBE1] font-display font-semibold mb-6">Our Courses</h4>
             <ul className="space-y-3">
               {[
-                { label: "3D Animation", href: "/courses/animation" },
-                { label: "Visual Effects", href: "/courses/vfx" },
-                { label: "Game Design", href: "/courses/gaming" },
-                { label: "Digital Filmmaking", href: "/courses/filmmaking" },
-                { label: "Digital Media", href: "/courses/digital-media" },
-                { label: "Architectural Design", href: "/courses/architectural" },
+                { label: "3D Animation", href: "/courses" },
+                { label: "Visual Effects", href: "/courses" },
+                { label: "Game Design", href: "/courses" },
+                { label: "Digital Filmmaking", href: "/courses" },
+                { label: "Digital Media", href: "/courses" },
+                { label: "Architectural Design", href: "/courses" },
               ].map((link) => (
                 <li key={link.label}>
                   <Link href={link.href} className="text-[#A8A29C] text-sm hover:text-[#E31837] transition-colors duration-300 py-1 inline-block">{link.label}</Link>

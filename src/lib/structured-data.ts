@@ -102,7 +102,7 @@ export const getCourseSchema = (courseName: string, description: string, duratio
   "provider": {
     "@type": "EducationalOrganization",
     "name": provider,
-    "sameAs": "https://maacjaipur.com"
+    "sameAs": "https://www.maacanimationjaipur.com"
   },
   "educationalCredential": "Diploma / B.Voc Degree",
   "duration": duration,
@@ -136,17 +136,17 @@ export const localBusinessSchema = {
   "@type": "EducationalOrganization",
   "name": "MAAC Jaipur — Maya Academy of Advanced Cinematics",
   "alternateName": "MAAC Animation Institute Jaipur",
-  "url": "https://maacjaipur.com",
+  "url": "https://www.maacanimationjaipur.com",
   "logo": {
     "@type": "ImageObject",
-    "url": "https://maacjaipur.com/logo.png",
+    "url": "https://www.maacanimationjaipur.com/wp-content/uploads/2021/09/v-toy-sl-3.png",
     "width": 600,
     "height": 600
   },
   "description": "Rajasthan's leading animation, VFX, and multimedia institute with 30+ years of excellence. Offering B.Voc degrees, diploma courses in 3D Animation, Visual Effects, Game Design, and Digital Filmmaking with 95% placement record.",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "711-712, Ambition Tower, 7th Floor, D-46B, Malan Ka Chauraha, Agrasain Circle, Subhash Marg",
+    "streetAddress": "711-712, Ambition Tower, 7th Floor, D-46B, Malan Ka Chauraha, Agrasain Circle, Subhash Marg, C Scheme",
     "addressLocality": "Jaipur",
     "addressRegion": "Rajasthan",
     "postalCode": "302001",
@@ -157,7 +157,7 @@ export const localBusinessSchema = {
     "latitude": 26.8466,
     "longitude": 75.8069
   },
-  "telephone": "+91-7300001589",
+  "telephone": "+919829294037",
   "email": "maacanimationjaipur@gmail.com",
   "openingHours": "Mo-Sa 09:00-19:00",
   "priceRange": "₹₹",
@@ -202,9 +202,9 @@ export const localBusinessSchema = {
   },
   "sameAs": [
     "https://www.facebook.com/MAAClndia",
-    "https://www.instagram.com/maacjaipurcscheme",
-    "https://www.youtube.com/@maac-jaipur-cscheme",
-    "https://www.linkedin.com/company/maac-jaipur-cscheme",
+    "https://www.instagram.com/maacanimationjaipur",
+    "https://www.youtube.com/@maacanimationjaipur",
+    "https://www.linkedin.com/company/maacanimationjaipur",
     "https://twitter.com/MAAClndia"
   ],
   "aggregateRating": {
@@ -256,17 +256,17 @@ export const videoSchema = {
   "name": "MAAC Jaipur Student Showreel 2024",
   "description": "Explore the incredible work created by MAAC Jaipur students across 3D Animation, VFX, Game Design, and Digital Filmmaking programs",
   "thumbnailUrl": [
-    "https://maacjaipur.com/images/showreel-thumb.jpg"
+    "https://www.maacanimationjaipur.com/wp-content/uploads/2021/09/v-toy-sl-3.png"
   ],
   "uploadDate": "2024-01-15",
   "duration": "PT3M45S",
   "contentUrl": "/intro.mp4",
-  "embedUrl": "https://maacjaipur.com/embed/showreel",
+  "embedUrl": "https://www.maacanimationjaipur.com/embed/showreel",
   "interactionCount": "15000",
   "publisher": {
     "@type": "EducationalOrganization",
     "name": "MAAC Jaipur",
-    "sameAs": "https://maacjaipur.com"
+    "sameAs": "https://www.maacanimationjaipur.com"
   }
 };
 
@@ -292,7 +292,7 @@ export const getJobSchema = (title: string, department: string, type: string = "
   "hiringOrganization": {
     "@type": "EducationalOrganization",
     "name": "MAAC Jaipur",
-    "sameAs": "https://maacjaipur.com"
+    "sameAs": "https://www.maacanimationjaipur.com"
   },
   "jobLocation": {
     "@type": "Place",

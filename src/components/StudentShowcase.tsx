@@ -7,10 +7,10 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const showcaseVideos = [
-  { title: "ANANDI", category: "Animation", video: "/student-work/ANANDI.mp4", duration: "2:34" },
-  { title: "FAST LIFE", category: "Short Film", video: "/student-work/FAST%20LIFE.mp4", duration: "3:12" },
-  { title: "KARMA", category: "Visual Effects", video: "/student-work/KARMA.mp4", duration: "4:05" },
-  { title: "THE PLASTIC PLAGUE", category: "Documentary", video: "/student-work/THE%20PLASTIC%20PLAGUE.mp4", duration: "5:20" },
+  { title: "ANANDI", category: "Animation", video: "/student-work/ANANDI-compressed.mp4", duration: "2:34" },
+  { title: "FAST LIFE", category: "Short Film", video: "/student-work/FAST%20LIFE-compressed.mp4", duration: "3:12" },
+  { title: "KARMA", category: "Visual Effects", video: "/student-work/KARMA-compressed.mp4", duration: "4:05" },
+  { title: "THE PLASTIC PLAGUE", category: "Documentary", video: "/student-work/THE%20PLASTIC%20PLAGUE-compressed.mp4", duration: "5:20" },
 ];
 
 const INTERVAL_MS = 8000;

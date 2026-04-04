@@ -20,7 +20,63 @@ export const revalidate = 3600;
 export default function Home() {
   return (
     <div className="overflow-hidden relative">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ ...localBusinessSchema, video: videoSchema, breadcrumb: breadcrumbSchema([{ name: "Home", url: "https://maacjaipur.com" }]), faq: faqSchema }) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "WebPage",
+                "@id": "https://www.maacanimationjaipur.com/",
+                "url": "https://www.maacanimationjaipur.com/",
+                "name": "Home animation institute in jaipur",
+                "isPartOf": { "@id": "https://www.maacanimationjaipur.com/#website" },
+                "primaryImageOfPage": { "@id": "https://www.maacanimationjaipur.com/#primaryimage" },
+                "image": { "@id": "https://www.maacanimationjaipur.com/#primaryimage" },
+                "thumbnailUrl": "https://www.maacanimationjaipur.com/wp-content/uploads/2021/09/v-toy-sl-3.png",
+                "datePublished": "2021-09-10T11:01:23+00:00",
+                "dateModified": "2025-07-03T10:38:30+00:00",
+                "description":
+                  "MAAC is the high-end 3D Animation & VFX education brand of Aptech. Through its wide network of centres, MAAC has prepared thousands students",
+                "breadcrumb": { "@id": "https://www.maacanimationjaipur.com/#breadcrumb" },
+                "inLanguage": "en-US",
+                "potentialAction": [{ "@type": "ReadAction", "target": ["https://www.maacanimationjaipur.com/"] }],
+              },
+              {
+                "@type": "ImageObject",
+                "inLanguage": "en-US",
+                "@id": "https://www.maacanimationjaipur.com/#primaryimage",
+                "url": "https://www.maacanimationjaipur.com/wp-content/uploads/2021/09/v-toy-sl-3.png",
+                "contentUrl": "https://www.maacanimationjaipur.com/wp-content/uploads/2021/09/v-toy-sl-3.png",
+              },
+              {
+                "@type": "BreadcrumbList",
+                "@id": "https://www.maacanimationjaipur.com/#breadcrumb",
+                "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Home" }],
+              },
+              {
+                "@type": "WebSite",
+                "@id": "https://www.maacanimationjaipur.com/#website",
+                "url": "https://www.maacanimationjaipur.com/",
+                "name": "maacanimationjaipur.com",
+                "description": "maacanimationjaipur.com",
+                "potentialAction": [
+                  {
+                    "@type": "SearchAction",
+                    "target": { "@type": "EntryPoint", "urlTemplate": "https://www.maacanimationjaipur.com/?s={search_term_string}" },
+                    "query-input": { "@type": "PropertyValueSpecification", "valueRequired": true, "valueName": "search_term_string" },
+                  },
+                ],
+                "inLanguage": "en-US",
+              },
+              { ...localBusinessSchema },
+              { ...videoSchema },
+              { ...faqSchema },
+            ],
+          }),
+        }}
+      />
       <MAACXHero />
       <VerticalCardGallery />
       <InstituteIntro />

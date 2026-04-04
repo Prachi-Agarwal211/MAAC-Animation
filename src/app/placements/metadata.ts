@@ -1,36 +1,43 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Placements at MAAC Jaipur — 95% Placement Record | Top Studios",
-  description: "MAAC Jaipur's placement cell ensures 95% of students get placed at top studios like DNEG, Prime Focus, Redchillies VFX, Ubisoft. Average package 3-6 LPA. Dedicated career support.",
-  keywords: [
-    "maac jaipur placements",
-    "animation jobs jaipur",
-    "vfx placement record",
-    "maac salary package",
-    "animation career opportunities",
-    "top recruiting companies maac",
-  ],
+  title: "Placements - maacanimationjaipur.com",
+  description: "Our students work at top studios like DNEG, Prime Focus, and more. Explore MAAC Jaipur's placement record and dedicated career support for animation and VFX graduates.",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   openGraph: {
-    title: "Placements at MAAC Jaipur | 95% Placement Record",
-    description: "Our students work at DNEG, Prime Focus, Ubisoft & more. Dedicated placement cell with 95% success rate",
-    url: "https://maacjaipur.com/placements",
-    type: "website",
+    title: "Placements - maacanimationjaipur.com",
+    description:
+      "WORK WITH THE BEST Our Students are hired by the best of the best. They dominate the industry with their",
+    url: "https://www.maacanimationjaipur.com/placements/",
+    type: "article",
+    siteName: "maacanimationjaipur.com",
+    locale: "en_US",
     images: [
       {
-        url: "/og-placements.jpg",
+        url: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/07/Screenshot-2025-07-05-212138.png",
         width: 1200,
         height: 630,
-        alt: "MAAC Jaipur Placement Companies",
+        alt: "Placements - maacanimationjaipur.com",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Placements at MAAC Jaipur | 95% Placement Record",
-    description: "Our students work at DNEG, Prime Focus, Ubisoft & more. Dedicated placement cell with 95% success rate",
+    title: "Placements - maacanimationjaipur.com",
+    description:
+      "WORK WITH THE BEST Our Students are hired by the best of the best. They dominate the industry with their",
   },
   alternates: {
-    canonical: "https://maacjaipur.com/placements",
+    canonical: "https://www.maacanimationjaipur.com/placements/",
   },
 };
