@@ -579,10 +579,10 @@ export function getAllCourseSlugs(): string[] {
 }
 
 export const courseCategories = [
-  { id: "animation", title: "Animation", count: coursesData.filter((c) => c.category === "animation").length, image: "/courses_images/image(4).png" },
-  { id: "vfx", title: "Visual Effects", count: coursesData.filter((c) => c.category === "vfx").length, image: "/courses_images/image(1).png" },
+  { id: "animation", title: "Animation", count: coursesData.filter((c) => c.category === "animation").length, image: "/courses_images/image-4.png" },
+  { id: "vfx", title: "Visual Effects", count: coursesData.filter((c) => c.category === "vfx").length, image: "/courses_images/image-1.png" },
   { id: "gaming", title: "Game Design", count: coursesData.filter((c) => c.category === "gaming").length, image: "/courses_images/game.png" },
-  { id: "filmmaking", title: "Filmmaking", count: coursesData.filter((c) => c.category === "filmmaking").length, image: "/courses_images/image(3).png" },
-  { id: "design", title: "Design", count: coursesData.filter((c) => c.category === "design").length, image: "/courses_images/image(5).png" },
-  { id: "media", title: "Digital Media", count: coursesData.filter((c) => c.category === "media").length, image: "/courses_images/image(2).png" },
+  { id: "filmmaking", title: "Filmmaking", count: coursesData.filter((c) => c.category === "filmmaking").length, image: "/courses_images/image-3.png" },
+  { id: "design", title: "Design", count: coursesData.filter((c) => c.category === "design").length, image: "/courses_images/image-5.png" },
+  { id: "media", title: "Digital Media", count: coursesData.filter((c) => c.category === "media").length, image: "/courses_images/image-2.png" },
 ];
