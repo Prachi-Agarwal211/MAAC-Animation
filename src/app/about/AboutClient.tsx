@@ -1,12 +1,9 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gsap } from "@/lib/gsap";
 import Footer from "@/components/Footer";
 import { localBusinessSchema, breadcrumbSchema } from "@/lib/structured-data";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const milestones = [
   { year: "1986", title: "Foundation", description: "MAAC was established as a premier animation education brand under Aptech." },

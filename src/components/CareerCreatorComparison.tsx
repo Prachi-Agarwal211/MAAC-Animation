@@ -1,11 +1,8 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gsap } from "@/lib/gsap";
 import Link from "next/link";
-
-gsap.registerPlugin(ScrollTrigger);
 
 export default function CareerCreatorComparison() {
   const sectionRef = useRef<HTMLDivElement>(null);

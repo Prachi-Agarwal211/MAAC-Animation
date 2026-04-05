@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import gsap from "gsap";
+import { gsap } from "@/lib/gsap";
 import Footer from "@/components/Footer";
 import { placementCompanies } from "@/data/siteData";
 

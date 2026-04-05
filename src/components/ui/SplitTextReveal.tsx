@@ -1,10 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import { gsap } from "@/lib/gsap";
 
 interface SplitTextRevealProps {
   children: React.ReactNode;
@@ -27,6 +24,26 @@ export default function SplitTextReveal({
 
   useEffect(() => {
     if (!containerRef.current) return;
+    if (typeof window === "undefined") return;
+
+    // NO char splitting on mobile — use simple fade instead
+    if (window.innerWidth < 768) {
+      const el = containerRef.current as HTMLElement;
+      el.style.opacity = "0";
+      el.style.transform = "translateY(16px)";
+      el.style.transition = `opacity 0.6s ease ${delay}s, transform 0.6s ease ${delay}s`;
+
+      // Simple intersection observer fade
+      const io = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) {
+          el.style.opacity = "1";
+          el.style.transform = "translateY(0)";
+          io.disconnect();
+        }
+      }, { threshold: 0.3 });
+      io.observe(el);
+      return () => io.disconnect();
+    }
 
     // Ensure animations respect user accessibility preferences
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;

@@ -1,11 +1,8 @@
 "use client";
 
 import { useEffect, useRef, memo } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gsap } from "@/lib/gsap";
 import { placementCompanies } from "@/data/siteData";
-
-gsap.registerPlugin(ScrollTrigger);
 
 function Placements() {
   const sectionRef = useRef<HTMLDivElement>(null);

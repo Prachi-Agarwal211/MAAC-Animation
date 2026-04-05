@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import gsap from "gsap";
+import { gsap } from "@/lib/gsap";
 import { navLinks, contactInfo } from "@/data/siteData";
 import { useUIStore } from "@/lib/store";
 

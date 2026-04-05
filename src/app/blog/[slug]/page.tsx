@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Script from "next/script";
@@ -247,11 +248,14 @@ export default async function BlogPostPage({
 
       {/* Featured Image */}
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 mb-12">
-        <div className="aspect-video rounded-xl overflow-hidden bg-[#1A1A1A]">
-          <img
+        <div className="relative aspect-video rounded-xl overflow-hidden bg-[#1A1A1A]">
+          <Image
             src={post.ogImage}
             alt={post.title}
-            className="w-full h-full object-cover"
+            fill
+            className="object-cover"
+            sizes="(max-width: 1280px) 100vw, 1280px"
+            priority
           />
         </div>
       </div>

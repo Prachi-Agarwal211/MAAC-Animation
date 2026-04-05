@@ -1,9 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
-import gsap from "gsap";
+import { gsap } from "@/lib/gsap";
 import { VolumeX, Volume2 } from "lucide-react";
-import VideoModal from "@/components/VideoModal";
 import SplitTextReveal from "@/components/ui/SplitTextReveal";
 
 const HERO_VIDEO_MP4 = "/hero-video-compressed.mp4";
@@ -21,7 +20,17 @@ export default function MAACXHero() {
   const animFrameRef = useRef<number>();
   const progressStartRef = useRef<number>(0);
 
-  const [introComplete, setIntroComplete] = useState(false);
+  // Skip intro on mobile, return visitors, or reduced-motion preference
+  const [introComplete, setIntroComplete] = useState(() => {
+    if (typeof window === "undefined") return false;
+    // Skip on mobile (saves ~8s LCP for 70%+ of users)
+    if (window.innerWidth < 768) return true;
+    // Skip for return visitors
+    if (sessionStorage.getItem("maac_intro_v3")) return true;
+    // Skip if user prefers reduced motion
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return true;
+    return false;
+  });
   const [isMuted, setIsMuted] = useState(true);
   const [showSkip, setShowSkip] = useState(false);
   const [videoError, setVideoError] = useState(false);
@@ -67,6 +76,7 @@ export default function MAACXHero() {
   // Handle intro video ending → sweep up
   const handleIntroEnded = useCallback(() => {
     if (introComplete) return;
+    sessionStorage.setItem("maac_intro_v3", "1");
     setIntroComplete(true);
 
     const overlay = introOverlayRef.current;
@@ -93,6 +103,22 @@ export default function MAACXHero() {
       introVideoRef.current.muted = true;
     }
   }, []);
+
+  // Reveal navbar immediately if intro was skipped
+  useEffect(() => {
+    if (introComplete) {
+      window.dispatchEvent(new Event("maac:intro_revealed"));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // only on mount
+
+  // Only load hero video AFTER intro is complete
+  useEffect(() => {
+    if (!introComplete || !heroVideoRef.current) return;
+    heroVideoRef.current.preload = "auto";
+    heroVideoRef.current.load();
+    heroVideoRef.current.play().catch(() => {});
+  }, [introComplete]);
 
   // Run hero entrance animations AFTER sweep completes
   useEffect(() => {
@@ -208,7 +234,7 @@ export default function MAACXHero() {
                 autoPlay
                 muted
                 playsInline
-                preload="auto"
+                preload={introComplete ? "none" : "auto"}
                 onEnded={handleIntroEnded}
                 onError={() => setVideoError(true)}
               >
@@ -315,7 +341,7 @@ export default function MAACXHero() {
             muted
             loop
             playsInline
-            preload="auto"
+            preload="none"
             poster="/hero-poster.jpg"
           >
             <source src={HERO_VIDEO_WEBM} type="video/webm" />
@@ -353,23 +379,24 @@ export default function MAACXHero() {
               </span>
             </div>
 
-            {/* Headline */}
+            {/* Headline — SEO-optimized H1 targeting primary keyword */}
             <h1 className="mb-3">
               <span className="block text-white font-display font-bold text-[clamp(2.8rem,7vw,5rem)] leading-[1.02] tracking-tight">
                 <SplitTextReveal delay={0.2} stagger={0.035}>
-                  Big Leaps
+                  Best Animation
+                </SplitTextReveal>
+              </span>
+              <span className="block text-[#E31837] font-display font-bold text-[clamp(2.2rem,5vw,4rem)] leading-[1.02] tracking-tight">
+                <SplitTextReveal delay={0.35} stagger={0.035}>
+                  Institute in Jaipur
                 </SplitTextReveal>
               </span>
             </h1>
 
-            {/* Subtitle */}
-            <div className="mb-7">
-              <span className="block text-[#E31837] font-sans font-medium text-[clamp(0.9rem,1.8vw,1.2rem)] leading-[1.3] uppercase tracking-widest">
-                <SplitTextReveal delay={0.45} stagger={0.012}>
-                  Begin With The Right Course
-                </SplitTextReveal>
-              </span>
-            </div>
+            {/* Subtitle — brand tagline (not H1) */}
+            <p className="text-[#A8A29C] text-lg font-medium mb-7 italic">
+              Big Leaps Begin With The Right Course
+            </p>
 
             {/* CTAs - only Explore Courses (showreel removed) */}
             <div className="maacx-cta-row flex flex-wrap items-center gap-3 md:gap-4">

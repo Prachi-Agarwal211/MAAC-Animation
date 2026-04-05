@@ -6,7 +6,6 @@ import CustomCursor from "@/components/hero/CustomCursor";
 import FloatingCTA from "@/components/FloatingCTA";
 import Navbar from "@/components/Navbar";
 import ClientShell from "@/components/ClientShell";
-import AnimatedBackground from "@/components/ui/AnimatedBackground";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Providers } from "./providers";
@@ -94,7 +93,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${syne.variable} font-body antialiased bg-[#0C0C0C] text-[#F0EBE1]`}
       >
-        <AnimatedBackground />
+        <div className="animated-bg" aria-hidden="true" />
         <Providers>
           <a
             href="#main-content"

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
-import gsap from "gsap";
+import { gsap } from "@/lib/gsap";
 
 interface ContactModalProps {
   isOpen: boolean;

@@ -770,6 +770,31 @@ body.demo-bar-visible .page-wrapper {
 }
 
 /* ═══════════════════════════════════════════════════════
+   ANIMATED BACKGROUND — CSS Replacement (0% CPU)
+   Replaces the canvas-based AnimatedBackground component
+   ═══════════════════════════════════════════════════════ */
+.animated-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 50% at 15% 50%, rgba(45,10,15,0.4) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 85% 30%, rgba(35,15,10,0.35) 0%, transparent 55%),
+    #0C0C0C;
+  animation: bg-drift 20s ease-in-out infinite alternate;
+}
+
+@keyframes bg-drift {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animated-bg { animation: none; }
+}
+
+/* ═══════════════════════════════════════════════════════
    AWWWARDS STYLE: Animated Mesh Deep Luxury Backgrounds
    ═══════════════════════════════════════════════════════ */
 .animated-mesh-bg {

@@ -2,10 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { destroyLenis } from "@/lib/lenis";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import gsap from "gsap";
-
-gsap.registerPlugin(ScrollTrigger);
+import gsap from "@/lib/gsap";
 
 export default function LenisProvider({
   children,

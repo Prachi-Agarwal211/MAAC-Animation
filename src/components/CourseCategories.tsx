@@ -1,12 +1,10 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Image from "next/image";
+import { gsap } from "@/lib/gsap";
 import Link from "next/link";
 import { coursesData } from "@/data/siteData";
-
-gsap.registerPlugin(ScrollTrigger);
 
 // SVG Icons per category
 const CategoryIcon = ({ type }: { type: string }) => {
@@ -67,6 +65,7 @@ interface SlideCardProps {
     description: string;
     fullDescription: string;
     icon: string;
+    image?: string;
     careers: string[];
   };
   index: number;
@@ -83,11 +82,23 @@ function SlideUpCard({ course }: SlideCardProps) {
       {/* Top section — dark gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#161616] to-[#0C0C0C]" />
 
-      {/* Icon area (top 60%) */}
+      {/* Icon/Image area (top 60%) */}
       <div className="relative z-10 h-[60%] flex items-center justify-center pt-8">
-        <div className="text-[#C4A882]/60 group-hover:text-[#C4A882] transition-colors duration-300">
-          <CategoryIcon type={course.icon} />
-        </div>
+        {course.image ? (
+          <div className="relative w-full h-full px-8 py-4">
+            <Image
+              src={course.image}
+              alt={`${course.title} course`}
+              fill
+              className="object-contain rounded-xl"
+              sizes="(max-width: 768px) 100vw, 33vw"
+            />
+          </div>
+        ) : (
+          <div className="text-[#C4A882]/60 group-hover:text-[#C4A882] transition-colors duration-300">
+            <CategoryIcon type={course.icon} />
+          </div>
+        )}
       </div>
 
       {/* Bottom red section — always visible */}

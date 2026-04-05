@@ -275,7 +275,7 @@ export const coursesData: Course[] = [
       { question: "Do I need programming skills for this course?", answer: "No, this course focuses on game art and design. Basic scripting is covered but deep programming knowledge is not required." },
       { question: "Which game engines will I learn?", answer: "You'll learn both Unity and Unreal Engine, the two most widely used engines in the gaming industry." },
     ],
-    ogImage: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/06/2020-07-05_23-03-12-500x498-1.jpg",
+    ogImage: "/courses/gaming-design.jpg",
     category: "gaming",
     priority: 9,
     eligibility: "10+2 or Equivalent",
@@ -579,10 +579,10 @@ export function getAllCourseSlugs(): string[] {
 }
 
 export const courseCategories = [
-  { id: "animation", title: "Animation", count: coursesData.filter((c) => c.category === "animation").length },
-  { id: "vfx", title: "Visual Effects", count: coursesData.filter((c) => c.category === "vfx").length },
-  { id: "gaming", title: "Game Design", count: coursesData.filter((c) => c.category === "gaming").length },
-  { id: "filmmaking", title: "Filmmaking", count: coursesData.filter((c) => c.category === "filmmaking").length },
-  { id: "design", title: "Design", count: coursesData.filter((c) => c.category === "design").length },
-  { id: "media", title: "Digital Media", count: coursesData.filter((c) => c.category === "media").length },
+  { id: "animation", title: "Animation", count: coursesData.filter((c) => c.category === "animation").length, image: "/courses_images/image(4).png" },
+  { id: "vfx", title: "Visual Effects", count: coursesData.filter((c) => c.category === "vfx").length, image: "/courses_images/image(1).png" },
+  { id: "gaming", title: "Game Design", count: coursesData.filter((c) => c.category === "gaming").length, image: "/courses_images/game.png" },
+  { id: "filmmaking", title: "Filmmaking", count: coursesData.filter((c) => c.category === "filmmaking").length, image: "/courses_images/image(3).png" },
+  { id: "design", title: "Design", count: coursesData.filter((c) => c.category === "design").length, image: "/courses_images/image(5).png" },
+  { id: "media", title: "Digital Media", count: coursesData.filter((c) => c.category === "media").length, image: "/courses_images/image(2).png" },
 ];

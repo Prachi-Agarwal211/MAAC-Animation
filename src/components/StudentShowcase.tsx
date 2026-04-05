@@ -1,10 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import { gsap } from "@/lib/gsap";
 
 const showcaseVideos = [
   { title: "ANANDI", category: "Animation", video: "/student-work/ANANDI-compressed.mp4", duration: "2:34" },

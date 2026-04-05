@@ -159,8 +159,8 @@ export const localBusinessSchema = {
   },
   "geo": {
     "@type": "GeoCoordinates",
-    "latitude": 26.9124,
-    "longitude": 75.7873
+    "latitude": 26.9139,
+    "longitude": 75.7842
   },
   "telephone": "+919829294037",
   "email": "maacanimationjaipur@gmail.com",

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import gsap from "gsap";
+import { gsap } from "@/lib/gsap";
 import Link from "next/link";
 import Footer from "@/components/Footer";
 import { coursesData } from "@/data/siteData";

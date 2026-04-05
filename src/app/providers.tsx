@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
-import gsap from "gsap";
+import { gsap } from "@/lib/gsap";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();

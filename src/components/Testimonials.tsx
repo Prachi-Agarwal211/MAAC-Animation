@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, memo } from "react";
-import gsap from "gsap";
+import { gsap } from "@/lib/gsap";
 import { testimonialsData } from "@/data/siteData";
 
 function Testimonials() {

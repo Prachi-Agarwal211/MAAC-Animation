@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
 import { blogPosts } from "@/data/blog";
@@ -105,10 +106,12 @@ export default function BlogIndexPage() {
               >
                 {/* Image */}
                 <Link href={`/blog/${post.slug}`} className="block relative aspect-video overflow-hidden bg-[#1A1A1A]">
-                  <img
+                  <Image
                     src={post.ogImage}
                     alt={post.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    sizes="(max-width: 768px) 100vw, 50vw"
                     loading="lazy"
                   />
                   <div className="absolute top-3 left-3">

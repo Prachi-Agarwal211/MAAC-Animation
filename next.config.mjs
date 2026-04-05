@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Enforce no trailing slashes everywhere (canonical URL consistency)
+  trailingSlash: false,
   // Image optimization configuration
   images: {
     formats: ["image/avif", "image/webp"],
@@ -20,6 +22,16 @@ const nextConfig = {
       {
         source: "/work/",
         destination: "/courses",
+        permanent: true,
+      },
+      {
+        source: "/animation-institute-in-jaipur/",
+        destination: "/animation-institute-jaipur",
+        permanent: true,
+      },
+      {
+        source: "/best-animation-institute-jaipur/",
+        destination: "/animation-institute-jaipur",
         permanent: true,
       },
       {

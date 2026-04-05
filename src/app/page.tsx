@@ -1,17 +1,20 @@
-import MAACXHero from "@/components/hero/MAACXHero";
-import VerticalCardGallery from "@/components/VerticalCardGallery";
-import InstituteIntro from "@/components/InstituteIntro";
-import CareerCreatorComparison from "@/components/CareerCreatorComparison";
-import CourseCategories from "@/components/CourseCategories";
-import IndustryPartners from "@/components/IndustryPartners";
-import PopularCourses from "@/components/PopularCourses";
-import StudentShowcase from "@/components/StudentShowcase";
-import Testimonials from "@/components/Testimonials";
-import Awards from "@/components/Awards";
-import Placements from "@/components/Placements";
-import ApplyNow from "@/components/ApplyNow";
+import dynamic from "next/dynamic";
+import MAACXHero from "@/components/hero/MAACXHero"; // Keep eager — above fold
+import InstituteIntro from "@/components/InstituteIntro"; // Keep eager
 import Footer from "@/components/Footer";
-import FAQSection from "@/components/FAQSection";
+
+// Everything else: lazy load for smaller initial bundle
+const VerticalCardGallery = dynamic(() => import("@/components/VerticalCardGallery"), { ssr: true });
+const CareerCreatorComparison = dynamic(() => import("@/components/CareerCreatorComparison"), { ssr: true });
+const CourseCategories = dynamic(() => import("@/components/CourseCategories"), { ssr: true });
+const IndustryPartners = dynamic(() => import("@/components/IndustryPartners"), { ssr: true });
+const PopularCourses = dynamic(() => import("@/components/PopularCourses"), { ssr: true });
+const StudentShowcase = dynamic(() => import("@/components/StudentShowcase"), { ssr: false }); // Videos: no SSR
+const Testimonials = dynamic(() => import("@/components/Testimonials"), { ssr: true });
+const Awards = dynamic(() => import("@/components/Awards"), { ssr: true });
+const Placements = dynamic(() => import("@/components/Placements"), { ssr: true });
+const ApplyNow = dynamic(() => import("@/components/ApplyNow"), { ssr: true });
+const FAQSection = dynamic(() => import("@/components/FAQSection"), { ssr: true });
 import { localBusinessSchema, videoSchema, breadcrumbSchema, faqSchema } from "@/lib/structured-data";
 
 // ISR: Revalidate every hour

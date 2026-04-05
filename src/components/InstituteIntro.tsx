@@ -1,11 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gsap } from "@/lib/gsap";
 import VideoModal from "@/components/VideoModal";
-
-gsap.registerPlugin(ScrollTrigger);
 
 function CountUpStat({ number, suffix, label }: { number: number; suffix: string; label: string }) {
   const [count, setCount] = useState(0);
