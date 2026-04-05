@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     title: "Blog - MAAC Animation Jaipur",
     description:
       "Insights, tips, and career guidance from MAAC Animation Jaipur.",
-    url: "https://www.maacanimationjaipur.com/blog/",
+    url: "https://www.maacanimationjaipur.com/blog",
     siteName: "maacanimationjaipur.com",
     locale: "en_US",
     images: [
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     follow: true,
   },
   alternates: {
-    canonical: "https://www.maacanimationjaipur.com/blog/",
+    canonical: "https://www.maacanimationjaipur.com/blog",
   },
 };
 
@@ -57,7 +57,7 @@ export default function BlogIndexPage() {
             "@type": "CollectionPage",
             name: "Blog - MAAC Animation Jaipur",
             description: "Insights, tips, and career guidance from MAAC Animation Jaipur.",
-            url: "https://www.maacanimationjaipur.com/blog/",
+            url: "https://www.maacanimationjaipur.com/blog",
             publisher: {
               "@type": "Organization",
               name: "MAAC Animation Jaipur",

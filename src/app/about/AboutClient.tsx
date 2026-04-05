@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
+import { shouldAnimate } from "@/lib/animationUtils";
 import Footer from "@/components/Footer";
 import { localBusinessSchema, breadcrumbSchema } from "@/lib/structured-data";
 
@@ -23,14 +24,14 @@ export default function AboutClient() {
   const pageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!shouldAnimate()) return;
 
     const ctx = gsap.context(() => {
       // Hero animation
       gsap.fromTo(
         ".about-hero-content",
         { opacity: 0, y: 60 },
-        { opacity: 1, y: 0, duration: prefersReduced ? 0.3 : 1, ease: "power3.out" }
+        { opacity: 1, y: 0, duration: 1, ease: "power3.out" }
       );
 
       // Timeline items
@@ -40,8 +41,8 @@ export default function AboutClient() {
         {
           opacity: 1,
           x: 0,
-          duration: prefersReduced ? 0.3 : 0.6,
-          stagger: prefersReduced ? 0 : 0.15,
+          duration: 0.6,
+          stagger: 0.15,
           scrollTrigger: {
             trigger: ".timeline-section",
             start: "top 75%",
@@ -58,9 +59,9 @@ export default function AboutClient() {
           opacity: 1,
           y: 0,
           scale: 1,
-          duration: prefersReduced ? 0.3 : 0.6,
-          stagger: prefersReduced ? 0 : 0.1,
-          ease: prefersReduced ? "none" : "back.out(1.3)",
+          duration: 0.6,
+          stagger: 0.1,
+          ease: "back.out(1.3)",
           scrollTrigger: {
             trigger: ".faculty-section",
             start: "top 75%",

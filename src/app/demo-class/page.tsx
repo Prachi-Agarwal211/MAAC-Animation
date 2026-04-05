@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     title: "Book Free Demo Class - MAAC Animation Jaipur",
     description:
       "Experience MAAC Jaipur's teaching methodology firsthand. Book a free demo class for 3D Animation, VFX, Game Design, or Digital Filmmaking.",
-    url: "https://www.maacanimationjaipur.com/demo-class/",
+    url: "https://www.maacanimationjaipur.com/demo-class",
     siteName: "maacanimationjaipur.com",
     locale: "en_US",
     images: [
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     follow: true,
   },
   alternates: {
-    canonical: "https://www.maacanimationjaipur.com/demo-class/",
+    canonical: "https://www.maacanimationjaipur.com/demo-class",
   },
 };
 
@@ -149,7 +149,7 @@ export default function DemoClassPage() {
               price: "0",
               priceCurrency: "INR",
               availability: "https://schema.org/InStock",
-              url: "https://www.maacanimationjaipur.com/demo-class/",
+              url: "https://www.maacanimationjaipur.com/demo-class",
             },
           }),
         }}

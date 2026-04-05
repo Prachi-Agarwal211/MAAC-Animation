@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, memo } from "react";
 import { gsap } from "@/lib/gsap";
+import { shouldAnimate } from "@/lib/animationUtils";
 import { testimonialsData } from "@/data/siteData";
 
 function Testimonials() {
@@ -11,6 +12,8 @@ function Testimonials() {
   const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
+    if (!shouldAnimate()) return;
+
     const ctx = gsap.context(() => {
       gsap.fromTo(".tm-heading", { opacity: 0, y: 50 }, {
         opacity: 1, y: 0, duration: 0.8, ease: "expo.out",

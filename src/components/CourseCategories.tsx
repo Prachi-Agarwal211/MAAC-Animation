@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { gsap } from "@/lib/gsap";
+import { shouldAnimate } from "@/lib/animationUtils";
 import Link from "next/link";
 import { coursesData } from "@/data/siteData";
 
@@ -136,6 +137,8 @@ export default function CourseCategories() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (!shouldAnimate()) return;
+
     const ctx = gsap.context(() => {
       const cards = gsap.utils.toArray('.category-card-item');
       if (cards.length > 0) {

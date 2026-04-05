@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
+import { shouldAnimate } from "@/lib/animationUtils";
 
 const partners = [
   "Nilee Games", "Mugafi", "Autodesk", "Canon", "Copperseed Games",
@@ -13,6 +14,8 @@ export default function IndustryPartners() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (!shouldAnimate()) return;
+
     const ctx = gsap.context(() => {
       gsap.fromTo(".partners-heading", { opacity: 0, y: 30 }, {
         opacity: 1, y: 0, duration: 0.8, ease: "expo.out",

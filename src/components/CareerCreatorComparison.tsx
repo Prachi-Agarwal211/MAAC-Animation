@@ -2,12 +2,15 @@
 
 import { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
+import { shouldAnimate } from "@/lib/animationUtils";
 import Link from "next/link";
 
 export default function CareerCreatorComparison() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (!shouldAnimate()) return;
+
     const ctx = gsap.context(() => {
       gsap.fromTo(".ccc-left-panel", { opacity: 0, x: -60 }, {
         opacity: 1, x: 0, duration: 1, ease: "expo.out",

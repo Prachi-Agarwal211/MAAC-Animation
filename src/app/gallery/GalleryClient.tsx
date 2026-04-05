@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
+import { shouldAnimate } from "@/lib/animationUtils";
 import Footer from "@/components/Footer";
 
 const galleryItems = Array.from({ length: 12 }).map((_, i) => ({
@@ -13,13 +14,13 @@ export default function GalleryClient() {
   const pageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!shouldAnimate()) return;
 
     const ctx = gsap.context(() => {
       gsap.fromTo(
         ".gallery-hero",
         { opacity: 0, y: 60 },
-        { opacity: 1, y: 0, duration: prefersReduced ? 0.3 : 1, ease: "power3.out" }
+        { opacity: 1, y: 0, duration: 1, ease: "power3.out" }
       );
 
       gsap.fromTo(
@@ -29,9 +30,9 @@ export default function GalleryClient() {
           opacity: 1,
           scale: 1,
           y: 0,
-          duration: prefersReduced ? 0.3 : 0.6,
-          stagger: prefersReduced ? 0 : 0.06,
-          ease: prefersReduced ? "none" : "back.out(1.4)",
+          duration: 0.6,
+          stagger: 0.06,
+          ease: "back.out(1.4)",
           scrollTrigger: {
             trigger: ".gallery-grid",
             start: "top 80%",

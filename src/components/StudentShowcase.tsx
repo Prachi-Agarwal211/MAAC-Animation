@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback } from "react";
 import { gsap } from "@/lib/gsap";
+import { shouldAnimate } from "@/lib/animationUtils";
 
 const showcaseVideos = [
   { title: "ANANDI", category: "Animation", video: "/student-work/ANANDI-compressed.mp4", duration: "2:34" },
@@ -73,6 +74,8 @@ export default function StudentShowcase() {
 
   // Heading entrance
   useEffect(() => {
+    if (!shouldAnimate()) return;
+
     const ctx = gsap.context(() => {
       gsap.fromTo(".ss-heading", { opacity: 0, y: 50 }, {
         opacity: 1, y: 0, duration: 0.9, ease: "expo.out",
@@ -112,15 +115,17 @@ export default function StudentShowcase() {
             className="absolute inset-0 transition-opacity duration-1000"
             style={{ opacity: i === active ? 1 : 0 }}
           >
-            <video
-              ref={el => { videoRefs.current[i] = el; }}
-              src={item.video}
-              className="showcase-video"
-              muted
-              loop
-              playsInline
-              preload={i === 0 ? "metadata" : "none"}
-            />
+            {(inView || i === active) && (
+              <video
+                ref={el => { videoRefs.current[i] = el; }}
+                src={item.video}
+                className="showcase-video"
+                muted
+                loop
+                playsInline
+                preload={i === 0 ? "metadata" : "none"}
+              />
+            )}
           </div>
         ))}
 

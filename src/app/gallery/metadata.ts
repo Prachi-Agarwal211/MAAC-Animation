@@ -5,15 +5,8 @@ export const metadata: Metadata = {
   description:
     "Explore MAAC Jaipur's campus photos, student projects, events, and workshops. See our animation labs, VFX studios, and creative work in action.",
   robots: {
-    index: true,
+    index: false, // Until real gallery images are uploaded
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-      "max-video-preview": -1,
-    },
   },
   openGraph: {
     title: "Student Work Gallery | MAAC Animation Jaipur",
