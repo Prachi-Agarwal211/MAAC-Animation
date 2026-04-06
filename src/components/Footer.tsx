@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 import { contactInfo } from "@/data/siteData";
 import MagneticButton from "@/components/ui/MagneticButton";
@@ -63,8 +64,14 @@ export default function Footer() {
           {/* About */}
           <div>
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#2A080C] to-[#1C1410] border border-[#E31837]/30 flex items-center justify-center">
-                <svg width="18" height="22" viewBox="0 0 22 26" fill="none"><path d="M2 2L8 24H12L18 2M5 14H17" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+              <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-[#2A080C] to-[#1C1410] border border-[#E31837]/30 flex items-center justify-center overflow-hidden">
+                <Image
+                  src="/maac-logo.png"
+                  alt="MAAC Jaipur Logo"
+                  width={40}
+                  height={40}
+                  className="object-contain"
+                />
               </div>
               <div>
                 <h3 className="text-[#F0EBE1] font-display font-bold text-lg leading-none">MAAC</h3>
@@ -166,8 +173,14 @@ export default function Footer() {
         {/* Mobile Accordion */}
         <div className="md:hidden">
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#2A080C] to-[#1C1410] border border-[#E31837]/30 flex items-center justify-center">
-              <svg width="18" height="22" viewBox="0 0 22 26" fill="none"><path d="M2 2L8 24H12L18 2M5 14H17" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-[#2A080C] to-[#1C1410] border border-[#E31837]/30 flex items-center justify-center overflow-hidden">
+              <Image
+                src="/maac-logo.png"
+                alt="MAAC Jaipur Logo"
+                width={40}
+                height={40}
+                className="object-contain"
+              />
             </div>
             <div>
               <h3 className="text-[#F0EBE1] font-display font-bold text-lg leading-none">MAAC</h3>

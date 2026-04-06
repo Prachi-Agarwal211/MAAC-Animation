@@ -10,9 +10,14 @@ function Testimonials() {
   const [active, setActive] = useState(0);
   const startXRef = useRef<number>(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    if (!shouldAnimate()) return;
+    setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!shouldAnimate() || !isMounted) return;
 
     const ctx = gsap.context(() => {
       gsap.fromTo(".tm-heading", { opacity: 0, y: 50 }, {
@@ -22,7 +27,7 @@ function Testimonials() {
     }, sectionRef);
 
     return () => { ctx.revert(); };
-  }, []);
+  }, [isMounted]);
 
   // Auto-advance interval (separate from GSAP context)
   useEffect(() => {

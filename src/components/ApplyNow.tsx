@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { gsap } from "@/lib/gsap";
 import { contactInfo } from "@/data/siteData";
 import MagneticButton from "@/components/ui/MagneticButton";
+import { submitContactForm } from "@/app/actions";
 
 export default function ApplyNow() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -45,14 +46,28 @@ export default function ApplyNow() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
-    
+
     setIsSubmitting(true);
     setSubmitError(null);
-    
+
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      setSubmitted(true);
+      // Create FormData and use server action
+      const data = new FormData();
+      data.set("name", formData.name);
+      data.set("phone", formData.phone);
+      data.set("email", formData.email);
+      data.set("course", formData.course);
+      data.set("city", formData.city);
+      data.set("message", formData.message);
+      
+      // Use server action for email delivery
+      const result = await submitContactForm(data);
+      
+      if (result.success) {
+        setSubmitted(true);
+      } else {
+        setSubmitError(result.message);
+      }
     } catch {
       setSubmitError('Something went wrong. Please try again.');
     } finally {

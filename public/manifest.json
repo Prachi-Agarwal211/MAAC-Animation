@@ -1,0 +1,23 @@
+{
+  "name": "MAAC Animation Institute Jaipur",
+  "short_name": "MAAC Jaipur",
+  "description": "Best Animation Institute in Jaipur — B.Voc, Diploma, 95% Placement",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0C0C0C",
+  "theme_color": "#E31837",
+  "icons": [
+    {
+      "src": "/maac-logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/maac-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

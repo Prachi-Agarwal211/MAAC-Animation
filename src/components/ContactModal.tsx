@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback } from "react";
 import { gsap } from "@/lib/gsap";
+import { submitContactForm } from "@/app/actions";
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -99,18 +100,26 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
     e.preventDefault();
     if (!validate()) return;
     setSubmitting(true);
+    
     try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData, source: "popup_modal" }),
-      });
-      if (response.ok) {
+      // Create FormData from state
+      const data = new FormData();
+      data.set("name", formData.name);
+      data.set("phone", formData.phone);
+      data.set("email", formData.email);
+      data.set("course", formData.course);
+      data.set("city", formData.city);
+      data.set("source", "popup_modal");
+      
+      // Use server action
+      const result = await submitContactForm(data);
+      
+      if (result.success) {
         setSubmitted(true);
         setTimeout(handleClose, 2500);
       }
     } catch {
-      /* silent */
+      // silent
     } finally {
       setSubmitting(false);
     }

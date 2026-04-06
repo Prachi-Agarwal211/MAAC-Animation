@@ -72,6 +72,35 @@ function renderContent(content: string) {
   let inCodeBlock = false;
   let codeContent = "";
 
+  // Helper function to parse inline markdown
+  function parseInlineMarkdown(text: string): React.ReactNode[] {
+    const parts: React.ReactNode[] = [];
+    const regex = /\*\*(.*?)\*\*/g;
+    let lastIndex = 0;
+    let match;
+
+    while ((match = regex.exec(text)) !== null) {
+      // Add text before the match
+      if (match.index > lastIndex) {
+        parts.push(text.slice(lastIndex, match.index));
+      }
+      // Add bold text
+      parts.push(
+        <strong key={match.index} className="text-[#F0EBE1] font-semibold">
+          {match[1]}
+        </strong>
+      );
+      lastIndex = regex.lastIndex;
+    }
+
+    // Add remaining text
+    if (lastIndex < text.length) {
+      parts.push(text.slice(lastIndex));
+    }
+
+    return parts.length > 0 ? parts : [text];
+  }
+
   lines.forEach((line, index) => {
     // Code blocks
     if (line.startsWith("```")) {
@@ -113,7 +142,7 @@ function renderContent(content: string) {
       return;
     }
 
-    // Bold text
+    // Bold text (entire line)
     if (line.startsWith("**") && line.endsWith("**")) {
       elements.push(
         <p key={index} className="text-[#F0EBE1] font-semibold my-2">
@@ -128,12 +157,21 @@ function renderContent(content: string) {
       return;
     }
 
-    // Regular paragraphs
-    elements.push(
-      <p key={index} className="text-[#A8A29C] leading-relaxed my-3">
-        {line.replace(/\*\*(.*?)\*\*/g, '<strong class="text-[#F0EBE1] font-semibold">$1</strong>')}
-      </p>
-    );
+    // Regular paragraphs with inline markdown support
+    const hasBold = line.includes("**");
+    if (hasBold) {
+      elements.push(
+        <p key={index} className="text-[#A8A29C] leading-relaxed my-3">
+          {parseInlineMarkdown(line)}
+        </p>
+      );
+    } else {
+      elements.push(
+        <p key={index} className="text-[#A8A29C] leading-relaxed my-3">
+          {line}
+        </p>
+      );
+    }
   });
 
   return elements;

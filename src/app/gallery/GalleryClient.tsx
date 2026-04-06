@@ -4,11 +4,29 @@ import { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
 import { shouldAnimate } from "@/lib/animationUtils";
 import Footer from "@/components/Footer";
+import Image from "next/image";
+import { portfolioEntries } from "@/data/portfolio";
 
-const galleryItems = Array.from({ length: 12 }).map((_, i) => ({
-  id: i + 1,
-  category: ["Animation", "VFX", "Gaming", "Design"][i % 4],
+// Select a diverse set of representative images for the gallery
+const galleryImages = portfolioEntries.slice(0, 12).map((entry) => ({
+  id: entry.id,
+  src: entry.featuredImage,
+  alt: `${entry.studentName} - ${entry.course}`,
+  category: entry.category,
+  studentName: entry.studentName,
+  course: entry.course,
 }));
+
+// Category emoji mapping
+const categoryEmojis: Record<string, string> = {
+  "3d-game-asset": "🎮",
+  "architectural-design": "🏛️",
+  "character-modeling": "🎭",
+  "digital-painting": "🎨",
+  "environment-modeling": "🌍",
+  "matte-painting": "🖼️",
+  featured: "⭐",
+};
 
 export default function GalleryClient() {
   const pageRef = useRef<HTMLDivElement>(null);
@@ -57,7 +75,7 @@ export default function GalleryClient() {
             "@context": "https://schema.org",
             "@type": "ImageGallery",
             "name": "MAAC Animation Jaipur - Student Work Gallery",
-            "description": "Student projects and work from MAAC Animation Jaipur",
+            "description": "Student projects and work from MAAC Animation Jaipur across 3D modeling, animation, VFX, digital painting, and more.",
             "url": "https://www.maacanimationjaipur.com/gallery",
             "author": {
               "@type": "EducationalOrganization",
@@ -89,27 +107,24 @@ export default function GalleryClient() {
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="gallery-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {galleryItems.map((item) => (
+            {galleryImages.map((item) => (
               <div
                 key={item.id}
-                className="gallery-item group relative glass-card rounded-2xl overflow-hidden"
+                className="gallery-item group relative glass-card rounded-2xl overflow-hidden border border-white/5 hover:border-[#E31837]/30 transition-all duration-300"
               >
-                <div className="image-placeholder aspect-square rounded-none border-0">
-                  <div className="text-center">
-                    <div className="text-4xl mb-2 opacity-40">
-                      {item.category === "Animation"
-                        ? "🎬"
-                        : item.category === "VFX"
-                        ? "✨"
-                        : item.category === "Gaming"
-                        ? "🎮"
-                        : "🎨"}
-                    </div>
-                    <span className="text-xs">
-                      Add Image {item.id}
-                    </span>
-                    <span className="text-[10px] text-gray-500 block mt-1">
-                      {item.category}
+                <div className="relative aspect-square">
+                  <Image
+                    src={item.src}
+                    alt={item.alt}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    loading="lazy"
+                  />
+                  {/* Category badge */}
+                  <div className="absolute top-3 left-3">
+                    <span className="bg-[#E31837]/90 text-white text-[10px] font-semibold px-2 py-1 rounded-full uppercase tracking-wider">
+                      {categoryEmojis[item.category] || "🎓"} {item.category.replace(/-/g, " ")}
                     </span>
                   </div>
                 </div>
@@ -117,14 +132,28 @@ export default function GalleryClient() {
                 {/* Hover overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-5">
                   <span className="text-[#E31837] text-xs font-medium uppercase tracking-wider">
-                    {item.category}
+                    {item.category.replace(/-/g, " ")}
                   </span>
                   <h3 className="text-[#f5f0e8] font-display font-semibold">
-                    Student Project #{item.id}
+                    {item.studentName}
                   </h3>
+                  <p className="text-[#6b6b6b] text-xs mt-1">{item.course}</p>
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* View All Student Work CTA */}
+          <div className="text-center mt-12">
+            <a
+              href="/student-work"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-[#E31837]/10 border border-[#E31837]/30 text-[#E31837] font-semibold hover:bg-[#E31837]/20 transition-colors"
+            >
+              View Full Portfolio Gallery
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
           </div>
         </div>
       </section>

@@ -20,10 +20,14 @@
     "next": "14.2.35",
     "react": "^18",
     "react-dom": "^18",
+    "react-intersection-observer": "^10.0.3",
+    "resend": "^6.10.0",
+    "sharp": "^0.34.5",
     "splitting": "^1.1.0",
     "zustand": "^5.0.12"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^16.2.2",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

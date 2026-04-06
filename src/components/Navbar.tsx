@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { gsap } from "@/lib/gsap";
 import { navLinks, contactInfo } from "@/data/siteData";
 import { useUIStore } from "@/lib/store";
@@ -48,13 +49,27 @@ export default function Navbar() {
         { x: -60, opacity: 0 },
         { x: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: "expo.out" }
       );
+      // iOS Safari fix: lock scroll position properly
+      const scrollY = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
+      document.body.style.top = `-${scrollY}px`;
       document.body.style.overflow = "hidden";
       document.documentElement.style.overflow = "hidden";
     } else {
+      // Restore scroll position on close
+      const scrollY = document.body.style.top;
+      document.body.style.position = '';
+      document.body.style.width = '';
+      document.body.style.top = '';
       document.body.style.overflow = "";
       document.documentElement.style.overflow = "";
+      window.scrollTo(0, parseInt(scrollY || '0') * -1);
     }
     return () => {
+      document.body.style.position = '';
+      document.body.style.width = '';
+      document.body.style.top = '';
       document.body.style.overflow = "";
       document.documentElement.style.overflow = "";
     };
@@ -109,10 +124,15 @@ export default function Navbar() {
             <div className="flex items-center justify-between h-16 lg:h-[72px]">
               {/* Logo */}
               <Link href="/" className="flex items-center gap-3 group">
-                <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-lg bg-gradient-to-br from-[#E31837] to-[#B8132C] flex items-center justify-center shadow-lg">
-                  <svg viewBox="0 0 48 48" className="w-7 h-7 sm:w-8 sm:h-8 text-white" fill="currentColor">
-                    <path d="M6 6v36l8-4V18l10 14 10-14v20l8 4V6L24 30 6 6z" />
-                  </svg>
+                <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-lg bg-[#0C0C0C]/80 backdrop-blur-sm border border-white/10 flex items-center justify-center shadow-lg overflow-hidden">
+                  <Image
+                    src="/maac-logo.png"
+                    alt="MAAC Jaipur Logo"
+                    width={48}
+                    height={48}
+                    className="object-contain"
+                    priority
+                  />
                 </div>
                 <div className="hidden sm:block">
                   <h1 className="text-white font-display font-bold text-lg leading-none">MAAC</h1>

@@ -1,0 +1,263 @@
+- generic [active] [ref=e1]:
+  - link "Skip to main content" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=e3]:
+    - generic [ref=e6]:
+      - link "MAAC Jaipur Logo MAAC Jaipur" [ref=e7] [cursor=pointer]:
+        - /url: /
+        - img "MAAC Jaipur Logo" [ref=e9]
+        - generic [ref=e10]:
+          - heading "MAAC" [level=1] [ref=e11]
+          - paragraph [ref=e12]: Jaipur
+      - navigation [ref=e13]:
+        - link "Home" [ref=e15] [cursor=pointer]:
+          - /url: /
+          - text: Home
+        - link "Courses" [ref=e18] [cursor=pointer]:
+          - /url: /#courses
+          - text: Courses
+        - link "Placements" [ref=e21] [cursor=pointer]:
+          - /url: /placements
+          - text: Placements
+        - link "Student Work" [ref=e24] [cursor=pointer]:
+          - /url: /portfolio
+          - text: Student Work
+        - link "About Us" [ref=e27] [cursor=pointer]:
+          - /url: /about
+          - text: About Us
+        - link "Gallery" [ref=e30] [cursor=pointer]:
+          - /url: /gallery
+          - text: Gallery
+        - link "Contact Us" [ref=e33] [cursor=pointer]:
+          - /url: /contact
+          - text: Contact Us
+      - generic [ref=e35]:
+        - link "+91-7300001589" [ref=e36] [cursor=pointer]:
+          - /url: tel:+91-7300001589
+        - link "WhatsApp" [ref=e37] [cursor=pointer]:
+          - /url: https://wa.me/917300001589?text=Hi%20MAAC%20Jaipur
+          - img [ref=e38]
+        - link "Apply Now" [ref=e40] [cursor=pointer]:
+          - /url: /contact
+  - main [ref=e41]:
+    - main [ref=e42]:
+      - generic [ref=e45]:
+        - paragraph [ref=e46]: Showcase
+        - heading "Student Gallery" [level=1] [ref=e47]
+        - paragraph [ref=e48]: Explore the incredible work created by our talented students across animation, VFX, gaming, and design programs.
+      - generic [ref=e51]:
+        - generic [ref=e52]:
+          - generic [ref=e53]:
+            - generic [ref=e54]:
+              - img "Nancy Verma - Advanced Program" [ref=e55]
+              - generic [ref=e57]: ⭐ featured
+            - generic [ref=e58]:
+              - generic [ref=e59]: featured
+              - heading "Nancy Verma" [level=3] [ref=e60]
+              - paragraph [ref=e61]: Advanced Program
+          - generic [ref=e62]:
+            - generic [ref=e63]:
+              - img "Prerit Mehan - Advanced Program" [ref=e64]
+              - generic [ref=e66]: ⭐ featured
+            - generic [ref=e67]:
+              - generic [ref=e68]: featured
+              - heading "Prerit Mehan" [level=3] [ref=e69]
+              - paragraph [ref=e70]: Advanced Program
+          - generic [ref=e71]:
+            - generic [ref=e72]:
+              - img "Archita Roy - 3D Game Asset Creation" [ref=e73]
+              - generic [ref=e75]: 🎮 3d game asset
+            - generic [ref=e76]:
+              - generic [ref=e77]: 3d game asset
+              - heading "Archita Roy" [level=3] [ref=e78]
+              - paragraph [ref=e79]: 3D Game Asset Creation
+          - generic [ref=e80]:
+            - generic [ref=e81]:
+              - img "Bijoy Mech - 3D Game Asset Creation" [ref=e82]
+              - generic [ref=e84]: 🎮 3d game asset
+            - generic [ref=e85]:
+              - generic [ref=e86]: 3d game asset
+              - heading "Bijoy Mech" [level=3] [ref=e87]
+              - paragraph [ref=e88]: 3D Game Asset Creation
+          - generic [ref=e89]:
+            - generic [ref=e90]:
+              - img "Khushal Singla - 3D Game Asset Creation" [ref=e91]
+              - generic [ref=e93]: 🎮 3d game asset
+            - generic [ref=e94]:
+              - generic [ref=e95]: 3d game asset
+              - heading "Khushal Singla" [level=3] [ref=e96]
+              - paragraph [ref=e97]: 3D Game Asset Creation
+          - generic [ref=e98]:
+            - generic [ref=e99]:
+              - img "Shreya Halder - 3D Game Asset Creation" [ref=e100]
+              - generic [ref=e102]: 🎮 3d game asset
+            - generic [ref=e103]:
+              - generic [ref=e104]: 3d game asset
+              - heading "Shreya Halder" [level=3] [ref=e105]
+              - paragraph [ref=e106]: 3D Game Asset Creation
+          - generic [ref=e107]:
+            - generic [ref=e108]:
+              - img "Krutika Vikram Rane - Architectural Design Visualization" [ref=e109]
+              - generic [ref=e111]: 🏛️ architectural design
+            - generic [ref=e112]:
+              - generic [ref=e113]: architectural design
+              - heading "Krutika Vikram Rane" [level=3] [ref=e114]
+              - paragraph [ref=e115]: Architectural Design Visualization
+          - generic [ref=e116]:
+            - generic [ref=e117]:
+              - img "Mohhamad Kaif Karamat Shaikh - Architectural Design Visualization" [ref=e118]
+              - generic [ref=e120]: 🏛️ architectural design
+            - generic [ref=e121]:
+              - generic [ref=e122]: architectural design
+              - heading "Mohhamad Kaif Karamat Shaikh" [level=3] [ref=e123]
+              - paragraph [ref=e124]: Architectural Design Visualization
+          - generic [ref=e125]:
+            - generic [ref=e126]:
+              - img "Sharanjit Kaur - Architectural Design Visualization" [ref=e127]
+              - generic [ref=e129]: 🏛️ architectural design
+            - generic [ref=e130]:
+              - generic [ref=e131]: architectural design
+              - heading "Sharanjit Kaur" [level=3] [ref=e132]
+              - paragraph [ref=e133]: Architectural Design Visualization
+          - generic [ref=e134]:
+            - generic [ref=e135]:
+              - img "Aarush Kumar - Character Modeling & Texturing" [ref=e136]
+              - generic [ref=e138]: 🎭 character modeling
+            - generic [ref=e139]:
+              - generic [ref=e140]: character modeling
+              - heading "Aarush Kumar" [level=3] [ref=e141]
+              - paragraph [ref=e142]: Character Modeling & Texturing
+          - generic [ref=e143]:
+            - generic [ref=e144]:
+              - img "Abhay Suryavanshi - Character Modeling & Texturing" [ref=e145]
+              - generic [ref=e147]: 🎭 character modeling
+            - generic [ref=e148]:
+              - generic [ref=e149]: character modeling
+              - heading "Abhay Suryavanshi" [level=3] [ref=e150]
+              - paragraph [ref=e151]: Character Modeling & Texturing
+          - generic [ref=e152]:
+            - generic [ref=e153]:
+              - img "Arfat Aziz Khan - Character Modeling & Texturing" [ref=e154]
+              - generic [ref=e156]: 🎭 character modeling
+            - generic [ref=e157]:
+              - generic [ref=e158]: character modeling
+              - heading "Arfat Aziz Khan" [level=3] [ref=e159]
+              - paragraph [ref=e160]: Character Modeling & Texturing
+        - link "View Full Portfolio Gallery" [ref=e162] [cursor=pointer]:
+          - /url: /student-work
+          - text: View Full Portfolio Gallery
+          - img [ref=e163]
+      - generic [ref=e165]:
+        - generic [ref=e167]:
+          - heading "Ready to Start? Book a Free Demo Class Today" [level=2] [ref=e168]
+          - generic [ref=e169]:
+            - link "Book Free Demo" [ref=e171] [cursor=pointer]:
+              - /url: /contact
+            - link "WhatsApp Us" [ref=e173] [cursor=pointer]:
+              - /url: https://wa.me/917300001589
+        - generic [ref=e175]:
+          - generic [ref=e176]:
+            - generic [ref=e177]:
+              - img "MAAC Jaipur Logo" [ref=e179]
+              - generic [ref=e180]:
+                - heading "MAAC" [level=3] [ref=e181]
+                - paragraph [ref=e182]: Jaipur
+            - paragraph [ref=e183]: MAAC is India's leading Animation, VFX, and Multimedia education brand with 30+ years of excellence.
+            - generic [ref=e184]:
+              - link "facebook" [ref=e185] [cursor=pointer]:
+                - /url: https://www.facebook.com/MAAClndia
+                - img [ref=e186]
+              - link "instagram" [ref=e188] [cursor=pointer]:
+                - /url: https://www.instagram.com/maacjaipurcscheme?igsh=OGluNWQybHI2cjBv&utm_source=qr
+                - img [ref=e189]
+              - link "youtube" [ref=e192] [cursor=pointer]:
+                - /url: https://youtube.com/@maac-jaipur-cscheme?si=QiPdIu3guJaDr3cB
+                - img [ref=e193]
+              - link "linkedin" [ref=e195] [cursor=pointer]:
+                - /url: https://www.linkedin.com/company/maac-jaipur-cscheme
+                - img [ref=e196]
+              - link "twitter" [ref=e199] [cursor=pointer]:
+                - /url: https://twitter.com/MAAClndia
+                - img [ref=e200]
+          - generic [ref=e202]:
+            - heading "Quick Links" [level=4] [ref=e203]
+            - list [ref=e204]:
+              - listitem [ref=e205]:
+                - link "Home" [ref=e206] [cursor=pointer]:
+                  - /url: /
+              - listitem [ref=e207]:
+                - link "About Us" [ref=e208] [cursor=pointer]:
+                  - /url: /about
+              - listitem [ref=e209]:
+                - link "Courses" [ref=e210] [cursor=pointer]:
+                  - /url: /courses
+              - listitem [ref=e211]:
+                - link "Placements" [ref=e212] [cursor=pointer]:
+                  - /url: /placements
+              - listitem [ref=e213]:
+                - link "Gallery" [ref=e214] [cursor=pointer]:
+                  - /url: /gallery
+              - listitem [ref=e215]:
+                - link "Contact Us" [ref=e216] [cursor=pointer]:
+                  - /url: /contact
+              - listitem [ref=e217]:
+                - link "Malviya Nagar" [ref=e218] [cursor=pointer]:
+                  - /url: /locations/malviya-nagar
+          - generic [ref=e219]:
+            - heading "Our Courses" [level=4] [ref=e220]
+            - list [ref=e221]:
+              - listitem [ref=e222]:
+                - link "3D Animation" [ref=e223] [cursor=pointer]:
+                  - /url: /courses
+              - listitem [ref=e224]:
+                - link "Visual Effects" [ref=e225] [cursor=pointer]:
+                  - /url: /courses
+              - listitem [ref=e226]:
+                - link "Game Design" [ref=e227] [cursor=pointer]:
+                  - /url: /courses
+              - listitem [ref=e228]:
+                - link "Digital Filmmaking" [ref=e229] [cursor=pointer]:
+                  - /url: /courses
+              - listitem [ref=e230]:
+                - link "Digital Media" [ref=e231] [cursor=pointer]:
+                  - /url: /courses
+              - listitem [ref=e232]:
+                - link "Architectural Design" [ref=e233] [cursor=pointer]:
+                  - /url: /courses
+          - generic [ref=e234]:
+            - heading "Contact Us" [level=4] [ref=e235]
+            - generic [ref=e236]:
+              - generic [ref=e237]:
+                - img [ref=e239]
+                - paragraph [ref=e242]: 711-712, Ambition Tower, 7th Floor, D-46B, Malan Ka Chauraha, Agrasain Circle, Subhash Marg, Jaipur, 302001
+              - generic [ref=e243]:
+                - img [ref=e245]
+                - generic [ref=e247]:
+                  - link "+91-7300001589" [ref=e248] [cursor=pointer]:
+                    - /url: tel:+91-7300001589
+                  - link "+91-9829294037" [ref=e249] [cursor=pointer]:
+                    - /url: tel:+91-9829294037
+              - generic [ref=e250]:
+                - img [ref=e252]
+                - link "maacanimationjaipur@gmail.com" [ref=e255] [cursor=pointer]:
+                  - /url: mailto:maacanimationjaipur@gmail.com
+        - generic [ref=e257]:
+          - paragraph [ref=e258]: Made with ❤ in India · Copyright © 2026 MAAC India
+          - generic [ref=e259]:
+            - link "Privacy Policy" [ref=e260] [cursor=pointer]:
+              - /url: "#"
+            - link "Terms of Service" [ref=e261] [cursor=pointer]:
+              - /url: "#"
+            - link "Sitemap" [ref=e262] [cursor=pointer]:
+              - /url: "#"
+  - generic:
+    - generic:
+      - link "Chat on WhatsApp":
+        - /url: https://wa.me/917300001589?text=Hi%20MAAC%20Jaipur
+        - img
+        - generic: WhatsApp Us
+    - generic:
+      - link "Call us":
+        - /url: tel:+917300001589
+        - img
+        - generic: Call Now

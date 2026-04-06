@@ -162,7 +162,7 @@ export const localBusinessSchema = {
     "latitude": 26.9139,
     "longitude": 75.7842
   },
-  "telephone": "+919829294037",
+  "telephone": ["+919829294037", "+919929059559", "+917300001589"],
   "email": "maacanimationjaipur@gmail.com",
   "openingHours": "Mo-Sa 09:00-19:00",
   "priceRange": "₹₹",
@@ -183,24 +183,104 @@ export const localBusinessSchema = {
         "@type": "Offer",
         "itemOffered": {
           "@type": "Course",
-          "name": "Advanced VFX Program",
-          "description": "24-month diploma in visual effects, compositing, and motion graphics"
+          "name": "AD3D Edge — Advanced Program in 3D Animation",
+          "description": "Advanced 3D animation with specialized character animation and studio pipeline"
         }
       },
       {
         "@type": "Offer",
         "itemOffered": {
           "@type": "Course",
-          "name": "Game Design & Integration",
-          "description": "Comprehensive game art, design, and engine integration program"
+          "name": "D3D — Program in 3D Animation",
+          "description": "Comprehensive 3D animation covering modeling, texturing, animation, and rendering"
         }
       },
       {
         "@type": "Offer",
         "itemOffered": {
           "@type": "Course",
-          "name": "Digital Filmmaking",
+          "name": "DAFM — Diploma in Animation & Film Making",
+          "description": "Digital animation and filmmaking with storyboard, editing, VFX, and post-production"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Course",
+          "name": "APDMD — Advanced Program in Digital Media & Design",
+          "description": "Comprehensive digital media and design program"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Course",
+          "name": "Design Viz Pro",
+          "description": "Visual communication, 3D visualization, and creative design thinking"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Course",
+          "name": "DGDI — Program in Game Design & Integration",
+          "description": "Game art, game design, level design, and engine integration"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Course",
+          "name": "ADVFX — Advanced Program in Visual Effects",
+          "description": "Advanced VFX with compositing, rotoscopy, paint prep, and CG integration"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Course",
+          "name": "VFX Plus — Program in Visual Effects",
+          "description": "Focused VFX training covering compositing, motion graphics, and VFX fundamentals"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Course",
+          "name": "IPVAD — Integrated Program in Visual Art & Design",
+          "description": "24-month integrated program combining visual art, design, animation, and digital media"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Course",
+          "name": "CE Pro — Creative Entrepreneur Program",
+          "description": "Creative skills combined with business acumen for aspiring freelancers"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Course",
+          "name": "Maya Pro",
+          "description": "Intensive Autodesk Maya training for animation, modeling, and VFX"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Course",
+          "name": "DFM — Digital Film Making",
           "description": "Complete filmmaking from pre-production to post-production"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Course",
+          "name": "MAX Pro",
+          "description": "Intensive 3ds Max program for 3D modeling, texturing, and visualization"
         }
       }
     ]

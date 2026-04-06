@@ -1,14 +1,15 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
+import Image from "next/image";
 import { gsap } from "@/lib/gsap";
 import { shouldAnimate } from "@/lib/animationUtils";
 
 const showcaseVideos = [
-  { title: "ANANDI", category: "Animation", video: "/student-work/ANANDI-compressed.mp4", duration: "2:34" },
-  { title: "FAST LIFE", category: "Short Film", video: "/student-work/FAST%20LIFE-compressed.mp4", duration: "3:12" },
-  { title: "KARMA", category: "Visual Effects", video: "/student-work/KARMA-compressed.mp4", duration: "4:05" },
-  { title: "THE PLASTIC PLAGUE", category: "Documentary", video: "/student-work/THE%20PLASTIC%20PLAGUE-compressed.mp4", duration: "5:20" },
+  { title: "ANANDI", category: "Animation", video: "/student-work/ANANDI-compressed.mp4", duration: "2:34", fallbackImage: "/portfolio/featured/nancy-verma-page1.jpg" },
+  { title: "FAST LIFE", category: "Short Film", video: "/student-work/FAST%20LIFE-compressed.mp4", duration: "3:12", fallbackImage: "/portfolio/environment-modeling/sayan-chowdhury-page1.jpg" },
+  { title: "KARMA", category: "Visual Effects", video: "/student-work/KARMA-compressed.mp4", duration: "4:05", fallbackImage: "/portfolio/matte-painting/akshat-asolkar.jpg" },
+  { title: "THE PLASTIC PLAGUE", category: "Documentary", video: "/student-work/THE%20PLASTIC%20PLAGUE-compressed.mp4", duration: "5:20", fallbackImage: "/portfolio/digital-painting/deshna-shah.jpg" },
 ];
 
 const INTERVAL_MS = 8000;
@@ -109,25 +110,43 @@ export default function StudentShowcase() {
       {/* Fullscreen video area */}
       <div className="relative" style={{ height: "75svh" }}>
         {/* Video layers */}
-        {showcaseVideos.map((item, i) => (
-          <div
-            key={i}
-            className="absolute inset-0 transition-opacity duration-1000"
-            style={{ opacity: i === active ? 1 : 0 }}
-          >
-            {(inView || i === active) && (
-              <video
-                ref={el => { videoRefs.current[i] = el; }}
-                src={item.video}
-                className="showcase-video"
-                muted
-                loop
-                playsInline
-                preload={i === 0 ? "metadata" : "none"}
-              />
-            )}
-          </div>
-        ))}
+        {showcaseVideos.map((item, i) => {
+          // Only load video for active and adjacent items
+          const shouldLoad = i === active || i === (active + 1) % showcaseVideos.length || i === (active - 1 + showcaseVideos.length) % showcaseVideos.length;
+          
+          return (
+            <div
+              key={i}
+              className="absolute inset-0 transition-opacity duration-1000"
+              style={{ opacity: i === active ? 1 : 0 }}
+            >
+              {/* Fallback portfolio image (shown behind video or if video fails) */}
+              <div className="absolute inset-0">
+                <Image
+                  src={item.fallbackImage}
+                  alt={`${item.title} - ${item.category} student work`}
+                  fill
+                  className="object-cover"
+                  sizes="100vw"
+                  priority={i === 0}
+                  loading={i === 0 ? "eager" : "lazy"}
+                />
+              </div>
+
+              {(inView || i === active) && (
+                <video
+                  ref={el => { videoRefs.current[i] = el; }}
+                  src={shouldLoad ? item.video : undefined}
+                  className="showcase-video"
+                  muted
+                  loop
+                  playsInline
+                  preload={i === 0 ? "metadata" : "none"}
+                />
+              )}
+            </div>
+          );
+        })}
 
         {/* Overlay gradient */}
         <div className="absolute inset-0 z-10" style={{

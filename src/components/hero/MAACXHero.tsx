@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
+import Image from "next/image";
 import { gsap } from "@/lib/gsap";
 import { VolumeX, Volume2 } from "lucide-react";
 import SplitTextReveal from "@/components/ui/SplitTextReveal";
@@ -21,20 +22,41 @@ export default function MAACXHero() {
   const progressStartRef = useRef<number>(0);
 
   // Skip intro on mobile, return visitors, or reduced-motion preference
-  const [introComplete, setIntroComplete] = useState(() => {
-    if (typeof window === "undefined") return false;
-    // Skip on mobile (saves ~8s LCP for 70%+ of users)
-    if (window.innerWidth < 768) return true;
-    // Skip for return visitors
-    if (sessionStorage.getItem("maac_intro_v3")) return true;
-    // Skip if user prefers reduced motion
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return true;
-    return false;
-  });
+  const [introComplete, setIntroComplete] = useState(false);
+  const [shouldSkipIntro, setShouldSkipIntro] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const [showSkip, setShowSkip] = useState(false);
   const [videoError, setVideoError] = useState(false);
   const hasAnimatedRef = useRef(false);
+
+  // Determine if intro should be skipped (client-side only)
+  useEffect(() => {
+    // Skip on mobile (saves ~8s LCP for 70%+ of users)
+    if (window.innerWidth < 768) { setShouldSkipIntro(true); setIntroComplete(true); return; }
+    // Skip for return visitors
+    if (sessionStorage.getItem("maac_intro_v3")) { setShouldSkipIntro(true); setIntroComplete(true); return; }
+    // Skip if user prefers reduced motion
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { setShouldSkipIntro(true); setIntroComplete(true); return; }
+  }, []);
+
+  // Connection-aware hero video loading
+  useEffect(() => {
+    if (!introComplete || !heroVideoRef.current) return;
+    
+    // Check for slow connection or data saver
+    const conn = (navigator as any).connection;
+    const slowConn = conn && (conn.saveData || ['slow-2g', '2g'].includes(conn.effectiveType));
+    
+    if (slowConn) {
+      // Don't autoplay video on slow connections
+      heroVideoRef.current.preload = "none";
+      return;
+    }
+    
+    heroVideoRef.current.preload = "auto";
+    heroVideoRef.current.load();
+    heroVideoRef.current.play().catch(() => {});
+  }, [introComplete]);
 
   // Progress bar animation
   useEffect(() => {
@@ -107,18 +129,13 @@ export default function MAACXHero() {
   // Reveal navbar immediately if intro was skipped
   useEffect(() => {
     if (introComplete) {
-      window.dispatchEvent(new Event("maac:intro_revealed"));
+      // Use RAF to ensure DOM is ready
+      requestAnimationFrame(() => {
+        window.dispatchEvent(new Event("maac:intro_revealed"));
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // only on mount
-
-  // Only load hero video AFTER intro is complete
-  useEffect(() => {
-    if (!introComplete || !heroVideoRef.current) return;
-    heroVideoRef.current.preload = "auto";
-    heroVideoRef.current.load();
-    heroVideoRef.current.play().catch(() => {});
-  }, [introComplete]);
 
   // Run hero entrance animations AFTER sweep completes
   useEffect(() => {
@@ -253,13 +270,16 @@ export default function MAACXHero() {
 
               {/* MAAC Logo/wordmark at top */}
               <div className="intro-ui-elements absolute top-8 left-1/2 -translate-x-1/2 flex flex-col items-center z-10">
-                <div
-                  className="w-6 h-[2px] mb-2"
-                  style={{ backgroundColor: "#E31837" }}
+                <div className="w-6 h-[2px] mb-2" style={{ backgroundColor: "#E31837" }} />
+                <Image
+                  src="/maac-logo.png"
+                  alt="MAAC"
+                  width={32}
+                  height={32}
+                  className="opacity-90"
+                  style={{ width: "auto", height: "auto" }}
+                  priority
                 />
-                <span className="text-white font-display font-bold text-sm tracking-[0.3em] uppercase">
-                  MAAC
-                </span>
               </div>
 
               {/* Mute toggle button (bottom-right) */}
