@@ -113,7 +113,7 @@ export default function InstituteIntro() {
 
               <div className="institute-description space-y-4 text-[#A8A29C] text-base md:text-lg leading-relaxed mb-8">
                 <p>
-                  Welcome to Maya Academy of Advanced Cinematics — MAAC. Our centre is equipped with an expert training team specializing in 3D Animation, VFX, Film Making, Gaming, Web Design, and more.
+                  Welcome to Maya Academy of Advanced Creativity — MAAC. Our centre is equipped with an expert training team specializing in 3D Animation, VFX, Film Making, Gaming, Web Design, and more.
                 </p>
                 <p>
                   We are proud to be one of the leading Animation and VFX Training Institutes in Rajasthan, with state-of-the-art infrastructure and industry-aligned curriculum.
@@ -218,7 +218,7 @@ export default function InstituteIntro() {
         <VideoModal
           isOpen={showModal}
           onClose={() => setShowModal(false)}
-          videoUrl="/intro.mp4"
+          youtubeId="_D7gd6bSE0A"
         />
       )}
     </div>
