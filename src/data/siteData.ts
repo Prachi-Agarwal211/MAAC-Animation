@@ -7,6 +7,7 @@ export const coursesData = {
       description: "Master high-quality animation with industry-standard techniques and real studio workflows",
       fullDescription: "Become a 3D Animator, Character Designer, Storyboard Artist, or Lighting Artist. Learn Autodesk Maya, 3ds Max, and industry-standard tools used in major studios.",
       icon: "animation",
+      image: "/courses_images/image-4.png",
       careers: ["3D Animator", "Character Designer", "Storyboard Artist", "Lighting Artist"],
     },
     {
@@ -16,6 +17,7 @@ export const coursesData = {
       description: "Create content for social media, YouTube, and OTT platforms with professional production skills",
       fullDescription: "Create engaging content for YouTube, Instagram, and digital platforms. Master video editing, content strategy, and audience engagement.",
       icon: "digital",
+      image: "/courses_images/image-2.png",
       careers: ["Content Creator", "Video Editor", "Social Media Manager", "YouTuber"],
     },
     {
@@ -25,6 +27,7 @@ export const coursesData = {
       description: "Design games, build assets, and master real-time rendering for mobile, PC, and console",
       fullDescription: "Design and develop games for multiple platforms. Learn game mechanics, level design, character creation, and game engine integration.",
       icon: "gaming",
+      image: "/courses_images/game.png",
       careers: ["Game Designer", "Level Designer", "Game Artist", "Unity Developer"],
     },
     {
@@ -34,6 +37,7 @@ export const coursesData = {
       description: "Create stunning VFX for film, television, and OTT using industry-standard compositing tools",
       fullDescription: "Create stunning visual effects for movies, TV shows, and OTT content. Master compositing, motion tracking, and CG integration.",
       icon: "vfx",
+      image: "/courses_images/image-1.png",
       careers: ["VFX Artist", "Compositor", "Roto Artist", "Matchmove Artist"],
     },
     {
@@ -43,6 +47,7 @@ export const coursesData = {
       description: "Produce dynamic motion graphics for TV, advertising, and digital media production",
       fullDescription: "Create dynamic motion graphics for TV, advertising, and digital media. Learn After Effects, Cinema 4D, and broadcast design principles.",
       icon: "motion",
+      image: "/courses_images/image-3.png",
       careers: ["Motion Graphics Artist", "Broadcast Designer", "Title Designer", "Animator"],
     },
     {
@@ -52,6 +57,7 @@ export const coursesData = {
       description: "Short-term specialized courses to upskill in animation, VFX, game design, and more",
       fullDescription: "Upgrade your skills with focused short-term programs. Perfect for working professionals looking to specialize or upskill.",
       icon: "skill",
+      image: "/courses_images/image-5.png",
       careers: ["Specialized Artist", "Freelancer", "Independent Creator"],
     },
   ],

@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "@/lib/gsap";
-import VideoModal from "@/components/VideoModal";
 
 function CountUpStat({ number, suffix, label }: { number: number; suffix: string; label: string }) {
   const [count, setCount] = useState(0);
@@ -44,7 +43,6 @@ function CountUpStat({ number, suffix, label }: { number: number; suffix: string
 
 export default function InstituteIntro() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -154,47 +152,14 @@ export default function InstituteIntro() {
             {/* Right: Video */}
             <div className="institute-video-container relative">
               <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl shadow-black/50">
-                {/* Background gradient */}
-                <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a1a] to-[#080808]" />
-
-                {/* Placeholder icon */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-7xl opacity-10">🎬</div>
-                </div>
-
-                {/* Subtle red glow */}
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    background: "radial-gradient(circle at 50% 60%, rgba(227,24,55,0.1) 0%, transparent 60%)",
-                  }}
+                <iframe
+                  className="absolute inset-0 w-full h-full"
+                  src="https://www.youtube.com/embed/_D7gd6bSE0A?autoplay=0&controls=1&rel=0&modestbranding=1&showinfo=0"
+                  title="MAAC Animation Showreel"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  style={{ border: 0 }}
                 />
-
-                {/* Overlay for click */}
-                <div
-                  className="absolute inset-0 flex items-center justify-center z-10 cursor-pointer group"
-                  onClick={() => setShowModal(true)}
-                  role="button"
-                  tabIndex={0}
-                  aria-label="Play showreel"
-                  onKeyDown={(e) => e.key === "Enter" && setShowModal(true)}
-                >
-                  <div className="relative">
-                    {/* Pulse rings */}
-                    <div className="absolute inset-0 rounded-full bg-[#E31837]/20 animate-ping" />
-                    <div
-                      className="w-18 h-18 md:w-20 md:h-20 rounded-full bg-[#E31837] flex items-center justify-center shadow-xl shadow-[#E31837]/40 group-hover:scale-110 transition-transform duration-300 relative"
-                      style={{ width: "72px", height: "72px" }}
-                    >
-                      <svg className="w-7 h-7 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M8 5v14l11-7z" />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Scrim */}
-                <div className="absolute inset-0 bg-black/20" />
               </div>
 
               {/* Floating stat card */}
@@ -213,14 +178,6 @@ export default function InstituteIntro() {
           </div>
         </div>
       </div>
-
-      {showModal && (
-        <VideoModal
-          isOpen={showModal}
-          onClose={() => setShowModal(false)}
-          youtubeId="_D7gd6bSE0A"
-        />
-      )}
     </div>
   );
 }
