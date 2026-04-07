@@ -66,7 +66,7 @@ export default function Footer() {
             <div className="flex items-center gap-3 mb-6">
               <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-[#2A080C] to-[#1C1410] border border-[#E31837]/30 flex items-center justify-center overflow-hidden">
                 <Image
-                  src="/maac-logo.png"
+                  src="/image.png"
                   alt="MAAC Jaipur Logo"
                   width={40}
                   height={40}
@@ -175,7 +175,7 @@ export default function Footer() {
           <div className="flex items-center gap-3 mb-6">
             <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-[#2A080C] to-[#1C1410] border border-[#E31837]/30 flex items-center justify-center overflow-hidden">
               <Image
-                src="/maac-logo.png"
+                src="/image.png"
                 alt="MAAC Jaipur Logo"
                 width={40}
                 height={40}

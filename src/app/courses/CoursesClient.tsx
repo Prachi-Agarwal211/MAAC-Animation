@@ -65,6 +65,7 @@ function FlipCard({ course, index }: FlipCardProps) {
       onBlur={() => setIsFlipped(false)}
       onMouseEnter={() => setIsFlipped(true)}
       onMouseLeave={() => setIsFlipped(false)}
+      onClick={() => setIsFlipped(prev => !prev)}
       role="button"
       aria-pressed={isFlipped}
       aria-label={`${course.title} - ${course.description}`}

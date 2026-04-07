@@ -64,7 +64,10 @@ export default function Navbar() {
       document.body.style.top = '';
       document.body.style.overflow = "";
       document.documentElement.style.overflow = "";
-      window.scrollTo(0, parseInt(scrollY || '0') * -1);
+      // Use requestAnimationFrame to prevent iOS scroll restore bug
+      requestAnimationFrame(() => {
+        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+      });
     }
     return () => {
       document.body.style.position = '';
@@ -126,7 +129,7 @@ export default function Navbar() {
               <Link href="/" className="flex items-center gap-3 group">
                 <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-lg bg-[#0C0C0C]/80 backdrop-blur-sm border border-white/10 flex items-center justify-center shadow-lg overflow-hidden">
                   <Image
-                    src="/maac-logo.png"
+                    src="/image.png"
                     alt="MAAC Jaipur Logo"
                     width={48}
                     height={48}

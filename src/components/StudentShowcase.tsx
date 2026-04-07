@@ -62,9 +62,12 @@ export default function StudentShowcase() {
 
   // Play/pause video based on active + inView
   useEffect(() => {
+    // Only autoplay on desktop to save mobile data
+    const isMobile = window.innerWidth < 1024;
+    
     videoRefs.current.forEach((v, i) => {
       if (!v) return;
-      if (i === active && inView) {
+      if (i === active && inView && !isMobile) {
         v.currentTime = 0;
         v.play().catch(() => {});
       } else {

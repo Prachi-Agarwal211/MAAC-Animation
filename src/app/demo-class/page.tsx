@@ -4,6 +4,8 @@ import Script from "next/script";
 import MagneticButton from "@/components/ui/MagneticButton";
 import { contactInfo } from "@/data/siteData";
 import { coursesData } from "@/data/courses";
+import { submitContactForm } from "@/app/actions";
+import { useState } from "react";
 
 export const metadata: Metadata = {
   title: "Book Free Demo Class - MAAC Animation Jaipur",
@@ -104,6 +106,34 @@ const benefits = [
 ];
 
 export default function DemoClassPage() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    formData.set("source", "demo_class_page");
+
+    try {
+      const result = await submitContactForm(formData);
+
+      if (result.success) {
+        setSubmitSuccess(true);
+        form.reset();
+        setTimeout(() => setSubmitSuccess(false), 5000);
+      } else {
+        console.error("Form submission failed:", result.message);
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <>
       {/* JSON-LD Structured Data */}
@@ -231,7 +261,7 @@ export default function DemoClassPage() {
                 Fill in your details and we&apos;ll confirm your demo class schedule.
               </p>
 
-              <form className="space-y-6" action="#" method="POST">
+              <form className="space-y-6" onSubmit={handleSubmit} method="POST">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-[#A8A29C] mb-2">
                     Full Name *
@@ -241,6 +271,7 @@ export default function DemoClassPage() {
                     id="name"
                     name="name"
                     required
+                    style={{ fontSize: '16px' }}
                     className="w-full bg-[#161616] border border-white/10 rounded-lg px-4 py-3 text-[#F0EBE1] placeholder-[#6B6560] focus:outline-none focus:border-[#E31837]/50 transition-colors"
                     placeholder="Enter your full name"
                   />
@@ -255,6 +286,7 @@ export default function DemoClassPage() {
                     id="phone"
                     name="phone"
                     required
+                    style={{ fontSize: '16px' }}
                     className="w-full bg-[#161616] border border-white/10 rounded-lg px-4 py-3 text-[#F0EBE1] placeholder-[#6B6560] focus:outline-none focus:border-[#E31837]/50 transition-colors"
                     placeholder="+91 XXXXX XXXXX"
                   />
@@ -269,6 +301,7 @@ export default function DemoClassPage() {
                     id="email"
                     name="email"
                     required
+                    style={{ fontSize: '16px' }}
                     className="w-full bg-[#161616] border border-white/10 rounded-lg px-4 py-3 text-[#F0EBE1] placeholder-[#6B6560] focus:outline-none focus:border-[#E31837]/50 transition-colors"
                     placeholder="your@email.com"
                   />
@@ -281,6 +314,7 @@ export default function DemoClassPage() {
                   <select
                     id="course"
                     name="course"
+                    style={{ fontSize: '16px' }}
                     className="w-full bg-[#161616] border border-white/10 rounded-lg px-4 py-3 text-[#F0EBE1] focus:outline-none focus:border-[#E31837]/50 transition-colors appearance-none"
                   >
                     <option value="">Select a course</option>
@@ -300,6 +334,7 @@ export default function DemoClassPage() {
                     type="date"
                     id="date"
                     name="date"
+                    style={{ fontSize: '16px' }}
                     className="w-full bg-[#161616] border border-white/10 rounded-lg px-4 py-3 text-[#F0EBE1] focus:outline-none focus:border-[#E31837]/50 transition-colors"
                   />
                 </div>
@@ -307,11 +342,28 @@ export default function DemoClassPage() {
                 <MagneticButton>
                   <button
                     type="submit"
-                    className="w-full bg-gradient-to-r from-[#E31837] to-[#C4132D] text-white hover:opacity-90 border border-[#E31837]/50 px-8 py-4 rounded-lg font-semibold shadow-[0_0_20px_rgba(227,24,55,0.3)] transition-opacity cursor-pointer"
+                    disabled={isSubmitting}
+                    className="w-full bg-gradient-to-r from-[#E31837] to-[#C4132D] text-white hover:opacity-90 border border-[#E31837]/50 px-8 py-4 rounded-lg font-semibold shadow-[0_0_20px_rgba(227,24,55,0.3)] transition-opacity cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                   >
-                    Book My Free Demo Class
+                    {isSubmitting ? (
+                      <>
+                        <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                        </svg>
+                        Booking...
+                      </>
+                    ) : (
+                      'Book My Free Demo Class'
+                    )}
                   </button>
                 </MagneticButton>
+
+                {submitSuccess && (
+                  <div className="p-3 rounded-xl bg-green-500/10 border border-green-500/20 text-green-400 text-sm text-center">
+                    Thank you! We&apos;ll confirm your demo class shortly.
+                  </div>
+                )}
 
                 <p className="text-[#6B6560] text-xs text-center">
                   By submitting, you agree to receive communications from MAAC Jaipur. We respect your privacy.

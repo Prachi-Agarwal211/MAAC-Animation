@@ -63,9 +63,10 @@ export default function PopularCourses() {
 
       {/* Track & Controls */}
       <div className="relative z-10 max-w-[1920px] mx-auto">
-        <div 
+        <div
           ref={trackRef}
           className="flex gap-6 overflow-x-auto snap-x snap-mandatory px-4 sm:px-6 md:px-12 lg:px-24 pb-8 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+          style={{ touchAction: 'pan-x' }}
         >
           {siteCoursesData.popularCourses.map((course, index) => {
             const imageUrl = coursePortfolioImages[course.code];

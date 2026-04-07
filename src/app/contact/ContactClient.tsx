@@ -191,6 +191,7 @@ export default function ContactClient() {
                 onChange={(e) =>
                   setFormData({ ...formData, name: e.target.value })
                 }
+                style={{ fontSize: '16px' }}
                 className="w-full px-5 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/30 transition-all"
               />
 
@@ -202,6 +203,7 @@ export default function ContactClient() {
                 onChange={(e) =>
                   setFormData({ ...formData, phone: e.target.value })
                 }
+                style={{ fontSize: '16px' }}
                 className="w-full px-5 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/30 transition-all"
               />
 
@@ -213,6 +215,7 @@ export default function ContactClient() {
                 onChange={(e) =>
                   setFormData({ ...formData, email: e.target.value })
                 }
+                style={{ fontSize: '16px' }}
                 className="w-full px-5 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/30 transition-all"
               />
 
@@ -221,6 +224,7 @@ export default function ContactClient() {
                 onChange={(e) =>
                   setFormData({ ...formData, course: e.target.value })
                 }
+                style={{ fontSize: '16px' }}
                 className="w-full px-5 py-4 rounded-xl bg-white/5 border border-white/10 text-gray-400 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/30 transition-all"
               >
                 <option value="">Select Course Interested In *</option>
@@ -239,6 +243,7 @@ export default function ContactClient() {
                 onChange={(e) =>
                   setFormData({ ...formData, message: e.target.value })
                 }
+                style={{ fontSize: '16px' }}
                 className="w-full px-5 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/30 transition-all resize-none"
               />
 

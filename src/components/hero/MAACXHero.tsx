@@ -31,8 +31,8 @@ export default function MAACXHero() {
 
   // Determine if intro should be skipped (client-side only)
   useEffect(() => {
-    // Skip on mobile (saves ~8s LCP for 70%+ of users)
-    if (window.innerWidth < 768) { setShouldSkipIntro(true); setIntroComplete(true); return; }
+    // Skip on mobile and tablets (saves ~8s LCP for majority of users)
+    if (window.innerWidth < 1024) { setShouldSkipIntro(true); setIntroComplete(true); return; }
     // Skip for return visitors
     if (sessionStorage.getItem("maac_intro_v3")) { setShouldSkipIntro(true); setIntroComplete(true); return; }
     // Skip if user prefers reduced motion
@@ -272,7 +272,7 @@ export default function MAACXHero() {
               <div className="intro-ui-elements absolute top-8 left-1/2 -translate-x-1/2 flex flex-col items-center z-10">
                 <div className="w-6 h-[2px] mb-2" style={{ backgroundColor: "#E31837" }} />
                 <Image
-                  src="/maac-logo.png"
+                  src="/image.png"
                   alt="MAAC"
                   width={32}
                   height={32}

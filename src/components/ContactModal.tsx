@@ -127,11 +127,17 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
   if (!isOpen) return null;
 
+  // Check if mobile/tablet to remove expensive backdrop-filter
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
+
   return (
     <div
       ref={overlayRef}
       className="fixed inset-0 z-[8000] flex items-center justify-center p-4"
-      style={{ background: "rgba(8,8,8,0.88)", backdropFilter: "blur(12px)" }}
+      style={{ 
+        background: "rgba(8,8,8,0.88)", 
+        backdropFilter: isMobile ? 'none' : 'blur(12px)'
+      }}
       onClick={(e) => {
         if (e.target === e.currentTarget) handleClose();
       }}
