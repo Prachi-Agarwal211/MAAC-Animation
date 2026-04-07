@@ -51,7 +51,7 @@ function Testimonials() {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
         <div className="tm-heading text-center mb-16">
           <p className="text-[#E31837] text-xs font-semibold tracking-[0.12em] uppercase mb-4">Testimonials</p>
-          <h2 data-splitting className="font-display font-bold text-[clamp(2rem,4vw,3.5rem)] text-[#F0EBE1] leading-[1.08] tracking-tight mb-4 pb-1">
+          <h2 className="font-display font-bold text-[clamp(2rem,4vw,3.5rem)] text-[#F0EBE1] leading-[1.08] tracking-tight mb-4 pb-1">
             What Our <span className="gradient-text-warm">Students Say</span>
           </h2>
         </div>
