@@ -1,8 +1,26 @@
 import { MetadataRoute } from "next";
+import { blogPosts } from "@/data/blog";
+import { coursesData } from "@/data/courses";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://www.maacanimationjaipur.com";
   const now = new Date();
+
+  // Auto-generate course URLs
+  const courseUrls = coursesData.map(course => ({
+    url: `${base}/courses/${course.slug}`,
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority: 0.85,
+  }));
+
+  // Auto-generate blog post URLs
+  const blogUrls = blogPosts.map(post => ({
+    url: `${base}/blog/${post.slug}`,
+    lastModified: new Date(post.date),
+    changeFrequency: "yearly" as const,
+    priority: 0.6,
+  }));
 
   return [
     // Core Pages (Next.js routes, not WordPress URLs)
@@ -79,123 +97,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
 
-    // Course Pages (19 courses)
-    {
-      url: `${base}/courses/3d-animation`,
-      lastModified: new Date("2025-07-04"),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${base}/courses/ad3d`,
-      lastModified: new Date("2025-07-05"),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${base}/courses/d3d`,
-      lastModified: new Date("2025-07-05"),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${base}/courses/dafm`,
-      lastModified: new Date("2025-07-05"),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${base}/courses/graphic-design`,
-      lastModified: new Date("2025-07-05"),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${base}/courses/apdmd`,
-      lastModified: new Date("2025-07-05"),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${base}/courses/architectural-design`,
-      lastModified: new Date("2025-07-05"),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${base}/courses/design-viz-pro`,
-      lastModified: new Date("2025-07-05"),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${base}/courses/gaming-design`,
-      lastModified: new Date("2025-07-05"),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${base}/courses/dgdi`,
-      lastModified: new Date("2025-07-05"),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${base}/courses/vfx`,
-      lastModified: new Date("2025-07-05"),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${base}/courses/advfx`,
-      lastModified: new Date("2025-07-05"),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${base}/courses/vfx-plus`,
-      lastModified: new Date("2025-07-05"),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${base}/courses/media`,
-      lastModified: new Date("2025-07-05"),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${base}/courses/ipvad`,
-      lastModified: new Date("2025-07-05"),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${base}/courses/skill-enhancement`,
-      lastModified: new Date("2025-07-05"),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${base}/courses/ce-pro`,
-      lastModified: new Date("2025-07-05"),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${base}/courses/dfm`,
-      lastModified: new Date("2025-07-05"),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${base}/courses/max-pro`,
-      lastModified: new Date("2025-07-05"),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-
-    // Blog Pages
+    // Blog Pages (manual entries)
     {
       url: `${base}/blog`,
       lastModified: new Date("2025-06-24"),
@@ -232,5 +134,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.6,
     },
+    
+    // Auto-generated course pages (from coursesData)
+    ...courseUrls,
+    // Auto-generated blog posts (from blogPosts)
+    ...blogUrls,
   ];
 }

@@ -79,9 +79,10 @@ export default function Home() {
                 "name": "MAAC Jaipur — Animation Institute",
                 "image": "https://www.maacanimationjaipur.com/wp-content/uploads/2021/09/v-toy-sl-3.png",
                 "telephone": "+917300001589",
+                "additionalTelephone": ["+919829294037", "+919929059559"],
                 "address": {
                   "@type": "PostalAddress",
-                  "streetAddress": "711-712 Ambition Tower 7th Floor Subhash Marg",
+                  "streetAddress": "711-712 Ambition Tower 7th Floor, D-46B, Malan Ka Chauraha, Agrasain Circle, Subhash Marg, C Scheme",
                   "addressLocality": "Jaipur",
                   "addressRegion": "Rajasthan",
                   "postalCode": "302001",

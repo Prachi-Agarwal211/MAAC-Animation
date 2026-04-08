@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "@/lib/gsap";
+import { shouldAnimate } from "@/lib/animationUtils";
 import Footer from "@/components/Footer";
 
 export default function ContactClient() {
@@ -17,6 +18,8 @@ export default function ContactClient() {
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
   useEffect(() => {
+    if (!shouldAnimate()) return;
+
     const ctx = gsap.context(() => {
       gsap.fromTo(
         ".contact-hero",
@@ -50,7 +53,10 @@ export default function ContactClient() {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          source: "contact_page"
+        }),
       });
 
       const data = await response.json();
@@ -155,7 +161,7 @@ export default function ContactClient() {
               {/* Google Maps embed */}
               <div className="rounded-2xl overflow-hidden h-64">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3557.8442087935854!2d75.78418831488203!3d26.91389298309897!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396db3bce9e2b4a3%3A0x5d2c1b9f8e5a4e3c!2sMAAC%20Animation%20Jaipur!5e0!3m2!1sen!2sin!4v1720000000000!5m2!1sen!2sin"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3557.8442087935854!2d75.78418831488203!3d26.91389298309897!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396c4b8d7e0b5e07%3A0x5d2c1b9f8e5a4e3c!2sMAAC%20Animation%2C%20711-712%20Ambition%20Tower%2C%20Subhash%20Marg%2C%20Jaipur!5e0!3m2!1sen!2sin!4v1712000000000!5m2!1sen!2sin"
                   width="100%"
                   height="256"
                   style={{ border: 0 }}
@@ -185,6 +191,7 @@ export default function ContactClient() {
                 onChange={(e) =>
                   setFormData({ ...formData, name: e.target.value })
                 }
+                style={{ fontSize: '16px' }}
                 className="w-full px-5 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/30 transition-all"
               />
 
@@ -196,6 +203,7 @@ export default function ContactClient() {
                 onChange={(e) =>
                   setFormData({ ...formData, phone: e.target.value })
                 }
+                style={{ fontSize: '16px' }}
                 className="w-full px-5 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/30 transition-all"
               />
 
@@ -207,6 +215,7 @@ export default function ContactClient() {
                 onChange={(e) =>
                   setFormData({ ...formData, email: e.target.value })
                 }
+                style={{ fontSize: '16px' }}
                 className="w-full px-5 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/30 transition-all"
               />
 
@@ -215,6 +224,7 @@ export default function ContactClient() {
                 onChange={(e) =>
                   setFormData({ ...formData, course: e.target.value })
                 }
+                style={{ fontSize: '16px' }}
                 className="w-full px-5 py-4 rounded-xl bg-white/5 border border-white/10 text-gray-400 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/30 transition-all"
               >
                 <option value="">Select Course Interested In *</option>
@@ -233,6 +243,7 @@ export default function ContactClient() {
                 onChange={(e) =>
                   setFormData({ ...formData, message: e.target.value })
                 }
+                style={{ fontSize: '16px' }}
                 className="w-full px-5 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/30 transition-all resize-none"
               />
 

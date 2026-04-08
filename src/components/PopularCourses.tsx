@@ -1,7 +1,28 @@
 "use client";
 
 import { useRef } from "react";
-import { coursesData } from "@/data/siteData";
+import Image from "next/image";
+import { siteCoursesData } from "@/data/siteData";
+
+// Map courses to relevant portfolio images
+const coursePortfolioImages: Record<string, string> = {
+  "ADVFX": "/portfolio/matte-painting/akshat-asolkar.jpg",
+  "AD3D": "/portfolio/character-modeling/aarush-kumar-page1.jpg",
+  "DGDI": "/portfolio/3d-game-asset/archita-roy-page1.jpg",
+  "APDMD": "/portfolio/digital-painting/deshna-shah.jpg",
+  "D3D": "/portfolio/character-modeling/abhay-suryavanshi.jpg",
+  "VFXP": "/portfolio/matte-painting/biswabrata-dutta-page1.jpg",
+};
+
+// Alt text for each course image
+const courseImageAlts: Record<string, string> = {
+  "ADVFX": "Akshat Asolkar - VFX matte painting project",
+  "AD3D": "Aarush Kumar - 3D character modeling project",
+  "DGDI": "Archita Roy - 3D game asset project",
+  "APDMD": "Deshna Shah - Digital media design project",
+  "D3D": "Abhay Suryavanshi - 3D animation project",
+  "VFXP": "Biswabrata Dutta - Visual effects project",
+};
 
 const courseGradients = [
   "linear-gradient(135deg, #2A1F1A 0%, #0C0C0C 100%)",
@@ -42,19 +63,39 @@ export default function PopularCourses() {
 
       {/* Track & Controls */}
       <div className="relative z-10 max-w-[1920px] mx-auto">
-        <div 
+        <div
           ref={trackRef}
           className="flex gap-6 overflow-x-auto snap-x snap-mandatory px-4 sm:px-6 md:px-12 lg:px-24 pb-8 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+          style={{ touchAction: 'pan-x' }}
         >
-          {coursesData.popularCourses.map((course, index) => (
+          {siteCoursesData.popularCourses.map((course, index) => {
+            const imageUrl = coursePortfolioImages[course.code];
+            const imageAlt = courseImageAlts[course.code] || `${course.name} project`;
+
+            return (
             <div
               key={course.name}
               className="flex-shrink-0 w-[85vw] sm:w-[400px] snap-center md:snap-start"
             >
               <div className="glass-card rounded-2xl overflow-hidden h-[480px] flex flex-col border border-white/5 bg-gradient-to-b from-white/[0.04] to-transparent hover:border-white/10 transition-colors">
-                {/* Top image section */}
-                <div className="h-[200px] relative flex items-center justify-center border-b border-white/5" style={{ background: courseGradients[index % courseGradients.length] }}>
-                  <div className="text-[#C4A882]/20 font-display font-extrabold text-7xl select-none">{course.code || course.name}</div>
+                {/* Top image section with portfolio image */}
+                <div className="h-[200px] relative overflow-hidden border-b border-white/5" style={{ background: courseGradients[index % courseGradients.length] }}>
+                  {imageUrl ? (
+                    <Image
+                      src={imageUrl}
+                      alt={imageAlt}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 640px) 85vw, 400px"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="text-[#C4A882]/20 font-display font-extrabold text-7xl select-none">{course.code || course.name}</div>
+                    </div>
+                  )}
+                  {/* Subtle gradient overlay for text readability */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                 </div>
 
                 {/* Bottom content */}
@@ -72,7 +113,8 @@ export default function PopularCourses() {
                 </div>
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Desktop Navigation Arrows */}

@@ -1,10 +1,10 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { gsap } from "@/lib/gsap";
+import { gsap, ScrollTrigger } from "@/lib/gsap";
 import Link from "next/link";
 import Footer from "@/components/Footer";
-import { coursesData } from "@/data/siteData";
+import { siteCoursesData } from "@/data/siteData";
 import { getCourseSchema, breadcrumbSchema } from "@/lib/structured-data";
 
 interface FlipCardProps {
@@ -65,6 +65,7 @@ function FlipCard({ course, index }: FlipCardProps) {
       onBlur={() => setIsFlipped(false)}
       onMouseEnter={() => setIsFlipped(true)}
       onMouseLeave={() => setIsFlipped(false)}
+      onClick={() => setIsFlipped(prev => !prev)}
       role="button"
       aria-pressed={isFlipped}
       aria-label={`${course.title} - ${course.description}`}
@@ -168,6 +169,12 @@ export default function CoursesClient() {
     };
   }, []);
 
+  // Refresh ScrollTrigger after all flip cards mount
+  useEffect(() => {
+    const timer = setTimeout(() => ScrollTrigger.refresh(), 500);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <main ref={pageRef} className="overflow-hidden bg-[#080808]">
       {/* Structured Data - Course Schema for each program */}
@@ -177,7 +184,7 @@ export default function CoursesClient() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "ItemList",
-            "itemListElement": coursesData.popularCourses.map((course, i) => ({
+            "itemListElement": siteCoursesData.popularCourses.map((course, i) => ({
               "@type": "ListItem",
               "position": i + 1,
               "item": getCourseSchema(course.fullName, course.description, course.duration)
@@ -224,7 +231,7 @@ export default function CoursesClient() {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {coursesData.categories.map((course, index) => (
+            {siteCoursesData.categories.map((course, index) => (
               <FlipCard key={course.id} course={course} index={index} />
             ))}
           </div>
@@ -232,22 +239,6 @@ export default function CoursesClient() {
       </section>
 
       <Footer />
-
-      {/* Custom CSS for flip animations */}
-      <style jsx global>{`
-        .perspective-1000 {
-          perspective: 1000px;
-        }
-        .transform-style-preserve-3d {
-          transform-style: preserve-3d;
-        }
-        .backface-hidden {
-          backface-visibility: hidden;
-        }
-        .rotate-x-180 {
-          transform: rotateX(180deg);
-        }
-      `}</style>
     </main>
   );
 }

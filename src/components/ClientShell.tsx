@@ -11,10 +11,12 @@ export default function ClientShell({ children }: { children: React.ReactNode })
 
     // Show modal AFTER intro sweep completes (not before!)
     const handler = () => {
+      // Longer delay on mobile (8s) vs desktop (2s) for better UX
+      const delay = window.innerWidth < 768 ? 8000 : 2000;
       setTimeout(() => {
         setShowModal(true);
         sessionStorage.setItem("maac_modal_shown", "1");
-      }, 2000); // 2 seconds after hero revealed
+      }, delay);
     };
     window.addEventListener("maac:intro_revealed", handler, { once: true });
     return () => window.removeEventListener("maac:intro_revealed", handler);

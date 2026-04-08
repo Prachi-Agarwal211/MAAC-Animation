@@ -4,6 +4,7 @@ import Script from "next/script";
 import { getCourseBySlug, getAllCourseSlugs, type Course } from "@/data/courses";
 import CourseHero from "@/components/courses/CourseHero";
 import CourseOverview from "@/components/courses/CourseOverview";
+import CourseFeeAdmission from "@/components/courses/CourseFeeAdmission";
 import CourseCurriculum from "@/components/courses/CourseCurriculum";
 import CourseTools from "@/components/courses/CourseTools";
 import CourseCareer from "@/components/courses/CourseCareer";
@@ -167,6 +168,7 @@ export default async function CoursePage({
       {/* Course Sections */}
       <CourseHero course={mappedCourse} />
       <CourseOverview course={mappedCourse} />
+      <CourseFeeAdmission course={mappedCourse} />
       <CourseCurriculum course={mappedCourse} />
       <CourseTools course={mappedCourse} />
       <CourseCareer course={mappedCourse} />

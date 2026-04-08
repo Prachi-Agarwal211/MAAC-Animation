@@ -5,6 +5,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
+  // CRITICAL: Prevent address-bar resize jump on mobile
+  ScrollTrigger.config({ ignoreMobileResize: true });
   gsap.ticker.lagSmoothing(0);
 }
 

@@ -1,6 +1,28 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
+
+// Portfolio image mapping for each feature card
+const cardImages: Record<number, string> = {
+  0: "/portfolio/featured/nancy-verma-page1.jpg",     // Transformative Educational Events
+  1: "/portfolio/character-modeling/aarush-kumar-page1.jpg", // Industry-Ready Portfolio
+  2: "/portfolio/matte-painting/akshat-asolkar.jpg",  // Exclusive Industry Exposure
+  3: "/portfolio/digital-painting/deshna-shah.jpg",   // Portfolio That Speaks Volumes
+  4: "/portfolio/environment-modeling/raghav-gupta-page1.jpg", // Industry-Grade Facilities
+  5: "/portfolio/3d-game-asset/archita-roy-page1.jpg", // Courses Built For Future
+  6: "/portfolio/architectural-design/sharanjit-kaur-page1.jpg", // Creative Careers That Click
+};
+
+const cardImageAlts: Record<number, string> = {
+  0: "Nancy Verma - Featured animation project",
+  1: "Aarush Kumar - Character modeling portfolio",
+  2: "Akshat Asolkar - Matte painting for VFX",
+  3: "Deshna Shah - Digital painting project",
+  4: "Raghav Gupta - Environment modeling work",
+  5: "Archita Roy - 3D game asset creation",
+  6: "Sharanjit Kaur - Architectural design project",
+};
 
 const featureCards = [
   {
@@ -134,12 +156,25 @@ export default function VerticalCardGallery() {
                 >
                   <div className="overflow-hidden">
                     <div className="p-6 md:p-8 pt-0 border-t border-white/5 mt-2 flex flex-col sm:flex-row items-center gap-8 bg-black/20">
-                      {/* Left: SVG Graphic */}
-                      <div className="w-full sm:w-1/3 aspect-square max-w-[160px] rounded-xl flex items-center justify-center bg-[#080808] relative overflow-hidden border border-white/5">
-                         <div className="absolute inset-0 opacity-10" style={{ background: `radial-gradient(circle at center, ${card.color}, transparent 70%)` }} />
-                         <svg width="60" height="60" viewBox="0 0 80 80" className="relative z-10" style={{ color: card.color }}>
-                           {card.svgPaths}
-                         </svg>
+                      {/* Left: Portfolio Image or SVG Graphic fallback */}
+                      <div className="w-full sm:w-1/3 aspect-square max-w-[160px] rounded-xl overflow-hidden relative bg-[#080808] border border-white/5">
+                        {cardImages[index] ? (
+                          <Image
+                            src={cardImages[index]}
+                            alt={cardImageAlts[index] || card.title}
+                            fill
+                            className="object-cover"
+                            sizes="(max-width: 768px) 100vw, 160px"
+                            loading="lazy"
+                          />
+                        ) : (
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <div className="absolute inset-0 opacity-10" style={{ background: `radial-gradient(circle at center, ${card.color}, transparent 70%)` }} />
+                            <svg width="60" height="60" viewBox="0 0 80 80" className="relative z-10" style={{ color: card.color }}>
+                              {card.svgPaths}
+                            </svg>
+                          </div>
+                        )}
                       </div>
                       
                       {/* Right: Description */}

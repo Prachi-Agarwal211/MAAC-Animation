@@ -1,5 +1,12 @@
 /** @type {import('next').NextConfig} */
+
+import withBundleAnalyzer from '@next/bundle-analyzer';
+
 const nextConfig = {
+  // Optimize package imports for better tree-shaking
+  experimental: {
+    optimizePackageImports: ['lucide-react', 'gsap'],
+  },
   // Enforce no trailing slashes everywhere (canonical URL consistency)
   trailingSlash: false,
   // Image optimization configuration
@@ -169,17 +176,8 @@ const nextConfig = {
         permanent: true,
       },
 
-      // Portfolio → Gallery redirect
-      {
-        source: "/portfolio/:path*",
-        destination: "/gallery",
-        permanent: true,
-      },
-      {
-        source: "/portfolio_page-:path*",
-        destination: "/gallery",
-        permanent: true,
-      },
+      // Note: Portfolio image files (/portfolio/*/*.jpg) are served directly from public/portfolio/
+      // Old WordPress portfolio page redirects handled via middleware if needed
 
       // WooCommerce → Homepage (noindex pages)
       {
@@ -327,8 +325,20 @@ const nextConfig = {
           { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
         ],
       },
+      {
+        // Cache portfolio images for 1 year
+        source: "/portfolio/:path*",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+        ],
+      },
     ];
   },
 };
 
-export default nextConfig;
+// Wrap with bundle analyzer (only enabled when ANALYZE=true)
+const withAnalyzer = withBundleAnalyzer({
+  enabled: process.env.ANALYZE === 'true',
+});
+
+export default withAnalyzer(nextConfig);

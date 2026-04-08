@@ -2,12 +2,15 @@
 
 import { useEffect, useRef, memo } from "react";
 import { gsap } from "@/lib/gsap";
+import { shouldAnimate } from "@/lib/animationUtils";
 import { placementCompanies } from "@/data/siteData";
 
 function Placements() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (!shouldAnimate()) return;
+
     const ctx = gsap.context(() => {
       gsap.fromTo(".pl-heading", { opacity: 0, y: 50 }, {
         opacity: 1, y: 0, duration: 0.8, ease: "expo.out",

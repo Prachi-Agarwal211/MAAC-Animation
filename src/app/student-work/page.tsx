@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     title: "Student Work - maacanimationjaipur.com",
     description:
       "At MAAC Animation Institute, we're committed to empowering aspiring artists and filmmakers to unleash their creative potential, hone their skills,",
-    url: "https://www.maacanimationjaipur.com/student-work/",
+    url: "https://www.maacanimationjaipur.com/student-work",
     siteName: "maacanimationjaipur.com",
     locale: "en_US",
     images: [
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: "https://www.maacanimationjaipur.com/student-work/",
+    canonical: "https://www.maacanimationjaipur.com/student-work",
   },
 };
 
@@ -71,7 +71,7 @@ export default function StudentWorkPage() {
             name: "Student Work - MAAC Animation Jaipur",
             description:
               "At MAAC Animation Institute, we're committed to empowering aspiring artists and filmmakers to unleash their creative potential, hone their skills,",
-            url: "https://www.maacanimationjaipur.com/student-work/",
+            url: "https://www.maacanimationjaipur.com/student-work",
             image:
               "https://www.maacanimationjaipur.com/wp-content/uploads/2025/07/Screenshot-2025-07-04-163930-400x89.png",
             publisher: {

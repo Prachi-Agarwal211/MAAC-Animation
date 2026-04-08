@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Syne } from "next/font/google";
 import "./globals.css";
 import LenisProvider from "@/components/LenisProvider";
@@ -23,6 +23,13 @@ const syne = Syne({
   variable: "--font-syne",
   display: "swap",
 });
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: '#0C0C0C',
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.maacanimationjaipur.com"),
@@ -81,6 +88,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
+  manifest: '/manifest.json',
 };
 
 export default function RootLayout({

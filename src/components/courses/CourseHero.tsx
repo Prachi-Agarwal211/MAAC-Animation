@@ -1,6 +1,31 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
+
+// Map course slugs to relevant portfolio images
+const coursePortfolioImages: Record<string, string> = {
+  // Animation courses
+  "3d-animation": "/portfolio/character-modeling/aarush-kumar-page1.jpg",
+  "ad3d": "/portfolio/character-modeling/arfat-aziz-khan-page1.jpg",
+  "d3d": "/portfolio/character-modeling/abhay-suryavanshi.jpg",
+  // VFX courses
+  "advfx": "/portfolio/matte-painting/akshat-asolkar.jpg",
+  "vfx-plus": "/portfolio/matte-painting/biswabrata-dutta-page1.jpg",
+  // Gaming courses
+  "gaming-design": "/portfolio/3d-game-asset/archita-roy-page1.jpg",
+  "dgdi": "/portfolio/3d-game-asset/bijoy-mech-page1.jpg",
+  // Architectural Design
+  "architectural-design": "/portfolio/architectural-design/krutika-vikram-rane-page1.jpg",
+  "design-viz-pro": "/portfolio/architectural-design/mohhamad-kaif-karamat-shaikh-page1.jpg",
+  // Digital Media / Digital Painting
+  "apdmd": "/portfolio/digital-painting/deshna-shah.jpg",
+  "graphic-design": "/portfolio/digital-painting/rudrani-samajpati-page1.jpg",
+  // Filmmaking
+  "dafm": "/portfolio/environment-modeling/sayan-chowdhury-page1.jpg",
+  // Environment
+  "environment-modeling": "/portfolio/environment-modeling/anindita-naskar-page1.jpg",
+};
 
 interface Course {
   slug: string;
@@ -18,6 +43,8 @@ interface Course {
 }
 
 export default function CourseHero({ course }: { course: Course }) {
+  const portfolioImage = coursePortfolioImages[course.slug];
+
   return (
     <section className="relative min-h-[60vh] md:min-h-[70vh] flex items-center overflow-hidden">
       {/* Background gradient */}
@@ -25,6 +52,20 @@ export default function CourseHero({ course }: { course: Course }) {
         className="absolute inset-0"
         style={{ background: "linear-gradient(135deg, #1A0508 0%, #0C0C0C 50%, #0C0C0C 100%)" }}
       />
+
+      {/* Portfolio image background */}
+      {portfolioImage && (
+        <div className="absolute inset-0 opacity-[0.08]">
+          <Image
+            src={portfolioImage}
+            alt={`${course.title} student work example`}
+            fill
+            className="object-cover"
+            sizes="100vw"
+            priority
+          />
+        </div>
+      )}
 
       {/* Decorative elements */}
       <div className="absolute top-20 right-10 w-64 h-64 rounded-full opacity-10" style={{ background: "radial-gradient(circle, #E31837 0%, transparent 70%)" }} />

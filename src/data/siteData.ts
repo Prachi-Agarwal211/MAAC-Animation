@@ -1,4 +1,4 @@
-export const coursesData = {
+export const siteCoursesData = {
   categories: [
     {
       id: "animation",
@@ -65,68 +65,63 @@ export const coursesData = {
     {
       name: "ADVFX",
       fullName: "Advanced Program in Visual Effects",
-      duration: "24 Months",
+      duration: "12 Months",
       description: "Master compositing, rotoscopy, paint prep, matchmoving, and CG integration with real-world studio projects.",
-      code: "ADVFX-24",
+      code: "ADVFX",
     },
     {
       name: "AD3D Edge",
       fullName: "Advanced Program in 3D Animation",
-      duration: "24 Months",
+      duration: "12 Months",
       description: "Comprehensive training in modeling, texturing, rigging, lighting, and character animation using Autodesk Maya.",
-      code: "AD3D-24",
+      code: "AD3D",
     },
     {
       name: "DGDI",
       fullName: "Program in Game Design & Integration",
-      duration: "24 Months",
+      duration: "12 Months",
       description: "Learn game art, game design, level design, and game engine integration for next-gen gaming platforms.",
-      code: "DGDI-24",
+      code: "DGDI",
     },
     {
       name: "APDMD",
       fullName: "Advanced Program in Digital Media & Design",
       duration: "24 Months",
       description: "Master graphic design, web design, UI/UX, motion graphics, and digital marketing for the modern creative industry.",
-      code: "APDMD-24",
+      code: "APDMD",
     },
     {
       name: "D3D",
       fullName: "Program in 3D Animation",
-      duration: "18 Months",
+      duration: "12 Months",
       description: "Foundation to intermediate training in 3D animation, covering all aspects of the 3D production pipeline.",
-      code: "D3D-18",
+      code: "D3D",
     },
     {
       name: "VFX Plus",
       fullName: "Program in Visual Effects",
-      duration: "18 Months",
+      duration: "6 Months",
       description: "Comprehensive VFX training covering compositing, motion graphics, and visual effects for films and television.",
-      code: "VFXP-18",
+      code: "VFXP",
     },
   ],
 };
 
 export const testimonialsData = [
   {
-    name: "Priya Sharma",
-    role: "VFX Artist at DNEG",
-    text: "MAAC transformed my passion for visual effects into a thriving career. The faculty and infrastructure are world-class. The hands-on projects prepared me for real studio work.",
+    name: "Isha Jain",
+    role: "Student",
+    text: "Maac is really a great institute for learning and the faculty is also really helpful and sweet. 100% recommended",
   },
   {
-    name: "Rahul Verma",
-    role: "3D Animator at Prime Focus",
-    text: "The practical approach to learning at MAAC gave me the skills and confidence to work on international projects. The industry connections are invaluable.",
+    name: "Nandan Singhal",
+    role: "Student",
+    text: "Best Institute in jaipur for animation and graphic design and also the faculty is very nice.",
   },
   {
-    name: "Ananya Singh",
-    role: "Game Designer at Ubisoft",
-    text: "MAAC's gaming program is comprehensive and industry-relevant. The mentors are experienced professionals who genuinely care about student success.",
-  },
-  {
-    name: "Karan Mehta",
-    role: "Motion Graphics Artist",
-    text: "The best decision I made was joining MAAC. The curriculum is constantly updated with industry trends and the placement support is excellent.",
+    name: "Tanisha Chauhan",
+    role: "Student",
+    text: "Maac Animation offers top-notch facilities and resources for aspiring animators. The studio environment is conducive to creativity, and the equipment is state-of-the-art. Highly recommended for anyone serious about pursuing a career in animation.☺️☺️",
   },
 ];
 
@@ -172,10 +167,7 @@ export const tickerStats = [
 
 export const navLinks = [
   { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  {
-    label: "Courses",
-    href: "/#courses",
+  { label: "Courses", href: "/#courses",
     children: [
       { label: "Animation", href: "/#courses", icon: "animation" },
       { label: "Visual Effects", href: "/#courses", icon: "vfx" },
@@ -186,17 +178,20 @@ export const navLinks = [
     ],
   },
   { label: "Placements", href: "/placements" },
+  { label: "Student Work", href: "/portfolio" },
+  { label: "About Us", href: "/about" },
   { label: "Gallery", href: "/gallery" },
-  { label: "Contact", href: "/contact" },
+  { label: "Contact Us", href: "/contact" },
 ];
 
 export const contactInfo = {
   phone: "+91-7300001589",
   phoneSecondary: "+91-9829294037",
+  phoneTertiary: "+91-9929059559",
   whatsapp: "+91-7300001589",
   email: "maacanimationjaipur@gmail.com",
-  address: "711-712, Ambition Tower, 7th Floor, D-46B, Malan Ka Chauraha, Agrasain Circle, Subhash Marg, Jaipur, 302001, RJ, IN",
-  googleMapsUrl: "https://maps.google.com/?q=MAAC+Jaipur+Subhash+Marg",
+  address: "711-712, Ambition Tower, 7th Floor, D-46B, Malan Ka Chauraha, Agrasain Circle, Subhash Marg, C Scheme, Jaipur, Rajasthan 302001",
+  googleMapsUrl: "https://maps.google.com/?q=MAAC+Jaipur+Subhash+Marg+C+Scheme",
   hours: "Mon–Sat 9:00 AM – 7:00 PM",
   social: {
     instagram: "https://www.instagram.com/maacjaipurcscheme?igsh=OGluNWQybHI2cjBv&utm_source=qr",
