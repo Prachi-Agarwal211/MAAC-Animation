@@ -135,15 +135,15 @@ export default function Navbar() {
             </nav>
 
             {/* Actions */}
-            <div className="flex items-center gap-4 md:gap-8">
-              <a href={`tel:${contactInfo.phone}`} className="hidden sm:flex items-center gap-3 text-white/60 hover:text-white transition-colors group">
-                <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:border-[#E31837]/50 transition-colors">
-                  <Phone size={16} />
+            <div className="flex items-center gap-4 md:gap-6">
+              <a href={`tel:${contactInfo.phone}`} className="hidden sm:flex items-center gap-2.5 text-white/60 hover:text-white transition-colors group">
+                <div className="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center group-hover:border-[#E31837]/50 transition-colors">
+                  <Phone size={14} />
                 </div>
-                <span className="text-xs font-bold tracking-widest">{contactInfo.phone}</span>
+                <span className="text-[11px] font-bold tracking-widest">{contactInfo.phone}</span>
               </a>
               
-              <Link href="/contact" className="hidden md:flex btn btn-primary px-6 py-2 rounded-full text-[10px] font-bold tracking-[0.15em]">
+              <Link href="/contact" className="hidden md:flex btn btn-primary px-6 py-2.5 rounded-full text-[10px] font-bold tracking-[0.15em]">
                 Apply Now
               </Link>
 

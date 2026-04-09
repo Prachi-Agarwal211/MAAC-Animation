@@ -19,7 +19,6 @@ const BentoGallery = dynamic(() => import("@/components/BentoGallery"), { ssr: t
 const LiquidReveal = dynamic(() => import("@/components/ui/LiquidReveal"), { ssr: true });
 
 // Heavy Three.js / purely client-side components
-const BeyondReality = dynamic(() => import("@/components/BeyondReality"), { ssr: false });
 const StudentShowcase = dynamic(() => import("@/components/StudentShowcase"), { ssr: false });
 
 import { localBusinessSchema, videoSchema, faqSchema, breadcrumbSchema } from "@/lib/structured-data";
@@ -56,12 +55,6 @@ export default function Home() {
           <VerticalCardGallery />
         </ErrorBoundary>
       </div>
-
-      <LiquidReveal>
-        <ErrorBoundary>
-          <BeyondReality />
-        </ErrorBoundary>
-      </LiquidReveal>
 
       <div id="intro" className="relative z-20">
         <InstituteIntro />

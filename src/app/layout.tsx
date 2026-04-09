@@ -112,7 +112,7 @@ export default function RootLayout({
       <head>
         {/* Preload hero videos for instant loading */}
         <link rel="preload" as="video" href="/hero-video-compressed.mp4" type="video/mp4" />
-        <link rel="preload" as="video" href="/hero-video.webm" type="video/webm" />
+        <link rel="preload" as="video" href="/intro.mp4" type="video/mp4" />
         <link rel="preload" as="image" href="/hero-poster.jpg" />
       </head>
       <body
