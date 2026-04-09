@@ -1,7 +1,8 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-import { gsap } from '@/lib/gsap';
+import { useRef } from 'react';
+import { useGSAP } from '@gsap/react';
+import gsap from '@/lib/gsap';
 
 interface RevealHeadingProps {
   children: string;
@@ -16,52 +17,41 @@ export default function RevealHeading({
   as: Tag = 'h2',
   delay = 0
 }: RevealHeadingProps) {
-  const ref = useRef<HTMLElement>(null);
+  const containerRef = useRef<HTMLElement>(null);
 
-  useEffect(() => {
-    if (!ref.current) return;
+  useGSAP(() => {
+    if (!containerRef.current) return;
 
-    const words = children.split(' ');
-    // Create spans safely using DOM manipulation instead of innerHTML
-    ref.current.textContent = '';
-    words.forEach((w, i) => {
-      const wrapper = document.createElement('span');
-      wrapper.className = 'word-wrapper inline-block overflow-hidden';
-      wrapper.setAttribute('aria-hidden', 'true');
-      
-      const inner = document.createElement('span');
-      inner.className = 'word-inner inline-block';
-      inner.textContent = w;
-      
-      wrapper.appendChild(inner);
-      ref.current!.appendChild(wrapper);
-      
-      // Add space after word (except for last)
-      if (i < words.length - 1) {
-        ref.current!.appendChild(document.createTextNode(' '));
-      }
-    });
+    const words = containerRef.current.querySelectorAll('.word-inner');
+    if (!words.length) return;
 
-    const ctx = gsap.context(() => {
-      gsap.fromTo('.word-inner',
-        { y: '100%' },
-        {
-          y: '0%',
-          duration: 0.7,
-          stagger: 0.05,
-          ease: 'power3.out',
-          delay,
-          scrollTrigger: {
-            trigger: ref.current as Element,
-            start: 'top 82%',
-            toggleActions: 'play none none reverse'
-          }
+    gsap.fromTo(words,
+      { y: '110%', rotateZ: 2 },
+      {
+        y: '0%',
+        rotateZ: 0,
+        duration: 1,
+        stagger: 0.05,
+        ease: 'expo.out',
+        delay,
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top 85%',
+          toggleActions: 'play none none reverse'
         }
-      );
-    }, ref);
+      }
+    );
+  }, { dependencies: [children, delay], scope: containerRef });
 
-    return () => ctx.revert();
-  }, [children, delay]);
-
-  return <Tag ref={ref as React.RefObject<HTMLHeadingElement>} className={className}>{children}</Tag>;
+  return (
+    <Tag ref={containerRef as any} className={`${className} flex flex-wrap gap-x-[0.3em]`}>
+      {children.split(' ').map((word, i) => (
+        <span key={i} className="word-wrapper inline-block overflow-hidden py-1">
+          <span className="word-inner inline-block will-change-transform origin-left">
+            {word}
+          </span>
+        </span>
+      ))}
+    </Tag>
+  );
 }

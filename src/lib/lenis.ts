@@ -9,8 +9,7 @@ const isTouchDevice = (): boolean => {
   return (
     'ontouchstart' in window ||
     navigator.maxTouchPoints > 0 ||
-    window.matchMedia('(pointer: coarse)').matches ||
-    window.innerWidth < 1024 // Disable on tablet too
+    window.matchMedia('(pointer: coarse)').matches
   );
 };
 

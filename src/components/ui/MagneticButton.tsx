@@ -1,6 +1,8 @@
 "use client";
 
-import { useRef, useEffect, useCallback } from "react";
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "@/lib/gsap";
 
 interface MagneticButtonProps {
   children: React.ReactNode;
@@ -11,55 +13,37 @@ interface MagneticButtonProps {
 export default function MagneticButton({
   children,
   className = "",
-  strength = 0.3,
+  strength = 0.35,
 }: MagneticButtonProps) {
   const wrapperRef = useRef<HTMLDivElement>(null);
 
-  const handleMouseMove = useCallback(
-    (e: MouseEvent) => {
-      const wrapper = wrapperRef.current;
-      if (!wrapper) return;
-
-      const rect = wrapper.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-
-      const deltaX = (e.clientX - centerX) * strength;
-      const deltaY = (e.clientY - centerY) * strength;
-
-      wrapper.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
-    },
-    [strength]
-  );
-
-  const handleMouseLeave = useCallback(() => {
+  useGSAP(() => {
     const wrapper = wrapperRef.current;
-    if (!wrapper) return;
-    wrapper.style.transform = "translate(0px, 0px)";
-  }, []);
+    if (!wrapper || window.matchMedia("(pointer: coarse)").matches) return;
 
-  useEffect(() => {
-    const wrapper = wrapperRef.current;
-    if (!wrapper) return;
+    const onMouseMove = (e: MouseEvent) => {
+      const { clientX, clientY } = e;
+      const { left, top, width, height } = wrapper.getBoundingClientRect();
+      const x = (clientX - (left + width / 2)) * strength;
+      const y = (clientY - (top + height / 2)) * strength;
+      gsap.to(wrapper, { x, y, duration: 0.4, ease: "power2.out" });
+    };
 
-    // Skip on touch devices
-    if (window.matchMedia("(hover: none)").matches) return;
+    const onMouseLeave = () => {
+      gsap.to(wrapper, { x: 0, y: 0, duration: 0.7, ease: "elastic.out(1, 0.3)" });
+    };
 
-    wrapper.addEventListener("mousemove", handleMouseMove);
-    wrapper.addEventListener("mouseleave", handleMouseLeave);
+    wrapper.addEventListener("mousemove", onMouseMove);
+    wrapper.addEventListener("mouseleave", onMouseLeave);
 
     return () => {
-      wrapper.removeEventListener("mousemove", handleMouseMove);
-      wrapper.removeEventListener("mouseleave", handleMouseLeave);
+      wrapper.removeEventListener("mousemove", onMouseMove);
+      wrapper.removeEventListener("mouseleave", onMouseLeave);
     };
-  }, [handleMouseMove, handleMouseLeave]);
+  }, { dependencies: [strength] });
 
   return (
-    <div
-      ref={wrapperRef}
-      className={`magnetic-wrapper ${className}`}
-      style={{ transition: "transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)" }}
-    >
+    <div ref={wrapperRef} className={`inline-block ${className}`}>
       {children}
     </div>
   );

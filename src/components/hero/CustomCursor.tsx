@@ -1,76 +1,84 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { gsap } from "@/lib/gsap";
+import { useRef, useEffect, useState } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "@/lib/gsap";
 
 export default function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
-  const followerRef = useRef<HTMLDivElement>(null);
-  const [isMobile, setIsMobile] = useState(true); // Start hidden to avoid flash
+  const dotRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(true);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
-    setIsMobile(isTouchDevice);
-    if (isTouchDevice) return;
+    setIsMobile(window.matchMedia("(pointer: coarse)").matches);
+  }, []);
+
+  useGSAP(() => {
+    if (isMobile) return;
 
     const cursor = cursorRef.current;
-    const follower = followerRef.current;
-    if (!cursor || !follower) return;
+    const dot = dotRef.current;
+    if (!cursor || !dot) return;
 
-    // Mouse move handler
     const onMouseMove = (e: MouseEvent) => {
-      const { clientX, clientY } = e;
-      // Cursor follows instantly
-      gsap.to(cursor, { x: clientX, y: clientY, duration: 0 });
-      // Follower follows with lag
-      gsap.to(follower, { x: clientX, y: clientY, duration: 0.18, ease: "expo.out" });
+      // Small dot follows instantly
+      gsap.to(dot, { x: e.clientX, y: e.clientY, duration: 0 });
+      // Main ring follows with lag
+      gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.5, ease: "power3.out" });
     };
 
-    // Hover handlers for interactive elements
-    const onMouseEnter = () => {
-      gsap.to(follower, { scale: 2.2, opacity: 0.6, duration: 0.3, ease: "expo.out" });
+    const handleHover = () => {
+      gsap.to(cursor, { 
+        scale: 3, 
+        backgroundColor: "rgba(255, 255, 255, 0.1)",
+        borderColor: "rgba(255, 255, 255, 0.5)",
+        duration: 0.4, 
+        ease: "expo.out" 
+      });
+      gsap.to(dot, { scale: 0, opacity: 0, duration: 0.2 });
     };
-    const onMouseLeave = () => {
-      gsap.to(follower, { scale: 1, opacity: 1, duration: 0.3, ease: "expo.out" });
+
+    const handleLeave = () => {
+      gsap.to(cursor, { 
+        scale: 1, 
+        backgroundColor: "transparent",
+        borderColor: "#E31837",
+        duration: 0.4, 
+        ease: "expo.out" 
+      });
+      gsap.to(dot, { scale: 1, opacity: 1, duration: 0.3 });
     };
 
     window.addEventListener("mousemove", onMouseMove);
 
-    // Add hover listeners to interactive elements (re-scan on each mount)
-    const interactiveElements = document.querySelectorAll("a, button, [data-cursor]");
-    interactiveElements.forEach((el) => {
-      el.addEventListener("mouseenter", onMouseEnter);
-      el.addEventListener("mouseleave", onMouseLeave);
+    const links = document.querySelectorAll("a, button, .cursor-hover");
+    links.forEach(link => {
+      link.addEventListener("mouseenter", handleHover);
+      link.addEventListener("mouseleave", handleLeave);
     });
 
     return () => {
       window.removeEventListener("mousemove", onMouseMove);
-      interactiveElements.forEach((el) => {
-        el.removeEventListener("mouseenter", onMouseEnter);
-        el.removeEventListener("mouseleave", onMouseLeave);
+      links.forEach(link => {
+        link.removeEventListener("mouseenter", handleHover);
+        link.removeEventListener("mouseleave", handleLeave);
       });
     };
-  }, []);
+  }, { dependencies: [isMobile] });
 
-  // Don't render any DOM elements on mobile
   if (isMobile) return null;
 
   return (
     <>
-      {/* Cursor dot — MAAC red */}
       <div
         ref={cursorRef}
-        className="custom-cursor__dot fixed top-0 left-0 w-[6px] h-[6px] rounded-full bg-[#E31837] pointer-events-none z-[9999]"
-        style={{ transform: "translate(-50%, -50%)", mixBlendMode: "normal" }}
-        aria-hidden="true"
+        className="fixed top-0 left-0 w-10 h-10 rounded-full border border-[#E31837] pointer-events-none z-[9999] mix-blend-difference -translate-x-1/2 -translate-y-1/2 flex items-center justify-center transition-[border-color,background-color] duration-300"
+        style={{ willChange: "transform" }}
       />
-      {/* Cursor follower (ring) — MAAC red */}
       <div
-        ref={followerRef}
-        className="custom-cursor__ring fixed top-0 left-0 w-8 h-8 rounded-full border border-[#E31837]/50 pointer-events-none z-[9998]"
-        style={{ transform: "translate(-50%, -50%)" }}
-        aria-hidden="true"
+        ref={dotRef}
+        className="fixed top-0 left-0 w-1.5 h-1.5 rounded-full bg-[#E31837] pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2"
+        style={{ willChange: "transform" }}
       />
     </>
   );

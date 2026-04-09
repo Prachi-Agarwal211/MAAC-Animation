@@ -2,9 +2,11 @@
 
 import { useRef } from "react";
 import Image from "next/image";
+import { useGSAP } from "@gsap/react";
+import gsap from "@/lib/gsap";
 import { siteCoursesData } from "@/data/siteData";
+import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 
-// Map courses to relevant portfolio images
 const coursePortfolioImages: Record<string, string> = {
   "ADVFX": "/portfolio/matte-painting/akshat-asolkar.jpg",
   "AD3D": "/portfolio/character-modeling/aarush-kumar-page1.jpg",
@@ -14,129 +16,108 @@ const coursePortfolioImages: Record<string, string> = {
   "VFXP": "/portfolio/matte-painting/biswabrata-dutta-page1.jpg",
 };
 
-// Alt text for each course image
-const courseImageAlts: Record<string, string> = {
-  "ADVFX": "Akshat Asolkar - VFX matte painting project",
-  "AD3D": "Aarush Kumar - 3D character modeling project",
-  "DGDI": "Archita Roy - 3D game asset project",
-  "APDMD": "Deshna Shah - Digital media design project",
-  "D3D": "Abhay Suryavanshi - 3D animation project",
-  "VFXP": "Biswabrata Dutta - Visual effects project",
-};
-
-const courseGradients = [
-  "linear-gradient(135deg, #2A1F1A 0%, #0C0C0C 100%)",
-  "linear-gradient(135deg, #1C1410 0%, #0C0C0C 100%)",
-  "linear-gradient(135deg, #161616 0%, #0C0C0C 100%)",
-  "linear-gradient(135deg, #2A1F1A 0%, #0C0C0C 100%)",
-];
-
 export default function PopularCourses() {
+  const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
 
-  // Smooth scroll arrows for desktop users who don't have a trackpad
-  const scrollTrack = (direction: 'left' | 'right') => {
+  useGSAP(() => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top 80%",
+        toggleActions: "play none none reverse",
+      }
+    });
+
+    tl.fromTo(".courses-heading", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1, ease: "expo.out" })
+      .fromTo(".course-card", { opacity: 0, x: 50 }, { opacity: 1, x: 0, duration: 0.8, stagger: 0.1, ease: "expo.out" }, "-=0.6");
+  }, { scope: containerRef });
+
+  const scroll = (dir: 'left' | 'right') => {
     if (trackRef.current) {
-      const scrollAmount = window.innerWidth > 768 ? 420 : 320;
-      trackRef.current.scrollBy({ left: direction === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' });
+      const amount = dir === 'left' ? -400 : 400;
+      trackRef.current.scrollBy({ left: amount, behavior: 'smooth' });
     }
   };
 
   return (
-    <section className="relative bg-[#0C0C0C] py-24 md:py-32 overflow-hidden">
-      {/* Background Mesh */}
-      <div className="absolute inset-0 pointer-events-none opacity-20">
-         <div className="absolute top-1/2 left-1/4 w-[250px] md:w-[500px] h-[250px] md:h-[500px] bg-[#C4A882]/10 blur-[60px] md:blur-[100px] rounded-full -translate-y-1/2" />
-         <div className="absolute top-1/3 right-1/4 w-[200px] md:w-[400px] h-[200px] md:h-[400px] bg-[#E31837]/10 blur-[60px] md:blur-[100px] rounded-full" />
-      </div>
-
+    <section ref={containerRef} className="relative bg-[#0C0C0C] py-24 md:py-40 overflow-hidden">
+      <div className="atmosphere-blob blob-red top-1/2 left-0 opacity-10" />
+      
       {/* Header */}
-      <div className="text-center relative z-10 max-w-7xl mx-auto px-6 mb-12 md:mb-16">
-        <p className="text-[#C4A882] text-xs font-semibold tracking-[0.12em] uppercase mb-4">Master Your Craft</p>
-        <h2 className="font-display font-bold text-[clamp(2.5rem,5vw,4rem)] text-[#F0EBE1] leading-[1.08] tracking-tight mb-4 pb-2">
-          Popular Courses
-        </h2>
-        <p className="text-[#A8A29C] text-lg max-w-2xl mx-auto">
-          Master industry-standard tools and techniques with our most sought-after programs
-        </p>
+      <div className="courses-heading relative z-10 max-w-7xl mx-auto px-6 mb-20">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
+          <div className="max-w-2xl">
+            <p className="text-[#C4A882] text-sm font-bold tracking-[0.2em] uppercase mb-6 flex items-center gap-3">
+              <span className="w-8 h-[1px] bg-[#C4A882]" />
+              Master Your Craft
+            </p>
+            <h2 className="font-display font-bold text-[clamp(2.2rem,5vw,4.5rem)] text-[#F0EBE1] leading-[0.95] tracking-tight">
+              Most Popular <span className="gradient-text">Programs</span>
+            </h2>
+          </div>
+          
+          <div className="hidden md:flex gap-4">
+            <button onClick={() => scroll('left')} className="w-14 h-14 rounded-full glass border border-white/5 flex items-center justify-center text-white/40 hover:text-white hover:border-[#E31837]/30 transition-all">
+              <ChevronLeft size={24} />
+            </button>
+            <button onClick={() => scroll('right')} className="w-14 h-14 rounded-full glass border border-white/5 flex items-center justify-center text-white/40 hover:text-white hover:border-[#E31837]/30 transition-all">
+              <ChevronRight size={24} />
+            </button>
+          </div>
+        </div>
       </div>
 
-      {/* Track & Controls */}
-      <div className="relative z-10 max-w-[1920px] mx-auto">
+      {/* Track */}
+      <div className="relative z-10">
         <div
           ref={trackRef}
-          className="flex gap-6 overflow-x-auto snap-x snap-mandatory px-4 sm:px-6 md:px-12 lg:px-24 pb-8 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
-          style={{ touchAction: 'pan-x' }}
+          className="flex gap-8 overflow-x-auto snap-x snap-mandatory px-6 md:px-12 lg:px-24 pb-12 no-scrollbar"
         >
-          {siteCoursesData.popularCourses.map((course, index) => {
-            const imageUrl = coursePortfolioImages[course.code];
-            const imageAlt = courseImageAlts[course.code] || `${course.name} project`;
-
-            return (
+          {siteCoursesData.popularCourses.map((course, index) => (
             <div
               key={course.name}
-              className="flex-shrink-0 w-[85vw] sm:w-[400px] snap-center md:snap-start"
+              className="course-card flex-shrink-0 w-[85vw] sm:w-[420px] snap-center"
             >
-              <div className="glass-card rounded-2xl overflow-hidden h-[480px] flex flex-col border border-white/5 bg-gradient-to-b from-white/[0.04] to-transparent hover:border-white/10 transition-colors">
-                {/* Top image section with portfolio image */}
-                <div className="h-[200px] relative overflow-hidden border-b border-white/5" style={{ background: courseGradients[index % courseGradients.length] }}>
-                  {imageUrl ? (
+              <div className="group relative rounded-[32px] overflow-hidden bg-[#111111] border border-white/5 transition-all duration-500 hover:border-[#E31837]/20 shadow-2xl">
+                {/* Image */}
+                <div className="h-[240px] relative overflow-hidden">
+                  {coursePortfolioImages[course.code] ? (
                     <Image
-                      src={imageUrl}
-                      alt={imageAlt}
+                      src={coursePortfolioImages[course.code]}
+                      alt={course.name}
                       fill
-                      className="object-cover"
-                      sizes="(max-width: 640px) 85vw, 400px"
-                      loading="lazy"
+                      className="object-cover transition-transform duration-1000 group-hover:scale-110"
                     />
                   ) : (
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="text-[#C4A882]/20 font-display font-extrabold text-7xl select-none">{course.code || course.name}</div>
+                    <div className="absolute inset-0 bg-[#1c1c1c] flex items-center justify-center">
+                       <span className="text-white/5 font-black text-8xl">{course.code}</span>
                     </div>
                   )}
-                  {/* Subtle gradient overlay for text readability */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-transparent to-transparent" />
+                  <div className="absolute top-6 left-6">
+                    <span className="px-4 py-1.5 rounded-full glass border border-white/10 text-[10px] font-bold tracking-widest text-[#C4A882] uppercase">
+                      {course.duration}
+                    </span>
+                  </div>
                 </div>
 
-                {/* Bottom content */}
-                <div className="p-6 flex-1 flex flex-col">
-                  <span className="inline-block w-fit px-3 py-1 rounded-full bg-[#C4A882]/10 text-[#C4A882] text-xs font-medium mb-3">
-                    {course.duration}
-                  </span>
-                  <h3 className="font-display font-bold text-xl text-[#F0EBE1] mb-1">{course.name}</h3>
-                  <p className="text-[#6B6560] text-sm mb-3">{course.fullName}</p>
-                  <p className="text-[#A8A29C] text-sm leading-relaxed line-clamp-3 mb-4 flex-1">{course.description}</p>
-                  <a href="/contact" className="inline-flex items-center gap-2 text-[#C4A882] text-sm font-medium group/link mt-auto w-fit">
-                    Learn More
-                    <svg className="w-4 h-4 transition-transform group-hover/link:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                {/* Content */}
+                <div className="p-8 md:p-10">
+                  <h3 className="font-display font-bold text-2xl text-white mb-2 group-hover:text-[#E31837] transition-colors">{course.name}</h3>
+                  <p className="text-[#6B6560] text-xs font-bold uppercase tracking-wider mb-6">{course.fullName}</p>
+                  <p className="text-[#A8A29C] text-sm leading-relaxed line-clamp-3 mb-8">{course.description}</p>
+                  
+                  <a href="/contact" className="inline-flex items-center gap-3 text-white text-xs font-bold tracking-[0.2em] uppercase group/btn">
+                    Course Details
+                    <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover/btn:bg-[#E31837] transition-all duration-500">
+                      <ArrowRight size={14} className="text-white" />
+                    </div>
                   </a>
                 </div>
               </div>
             </div>
-            );
-          })}
-        </div>
-
-        {/* Desktop Navigation Arrows */}
-        <div className="hidden md:flex justify-end gap-3 px-12 lg:px-24 mt-4">
-          <button 
-            onClick={() => scrollTrack('left')}
-            className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white/60 hover:bg-white/5 hover:text-white transition-all focus:outline-none focus:ring-1 focus:ring-[#C4A882]/50 bg-black/20"
-            aria-label="Scroll left"
-          >
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-          <button 
-            onClick={() => scrollTrack('right')}
-            className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white/60 hover:bg-white/5 hover:text-white transition-all focus:outline-none focus:ring-1 focus:ring-[#C4A882]/50 bg-black/20"
-            aria-label="Scroll right"
-          >
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
+          ))}
         </div>
       </div>
     </section>

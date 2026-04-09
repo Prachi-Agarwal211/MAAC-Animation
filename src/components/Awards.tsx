@@ -1,80 +1,103 @@
 "use client";
 
-import { useEffect, useRef, memo } from "react";
-import { gsap } from "@/lib/gsap";
-import { shouldAnimate } from "@/lib/animationUtils";
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "@/lib/gsap";
 import { awardsData } from "@/data/siteData";
+import { Trophy, ArrowUpRight } from "lucide-react";
 
 function Awards() {
-  const sectionRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (!shouldAnimate()) return;
+  useGSAP(() => {
+    const mm = gsap.matchMedia();
 
-    const ctx = gsap.context(() => {
-      gsap.fromTo(".aw-heading", { opacity: 0, y: 50 }, {
-        opacity: 1, y: 0, duration: 0.8, ease: "expo.out",
-        scrollTrigger: { trigger: sectionRef.current, start: "top 75%" },
+    mm.add("(min-width: 1024px)", () => {
+      // Desktop: Kinetic Typography Parallax
+      const rows = gsap.utils.toArray(".awards-row");
+      rows.forEach((row: any, i) => {
+        const speed = (i + 1) * 50;
+        gsap.to(row, {
+          x: i % 2 === 0 ? -speed : speed,
+          ease: "none",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+          }
+        });
       });
+    });
 
-      gsap.fromTo(".aw-card", { opacity: 0, y: 40 }, {
-        opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: "expo.out",
-        scrollTrigger: { trigger: ".aw-grid", start: "top 80%" },
-      });
-    }, sectionRef);
-    return () => ctx.revert();
-  }, []);
+    gsap.fromTo(".aw-header > *", 
+      { opacity: 0, y: 30 }, 
+      { opacity: 1, y: 0, duration: 1, stagger: 0.1, ease: "expo.out",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 80%",
+        }
+      }
+    );
+  }, { scope: containerRef });
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden">
-      {/* REPLACE the cream section with: */}
-      <div className="py-20 md:py-28" style={{ background: "linear-gradient(180deg, #0C0C0C 0%, #1C1208 50%, #0C0C0C 100%)" }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Header */}
-          <div className="aw-heading text-center mb-16">
-            <p className="text-[#C4A882] text-xs font-semibold tracking-[0.12em] uppercase mb-4">Recognition</p>
-            <h2 className="font-display font-bold text-[clamp(2rem,4vw,3.5rem)] text-[#F0EBE1] leading-[1.08] tracking-tight mb-4 pb-1">
-              Awards & <span className="text-[#E31837]">Recognition</span>
-            </h2>
-            <p className="text-[#A8A29C] text-lg max-w-2xl mx-auto">
-              Celebrated by industry leaders for our commitment to excellence
-            </p>
-          </div>
+    <section ref={containerRef} className="relative py-24 md:py-40 bg-[#080808] overflow-hidden">
+      <div className="atmosphere-blob blob-orange top-1/2 -left-20 opacity-5" />
+      
+      <div className="relative z-10 max-w-7xl mx-auto px-6 mb-32">
+        <div className="aw-header text-left">
+          <p className="text-[#E31837] text-sm font-bold tracking-[0.3em] uppercase mb-6">Excellence Recognized</p>
+          <h2 className="font-display font-black text-[clamp(2.5rem,6vw,5.5rem)] text-white leading-[0.9] tracking-tighter">
+            Our Legacy of <br /> <span className="gradient-text">Winning</span>
+          </h2>
+        </div>
+      </div>
 
-          {/* Cards - dark version */}
-          <div className="aw-grid grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
-            {awardsData.map((award, index) => (
-              <div
-                key={index}
-                className="aw-card relative rounded-2xl p-8 overflow-hidden group"
-                style={{
-                  background: "rgba(28, 20, 16, 0.6)",
-                  border: "1px solid rgba(196, 168, 130, 0.12)",
-                  backdropFilter: "blur(10px)"
-                }}
-              >
-                {/* Year watermark */}
-                <span className="absolute -top-4 -right-4 font-display font-extrabold text-[6rem] md:text-[8rem] leading-none pointer-events-none select-none" style={{ color: "rgba(196,168,130,0.06)" }}>
-                  {award.year}
-                </span>
-
-                {/* Badge */}
-                <div className="w-12 h-12 rounded-full flex items-center justify-center mb-4" style={{ background: "rgba(196,168,130,0.1)", border: "1px solid rgba(196,168,130,0.2)" }}>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C4A882" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                  </svg>
+      {/* Kinetic Rows (Desktop) */}
+      <div className="hidden lg:block space-y-12 mb-40">
+        {[0, 1].map((rowIndex) => (
+          <div key={rowIndex} className="awards-row flex gap-12 whitespace-nowrap px-20">
+            {awardsData.map((award, i) => (
+              <div key={i} className="group relative flex-shrink-0">
+                <div className="flex items-end gap-6 cursor-none">
+                  <span className="text-[10vw] font-display font-black text-white/5 transition-colors group-hover:text-white group-hover:skew-x-[-10deg] duration-700 leading-none">
+                    {award.name.split(' ')[0]}
+                  </span>
+                  <div className="mb-4">
+                    <Trophy size={48} className="text-[#E31837] opacity-0 group-hover:opacity-100 transition-all duration-700 translate-y-4 group-hover:translate-y-0" />
+                  </div>
                 </div>
 
-                <p className="text-[#8B7355] text-xs font-semibold tracking-[0.12em] uppercase mb-2">{award.year}</p>
-                <h3 className="font-display font-bold text-xl md:text-2xl text-[#E8DCC8] mb-1 relative z-10">{award.name}</h3>
-                <p className="text-[#A8A29C] text-sm">{award.org}</p>
+                {/* Detailed Reveal */}
+                <div className="absolute top-1/2 left-full ml-12 -translate-y-1/2 w-80 p-8 glass-card rounded-[32px] opacity-0 group-hover:opacity-100 transition-all duration-700 pointer-events-none z-20">
+                   <div className="text-[10px] font-bold text-[#E31837] uppercase tracking-[0.3em] mb-4">{award.year}</div>
+                   <h3 className="text-white text-xl font-display font-bold mb-4">{award.name}</h3>
+                   <p className="text-[#A8A29C] text-sm leading-relaxed border-t border-white/5 pt-4">{award.org}</p>
+                </div>
               </div>
             ))}
           </div>
-        </div>
+        ))}
+      </div>
+
+      {/* Mobile: Elegant Staggered List */}
+      <div className="lg:hidden px-6 space-y-6">
+        {awardsData.map((award, i) => (
+          <div key={i} className="p-8 rounded-[32px] glass border border-white/5 flex items-start justify-between group">
+            <div>
+              <div className="text-[10px] font-bold text-[#E31837] uppercase tracking-[0.2em] mb-2">{award.year}</div>
+              <h3 className="text-white text-xl font-display font-bold leading-tight mb-1">{award.name}</h3>
+              <p className="text-[#6B6560] text-xs font-bold uppercase tracking-widest">{award.org}</p>
+            </div>
+            <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-[#E31837]">
+              <Trophy size={18} />
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );
 }
 
-export default memo(Awards);
+export default Awards;

@@ -1,134 +1,57 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
-import Link from "next/link";
+import { useState, useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "@/lib/gsap";
 import Footer from "@/components/Footer";
 import { siteCoursesData } from "@/data/siteData";
 import { getCourseSchema, breadcrumbSchema } from "@/lib/structured-data";
+import { ArrowUpRight, Search } from "lucide-react";
+import Link from "next/link";
 
-interface FlipCardProps {
-  course: {
-    id: string;
-    title: string;
-    subtitle: string;
-    description: string;
-    fullDescription: string;
-    icon: string;
-    careers: string[];
-  };
-  index: number;
-}
-
-function FlipCard({ course, index }: FlipCardProps) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [isFlipped, setIsFlipped] = useState(false);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        cardRef.current,
-        { opacity: 0, y: 60, scale: 0.9 },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 0.6,
-          delay: index * 0.1,
-          ease: "back.out(1.3)",
-          scrollTrigger: {
-            trigger: cardRef.current,
-            start: "top 85%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
-    }, cardRef);
-
-    return () => ctx.revert();
-  }, [index]);
-
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      setIsFlipped(prev => !prev);
-    }
-  };
+function CoursePanel({ course, index }: { course: any; index: number }) {
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
     <div
-      ref={cardRef}
-      className="flip-card-container relative w-full aspect-[3/4] cursor-pointer perspective-1000 group"
-      tabIndex={0}
-      onKeyDown={handleKeyDown}
-      onFocus={() => setIsFlipped(true)}
-      onBlur={() => setIsFlipped(false)}
-      onMouseEnter={() => setIsFlipped(true)}
-      onMouseLeave={() => setIsFlipped(false)}
-      onClick={() => setIsFlipped(prev => !prev)}
-      role="button"
-      aria-pressed={isFlipped}
-      aria-label={`${course.title} - ${course.description}`}
+      className="course-panel group relative aspect-[3/4] rounded-[48px] overflow-hidden bg-[#111111] border border-white/5 transition-all duration-700 hover:border-[#E31837]/30"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
-      <div
-        className={`relative w-full h-full transition-transform duration-500 transform-style-preserve-3d ${isFlipped ? 'rotate-x-180' : ''}`}
-      >
-        {/* Front Side - Dark Theme with Red Box */}
-        <div className={`absolute inset-0 backface-hidden rounded-2xl overflow-hidden shadow-2xl bg-[#0a0a0a] border-2 transition-border duration-300 ${isFlipped ? 'border-[#E31837]' : 'border-transparent'}`}>
-          {/* Dark Image Section with subtle gradient */}
-          <div className="relative h-3/5 bg-gradient-to-br from-[#1a1a1a] to-[#0a0a0a] overflow-hidden">
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span className={`text-7xl transition-all duration-300 ${isFlipped ? 'opacity-80 scale-110' : 'opacity-60'}`}>{course.icon}</span>
-            </div>
-            {/* Subtle red glow overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#E31837]/30 to-transparent" />
-          </div>
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-[#080808]/40 to-transparent z-10" />
+        <div className="absolute inset-0 flex items-center justify-center text-[15rem] font-display font-black text-white/[0.02] group-hover:text-white/[0.05] transition-all duration-1000 group-hover:scale-110">{course.id[0].toUpperCase()}</div>
+      </div>
 
-          {/* Red Info Box */}
-          <div className="absolute bottom-0 left-0 right-0 h-2/5 bg-[#E31837] rounded-b-2xl p-6 flex flex-col justify-center">
-            <h3 className="text-xl md:text-2xl font-display font-bold text-white mb-2">
-              {course.title}
-            </h3>
-            <p className="text-gray-300 text-sm leading-relaxed">
-              {course.description}
-            </p>
-          </div>
+      <div className="relative z-20 h-full flex flex-col justify-end p-10 md:p-12">
+        <div className="mb-8 transform transition-transform duration-700 group-hover:-translate-y-4">
+          <span className="text-[#E31837] text-[10px] font-bold uppercase tracking-[0.4em] mb-4 block">0{index + 1} · {course.subtitle}</span>
+          <h3 className="text-white font-display font-black text-3xl md:text-4xl leading-none tracking-tighter mb-4">{course.title}</h3>
+          <p className="text-[#A8A29C] text-sm md:text-base line-clamp-2 group-hover:opacity-0 transition-opacity duration-500">{course.description}</p>
         </div>
 
-        {/* Back Side - Flipped Content (Full Red with all details) */}
-        <div className="absolute inset-0 backface-hidden rotate-x-180 rounded-2xl overflow-hidden shadow-2xl bg-[#161616] p-6 md:p-8 border-2 border-[#E31837]">
-          <div className="h-full flex flex-col justify-center text-center overflow-y-auto">
-            <div className="text-5xl mb-4">{course.icon}</div>
-            <h3 className="text-xl md:text-2xl font-display font-bold text-[#f5f0e8] mb-3">
-              {course.title}
-            </h3>
-            <p className="text-[#E31837] text-xs md:text-sm font-medium mb-4">
-              {course.subtitle}
-            </p>
-            <p className="text-gray-200 text-sm leading-relaxed mb-4">
-              {course.fullDescription}
-            </p>
-
-            {/* Career Options */}
-            <div className="mb-4">
-              <p className="text-[#E31837] text-xs font-semibold mb-2 uppercase tracking-wider">Career Options</p>
-              <div className="flex flex-wrap gap-1 justify-center">
-                {course.careers.map((career, idx) => (
-                  <span key={idx} className="text-xs text-[#6b6b6b] bg-white/5 border border-white/10 px-2 py-1 rounded">
-                    {career}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            <Link
-              href="/contact"
-              className="inline-block py-2 md:py-3 px-6 md:px-8 border-2 border-[#E31837] text-[#E31837] hover:bg-[#E31837] hover:text-white font-semibold rounded-xl text-center transition-all duration-300 text-sm md:text-base"
-              onClick={(e) => e.stopPropagation()}
-            >
-              View Details
-            </Link>
-          </div>
+        {/* Cinematic Reveal */}
+        <div 
+          className="absolute inset-0 bg-[#0C0C0C]/95 p-10 md:p-12 flex flex-col justify-center transition-all duration-1000 ease-expo-out z-30"
+          style={{ clipPath: isHovered ? 'circle(150% at 100% 100%)' : 'circle(0% at 100% 100%)' }}
+        >
+           <div className="w-16 h-[1px] bg-[#E31837] mb-8" />
+           <p className="text-white/80 text-lg leading-relaxed mb-8">
+             {course.fullDescription}
+           </p>
+           <div className="flex flex-wrap gap-2 mb-12">
+             {course.careers.map((c: string) => (
+               <span key={c} className="text-[9px] font-bold uppercase tracking-[0.2em] text-white/30 border border-white/10 px-3 py-1.5 rounded-full hover:text-white hover:border-[#E31837]/50 transition-colors">
+                 {c}
+               </span>
+             ))}
+           </div>
+           <Link href="/contact" className="inline-flex items-center gap-4 text-white text-[10px] font-bold tracking-[0.4em] uppercase group/link">
+             SECURE ADMISSION
+             <div className="w-12 h-12 rounded-full bg-[#E31837] flex items-center justify-center transition-transform group-hover/link:scale-110 shadow-2xl shadow-[#E31837]/20">
+               <ArrowUpRight size={20} />
+             </div>
+           </Link>
         </div>
       </div>
     </div>
@@ -136,103 +59,77 @@ function FlipCard({ course, index }: FlipCardProps) {
 }
 
 export default function CoursesClient() {
-  const pageRef = useRef<HTMLDivElement>(null);
+  const [filter, setFilter] = useState("");
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        ".courses-hero-content",
-        { opacity: 0, y: 60 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          ease: "power3.out",
-        }
-      );
+  const filteredCourses = siteCoursesData.categories.filter(c => 
+    c.title.toLowerCase().includes(filter.toLowerCase()) || 
+    c.description.toLowerCase().includes(filter.toLowerCase())
+  );
 
-      gsap.fromTo(
-        ".hero-subtitle",
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          delay: 0.3,
-          ease: "power2.out",
-        }
-      );
-    }, pageRef);
-
-    return () => {
-      ctx.revert();
-    };
-  }, []);
-
-  // Refresh ScrollTrigger after all flip cards mount
-  useEffect(() => {
-    const timer = setTimeout(() => ScrollTrigger.refresh(), 500);
-    return () => clearTimeout(timer);
-  }, []);
+  useGSAP(() => {
+    gsap.fromTo(".course-panel", 
+      { opacity: 0, y: 50, scale: 0.95 },
+      { opacity: 1, y: 0, scale: 1, duration: 1, stagger: 0.1, ease: "expo.out", delay: 0.5 }
+    );
+  }, { dependencies: [filter], scope: containerRef });
 
   return (
-    <main ref={pageRef} className="overflow-hidden bg-[#080808]">
-      {/* Structured Data - Course Schema for each program */}
+    <main ref={containerRef} className="bg-[#080808] overflow-hidden">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "ItemList",
-            "itemListElement": siteCoursesData.popularCourses.map((course, i) => ({
-              "@type": "ListItem",
-              "position": i + 1,
-              "item": getCourseSchema(course.fullName, course.description, course.duration)
-            }))
+            "@graph": [
+              {
+                "@type": "ItemList",
+                "itemListElement": siteCoursesData.popularCourses.map((course, i) => ({
+                  "@type": "ListItem",
+                  "position": i + 1,
+                  "item": getCourseSchema(course.fullName, course.description, course.duration)
+                }))
+              },
+              breadcrumbSchema([
+                { name: "Home", url: "https://www.maacanimationjaipur.com" },
+                { name: "Courses", url: "https://www.maacanimationjaipur.com/courses" }
+              ])
+            ]
           }),
         }}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(breadcrumbSchema([
-            { name: "Home", url: "https://www.maacanimationjaipur.com" },
-            { name: "Courses", url: "https://www.maacanimationjaipur.com/courses" },
-          ])),
-        }}
-      />
 
-      {/* Hero Section */}
-      <section className="relative pt-20 md:pt-32 pb-16 md:pb-20 overflow-hidden bg-[#080808]">
-        <div className="absolute top-1/4 -right-32 w-96 h-96 bg-primary/15 rounded-full blur-[120px]" />
-        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+      {/* ── HERO SECTION ── */}
+      <section className="relative pt-32 pb-20 px-6 md:px-12 lg:px-24">
+        <div className="max-w-[1800px] mx-auto">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-12 mb-20 border-b border-white/5 pb-20">
+            <div className="max-w-4xl">
+              <span className="inline-block text-[#E31837] text-xs font-bold tracking-[0.4em] uppercase mb-8">Professional Programs</span>
+              <h1 className="font-display font-black text-[clamp(3.5rem,10vw,8.5rem)] text-white leading-[0.85] tracking-tighter mb-8">
+                MASTER YOUR <br /> <span className="gradient-text">LEGACY</span>
+              </h1>
+              <p className="text-[#A8A29C] text-lg md:text-2xl font-medium leading-relaxed italic border-l-2 border-[#E31837] pl-8">
+                Explore our elite selection of VFX, Animation, and Game Design courses engineered for the next generation of visual storytellers.
+              </p>
+            </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 courses-hero-content">
-          <p className="text-[#E31837] text-xs font-inter font-semibold tracking-[0.2em] uppercase mb-4">
-            Explore Programs
-          </p>
-          <h1 className="font-display font-extrabold text-[clamp(2.5rem,5vw,5rem)] text-[#f5f0e8] leading-[1.05] tracking-tight mb-6">
-            MAAC Courses
-          </h1>
-          <h2 className="text-2xl sm:text-3xl text-[#6b6b6b] mb-6">
-            Find the Right Fit for Your Future
-          </h2>
-          <p className="text-[#6b6b6b] text-lg md:text-xl max-w-3xl leading-relaxed hero-subtitle">
-            Get globally recognized training through MESC and NSDC - and build
-            skills that set you apart.
-          </p>
-        </div>
-      </section>
+            {/* Filter UI */}
+            <div className="relative w-full lg:w-96 group">
+              <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-white/20 group-hover:text-[#E31837] transition-colors" size={20} />
+              <input 
+                type="text" 
+                placeholder="SEARCH PROGRAMS..."
+                value={filter}
+                onChange={(e) => setFilter(e.target.value)}
+                className="w-full bg-[#111111] border border-white/5 rounded-full py-6 pl-16 pr-8 text-xs font-bold tracking-[0.2em] text-white focus:outline-none focus:border-[#E31837]/50 transition-all uppercase placeholder:text-white/10"
+              />
+            </div>
+          </div>
 
-      {/* Flip Cards Grid */}
-      <section className="relative pb-24">
-        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
-        <div className="absolute bottom-0 left-1/4 w-64 h-64 bg-primary/5 rounded-full blur-[100px]" />
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {siteCoursesData.categories.map((course, index) => (
-              <FlipCard key={course.id} course={course} index={index} />
+          {/* Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 pb-40">
+            {filteredCourses.map((course, i) => (
+              <CoursePanel key={course.id} course={course} index={i} />
             ))}
           </div>
         </div>

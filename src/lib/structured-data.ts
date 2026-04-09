@@ -7,7 +7,6 @@
 
 // FAQ Schema - Critical for GEO and voice search
 export const faqSchema = {
-  "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
     {
@@ -95,7 +94,6 @@ export const faqSchema = {
 
 // Course Schema - For each program
 export const getCourseSchema = (courseName: string, description: string, duration: string, provider: string = "MAAC Jaipur") => ({
-  "@context": "https://schema.org",
   "@type": "Course",
   "name": courseName,
   "description": description,
@@ -132,7 +130,6 @@ export const getCourseSchema = (courseName: string, description: string, duratio
 
 // LocalBusiness Schema - Enhanced with reviews and offerings
 export const localBusinessSchema = {
-  "@context": "https://schema.org",
   "@type": "EducationalOrganization",
   "name": "MAAC Jaipur — Maya Academy of Advanced Cinematics",
   "alternateName": "MAAC Animation Institute Jaipur",
@@ -315,7 +312,6 @@ export const localBusinessSchema = {
 
 // Review Schema - For testimonials
 export const getReviewSchema = (author: string, role: string, rating: number = 5, text: string) => ({
-  "@context": "https://schema.org",
   "@type": "Review",
   "itemReviewed": {
     "@type": "EducationalOrganization",
@@ -337,7 +333,6 @@ export const getReviewSchema = (author: string, role: string, rating: number = 5
 
 // VideoObject Schema - For showreel
 export const videoSchema = {
-  "@context": "https://schema.org",
   "@type": "VideoObject",
   "name": "MAAC Jaipur Student Showreel 2024",
   "description": "Explore the incredible work created by MAAC Jaipur students across 3D Animation, VFX, Game Design, and Digital Filmmaking programs",
@@ -358,7 +353,6 @@ export const videoSchema = {
 
 // Breadcrumb Schema
 export const breadcrumbSchema = (items: Array<{ name: string; url: string }>) => ({
-  "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": items.map((item, index) => ({
     "@type": "ListItem",
@@ -370,7 +364,6 @@ export const breadcrumbSchema = (items: Array<{ name: string; url: string }>) =>
 
 // JobPosting Schema - For career pages
 export const getJobSchema = (title: string, department: string, type: string = "Full-time") => ({
-  "@context": "https://schema.org",
   "@type": "JobPosting",
   "title": title,
   "department": department,

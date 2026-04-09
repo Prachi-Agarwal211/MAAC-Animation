@@ -1,195 +1,211 @@
 "use client";
 
-import { useState } from "react";
+import { useRef } from "react";
 import Image from "next/image";
+import { useGSAP } from "@gsap/react";
+import gsap from "@/lib/gsap";
+import { ArrowRight } from "lucide-react";
 
-// Portfolio image mapping for each feature card
 const cardImages: Record<number, string> = {
-  0: "/portfolio/featured/nancy-verma-page1.jpg",     // Transformative Educational Events
-  1: "/portfolio/character-modeling/aarush-kumar-page1.jpg", // Industry-Ready Portfolio
-  2: "/portfolio/matte-painting/akshat-asolkar.jpg",  // Exclusive Industry Exposure
-  3: "/portfolio/digital-painting/deshna-shah.jpg",   // Portfolio That Speaks Volumes
-  4: "/portfolio/environment-modeling/raghav-gupta-page1.jpg", // Industry-Grade Facilities
-  5: "/portfolio/3d-game-asset/archita-roy-page1.jpg", // Courses Built For Future
-  6: "/portfolio/architectural-design/sharanjit-kaur-page1.jpg", // Creative Careers That Click
-};
-
-const cardImageAlts: Record<number, string> = {
-  0: "Nancy Verma - Featured animation project",
-  1: "Aarush Kumar - Character modeling portfolio",
-  2: "Akshat Asolkar - Matte painting for VFX",
-  3: "Deshna Shah - Digital painting project",
-  4: "Raghav Gupta - Environment modeling work",
-  5: "Archita Roy - 3D game asset creation",
-  6: "Sharanjit Kaur - Architectural design project",
+  0: "/portfolio/featured/nancy-verma-page1.jpg",
+  1: "/portfolio/character-modeling/aarush-kumar-page1.jpg",
+  2: "/portfolio/matte-painting/akshat-asolkar.jpg",
+  3: "/portfolio/digital-painting/deshna-shah.jpg",
+  4: "/portfolio/environment-modeling/raghav-gupta-page1.jpg",
+  5: "/portfolio/3d-game-asset/archita-roy-page1.jpg",
+  6: "/portfolio/architectural-design/sharanjit-kaur-page1.jpg",
 };
 
 const featureCards = [
   {
-    title: "Transformative Educational Events",
+    title: "Educational Events",
     desc: "Industry workshops, masterclasses, and live projects that bridge classroom learning with real-world experience",
     color: "#E31837",
-    svgPaths: [
-      <rect key="1" x="10" y="10" width="60" height="60" rx="8" stroke="currentColor" strokeWidth="1.5" fill="none"/>,
-      <path key="2" d="M10 40 L40 10 L70 40 L40 70 Z" stroke="currentColor" strokeWidth="1" fill="none"/>
-    ]
   },
   {
-    title: "Industry-Ready Portfolio Development",
+    title: "Portfolio Mastery",
     desc: "Build a professional portfolio with live projects, animations, and visual effects work that showcases your skills",
     color: "#FF6B35",
-    svgPaths: [
-      <circle key="1" cx="40" cy="40" r="30" stroke="currentColor" strokeWidth="1.5" fill="none"/>,
-      <circle key="2" cx="40" cy="40" r="15" stroke="currentColor" strokeWidth="1" fill="none"/>
-    ]
   },
   {
-    title: "Exclusive Industry Exposure",
+    title: "Industry Exposure",
     desc: "Studio visits, live briefs, and internship opportunities with top animation and VFX companies",
     color: "#00B4D8",
-    svgPaths: [
-      <path key="1" d="M20 60 L20 20 L60 20 L60 60 Z" stroke="currentColor" strokeWidth="1.5" fill="none"/>,
-      <path key="2" d="M20 40 L60 40" stroke="currentColor" strokeWidth="1" fill="none"/>
-    ]
   },
   {
-    title: "Portfolio That Speaks Volumes",
+    title: "Premier Placements",
     desc: "Graduate with a professional showreel and portfolio that showcases your skills to potential employers",
     color: "#9D4EDD",
-    svgPaths: [
-      <rect key="1" x="15" y="15" width="50" height="50" rx="4" stroke="currentColor" strokeWidth="1.5" fill="none"/>,
-      <path key="2" d="M25 35 L55 35 M25 45 L45 45" stroke="currentColor" strokeWidth="1" fill="none"/>
-    ]
   },
   {
-    title: "Industry-Grade Facilities",
+    title: "Pro Facilities",
     desc: "State-of-the-art labs, rendering farms, and production suites equipped with latest software and hardware",
     color: "#06D6A0",
-    svgPaths: [
-      <rect key="1" x="10" y="20" width="60" height="40" rx="4" stroke="currentColor" strokeWidth="1.5" fill="none"/>,
-      <path key="2" d="M30 60 L50 60 M40 60 L40 65 M20 65 L60 65" stroke="currentColor" strokeWidth="1" fill="none"/>
-    ]
   },
   {
-    title: "Courses Built For Future",
+    title: "Future-Proof Courses",
     desc: "Curriculum updated regularly with emerging technologies like AI, VR, AR, and real-time rendering",
     color: "#FFD166",
-    svgPaths: [
-      <path key="1" d="M40 10 L70 60 L10 60 Z" stroke="currentColor" strokeWidth="1.5" fill="none"/>,
-      <circle key="2" cx="40" cy="45" r="5" stroke="currentColor" strokeWidth="1" fill="none"/>
-    ]
   },
   {
-    title: "Creative Careers That Click",
+    title: "Creative Careers",
     desc: "Placement support, career counseling, and alumni network that helps you land your dream job",
     color: "#EF476F",
-    svgPaths: [
-      <rect key="1" x="20" y="30" width="40" height="30" rx="2" stroke="currentColor" strokeWidth="1.5" fill="none"/>,
-      <path key="2" d="M30 30 L30 20 L50 20 L50 30" stroke="currentColor" strokeWidth="1" fill="none"/>
-    ]
   },
 ];
 
 export default function VerticalCardGallery() {
-  const [activeIndex, setActiveIndex] = useState<number>(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const leftPanelRef = useRef<HTMLDivElement>(null);
+  const rightPanelRef = useRef<HTMLDivElement>(null);
+  const progressRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    const mm = gsap.matchMedia();
+
+    mm.add("(min-width: 1024px)", () => {
+      const items = gsap.utils.toArray(".gallery-item");
+      
+      items.forEach((item: any) => {
+        gsap.fromTo(item, 
+          { opacity: 0, y: 100, scale: 0.9 },
+          { 
+            opacity: 1, 
+            y: 0, 
+            scale: 1,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: item,
+              start: "top 90%",
+              end: "top 40%",
+              scrub: 1,
+            }
+          }
+        );
+      });
+
+      // Pin Left Panel
+      gsap.to(leftPanelRef.current, {
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 80px",
+          end: "bottom bottom",
+          pin: true,
+          pinSpacing: false,
+          scrub: true,
+        }
+      });
+
+      // Progress Line
+      gsap.to(progressRef.current, {
+        height: "100%",
+        ease: "none",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 80px",
+          end: "bottom bottom",
+          scrub: true,
+        }
+      });
+    });
+
+    return () => mm.revert();
+  }, { scope: containerRef });
 
   return (
-    <div className="bg-[#0C0C0C] py-20 md:py-32 px-4 sm:px-6 lg:px-12 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-12 lg:gap-20 relative z-10">
+    <div ref={containerRef} className="bg-[#080808] py-24 md:py-40 px-6 lg:px-20 relative overflow-hidden border-b border-white/5">
+      <div className="max-w-[1440px] mx-auto flex flex-col lg:flex-row gap-16 lg:gap-32">
         
         {/* Left Side: Sticky Headers */}
-        <div className="lg:w-[40%] lg:sticky lg:top-32 h-fit">
-          <p className="text-[#E31837] text-xs font-semibold tracking-[0.15em] uppercase mb-6">
-            Empower Your Future
-          </p>
-          <h2 className="font-display font-bold text-[clamp(2.5rem,5vw,4rem)] leading-[1.05] tracking-tight text-[#F0EBE1] mb-2">
-            Creative Careers
-            <br />
-            That Click
-          </h2>
-          <h2 className="font-display font-bold text-[clamp(2.5rem,5vw,4rem)] leading-[1.05] tracking-tight text-[#C4A882] mb-6 inline-block relative">
-            Think MAAC
-            <div className="absolute -bottom-2 left-0 w-full h-[2px] bg-gradient-to-r from-[#C4A882] to-transparent opacity-50" />
-          </h2>
-          <p className="text-[#A8A29C] text-lg leading-relaxed max-w-md">
-            Train in animation, VFX, gaming, and digital content creation with
-            expert-led courses that prepare you for real industry success.
-          </p>
+        <div ref={leftPanelRef} className="lg:w-[40%] h-fit z-10">
+          <div className="relative pl-12">
+            {/* Progress Track */}
+            <div className="absolute left-0 top-0 w-[2px] h-64 bg-white/5 rounded-full overflow-hidden">
+               <div ref={progressRef} className="w-full h-0 bg-[#E31837] shadow-[0_0_15px_#E31837]" />
+            </div>
+
+            <p className="text-[#E31837] text-sm font-bold tracking-[0.3em] uppercase mb-8 flex items-center gap-3">
+              Elite Training
+            </p>
+            <h2 className="font-display font-black text-[clamp(2.5rem,6vw,5.5rem)] leading-[0.85] tracking-tighter text-white mb-6">
+              CREATIVE<br />
+              <span className="gradient-text italic">EVOLUTION</span>
+            </h2>
+            <h3 className="font-display font-bold text-xl tracking-widest text-[#6B6560] mb-8 uppercase">
+              The MAAC Standard
+            </h3>
+            <p className="text-[#A8A29C] text-lg md:text-xl font-medium leading-relaxed max-w-sm italic">
+              Experience a curriculum engineered for the global production pipeline. We don&apos;t just teach software; we forge cinematic careers.
+            </p>
+          </div>
         </div>
 
-        {/* Right Side: Accordion */}
-        <div className="lg:w-[60%] flex flex-col gap-4">
-          {featureCards.map((card, index) => {
-            const isActive = activeIndex === index;
-            return (
-              <div 
-                key={index}
-                className="group border border-white/10 rounded-2xl overflow-hidden bg-[#161616]/50 backdrop-blur-sm cursor-pointer transition-colors hover:bg-white/[0.04]"
-                onClick={() => setActiveIndex(isActive ? -1 : index)}
-              >
-                {/* Header (Always Visible) */}
-                <div className="p-6 md:p-8 flex items-center justify-between gap-4">
-                  <div className="flex items-center gap-6">
-                    <span 
-                      className="text-sm font-semibold tracking-widest hidden sm:block"
-                      style={{ color: isActive ? card.color : '#6B6560' }}
-                    >
-                      0{index + 1}
-                    </span>
-                    <h3 className={`font-display font-bold text-xl md:text-2xl transition-colors ${isActive ? 'text-white' : 'text-[#A8A29C]'}`}>
-                      {card.title}
-                    </h3>
+        {/* Right Side: Gallery Items */}
+        <div 
+          ref={rightPanelRef} 
+          className="lg:w-[60%] flex flex-col gap-12 lg:gap-32"
+        >
+          {featureCards.map((card, index) => (
+            <div 
+              key={index}
+              className="gallery-item group relative flex-shrink-0 w-full"
+            >
+              <div className="relative overflow-hidden rounded-[48px] bg-[#111111] border border-white/5 transition-all duration-1000 group-hover:border-[#E31837]/30 shadow-2xl">
+                <div className="flex flex-col md:flex-row items-stretch">
+                  {/* Image Side */}
+                  <div className="w-full md:w-1/2 aspect-square relative overflow-hidden">
+                    {cardImages[index] ? (
+                      <Image
+                        src={cardImages[index]}
+                        alt={card.title}
+                        fill
+                        className="object-cover transition-transform duration-[1.5s] ease-expo-out group-hover:scale-110"
+                        sizes="(max-width: 768px) 100vw, 800px"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 bg-gradient-to-br from-[#1c1c1c] to-[#0c0c0c]" />
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent md:bg-gradient-to-r" />
+                    <div className="absolute bottom-10 left-10 md:hidden">
+                       <span className="text-white/10 text-6xl font-display font-black">0{index + 1}</span>
+                    </div>
                   </div>
-                  <div 
-                    className={`w-8 h-8 rounded-full border flex items-center justify-center flex-shrink-0 transition-transform duration-500 ${isActive ? 'rotate-180 border-[#C4A882] bg-white/5' : 'border-white/10'}`}
-                  >
-                    <svg className={`w-4 h-4 transition-colors ${isActive ? 'text-[#C4A882]' : 'text-white/50'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </div>
-                </div>
 
-                {/* Collapsible Content */}
-                <div 
-                  className="grid transition-all duration-500 ease-in-out"
-                  style={{ gridTemplateRows: isActive ? '1fr' : '0fr' }}
-                >
-                  <div className="overflow-hidden">
-                    <div className="p-6 md:p-8 pt-0 border-t border-white/5 mt-2 flex flex-col sm:flex-row items-center gap-8 bg-black/20">
-                      {/* Left: Portfolio Image or SVG Graphic fallback */}
-                      <div className="w-full sm:w-1/3 aspect-square max-w-[160px] rounded-xl overflow-hidden relative bg-[#080808] border border-white/5">
-                        {cardImages[index] ? (
-                          <Image
-                            src={cardImages[index]}
-                            alt={cardImageAlts[index] || card.title}
-                            fill
-                            className="object-cover"
-                            sizes="(max-width: 768px) 100vw, 160px"
-                            loading="lazy"
-                          />
-                        ) : (
-                          <div className="absolute inset-0 flex items-center justify-center">
-                            <div className="absolute inset-0 opacity-10" style={{ background: `radial-gradient(circle at center, ${card.color}, transparent 70%)` }} />
-                            <svg width="60" height="60" viewBox="0 0 80 80" className="relative z-10" style={{ color: card.color }}>
-                              {card.svgPaths}
-                            </svg>
-                          </div>
-                        )}
+                  {/* Content Side */}
+                  <div className="w-full md:w-1/2 p-10 md:p-16 flex flex-col justify-center relative">
+                    <span className="hidden md:block absolute top-12 right-12 text-white/[0.03] text-8xl font-display font-black">0{index + 1}</span>
+                    
+                    <div className="flex items-center gap-4 mb-8">
+                      <div className="w-8 h-[1px] bg-[#E31837]" />
+                      <span className="text-[#E31837] text-[10px] font-bold tracking-[0.3em] uppercase">Insight</span>
+                    </div>
+
+                    <h4 className="font-display font-bold text-3xl text-white mb-6 leading-[0.9] tracking-tighter group-hover:text-[#E31837] transition-colors duration-500">
+                      {card.title}
+                    </h4>
+                    
+                    <p className="text-[#A8A29C] text-base font-medium leading-relaxed mb-10">
+                      {card.desc}
+                    </p>
+
+                    <div className="flex items-center gap-6">
+                      <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-[#E31837] group-hover:border-[#E31837] transition-all duration-500">
+                        <ArrowRight size={20} className="text-white transition-transform group-hover:translate-x-1" />
                       </div>
-                      
-                      {/* Right: Description */}
-                      <p className="text-[#A8A29C] text-base md:text-lg leading-relaxed flex-1">
-                        {card.desc}
-                      </p>
+                      <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-white/40 group-hover:text-white transition-colors">Details</span>
                     </div>
                   </div>
                 </div>
               </div>
-            );
-          })}
+            </div>
+          ))}
         </div>
 
       </div>
+      
+      {/* Atmosphere blobs */}
+      <div className="absolute top-1/4 -left-40 w-[600px] h-[600px] bg-[#E31837]/5 blur-[150px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-1/4 -right-40 w-[600px] h-[600px] bg-[#FF6B35]/5 blur-[150px] rounded-full pointer-events-none" />
     </div>
   );
 }

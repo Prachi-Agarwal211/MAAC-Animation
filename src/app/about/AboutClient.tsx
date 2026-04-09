@@ -1,255 +1,155 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { gsap } from "@/lib/gsap";
-import { shouldAnimate } from "@/lib/animationUtils";
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "@/lib/gsap";
 import Footer from "@/components/Footer";
 import { localBusinessSchema, breadcrumbSchema } from "@/lib/structured-data";
+import RevealHeading from "@/components/ui/RevealHeading";
+import SplitTextReveal from "@/components/ui/SplitTextReveal";
 
 const milestones = [
-  { year: "1986", title: "Foundation", description: "MAAC was established as a premier animation education brand under Aptech." },
-  { year: "2000s", title: "Expansion", description: "Expanded to 100+ centers across India, becoming the largest animation institute network." },
-  { year: "2010s", title: "Industry Integration", description: "Established partnerships with leading studios like DNEG, Prime Focus, and MPC." },
-  { year: "Present", title: "Innovation", description: "Continuously updating curriculum with cutting-edge technologies including AI, VR, and real-time rendering." },
+  { year: "1986", title: "The Genesis", description: "Established as India's first dedicated institute for cinematic excellence." },
+  { year: "2000", title: "Global Vision", description: "Pioneered the integration of international VFX workflows into the Indian curriculum." },
+  { year: "2015", title: "Studio Synergy", description: "Launched exclusive placement cells with DNEG, Prime Focus, and MPC." },
+  { year: "2026", title: "Future Forge", description: "Leading the revolution in AI-driven 3D production and real-time rendering." },
 ];
 
 const faculty = [
-  { name: "Rajesh Kumar", role: "Head of Animation", experience: "15+ Years", initial: "R", bio: "Former animator at Prime Focus" },
-  { name: "Priya Menon", role: "VFX Lead Instructor", experience: "12+ Years", initial: "P", bio: "Ex-compositor at Redchillies VFX" },
-  { name: "Amit Sharma", role: "Game Design Mentor", experience: "10+ Years", initial: "A", bio: "Previously at Ubisoft India" },
-  { name: "Sneha Patel", role: "Digital Media Lead", experience: "8+ Years", initial: "S", bio: "Motion graphics specialist" },
+  { name: "Rajesh Kumar", role: "Head of Animation", exp: "15+ Years", bio: "Former Lead Animator at Prime Focus" },
+  { name: "Priya Menon", role: "VFX Lead", exp: "12+ Years", bio: "Ex-Compositor at Redchillies VFX" },
+  { name: "Amit Sharma", role: "Game Design", exp: "10+ Years", bio: "Expert in Unreal Engine 5" },
+  { name: "Sneha Patel", role: "Digital Media", exp: "8+ Years", bio: "Motion Graphics specialist" },
 ];
 
 export default function AboutClient() {
-  const pageRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (!shouldAnimate()) return;
+  useGSAP(() => {
+    const tl = gsap.timeline();
+    tl.fromTo(".about-hero-media", { scale: 1.2, opacity: 0 }, { scale: 1, opacity: 1, duration: 1.5, ease: "expo.out" });
 
-    const ctx = gsap.context(() => {
-      // Hero animation
-      gsap.fromTo(
-        ".about-hero-content",
-        { opacity: 0, y: 60 },
-        { opacity: 1, y: 0, duration: 1, ease: "power3.out" }
-      );
-
-      // Timeline items
-      gsap.fromTo(
-        ".timeline-item",
-        { opacity: 0, x: -40 },
-        {
-          opacity: 1,
-          x: 0,
-          duration: 0.6,
-          stagger: 0.15,
-          scrollTrigger: {
-            trigger: ".timeline-section",
-            start: "top 75%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
-
-      // Faculty cards
-      gsap.fromTo(
-        ".faculty-card",
-        { opacity: 0, y: 40, scale: 0.95 },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 0.6,
-          stagger: 0.1,
-          ease: "back.out(1.3)",
-          scrollTrigger: {
-            trigger: ".faculty-section",
-            start: "top 75%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
-    }, pageRef);
-
-    return () => {
-      ctx.revert();
-    };
-  }, []);
+    gsap.fromTo(".milestone-card", 
+      { opacity: 0, x: (i) => i % 2 === 0 ? -50 : 50 },
+      { 
+        opacity: 1, x: 0, duration: 1, stagger: 0.2, ease: "expo.out",
+        scrollTrigger: { trigger: ".timeline-section", start: "top 70%" }
+      }
+    );
+  }, { scope: containerRef });
 
   return (
-    <main ref={pageRef} className="overflow-hidden">
-      {/* Structured Data */}
+    <main ref={containerRef} className="bg-[#080808] overflow-hidden">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
-            ...localBusinessSchema,
-            breadcrumb: breadcrumbSchema([
-              { name: "Home", url: "https://www.maacanimationjaipur.com" },
-              { name: "About", url: "https://www.maacanimationjaipur.com/about" },
-            ]),
+            "@context": "https://schema.org",
+            "@graph": [
+              { ...localBusinessSchema },
+              breadcrumbSchema([
+                { name: "Home", url: "https://www.maacanimationjaipur.com" },
+                { name: "About", url: "https://www.maacanimationjaipur.com/about" },
+              ])
+            ]
           }),
         }}
       />
 
-      {/* Hero */}
-      <section className="relative pt-20 md:pt-32 pb-16 md:pb-20 overflow-hidden">
-        <div className="absolute inset-0 bg-hero-pattern" />
-        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-primary/15 rounded-full blur-[120px]" />
-        <div className="absolute bottom-0 -right-32 w-96 h-96 bg-accent/10 rounded-full blur-[120px]" />
+      {/* ── HERO SECTION ── */}
+      <section className="relative min-h-[90vh] flex flex-col justify-end pb-24 px-6 md:px-12 lg:px-24">
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent z-10" />
+          <div className="about-hero-media relative w-full h-full">
+             <div className="absolute inset-0 bg-[#1c1c1c] animated-mesh-bg opacity-40" />
+             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[30vw] font-display font-black text-white/[0.02] select-none pointer-events-none">ABOUT</div>
+          </div>
+        </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 about-hero-content">
-          <p className="text-[#E31837] text-xs font-inter font-semibold tracking-[0.2em] uppercase mb-4">
-            About MAAC
-          </p>
-          <h1 className="font-display font-extrabold text-[clamp(2.5rem,5vw,5rem)] text-[#f5f0e8] leading-[1.05] tracking-tight mb-6">
-            MAAC Animation Institute <span className="gradient-text">Jaipur</span>
+        <div className="relative z-20 max-w-5xl">
+          <span className="inline-block text-[#E31837] text-xs font-bold tracking-[0.4em] uppercase mb-8">
+            Established 1986
+          </span>
+          <h1 className="mb-10">
+            <span className="block text-white font-display font-black text-[clamp(3.5rem,10vw,8.5rem)] leading-[0.85] tracking-tighter">
+              <SplitTextReveal>Crafting the</SplitTextReveal>
+            </span>
+            <span className="block gradient-text font-display font-black text-[clamp(3rem,8vw,7rem)] leading-[0.85] tracking-tighter mt-4">
+              <SplitTextReveal delay={0.2}>Digital Future</SplitTextReveal>
+            </span>
           </h1>
-          <p className="text-[#6b6b6b] text-lg md:text-xl max-w-3xl leading-relaxed">
-            Welcome to Maya Academy of Advanced Cinematics (MAAC) — Jaipur&apos;s premier animation institute and the best destination for aspiring animators, VFX artists, and game designers in Rajasthan. Established with a vision to nurture creative talents and provide world-class education in animation and multimedia.
+          <p className="text-[#A8A29C] text-lg md:text-2xl font-medium leading-relaxed max-w-3xl border-l-2 border-[#E31837] pl-8">
+            Welcome to Maya Academy of Advanced Cinematics (MAAC) — Jaipur&apos;s premier hub for VFX, Animation, and Game Design excellence.
           </p>
-
-          {/* Decorative gradient block */}
-          <div
-            className="aspect-video max-w-4xl rounded-3xl mt-10 overflow-hidden"
-            style={{
-              background: "linear-gradient(135deg,#1C1410 0%,#2A0A0E 50%,#1C1410 100%)",
-              border: "1px solid rgba(227,24,55,0.15)",
-            }}
-          >
-            <div className="w-full h-full flex items-center justify-center">
-              <div className="text-center">
-                <div className="font-display font-bold text-[8rem] text-white/5 leading-none select-none">MAAC</div>
-                <p className="text-[#6b6b6b] text-sm -mt-4">Maya Academy of Advanced Cinematics</p>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
-      {/* Mission & Vision */}
-      <section className="relative py-24 overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="glass-card rounded-3xl p-8 md:p-10">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center text-3xl mb-6">
-                🎯
-              </div>
-              <h3 className="font-display font-bold text-2xl text-[#f5f0e8] mb-4">
-                Our Mission
-              </h3>
-              <p className="text-[#6b6b6b] leading-relaxed">
-                To inspire, educate, and empower aspiring artists to unleash
-                their creativity and achieve their dreams. We strive to provide a
-                conducive learning environment where students can experiment,
-                collaborate, and push the boundaries of their imagination.
-              </p>
-            </div>
-            <div className="glass-card rounded-3xl p-8 md:p-10">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center text-3xl mb-6">
-                🌟
-              </div>
-              <h3 className="font-display font-bold text-2xl text-[#f5f0e8] mb-4">
-                Our Vision
-              </h3>
-              <p className="text-[#6b6b6b] leading-relaxed">
-                To be the global leader in animation and VFX education, setting
-                benchmarks for creative excellence and producing industry-ready
-                professionals who shape the future of entertainment, media, and
-                digital content creation.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Timeline */}
-      <section className="timeline-section relative py-24 bg-[#0f0f0f]">
-        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="font-display font-bold text-3xl sm:text-4xl text-[#f5f0e8] mb-4">
-              Our <span className="gradient-text">History</span>
-            </h2>
-          </div>
-
-          <div className="relative">
-            {/* Timeline line */}
-            <div className="absolute left-1/2 -translate-x-1/2 w-px h-full bg-gradient-to-b from-primary/50 via-accent/30 to-primary/50 hidden md:block" />
-
-            <div className="space-y-12">
-              {milestones.map((item, index) => (
-                <div
-                  key={item.year}
-                  className={`timeline-item flex flex-col md:flex-row items-center gap-8 ${
-                    index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
-                  }`}
-                >
-                  <div className={`flex-1 ${index % 2 === 0 ? "md:text-right" : "md:text-left"}`}>
-                    <div className="glass-card rounded-2xl p-6 inline-block">
-                      <span className="text-[#E31837] font-display font-bold text-lg">
-                        {item.year}
-                      </span>
-                      <h3 className="text-[#f5f0e8] font-display font-semibold text-xl mt-2 mb-1">
-                        {item.title}
-                      </h3>
-                      <p className="text-[#6b6b6b] text-sm">{item.description}</p>
-                    </div>
-                  </div>
-
-                  {/* Center dot */}
-                  <div className="w-4 h-4 rounded-full bg-primary border-4 border-dark relative z-10 hidden md:block">
-                    <div className="absolute inset-0 rounded-full bg-primary animate-ping opacity-20" />
-                  </div>
-
-                  <div className="flex-1" />
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Faculty */}
-      <section className="faculty-section relative py-24">
-        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <p className="text-[#E31837] text-xs font-inter font-semibold tracking-[0.2em] uppercase mb-4">
-              Our Team
-            </p>
-            <h2 className="font-display font-bold text-3xl sm:text-4xl text-[#f5f0e8] mb-4">
-              Experienced <span className="gradient-text">Faculty</span>
-            </h2>
-            <p className="text-[#6b6b6b] text-lg max-w-2xl mx-auto">
-              Learn from industry professionals with years of experience in top
-              animation studios and production houses.
+      {/* ── MISSION SECTION ── */}
+      <section className="relative py-24 md:py-40 bg-[#0C0C0C]">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 grid lg:grid-cols-2 gap-16 md:gap-32">
+          <div className="space-y-12">
+            <RevealHeading className="text-white text-4xl md:text-6xl tracking-tighter">The Visionary Core</RevealHeading>
+            <p className="text-[#A8A29C] text-lg leading-relaxed italic">
+              &ldquo;We don&apos;t just teach tools; we forge artists who command the medium. Our vision is to place Jaipur at the heart of the global creative map.&rdquo;
             </p>
           </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {faculty.map((member) => (
-              <div
-                key={member.name}
-                className="faculty-card glass-card rounded-3xl p-6 text-center group"
-              >
-                {/* Avatar - styled initials */}
-                <div
-                  className="w-28 h-28 mx-auto rounded-full mb-4 flex items-center justify-center font-display font-bold text-3xl text-white/80"
-                  style={{ background: "linear-gradient(135deg,#E31837,#C4132D)" }}
-                >
-                  {member.initial}
-                </div>
-                <h3 className="font-display font-semibold text-[#f5f0e8] group-hover:text-primary transition-colors">
-                  {member.name}
-                </h3>
-                <p className="text-[#E31837] text-sm mb-1">{member.role}</p>
-                <p className="text-[#6b6b6b] text-xs">{member.experience}</p>
-                <p className="text-[#6b6b6b] text-xs mt-2">{member.bio}</p>
+          <div className="grid gap-8">
+            {["Mission", "Vision"].map((type, i) => (
+              <div key={type} className="p-10 rounded-[40px] glass border border-white/5 group hover:border-[#E31837]/30 transition-all duration-700">
+                <span className="text-[#E31837] text-[10px] font-bold uppercase tracking-[0.3em] mb-4 block">0{i+1} · {type}</span>
+                <p className="text-white/80 leading-relaxed">
+                  {i === 0 
+                    ? "To inspire and empower aspiring artists through industry-aligned curriculum and hands-on studio experience."
+                    : "To be the global benchmark in digital arts education, producing elite talent for the world's top production houses."}
+                </p>
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ── TIMELINE SECTION ── */}
+      <section className="timeline-section relative py-24 md:py-40">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 mb-24">
+          <h2 className="font-display font-black text-white text-5xl md:text-8xl tracking-tighter">OUR <span className="text-white/10">ODYSSEY</span></h2>
+        </div>
+        
+        <div className="relative border-t border-white/5">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4">
+            {milestones.map((m, i) => (
+              <div key={i} className="milestone-card p-10 md:p-12 border-b md:border-b-0 md:border-r border-white/5 hover:bg-[#E31837]/5 transition-colors duration-700 group">
+                <div className="text-[#E31837] font-display font-black text-5xl mb-8 group-hover:scale-110 group-hover:-translate-y-2 transition-transform duration-500">{m.year}</div>
+                <h3 className="text-white text-xl font-display font-bold mb-4 uppercase tracking-widest">{m.title}</h3>
+                <p className="text-[#6B6560] text-sm leading-relaxed group-hover:text-white transition-colors">{m.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── FACULTY SECTION ── */}
+      <section className="py-24 md:py-40 bg-[#080808]">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 text-center mb-24">
+          <span className="text-[#E31837] text-sm font-bold tracking-[0.3em] uppercase mb-6 block">Industry Titans</span>
+          <h2 className="text-white font-display font-black text-5xl md:text-8xl tracking-tighter">EXPERIENCED <span className="gradient-text">FACULTY</span></h2>
+        </div>
+
+        <div className="max-w-[1600px] mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {faculty.map((f, i) => (
+            <div key={i} className="group relative aspect-[3/4] rounded-[40px] overflow-hidden bg-[#111111] border border-white/5">
+              <div className="absolute inset-0 bg-gradient-to-br from-[#E31837]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+              <div className="absolute inset-0 flex items-center justify-center text-[15rem] font-display font-black text-white/[0.02] group-hover:text-white/[0.05] transition-colors">{f.name[0]}</div>
+              
+              <div className="absolute bottom-0 left-0 right-0 p-10 translate-y-4 group-hover:translate-y-0 transition-transform duration-700">
+                <span className="text-[#E31837] text-[10px] font-bold uppercase tracking-[0.3em] mb-2 block">{f.role}</span>
+                <h3 className="text-white text-2xl font-display font-bold mb-2">{f.name}</h3>
+                <p className="text-[#6B6560] text-xs font-bold uppercase tracking-widest mb-6">{f.exp} EXPERIENCE</p>
+                <p className="text-white/40 text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-100">
+                  {f.bio}
+                </p>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 

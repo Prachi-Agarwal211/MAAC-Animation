@@ -1,10 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { gsap } from "@/lib/gsap";
+import { useRef, useState } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "@/lib/gsap";
 import { contactInfo } from "@/data/siteData";
 import MagneticButton from "@/components/ui/MagneticButton";
 import { submitContactForm } from "@/app/actions";
+import { Send, Phone, MessageSquare, Mail, ShieldCheck } from "lucide-react";
 
 export default function ApplyNow() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -17,21 +19,18 @@ export default function ApplyNow() {
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo(".an-heading", { opacity: 0, x: -60 }, {
-        opacity: 1, x: 0, duration: 1, ease: "expo.out",
-        scrollTrigger: { trigger: sectionRef.current, start: "top 75%" },
-      });
-      if (formRef.current) {
-        gsap.fromTo(formRef.current, { opacity: 0, x: 60 }, {
-          opacity: 1, x: 0, duration: 1, ease: "expo.out",
-          scrollTrigger: { trigger: sectionRef.current, start: "top 70%" },
-        });
+  useGSAP(() => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top 80%",
+        toggleActions: "play none none reverse",
       }
-    }, sectionRef);
-    return () => ctx.revert();
-  }, []);
+    });
+
+    tl.fromTo(".an-heading", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 1, ease: "expo.out" })
+      .fromTo(".an-form-card", { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: 1, ease: "expo.out" }, "-=0.8");
+  }, { scope: sectionRef });
 
   const validate = () => {
     const errs: Record<string, string> = {};
@@ -46,28 +45,15 @@ export default function ApplyNow() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
-
     setIsSubmitting(true);
     setSubmitError(null);
 
     try {
-      // Create FormData and use server action
       const data = new FormData();
-      data.set("name", formData.name);
-      data.set("phone", formData.phone);
-      data.set("email", formData.email);
-      data.set("course", formData.course);
-      data.set("city", formData.city);
-      data.set("message", formData.message);
-      
-      // Use server action for email delivery
+      Object.entries(formData).forEach(([k, v]) => data.set(k, v));
       const result = await submitContactForm(data);
-      
-      if (result.success) {
-        setSubmitted(true);
-      } else {
-        setSubmitError(result.message);
-      }
+      if (result.success) setSubmitted(true);
+      else setSubmitError(result.message);
     } catch {
       setSubmitError('Something went wrong. Please try again.');
     } finally {
@@ -77,173 +63,149 @@ export default function ApplyNow() {
 
   if (submitted) {
     return (
-      <section className="relative py-24 md:py-32 overflow-hidden bg-gradient-section">
+      <section className="relative py-24 md:py-40 overflow-hidden bg-[#0C0C0C]">
         <div className="max-w-2xl mx-auto px-6 text-center">
-          <div className="w-16 h-16 rounded-full bg-[#25D366]/20 flex items-center justify-center mx-auto mb-6">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#25D366" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <div className="w-20 h-20 rounded-full bg-[#25D366]/10 border border-[#25D366]/30 flex items-center justify-center mx-auto mb-8">
+            <Send size={32} className="text-[#25D366]" />
           </div>
-          <h2 className="font-display font-bold text-3xl text-[#F0EBE1] mb-4">Thank You!</h2>
-          <p className="text-[#A8A29C] text-lg">We&apos;ve received your enquiry. Our team will contact you within 24 hours.</p>
+          <h2 className="font-display font-bold text-4xl text-white mb-6">Success!</h2>
+          <p className="text-[#A8A29C] text-xl leading-relaxed">Our admissions team will contact you within 24 hours to guide you through the process.</p>
         </div>
       </section>
     );
   }
 
   const inputClass = (field: string) =>
-    `w-full px-5 py-4 rounded-xl bg-white/5 border ${errors[field] ? "border-red-500" : "border-white/10"} text-[#F0EBE1] placeholder-[#6B6560] focus:outline-none focus:border-[#C4A882]/50 focus:ring-1 focus:ring-[#C4A882]/30 transition-all duration-300 text-base`;
+    `w-full px-6 py-4 rounded-2xl bg-white/5 border ${errors[field] ? "border-red-500" : "border-white/10"} text-white placeholder-[#6B6560] focus:outline-none focus:border-[#E31837]/50 transition-all duration-300 text-base`;
 
   return (
-    <section ref={sectionRef} className="relative py-24 md:py-32 overflow-hidden bg-gradient-section">
-      {/* Grid overlay */}
-      <div className="absolute inset-0 opacity-[0.03]" style={{
-        backgroundImage: "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)",
-        backgroundSize: "40px 40px",
-      }} />
-
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+    <section ref={sectionRef} className="relative py-24 md:py-40 overflow-hidden bg-[#0C0C0C]">
+      <div className="atmosphere-blob blob-red top-0 left-0 opacity-10" />
+      
+      <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
           {/* Left */}
-          <div className="an-heading order-2 lg:order-1">
-            <p className="text-[#E31837] text-xs font-semibold tracking-[0.15em] uppercase mb-4">Get Started</p>
-            <h2 className="font-display font-bold text-[clamp(2rem,4vw,3.5rem)] text-[#F0EBE1] leading-[1.05] tracking-tight mb-6">
-              Apply <span className="gradient-text">Now</span>
-            </h2>
-            <p className="text-[#A8A29C] text-lg leading-relaxed mb-8">
-              Take the first step towards your creative career. Fill in the form and our team will get in touch.
-            </p>
+          <div className="an-heading space-y-10">
+            <div>
+              <p className="text-[#E31837] text-sm font-bold tracking-[0.2em] uppercase mb-6 flex items-center gap-3">
+                <span className="w-8 h-[1px] bg-[#E31837]" />
+                Admissions Open
+              </p>
+              <h2 className="font-display font-bold text-[clamp(2.5rem,6vw,4.5rem)] text-[#F0EBE1] leading-[0.95] tracking-tight">
+                Ignite Your <span className="gradient-text">Potential</span>
+              </h2>
+              <p className="text-[#A8A29C] text-lg md:text-2xl font-medium leading-relaxed mt-8 max-w-lg">
+                Join India&apos;s most prestigious academy for digital arts. Your journey to a global creative career starts here.
+              </p>
+            </div>
 
-            {/* Trust badges */}
-            <div className="flex flex-wrap gap-3 mb-8">
-              {["NSDC Partner", "MESC Certified", "Skill India"].map((badge) => (
-                <span key={badge} className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[#A8A29C] text-xs">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E31837" strokeWidth="2"><polyline points="20 6 9 17 4 12"/></svg>
+
+            <div className="grid grid-cols-2 gap-4">
+              {["NSDC Partner", "MESC Certified", "Skill India", "B.Voc Degree"].map((badge) => (
+                <div key={badge} className="flex items-center gap-3 p-4 rounded-2xl glass border border-white/5 text-white/60 text-xs font-bold uppercase tracking-wider">
+                  <div className="w-6 h-6 rounded-full bg-[#E31837]/10 flex items-center justify-center">
+                    <ShieldCheck size={14} className="text-[#E31837]" />
+                  </div>
                   {badge}
-                </span>
+                </div>
               ))}
             </div>
 
-            {/* Direct contact */}
-            <p className="text-[#6B6560] text-sm mb-3">Or reach us directly:</p>
-            <div className="flex flex-wrap gap-3 mb-8">
-              <MagneticButton>
-                <a href={contactInfo.whatsapp ? `https://wa.me/${contactInfo.whatsapp.replace(/[^0-9]/g, "")}` : "#"} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#25D366]/10 border border-[#25D366]/20 text-[#25D366] text-sm hover:bg-[#25D366]/20 transition-colors">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>
-                  WhatsApp
-                </a>
-              </MagneticButton>
-              <MagneticButton>
-                <a href={`tel:${contactInfo.phone}`} className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#E31837]/10 border border-[#E31837]/20 text-[#E31837] text-sm hover:bg-[#E31837]/20 transition-colors">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.12.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.58 2.81.7A2 2 0 0122 16.92z"/></svg>
-                  Call
-                </a>
-              </MagneticButton>
-              <a href={`mailto:${contactInfo.email}`} className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-[#A8A29C] text-sm hover:bg-white/10 transition-colors">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                Email
-              </a>
+            <div className="space-y-6 pt-6 border-t border-white/5">
+              <p className="text-[#6B6560] text-xs font-bold uppercase tracking-[0.2em]">Contact Us Directly</p>
+              <div className="flex flex-wrap gap-4">
+                <MagneticButton>
+                  <a href={contactInfo.whatsapp ? `https://wa.me/${contactInfo.whatsapp.replace(/[^0-9]/g, "")}` : "#"} className="flex items-center gap-3 px-6 py-3 rounded-full bg-[#25D366]/10 border border-[#25D366]/20 text-[#25D366] text-xs font-bold uppercase tracking-widest hover:bg-[#25D366]/20 transition-all">
+                    <MessageSquare size={16} /> WhatsApp
+                  </a>
+                </MagneticButton>
+                <MagneticButton>
+                  <a href={`tel:${contactInfo.phone}`} className="flex items-center gap-3 px-6 py-3 rounded-full bg-[#E31837]/10 border border-[#E31837]/20 text-[#E31837] text-xs font-bold uppercase tracking-widest hover:bg-[#E31837]/20 transition-all">
+                    <Phone size={16} /> Call Now
+                  </a>
+                </MagneticButton>
+              </div>
             </div>
-
-            <p className="text-[#A8A29C] text-sm">Free career counseling — No obligation</p>
-            <p className="text-[#6B6560] text-xs mt-1">Join 500+ students who enrolled this year</p>
           </div>
 
           {/* Right — Form */}
-          <form
-            ref={formRef}
-            onSubmit={handleSubmit}
-            className="order-1 lg:order-2 glass rounded-3xl p-6 md:p-8 space-y-4"
-          >
-            <h3 className="font-display font-bold text-xl text-[#F0EBE1] mb-2">Enquiry Form</h3>
+          <div className="an-form-card">
+            <form
+              ref={formRef}
+              onSubmit={handleSubmit}
+              className="glass rounded-[40px] p-8 md:p-12 space-y-6 border-white/5 relative overflow-hidden"
+            >
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#E31837] to-[#FF6B35]" />
+              <h3 className="font-display font-bold text-2xl text-white mb-4">Express Interest</h3>
 
-            <div>
-              <input type="text" placeholder="Your Name *" required value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className={inputClass("name")} style={{ fontSize: "16px" }} />
-              {errors.name && <p className="text-red-400 text-xs mt-1">{errors.name}</p>}
-            </div>
+              <div className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <input type="text" placeholder="Full Name *" required value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    className={inputClass("name")} />
+                  <input type="email" placeholder="Email Address *" required value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    className={inputClass("email")} />
+                </div>
 
-            <div>
-              <div className="flex">
-                <span className="flex items-center px-4 rounded-l-xl bg-white/5 border border-r-0 border-white/10 text-[#6B6560] text-sm">+91</span>
-                <input type="tel" placeholder="Phone Number *" required value={formData.phone}
-                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  className={`${inputClass("phone")} rounded-l-none`} style={{ fontSize: "16px" }} />
+                <div className="flex gap-4">
+                  <div className="flex-1">
+                    <input type="tel" placeholder="Phone Number *" required value={formData.phone}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      className={inputClass("phone")} />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <select value={formData.course}
+                    onChange={(e) => setFormData({ ...formData, course: e.target.value })}
+                    className={`${inputClass("course")} appearance-none`}>
+                    <option value="">Select Course *</option>
+                    <option value="animation">3D Animation</option>
+                    <option value="vfx">Visual Effects (VFX)</option>
+                    <option value="gaming">Game Design</option>
+                    <option value="filmmaking">Digital Filmmaking</option>
+                    <option value="digital-media">Digital Media & Design</option>
+                    <option value="architectural">Architectural Design</option>
+                  </select>
+                  <select value={formData.city}
+                    onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+                    className={`${inputClass("city")} appearance-none`}>
+                    <option value="">Preferred Center</option>
+                    <option value="jaipur-malviya">Jaipur — Malviya Nagar</option>
+                    <option value="jaipur-vaishali">Jaipur — Vaishali Nagar</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+
+                <textarea placeholder="Tell us about your goals (Optional)" rows={3} value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  className={`${inputClass("message")} resize-none`} />
               </div>
-              {errors.phone && <p className="text-red-400 text-xs mt-1">{errors.phone}</p>}
-            </div>
 
-            <div>
-              <input type="email" placeholder="Email Address *" required value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className={inputClass("email")} style={{ fontSize: "16px" }} />
-              {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email}</p>}
-            </div>
-
-            <div>
-              <select value={formData.course}
-                onChange={(e) => setFormData({ ...formData, course: e.target.value })}
-                className={`${inputClass("course")} appearance-none`} style={{ fontSize: "16px" }}>
-                <option value="">Select Course *</option>
-                <option value="animation">3D Animation</option>
-                <option value="vfx">Visual Effects (VFX)</option>
-                <option value="gaming">Game Design</option>
-                <option value="filmmaking">Digital Filmmaking</option>
-                <option value="digital-media">Digital Media & Design</option>
-                <option value="architectural">Architectural Design</option>
-              </select>
-              {errors.course && <p className="text-red-400 text-xs mt-1">{errors.course}</p>}
-            </div>
-
-            <div>
-              <select value={formData.city}
-                onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                className={`${inputClass("city")} appearance-none`} style={{ fontSize: "16px" }}>
-                <option value="">Select City / Center</option>
-                <option value="jaipur-malviya">Jaipur — Malviya Nagar</option>
-                <option value="jaipur-vaishali">Jaipur — Vaishali Nagar</option>
-                <option value="other">Other</option>
-              </select>
-            </div>
-
-            <div>
-              <textarea placeholder="Your Message (Optional)" rows={3} value={formData.message}
-                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                className={`${inputClass("message")} resize-none`} style={{ fontSize: "16px" }} />
-            </div>
-
-            <div className="flex justify-center">
               <MagneticButton>
                 <button 
                   type="submit" 
                   disabled={isSubmitting}
-                  className="btn bg-gradient-to-r from-[#E31837] to-[#C4132D] text-white py-4 text-base font-display w-full disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(227,24,55,0.2)] border border-[#E31837]/50"
+                  className="w-full btn btn-primary py-5 rounded-2xl text-base font-bold tracking-widest flex items-center justify-center gap-3 disabled:opacity-50"
                 >
-                  {isSubmitting ? (
-                    <>
-                      <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                      </svg>
-                      Submitting...
-                    </>
-                  ) : (
-                    'Submit Enquiry'
-                  )}
+                  {isSubmitting ? 'Sending...' : 'Secure Your Spot'}
+                  {!isSubmitting && <Send size={18} />}
                 </button>
               </MagneticButton>
-            </div>
-            
-            {submitError && (
-              <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm text-center">
-                {submitError}
-              </div>
-            )}
+              
+              {submitError && (
+                <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm text-center">
+                  {submitError}
+                </div>
+              )}
 
-            <p className="text-[#6B6560] text-xs text-center flex items-center justify-center gap-1">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-              Your data is 100% secure. No spam.
-            </p>
-          </form>
+              <p className="text-[#6B6560] text-[10px] text-center uppercase tracking-widest flex items-center justify-center gap-2">
+                <ShieldCheck size={12} className="text-[#25D366]" />
+                Strict Privacy Policy • No Spam Guaranteed
+              </p>
+            </form>
+          </div>
         </div>
       </div>
     </section>

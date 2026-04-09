@@ -1,105 +1,126 @@
 "use client";
 
-import { useEffect, useRef, useState, memo } from "react";
-import { gsap } from "@/lib/gsap";
-import { shouldAnimate } from "@/lib/animationUtils";
+import { useRef, useState, memo } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "@/lib/gsap";
 import { testimonialsData } from "@/data/siteData";
+import { ChevronLeft, ChevronRight, Play, Volume2 } from "lucide-react";
+
+function Waveform() {
+  return (
+    <div className="flex items-center gap-1 h-8">
+      {Array.from({ length: 12 }).map((_, i) => (
+        <div
+          key={i}
+          className="w-1 bg-[#E31837] rounded-full animate-pulse"
+          style={{ 
+            height: `${Math.random() * 100}%`,
+            animationDelay: `${i * 0.1}s`,
+            animationDuration: `${0.5 + Math.random()}s`
+          }}
+        />
+      ))}
+    </div>
+  );
+}
 
 function Testimonials() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
-  const startXRef = useRef<number>(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
 
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (!shouldAnimate() || !isMounted) return;
-
-    const ctx = gsap.context(() => {
-      gsap.fromTo(".tm-heading", { opacity: 0, y: 50 }, {
-        opacity: 1, y: 0, duration: 0.8, ease: "expo.out",
-        scrollTrigger: { trigger: sectionRef.current, start: "top 75%" },
-      });
-    }, sectionRef);
-
-    return () => { ctx.revert(); };
-  }, [isMounted]);
-
-  // Auto-advance interval (separate from GSAP context)
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (!isPaused) {
-        setActive((prev) => (prev + 1) % testimonialsData.length);
+  useGSAP(() => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top 80%",
+        toggleActions: "play none none reverse",
       }
-    }, 5000);
+    });
 
-    return () => clearInterval(interval);
-  }, [isPaused]);
+    tl.fromTo(".tm-header > *", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1, stagger: 0.1, ease: "expo.out" })
+      .fromTo(".tm-main", { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 1.2, ease: "expo.out" }, "-=0.8");
+  }, { scope: sectionRef });
 
-  // Touch swipe support on mobile
-  const handleTouchStart = (e: React.TouchEvent) => { startXRef.current = e.touches[0].clientX; };
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    const diff = startXRef.current - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 50) {
-      setActive(prev => diff > 0
-        ? Math.min(prev + 1, testimonialsData.length - 1)
-        : Math.max(prev - 1, 0)
-      );
-    }
-  };
+  const next = () => setActive((prev) => (prev + 1) % testimonialsData.length);
+  const prev = () => setActive((prev) => (prev - 1 + testimonialsData.length) % testimonialsData.length);
 
   return (
-    <section ref={sectionRef} className="relative py-24 md:py-32 overflow-hidden" style={{ background: "linear-gradient(180deg, #0C0C0C 0%, #17110C 50%, #0C0C0C 100%)" }}>
-      <div className="atmosphere-blob blob-red" style={{ top: "30%", left: "-100px", width: "400px", height: "400px" }} />
-
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
-        <div className="tm-heading text-center mb-16">
-          <p className="text-[#E31837] text-xs font-semibold tracking-[0.12em] uppercase mb-4">Testimonials</p>
-          <h2 className="font-display font-bold text-[clamp(2rem,4vw,3.5rem)] text-[#F0EBE1] leading-[1.08] tracking-tight mb-4 pb-1">
-            What Our <span className="gradient-text-warm">Students Say</span>
+    <section ref={sectionRef} className="relative py-24 md:py-40 overflow-hidden bg-[#080808]">
+      <div className="atmosphere-blob blob-red top-1/4 -left-20 opacity-5" />
+      
+      <div className="relative max-w-7xl mx-auto px-6 lg:px-8 z-10">
+        <div className="tm-header text-center mb-24">
+          <p className="text-[#E31837] text-sm font-bold tracking-[0.3em] uppercase mb-6">Success Stories</p>
+          <h2 className="font-display font-black text-[clamp(2.5rem,6vw,5.5rem)] text-white leading-[0.9] tracking-tighter">
+            The Alumni <span className="gradient-text">Voices</span>
           </h2>
         </div>
 
-        <div className="max-w-4xl mx-auto">
+        <div className="tm-main max-w-5xl mx-auto relative">
           <div
-            className="glass-card rounded-3xl p-8 md:p-12 text-center mb-8"
-            onTouchStart={handleTouchStart}
-            onTouchEnd={handleTouchEnd}
+            className="glass rounded-[48px] p-10 md:p-20 relative overflow-hidden group border-white/5"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
-            onFocus={() => setIsPaused(true)}
-            onBlur={() => setIsPaused(false)}
           >
-            <div className="text-5xl text-[#E31837]/30 font-display mb-6">&ldquo;</div>
-            <p 
-              className="text-[#A8A29C] text-lg md:text-xl leading-relaxed mb-8 min-h-[120px] transition-all duration-500"
-              aria-live="polite"
-              aria-atomic="true"
-            >
-              {testimonialsData[active].text}
-            </p>
-            <div className="flex items-center justify-center gap-4">
-              <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#E31837]/30 to-[#FF6B35]/30 flex items-center justify-center text-[#F0EBE1] font-display font-bold text-lg">
-                {testimonialsData[active].name.charAt(0)}
+            {/* Header: Audio UI */}
+            <div className="flex items-center justify-between mb-16 border-b border-white/5 pb-8">
+               <div className="flex items-center gap-6">
+                  <div className="w-12 h-12 rounded-full bg-[#E31837] flex items-center justify-center text-white">
+                    <Play size={20} fill="currentColor" />
+                  </div>
+                  <div>
+                    <span className="block text-[10px] font-bold text-[#E31837] uppercase tracking-[0.3em] mb-1">Live Playback</span>
+                    <Waveform />
+                  </div>
+               </div>
+               <div className="hidden sm:flex items-center gap-3 text-white/20">
+                  <Volume2 size={18} />
+                  <span className="text-[10px] font-bold uppercase tracking-widest tabular-nums">00:4{active} / 03:12</span>
+               </div>
+            </div>
+
+            <div className="relative z-10 flex flex-col items-center text-center">
+              <p 
+                className="text-[#A8A29C] text-xl md:text-3xl leading-relaxed mb-16 font-medium italic min-h-[180px] flex items-center justify-center transition-all duration-700"
+              >
+                &ldquo;{testimonialsData[active].text}&rdquo;
+              </p>
+              
+              <div className="flex flex-col items-center gap-6">
+                <div className="w-24 h-24 rounded-3xl bg-gradient-to-br from-[#E31837] to-[#FF6B35] p-[1px] rotate-3 group-hover:rotate-0 transition-transform duration-700">
+                  <div className="w-full h-full rounded-3xl bg-[#080808] flex items-center justify-center text-3xl font-display font-black text-white">
+                    {testimonialsData[active].name.charAt(0)}
+                  </div>
+                </div>
+                <div>
+                  <h4 className="text-white text-2xl font-display font-bold tracking-tight mb-1">{testimonialsData[active].name}</h4>
+                  <p className="text-[#E31837] text-xs font-bold tracking-[0.3em] uppercase">{testimonialsData[active].role}</p>
+                </div>
               </div>
-              <div className="text-left">
-                <h4 className="text-[#F0EBE1] font-display font-semibold">{testimonialsData[active].name}</h4>
-                <p className="text-[#E31837] text-sm">{testimonialsData[active].role}</p>
-              </div>
+            </div>
+
+            {/* Navigation Arrows */}
+            <div className="absolute inset-y-0 left-4 md:left-10 flex items-center">
+               <button onClick={prev} className="w-14 h-14 rounded-full glass border border-white/5 flex items-center justify-center text-white/40 hover:text-white hover:border-[#E31837]/30 transition-all active:scale-90">
+                 <ChevronLeft size={28} />
+               </button>
+            </div>
+            <div className="absolute inset-y-0 right-4 md:right-10 flex items-center">
+               <button onClick={next} className="w-14 h-14 rounded-full glass border border-white/5 flex items-center justify-center text-white/40 hover:text-white hover:border-[#E31837]/30 transition-all active:scale-90">
+                 <ChevronRight size={28} />
+               </button>
             </div>
           </div>
 
-          <div className="flex items-center justify-center gap-3">
+          {/* Timeline Dots */}
+          <div className="flex items-center justify-center gap-4 mt-16">
             {testimonialsData.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setActive(index)}
-                className={`transition-all duration-300 rounded-full ${
-                  index === active ? "w-8 h-3 bg-gradient-to-r from-[#E31837] to-[#FF6B35]" : "w-3 h-3 bg-white/20 hover:bg-white/30"
+                className={`transition-all duration-700 rounded-full h-1 ${
+                  index === active ? "w-16 bg-[#E31837]" : "w-2 bg-white/10 hover:bg-white/20"
                 }`}
                 aria-label={`Testimonial ${index + 1}`}
               />

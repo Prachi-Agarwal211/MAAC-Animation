@@ -4,11 +4,14 @@ import "./globals.css";
 import LenisProvider from "@/components/LenisProvider";
 import CustomCursor from "@/components/hero/CustomCursor";
 import FloatingCTA from "@/components/FloatingCTA";
+import MobileBottomNav from "@/components/MobileBottomNav";
 import Navbar from "@/components/Navbar";
 import ClientShell from "@/components/ClientShell";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Providers } from "./providers";
+
+import { contactInfo } from "@/data/siteData";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -38,7 +41,7 @@ export const metadata: Metadata = {
     template: "%s | MAAC Jaipur",
   },
   description:
-    "MAAC Jaipur — Rajasthan's #1 Animation Institute. B.Voc Degree in 3D Animation, VFX & Game Design. 95% Placements. NSDC Certified. Call +91-7300001589.",
+    "MAAC Jaipur — Rajasthan's #1 Animation Institute. B.Voc Degree in 3D Animation, VFX & Game Design. 95% Placements. NSDC Certified. Call " + contactInfo.phone + ".",
   keywords: [
     "animation institute jaipur",
     "3d animation course jaipur",
@@ -90,6 +93,7 @@ export const metadata: Metadata = {
   },
   manifest: '/manifest.json',
 };
+import DemoBar from "@/components/ui/DemoBar";
 
 export default function RootLayout({
   children,
@@ -101,7 +105,9 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${syne.variable} font-body antialiased bg-[#0C0C0C] text-[#F0EBE1]`}
       >
+        <DemoBar />
         <div className="animated-bg" aria-hidden="true" />
+
         <Providers>
           <a
             href="#main-content"
@@ -119,7 +125,8 @@ export default function RootLayout({
             <ClientShell>
               <main id="main-content" tabIndex={-1} className="page-wrapper">{children}</main>
             </ClientShell>
-            <FloatingCTA whatsapp="+917300001589" phone="+917300001589" />
+            <FloatingCTA whatsapp={contactInfo.whatsapp} phone={contactInfo.phone} />
+            <MobileBottomNav />
             <Analytics />
             <SpeedInsights />
           </LenisProvider>

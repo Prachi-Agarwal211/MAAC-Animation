@@ -100,9 +100,9 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
     e.preventDefault();
     if (!validate()) return;
     setSubmitting(true);
+    setErrors({});
     
     try {
-      // Create FormData from state
       const data = new FormData();
       data.set("name", formData.name);
       data.set("phone", formData.phone);
@@ -111,15 +111,16 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
       data.set("city", formData.city);
       data.set("source", "popup_modal");
       
-      // Use server action
       const result = await submitContactForm(data);
       
       if (result.success) {
         setSubmitted(true);
-        setTimeout(handleClose, 2500);
+        setTimeout(handleClose, 3000);
+      } else {
+        setErrors({ submit: result.message });
       }
-    } catch {
-      // silent
+    } catch (error: any) {
+      setErrors({ submit: error.message || "Something went wrong. Please try again." });
     } finally {
       setSubmitting(false);
     }
@@ -177,23 +178,23 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
         <div className="p-7 pt-6">
           {submitted ? (
             <div className="text-center py-6">
-              <div className="w-14 h-14 rounded-full bg-[#E31837]/15 border border-[#E31837]/30 flex items-center justify-center mx-auto mb-4">
+              <div className="w-14 h-14 rounded-full bg-[#E31837]/15 border border-[#E31837]/30 flex items-center justify-center mx-auto mb-4 text-[#E31837]">
                 <svg
                   width="24"
                   height="24"
                   viewBox="0 0 24 24"
                   fill="none"
-                  stroke="#E31837"
-                  strokeWidth="2"
+                  stroke="currentColor"
+                  strokeWidth="3"
                 >
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
               </div>
               <h3 className="font-display font-bold text-xl text-[#F0EBE1] mb-2">
-                We&apos;ll be in touch!
+                Transmission Successful!
               </h3>
               <p className="text-[#A8A29C] text-sm">
-                Our team will call you within 24 hours.
+                Our career advisor will contact you within 24 hours.
               </p>
             </div>
           ) : (
@@ -210,6 +211,12 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                   Book a free demo. No commitment required.
                 </p>
               </div>
+
+              {errors.submit && (
+                <div className="mb-4 p-3 bg-red-500/10 border border-red-500/20 rounded-xl text-red-500 text-[10px] font-bold uppercase tracking-widest text-center">
+                  {errors.submit}
+                </div>
+              )}
 
               <form onSubmit={handleSubmit} className="space-y-3">
                 {/* Full Name */}

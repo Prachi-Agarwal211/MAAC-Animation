@@ -1,0 +1,100 @@
+"use client";
+
+import { useRef } from "react";
+import Image from "next/image";
+import { useGSAP } from "@gsap/react";
+import gsap from "@/lib/gsap";
+
+const bentoItems = [
+  {
+    title: "Environment Modeling",
+    category: "3D Art",
+    image: "/portfolio/environment-modeling/raghav-gupta-page1.jpg",
+    span: "md:col-span-2 md:row-span-2",
+  },
+  {
+    title: "Cinematic Lighting",
+    category: "Lighting & Lookdev",
+    image: "/portfolio/featured/nancy-verma-page1.jpg",
+    span: "md:col-span-1 md:row-span-1",
+  },
+  {
+    title: "VFX Simulation",
+    category: "Dynamics",
+    image: "/portfolio/matte-painting/akshat-asolkar.jpg",
+    span: "md:col-span-1 md:row-span-1",
+  },
+  {
+    title: "Digital Painting",
+    category: "Concept Art",
+    image: "/portfolio/digital-painting/deshna-shah.jpg",
+    span: "md:col-span-1 md:row-span-2",
+  },
+  {
+    title: "Character Design",
+    category: "Sculpting",
+    image: "/portfolio/character-modeling/aarush-kumar-page1.jpg",
+    span: "md:col-span-1 md:row-span-1",
+  },
+  {
+    title: "Feature Production",
+    category: "Full Production",
+    image: "/portfolio/featured/prerit-mehan-page1.jpg",
+    span: "md:col-span-2 md:row-span-1",
+  },
+];
+
+export default function BentoGallery() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top 80%",
+        toggleActions: "play none none reverse",
+      }
+    });
+
+    tl.fromTo(".bento-item", 
+      { opacity: 0, scale: 0.9, y: 30 },
+      { opacity: 1, scale: 1, y: 0, duration: 1, stagger: 0.1, ease: "expo.out" }
+    );
+  }, { scope: containerRef });
+
+  return (
+    <section ref={containerRef} className="bg-[#080808] py-24 md:py-40 px-6 lg:px-20 overflow-hidden">
+      <div className="max-w-[1600px] mx-auto">
+        <div className="text-center mb-20">
+          <span className="inline-block text-[#E31837] text-xs font-bold tracking-[0.4em] uppercase mb-6">Excellence in Craft</span>
+          <h2 className="font-display font-black text-[clamp(2.5rem,6vw,5.5rem)] text-white leading-[0.9] tracking-tighter">
+            The Bento <span className="gradient-text">Showreel</span>
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6 auto-rows-[250px] md:auto-rows-[300px]">
+          {bentoItems.map((item, i) => (
+            <div
+              key={i}
+              className={`bento-item group relative overflow-hidden rounded-[32px] bg-[#111111] border border-white/5 transition-all duration-700 hover:border-[#E31837]/30 ${item.span}`}
+            >
+              <Image
+                src={item.image}
+                alt={item.title}
+                fill
+                className="object-cover transition-transform duration-1000 group-hover:scale-110 opacity-60 group-hover:opacity-100"
+                sizes="(max-width: 768px) 100vw, 800px"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              
+              <div className="absolute bottom-8 left-8 right-8 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+                <span className="text-[#E31837] text-[10px] font-bold uppercase tracking-[0.2em]">{item.category}</span>
+                <h3 className="text-white text-xl md:text-2xl font-display font-bold mt-2">{item.title}</h3>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
