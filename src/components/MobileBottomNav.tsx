@@ -5,6 +5,7 @@ import gsap from "@/lib/gsap";
 import { useRef, useState, useEffect } from "react";
 import { MessageSquare, Calendar, Phone } from "lucide-react";
 import Link from "next/link";
+import { contactInfo } from "@/data/siteData";
 
 export default function MobileBottomNav() {
   const [isVisible, setIsVisible] = useState(false);
@@ -26,7 +27,7 @@ export default function MobileBottomNav() {
         duration: 0.8,
         ease: "expo.out"
       });
-      gsap.fromTo(".mobile-fab-item", 
+      gsap.fromTo(".mobile-fab-item",
         { scale: 0.8, opacity: 0 },
         { scale: 1, opacity: 1, duration: 0.6, stagger: 0.1, ease: "back.out(1.7)", delay: 0.2 }
       );
@@ -40,6 +41,9 @@ export default function MobileBottomNav() {
     }
   }, { dependencies: [isVisible] });
 
+  const whatsappUrl = `https://wa.me/${contactInfo.whatsapp.replace(/[^0-9]/g, "")}?text=Hi%20MAAC%20Jaipur`;
+  const callUrl = `tel:${contactInfo.phone.replace(/[^0-9+]/g, "")}`;
+
   return (
     <div
       ref={containerRef}
@@ -47,13 +51,13 @@ export default function MobileBottomNav() {
     >
       <div className="glass rounded-[32px] p-2 shadow-[0_30px_60px_rgba(0,0,0,0.8)] flex items-center gap-2 border border-white/10 backdrop-blur-3xl">
         <a
-          href="https://wa.me/917300001589"
+          href={whatsappUrl}
           className="mobile-fab-item flex-1 flex flex-col items-center justify-center py-4 bg-[#25D366]/10 text-[#25D366] rounded-[24px] gap-1.5 transition-all active:scale-95"
         >
           <MessageSquare size={20} />
           <span className="text-[8px] font-black uppercase tracking-[0.2em]">WhatsApp</span>
         </a>
-        
+
         <Link
           href="/contact"
           className="mobile-fab-item flex-[1.8] flex flex-col items-center justify-center py-4 bg-[#E31837] text-white rounded-[24px] gap-1.5 shadow-xl shadow-[#E31837]/20 transition-all active:scale-95 border border-white/10"
@@ -63,7 +67,7 @@ export default function MobileBottomNav() {
         </Link>
 
         <a
-          href="tel:+917300001589"
+          href={callUrl}
           className="mobile-fab-item flex-1 flex flex-col items-center justify-center py-4 bg-white/5 text-white/60 rounded-[24px] gap-1.5 transition-all active:scale-95"
         >
           <Phone size={20} />

@@ -39,19 +39,37 @@ function Placements() {
     tl.fromTo(".pl-header > *", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1, stagger: 0.1, ease: "expo.out" })
       .fromTo(".placement-card", { opacity: 0, scale: 0.9, y: 20 }, { opacity: 1, scale: 1, y: 0, duration: 0.8, stagger: 0.05, ease: "expo.out" }, "-=0.6");
 
-    // Interactive Tilt for Desktop
-    const cards = gsap.utils.toArray(".placement-card");
-    cards.forEach((card: any) => {
-      card.addEventListener("mousemove", (e: MouseEvent) => {
-        const { left, top, width, height } = card.getBoundingClientRect();
-        const x = (e.clientX - (left + width / 2)) / 15;
-        const y = (e.clientY - (top + height / 2)) / 15;
-        gsap.to(card, { rotateY: x, rotateX: -y, duration: 0.5, ease: "power2.out" });
+    // Interactive Tilt for Desktop ONLY - disable on mobile/touch
+    if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+      const cards = gsap.utils.toArray<HTMLElement>(".placement-card");
+      cards.forEach((card) => {
+        const handleMouseMove = (e: globalThis.MouseEvent) => {
+          const { left, top, width, height } = card.getBoundingClientRect();
+          const x = (e.clientX - (left + width / 2)) / 15;
+          const y = (e.clientY - (top + height / 2)) / 15;
+          gsap.to(card, { rotateY: x, rotateX: -y, duration: 0.5, ease: "power2.out" });
+        };
+        const handleMouseLeave = () => {
+          gsap.to(card, { rotateY: 0, rotateX: 0, duration: 0.5, ease: "power2.out" });
+        };
+        
+        card.addEventListener("mousemove", handleMouseMove as EventListener);
+        card.addEventListener("mouseleave", handleMouseLeave);
+        
+        // Store handlers for cleanup
+        (card as any)._tiltMouseMove = handleMouseMove;
+        (card as any)._tiltMouseLeave = handleMouseLeave;
       });
-      card.addEventListener("mouseleave", () => {
-        gsap.to(card, { rotateY: 0, rotateX: 0, duration: 0.5, ease: "power2.out" });
-      });
-    });
+      
+      // Return cleanup function
+      return () => {
+        const cards = gsap.utils.toArray<HTMLElement>(".placement-card");
+        cards.forEach((card) => {
+          card.removeEventListener("mousemove", (card as any)._tiltMouseMove as EventListener);
+          card.removeEventListener("mouseleave", (card as any)._tiltMouseLeave);
+        });
+      };
+    }
   }, { scope: containerRef });
 
   return (

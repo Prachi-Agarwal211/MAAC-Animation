@@ -1,22 +1,28 @@
 "use client";
 
-import { useRef, useState, memo } from "react";
+import { useRef, useState, memo, useMemo } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "@/lib/gsap";
 import { testimonialsData } from "@/data/siteData";
 import { ChevronLeft, ChevronRight, Play, Volume2 } from "lucide-react";
 
 function Waveform() {
+  // Memoize waveform heights to prevent jitter on re-renders
+  const heights = useMemo(() => 
+    Array.from({ length: 12 }, () => Math.random() * 100),
+    []
+  );
+  
   return (
     <div className="flex items-center gap-1 h-8">
-      {Array.from({ length: 12 }).map((_, i) => (
+      {heights.map((height, i) => (
         <div
           key={i}
           className="w-1 bg-[#E31837] rounded-full animate-pulse"
-          style={{ 
-            height: `${Math.random() * 100}%`,
+          style={{
+            height: `${height}%`,
             animationDelay: `${i * 0.1}s`,
-            animationDuration: `${0.5 + Math.random()}s`
+            animationDuration: `${0.5 + (i % 5) * 0.1}s`
           }}
         />
       ))}

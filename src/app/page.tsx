@@ -83,26 +83,45 @@ export default function Home() {
         </ErrorBoundary>
       </section>
 
-      <IndustryPartners />
-      <PopularCourses />
+      <ErrorBoundary>
+        <IndustryPartners />
+      </ErrorBoundary>
       
+      <ErrorBoundary>
+        <PopularCourses />
+      </ErrorBoundary>
+
       <ErrorBoundary>
         <StudentShowcase />
       </ErrorBoundary>
+
+      <ErrorBoundary>
+        <Testimonials />
+      </ErrorBoundary>
       
-      <Testimonials />
-      <Awards />
+      <ErrorBoundary>
+        <Awards />
+      </ErrorBoundary>
 
-      <section id="placements" className="relative z-10">
-        <Placements />
-      </section>
+      <ErrorBoundary>
+        <section id="placements" className="relative z-10">
+          <Placements />
+        </section>
+      </ErrorBoundary>
 
-      <div id="apply" className="relative z-20">
-        <ApplyNow />
-      </div>
+      <ErrorBoundary>
+        <div id="apply" className="relative z-20">
+          <ApplyNow />
+        </div>
+      </ErrorBoundary>
 
-      <FAQSection />
-      <Footer />
+      <ErrorBoundary>
+        <FAQSection />
+      </ErrorBoundary>
+      
+      <ErrorBoundary>
+        <Footer />
+      </ErrorBoundary>
     </div>
   );
 }

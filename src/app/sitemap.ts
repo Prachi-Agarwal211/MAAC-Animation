@@ -26,55 +26,55 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Core Pages (Next.js routes, not WordPress URLs)
     {
       url: base,
-      lastModified: new Date("2025-07-03"),
+      lastModified: now,
       changeFrequency: "weekly",
       priority: 1.0,
     },
     {
       url: `${base}/courses`,
-      lastModified: new Date("2025-07-05"),
+      lastModified: now,
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
       url: `${base}/contact`,
-      lastModified: new Date("2025-06-26"),
+      lastModified: now,
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${base}/about`,
-      lastModified: new Date("2025-07-09"),
+      lastModified: now,
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
       url: `${base}/placements`,
-      lastModified: new Date("2025-07-05"),
+      lastModified: now,
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${base}/student-work`,
-      lastModified: new Date("2025-07-05"),
+      lastModified: now,
       changeFrequency: "monthly",
       priority: 0.6,
     },
     {
       url: `${base}/gallery`,
-      lastModified: new Date("2025-07-09"),
+      lastModified: now,
       changeFrequency: "monthly",
       priority: 0.6,
     },
     {
       url: `${base}/demo-class`,
-      lastModified: new Date("2025-06-26"),
+      lastModified: now,
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${base}/locations/malviya-nagar`,
-      lastModified: new Date("2025-06-24"),
+      lastModified: now,
       changeFrequency: "monthly",
       priority: 0.7,
     },
@@ -100,19 +100,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Blog Pages (manual entries)
     {
       url: `${base}/blog`,
-      lastModified: new Date("2025-06-24"),
+      lastModified: now,
       changeFrequency: "monthly",
       priority: 0.6,
     },
     {
       url: `${base}/blog/transitions-in-ux-design`,
-      lastModified: new Date("2025-06-24"),
+      lastModified: now,
       changeFrequency: "yearly",
       priority: 0.5,
     },
     {
       url: `${base}/blog/career-in-animation`,
-      lastModified: new Date("2025-06-24"),
+      lastModified: now,
       changeFrequency: "yearly",
       priority: 0.5,
     },
@@ -134,7 +134,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.6,
     },
-    
+
     // Auto-generated course pages (from coursesData)
     ...courseUrls,
     // Auto-generated blog posts (from blogPosts)

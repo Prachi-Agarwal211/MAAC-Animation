@@ -1,17 +1,13 @@
 "use client";
 import { useState, useEffect } from "react";
 import ContactModal from "@/components/ContactModal";
-import { useUIStore } from "@/lib/store";
+import { useScroll } from "@/hooks/useScroll";
 
 export default function ClientShell({ children }: { children: React.ReactNode }) {
   const [showModal, setShowModal] = useState(false);
-  const setScroll = useUIStore((state) => state.setScroll);
-
-  useEffect(() => {
-    const handleScroll = () => setScroll(window.scrollY);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [setScroll]);
+  
+  // Use centralized scroll hook
+  useScroll();
 
   useEffect(() => {
     const shown = sessionStorage.getItem("maac_modal_shown");

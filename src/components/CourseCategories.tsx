@@ -53,13 +53,14 @@ const CategoryIcon = ({ type }: { type: string }) => {
 
 function SlideUpCard({ course }: { course: any }) {
   const [isHovered, setIsHovered] = useState(false);
+  const isTouchDevice = typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches;
 
   return (
     <div
       className="category-card relative aspect-[4/5] rounded-[32px] overflow-hidden cursor-pointer group bg-[#111111] border border-white/5 transition-all duration-500 hover:border-[#E31837]/30"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      onClick={() => setIsHovered(!isHovered)}
+      onMouseEnter={() => !isTouchDevice && setIsHovered(true)}
+      onMouseLeave={() => !isTouchDevice && setIsHovered(false)}
+      onClick={() => isTouchDevice && setIsHovered(!isHovered)}
     >
       {/* Media Layer */}
       <div className="absolute inset-0 z-0">

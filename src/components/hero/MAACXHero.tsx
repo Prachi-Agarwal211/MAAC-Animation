@@ -25,10 +25,16 @@ export default function MAACXHero() {
   const [videoError, setVideoError] = useState(false);
 
   useEffect(() => {
-    const skipIntro = 
-      window.innerWidth < 1024 || 
+    // Check for slow connection or save data preference
+    const connection = (navigator as any).connection || (navigator as any).mozConnection || (navigator as any).webkitConnection;
+    const isSlowConnection = connection && (connection.saveData || ['slow-2g', '2g', '3g'].includes(connection.effectiveType));
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    
+    const skipIntro =
+      window.innerWidth < 1024 ||
       sessionStorage.getItem("maac_intro_v9") ||
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      isSlowConnection ||
+      prefersReducedMotion;
 
     if (skipIntro) {
       setIntroComplete(true);
@@ -148,6 +154,7 @@ export default function MAACXHero() {
             muted={isMuted}
             loop
             playsInline
+            preload="auto"
             poster="/hero-poster.jpg"
           >
             <source src={HERO_VIDEO_WEBM} type="video/webm" />

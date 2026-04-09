@@ -83,20 +83,25 @@ export default function StudentShowcase() {
       <div className="ss-main relative flex-1 max-w-[1600px] mx-auto w-full px-4 md:px-10">
         <div className="relative aspect-video rounded-[40px] overflow-hidden bg-black shadow-[0_40px_100px_rgba(0,0,0,0.8)] border border-white/5 group">
           
-          {showcaseVideos.map((item, i) => (
-            <div key={i} className={`absolute inset-0 transition-all duration-1000 ease-expo-out ${i === active ? 'opacity-100 scale-100' : 'opacity-0 scale-105 pointer-events-none'}`}>
-              <video
-                ref={el => { videoRefs.current[i] = el; }}
-                src={item.video}
-                className="w-full h-full object-cover"
-                muted={isMuted}
-                loop
-                playsInline
-                autoPlay={i === active}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
-            </div>
-          ))}
+          {showcaseVideos.map((item, i) => {
+            // Only load active video and adjacent ones for smooth transitions
+            const shouldLoadVideo = i === active || i === active - 1 || i === active + 1;
+            
+            return (
+              <div key={i} className={`absolute inset-0 transition-all duration-1000 ease-expo-out ${i === active ? 'opacity-100 scale-100' : 'opacity-0 scale-105 pointer-events-none'}`}>
+                <video
+                  ref={el => { videoRefs.current[i] = el; }}
+                  src={shouldLoadVideo ? item.video : undefined}
+                  className="w-full h-full object-cover"
+                  muted={isMuted}
+                  loop
+                  playsInline
+                  autoPlay={i === active}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
+              </div>
+            );
+          })}
 
           {/* Controls Overlay */}
           <div className="absolute inset-0 z-10 flex flex-col justify-between p-8 md:p-12 opacity-0 group-hover:opacity-100 transition-opacity duration-500">

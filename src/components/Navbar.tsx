@@ -8,30 +8,22 @@ import gsap from "@/lib/gsap";
 import { navLinks, contactInfo } from "@/data/siteData";
 import { useUIStore } from "@/lib/store";
 import { Phone, MessageSquare, ChevronDown } from "lucide-react";
+import { useScrollProgress } from "@/hooks/useScroll";
 
 export default function Navbar() {
-  const { mobileMenuOpen, megaMenuOpen, toggleMobileMenu, setMegaMenu, closeAllMenus, isScrolled } = useUIStore();
+  const { mobileMenuOpen, megaMenuOpen, toggleMobileMenu, setMegaMenu, isScrolled } = useUIStore();
   const [isVisible, setIsVisible] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
   
+  // Use centralized scroll progress hook
+  const _scrollProgress = useScrollProgress();
+
   const navRef = useRef<HTMLElement>(null);
   const logoRef = useRef<HTMLDivElement>(null);
-  const mobileMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handler = () => setTimeout(() => setIsVisible(true), 300);
     window.addEventListener("maac:intro_revealed", handler, { once: true });
     return () => window.removeEventListener("maac:intro_revealed", handler);
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const height = document.documentElement.scrollHeight - window.innerHeight;
-      setScrollProgress((scrollY / height) * 100);
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useGSAP(() => {
@@ -119,10 +111,6 @@ export default function Navbar() {
               <div ref={logoRef} className="relative w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center overflow-hidden transition-colors group-hover:border-[#E31837]/50 shadow-2xl">
                 <Image src="/image.png" alt="MAAC" width={40} height={40} className="object-contain" priority />
               </div>
-              <div className="hidden lg:block">
-                <span className="block text-white font-display font-black text-xl leading-none tracking-tighter">MAAC</span>
-                <span className="block text-[#E31837] text-[10px] font-bold tracking-[0.3em] uppercase mt-1">JAIPUR</span>
-              </div>
             </Link>
 
             {/* Desktop Nav */}
@@ -155,7 +143,7 @@ export default function Navbar() {
                 <span className="text-xs font-bold tracking-widest">{contactInfo.phone}</span>
               </a>
               
-              <Link href="/contact" className="hidden md:flex btn btn-primary px-8 py-3 rounded-full text-[11px] font-bold tracking-[0.2em]">
+              <Link href="/contact" className="hidden md:flex btn btn-primary px-6 py-2 rounded-full text-[10px] font-bold tracking-[0.15em]">
                 Apply Now
               </Link>
 
@@ -174,7 +162,7 @@ export default function Navbar() {
 
       {/* ── MOBILE MENU ── */}
       <div className={`fixed inset-0 z-[999] bg-[#0C0C0C] transition-all duration-700 ease-expo-out ${mobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}>
-        <div className="h-full flex flex-col pt-32 px-10 pb-12 overflow-y-auto">
+        <div className="h-full flex flex-col pt-[calc(var(--demo-bar-height,40px)+8rem)] px-10 pb-12 overflow-y-auto">
           <nav className="flex-1 space-y-8">
             {navLinks.map((link) => (
               <div key={link.label} className="mobile-nav-link">

@@ -28,41 +28,51 @@ export default function CustomCursor() {
     };
 
     const handleHover = () => {
-      gsap.to(cursor, { 
-        scale: 3, 
+      gsap.to(cursor, {
+        scale: 3,
         backgroundColor: "rgba(255, 255, 255, 0.1)",
         borderColor: "rgba(255, 255, 255, 0.5)",
-        duration: 0.4, 
-        ease: "expo.out" 
+        duration: 0.4,
+        ease: "expo.out"
       });
       gsap.to(dot, { scale: 0, opacity: 0, duration: 0.2 });
     };
 
     const handleLeave = () => {
-      gsap.to(cursor, { 
-        scale: 1, 
+      gsap.to(cursor, {
+        scale: 1,
         backgroundColor: "transparent",
         borderColor: "#E31837",
-        duration: 0.4, 
-        ease: "expo.out" 
+        duration: 0.4,
+        ease: "expo.out"
       });
       gsap.to(dot, { scale: 1, opacity: 1, duration: 0.3 });
     };
 
     window.addEventListener("mousemove", onMouseMove);
 
-    const links = document.querySelectorAll("a, button, .cursor-hover");
-    links.forEach(link => {
-      link.addEventListener("mouseenter", handleHover);
-      link.addEventListener("mouseleave", handleLeave);
-    });
+    // Event delegation: handle hover effects for current and future elements
+    const handleMouseOver = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.matches("a, button, .cursor-hover") || target.closest("a, button, .cursor-hover")) {
+        handleHover();
+      }
+    };
+
+    const handleMouseOut = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.matches("a, button, .cursor-hover") || target.closest("a, button, .cursor-hover")) {
+        handleLeave();
+      }
+    };
+
+    document.addEventListener("mouseover", handleMouseOver);
+    document.addEventListener("mouseout", handleMouseOut);
 
     return () => {
       window.removeEventListener("mousemove", onMouseMove);
-      links.forEach(link => {
-        link.removeEventListener("mouseenter", handleHover);
-        link.removeEventListener("mouseleave", handleLeave);
-      });
+      document.removeEventListener("mouseover", handleMouseOver);
+      document.removeEventListener("mouseout", handleMouseOut);
     };
   }, { dependencies: [isMobile] });
 

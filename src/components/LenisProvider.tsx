@@ -1,74 +1,46 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useEffect } from "react";
 import { useGSAP } from "@gsap/react";
-import { destroyLenis } from "@/lib/lenis";
-import gsap, { ScrollTrigger } from "@/lib/gsap";
+import { initLenis, destroyLenis } from "@/lib/lenis";
+import { ScrollTrigger } from "@/lib/gsap";
 
 export default function LenisProvider({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const containerRef = useRef<HTMLDivElement>(null);
-
+  // Initialize Lenis ONCE - let lenis.ts handle all setup
   useEffect(() => {
-    let tickerCallback: any;
-    
-    const init = async () => {
-      const { initLenis } = await import("@/lib/lenis");
-      const lenis = initLenis();
-      if (lenis) {
-        lenis.on("scroll", ScrollTrigger.update);
-        tickerCallback = (time: number) => {
-          lenis.raf(time * 1000);
-        };
-        gsap.ticker.add(tickerCallback);
-        gsap.ticker.lagSmoothing(0);
-      }
-    };
-
-    init();
+    initLenis();
 
     return () => {
-      if (tickerCallback) {
-        gsap.ticker.remove(tickerCallback);
-      }
       destroyLenis();
     };
   }, []);
 
   useGSAP(() => {
-    // Global scroll-reveal
-    const revealElements = gsap.utils.toArray(".scroll-reveal");
-    revealElements.forEach((el) => {
-      gsap.fromTo(
-        el as Element,
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1.2,
-          ease: "expo.out",
-          scrollTrigger: {
-            trigger: el as Element,
-            start: "top 90%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
-    });
-
     // CRITICAL: Refresh all ScrollTriggers after initial layout
+    // Single refresh point - no duplication
     const refresh = () => ScrollTrigger.refresh();
-    const timer = setTimeout(refresh, 500);
-    window.addEventListener("resize", refresh);
+    const timer = setTimeout(refresh, 300);
+    
+    // Debounced resize handler
+    let resizeTimer: NodeJS.Timeout;
+    const handleResize = () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(refresh, 200);
+    };
+    
+    window.addEventListener("resize", handleResize);
 
     return () => {
       clearTimeout(timer);
-      window.removeEventListener("resize", refresh);
+      clearTimeout(resizeTimer);
+      window.removeEventListener("resize", handleResize);
     };
-  }, { scope: containerRef });
+  }, []);
 
-  return <div ref={containerRef}>{children}</div>;
+  // Don't wrap in a div - just render children directly in the document flow
+  return <>{children}</>;
 }

@@ -36,24 +36,3 @@ export const useModalStore = create<ModalState>((set) => ({
   openModal: (type, content) => set({ activeModal: type, modalContent: content }),
   closeModal: () => set({ activeModal: null, modalContent: undefined }),
 }));
-
-// Form State - Centralized form handling
-interface FormState {
-  isSubmitting: boolean;
-  submitted: boolean;
-  error: string | null;
-  setSubmitting: (status: boolean) => void;
-  setSubmitted: (status: boolean) => void;
-  setError: (error: string | null) => void;
-  resetForm: () => void;
-}
-
-export const useFormStore = create<FormState>((set) => ({
-  isSubmitting: false,
-  submitted: false,
-  error: null,
-  setSubmitting: (status) => set({ isSubmitting: status }),
-  setSubmitted: (status) => set({ submitted: status }),
-  setError: (error) => set({ error }),
-  resetForm: () => set({ isSubmitting: false, submitted: false, error: null }),
-}));

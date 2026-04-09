@@ -3,8 +3,7 @@ import { Inter, Syne } from "next/font/google";
 import "./globals.css";
 import LenisProvider from "@/components/LenisProvider";
 import CustomCursor from "@/components/hero/CustomCursor";
-import FloatingCTA from "@/components/FloatingCTA";
-import MobileBottomNav from "@/components/MobileBottomNav";
+import FloatingActions from "@/components/FloatingActions";
 import Navbar from "@/components/Navbar";
 import ClientShell from "@/components/ClientShell";
 import { Analytics } from "@vercel/analytics/react";
@@ -42,6 +41,15 @@ export const metadata: Metadata = {
   },
   description:
     "MAAC Jaipur — Rajasthan's #1 Animation Institute. B.Voc Degree in 3D Animation, VFX & Game Design. 95% Placements. NSDC Certified. Call " + contactInfo.phone + ".",
+  icons: {
+    icon: [
+      { url: '/image.png', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/image.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
+  manifest: '/manifest.json',
   keywords: [
     "animation institute jaipur",
     "3d animation course jaipur",
@@ -91,7 +99,6 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
-  manifest: '/manifest.json',
 };
 import DemoBar from "@/components/ui/DemoBar";
 
@@ -102,6 +109,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth bg-[#0C0C0C]">
+      <head>
+        {/* Preload hero videos for instant loading */}
+        <link rel="preload" as="video" href="/hero-video-compressed.mp4" type="video/mp4" />
+        <link rel="preload" as="video" href="/hero-video.webm" type="video/webm" />
+        <link rel="preload" as="image" href="/hero-poster.jpg" />
+      </head>
       <body
         className={`${inter.variable} ${syne.variable} font-body antialiased bg-[#0C0C0C] text-[#F0EBE1]`}
       >
@@ -125,8 +138,7 @@ export default function RootLayout({
             <ClientShell>
               <main id="main-content" tabIndex={-1} className="page-wrapper">{children}</main>
             </ClientShell>
-            <FloatingCTA whatsapp={contactInfo.whatsapp} phone={contactInfo.phone} />
-            <MobileBottomNav />
+            <FloatingActions />
             <Analytics />
             <SpeedInsights />
           </LenisProvider>

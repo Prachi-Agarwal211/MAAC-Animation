@@ -1,17 +1,13 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "@/lib/gsap";
 import { useUIStore } from "@/lib/store";
 import { Phone, MessageSquare } from "lucide-react";
+import { contactInfo } from "@/data/siteData";
 
-interface FloatingCTAProps {
-  whatsapp: string;
-  phone: string;
-}
-
-export default function FloatingCTA({ whatsapp, phone }: FloatingCTAProps) {
+export default function FloatingCTA() {
   const { mobileMenuOpen, isScrolled: isVisible } = useUIStore();
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -30,8 +26,8 @@ export default function FloatingCTA({ whatsapp, phone }: FloatingCTAProps) {
     }
   }, { dependencies: [isVisible, mobileMenuOpen] });
 
-  const whatsappUrl = `https://wa.me/${whatsapp.replace(/[^0-9]/g, "")}?text=Hi%20MAAC%20Jaipur`;
-  const callUrl = `tel:${phone.replace(/[^0-9+]/g, "")}`;
+  const whatsappUrl = `https://wa.me/${contactInfo.whatsapp.replace(/[^0-9]/g, "")}?text=Hi%20MAAC%20Jaipur`;
+  const callUrl = `tel:${contactInfo.phone.replace(/[^0-9+]/g, "")}`;
 
   return (
     <div
