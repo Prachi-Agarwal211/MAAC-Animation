@@ -58,7 +58,7 @@ function Testimonials() {
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8 z-10">
         <div className="tm-header text-center mb-24">
           <p className="text-[#E31837] text-sm font-bold tracking-[0.3em] uppercase mb-6">Success Stories</p>
-          <h2 className="font-display font-black text-[clamp(2.5rem,6vw,5.5rem)] text-white leading-[0.9] tracking-tighter">
+          <h2 className="font-display font-black text-[clamp(1.8rem,4.5vw,3rem)] text-white leading-[0.9] tracking-tighter">
             The Alumni <span className="gradient-text">Voices</span>
           </h2>
         </div>

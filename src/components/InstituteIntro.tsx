@@ -27,7 +27,7 @@ function CountUpStat({ number, suffix, label }: { number: number; suffix: string
 
   return (
     <div className="text-center px-4 group">
-      <div className="font-display font-black text-[clamp(2rem,5vw,3.5rem)] leading-none text-white tabular-nums flex items-center justify-center tracking-tighter">
+      <div className="font-display font-black text-[clamp(1.5rem,3.5vw,2.5rem)] leading-none text-white tabular-nums flex items-center justify-center tracking-tighter">
         <span ref={countRef}>0</span>
         <span className="text-[#E31837] ml-1">{suffix}</span>
       </div>
@@ -78,7 +78,7 @@ export default function InstituteIntro() {
           <div className="lg:col-span-5">
             <div className="flex items-start gap-4 mb-8">
               <div className="w-1 h-12 bg-[#E31837] flex-shrink-0 rounded-full mt-1" />
-              <h2 className="institute-title font-display font-bold text-[clamp(1.8rem,3vw,2.8rem)] leading-tight text-white uppercase tracking-tighter">
+              <h2 className="institute-title font-display font-bold text-[clamp(1.4rem,3vw,2.2rem)] leading-tight text-white uppercase tracking-tighter">
                 Jaipur&apos;s Elite <br />
                 <span className="text-[#E31837]">Creative Powerhouse</span>
               </h2>

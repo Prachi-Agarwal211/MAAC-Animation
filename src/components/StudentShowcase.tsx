@@ -74,7 +74,7 @@ export default function StudentShowcase() {
         <span className="inline-block px-4 py-2 bg-[#E31837]/10 backdrop-blur-md border border-[#E31837]/30 rounded-full text-[#E31837] text-[11px] font-bold tracking-[0.2em] uppercase mb-6">
           Premium Student Reel
         </span>
-        <h2 className="font-display font-bold text-[clamp(2.5rem,6vw,5.5rem)] text-white leading-[0.9] tracking-tighter">
+        <h2 className="font-display font-bold text-[clamp(1.8rem,4.5vw,3rem)] text-white leading-[0.9] tracking-tighter">
           Cinematic <span className="gradient-text">Showcase</span>
         </h2>
       </div>

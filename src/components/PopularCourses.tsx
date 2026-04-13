@@ -52,7 +52,7 @@ export default function PopularCourses() {
               <span className="w-8 h-[1px] bg-[#C4A882]" />
               Master Your Craft
             </p>
-            <h2 className="font-display font-bold text-[clamp(2.2rem,5vw,4.5rem)] text-[#F0EBE1] leading-[0.95] tracking-tight">
+            <h2 className="font-display font-bold text-[clamp(1.6rem,4vw,2.8rem)] text-[#F0EBE1] leading-[0.95] tracking-tight">
               Most Popular <span className="gradient-text">Programs</span>
             </h2>
           </div>

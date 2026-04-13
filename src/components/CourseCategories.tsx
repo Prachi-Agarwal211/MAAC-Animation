@@ -143,7 +143,7 @@ export default function CourseCategories() {
             Our Expertise
             <span className="w-6 h-[1px] bg-[#E31837]" />
           </p>
-          <h2 className="font-display font-bold text-[clamp(2.2rem,5vw,4.5rem)] text-[#F0EBE1] leading-[0.95] tracking-tight">
+          <h2 className="font-display font-bold text-[clamp(1.6rem,4vw,2.8rem)] text-[#F0EBE1] leading-[0.95] tracking-tight">
             Creative <span className="gradient-text">Disciplines</span>
           </h2>
         </div>

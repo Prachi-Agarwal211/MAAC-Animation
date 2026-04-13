@@ -48,7 +48,7 @@ function Awards() {
       <div className="relative z-10 max-w-7xl mx-auto px-6 mb-32">
         <div className="aw-header text-left">
           <p className="text-[#E31837] text-sm font-bold tracking-[0.3em] uppercase mb-6">Excellence Recognized</p>
-          <h2 className="font-display font-black text-[clamp(2.5rem,6vw,5.5rem)] text-white leading-[0.9] tracking-tighter">
+          <h2 className="font-display font-black text-[clamp(1.8rem,4.5vw,3rem)] text-white leading-[0.9] tracking-tighter">
             Our Legacy of <br /> <span className="gradient-text">Winning</span>
           </h2>
         </div>

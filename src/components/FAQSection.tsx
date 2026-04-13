@@ -38,7 +38,7 @@ function FAQSection() {
               <span className="w-8 h-[1px] bg-[#E31837]" />
               Support Hub
             </p>
-            <h2 className="font-display font-bold text-[clamp(2.5rem,5vw,4.5rem)] text-[#F0EBE1] leading-[0.95] tracking-tight">
+            <h2 className="font-display font-bold text-[clamp(1.8rem,4.5vw,3rem)] text-[#F0EBE1] leading-[0.95] tracking-tight">
               Answering Your <span className="gradient-text">Ambitions</span>
             </h2>
           </div>

@@ -59,7 +59,7 @@ export default function IndustryPartners() {
         {/* Header */}
         <div className="ip-header text-center mb-32">
           <p className="text-[#E31837] text-[10px] font-bold tracking-[0.4em] uppercase mb-6">Our Production Network</p>
-          <h2 className="font-display font-black text-[clamp(2.5rem,6vw,5.5rem)] text-white leading-[0.9] tracking-tighter">
+          <h2 className="font-display font-black text-[clamp(1.8rem,4.5vw,3rem)] text-white leading-[0.9] tracking-tighter">
             Hiring <span className="gradient-text italic">Ecosystem</span>
           </h2>
         </div>

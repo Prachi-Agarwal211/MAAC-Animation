@@ -39,7 +39,7 @@ export default function CareerCreatorComparison() {
                 <span className="text-[#E31837] text-xs font-bold tracking-[0.3em] uppercase">Pathway 01</span>
               </div>
               
-              <h2 className="font-display font-black text-[clamp(2.5rem,6vw,5rem)] text-white leading-[0.85] tracking-tighter mb-8">
+              <h2 className="font-display font-black text-[clamp(1.8rem,4.5vw,3rem)] text-white leading-[0.85] tracking-tighter mb-8">
                 CAREER<span className="gradient-text italic">X</span>
               </h2>
               
@@ -85,7 +85,7 @@ export default function CareerCreatorComparison() {
                 <span className="text-[#FF6B35] text-xs font-bold tracking-[0.3em] uppercase">Pathway 02</span>
               </div>
               
-              <h2 className="font-display font-black text-[clamp(2.5rem,6vw,5rem)] text-white leading-[0.85] tracking-tighter mb-8">
+              <h2 className="font-display font-black text-[clamp(1.8rem,4.5vw,3rem)] text-white leading-[0.85] tracking-tighter mb-8">
                 CREATOR<span className="text-[#FF6B35] italic">X</span>
               </h2>
               

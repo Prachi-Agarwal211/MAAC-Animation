@@ -67,7 +67,7 @@ export default function BentoGallery() {
       <div className="max-w-[1600px] mx-auto">
         <div className="text-center mb-20">
           <span className="inline-block text-[#E31837] text-xs font-bold tracking-[0.4em] uppercase mb-6">Excellence in Craft</span>
-          <h2 className="font-display font-black text-[clamp(2.5rem,6vw,5.5rem)] text-white leading-[0.9] tracking-tighter">
+          <h2 className="font-display font-black text-[clamp(1.8rem,4.5vw,3rem)] text-white leading-[0.9] tracking-tighter">
             The Bento <span className="gradient-text">Showreel</span>
           </h2>
         </div>

@@ -91,7 +91,7 @@ export default function ApplyNow() {
                 <span className="w-8 h-[1px] bg-[#E31837]" />
                 Admissions Open
               </p>
-              <h2 className="font-display font-bold text-[clamp(2.5rem,6vw,4.5rem)] text-[#F0EBE1] leading-[0.95] tracking-tight">
+              <h2 className="font-display font-bold text-[clamp(1.8rem,4.5vw,3rem)] text-[#F0EBE1] leading-[0.95] tracking-tight">
                 Ignite Your <span className="gradient-text">Potential</span>
               </h2>
               <p className="text-[#A8A29C] text-lg md:text-2xl font-medium leading-relaxed mt-8 max-w-lg">

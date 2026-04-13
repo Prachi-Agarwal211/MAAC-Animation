@@ -176,10 +176,10 @@ export default function MAACXHero() {
             </div>
 
             <h1 className="mb-6">
-              <span className="block text-white font-display font-bold text-[clamp(2rem,6vw,4rem)] leading-[0.95] tracking-tighter uppercase">
+              <span className="block text-white font-display font-bold text-[clamp(1.5rem,4vw,2.5rem)] leading-[0.95] tracking-tighter uppercase">
                 <SplitTextReveal>Master the Craft of</SplitTextReveal>
               </span>
-              <span className="block gradient-text font-display font-black text-[clamp(1.8rem,5vw,3.5rem)] leading-[0.95] tracking-tighter mt-2 uppercase">
+              <span className="block gradient-text font-display font-black text-[clamp(1.4rem,3.5vw,2.2rem)] leading-[0.95] tracking-tighter mt-2 uppercase">
                 <SplitTextReveal delay={0.2}>Visual Storytelling</SplitTextReveal>
               </span>
             </h1>

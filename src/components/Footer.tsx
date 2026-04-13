@@ -64,7 +64,7 @@ export default function Footer() {
           <div className="absolute inset-0 bg-[#E31837]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
           
           <div className="relative z-10 max-w-2xl text-center lg:text-left">
-            <h2 className="font-display font-bold text-[clamp(2.2rem,5vw,4.5rem)] text-white leading-[0.9] tracking-tighter mb-8">
+            <h2 className="font-display font-bold text-[clamp(1.8rem,4.5vw,3rem)] text-white leading-[0.9] tracking-tighter mb-8">
               Start Your <span className="gradient-text">Creative Legacy</span>
             </h2>
             <p className="text-[#A8A29C] text-lg md:text-xl font-medium leading-relaxed">
