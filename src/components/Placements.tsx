@@ -105,7 +105,7 @@ function Placements() {
         duration,
         ease: "none",
         repeat: -1,
-        onRepeat: () => gsap.set(row1, { x: 0 })
+        onRepeat: () => { gsap.set(row1, { x: 0 }); }
       });
     }
 
@@ -127,7 +127,7 @@ function Placements() {
         duration,
         ease: "none",
         repeat: -1,
-        onRepeat: () => gsap.set(row2, { x: -singleSetWidth })
+        onRepeat: () => { gsap.set(row2, { x: -singleSetWidth }); }
       });
     }
 

@@ -49,6 +49,8 @@ function getSegmentPath(index: number, outerR: number, innerR: number) {
 
 export default function VerticalCardGallery() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const rightViewportRef = useRef<HTMLDivElement>(null);
+  const rightTrackRef = useRef<HTMLDivElement>(null);
   const segmentRefs = useRef<(SVGPathElement | null)[]>([]);
   const labelRefs = useRef<(HTMLDivElement | null)[]>([]);
   const pieCenterTextRef = useRef<SVGTextElement | null>(null);
@@ -105,44 +107,112 @@ export default function VerticalCardGallery() {
     // Initialize first segment
     updateActiveSegment(0);
 
-    // Desktop: sticky left + scrolling right
-    if (window.innerWidth >= 1024) {
-      cardRefs.current.forEach((card, index) => {
-        if (!card) return;
+    const mm = gsap.matchMedia();
 
-        gsap.to(card, {
-          scrollTrigger: {
-            trigger: card,
-            start: "top center",
-            end: "bottom center",
-            onEnter: () => updateActiveSegment(index),
-            onEnterBack: () => updateActiveSegment(index),
-          },
-        });
-      });
-    } else {
-      // Mobile: simple fade in
-      cardRefs.current.forEach((card) => {
-        if (!card) return;
-        gsap.fromTo(card, 
-          { opacity: 0, y: 30 }, 
-          { 
-            opacity: 1, 
-            y: 0, 
-            duration: 0.6,
-            scrollTrigger: {
-              trigger: card,
-              start: "top 85%",
+    mm.add("(min-width: 1024px)", () => {
+      const section = containerRef.current;
+      const viewport = rightViewportRef.current;
+      const track = rightTrackRef.current;
+      if (!section || !viewport || !track) return;
+
+      const getMaxTranslate = () => Math.max(0, track.scrollHeight - viewport.clientHeight);
+
+      // Animate the right column "internally" while the whole section stays pinned.
+      const tween = gsap.to(track, {
+        y: () => -getMaxTranslate(),
+        ease: "none",
+        scrollTrigger: {
+          trigger: section,
+          start: "top top",
+          end: () => `+=${Math.max(1, getMaxTranslate())}`,
+          scrub: true,
+          pin: true,
+          pinReparent: true,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+          onUpdate: (self) => {
+            const max = getMaxTranslate();
+            if (max <= 0) {
+              updateActiveSegment(0);
+              return;
             }
-          }
-        );
+
+            const y = self.progress * max;
+            const focusY = y + viewport.clientHeight * 0.35;
+
+            // Pick active card based on which card is closest to the focus line.
+            let active = 0;
+            for (let i = 0; i < cardRefs.current.length; i++) {
+              const el = cardRefs.current[i];
+              if (!el) continue;
+              const top = el.offsetTop;
+              if (top <= focusY) active = i;
+            }
+            updateActiveSegment(Math.min(SEGMENTS - 1, Math.max(0, active)));
+          },
+        },
       });
-    }
+
+      return () => {
+        tween.scrollTrigger?.kill();
+        tween.kill();
+      };
+    });
+
+    mm.add("(max-width: 1023px)", () => {
+      const section = containerRef.current;
+      const viewport = rightViewportRef.current;
+      const track = rightTrackRef.current;
+      if (!section || !viewport || !track) return;
+
+      const getMaxTranslate = () => Math.max(0, track.scrollHeight - viewport.clientHeight);
+
+      const tween = gsap.to(track, {
+        y: () => -getMaxTranslate(),
+        ease: "none",
+        scrollTrigger: {
+          trigger: section,
+          start: "top top",
+          end: () => `+=${Math.max(1, getMaxTranslate())}`,
+          scrub: true,
+          pin: true,
+          pinReparent: true,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+          onUpdate: (self) => {
+            const max = getMaxTranslate();
+            if (max <= 0) {
+              updateActiveSegment(0);
+              return;
+            }
+
+            const y = self.progress * max;
+            const focusY = y + viewport.clientHeight * 0.35;
+
+            let active = 0;
+            for (let i = 0; i < cardRefs.current.length; i++) {
+              const el = cardRefs.current[i];
+              if (!el) continue;
+              const top = el.offsetTop;
+              if (top <= focusY) active = i;
+            }
+            updateActiveSegment(Math.min(SEGMENTS - 1, Math.max(0, active)));
+          },
+        },
+      });
+
+      return () => {
+        tween.scrollTrigger?.kill();
+        tween.kill();
+      };
+    });
+
+    return () => mm.revert();
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="relative bg-[#080808]">
-      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-16 py-20">
+    <section ref={containerRef} className="relative bg-[#080808] min-h-[100vh]">
+      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-16 py-20 lg:py-12">
         {/* Section Header */}
         <div className="text-center mb-12">
           <p className="text-[#E31837] text-[10px] font-bold tracking-[0.3em] uppercase mb-4">
@@ -154,12 +224,12 @@ export default function VerticalCardGallery() {
         </div>
 
         {/* Two Column Layout */}
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
+        <div className="flex flex-col lg:flex-row gap-10 lg:gap-16">
 
           {/* LEFT: Sticky Pie Chart */}
           <div className="lg:w-[45%] lg:flex-shrink-0">
-            <div className="lg:sticky lg:top-24">
-              <div className="relative w-full max-w-[480px] mx-auto" style={{ aspectRatio: "1/1" }}>
+            <div className="sticky top-6 lg:sticky lg:top-24">
+              <div className="relative w-full max-w-[360px] sm:max-w-[420px] lg:max-w-[480px] mx-auto" style={{ aspectRatio: "1/1" }}>
                 <svg viewBox="0 0 512 512" className="w-full h-full relative z-10">
                   <defs>
                     <filter id="segGlow" x="-30%" y="-30%" width="160%" height="160%">
@@ -242,48 +312,53 @@ export default function VerticalCardGallery() {
           </div>
 
           {/* RIGHT: Scrolling Cards */}
-          <div className="lg:w-[55%] space-y-8">
-            {featureCards.map((card, index) => (
-              <div 
-                key={index} 
-                ref={el => { cardRefs.current[index] = el; }}
-                className="group relative overflow-hidden rounded-2xl bg-[#111] border border-white/5 transition-all duration-500 hover:border-[#E31837]/30"
-              >
-                <div className="flex flex-col md:flex-row">
-                  {/* Image */}
-                  <div className="w-full md:w-2/5 aspect-square relative overflow-hidden">
-                    <Image 
-                      src={cardImages[index]} 
-                      alt={card.title} 
-                      fill 
-                      className="object-cover transition-transform duration-700 group-hover:scale-105" 
-                      sizes="(max-width: 768px) 100vw, 40vw" 
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#111] via-transparent to-transparent md:bg-gradient-to-r" />
-                  </div>
-                  
-                  {/* Content */}
-                  <div className="w-full md:w-3/5 p-6 md:p-8 flex flex-col justify-center">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-8 h-[1px] bg-[#E31837]" />
-                      <span className="text-[#E31837] text-[9px] font-bold tracking-[0.3em] uppercase">Insight</span>
+          <div
+            ref={rightViewportRef}
+            className="lg:w-[55%] h-[52vh] sm:h-[56vh] lg:h-[calc(100vh-8rem)] overflow-hidden"
+          >
+            <div ref={rightTrackRef} className="space-y-8">
+              {featureCards.map((card, index) => (
+                <div
+                  key={index}
+                  ref={el => { cardRefs.current[index] = el; }}
+                  className="group relative overflow-hidden rounded-2xl bg-[#111] border border-white/5 transition-all duration-500 hover:border-[#E31837]/30"
+                >
+                  <div className="flex flex-col md:flex-row">
+                    {/* Image */}
+                    <div className="w-full md:w-2/5 aspect-square relative overflow-hidden">
+                      <Image
+                        src={cardImages[index]}
+                        alt={card.title}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                        sizes="(max-width: 768px) 100vw, 40vw"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#111] via-transparent to-transparent md:bg-gradient-to-r" />
                     </div>
-                    <h4 className="font-display font-bold text-xl md:text-2xl text-white mb-3 leading-[0.95]">
-                      {card.title}
-                    </h4>
-                    <p className="text-[#A8A29C] text-sm md:text-base leading-relaxed mb-6">
-                      {card.desc}
-                    </p>
-                    <div className="flex items-center gap-4">
-                      <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-[#E31837] group-hover:border-[#E31837] transition-all duration-500">
-                        <ArrowRight size={16} className="text-white transition-transform group-hover:translate-x-1" />
+
+                    {/* Content */}
+                    <div className="w-full md:w-3/5 p-6 md:p-8 flex flex-col justify-center">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="w-8 h-[1px] bg-[#E31837]" />
+                        <span className="text-[#E31837] text-[9px] font-bold tracking-[0.3em] uppercase">Insight</span>
                       </div>
-                      <span className="text-[9px] font-bold tracking-[0.2em] uppercase text-white/40 group-hover:text-white transition-colors">Details</span>
+                      <h4 className="font-display font-bold text-xl md:text-2xl text-white mb-3 leading-[0.95]">
+                        {card.title}
+                      </h4>
+                      <p className="text-[#A8A29C] text-sm md:text-base leading-relaxed mb-6">
+                        {card.desc}
+                      </p>
+                      <div className="flex items-center gap-4">
+                        <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-[#E31837] group-hover:border-[#E31837] transition-all duration-500">
+                          <ArrowRight size={16} className="text-white transition-transform group-hover:translate-x-1" />
+                        </div>
+                        <span className="text-[9px] font-bold tracking-[0.2em] uppercase text-white/40 group-hover:text-white transition-colors">Details</span>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
 
         </div>
