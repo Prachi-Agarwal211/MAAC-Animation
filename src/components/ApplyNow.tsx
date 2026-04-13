@@ -102,7 +102,7 @@ export default function ApplyNow() {
 
             <div className="grid grid-cols-2 gap-4">
               {["NSDC Partner", "MESC Certified", "Skill India", "B.Voc Degree"].map((badge) => (
-                <div key={badge} className="flex items-center gap-3 p-4 rounded-2xl glass border border-white/5 text-white/60 text-xs font-bold uppercase tracking-wider">
+                <div key={badge} className="flex items-center gap-3 p-4 rounded-2xl glass border border-white/5 text-[#F0EBE1] text-xs font-bold uppercase tracking-wider">
                   <div className="w-6 h-6 rounded-full bg-[#E31837]/10 flex items-center justify-center">
                     <ShieldCheck size={14} className="text-[#E31837]" />
                   </div>
@@ -159,22 +159,22 @@ export default function ApplyNow() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <select value={formData.course}
                     onChange={(e) => setFormData({ ...formData, course: e.target.value })}
-                    className={`${inputClass("course")} appearance-none`}>
-                    <option value="">Select Course *</option>
-                    <option value="animation">3D Animation</option>
-                    <option value="vfx">Visual Effects (VFX)</option>
-                    <option value="gaming">Game Design</option>
-                    <option value="filmmaking">Digital Filmmaking</option>
-                    <option value="digital-media">Digital Media & Design</option>
-                    <option value="architectural">Architectural Design</option>
+                    className={`${inputClass("course")} appearance-none bg-[#0a0a0a]`}>
+                    <option value="" className="bg-[#0a0a0a] text-white">Select Course *</option>
+                    <option value="animation" className="bg-[#0a0a0a] text-white">3D Animation</option>
+                    <option value="vfx" className="bg-[#0a0a0a] text-white">Visual Effects (VFX)</option>
+                    <option value="gaming" className="bg-[#0a0a0a] text-white">Game Design</option>
+                    <option value="filmmaking" className="bg-[#0a0a0a] text-white">Digital Filmmaking</option>
+                    <option value="digital-media" className="bg-[#0a0a0a] text-white">Digital Media & Design</option>
+                    <option value="architectural" className="bg-[#0a0a0a] text-white">Architectural Design</option>
                   </select>
                   <select value={formData.city}
                     onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                    className={`${inputClass("city")} appearance-none`}>
-                    <option value="">Preferred Center</option>
-                    <option value="jaipur-malviya">Jaipur — Malviya Nagar</option>
-                    <option value="jaipur-vaishali">Jaipur — Vaishali Nagar</option>
-                    <option value="other">Other</option>
+                    className={`${inputClass("city")} appearance-none bg-[#0a0a0a]`}>
+                    <option value="" className="bg-[#0a0a0a] text-white">Preferred Center</option>
+                    <option value="jaipur-malviya" className="bg-[#0a0a0a] text-white">Jaipur — Malviya Nagar</option>
+                    <option value="jaipur-vaishali" className="bg-[#0a0a0a] text-white">Jaipur — Vaishali Nagar</option>
+                    <option value="other" className="bg-[#0a0a0a] text-white">Other</option>
                   </select>
                 </div>
 

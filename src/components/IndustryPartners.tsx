@@ -5,44 +5,85 @@ import { useGSAP } from "@gsap/react";
 import gsap from "@/lib/gsap";
 
 const partners = [
-  { name: "Nilee Games", style: "font-display font-black tracking-tighter" },
-  { name: "Mugafi", style: "font-serif italic tracking-wide" },
-  { name: "Autodesk", style: "font-sans font-bold uppercase tracking-[0.2em]" },
-  { name: "Canon", style: "font-serif font-black uppercase" },
-  { name: "Copperseed", style: "font-mono font-medium tracking-tight" },
-  { name: "Pixel:Ratio", style: "font-display font-bold italic" },
-  { name: "Cedge", style: "font-sans font-black tracking-widest uppercase" },
-  { name: "Physics Wallah", style: "font-sans font-bold tracking-tight" },
-  { name: "Zebu", style: "font-display font-black uppercase tracking-tighter" },
-  { name: "Resonance", style: "font-serif italic font-bold" },
-  { name: "Cimpress", style: "font-sans font-medium uppercase tracking-[0.1em]" },
-  { name: "PhantomFX", style: "font-display font-black italic tracking-tighter" },
-  { name: "Tech Mahindra", style: "font-sans font-bold uppercase" },
-  { name: "Postify", style: "font-mono font-bold italic" },
-  { name: "LFX Studios", style: "font-display font-black tracking-widest uppercase" },
+  "NILEE GAMES",
+  "MUGAFI",
+  "AUTODESK",
+  "CANON",
+  "COPPERSEED",
+  "PIXEL RATIO",
+  "CEDGE",
+  "PHYSICS WALLAH",
+  "ZEBU",
+  "RESONANCE",
+  "CIMPRESS",
+  "PHANTOMFX",
+  "TECH MAHINDRA",
+  "POSTIFY",
+  "LFX STUDIOS",
 ];
+
+// Create 4 copies for seamless loop
+const extendedPartners = [...partners, ...partners, ...partners, ...partners];
+const reversedPartners = [...extendedPartners].reverse();
 
 export default function IndustryPartners() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const row1Ref = useRef<HTMLDivElement>(null);
+  const row2Ref = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
-    const logos = gsap.utils.toArray(".floating-logo");
-    
-    logos.forEach((logo: any, i) => {
-      gsap.to(logo, {
-        x: "random(-15, 15)",
-        y: "random(-15, 15)",
-        duration: "random(3, 5)",
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-        delay: i * 0.15,
-      });
-    });
+    // Setup Row 1: Scroll left
+    if (row1Ref.current) {
+      const row1 = row1Ref.current;
+      const items = Array.from(row1.children) as HTMLElement[];
+      
+      let singleSetWidth = 0;
+      for (let i = 0; i < partners.length && i < items.length; i++) {
+        singleSetWidth += items[i].offsetWidth + 32; // 32px gap
+      }
 
-    gsap.fromTo(".ip-header > *", 
-      { opacity: 0, y: 30 }, 
-      { opacity: 1, y: 0, duration: 1, stagger: 0.1, ease: "expo.out",
+      const duration = singleSetWidth / 80; // 80px per second
+
+      gsap.to(row1, {
+        x: -singleSetWidth,
+        duration,
+        ease: "none",
+        repeat: -1,
+        onRepeat: () => gsap.set(row1, { x: 0 })
+      });
+    }
+
+    // Setup Row 2: Scroll right
+    if (row2Ref.current) {
+      const row2 = row2Ref.current;
+      const items = Array.from(row2.children) as HTMLElement[];
+      
+      let singleSetWidth = 0;
+      for (let i = 0; i < partners.length && i < items.length; i++) {
+        singleSetWidth += items[i].offsetWidth + 32;
+      }
+
+      const duration = singleSetWidth / 80;
+
+      gsap.set(row2, { x: -singleSetWidth });
+      gsap.to(row2, {
+        x: 0,
+        duration,
+        ease: "none",
+        repeat: -1,
+        onRepeat: () => gsap.set(row2, { x: -singleSetWidth })
+      });
+    }
+
+    // Header animation
+    gsap.fromTo(".ip-header > *",
+      { opacity: 0, y: 30 },
+      { 
+        opacity: 1, 
+        y: 0, 
+        duration: 1, 
+        stagger: 0.1, 
+        ease: "expo.out",
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top 80%",
@@ -52,40 +93,59 @@ export default function IndustryPartners() {
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="relative bg-[#080808] py-24 md:py-40 overflow-hidden border-y border-white/5">
-      <div className="atmosphere-blob blob-red top-[-10%] right-[-10%] opacity-10" />
-      
-      <div className="relative z-10 max-w-[1800px] mx-auto px-6">
+    <section 
+      ref={containerRef} 
+      className="relative bg-[#0a0a0a] py-20 md:py-28 overflow-hidden border-y border-yellow-600/30"
+    >
+      <div className="relative z-10 max-w-[1800px] mx-auto">
         {/* Header */}
-        <div className="ip-header text-center mb-32">
-          <p className="text-[#E31837] text-[10px] font-bold tracking-[0.4em] uppercase mb-6">Our Production Network</p>
-          <h2 className="font-display font-black text-[clamp(1.8rem,4.5vw,3rem)] text-white leading-[0.9] tracking-tighter">
-            Hiring <span className="gradient-text italic">Ecosystem</span>
+        <div className="ip-header text-center mb-12">
+          <h2 className="font-display font-black text-[clamp(1.5rem,3.5vw,2.5rem)] text-white leading-[0.9] tracking-tighter uppercase">
+            Hiring <span className="text-yellow-500 italic">Ecosystem</span>
           </h2>
         </div>
 
-        {/* Logo Cloud */}
-        <div className="flex flex-wrap justify-center gap-8 md:gap-16 lg:gap-20">
-          {partners.map((partner, i) => (
-            <div
-              key={i}
-              className="floating-logo group relative"
-            >
-              <div className="w-32 h-32 md:w-56 md:h-56 rounded-[48px] glass border border-white/5 flex items-center justify-center p-8 transition-all duration-700 hover:border-[#E31837]/40 hover:bg-white/[0.02] hover:scale-105 shadow-2xl relative overflow-hidden">
-                {/* Internal Glow */}
-                <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                
-                <span className={`text-[11px] md:text-sm text-white/20 group-hover:text-white transition-all duration-500 text-center leading-none pointer-events-none select-none ${partner.style}`}>
-                  {partner.name}
-                </span>
+        {/* Dual-Row Scrolling */}
+        <div className="relative space-y-6">
+          {/* Gradient overlays */}
+          <div className="absolute left-0 top-0 bottom-0 w-24 md:w-48 bg-gradient-to-r from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 md:w-48 bg-gradient-to-l from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
+
+          {/* Row 1 - Scrolls Left */}
+          <div 
+            ref={row1Ref}
+            className="flex items-center gap-8 w-max"
+            onMouseEnter={(e) => gsap.to(e.currentTarget, { timeScale: 0.2, duration: 0.3 })}
+            onMouseLeave={(e) => gsap.to(e.currentTarget, { timeScale: 1, duration: 0.3 })}
+          >
+            {extendedPartners.map((partner, i) => (
+              <div key={`${partner}-${i}`} className="shrink-0 group">
+                <div className="w-48 h-20 md:w-56 md:h-24 bg-[#0d0d0d] border-2 border-yellow-500/70 flex items-center justify-center px-6 transition-all duration-300 hover:border-yellow-400 hover:bg-[#111111] hover:scale-105">
+                  <span className="text-xs md:text-sm text-white font-bold uppercase tracking-wider text-center">
+                    {partner}
+                  </span>
+                </div>
               </div>
-              
-              {/* Context Label */}
-              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0">
-                 <span className="text-[8px] font-bold text-[#E31837] tracking-[0.3em] uppercase whitespace-nowrap">Hiring Partner</span>
+            ))}
+          </div>
+
+          {/* Row 2 - Scrolls Right */}
+          <div 
+            ref={row2Ref}
+            className="flex items-center gap-8 w-max"
+            onMouseEnter={(e) => gsap.to(e.currentTarget, { timeScale: 0.2, duration: 0.3 })}
+            onMouseLeave={(e) => gsap.to(e.currentTarget, { timeScale: 1, duration: 0.3 })}
+          >
+            {reversedPartners.map((partner, i) => (
+              <div key={`${partner}-${i}`} className="shrink-0 group">
+                <div className="w-48 h-20 md:w-56 md:h-24 bg-[#0d0d0d] border-2 border-yellow-500/70 flex items-center justify-center px-6 transition-all duration-300 hover:border-yellow-400 hover:bg-[#111111] hover:scale-105">
+                  <span className="text-xs md:text-sm text-white font-bold uppercase tracking-wider text-center">
+                    {partner}
+                  </span>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

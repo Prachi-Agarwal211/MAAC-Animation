@@ -54,6 +54,59 @@ export default function VerticalCardGallery() {
   const pieCenterTextRef = useRef<SVGTextElement | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
+  const updatePieChart = (index: number) => {
+    setActiveIndex(index);
+
+    // Update center text
+    if (pieCenterTextRef.current) {
+      pieCenterTextRef.current.textContent = String(index + 1).padStart(2, "0");
+    }
+
+    // Update segments
+    segmentRefs.current.forEach((seg, i) => {
+      if (!seg) return;
+      if (i === index) {
+        gsap.to(seg, {
+          strokeWidth: 3,
+          stroke: "#E31837",
+          filter: "url(#segGlow)",
+          opacity: 1,
+          duration: 0.3,
+          ease: "power2.out"
+        });
+      } else {
+        gsap.to(seg, {
+          strokeWidth: 1,
+          stroke: "rgba(255,255,255,0.05)",
+          filter: "none",
+          opacity: 0.3,
+          duration: 0.3,
+          ease: "power2.out"
+        });
+      }
+    });
+
+    // Update labels
+    labelRefs.current.forEach((label, i) => {
+      if (!label) return;
+      if (i === index) {
+        gsap.to(label, {
+          color: "#fff",
+          scale: 1.15,
+          duration: 0.3,
+          ease: "power2.out"
+        });
+      } else {
+        gsap.to(label, {
+          color: "rgba(255,255,255,0.2)",
+          scale: 1,
+          duration: 0.3,
+          ease: "power2.out"
+        });
+      }
+    });
+  };
+
   useGSAP(() => {
     const mm = gsap.matchMedia();
 
@@ -61,9 +114,6 @@ export default function VerticalCardGallery() {
       const items = gsap.utils.toArray<HTMLElement>(".content-section");
 
       items.forEach((item, index) => {
-        const seg = segmentRefs.current[index];
-        const label = labelRefs.current[index];
-
         gsap.fromTo(item, { opacity: 0.3, y: 60 }, {
           opacity: 1, y: 0, duration: 0.8, ease: "power2.out",
           scrollTrigger: {
@@ -71,49 +121,27 @@ export default function VerticalCardGallery() {
             start: "top 50%",
             end: "top 30%",
             scrub: 0.3,
-            onEnter: () => {
-              setActiveIndex(index);
-
-              if (seg) {
-                gsap.to(seg, { strokeWidth: 3, stroke: "#E31837", filter: "url(#segGlow)", duration: 0.4 });
-              }
-              segmentRefs.current.forEach((s, i) => {
-                if (s && i !== index) {
-                  gsap.to(s, { strokeWidth: 1, stroke: "rgba(255,255,255,0.05)", filter: "none", duration: 0.4 });
-                }
-              });
-
-              if (label) {
-                gsap.to(label, { color: "#fff", scale: 1.15, duration: 0.3 });
-              }
-              labelRefs.current.forEach((l, i) => {
-                if (l && i !== index) {
-                  gsap.to(l, { color: "rgba(255,255,255,0.3)", scale: 1, duration: 0.3 });
-                }
-              });
-
-              if (pieCenterTextRef.current) {
-                pieCenterTextRef.current.textContent = String(index + 1).padStart(2, "0");
-              }
-            }
+            onEnter: () => updatePieChart(index),
+            onEnterBack: () => updatePieChart(index)
           }
         });
       });
 
-      if (segmentRefs.current[0]) {
-        gsap.set(segmentRefs.current[0], { stroke: "#E31837", strokeWidth: 3, filter: "url(#segGlow)" });
-      }
-      if (labelRefs.current[0]) {
-        gsap.set(labelRefs.current[0], { color: "#fff", scale: 1.15 });
-      }
+      // Initialize first segment
+      updatePieChart(0);
     });
 
     mm.add("(max-width: 1023px)", () => {
       const items = gsap.utils.toArray<HTMLElement>(".content-section");
-      items.forEach((item) => {
+      items.forEach((item, index) => {
         gsap.fromTo(item, { opacity: 0, y: 50 }, {
           opacity: 1, y: 0, duration: 0.6, ease: "power2.out",
-          scrollTrigger: { trigger: item, start: "top 85%", toggleActions: "play none none reverse" }
+          scrollTrigger: {
+            trigger: item,
+            start: "top 85%",
+            toggleActions: "play none none reverse",
+            onEnter: () => updatePieChart(index)
+          }
         });
       });
     });
@@ -129,12 +157,12 @@ export default function VerticalCardGallery() {
       <div className="relative z-10 max-w-[1440px] mx-auto px-6 lg:px-20">
         {/* Section Header */}
         <div className="text-center mb-12 lg:mb-16">
-          <p className="text-[#E31837] text-sm font-bold tracking-[0.3em] uppercase mb-4 flex items-center justify-center gap-3">
+          <p className="text-[#E31837] text-[10px] font-bold tracking-[0.3em] uppercase mb-4 flex items-center justify-center gap-3">
             <span className="w-8 h-[1px] bg-[#E31837]" />
             The MAAC Standard
             <span className="w-8 h-[1px] bg-[#E31837]" />
           </p>
-          <h2 className="font-display font-black text-[clamp(2rem,5vw,4rem)] leading-[0.85] tracking-tighter text-white">
+          <h2 className="font-display font-black text-[clamp(2rem,5vw,3.5rem)] leading-[0.85] tracking-tighter text-white">
             CREATIVE <span className="gradient-text italic">EVOLUTION</span>
           </h2>
           <p className="text-[#A8A29C] text-base lg:text-lg font-medium leading-relaxed mt-4 max-w-2xl mx-auto italic">
@@ -145,7 +173,7 @@ export default function VerticalCardGallery() {
         {/* Main Layout: Pie Chart LEFT (sticky), Cards RIGHT (scrollable) */}
         <div className="flex flex-col lg:flex-row">
 
-          {/* LEFT: Sticky Pie Chart - always visible while scrolling */}
+          {/* LEFT: Sticky Pie Chart */}
           <div className="lg:w-[45%] lg:flex-shrink-0 order-first lg:order-none">
             {/* Desktop: Fixed/Sticky pie chart */}
             <div className="hidden lg:block" style={{ position: "sticky", top: "80px" }}>
@@ -168,6 +196,7 @@ export default function VerticalCardGallery() {
                     ))}
                   </defs>
 
+                  {/* Background circle */}
                   <circle cx={CX} cy={CY} r={OUTER_R} fill="#111" stroke="rgba(255,255,255,0.05)" strokeWidth="1" />
 
                   {/* 7 Segments with Images */}
@@ -195,6 +224,7 @@ export default function VerticalCardGallery() {
                     </g>
                   ))}
 
+                  {/* Center circle */}
                   <circle cx={CX} cy={CY} r={INNER_R} fill="#080808" stroke="rgba(255,255,255,0.1)" strokeWidth="1" />
                   <text ref={pieCenterTextRef} x={CX} y={CY - 4} textAnchor="middle" className="fill-white font-display font-black" style={{ fontSize: "32px" }}>01</text>
                   <text x={CX} y={CY + 18} textAnchor="middle" className="fill-[#6B6560] font-bold uppercase tracking-widest" style={{ fontSize: "9px", letterSpacing: "0.2em" }}>OF {SEGMENTS}</text>
@@ -218,7 +248,7 @@ export default function VerticalCardGallery() {
                         left: `${(lx / 512) * 100}%`,
                         top: `${(ly / 512) * 100}%`,
                         transform: `translate(${isLeft ? "-100%" : "0%"}, -50%)`,
-                        color: "rgba(255,255,255,0.3)",
+                        color: "rgba(255,255,255,0.2)",
                       }}
                     >
                       {card.title}
@@ -261,7 +291,7 @@ export default function VerticalCardGallery() {
             </div>
           </div>
 
-          {/* RIGHT: Scrolling Content - tall enough for scrolling while pie chart stays */}
+          {/* RIGHT: Scrolling Content */}
           <div className="lg:w-[55%] lg:pl-12 lg:pt-8">
             <div className="flex flex-col gap-0">
               {featureCards.map((card, index) => (
