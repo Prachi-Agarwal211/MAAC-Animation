@@ -15,7 +15,7 @@ export default function ApplyNow() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [formData, setFormData] = useState({
-    name: "", phone: "", email: "", course: "", city: "", message: "",
+    name: "", phone: "", email: "", course: "", message: "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -167,14 +167,6 @@ export default function ApplyNow() {
                     <option value="filmmaking" className="bg-[#0a0a0a] text-white">Digital Filmmaking</option>
                     <option value="digital-media" className="bg-[#0a0a0a] text-white">Digital Media & Design</option>
                     <option value="architectural" className="bg-[#0a0a0a] text-white">Architectural Design</option>
-                  </select>
-                  <select value={formData.city}
-                    onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                    className={`${inputClass("city")} appearance-none bg-[#0a0a0a]`}>
-                    <option value="" className="bg-[#0a0a0a] text-white">Preferred Center</option>
-                    <option value="jaipur-malviya" className="bg-[#0a0a0a] text-white">Jaipur — Malviya Nagar</option>
-                    <option value="jaipur-vaishali" className="bg-[#0a0a0a] text-white">Jaipur — Vaishali Nagar</option>
-                    <option value="other" className="bg-[#0a0a0a] text-white">Other</option>
                   </select>
                 </div>
 

@@ -17,7 +17,6 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
     phone: "",
     email: "",
     course: "",
-    city: "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
@@ -108,7 +107,6 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
       data.set("phone", formData.phone);
       data.set("email", formData.email);
       data.set("course", formData.course);
-      data.set("city", formData.city);
       data.set("source", "popup_modal");
       
       const result = await submitContactForm(data);
@@ -332,30 +330,6 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                     </p>
                   )}
                 </div>
-
-                {/* City */}
-                <select
-                  value={formData.city}
-                  onChange={(e) =>
-                    setFormData({ ...formData, city: e.target.value })
-                  }
-                  className="w-full px-4 py-3 rounded-xl text-sm focus:outline-none transition-all appearance-none"
-                  style={{
-                    background: "rgba(255,255,255,0.05)",
-                    border: "1px solid rgba(255,255,255,0.08)",
-                    color: formData.city ? "#F0EBE1" : "#6B6560",
-                    fontSize: "16px",
-                  }}
-                >
-                  <option value="">Your City / Center</option>
-                  <option value="jaipur-malviya">
-                    Jaipur — Malviya Nagar
-                  </option>
-                  <option value="jaipur-vaishali">
-                    Jaipur — Vaishali Nagar
-                  </option>
-                  <option value="other">Other City</option>
-                </select>
 
                 <button
                   type="submit"
