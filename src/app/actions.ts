@@ -45,7 +45,7 @@ export async function submitContactForm(formData: FormData) {
       const resend = new Resend(resendApiKey);
       
       const { error } = await resend.emails.send({
-        from: 'MAAC Jaipur <noreply@maacanimationjaipur.com>',
+        from: 'MAAC Jaipur <maacanimationjaipur@gmail.com>',
         to: ['maacanimationjaipur@gmail.com'],
         subject: `New Enquiry from ${name} [${source}]`,
         html: `

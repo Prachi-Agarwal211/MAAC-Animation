@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
       const resend = new Resend(resendApiKey);
       
       await resend.emails.send({
-        from: 'MAAC Jaipur <noreply@maacanimationjaipur.com>',
+        from: 'MAAC Jaipur <maacanimationjaipur@gmail.com>',
         to: ['maacanimationjaipur@gmail.com'],
         subject: `New Contact Form Enquiry from ${name}`,
         html: `

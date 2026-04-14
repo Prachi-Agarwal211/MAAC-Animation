@@ -92,7 +92,7 @@ export default function ContactClient() {
                <div className="contact-card p-6 rounded-2xl glass border border-white/5 space-y-3 hover:border-[#E31837]/30 transition-all">
                   <Mail size={16} className="text-[#E31837]" />
                   <h4 className="text-white font-display font-bold text-xs uppercase tracking-wider">Email</h4>
-                  <a href="mailto:contact@maacjaipur.com" className="block text-[#A8A29C] text-xs hover:text-white transition-colors break-all">contact@maacjaipur.com</a>
+                  <a href="mailto:maacanimationjaipur@gmail.com" className="block text-[#A8A29C] text-xs hover:text-white transition-colors break-all">maacanimationjaipur@gmail.com</a>
                </div>
             </div>
 

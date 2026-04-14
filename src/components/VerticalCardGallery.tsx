@@ -160,50 +160,25 @@ export default function VerticalCardGallery() {
     });
 
     mm.add("(max-width: 1023px)", () => {
-      const section = containerRef.current;
-      const viewport = rightViewportRef.current;
-      const track = rightTrackRef.current;
-      if (!section || !viewport || !track) return;
+      // Mobile: normal page scroll (no pin) to avoid blank/black gaps.
+      // We still update the pie highlight based on which card is in view.
+      const cards = cardRefs.current.filter(Boolean) as HTMLDivElement[];
+      const triggers: ScrollTrigger[] = [];
 
-      const getMaxTranslate = () => Math.max(0, track.scrollHeight - viewport.clientHeight);
-
-      const tween = gsap.to(track, {
-        y: () => -getMaxTranslate(),
-        ease: "none",
-        scrollTrigger: {
-          trigger: section,
-          start: "top top",
-          end: () => `+=${Math.max(1, getMaxTranslate())}`,
-          scrub: true,
-          pin: true,
-          pinReparent: true,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-          onUpdate: (self) => {
-            const max = getMaxTranslate();
-            if (max <= 0) {
-              updateActiveSegment(0);
-              return;
-            }
-
-            const y = self.progress * max;
-            const focusY = y + viewport.clientHeight * 0.35;
-
-            let active = 0;
-            for (let i = 0; i < cardRefs.current.length; i++) {
-              const el = cardRefs.current[i];
-              if (!el) continue;
-              const top = el.offsetTop;
-              if (top <= focusY) active = i;
-            }
-            updateActiveSegment(Math.min(SEGMENTS - 1, Math.max(0, active)));
-          },
-        },
+      cards.forEach((card, index) => {
+        triggers.push(
+          ScrollTrigger.create({
+            trigger: card,
+            start: "top 65%",
+            end: "bottom 35%",
+            onEnter: () => updateActiveSegment(index),
+            onEnterBack: () => updateActiveSegment(index),
+          })
+        );
       });
 
       return () => {
-        tween.scrollTrigger?.kill();
-        tween.kill();
+        triggers.forEach((t) => t.kill());
       };
     });
 
@@ -228,8 +203,8 @@ export default function VerticalCardGallery() {
 
           {/* LEFT: Sticky Pie Chart */}
           <div className="lg:w-[45%] lg:flex-shrink-0">
-            <div className="sticky top-6 lg:sticky lg:top-24">
-              <div className="relative w-full max-w-[360px] sm:max-w-[420px] lg:max-w-[480px] mx-auto" style={{ aspectRatio: "1/1" }}>
+            <div className="lg:sticky lg:top-24">
+              <div className="relative w-full max-w-[360px] sm:max-w-[420px] lg:max-w-[480px] mx-auto -mt-4 sm:-mt-6 lg:mt-0" style={{ aspectRatio: "1/1" }}>
                 <svg viewBox="0 0 512 512" className="w-full h-full relative z-10">
                   <defs>
                     <filter id="segGlow" x="-30%" y="-30%" width="160%" height="160%">
@@ -314,7 +289,7 @@ export default function VerticalCardGallery() {
           {/* RIGHT: Scrolling Cards */}
           <div
             ref={rightViewportRef}
-            className="lg:w-[55%] h-[52vh] sm:h-[56vh] lg:h-[calc(100vh-8rem)] overflow-hidden"
+            className="lg:w-[55%] lg:h-[calc(100vh-8rem)] lg:overflow-hidden"
           >
             <div ref={rightTrackRef} className="space-y-8">
               {featureCards.map((card, index) => (
