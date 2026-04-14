@@ -121,7 +121,7 @@ export const testimonialsData = [
   {
     name: "Tanisha Chauhan",
     role: "Student",
-    text: "Maac Animation offers top-notch facilities and resources for aspiring animators. The studio environment is conducive to creativity, and the equipment is state-of-the-art. Highly recommended for anyone serious about pursuing a career in animation.☺️☺️",
+    text: "Maac Animation offers top-notch facilities and resources for aspiring animators. The studio environment is conducive to creativity, and the equipment is state-of-the-art. Highly recommended for anyone serious about pursuing a career in animation.",
   },
 ];
 
@@ -167,21 +167,23 @@ export const tickerStats = [
 
 export const navLinks = [
   { label: "Home", href: "/" },
-  { label: "Courses", href: "/#courses",
+  {
+    label: "Courses",
+    href: "/courses",
     children: [
-      { label: "Animation", href: "/#courses", icon: "animation" },
-      { label: "Visual Effects", href: "/#courses", icon: "vfx" },
-      { label: "Gaming", href: "/#courses", icon: "gaming" },
-      { label: "Filmmaking", href: "/#courses", icon: "animation" },
-      { label: "Digital Media", href: "/#courses", icon: "digital" },
-      { label: "Architectural Design", href: "/#courses", icon: "motion" },
+      { label: "3D Animation", href: "/courses", icon: "animation" },
+      { label: "Visual Effects", href: "/courses", icon: "vfx" },
+      { label: "Game Design", href: "/courses", icon: "gaming" },
+      { label: "Filmmaking", href: "/courses", icon: "animation" },
+      { label: "Digital Media", href: "/courses", icon: "digital" },
+      { label: "Motion Graphics", href: "/courses", icon: "motion" },
     ],
   },
   { label: "Placements", href: "/placements" },
-  { label: "Student Work", href: "/portfolio" },
+  { label: "Student Work", href: "/student-work" },
   { label: "About Us", href: "/about" },
   { label: "Gallery", href: "/gallery" },
-  { label: "Contact Us", href: "/contact" },
+  { label: "Demo Class", href: "/demo-class" },
 ];
 
 export const contactInfo = {
@@ -190,11 +192,13 @@ export const contactInfo = {
   phoneTertiary: "+91-9929059559",
   whatsapp: "+91-7300001589",
   email: "maacanimationjaipur@gmail.com",
-  address: "711-712, Ambition Tower, 7th Floor, D-46B, Malan Ka Chauraha, Agrasain Circle, Subhash Marg, C Scheme, Jaipur, Rajasthan 302001",
-  googleMapsUrl: "https://maps.google.com/?q=MAAC+Jaipur+Subhash+Marg+C+Scheme",
+  address:
+    "711-712, Ambition Tower, 7th Floor, D-46B, Malan Ka Chauraha, Agrasain Circle, Subhash Marg, C Scheme, Jaipur, Rajasthan 302001",
+  googleMapsUrl: "https://maps.google.com/?q=MAAC+Jaipur+C+Scheme+711+Ambition+Tower",
   hours: "Mon–Sat 9:00 AM – 7:00 PM",
   social: {
-    instagram: "https://www.instagram.com/maacjaipurcscheme?igsh=OGluNWQybHI2cjBv&utm_source=qr",
+    instagram:
+      "https://www.instagram.com/maacjaipurcscheme?igsh=OGluNWQybHI2cjBv&utm_source=qr",
     linkedin: "https://www.linkedin.com/company/maac-jaipur-cscheme",
     youtube: "https://youtube.com/@maac-jaipur-cscheme?si=QiPdIu3guJaDr3cB",
     facebook: "https://www.facebook.com/MAAClndia",
