@@ -171,34 +171,46 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${syne.variable}`}>
+    <html lang="en" className={`scroll-smooth ${inter.variable} ${syne.variable}`}>
       <head>
         {/* Preload hero videos for instant loading */}
         <link rel="preload" as="video" href="/hero-video.mp4" type="video/mp4" />
+        <link rel="preload" as="video" href="/intro.mp4" type="video/mp4" />
+        <link rel="preload" as="image" href="/hero-poster.jpg" />
         {/* JSON-LD Structured Data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="bg-[#0C0C0C] text-white antialiased">
+      <body
+        className={`${inter.variable} ${syne.variable} font-body antialiased bg-[#0C0C0C] text-[#F0EBE1]`}
+      >
+        <DemoBar />
+        <div className="animated-bg" aria-hidden="true" />
+
         <Providers>
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-[9999] bg-[#E31837] text-white px-4 py-2 rounded"
+          >
+            Skip to main content
+          </a>
+
+          <div className="grain-overlay" aria-hidden="true" />
+
+          <CustomCursor />
+
           <LenisProvider>
-            <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:bg-red-600 focus:text-white focus:px-4 focus:py-2 focus:text-sm">
-              Skip to main content
-            </a>
-            <DemoBar />
             <Navbar />
-            <CustomCursor />
-            <main id="main-content">
-              {children}
-            </main>
+            <ClientShell>
+              <main id="main-content" tabIndex={-1} className="page-wrapper">{children}</main>
+            </ClientShell>
             <FloatingActions />
-            <ClientShell />
+            <Analytics />
+            <SpeedInsights />
           </LenisProvider>
         </Providers>
-        <Analytics />
-        <SpeedInsights />
       </body>
     </html>
   );
