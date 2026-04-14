@@ -74,7 +74,7 @@ export default function Footer() {
 
           <div className="relative z-10 flex flex-col sm:flex-row gap-6">
             <MagneticButton>
-              <Link href="/contact" className="btn btn-primary px-10 py-5 rounded-2xl text-base font-bold tracking-widest shadow-2xl">
+              <Link href="/demo-class" className="btn btn-primary px-10 py-5 rounded-2xl text-base font-bold tracking-widest shadow-2xl">
                 Book Free Demo
               </Link>
             </MagneticButton>

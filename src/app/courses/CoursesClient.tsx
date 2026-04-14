@@ -56,7 +56,7 @@ function CoursePanel({ course, index }: { course: any; index: number }) {
                </span>
              ))}
            </div>
-           <Link href="/contact" className="inline-flex items-center gap-3 text-white text-[9px] font-bold tracking-wider uppercase group/link">
+           <Link href="/demo-class" className="inline-flex items-center gap-3 text-white text-[9px] font-bold tracking-wider uppercase group/link">
              SECURE ADMISSION
              <div className="w-10 h-10 rounded-full bg-[#E31837] flex items-center justify-center transition-transform group-hover/link:scale-110">
                <ArrowUpRight size={16} />

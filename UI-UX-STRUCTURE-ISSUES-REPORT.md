@@ -104,7 +104,7 @@ Page Request → Instant Video Load (Hero) → Page Interactive → Other Sectio
 
 **Current Code:**
 ```tsx
-<Link href="/contact" 
+<Link href="/demo-class" 
   className="hidden md:flex btn btn-primary px-8 py-3 rounded-full 
              text-[11px] font-bold tracking-[0.2em]">
   Apply Now
@@ -118,7 +118,7 @@ Page Request → Instant Video Load (Hero) → Page Interactive → Other Sectio
 
 **Recommended Fix:**
 ```tsx
-<Link href="/contact" 
+<Link href="/demo-class" 
   className="hidden md:flex btn btn-primary px-6 py-2 rounded-full 
              text-[10px] font-bold tracking-[0.15em]">
   Apply Now

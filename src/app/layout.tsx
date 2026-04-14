@@ -11,6 +11,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Providers } from "./providers";
 import { contactInfo } from "@/data/siteData";
 import DemoBar from "@/components/ui/DemoBar";
+import ErrorBoundary from "@/components/ErrorBoundary";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -203,9 +204,9 @@ export default function RootLayout({
 
           <LenisProvider>
             <Navbar />
-            <ClientShell>
+            <ErrorBoundary><ClientShell>
               <main id="main-content" tabIndex={-1} className="page-wrapper">{children}</main>
-            </ClientShell>
+            </ClientShell></ErrorBoundary>
             <FloatingActions />
             <Analytics />
             <SpeedInsights />

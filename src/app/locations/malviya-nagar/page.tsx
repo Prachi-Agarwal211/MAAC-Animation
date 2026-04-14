@@ -151,7 +151,7 @@ export default function MalviyaNagarPage() {
               </div>
 
               <a
-                href="/contact"
+                href="/demo-class"
                 className="btn btn-primary w-full justify-center mt-6"
               >
                 Book Free Demo Class

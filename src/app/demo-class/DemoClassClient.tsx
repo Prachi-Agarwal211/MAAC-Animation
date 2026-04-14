@@ -177,7 +177,7 @@ export default function DemoClassClient() {
                <div className="absolute inset-0 bg-[#E31837]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
                <h4 className="relative z-10 text-white font-display font-bold text-xl mb-4">Can&apos;t Visit?</h4>
                <p className="relative z-10 text-[#A8A29C] text-sm leading-relaxed mb-8">We offer online demo sessions for students outside Jaipur. Contact us to schedule a virtual tour.</p>
-               <Link href="/contact" className="relative z-10 inline-flex items-center gap-3 text-[#E31837] text-[10px] font-bold tracking-widest uppercase">
+               <Link href="/demo-class" className="relative z-10 inline-flex items-center gap-3 text-[#E31837] text-[10px] font-bold tracking-widest uppercase">
                  Inquire Online <ArrowRight size={14} />
                </Link>
             </div>

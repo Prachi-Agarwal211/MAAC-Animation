@@ -82,7 +82,7 @@ export default function VaishaliNagarPage() {
               <div><p className="text-[#6b6b6b] text-sm mb-1">Address</p><p className="text-[#F0EBE1]">711-712, Ambition Tower, 7th Floor<br />Subhash Marg, C-Scheme, Jaipur<br />Rajasthan 302001</p></div>
               <div><p className="text-[#6b6b6b] text-sm mb-1">Phone</p><a href="tel:+917300001589" className="text-[#E31837] hover:underline">+91-7300001589</a></div>
               <div><p className="text-[#6b6b6b] text-sm mb-1">Hours</p><p className="text-[#F0EBE1]">Monday - Saturday: 9 AM - 7 PM</p></div>
-              <a href="/contact" className="btn btn-primary w-full justify-center mt-6">Book Free Demo Class</a>
+              <a href="/demo-class" className="btn btn-primary w-full justify-center mt-6">Book Free Demo Class</a>
             </div>
           </div>
         </div>

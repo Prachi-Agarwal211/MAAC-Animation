@@ -125,7 +125,7 @@ export default function CSchemePage() {
                 <p className="text-[#6b6b6b] text-sm mb-1">Hours</p>
                 <p className="text-[#F0EBE1]">Monday - Saturday: 9 AM - 7 PM</p>
               </div>
-              <a href="/contact" className="btn btn-primary w-full justify-center mt-6">Book Free Demo Class</a>
+              <a href="/demo-class" className="btn btn-primary w-full justify-center mt-6">Book Free Demo Class</a>
             </div>
           </div>
         </div>
