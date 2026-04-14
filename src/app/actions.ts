@@ -39,52 +39,54 @@ export async function submitContactForm(formData: FormData) {
   try {
     // Only send email if API key is configured
     const resendApiKey = process.env.RESEND_API_KEY;
-    
+
     if (resendApiKey) {
       const { Resend } = await import("resend");
       const resend = new Resend(resendApiKey);
-      
+
       const { error } = await resend.emails.send({
-        from: 'MAAC Jaipur <maacanimationjaipur@gmail.com>',
+        // IMPORTANT: 'from' must use a verified domain in Resend.
+        // Go to resend.com/domains, add maacanimationjaipur.com,
+        // verify DNS records, then this sender address will work.
+        from: 'MAAC Jaipur <noreply@maacanimationjaipur.com>',
         to: ['maacanimationjaipur@gmail.com'],
+        replyTo: email || undefined,
         subject: `New Enquiry from ${name} [${source}]`,
         html: `
-          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #fff; padding: 20px; border: 1px solid #eee;">
-            <h2 style="color: #E31837; border-bottom: 2px solid #E31837; padding-bottom: 10px;">New Website Enquiry</h2>
-            <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
-              <tr style="background: #f9f9f9;">
-                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold; width: 30%;">Name</td>
-                <td style="padding: 12px; border: 1px solid #ddd;">${name}</td>
-              </tr>
-              <tr>
-                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Phone</td>
-                <td style="padding: 12px; border: 1px solid #ddd;">${phone}</td>
-              </tr>
-              ${email ? `<tr style="background: #f9f9f9;">
-                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Email</td>
-                <td style="padding: 12px; border: 1px solid #ddd;">${email}</td>
-              </tr>` : ''}
-              ${course ? `<tr>
-                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Course Interest</td>
-                <td style="padding: 12px; border: 1px solid #ddd;">${course}</td>
-              </tr>` : ''}
-              ${city ? `<tr style="background: #f9f9f9;">
-                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">City</td>
-                <td style="padding: 12px; border: 1px solid #ddd;">${city}</td>
-              </tr>` : ''}
-              ${message ? `<tr>
-                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Message</td>
-                <td style="padding: 12px; border: 1px solid #ddd;">${message}</td>
-              </tr>` : ''}
-              <tr style="background: #f9f9f9;">
-                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Source</td>
-                <td style="padding: 12px; border: 1px solid #ddd;">${source}</td>
-              </tr>
-            </table>
-            <p style="margin-top: 20px; color: #666; font-size: 14px;">
-              This enquiry was submitted from the MAAC Jaipur website.
-            </p>
-          </div>
+          <!DOCTYPE html>
+          <html>
+          <head><meta charset="utf-8"><style>
+            body { font-family: Arial, sans-serif; background: #f4f4f4; margin: 0; padding: 20px; }
+            .container { max-width: 600px; margin: 0 auto; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+            .header { background: #CC0000; color: white; padding: 24px 32px; }
+            .header h1 { margin: 0; font-size: 20px; }
+            .header p { margin: 4px 0 0; font-size: 12px; opacity: 0.8; }
+            .body { padding: 32px; }
+            table { width: 100%; border-collapse: collapse; }
+            td { padding: 10px 12px; border-bottom: 1px solid #f0f0f0; font-size: 14px; }
+            td:first-child { font-weight: bold; color: #555; width: 35%; background: #fafafa; }
+            .footer { background: #f9f9f9; padding: 16px 32px; font-size: 11px; color: #999; text-align: center; }
+          </style></head>
+          <body>
+            <div class="container">
+              <div class="header">
+                <h1>New Website Enquiry</h1>
+                <p>MAAC Jaipur C-Scheme &mdash; ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}</p>
+              </div>
+              <div class="body">
+                <table>
+                  <tr><td>Name</td><td>${name}</td></tr>
+                  <tr><td>Phone</td><td>${phone}</td></tr>
+                  ${email ? `<tr><td>Email</td><td>${email}</td></tr>` : ''}
+                  ${course ? `<tr><td>Course Interest</td><td>${course}</td></tr>` : ''}
+                  ${city ? `<tr><td>City</td><td>${city}</td></tr>` : ''}
+                  ${message ? `<tr><td>Message</td><td>${message}</td></tr>` : ''}
+                  <tr><td>Source</td><td>${source}</td></tr>
+                </table>
+              </div>
+              <div class="footer">This enquiry was submitted from the MAAC Jaipur website &mdash; maacanimationjaipur.com</div>
+            </div>
+          </body></html>
         `,
       });
 
@@ -100,9 +102,9 @@ export async function submitContactForm(formData: FormData) {
     return { success: true, message: "Application submitted successfully! We'll contact you soon." };
   } catch (error: any) {
     console.error('Form submission error:', error);
-    return { 
-      success: false, 
-      message: error instanceof Error ? error.message : "Failed to submit form. Please try again." 
+    return {
+      success: false,
+      message: error instanceof Error ? error.message : "Failed to submit form. Please try again.",
     };
   }
 }
