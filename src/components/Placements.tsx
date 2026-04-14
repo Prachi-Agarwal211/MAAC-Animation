@@ -8,129 +8,80 @@ import { Globe, Star, ShieldCheck, Briefcase } from "lucide-react";
 const placementCompanies = [
   { 
     name: "DNEG", 
-    logo: "https://upload.wikimedia.org/wikipedia/commons/1/1a/DNEG_logo.svg",
-    bgColor: "#1a1a2e"
+    logo: "/logos/DNEG_logo.jpg",
+    bgColor: "#ffffff"
   },
   { 
     name: "Prime Focus", 
-    logo: "https://logo.clearbit.com/primefocusworld.com",
+    logo: "/logos/prime_focus_logo.png",
     bgColor: "#ffffff"
   },
   { 
     name: "Redchillies VFX", 
-    logo: "https://logo.clearbit.com/redchillies.com",
+    logo: "/logos/Red_Chillies_Entertainment_logo.jpg",
     bgColor: "#ffffff"
   },
   { 
     name: "MPC", 
-    logo: "https://logo.clearbit.com/mpcfilm.com",
+    logo: "/logos/mpc_logo.png",
     bgColor: "#ffffff"
   },
   { 
     name: "Technicolor", 
-    logo: "https://logo.clearbit.com/technicolor.com",
+    logo: "/logos/technicolor_logo.jpg",
     bgColor: "#ffffff"
   },
   { 
     name: "Method Studios", 
-    logo: "https://logo.clearbit.com/methodstudios.com",
+    logo: "/logos/Method_Studios_logo.png",
     bgColor: "#ffffff"
   },
   { 
     name: "Ubisoft", 
-    logo: "https://upload.wikimedia.org/wikipedia/commons/a/a8/Ubisoft_logo.svg",
-    bgColor: "#000000"
+    logo: "/logos/ubisoft_logo.png",
+    bgColor: "#ffffff"
   },
   { 
     name: "EA Games", 
-    logo: "https://upload.wikimedia.org/wikipedia/commons/0/0c/Electronic_Arts_Logo.svg",
+    logo: "/logos/ea_games_logo.jpg",
     bgColor: "#ffffff"
   },
   { 
     name: "Rockstar Games", 
-    logo: "https://upload.wikimedia.org/wikipedia/commons/5/53/Rockstar_Games_Logo.svg",
+    logo: "/logos/rockstar_games_logo.jpg",
     bgColor: "#ffffff"
   },
   { 
     name: "Makuta VFX", 
-    logo: "https://logo.clearbit.com/makutavfx.com",
+    logo: "/logos/makuta_vfx_logo.jpg",
     bgColor: "#ffffff"
   },
   { 
     name: "DQ Entertainment", 
-    logo: "https://logo.clearbit.com/dqentertainment.com",
+    logo: "/logos/dq_entertainment_logo.jpg",
     bgColor: "#ffffff"
   },
   { 
     name: "Green Gold", 
-    logo: "https://logo.clearbit.com/greengoldtv.com",
+    logo: "/logos/green_gold_animation_pvt_ltd_logo.jpg",
     bgColor: "#ffffff"
   },
   { 
     name: "Reliance", 
-    logo: "https://logo.clearbit.com/relianceada.com",
+    logo: "/logos/reliance_logo.jpg",
     bgColor: "#ffffff"
   },
   { 
     name: "Xentrix", 
-    logo: "https://logo.clearbit.com/xentrix.in",
+    logo: "/logos/Xentrix_logo.png",
     bgColor: "#ffffff"
   },
 ];
 
-// Create 4 copies for seamless loop
-const extendedCompanies = [...placementCompanies, ...placementCompanies, ...placementCompanies, ...placementCompanies];
-const reversedCompanies = [...extendedCompanies].reverse();
-
 function Placements() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const row1Ref = useRef<HTMLDivElement>(null);
-  const row2Ref = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
-    // Setup Row 1: Scroll left
-    if (row1Ref.current) {
-      const row1 = row1Ref.current;
-      const items = Array.from(row1.children) as HTMLElement[];
-      
-      let singleSetWidth = 0;
-      for (let i = 0; i < placementCompanies.length && i < items.length; i++) {
-        singleSetWidth += items[i].offsetWidth + 20;
-      }
-
-      const duration = singleSetWidth / 60;
-
-      gsap.to(row1, {
-        x: -singleSetWidth,
-        duration,
-        ease: "none",
-        repeat: -1,
-        onRepeat: () => { gsap.set(row1, { x: 0 }); }
-      });
-    }
-
-    // Setup Row 2: Scroll right
-    if (row2Ref.current) {
-      const row2 = row2Ref.current;
-      const items = Array.from(row2.children) as HTMLElement[];
-      
-      let singleSetWidth = 0;
-      for (let i = 0; i < placementCompanies.length && i < items.length; i++) {
-        singleSetWidth += items[i].offsetWidth + 20;
-      }
-
-      const duration = singleSetWidth / 60;
-
-      gsap.set(row2, { x: -singleSetWidth });
-      gsap.to(row2, {
-        x: 0,
-        duration,
-        ease: "none",
-        repeat: -1,
-        onRepeat: () => { gsap.set(row2, { x: -singleSetWidth }); }
-      });
-    }
-
     // Header animation
     gsap.fromTo(".pl-header > *", 
       { opacity: 0, y: 30 }, 
@@ -150,16 +101,16 @@ function Placements() {
 
   // Render company logo card with image
   const renderCompany = (company: typeof placementCompanies[0], i: number) => (
-    <div key={`${company.name}-${i}`} className="shrink-0 group">
+    <div key={`${company.name}-${i}`} className="group">
       <div 
-        className="w-40 h-24 md:w-48 md:h-28 rounded-lg border-2 border-gray-200 flex items-center justify-center p-5 transition-all duration-300 hover:shadow-xl hover:scale-105 hover:border-gray-300 overflow-hidden relative"
+        className="h-16 sm:h-18 md:h-20 lg:h-20 w-full rounded-xl border border-white/10 bg-white flex items-center justify-center px-6 transition-transform duration-300 hover:scale-[1.02] overflow-hidden"
         style={{ backgroundColor: company.bgColor }}
       >
         {/* Company Logo Image */}
         <img
           src={company.logo}
           alt={`${company.name} logo`}
-          className="w-full h-full object-contain object-center opacity-90 group-hover:opacity-100 transition-all duration-300"
+          className="max-h-full w-auto object-contain object-center opacity-90 group-hover:opacity-100 transition-opacity duration-300"
           onError={(e) => {
             const target = e.target as HTMLImageElement;
             target.style.display = "none";
@@ -169,7 +120,7 @@ function Placements() {
         />
         
         {/* Fallback company name (hidden by default) */}
-        <span className="text-sm text-gray-700 font-bold uppercase tracking-wider text-center items-center justify-center hidden w-full h-full">
+        <span className="text-[11px] text-gray-800 font-bold uppercase tracking-wider text-center items-center justify-center hidden w-full h-full">
           {company.name}
         </span>
       </div>
@@ -179,7 +130,7 @@ function Placements() {
   return (
     <section 
       ref={containerRef} 
-      className="relative bg-[#080408] py-24 md:py-32 overflow-hidden border-t-2 border-red-600/40"
+      className="relative bg-[#080408] py-24 md:py-32 overflow-hidden"
     >
       <div className="relative z-10 max-w-6xl mx-auto px-6">
         {/* Header */}
@@ -197,30 +148,16 @@ function Placements() {
           </p>
         </div>
 
-        {/* Dual-Row Scrolling Logo Cloud */}
-        <div className="relative space-y-6">
-          {/* Gradient overlays */}
-          <div className="absolute left-0 top-0 bottom-0 w-24 md:w-48 bg-gradient-to-r from-[#080408] to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-24 md:w-48 bg-gradient-to-l from-[#080408] to-transparent z-10 pointer-events-none" />
+        {/* Alumni Network Logo Rows (like reference screenshot) */}
+        <div className="max-w-6xl mx-auto">
+          <div className="border-t-2 border-b-2 border-red-600/40 pt-10 pb-10">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4 md:gap-5">
+              {placementCompanies.slice(0, 7).map((company, i) => renderCompany(company, i))}
+            </div>
 
-          {/* Row 1 - Scrolls Left */}
-          <div 
-            ref={row1Ref}
-            className="flex items-center gap-5 w-max"
-            onMouseEnter={(e) => gsap.to(e.currentTarget, { timeScale: 0.2, duration: 0.3 })}
-            onMouseLeave={(e) => gsap.to(e.currentTarget, { timeScale: 1, duration: 0.3 })}
-          >
-            {extendedCompanies.map((company, i) => renderCompany(company, i))}
-          </div>
-
-          {/* Row 2 - Scrolls Right */}
-          <div 
-            ref={row2Ref}
-            className="flex items-center gap-5 w-max"
-            onMouseEnter={(e) => gsap.to(e.currentTarget, { timeScale: 0.2, duration: 0.3 })}
-            onMouseLeave={(e) => gsap.to(e.currentTarget, { timeScale: 1, duration: 0.3 })}
-          >
-            {reversedCompanies.map((company, i) => renderCompany(company, i))}
+            <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4 md:gap-5 lg:max-w-[1100px] lg:mx-auto">
+              {placementCompanies.slice(7).map((company, i) => renderCompany(company, i + 7))}
+            </div>
           </div>
         </div>
       </div>

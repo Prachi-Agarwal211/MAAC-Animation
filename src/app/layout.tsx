@@ -10,7 +10,6 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Providers } from "./providers";
 import { contactInfo } from "@/data/siteData";
-import DemoBar from "@/components/ui/DemoBar";
 import ErrorBoundary from "@/components/ErrorBoundary";
 
 const inter = Inter({
@@ -187,7 +186,6 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${syne.variable} font-body antialiased bg-[#0C0C0C] text-[#F0EBE1]`}
       >
-        <DemoBar />
         <div className="animated-bg" aria-hidden="true" />
 
         <Providers>

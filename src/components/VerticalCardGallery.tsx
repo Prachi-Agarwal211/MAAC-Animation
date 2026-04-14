@@ -4,6 +4,7 @@ import { useRef } from "react";
 import Image from "next/image";
 import { useGSAP } from "@gsap/react";
 import gsap from "@/lib/gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight } from "lucide-react";
 
 const cardImages: Record<number, string> = {
@@ -104,6 +105,8 @@ export default function VerticalCardGallery() {
   };
 
   useGSAP(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
     // Initialize first segment
     updateActiveSegment(0);
 
@@ -203,7 +206,7 @@ export default function VerticalCardGallery() {
 
           {/* LEFT: Sticky Pie Chart */}
           <div className="lg:w-[45%] lg:flex-shrink-0">
-            <div className="lg:sticky lg:top-24">
+            <div className="sticky top-20 lg:top-24 z-20">
               <div className="relative w-full max-w-[360px] sm:max-w-[420px] lg:max-w-[480px] mx-auto -mt-4 sm:-mt-6 lg:mt-0" style={{ aspectRatio: "1/1" }}>
                 <svg viewBox="0 0 512 512" className="w-full h-full relative z-10">
                   <defs>
@@ -270,7 +273,7 @@ export default function VerticalCardGallery() {
                     <div
                       key={i}
                       ref={el => { labelRefs.current[i] = el; }}
-                      className="absolute text-[10px] font-bold tracking-wider uppercase transition-all duration-300 whitespace-nowrap"
+                      className="absolute text-[9px] sm:text-[10px] font-bold tracking-wider uppercase transition-all duration-300 whitespace-nowrap"
                       style={{
                         left: `${(lx / 512) * 100}%`,
                         top: `${(ly / 512) * 100}%`,

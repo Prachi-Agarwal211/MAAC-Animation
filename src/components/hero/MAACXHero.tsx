@@ -62,9 +62,9 @@ export default function MAACXHero() {
     tl.to(".intro-ui-elements", { opacity: 0, duration: 0.4 })
       .to(introOverlayRef.current, {
         opacity: 0,
-        scale: 1.1,
-        filter: "blur(20px)",
-        duration: 1.5,
+        // Keep the cinematic feel but avoid filter blur (expensive on GPUs).
+        scale: 1.06,
+        duration: 1.0,
         ease: "power4.inOut"
       });
   };
@@ -84,8 +84,9 @@ export default function MAACXHero() {
     const tl = gsap.timeline({ defaults: { ease: "expo.out" } });
     
     tl.fromTo(".maacx-content > *", 
-      { opacity: 0, y: 30, filter: "blur(10px)" },
-      { opacity: 1, y: 0, filter: "blur(0px)", duration: 1.2, stagger: 0.1, delay: 0.5 }
+      // Avoid animating CSS filters (blur) for smoother performance.
+      { opacity: 0, y: 24 },
+      { opacity: 1, y: 0, duration: 1.05, stagger: 0.08, delay: 0.35 }
     );
 
     if (heroVideoRef.current) {
@@ -102,7 +103,7 @@ export default function MAACXHero() {
           {videoError ? (
             <div className="flex flex-col items-center gap-8">
                <div className="w-16 h-16 border-t-2 border-[#E31837] rounded-full animate-spin" />
-               <span className="text-white/20 text-[10px] font-bold tracking-[0.4em] uppercase">Initialising Vision</span>
+               <span className="text-white/20 text-[10px] font-bold tracking-[0.4em] uppercase">Loading Experience</span>
             </div>
           ) : (
             <>
@@ -119,8 +120,7 @@ export default function MAACXHero() {
               <div className="absolute inset-0 bg-black/40 z-[1]" />
               
               <div className="intro-ui-elements absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 flex flex-col items-center">
-                <Image src="/maac-logo.png" alt="MAAC Jaipur" width={220} height={90} className="object-contain drop-shadow-2xl" priority />
-                <p className="text-white/50 text-xs mt-3 tracking-[0.25em] uppercase font-light">Animation · VFX · Jaipur</p>
+                <p className="text-white/50 text-xs tracking-[0.25em] uppercase font-light">Animation · VFX · Jaipur</p>
                 <div className="h-[1px] w-6 bg-[#E31837] mt-4 shadow-[0_0_10px_#E31837]" />
               </div>
 
@@ -155,7 +155,7 @@ export default function MAACXHero() {
             muted={isMuted}
             loop
             playsInline
-            preload="auto"
+            preload="metadata"
             poster="/hero-poster.jpg"
           >
             <source src={HERO_VIDEO_WEBM} type="video/webm" />
@@ -164,39 +164,39 @@ export default function MAACXHero() {
           {/* High-End Vignette Matrix */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black/90" />
           <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/20" />
-          <div className="absolute inset-0 bg-black/10" />
+          <div className="absolute inset-0 bg-black/5" />
         </div>
 
         {/* Hero Content */}
-        <div className="relative z-10 px-6 sm:px-12 lg:px-24 pb-20 md:pb-32 maacx-content max-w-[1800px] mx-auto w-full">
+        <div className="relative z-10 px-6 sm:px-12 lg:px-24 pb-16 sm:pb-20 md:pb-32 maacx-content max-w-[1800px] mx-auto w-full">
           <div className="max-w-3xl">
             <div className="mb-6">
-              <span className="inline-block px-4 py-1.5 bg-[#E31837]/10 backdrop-blur-md border border-[#E31837]/20 rounded-full text-[#E31837] text-[10px] font-bold tracking-[0.3em] uppercase">
-                Premium Creative Hub · Jaipur
+              <span className="inline-block px-4 py-1.5 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white text-[10px] font-bold tracking-[0.3em] uppercase">
+                Animation & VFX Academy · Jaipur
               </span>
             </div>
 
-            <h1 className="mb-6">
-              <span className="block text-white font-display font-bold text-[clamp(1.5rem,4vw,2.5rem)] leading-[0.95] tracking-tighter uppercase">
-                <SplitTextReveal>Master the Craft of</SplitTextReveal>
+            <h1 className="mb-5 sm:mb-6">
+              <span className="block text-white font-display font-bold text-[clamp(1.6rem,6.2vw,2.5rem)] leading-[0.95] tracking-tighter uppercase">
+                <SplitTextReveal>Learn Animation & VFX</SplitTextReveal>
               </span>
-              <span className="block gradient-text font-display font-black text-[clamp(1.4rem,3.5vw,2.2rem)] leading-[0.95] tracking-tighter mt-2 uppercase">
-                <span className="animate-fade-in-up inline-block" style={{animationDelay:"0.6s",animationFillMode:"both"}}>Visual Storytelling</span>
+              <span className="block gradient-text font-display font-black text-[clamp(1.35rem,5.4vw,2.2rem)] leading-[0.95] tracking-tighter mt-2 uppercase">
+                <span className="animate-fade-in-up inline-block" style={{animationDelay:"0.6s",animationFillMode:"both"}}>From Basics to Portfolio</span>
               </span>
             </h1>
 
-            <p className="text-[#A8A29C] text-base md:text-lg font-medium mb-10 max-w-xl leading-relaxed border-l-2 border-[#E31837]/50 pl-6 italic">
-              Empowering the next generation of 3D artists, VFX masters, and game designers with a curriculum engineered for the global pipeline.
+            <p className="text-[#A8A29C] text-[15px] sm:text-base md:text-lg font-medium mb-8 sm:mb-10 max-w-xl leading-relaxed sm:border-l-2 sm:border-[#E31837]/50 sm:pl-6 sm:italic">
+              Get hands-on training in 3D, VFX, motion graphics, and game art—learn industry tools, build real projects, and graduate with a showreel that’s ready for interviews.
             </p>
 
-            <div className="flex flex-wrap items-center gap-8">
-              <a href="#courses" className="btn btn-primary px-10 py-4 rounded-xl text-[10px] font-bold tracking-[0.3em]">
+            <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-4 sm:gap-8">
+              <a href="#courses" className="btn btn-primary w-full sm:w-auto px-10 py-4 rounded-xl text-[10px] font-bold tracking-[0.3em] text-center">
                 VIEW PROGRAMS
               </a>
               
               <button 
                 onClick={() => { setIsMuted(!isMuted); if(heroVideoRef.current) heroVideoRef.current.muted = !isMuted; }}
-                className="flex items-center gap-4 group"
+                className="flex items-center justify-center sm:justify-start gap-4 group w-full sm:w-auto"
               >
                 <div className="w-12 h-12 rounded-full glass border border-white/10 flex items-center justify-center text-white/60 group-hover:text-white transition-all">
                   {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}

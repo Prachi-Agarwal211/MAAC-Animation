@@ -93,8 +93,8 @@ export default function Footer() {
         {/* Brand Col */}
         <div className="footer-reveal lg:col-span-4 space-y-10">
           <Link href="/" className="flex items-center gap-4 group">
-            <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center transition-colors group-hover:border-[#E31837]/50">
-              <Image src="/image.png" alt="MAAC" width={40} height={40} />
+            <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center transition-colors group-hover:border-[#E31837]/50">
+              <Image src="/image.png" alt="MAAC" width={48} height={48} className="rounded" />
             </div>
             <div>
               <span className="block text-white font-display font-black text-2xl tracking-tighter">MAAC</span>

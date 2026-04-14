@@ -52,6 +52,7 @@ export default function PopularCourses() {
               <span className="w-8 h-[1px] bg-[#C4A882]" />
               Master Your Craft
             </p>
+
             <h2 className="font-display font-bold text-[clamp(1.6rem,4vw,2.8rem)] text-[#F0EBE1] leading-[0.95] tracking-tight">
               Most Popular <span className="gradient-text">Programs</span>
             </h2>
@@ -74,9 +75,9 @@ export default function PopularCourses() {
           ref={trackRef}
           className="flex gap-8 overflow-x-auto snap-x snap-mandatory px-6 md:px-12 lg:px-24 pb-12 no-scrollbar"
         >
-          {siteCoursesData.popularCourses.map((course, index) => (
+          {siteCoursesData.popularCourses.map((course) => (
             <div
-              key={course.name}
+              key={course.code}
               className="course-card flex-shrink-0 w-[85vw] sm:w-[420px] snap-center"
             >
               <div className="group relative rounded-[32px] overflow-hidden bg-[#111111] border border-white/5 transition-all duration-500 hover:border-[#E31837]/20 shadow-2xl">

@@ -112,24 +112,23 @@ export default function Navbar() {
         } ${
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
         }`}
-        style={{ paddingTop: "var(--demo-bar-height, 0px)" }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16 md:h-18">
 
           {/* ── BRAND LOCKUP ── */}
           <div ref={logoRef} className="flex-shrink-0">
-            <Link href="/" className="flex items-center gap-2.5 group" aria-label="MAAC Jaipur C-Scheme - Home">
+            <Link href="/" className="flex items-center gap-3 group" aria-label="MAAC Jaipur C-Scheme - Home">
               <Image
                 src="/image.png"
                 alt="MAAC Animation Jaipur Logo"
-                width={40}
-                height={40}
-                className="rounded transition-transform group-hover:scale-105"
+                width={56}
+                height={56}
+                className="rounded transition-transform group-hover:scale-105 drop-shadow-lg"
                 priority
               />
               <div className="hidden sm:flex flex-col leading-none">
-                <span className="font-syne font-bold text-white text-[15px] tracking-wide">MAAC Jaipur</span>
-                <span className="text-red-500 text-[9px] tracking-[0.2em] uppercase font-medium">C-Scheme</span>
+                <span className="font-syne font-bold text-white text-[17px] tracking-wide drop-shadow-md">MAAC Jaipur</span>
+                <span className="text-red-500 text-[10px] tracking-[0.2em] uppercase font-semibold drop-shadow-sm">C-Scheme</span>
               </div>
             </Link>
           </div>
@@ -206,10 +205,9 @@ export default function Navbar() {
 
       {/* ── MOBILE MENU ── */}
       <div
-        className={`fixed inset-0 z-40 bg-[#0C0C0C] flex flex-col transition-all duration-300 ${
+        className={`fixed inset-0 z-40 bg-[#0C0C0C] flex flex-col transition-all duration-300 pt-16 md:pt-18 ${
           mobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
-        style={{ paddingTop: "calc(var(--demo-bar-height, 0px) + 64px)" }}
         aria-hidden={!mobileMenuOpen}
       >
         <nav className="flex-1 overflow-y-auto px-6 py-8">
