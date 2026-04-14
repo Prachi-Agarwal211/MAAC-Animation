@@ -104,7 +104,7 @@ function SlideUpCard({ course }: { course: any }) {
                </span>
              ))}
            </div>
-           <Link href="/contact" className="inline-flex items-center gap-4 text-white text-[10px] font-bold tracking-[0.3em] uppercase group/link">
+           <Link href="/demo-class" className="inline-flex items-center gap-4 text-white text-[10px] font-bold tracking-[0.3em] uppercase group/link">
              Deep Dive
              <div className="w-10 h-10 rounded-full bg-[#E31837] flex items-center justify-center transition-transform group-hover/link:scale-110">
                <ArrowUpRight size={16} />
