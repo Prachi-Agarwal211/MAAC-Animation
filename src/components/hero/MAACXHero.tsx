@@ -118,8 +118,9 @@ export default function MAACXHero() {
               </video>
               <div className="absolute inset-0 bg-black/40 z-[1]" />
               
-              <div className="intro-ui-elements absolute top-12 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center">
-                <Image src="/image.png" alt="MAAC" width={32} height={32} priority />
+              <div className="intro-ui-elements absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 flex flex-col items-center">
+                <Image src="/maac-logo.png" alt="MAAC Jaipur" width={220} height={90} className="object-contain drop-shadow-2xl" priority />
+                <p className="text-white/50 text-xs mt-3 tracking-[0.25em] uppercase font-light">Animation · VFX · Jaipur</p>
                 <div className="h-[1px] w-6 bg-[#E31837] mt-4 shadow-[0_0_10px_#E31837]" />
               </div>
 
@@ -180,7 +181,7 @@ export default function MAACXHero() {
                 <SplitTextReveal>Master the Craft of</SplitTextReveal>
               </span>
               <span className="block gradient-text font-display font-black text-[clamp(1.4rem,3.5vw,2.2rem)] leading-[0.95] tracking-tighter mt-2 uppercase">
-                <SplitTextReveal delay={0.2}>Visual Storytelling</SplitTextReveal>
+                <span className="animate-fade-in-up inline-block" style={{animationDelay:"0.6s",animationFillMode:"both"}}>Visual Storytelling</span>
               </span>
             </h1>
 
