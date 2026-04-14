@@ -108,7 +108,7 @@ export default function MAACXHero() {
             <>
               <video
                 ref={introVideoRef}
-                className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+                className="w-full h-full object-contain pointer-events-none"
                 autoPlay muted playsInline
                 onEnded={handleIntroEnded}
                 onError={() => setVideoError(true)}
