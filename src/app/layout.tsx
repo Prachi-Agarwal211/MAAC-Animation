@@ -9,8 +9,8 @@ import ClientShell from "@/components/ClientShell";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Providers } from "./providers";
-
 import { contactInfo } from "@/data/siteData";
+import DemoBar from "@/components/ui/DemoBar";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     template: "%s | MAAC Jaipur",
   },
   description:
-    "MAAC Jaipur — Rajasthan's #1 Animation Institute. B.Voc Degree in 3D Animation, VFX & Game Design. 95% Placements. NSDC Certified. Call " + contactInfo.phone + ".",
+    "MAAC Jaipur C-Scheme — Rajasthan's #1 Animation Institute. B.Voc Degree in 3D Animation, VFX & Game Design. 95% Placements. NSDC Certified. Call " + contactInfo.phone + ".",
   icons: {
     icon: [
       { url: '/image.png', type: 'image/png' },
@@ -52,6 +52,7 @@ export const metadata: Metadata = {
   manifest: '/manifest.json',
   keywords: [
     "animation institute jaipur",
+    "maac jaipur c scheme",
     "3d animation course jaipur",
     "vfx training jaipur",
     "maac animation jaipur",
@@ -61,6 +62,8 @@ export const metadata: Metadata = {
     "vfx courses jaipur",
     "graphic design course jaipur",
     "filmmaking course jaipur",
+    "b.voc animation jaipur",
+    "nsdc certified animation course",
   ],
   verification: {
     google: "dK9O7oyQ38md-k2VNjfTZJ64trKyvyLqSxlVik7Ak3M",
@@ -69,21 +72,25 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://www.maacanimationjaipur.com",
-    siteName: "maacanimationjaipur.com",
-    title: "MAAC Animation Institute Jaipur | Best Animation & VFX Courses",
+    siteName: "MAAC Animation Jaipur",
+    title: "MAAC Animation Institute Jaipur C-Scheme | Best Animation & VFX Courses",
     description:
-      "MAAC Jaipur — Rajasthan's #1 Animation Institute. B.Voc Degree in 3D Animation, VFX & Game Design. 95% Placements. NSDC Certified.",
+      "MAAC Jaipur C-Scheme — Rajasthan's #1 Animation Institute. B.Voc Degree in 3D Animation, VFX & Game Design. 95% Placements. NSDC Certified.",
     images: [
       {
-        url: "https://www.maacanimationjaipur.com/wp-content/uploads/2021/09/v-toy-sl-3.png",
+        url: "https://www.maacanimationjaipur.com/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "MAAC Animation Jaipur",
+        alt: "MAAC Animation Jaipur C-Scheme - Best Animation Institute in Rajasthan",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
+    title: "MAAC Animation Jaipur C-Scheme | Best Animation & VFX Courses",
+    description:
+      "MAAC Jaipur C-Scheme — Rajasthan's #1 Animation Institute. B.Voc Degree in 3D Animation, VFX & Game Design. 95% Placements.",
+    images: ["https://www.maacanimationjaipur.com/og-image.jpg"],
   },
   robots: {
     index: true,
@@ -97,10 +104,66 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: "/",
+    canonical: "https://www.maacanimationjaipur.com",
   },
 };
-import DemoBar from "@/components/ui/DemoBar";
+
+// JSON-LD LocalBusiness + EducationalOrganization structured data
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["EducationalOrganization", "LocalBusiness"],
+      "@id": "https://www.maacanimationjaipur.com",
+      name: "MAAC Animation Jaipur C-Scheme",
+      alternateName: "MAAC Jaipur",
+      url: "https://www.maacanimationjaipur.com",
+      logo: "https://www.maacanimationjaipur.com/image.png",
+      image: "https://www.maacanimationjaipur.com/og-image.jpg",
+      description:
+        "MAAC Jaipur C-Scheme is Rajasthan's leading Animation, VFX and Game Design institute. Offering B.Voc, Diploma and short-term courses. NSDC & MESC certified with 95% placement support.",
+      telephone: contactInfo.phone,
+      email: contactInfo.email,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "711-712, Ambition Tower, 7th Floor, D-46B, Malan Ka Chauraha, Agrasain Circle, Subhash Marg",
+        addressLocality: "Jaipur",
+        addressRegion: "Rajasthan",
+        postalCode: "302001",
+        addressCountry: "IN",
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: 26.9124,
+        longitude: 75.7873,
+      },
+      openingHoursSpecification: [
+        {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+          opens: "09:00",
+          closes: "19:00",
+        },
+      ],
+      sameAs: [
+        contactInfo.social.facebook,
+        contactInfo.social.instagram,
+        contactInfo.social.youtube,
+        contactInfo.social.linkedin,
+      ],
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Animation & VFX Courses",
+        itemListElement: [
+          { "@type": "Course", name: "Advanced Program in Visual Effects (ADVFX)", description: "Master compositing, rotoscopy, matchmoving and CG integration", provider: { "@type": "Organization", name: "MAAC Jaipur" } },
+          { "@type": "Course", name: "Advanced Program in 3D Animation (AD3D Edge)", description: "Comprehensive training in modeling, texturing, rigging and character animation using Maya", provider: { "@type": "Organization", name: "MAAC Jaipur" } },
+          { "@type": "Course", name: "Program in Game Design & Integration (DGDI)", description: "Learn game art, game design, level design and game engine integration", provider: { "@type": "Organization", name: "MAAC Jaipur" } },
+          { "@type": "Course", name: "Advanced Program in Digital Media & Design (APDMD)", description: "Master graphic design, web design, UI/UX, motion graphics and digital marketing", provider: { "@type": "Organization", name: "MAAC Jaipur" } },
+        ],
+      },
+    },
+  ],
+};
 
 export default function RootLayout({
   children,
@@ -108,41 +171,34 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth bg-[#0C0C0C]">
+    <html lang="en" className={`${inter.variable} ${syne.variable}`}>
       <head>
         {/* Preload hero videos for instant loading */}
-        <link rel="preload" as="video" href="/hero-video-compressed.mp4" type="video/mp4" />
-        <link rel="preload" as="video" href="/intro.mp4" type="video/mp4" />
-        <link rel="preload" as="image" href="/hero-poster.jpg" />
+        <link rel="preload" as="video" href="/hero-video.mp4" type="video/mp4" />
+        {/* JSON-LD Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </head>
-      <body
-        className={`${inter.variable} ${syne.variable} font-body antialiased bg-[#0C0C0C] text-[#F0EBE1]`}
-      >
-        <DemoBar />
-        <div className="animated-bg" aria-hidden="true" />
-
+      <body className="bg-[#0C0C0C] text-white antialiased">
         <Providers>
-          <a
-            href="#main-content"
-            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-[9999] bg-[#E31837] text-white px-4 py-2 rounded"
-          >
-            Skip to main content
-          </a>
-
-          <div className="grain-overlay" aria-hidden="true" />
-
-          <CustomCursor />
-
           <LenisProvider>
+            <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:bg-red-600 focus:text-white focus:px-4 focus:py-2 focus:text-sm">
+              Skip to main content
+            </a>
+            <DemoBar />
             <Navbar />
-            <ClientShell>
-              <main id="main-content" tabIndex={-1} className="page-wrapper">{children}</main>
-            </ClientShell>
+            <CustomCursor />
+            <main id="main-content">
+              {children}
+            </main>
             <FloatingActions />
-            <Analytics />
-            <SpeedInsights />
+            <ClientShell />
           </LenisProvider>
         </Providers>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
