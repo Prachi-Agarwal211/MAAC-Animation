@@ -1,64 +1,74 @@
 export const siteCoursesData = {
   categories: [
     {
-      id: "animation",
+      id: "3d-animation",
       title: "3D Animation",
-      subtitle: "Master the art of storytelling",
-      description: "Master high-quality animation with industry-standard techniques and real studio workflows",
-      fullDescription: "Become a 3D Animator, Character Designer, Storyboard Artist, or Lighting Artist. Learn Autodesk Maya, 3ds Max, and industry-standard tools used in major studios.",
+      subtitle: "Master the art of 3D storytelling",
+      description: "Master high-quality 3D animation with industry-standard techniques, character rigging, and real studio workflows",
+      fullDescription: "Become a 3D Animator, Character Designer, Storyboard Artist, Rigging Artist, Lighting Artist, or Game Asset Artist. Learn Autodesk Maya, 3ds Max, ZBrush, and industry-standard tools used in major studios worldwide.",
       icon: "animation",
       image: "/courses_images/image-4.png",
-      careers: ["3D Animator", "Character Designer", "Storyboard Artist", "Lighting Artist"],
+      careers: ["3D Animator", "Character Designer", "Storyboard Artist", "Rigging Artist", "Lighting Artist", "Game Asset Artist"],
     },
     {
       id: "digital-content",
       title: "Digital Content Creation",
       subtitle: "Build a career in digital media",
       description: "Create content for social media, YouTube, and OTT platforms with professional production skills",
-      fullDescription: "Create engaging content for YouTube, Instagram, and digital platforms. Master video editing, content strategy, and audience engagement.",
+      fullDescription: "Create engaging content for YouTube, Instagram, and digital platforms. Master video editing, content strategy, audience engagement, and become a Graphic Designer, Video Producer, Social Media Designer, UI/UX Designer, Motion Graphics Artist, or Content Strategist.",
       icon: "digital",
       image: "/courses_images/image-2.png",
-      careers: ["Content Creator", "Video Editor", "Social Media Manager", "YouTuber"],
+      careers: ["Graphic Designer", "Video Producer", "Social Media Designer", "UI/UX Designer", "Motion Graphics Artist", "Content Strategist"],
     },
     {
-      id: "gaming",
+      id: "game-design",
       title: "Game Design",
       subtitle: "Gain expertise in game design",
       description: "Design games, build assets, and master real-time rendering for mobile, PC, and console",
-      fullDescription: "Design and develop games for multiple platforms. Learn game mechanics, level design, character creation, and game engine integration.",
+      fullDescription: "Design and develop games for multiple platforms. Learn game mechanics, level design, character creation, and game engine integration. Become a Game Developer, Level Designer, 3D Artist, Virtual Reality Artist, or Game Animator.",
       icon: "gaming",
       image: "/courses_images/game.png",
-      careers: ["Game Designer", "Level Designer", "Game Artist", "Unity Developer"],
+      careers: ["Game Developer", "Level Designer", "3D Artist", "Virtual Reality Artist", "Game Animator"],
     },
     {
       id: "vfx",
-      title: "VFX Courses",
+      title: "Visual Effects (VFX)",
       subtitle: "Develop high-end visual effects",
       description: "Create stunning VFX for film, television, and OTT using industry-standard compositing tools",
-      fullDescription: "Create stunning visual effects for movies, TV shows, and OTT content. Master compositing, motion tracking, and CG integration.",
+      fullDescription: "Create stunning visual effects for movies, TV shows, and OTT content. Master compositing, motion tracking, and CG integration. Become a VFX Compositor, Motion Graphics Artist, FX Artist, Matte Painter, or Pre-visualization Artist.",
       icon: "vfx",
       image: "/courses_images/image-1.png",
-      careers: ["VFX Artist", "Compositor", "Roto Artist", "Matchmove Artist"],
+      careers: ["VFX Compositor", "Motion Graphics Artist", "FX Artist", "Matte Painter", "Pre-visualization Artist"],
     },
     {
-      id: "motion-graphics",
-      title: "Motion Graphics & Broadcast",
-      subtitle: "Explore motion graphics and advertising",
-      description: "Produce dynamic motion graphics for TV, advertising, and digital media production",
-      fullDescription: "Create dynamic motion graphics for TV, advertising, and digital media. Learn After Effects, Cinema 4D, and broadcast design principles.",
+      id: "broadcast-motion",
+      title: "Broadcast & Motion Graphics",
+      subtitle: "Explore motion graphics and broadcast design",
+      description: "Produce dynamic motion graphics for TV, advertising, streaming, and digital media production",
+      fullDescription: "Create dynamic motion graphics for broadcast, TV, advertising, and digital media. Learn After Effects, Cinema 4D, and broadcast design principles. Become a Motion Graphics Artist, Broadcast Designer, UI Designer, or Video Editor.",
       icon: "motion",
       image: "/courses_images/image-3.png",
-      careers: ["Motion Graphics Artist", "Broadcast Designer", "Title Designer", "Animator"],
+      careers: ["Motion Graphics Artist", "Broadcast Designer", "UI Designer", "Video Editor"],
     },
     {
-      id: "skill-enhancement",
-      title: "Skill Enhancement",
-      subtitle: "Fast-track your career",
-      description: "Short-term specialized courses to upskill in animation, VFX, game design, and more",
-      fullDescription: "Upgrade your skills with focused short-term programs. Perfect for working professionals looking to specialize or upskill.",
+      id: "filmmaking-photography",
+      title: "Filmmaking & Photography",
+      subtitle: "Master the art of visual storytelling",
+      description: "Learn cinematic filmmaking, photography, editing, and post-production for film and digital media",
+      fullDescription: "Master the complete filmmaking pipeline — from scriptwriting and storyboarding to shooting, VFX, editing, and final delivery. Become a Video Editor, Cinematographer, Film Director, or Content Creator.",
+      icon: "filmmaking",
+      image: "/courses_images/image-5.png",
+      careers: ["Video Editor", "Cinematographer", "Film Director", "Content Creator"],
+    },
+    {
+      id: "specialized-bootcamp",
+      title: "Specialized Skills Bootcamp",
+      subtitle: "Fast-track your career with focused learning",
+      description: "Short-term specialized courses to upskill in specific areas of animation, VFX, game design, and more",
+      fullDescription: "Upgrade your skills with focused short-term programs. Perfect for working professionals looking to specialize or upskill. Become a Motion Graphics Artist, Broadcast Designer, UI Designer, or Video Editor.",
       icon: "skill",
       image: "/courses_images/image-5.png",
-      careers: ["Specialized Artist", "Freelancer", "Independent Creator"],
+      careers: ["Motion Graphics Artist", "Broadcast Designer", "UI Designer", "Video Editor"],
     },
   ],
   popularCourses: [
@@ -165,25 +175,125 @@ export const tickerStats = [
   "B.Voc Degree Available",
 ];
 
-export const navLinks = [
-  { label: "Home", href: "/" },
+export type NavChildLink = { label: string; href: string; external?: boolean };
+/** Same taxonomy as maacindia.com Courses menu; links point to Jaipur site sections where possible. */
+export type NavMegaGroup = { title: string; links: NavChildLink[] };
+export type NavLinkItem = {
+  label: string;
+  href: string;
+  mobileOnly?: boolean;
+  external?: boolean;
+  children?: NavChildLink[];
+  megaGroups?: NavMegaGroup[];
+};
+
+/** Mirrors MAAC India course categories & program names (CareerX | CreatorX lines preserved). */
+export const courseMegaMenuJaipur: NavMegaGroup[] = [
+  {
+    title: "Animation",
+    links: [
+      { label: "AD3D Edge Plus — Powered by CareerX | CreatorX", href: "/courses#3d-animation" },
+      { label: "3D & Real-time Design", href: "/courses#3d-animation" },
+      { label: "D3D", href: "/courses#3d-animation" },
+      { label: "DAFM", href: "/courses#3d-animation" },
+    ],
+  },
+  {
+    title: "VFX",
+    links: [
+      { label: "ADVFX Plus — Powered by CareerX | CreatorX", href: "/courses#vfx" },
+      { label: "VFX PLUS", href: "/courses#vfx" },
+      { label: "Compositing & Editing Plus", href: "/courses#vfx" },
+    ],
+  },
+  {
+    title: "Digital Content Creation",
+    links: [
+      { label: "APDMC Plus — Powered by CareerX | CreatorX", href: "/courses#digital-content" },
+      { label: "DGWA Plus", href: "/courses#digital-content" },
+      { label: "APDMD", href: "/courses#digital-content" },
+      { label: "UI/UX DESIGN PRO", href: "/courses#digital-content" },
+    ],
+  },
+  {
+    title: "Game Design",
+    links: [
+      { label: "3DGAI", href: "/courses#game-design" },
+      { label: "APGDI", href: "/courses#game-design" },
+      { label: "PMGDI", href: "/courses#game-design" },
+      { label: "ADIDG Plus — Powered by CareerX | CreatorX", href: "/courses#game-design" },
+    ],
+  },
+  {
+    title: "Motion Graphics & Broadcast",
+    links: [
+      { label: "APMG", href: "/courses#broadcast-motion" },
+      { label: "BROADCAST PLUS", href: "/courses#broadcast-motion" },
+    ],
+  },
+  {
+    title: "Skill Enhancement Courses",
+    links: [
+      { label: "Blender Pro", href: "/courses#specialized-bootcamp" },
+      { label: "Cinema 4D Pro", href: "/courses#specialized-bootcamp" },
+      { label: "Max Pro", href: "/courses#specialized-bootcamp" },
+      { label: "Maya Pro", href: "/courses#specialized-bootcamp" },
+      { label: "Design Viz Pro", href: "/courses#specialized-bootcamp" },
+      { label: "Digital Photography", href: "/courses#filmmaking-photography" },
+      { label: "Advance Compositing", href: "/courses#vfx" },
+      { label: "Compositing Plus", href: "/courses#vfx" },
+      { label: "GenAI for Digital Content Creators", href: "/courses#digital-content" },
+    ],
+  },
+  {
+    title: "Filmmaking",
+    links: [
+      { label: "Digital Film Making", href: "/courses#filmmaking-photography" },
+      { label: "PPVP", href: "/courses#filmmaking-photography" },
+    ],
+  },
+  {
+    title: "Blended Model of Learning",
+    links: [{ label: "Blended learning at MAAC Jaipur", href: "/courses" }],
+  },
+  {
+    title: "Visual Arts & Design",
+    links: [
+      { label: "IPVAD - XR — Powered by CareerX | CreatorX", href: "/courses#digital-content" },
+    ],
+  },
+];
+
+/** Desktop + mobile sheet: primary nav + Home/Contact on small screens. */
+export const navLinks: NavLinkItem[] = [
+  { label: "Home", href: "/", mobileOnly: true },
   {
     label: "Courses",
     href: "/courses",
+    megaGroups: courseMegaMenuJaipur,
+  },
+  {
+    label: "Student's World",
+    href: "/student-work",
     children: [
-      { label: "3D Animation", href: "/courses", icon: "animation" },
-      { label: "Visual Effects", href: "/courses", icon: "vfx" },
-      { label: "Game Design", href: "/courses", icon: "gaming" },
-      { label: "Filmmaking", href: "/courses", icon: "animation" },
-      { label: "Digital Media", href: "/courses", icon: "digital" },
-      { label: "Motion Graphics", href: "/courses", icon: "motion" },
+      { label: "Gallery", href: "/gallery" },
+      { label: "Placements", href: "/placements" },
+      { label: "Student Work", href: "/student-work" },
     ],
   },
-  { label: "Placements", href: "/placements" },
-  { label: "Student Work", href: "/student-work" },
-  { label: "About Us", href: "/about" },
-  { label: "Gallery", href: "/gallery" },
-  { label: "Demo Class", href: "/demo-class" },
+  { label: "Events", href: "/#events" },
+  {
+    label: "About Us",
+    href: "/about",
+    children: [
+      { label: "About MAAC Jaipur", href: "/about" },
+      { label: "Heritage & milestones", href: "/about#heritage" },
+      { label: "Faculty", href: "/about#faculty" },
+      { label: "Jaipur centres", href: "/locations/c-scheme" },
+      { label: "Blog", href: "/blog" },
+    ],
+  },
+  { label: "Contact", href: "/contact", mobileOnly: true },
 ];
 
 export const contactInfo = {

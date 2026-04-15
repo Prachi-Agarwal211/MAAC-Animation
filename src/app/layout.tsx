@@ -173,9 +173,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`scroll-smooth ${inter.variable} ${syne.variable}`}>
       <head>
-        {/* Preload hero videos for instant loading */}
-        <link rel="preload" as="video" href="/hero-video.mp4" type="video/mp4" />
+        {/* Intro first on home; hero loads after intro completes (see MAACXHero). */}
         <link rel="preload" as="video" href="/intro.mp4" type="video/mp4" />
+        <link rel="preload" as="video" href="/intro.webm" type="video/webm" />
         <link rel="preload" as="image" href="/hero-poster.jpg" />
         {/* JSON-LD Structured Data */}
         <script

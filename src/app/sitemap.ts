@@ -1,18 +1,9 @@
 import { MetadataRoute } from "next";
 import { blogPosts } from "@/data/blog";
-import { coursesData } from "@/data/courses";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://www.maacanimationjaipur.com";
   const now = new Date();
-
-  // Auto-generate course URLs
-  const courseUrls = coursesData.map(course => ({
-    url: `${base}/courses/${course.slug}`,
-    lastModified: now,
-    changeFrequency: "monthly" as const,
-    priority: 0.85,
-  }));
 
   // Auto-generate blog post URLs
   const blogUrls = blogPosts.map(post => ({
@@ -134,9 +125,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.6,
     },
-
-    // Auto-generated course pages (from coursesData)
-    ...courseUrls,
     // Auto-generated blog posts (from blogPosts)
     ...blogUrls,
   ];

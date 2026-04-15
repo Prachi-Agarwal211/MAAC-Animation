@@ -122,10 +122,19 @@ export default function Footer() {
         <div className="footer-reveal lg:col-span-2 space-y-8">
           <h4 className="text-white text-xs font-bold uppercase tracking-[0.2em]">Explore</h4>
           <ul className="space-y-4">
-            {["Home", "About Us", "Courses", "Placements", "Gallery"].map(link => (
-              <li key={link}>
-                <Link href={`/${link.toLowerCase().replace(" ", "-")}`} className="text-[#6B6560] hover:text-white transition-colors flex items-center justify-between group">
-                  {link}
+            {[
+              { label: "Home", href: "/" },
+              { label: "About Us", href: "/about" },
+              { label: "Courses", href: "/courses" },
+              { label: "Placements", href: "/placements" },
+              { label: "Student Work", href: "/student-work" },
+              { label: "Events", href: "/#events" },
+              { label: "Gallery", href: "/gallery" },
+              { label: "Locate a Centre", href: "/locations/c-scheme" },
+            ].map(link => (
+              <li key={link.label}>
+                <Link href={link.href} className="text-[#6B6560] hover:text-white transition-colors flex items-center justify-between group">
+                  {link.label}
                   <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />
                 </Link>
               </li>
@@ -133,14 +142,42 @@ export default function Footer() {
           </ul>
         </div>
 
-        {/* Links Col 2 */}
+        {/* Links Col 2 - Resources */}
         <div className="footer-reveal lg:col-span-3 space-y-8">
-          <h4 className="text-white text-xs font-bold uppercase tracking-[0.2em]">Specializations</h4>
+          <h4 className="text-white text-xs font-bold uppercase tracking-[0.2em]">Resources</h4>
           <ul className="space-y-4">
-            {["3D Animation", "Visual Effects", "Game Design", "Filmmaking", "Digital Media"].map(link => (
-              <li key={link}>
-                <Link href="/courses" className="text-[#6B6560] hover:text-white transition-colors flex items-center justify-between group">
-                  {link}
+            {[
+              { label: "Blog", href: "/blog" },
+              { label: "Contact Us", href: "/contact" },
+              { label: "Student Enquiry", href: "/demo-class" },
+              { label: "FAQ", href: "/#faq" },
+              { label: "Disclaimer", href: "/disclaimer" },
+              { label: "Sitemap", href: "/sitemap.xml" },
+            ].map(link => (
+              <li key={link.label}>
+                <Link href={link.href} className="text-[#6B6560] hover:text-white transition-colors flex items-center justify-between group">
+                  {link.label}
+                  <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Links Col 3 - Policies */}
+        <div className="footer-reveal lg:col-span-3 space-y-8">
+          <h4 className="text-white text-xs font-bold uppercase tracking-[0.2em]">Policies & Verification</h4>
+          <ul className="space-y-4">
+            {[
+              { label: "Privacy Policy", href: "/privacy-policy" },
+              { label: "Terms & Conditions", href: "/terms-of-service" },
+              { label: "Verify Your Certificate", href: "/verify-certificate" },
+              { label: "Profanity Policy", href: "/profanity-policy" },
+              { label: "Laptop Scheme Terms", href: "/laptop-scheme" },
+            ].map(link => (
+              <li key={link.label}>
+                <Link href={link.href} className="text-[#6B6560] hover:text-white transition-colors flex items-center justify-between group">
+                  {link.label}
                   <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />
                 </Link>
               </li>
@@ -177,9 +214,13 @@ export default function Footer() {
           <p className="text-[#6B6560] text-[10px] font-bold uppercase tracking-[0.3em]">
             © {new Date().getFullYear()} MAAC India · Crafting Digital Futures
           </p>
-          <div className="flex gap-8">
-            {["Privacy", "Terms", "Sitemap"].map(link => (
-              <a key={link} href="#" className="text-[#6B6560] hover:text-white text-[10px] font-bold uppercase tracking-[0.3em] transition-colors">{link}</a>
+          <div className="flex flex-wrap gap-6 md:gap-8">
+            {[
+              { label: "Privacy", href: "/privacy-policy" },
+              { label: "Terms", href: "/terms-of-service" },
+              { label: "Sitemap", href: "/sitemap.xml" },
+            ].map(link => (
+              <Link key={link.label} href={link.href} className="text-[#6B6560] hover:text-white text-[10px] font-bold uppercase tracking-[0.3em] transition-colors">{link.label}</Link>
             ))}
           </div>
         </div>

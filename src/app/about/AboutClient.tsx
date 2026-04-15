@@ -109,7 +109,7 @@ export default function AboutClient() {
       </section>
 
       {/* ── TIMELINE SECTION ── */}
-      <section className="timeline-section relative py-24 md:py-40">
+      <section id="heritage" className="timeline-section relative py-24 md:py-40 scroll-mt-28">
         <div className="max-w-7xl mx-auto px-6 md:px-12 mb-24">
           <h2 className="font-display font-black text-white text-5xl md:text-8xl tracking-tighter">OUR <span className="text-white/10">ODYSSEY</span></h2>
         </div>
@@ -128,7 +128,7 @@ export default function AboutClient() {
       </section>
 
       {/* ── FACULTY SECTION ── */}
-      <section className="py-24 md:py-40 bg-[#080808]">
+      <section id="faculty" className="py-24 md:py-40 bg-[#080808] scroll-mt-28">
         <div className="max-w-7xl mx-auto px-6 md:px-12 text-center mb-24">
           <span className="text-[#E31837] text-sm font-bold tracking-[0.3em] uppercase mb-6 block">Industry Titans</span>
           <h2 className="text-white font-display font-black text-5xl md:text-8xl tracking-tighter">EXPERIENCED <span className="gradient-text">FACULTY</span></h2>

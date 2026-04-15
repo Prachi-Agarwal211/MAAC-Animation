@@ -1,0 +1,660 @@
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - link "MAAC" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - img "MAAC" [ref=e6]
+      - navigation [ref=e7]:
+        - link "Courses" [ref=e9] [cursor=pointer]:
+          - /url: /courses
+          - generic [ref=e10]:
+            - text: Courses
+            - img [ref=e11]
+        - link "About Us" [ref=e13] [cursor=pointer]:
+          - /url: /about-maac
+        - link "Student's World" [ref=e15] [cursor=pointer]:
+          - /url: /students-world
+          - generic [ref=e16]:
+            - text: Student's World
+            - img [ref=e17]
+        - link "Events" [ref=e20] [cursor=pointer]:
+          - /url: /events-at-maac
+          - generic [ref=e21]:
+            - text: Events
+            - img [ref=e22]
+        - link "Locate a Centre" [ref=e24] [cursor=pointer]:
+          - /url: /locate-a-centre
+        - link "Partner with MAAC" [ref=e25] [cursor=pointer]:
+          - /url: /partner-with-maac
+      - generic [ref=e26]:
+        - img "Call" [ref=e27] [cursor=pointer]
+        - button "Enquire Now Get in Touch" [ref=e28] [cursor=pointer]:
+          - generic [ref=e30]: Enquire Now Get in Touch
+        - img [ref=e31] [cursor=pointer]
+    - generic [ref=e33]:
+      - button [ref=e34] [cursor=pointer]:
+        - img [ref=e35]
+      - list [ref=e38]:
+        - listitem [ref=e39]:
+          - link "Home" [ref=e40] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=e41]:
+          - generic [ref=e42] [cursor=pointer]:
+            - link "Courses" [ref=e43]:
+              - /url: /courses
+            - img [ref=e44]
+        - listitem [ref=e45]:
+          - link "About Us" [ref=e46] [cursor=pointer]:
+            - /url: /about-maac
+        - listitem [ref=e47]:
+          - generic [ref=e48] [cursor=pointer]:
+            - link "Student's World" [ref=e49]:
+              - /url: /students-world
+            - img [ref=e50]
+        - listitem [ref=e51]:
+          - generic [ref=e52] [cursor=pointer]:
+            - link "Events" [ref=e53]:
+              - /url: /events-at-maac
+            - img [ref=e54]
+        - listitem [ref=e55]:
+          - link "Partner with MAAC" [ref=e56] [cursor=pointer]:
+            - /url: /partner-with-maac
+        - listitem [ref=e57]:
+          - link "Locate a Centre" [ref=e58] [cursor=pointer]:
+            - /url: /locate-a-centre
+        - listitem [ref=e59]:
+          - link "Contact Us" [ref=e60] [cursor=pointer]:
+            - /url: /contact-us
+        - listitem [ref=e61]:
+          - link "Blog" [ref=e62] [cursor=pointer]:
+            - /url: /blog
+  - generic [ref=e69]:
+    - generic [ref=e70]:
+      - img "image 1" [ref=e72]
+      - img "image 1" [ref=e74]
+      - img "image 2" [ref=e76]
+      - img "image 3" [ref=e78]
+      - img "image 4" [ref=e80]
+      - img "image 5" [ref=e82]
+      - img "image 6" [ref=e84]
+      - img "image 7" [ref=e86]
+    - generic:
+      - generic [ref=e87]:
+        - heading [level=2]:
+          - paragraph
+        - heading [level=3]:
+          - paragraph
+      - generic [ref=e88]:
+        - img "thumb image 1" [ref=e90] [cursor=pointer]
+        - img "thumb image 2" [ref=e92] [cursor=pointer]
+        - img "thumb image 3" [ref=e94] [cursor=pointer]
+        - img "thumb image 4" [ref=e96] [cursor=pointer]
+  - generic [ref=e99]:
+    - generic [ref=e101]:
+      - heading "Creative Careers That Click - Think MAAC." [level=2] [ref=e102]
+      - heading "Empower Your Future with Skills That Matter" [level=3] [ref=e103]
+      - paragraph [ref=e104]: Train in animation, VFX, gaming, and digital content creation with expert-led courses that prepare you for real industry success.
+    - generic [ref=e105]:
+      - generic [ref=e107] [cursor=pointer]:
+        - img "MAAC Workshop Classes" [ref=e108]
+        - paragraph [ref=e109]: From exclusive workshops to high-impact masterclasses, MAAC’s events empower you to hone your skills and build a portfolio that stands out in the industry.
+      - generic [ref=e111] [cursor=pointer]: Learn from Industry Game Changers
+      - generic [ref=e113] [cursor=pointer]: Exclusive Industry Exposure
+      - generic [ref=e115] [cursor=pointer]: Placement Support
+      - generic [ref=e117] [cursor=pointer]: Portfolio that speaks volumes
+      - generic [ref=e119] [cursor=pointer]: Industry-Grade Facilities
+      - generic [ref=e121] [cursor=pointer]: Courses Build For Future
+  - generic [ref=e122]:
+    - generic [ref=e124]:
+      - generic [ref=e125]:
+        - 'heading "Dual Pathways: Industry Co-curated programs" [level=2] [ref=e126]'
+        - generic [ref=e128]:
+          - text: Newly Launched
+          - generic [ref=e129]: ▶▶
+      - generic [ref=e130]:
+        - generic [ref=e131]:
+          - generic [ref=e132]:
+            - img "CareerX" [ref=e133]
+            - img "CreatorX" [ref=e134]
+          - paragraph [ref=e135]: CareerX and CreatorX are industry-led learning pathways introduced to equip students with future-ready skills in creative and digital media fields like animation, VFX, gaming, digital content.
+          - paragraph [ref=e136]: MAAC's future-ready learning ecosystem prepares you to excel in studios and thrive as an independent creator in the digital economy.
+          - paragraph [ref=e137]: Become a studio-ready artist and an independent creative force.
+        - img "Creative Age" [ref=e140]
+      - generic [ref=e141]:
+        - generic [ref=e142]:
+          - img "career" [ref=e143]
+          - paragraph [ref=e144]: "A 1st of its kind, industry-led, Studio-aligned Learning program:"
+          - list [ref=e145]:
+            - listitem [ref=e146]: Industry-academia learning
+            - listitem [ref=e147]: Studio-led delivery
+            - listitem [ref=e148]: Live case studies
+            - listitem [ref=e149]: End-to-end production workflow
+        - generic [ref=e150]:
+          - img "creator" [ref=e151]
+          - paragraph [ref=e152]: Create. Collaborate. Grow.
+          - list [ref=e153]:
+            - listitem [ref=e154]: Entrepreneurship readiness
+            - listitem [ref=e155]: Prep for gig economy & freelance work
+            - listitem [ref=e156]: Project & client management
+            - listitem [ref=e157]: IP creation & monetisation
+            - listitem [ref=e158]: Training directly from industry experts
+    - generic [ref=e159]:
+      - heading "Our Affiliated Courses" [level=2] [ref=e160]
+      - generic [ref=e161]:
+        - link "AD3D Edge Plus - Powered by CareerX | CreatorX" [ref=e162] [cursor=pointer]:
+          - /url: /courses/3d-animation/ad3d-edge-plus
+          - generic [ref=e163]:
+            - generic [ref=e164]:
+              - heading "AD3D Edge Plus -" [level=3] [ref=e165]
+              - paragraph [ref=e166]: Powered by CareerX | CreatorX
+            - img [ref=e168]
+        - link "ADVFX Plus - Powered by CareerX | CreatorX" [ref=e172] [cursor=pointer]:
+          - /url: /courses/visual-effects/advfx-plus
+          - generic [ref=e173]:
+            - generic [ref=e174]:
+              - heading "ADVFX Plus -" [level=3] [ref=e175]
+              - paragraph [ref=e176]: Powered by CareerX | CreatorX
+            - img [ref=e178]
+        - link "APDMC Plus - Powered by CareerX | CreatorX" [ref=e182] [cursor=pointer]:
+          - /url: /courses/digital-content-creation/apdmc-plus
+          - generic [ref=e183]:
+            - generic [ref=e184]:
+              - heading "APDMC Plus -" [level=3] [ref=e185]
+              - paragraph [ref=e186]: Powered by CareerX | CreatorX
+            - img [ref=e188]
+        - link "ADIDG Plus - Powered by CareerX | CreatorX" [ref=e192] [cursor=pointer]:
+          - /url: /courses/game-design/adidg-plus
+          - generic [ref=e193]:
+            - generic [ref=e194]:
+              - heading "ADIDG Plus -" [level=3] [ref=e195]
+              - paragraph [ref=e196]: Powered by CareerX | CreatorX
+            - img [ref=e198]
+    - generic [ref=e203]:
+      - heading "Our Industry Knowledge Partners:" [level=2] [ref=e204]
+      - generic [ref=e206]:
+        - img "partner" [ref=e208]
+        - img "partner" [ref=e210]
+        - img "partner" [ref=e212]
+        - img "partner" [ref=e214]
+        - img "partner" [ref=e216]
+        - img "partner" [ref=e218]
+        - img "partner" [ref=e220]
+        - img "partner" [ref=e222]
+        - img "partner" [ref=e224]
+        - img "partner" [ref=e226]
+        - img "partner" [ref=e228]
+        - img "partner" [ref=e230]
+        - img "partner" [ref=e232]
+        - img "partner" [ref=e234]
+        - img "partner" [ref=e236]
+  - generic [ref=e238]:
+    - generic [ref=e239]:
+      - generic [ref=e240]:
+        - heading "MAAC Courses" [level=2] [ref=e241]
+        - heading "Find the Right Fit for Your Future" [level=3] [ref=e242]
+        - paragraph [ref=e243]: Get globally recognized training through MESC and NSDC - and build skills that set you apart.
+      - button "Pick Your Course Pick Your Course" [ref=e245] [cursor=pointer]:
+        - generic [ref=e247]: Pick Your Course Pick Your Course
+    - generic [ref=e248]:
+      - generic [ref=e249]:
+        - img "3D Animation" [ref=e251]
+        - generic [ref=e252]:
+          - heading "3D Animation" [level=3] [ref=e253]
+          - paragraph [ref=e255]: Master the art of storytelling through high-quality animation and industry-standard techniques
+          - paragraph [ref=e257]: Become a 3D Animator, Character Designer, Storyboard Artist, or Lighting Artist in the animation industry
+          - button "View Details View Details" [ref=e259] [cursor=pointer]:
+            - generic [ref=e261]: View Details View Details
+      - generic [ref=e262]:
+        - img "Digital Content Creation" [ref=e264]
+        - generic [ref=e265]:
+          - heading "Digital Content Creation" [level=3] [ref=e266]
+          - paragraph [ref=e268]: Build a career in digital media, social media content creation, short filmmaking, and video production. Ideal for influencers and YouTubers
+          - paragraph [ref=e270]: Become a Digital Content Creator, Social Media Influencer, Social Media Strategist, Video Producer, or YouTube Content Creator
+          - button "View Details View Details" [ref=e272] [cursor=pointer]:
+            - generic [ref=e274]: View Details View Details
+      - generic [ref=e275]:
+        - img "Game Design" [ref=e277]
+        - generic [ref=e278]:
+          - heading "Game Design" [level=3] [ref=e279]
+          - paragraph [ref=e281]: Gain expertise in game design, asset creation, and real-time rendering for mobile, online, and console gaming
+          - paragraph [ref=e283]: Step into gaming as a Game Environment Artist, 3D Asset Designer, Character Animator, or Level Designer
+          - button "View Details View Details" [ref=e285] [cursor=pointer]:
+            - generic [ref=e287]: View Details View Details
+      - generic [ref=e288]:
+        - img "VFX Courses" [ref=e290]
+        - generic [ref=e291]:
+          - heading "VFX Courses" [level=3] [ref=e292]
+          - paragraph [ref=e294]: Develop high-end visual effects skills for film, television, and OTT platforms using industry-standard tools
+          - paragraph [ref=e296]: Work in films and OTT as a VFX Artist, Compositing Artist, Rotoscoping Artist, or Match move Artist
+          - button "View Details View Details" [ref=e298] [cursor=pointer]:
+            - generic [ref=e300]: View Details View Details
+      - generic [ref=e301]:
+        - img "Motion Graphics & Broadcast Design" [ref=e303]
+        - generic [ref=e304]:
+          - heading "Motion Graphics & Broadcast Design" [level=3] [ref=e305]
+          - paragraph [ref=e307]: Explore motion graphics, advertising, and digital media production for film and television
+          - paragraph [ref=e309]: Join the media industry as a Motion Graphics Designer, Broadcast Designer, or Cinematic Animator
+          - button "View Details View Details" [ref=e311] [cursor=pointer]:
+            - generic [ref=e313]: View Details View Details
+      - generic [ref=e314]:
+        - img "Skill Enhancement Courses" [ref=e316]
+        - generic [ref=e317]:
+          - heading "Skill Enhancement Courses" [level=3] [ref=e318]
+          - paragraph [ref=e320]: Fast-track your career with specialized short-term courses in animation, VFX, game design, and more
+          - paragraph [ref=e322]: Become an Animator, VFX Artist, Game Designer, or Digital Content Specialist
+          - button "View Details View Details" [ref=e324] [cursor=pointer]:
+            - generic [ref=e326]: View Details View Details
+    - button "Explore All Courses Explore All Courses" [ref=e328] [cursor=pointer]:
+      - generic [ref=e330]: Explore All Courses Explore All Courses
+  - generic [ref=e331]:
+    - generic [ref=e332]: Get in Touch to Get Ahead
+    - generic [ref=e333]: You're one step away from turning passion into a profession - reach out now.
+    - generic [ref=e334]:
+      - img "Enthusiastic Students at MAAC" [ref=e338]
+      - generic [ref=e340]:
+        - generic [ref=e341]:
+          - generic [ref=e342]: Full Name *
+          - textbox "Full Name * Full Name *" [ref=e343]:
+            - /placeholder: Full Name
+          - generic [ref=e344]: Mobile Number *
+          - textbox "Mobile Number * Mobile Number *" [ref=e345]:
+            - /placeholder: Mobile Number
+          - generic [ref=e346]: Email *
+          - textbox "Email * Email *" [ref=e347]:
+            - /placeholder: Email
+          - generic [ref=e348]: Select Course Interested In *
+          - combobox "Select Course Interested In * Select Course Interested In *" [ref=e349]:
+            - option "Select Course" [selected]
+            - option "Digital Content Creation"
+            - option "Gaming and ID"
+            - option "GEN AI"
+            - option "AVGC"
+            - option "Short Term Courses"
+            - option "Broadcast"
+            - option "Bachelor of Vocation (B.Voc.) in 3D Animation & Visual Effects"
+            - option "Film Making"
+            - option "VFX"
+            - option "3D Animation"
+          - generic [ref=e350]: Select State *
+          - combobox "Select State * Select State *" [ref=e351]:
+            - option "Select State" [selected]
+          - generic [ref=e352]: Select Centre *
+          - combobox "Select Centre * Select Centre *" [ref=e353]:
+            - option "Select Centre" [selected]
+        - generic [ref=e355]:
+          - text: By clicking on Submit, you agree to our
+          - link "Privacy Policy" [ref=e356] [cursor=pointer]:
+            - /url: /privacy-policy
+          - text: .
+        - button "Get in Touch Get in Touch" [ref=e357] [cursor=pointer]:
+          - generic [ref=e359]: Get in Touch Get in Touch
+  - generic [ref=e360]:
+    - generic [ref=e361]:
+      - generic [ref=e362]:
+        - 'heading "MAAC Placements: Your Launchpad to the Industry" [level=2] [ref=e363]'
+        - heading "You don't just train here - you get ready to lead." [level=3] [ref=e364]
+        - paragraph [ref=e365]: You get hired because you're ready from Day 1, with real skills and industry-driven training.
+      - button "Meet Your Future Employers Meet Your Future Employers" [ref=e367] [cursor=pointer]:
+        - generic [ref=e369]: Meet Your Future Employers Meet Your Future Employers
+    - generic [ref=e370]:
+      - generic [ref=e371]:
+        - generic [ref=e372]: PIXEL TEK
+        - generic [ref=e373]: DNEG
+        - generic [ref=e374]: MEDIA STUDIO
+        - generic [ref=e375]: RED CHILLIES
+        - generic [ref=e376]: SOLD OUT
+        - generic [ref=e377]: LIMINAL STUDIO
+        - generic [ref=e378]: AMAZON
+        - generic [ref=e379]: VISTAPRINT
+        - generic [ref=e380]: ACCENTURE
+        - generic [ref=e381]: STRINGS INFINITY
+        - generic [ref=e382]: FOLKS VFX
+        - generic [ref=e383]: CIMPRESS INDIA
+        - generic [ref=e384]: PIXEL TEK
+        - generic [ref=e385]: DNEG
+        - generic [ref=e386]: MEDIA STUDIO
+        - generic [ref=e387]: RED CHILLIES
+        - generic [ref=e388]: SOLD OUT
+        - generic [ref=e389]: LIMINAL STUDIO
+        - generic [ref=e390]: AMAZON
+        - generic [ref=e391]: VISTAPRINT
+        - generic [ref=e392]: ACCENTURE
+        - generic [ref=e393]: STRINGS INFINITY
+        - generic [ref=e394]: FOLKS VFX
+        - generic [ref=e395]: CIMPRESS INDIA
+      - generic [ref=e396]:
+        - generic [ref=e397]: PIXEL TEK
+        - generic [ref=e398]: DNEG
+        - generic [ref=e399]: MEDIA STUDIO
+        - generic [ref=e400]: RED CHILLIES
+        - generic [ref=e401]: SOLD OUT
+        - generic [ref=e402]: LIMINAL STUDIO
+        - generic [ref=e403]: AMAZON
+        - generic [ref=e404]: VISTAPRINT
+        - generic [ref=e405]: ACCENTURE
+        - generic [ref=e406]: STRINGS INFINITY
+        - generic [ref=e407]: FOLKS VFX
+        - generic [ref=e408]: CIMPRESS INDIA
+        - generic [ref=e409]: PIXEL TEK
+        - generic [ref=e410]: DNEG
+        - generic [ref=e411]: MEDIA STUDIO
+        - generic [ref=e412]: RED CHILLIES
+        - generic [ref=e413]: SOLD OUT
+        - generic [ref=e414]: LIMINAL STUDIO
+        - generic [ref=e415]: AMAZON
+        - generic [ref=e416]: VISTAPRINT
+        - generic [ref=e417]: ACCENTURE
+        - generic [ref=e418]: STRINGS INFINITY
+        - generic [ref=e419]: FOLKS VFX
+        - generic [ref=e420]: CIMPRESS INDIA
+  - generic [ref=e421]:
+    - generic [ref=e422]:
+      - generic [ref=e423]:
+        - heading "From MAAC to the Big Leagues" [level=2] [ref=e424]
+        - paragraph [ref=e425]: MAAC alumni are making waves in top gaming studios, production houses, and VFX giants - and you could be next.
+      - button "Meet the Game-Changers Meet the Game-Changers" [ref=e427] [cursor=pointer]:
+        - generic [ref=e429]: Meet the Game-Changers Meet the Game-Changers
+    - generic [ref=e430]:
+      - generic [ref=e431]:
+        - generic [ref=e432]:
+          - img "Manit Kumar, MAAC Alumni" [ref=e434]
+          - heading "MANIT KUMAR" [level=3] [ref=e436]
+          - generic [ref=e437]:
+            - paragraph [ref=e438]: "Field: 3D ANIMATION ARTIST"
+            - paragraph [ref=e439]: "Salary: 9.9 LPA"
+            - paragraph [ref=e440]: "Company: SUNDEEP GROUPS"
+        - generic [ref=e441]:
+          - img "Preethi S, MAAC Alumni" [ref=e443]
+          - heading "PREETHI S" [level=3] [ref=e445]
+          - generic [ref=e446]:
+            - paragraph [ref=e447]: "Field: 3D ANIMATION ARTIST"
+            - paragraph [ref=e448]: "Salary: 8.5 LPA"
+            - paragraph [ref=e449]: "Company: LIGHT AND WONDER"
+        - generic [ref=e450]:
+          - img "Shivam Gujran, MAAC Alumni" [ref=e452]
+          - heading "SHIVAM GUJRAN" [level=3] [ref=e454]
+          - generic [ref=e455]:
+            - paragraph [ref=e456]: "Field: 3D ANIMATION ARTIST"
+            - paragraph [ref=e457]: "Salary: 6.6 LPA"
+            - paragraph [ref=e458]: "Company: OPENCV ORG"
+        - generic [ref=e459]:
+          - img "Shilpi Gupta, MAAC Alumni" [ref=e461]
+          - heading "SHILPI GUPTA" [level=3] [ref=e463]
+          - generic [ref=e464]:
+            - paragraph [ref=e465]: "Field: INTERIOR DESIGNER"
+            - paragraph [ref=e466]: "Salary: 4.92 LPA"
+            - paragraph [ref=e467]: "Company: LIVSPACE"
+        - generic [ref=e468]:
+          - img "Ritika Singh, MAAC Alumni" [ref=e470]
+          - heading "RITIKA SINGH" [level=3] [ref=e472]
+          - generic [ref=e473]:
+            - paragraph [ref=e474]: "Field: MOTION GRAPHIC ARTIST"
+            - paragraph [ref=e475]: "Salary: 4.56 LPA"
+            - paragraph [ref=e476]: "Company: JUNGLEE GAMES"
+        - generic [ref=e477]:
+          - heading "KAMNA GAUTAM" [level=3] [ref=e480]
+          - generic [ref=e481]:
+            - paragraph [ref=e482]: "Field: GRAPHIC DESIGNER"
+            - paragraph [ref=e483]: "Salary: 4.3 LPA"
+            - paragraph [ref=e484]: "Company: TOUCHWOOD"
+        - generic [ref=e485]:
+          - heading "ANAMIKA PORWAL" [level=3] [ref=e488]
+          - generic [ref=e489]:
+            - paragraph [ref=e490]: "Field: GRAPHIC DESIGNER"
+            - paragraph [ref=e491]: "Salary: 4.2 LPA"
+            - paragraph [ref=e492]: "Company: INFOEDGE"
+        - generic [ref=e493]:
+          - img "Gazala Yasmin, MAAC Alumni" [ref=e495]
+          - heading "GAZALA YASMIN" [level=3] [ref=e497]
+          - generic [ref=e498]:
+            - paragraph [ref=e499]: "Field: GRAPHIC DESIGNER"
+            - paragraph [ref=e500]: "Salary: 4.2 LPA"
+            - paragraph [ref=e501]: "Company: NIYAT STUDIO"
+        - generic [ref=e502]:
+          - img "Sanjay Verma, MAAC Alumni" [ref=e504]
+          - heading "SANJAY VERMA" [level=3] [ref=e506]
+          - generic [ref=e507]:
+            - paragraph [ref=e508]: "Field: 3D MODELING & TEXTURING ARTIST"
+            - paragraph [ref=e509]: "Salary: 4.2 LPA"
+            - paragraph [ref=e510]: "Company: MH1 CHANNEL"
+        - generic [ref=e511]:
+          - img "Shivanshu Uttam, MAAC Alumni" [ref=e513]
+          - heading "SHIVANSHU UTTAM" [level=3] [ref=e515]
+          - generic [ref=e516]:
+            - paragraph [ref=e517]: "Field: 3D ARTIST"
+            - paragraph [ref=e518]: "Salary: 3.6 LPA"
+            - paragraph [ref=e519]: "Company: RAMESH – POOJA COMEDY CHANNEL"
+      - img "slider" [ref=e524]
+  - generic [ref=e525]:
+    - generic [ref=e526]:
+      - generic [ref=e527]:
+        - heading "MAAC Students' Work" [level=2] [ref=e528]
+        - heading "Creativity speaks louder than words." [level=3] [ref=e529]
+        - paragraph [ref=e530]: See how MAAC students are raising the bar with projects that blend skill, vision, and real-world training.
+      - button "See Magic in Action See Magic in Action" [ref=e532] [cursor=pointer]:
+        - generic [ref=e534]: See Magic in Action See Magic in Action
+    - generic [ref=e535]:
+      - generic [ref=e537]:
+        - generic [ref=e538]:
+          - img "RITVIK KUMAR DAS" [ref=e539]
+          - paragraph [ref=e540]: RITVIK KUMAR DAS
+        - generic [ref=e541]:
+          - generic [ref=e542]:
+            - img "TANUJ DHAMI" [ref=e543]
+            - paragraph [ref=e544]: TANUJ DHAMI
+          - generic [ref=e545]:
+            - img "MOHIK DHAKATE" [ref=e546]
+            - paragraph [ref=e547]: MOHIK DHAKATE
+        - generic [ref=e548]:
+          - generic [ref=e549]:
+            - img "ANJALI KASHYAP" [ref=e550]
+            - paragraph [ref=e551]: ANJALI KASHYAP
+          - generic [ref=e552]:
+            - img "CHHANDOSI MUKHERJEE" [ref=e553]
+            - paragraph [ref=e554]: CHHANDOSI MUKHERJEE
+      - generic [ref=e556]:
+        - paragraph [ref=e559]: ASHAD KHAN
+        - generic [ref=e560]:
+          - paragraph [ref=e563]: DEEPAK KUMAR
+          - paragraph [ref=e566]: INDRANUJ DAS
+        - generic [ref=e567]:
+          - paragraph [ref=e570]: ASHAD KHAN
+          - paragraph [ref=e573]: SAIF ALAM
+      - generic [ref=e575]:
+        - generic [ref=e576]:
+          - img "SHRAVON PP" [ref=e577]
+          - paragraph [ref=e578]: SHRAVON PP
+        - generic [ref=e579]:
+          - generic [ref=e580]:
+            - img "SASMITA PANI" [ref=e581]
+            - paragraph [ref=e582]: SASMITA PANI
+          - generic [ref=e583]:
+            - img "ANKIT SOLANKI" [ref=e584]
+            - paragraph [ref=e585]: ANKIT SOLANKI
+        - generic [ref=e586]:
+          - generic [ref=e587]:
+            - img "SURAJ DHAMNE" [ref=e588]
+            - paragraph [ref=e589]: SURAJ DHAMNE
+          - generic [ref=e590]:
+            - img "DIXIT JAYA" [ref=e591]
+            - paragraph [ref=e592]: DIXIT JAYA
+    - img "slider" [ref=e597]
+    - text: Get in Touch
+  - generic [ref=e598]:
+    - generic [ref=e599]:
+      - generic [ref=e600]:
+        - 'heading "MAAC Events: Celebrating Creativity and Innovation" [level=2] [ref=e601]'
+        - heading "Create. Compete. Level Up." [level=3] [ref=e602]
+        - paragraph [ref=e603]:
+          - text: Every MAAC
+          - link "event" [ref=e604] [cursor=pointer]:
+            - /url: /events-at-maac
+          - text: is a chance to challenge yourself and build industry-ready confidence.
+      - button "Experience the Buzz Experience the Buzz" [ref=e606] [cursor=pointer]:
+        - generic [ref=e608]: Experience the Buzz Experience the Buzz
+    - generic [ref=e609]:
+      - generic [ref=e610]:
+        - generic [ref=e613]:
+          - paragraph [ref=e614]: A multi-category competition that enhances presentation skills and builds professional showcasing confidence.
+          - button "Know More Get in Touch" [ref=e615] [cursor=pointer]:
+            - generic [ref=e617]: Know More Get in Touch
+        - generic [ref=e620]:
+          - paragraph [ref=e621]: India’s top animation award where students showcase work, get expert critiques, and industry exposure.
+          - button "Know More Get in Touch" [ref=e622] [cursor=pointer]:
+            - generic [ref=e624]: Know More Get in Touch
+        - generic [ref=e627]:
+          - paragraph [ref=e628]: A 4-day immersive event with workshops, seminars, and studio-like collaboration in Goa or Rann of Kutch.
+          - button "Know More Get in Touch" [ref=e629] [cursor=pointer]:
+            - generic [ref=e631]: Know More Get in Touch
+        - generic [ref=e634]:
+          - paragraph [ref=e635]: Zonal events with alumni programs and industry sessions to build networks and real-world job readiness.
+          - button "Know More Get in Touch" [ref=e636] [cursor=pointer]:
+            - generic [ref=e638]: Know More Get in Touch
+        - generic [ref=e641]:
+          - paragraph [ref=e642]: A high-pressure creative challenge to make a short film in just 100 hours—boosting speed, teamwork, and skill.
+          - button "Know More Get in Touch" [ref=e643] [cursor=pointer]:
+            - generic [ref=e645]: Know More Get in Touch
+        - generic [ref=e648]:
+          - paragraph [ref=e649]: A photography and filmmaking contest where students receive expert feedback to sharpen creative skills.
+          - button "Know More Get in Touch" [ref=e650] [cursor=pointer]:
+            - generic [ref=e652]: Know More Get in Touch
+        - generic [ref=e655]:
+          - paragraph [ref=e656]: Live webinars by industry pros covering trends, tools, and tips to stay updated with industry standards.
+          - button "Know More Get in Touch" [ref=e657] [cursor=pointer]:
+            - generic [ref=e659]: Know More Get in Touch
+      - img "slider" [ref=e663]
+      - text: Get in Touch
+  - generic [ref=e665]:
+    - generic [ref=e666]:
+      - 'heading "MAAC: Your Trusted Training Partner" [level=2] [ref=e667]'
+      - heading "Proudly partnered with MESC & NSDC under the Skill India Mission, we offer nationally recognized, industry-relevant training. Get certified, gain real skills, and build a future-ready career in Animation, VFX, Gaming, and more!" [level=3] [ref=e668]
+    - link "Explore Certified Courses Get in Touch" [ref=e670] [cursor=pointer]:
+      - /url: /courses
+      - button "Explore Certified Courses Get in Touch" [ref=e671]:
+        - generic [ref=e673]: Explore Certified Courses Get in Touch
+  - generic [ref=e677]:
+    - heading "Start Your MAAC Journey" [level=2] [ref=e678]
+    - paragraph [ref=e679]: Reach out to us today and take the first step toward your creative journey with MAAC.
+    - generic [ref=e680]:
+      - generic [ref=e681]:
+        - generic [ref=e682]: Full Name *
+        - textbox "Full Name" [ref=e683]
+        - generic [ref=e684]: Mobile Number *
+        - textbox "Mobile Number" [ref=e685]
+        - generic [ref=e686]: Email *
+        - textbox "Email" [ref=e687]
+      - generic [ref=e688]:
+        - generic [ref=e689]: Select Course Interested In *
+        - combobox [ref=e690]:
+          - option "Select Course" [selected]
+          - option "Digital Content Creation"
+          - option "Gaming and ID"
+          - option "GEN AI"
+          - option "AVGC"
+          - option "Short Term Courses"
+          - option "Broadcast"
+          - option "Bachelor of Vocation (B.Voc.) in 3D Animation & Visual Effects"
+          - option "Film Making"
+          - option "VFX"
+          - option "3D Animation"
+        - generic [ref=e691]: Select State *
+        - combobox [ref=e692]:
+          - option "Select State" [selected]
+        - generic [ref=e693]: Select Centre *
+        - combobox [ref=e694]:
+          - option "Select Centre" [selected]
+      - generic [ref=e696]:
+        - text: By clicking on Submit, you agree to our
+        - link "Privacy Policy" [ref=e697] [cursor=pointer]:
+          - /url: /privacy-policy
+        - text: .
+      - img "Dramatic Indian movie poster with half painted face concept" [ref=e699]
+      - button "Get in Touch Get in Touch" [ref=e700] [cursor=pointer]:
+        - generic [ref=e702]: Get in Touch Get in Touch
+  - generic [ref=e703]:
+    - contentinfo [ref=e704]:
+      - generic [ref=e705]:
+        - generic [ref=e706]:
+          - img "MAAC Logo" [ref=e707]
+          - paragraph [ref=e708]: Join MAAC and embark on a journey that will unlock your true potential, inspire creativity, and empower you to lead in a world of limitless possibilities.
+        - generic [ref=e709]:
+          - generic [ref=e710]:
+            - paragraph [ref=e711]:
+              - link "Courses" [ref=e712] [cursor=pointer]:
+                - /url: /courses
+            - paragraph [ref=e713]:
+              - link "Placement Opportunities" [ref=e714] [cursor=pointer]:
+                - /url: /placements-at-maac
+            - paragraph [ref=e715]:
+              - link "About Us" [ref=e716] [cursor=pointer]:
+                - /url: /about-maac
+            - paragraph [ref=e717]:
+              - link "Contact Us" [ref=e718] [cursor=pointer]:
+                - /url: /contact-us
+          - generic [ref=e719]:
+            - paragraph [ref=e720]:
+              - link "Blog" [ref=e721] [cursor=pointer]:
+                - /url: /blog
+            - paragraph [ref=e722]:
+              - link "Disclaimer" [ref=e723] [cursor=pointer]:
+                - /url: /disclaimer
+            - paragraph [ref=e724]:
+              - link "FAQ" [ref=e725] [cursor=pointer]:
+                - /url: /FAQs
+            - paragraph [ref=e726]:
+              - link "Sitemap" [ref=e727] [cursor=pointer]:
+                - /url: /sitemap
+          - generic [ref=e728]:
+            - paragraph [ref=e729]:
+              - link "Student Enquiry" [ref=e730] [cursor=pointer]:
+                - /url: /student-enquiry
+            - paragraph [ref=e731]:
+              - link "Privacy Policy" [ref=e732] [cursor=pointer]:
+                - /url: /privacy-policy
+            - paragraph [ref=e733]:
+              - link "Profanity Policy" [ref=e734] [cursor=pointer]:
+                - /url: /profanity-policy
+            - paragraph [ref=e735]:
+              - link "Verify Your Certificate" [ref=e736] [cursor=pointer]:
+                - /url: /verify-your-certificate
+            - paragraph [ref=e737]:
+              - link "Laptop Scheme Terms" [ref=e738] [cursor=pointer]:
+                - /url: /laptop-scheme-terms
+        - generic [ref=e739]:
+          - heading "Did you find the information you were looking for?" [level=3] [ref=e740]
+          - generic [ref=e741]:
+            - button "Yes Yes" [ref=e742] [cursor=pointer]:
+              - generic [ref=e744]: Yes Yes
+            - button "No No" [ref=e745] [cursor=pointer]:
+              - generic [ref=e747]: No No
+    - contentinfo [ref=e748]:
+      - generic [ref=e749]:
+        - generic [ref=e750]:
+          - paragraph [ref=e751]: Follow us for updates, inspiration, and student stories
+          - generic [ref=e752]:
+            - link "Facebook" [ref=e753] [cursor=pointer]:
+              - /url: https://www.facebook.com/maacindia
+              - img [ref=e754]
+            - link "Twitter" [ref=e756] [cursor=pointer]:
+              - /url: https://x.com/MayaAcademyInd
+              - img [ref=e757]
+            - link "Instagram" [ref=e759] [cursor=pointer]:
+              - /url: https://www.instagram.com/maacindiaofficial/
+              - img [ref=e760]
+            - link "YouTube" [ref=e762] [cursor=pointer]:
+              - /url: https://www.youtube.com/user/maacindia
+              - img [ref=e763]
+            - link "LinkedIn" [ref=e765] [cursor=pointer]:
+              - /url: https://www.linkedin.com/school/maac/
+              - img [ref=e766]
+        - img "official stamp" [ref=e769]
+        - paragraph [ref=e771]:
+          - text: Reach Us at
+          - link "1-800-209-6222" [ref=e772] [cursor=pointer]:
+            - /url: tel:18002096222
+          - text: "|"
+          - link "info@maacmail.com" [ref=e773] [cursor=pointer]:
+            - /url: mailto:info@maacmail.com
+      - paragraph [ref=e774]: Copyright © 2026 Aptech Ltd. All rights reserved.
+  - region "Notifications Alt+T"
+  - img "Chatbot" [ref=e776] [cursor=pointer]

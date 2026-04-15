@@ -47,6 +47,20 @@ const CategoryIcon = ({ type }: { type: string }) => {
         <path d="M24 54V38H16l16-20 16 20h-8v16H24z" />
       </svg>
     ),
+    filmmaking: (
+      <svg width="48" height="48" viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <rect x="4" y="12" width="56" height="40" rx="4" />
+        <line x1="4" y1="22" x2="60" y2="22" />
+        <line x1="4" y1="42" x2="60" y2="42" />
+        <line x1="16" y1="12" x2="16" y2="22" />
+        <line x1="32" y1="12" x2="32" y2="22" />
+        <line x1="48" y1="12" x2="48" y2="22" />
+        <line x1="16" y1="42" x2="16" y2="52" />
+        <line x1="32" y1="42" x2="32" y2="52" />
+        <line x1="48" y1="42" x2="48" y2="52" />
+        <polygon points="28,28 42,32 28,36" fill="currentColor" />
+      </svg>
+    ),
   };
   return icons[type] || icons.animation;
 };
@@ -88,24 +102,27 @@ function SlideUpCard({ course }: { course: any }) {
         </div>
 
         {/* Hover Details */}
-        <div 
+        <div
           className={`absolute inset-0 bg-[#0C0C0C]/95 p-8 md:p-10 flex flex-col justify-center transition-all duration-1000 ease-expo-out`}
-          style={{ 
+          style={{
             clipPath: isHovered ? 'circle(150% at 100% 100%)' : 'circle(0% at 100% 100%)',
           }}
         >
-           <p className="text-white/80 text-sm md:text-base leading-relaxed mb-8 border-l-2 border-[#E31837] pl-6">
+           <p className="text-white/80 text-sm md:text-base leading-relaxed mb-6 border-l-2 border-[#E31837] pl-6">
              {course.fullDescription}
            </p>
-           <div className="flex flex-wrap gap-2 mb-10">
-             {course.careers.slice(0, 4).map((c: string) => (
-               <span key={c} className="text-[9px] font-bold uppercase tracking-[0.2em] text-white/40 border border-white/10 px-3 py-1.5 rounded-full">
-                 {c}
-               </span>
-             ))}
+           <div className="mb-8">
+             <h4 className="text-white text-xs font-bold uppercase tracking-[0.2em] mb-3">Your Future Roles</h4>
+             <div className="flex flex-wrap gap-2">
+               {course.careers.map((c: string) => (
+                 <span key={c} className="text-[9px] font-bold uppercase tracking-[0.15em] text-white/60 border border-white/10 px-3 py-1.5 rounded-full">
+                   {c}
+                 </span>
+               ))}
+             </div>
            </div>
-           <Link href="/demo-class" className="inline-flex items-center gap-4 text-white text-[10px] font-bold tracking-[0.3em] uppercase group/link">
-             Deep Dive
+           <Link href="/courses" className="inline-flex items-center gap-4 text-white text-[10px] font-bold tracking-[0.3em] uppercase group/link">
+             Read More
              <div className="w-10 h-10 rounded-full bg-[#E31837] flex items-center justify-center transition-transform group-hover/link:scale-110">
                <ArrowUpRight size={16} />
              </div>
@@ -140,11 +157,11 @@ export default function CourseCategories() {
         <div className="categories-heading text-center mb-20 md:mb-28">
           <p className="text-[#E31837] text-sm font-bold tracking-[0.2em] uppercase mb-6 flex items-center justify-center gap-3">
             <span className="w-6 h-[1px] bg-[#E31837]" />
-            Our Expertise
+            Courses at MAAC
             <span className="w-6 h-[1px] bg-[#E31837]" />
           </p>
           <h2 className="font-display font-bold text-[clamp(1.6rem,4vw,2.8rem)] text-[#F0EBE1] leading-[0.95] tracking-tight">
-            Creative <span className="gradient-text">Disciplines</span>
+            Explore Our <span className="gradient-text">Course Categories</span>
           </h2>
         </div>
 

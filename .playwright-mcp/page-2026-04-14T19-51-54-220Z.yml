@@ -1,0 +1,291 @@
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - link "MAAC" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - img "MAAC" [ref=e6]
+      - navigation [ref=e7]:
+        - link "Courses" [ref=e9] [cursor=pointer]:
+          - /url: /courses
+          - generic [ref=e10]:
+            - text: Courses
+            - img [ref=e11]
+        - link "About Us" [ref=e13] [cursor=pointer]:
+          - /url: /about-maac
+        - link "Student's World" [ref=e15] [cursor=pointer]:
+          - /url: /students-world
+          - generic [ref=e16]:
+            - text: Student's World
+            - img [ref=e17]
+        - link "Events" [ref=e20] [cursor=pointer]:
+          - /url: /events-at-maac
+          - generic [ref=e21]:
+            - text: Events
+            - img [ref=e22]
+        - link "Locate a Centre" [ref=e24] [cursor=pointer]:
+          - /url: /locate-a-centre
+        - link "Partner with MAAC" [ref=e25] [cursor=pointer]:
+          - /url: /partner-with-maac
+      - generic [ref=e26]:
+        - img "Call" [ref=e27] [cursor=pointer]
+        - button "Enquire Now Get in Touch" [ref=e28] [cursor=pointer]:
+          - generic [ref=e30]: Enquire Now Get in Touch
+        - img [ref=e31] [cursor=pointer]
+    - generic [ref=e33]:
+      - button [ref=e34] [cursor=pointer]:
+        - img [ref=e35]
+      - list [ref=e38]:
+        - listitem [ref=e39]:
+          - link "Home" [ref=e40] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=e41]:
+          - generic [ref=e42] [cursor=pointer]:
+            - link "Courses" [ref=e43]:
+              - /url: /courses
+            - img [ref=e44]
+        - listitem [ref=e45]:
+          - link "About Us" [ref=e46] [cursor=pointer]:
+            - /url: /about-maac
+        - listitem [ref=e47]:
+          - generic [ref=e48] [cursor=pointer]:
+            - link "Student's World" [ref=e49]:
+              - /url: /students-world
+            - img [ref=e50]
+        - listitem [ref=e51]:
+          - generic [ref=e52] [cursor=pointer]:
+            - link "Events" [ref=e53]:
+              - /url: /events-at-maac
+            - img [ref=e54]
+        - listitem [ref=e55]:
+          - link "Partner with MAAC" [ref=e56] [cursor=pointer]:
+            - /url: /partner-with-maac
+        - listitem [ref=e57]:
+          - link "Locate a Centre" [ref=e58] [cursor=pointer]:
+            - /url: /locate-a-centre
+        - listitem [ref=e59]:
+          - link "Contact Us" [ref=e60] [cursor=pointer]:
+            - /url: /contact-us
+        - listitem [ref=e61]:
+          - link "Blog" [ref=e62] [cursor=pointer]:
+            - /url: /blog
+  - generic [ref=e63]:
+    - generic [ref=e69]:
+      - heading "COURSES AT MAAC" [level=1] [ref=e71]
+      - paragraph [ref=e72]: Step into the world of Animation, VFX, Gaming, Filmmaking, and Digital Media with MAAC. Here, you don’t just learn at MAAC - you create, innovate, and become job-ready for exciting career opportunities.
+    - generic [ref=e73]:
+      - generic [ref=e74]: Master Your Craft
+      - generic [ref=e78]:
+        - generic [ref=e79]: Our Courses
+        - generic [ref=e80]: Our industry-aligned courses equip you with cutting-edge skills, real-world experience, and hands-on training using the latest tools and technologies. Whether you aim to become an animator, VFX artist, game developer, or digital designer, we help you turn your passion into a profession.
+    - generic [ref=e83]:
+      - generic [ref=e84]: Explore Our Courses
+      - generic [ref=e85]:
+        - generic [ref=e89]:
+          - generic [ref=e90]: 3D Animation
+          - generic [ref=e91]: Master the art of storytelling through high-quality animation, modeling, texturing, lighting, and rigging. Work on real-world projects and build your portfolio.
+          - generic [ref=e92]:
+            - heading "Your Future Roles:" [level=4] [ref=e93]
+            - paragraph [ref=e94]: 3D Animator, Character Designer, Rigging Artist, Lighting Artist, Game Asset Artist, Environment Artist.
+          - button "Read More Read More" [ref=e95] [cursor=pointer]:
+            - generic [ref=e97]: Read More Read More
+        - generic [ref=e101]:
+          - generic [ref=e102]: Digital Content Creation
+          - generic [ref=e103]: Become a digital content pro! Learn graphic design, animation, video production, and web design to create compelling digital media.
+          - generic [ref=e104]:
+            - heading "Your Future Roles:" [level=4] [ref=e105]
+            - paragraph [ref=e106]: Graphic Designer, Video Producer, Social Media Designer, UI/UX Designer, Motion Graphics Artist, Content Strategist.
+          - button "Read More Read More" [ref=e107] [cursor=pointer]:
+            - generic [ref=e109]: Read More Read More
+        - generic [ref=e113]:
+          - generic [ref=e114]: Game Design
+          - generic [ref=e115]: Step into the world of gaming! Learn game asset creation, real-time rendering, and interactive design.
+          - generic [ref=e116]:
+            - heading "Your Future Roles:" [level=4] [ref=e117]
+            - paragraph [ref=e118]: Game Developer, Level Designer, 3D Artist, Virtual Reality Artist, Game Animator.
+          - button "Read More Read More" [ref=e119] [cursor=pointer]:
+            - generic [ref=e121]: Read More Read More
+        - generic [ref=e125]:
+          - generic [ref=e126]: Visual Effects (VFX)
+          - generic [ref=e127]: Create stunning VFX for movies, TV, and gaming with advanced CGI, compositing, and motion tracking techniques.
+          - generic [ref=e128]:
+            - heading "Your Future Roles:" [level=4] [ref=e129]
+            - paragraph [ref=e130]: VFX Compositor, Motion Graphics Artist, FX Artist, Matte Painter, Pre-Visualization Artist.
+          - button "Read More Read More" [ref=e131] [cursor=pointer]:
+            - generic [ref=e133]: Read More Read More
+        - generic [ref=e137]:
+          - generic [ref=e138]: Broadcast & Motion Graphics
+          - generic [ref=e139]: Master the art of motion design, video editing, and broadcast graphics for TV, digital media, and advertising.
+          - generic [ref=e140]:
+            - heading "Your Future Roles:" [level=4] [ref=e141]
+            - paragraph [ref=e142]: Motion Graphics Artist, Broadcast Designer, UI Designer, Video Editor.
+          - button "Read More Read More" [ref=e143] [cursor=pointer]:
+            - generic [ref=e145]: Read More Read More
+        - generic [ref=e149]:
+          - generic [ref=e150]: Filmmaking & Photography
+          - generic [ref=e151]: Turn your vision into reality! Learn cinematography, video editing, sound design, and VFX for films, ads, and digital platforms.
+          - generic [ref=e152]:
+            - heading "Your Future Roles:" [level=4] [ref=e153]
+            - paragraph [ref=e154]: Video Editor, Cinematographer, Film Director, Content Creator.
+          - button "Read More Read More" [ref=e155] [cursor=pointer]:
+            - generic [ref=e157]: Read More Read More
+        - generic [ref=e161]:
+          - generic [ref=e162]: Specialized Skills Bootcamp
+          - generic [ref=e163]: Master the art of motion design, video editing, and broadcast graphics for TV, digital media, and advertising.
+          - generic [ref=e164]:
+            - heading "Your Future Roles:" [level=4] [ref=e165]
+            - paragraph [ref=e166]: Motion Graphics Artist, Broadcast Designer, UI Designer, Video Editor.
+          - button "Read More Read More" [ref=e167] [cursor=pointer]:
+            - generic [ref=e169]: Read More Read More
+    - generic [ref=e170]:
+      - generic [ref=e171]: Everything you need to know about our courses— just a click away.
+      - button "View e-brochureE-brochure Read More" [ref=e173] [cursor=pointer]:
+        - generic [ref=e175]:
+          - text: View e-brochure
+          - img "E-brochure" [ref=e176]
+          - text: Read More
+    - generic [ref=e177]:
+      - generic [ref=e180]:
+        - generic [ref=e181]: Exciting Career Opportunities at MAAC
+        - generic [ref=e182]:
+          - link "MAAC is one of the leading institutesin India" [ref=e183] [cursor=pointer]:
+            - /url: /
+          - text: that offers Animation, Gaming, VFX, Broadcast, Photography, and Digital Design courses. Our centers across India and worldwide are equipped with state-of-the-art infrastructure, studio-like classrooms, and the latest industry tools and software. Whether you're just starting or looking to upskill, our courses are designed to set you on the path to success in the media and entertainment industry.
+        - button "Read More Read More" [ref=e185] [cursor=pointer]:
+          - generic [ref=e187]: Read More Read More
+      - text: Read More
+    - generic [ref=e195]: The courses at MAAC are ideal for both beginners and professionals. Join a course at MAAC and prepare yourself for an exciting career in the M&E industry.
+    - generic [ref=e196]:
+      - generic [ref=e197]: Not sure which course is right for you?
+      - generic [ref=e198]: Choosing the perfect path in Animation, VFX, or Game Design can be overwhelming, but we're here to help!
+      - generic [ref=e199]: Fill in the form and our career counselors will call you back. They guide you to choose the right career course at MAAC
+      - button "Enquire Now Enquire Now" [ref=e201] [cursor=pointer]:
+        - generic [ref=e203]: Enquire Now Enquire Now
+  - generic [ref=e206]:
+    - heading "Start Your MAAC Journey" [level=2] [ref=e207]
+    - paragraph [ref=e208]: Reach out to us today and take the first step toward your creative journey with MAAC.
+    - generic [ref=e209]:
+      - generic [ref=e210]:
+        - generic [ref=e211]: Full Name *
+        - textbox "Full Name *" [ref=e212]:
+          - /placeholder: Full Name
+        - generic [ref=e213]: Mobile Number *
+        - textbox "Mobile Number *" [ref=e214]:
+          - /placeholder: Mobile Number
+        - generic [ref=e215]: Email *
+        - textbox "Email *" [ref=e216]:
+          - /placeholder: Email
+      - generic [ref=e217]:
+        - generic [ref=e218]: Select Course Interested In *
+        - combobox "Select Course Interested In *" [ref=e219]:
+          - option "Select Course" [selected]
+          - option "Digital Content Creation"
+          - option "Gaming and ID"
+          - option "GEN AI"
+          - option "AVGC"
+          - option "Short Term Courses"
+          - option "Broadcast"
+          - option "Bachelor of Vocation (B.Voc.) in 3D Animation & Visual Effects"
+          - option "Film Making"
+          - option "VFX"
+          - option "3D Animation"
+        - generic [ref=e220]: Select State *
+        - combobox "Select State *" [ref=e221]:
+          - option "Select State" [selected]
+        - generic [ref=e222]: Select Centre *
+        - combobox "Select Centre *" [ref=e223]:
+          - option "Select Centre" [selected]
+      - generic [ref=e225]:
+        - text: By clicking on Submit, you agree to our
+        - link "Privacy Policy" [ref=e226] [cursor=pointer]:
+          - /url: /privacy-policy
+        - text: .
+      - img "Dramatic Indian movie poster with half painted face concept" [ref=e228]
+      - button "Get in Touch Get in Touch" [ref=e229] [cursor=pointer]:
+        - generic [ref=e231]: Get in Touch Get in Touch
+  - generic [ref=e232]:
+    - contentinfo [ref=e233]:
+      - generic [ref=e234]:
+        - generic [ref=e235]:
+          - img "MAAC Logo" [ref=e236]
+          - paragraph [ref=e237]: Join MAAC and embark on a journey that will unlock your true potential, inspire creativity, and empower you to lead in a world of limitless possibilities.
+        - generic [ref=e238]:
+          - generic [ref=e239]:
+            - paragraph [ref=e240]:
+              - link "Courses" [ref=e241] [cursor=pointer]:
+                - /url: /courses
+            - paragraph [ref=e242]:
+              - link "Placement Opportunities" [ref=e243] [cursor=pointer]:
+                - /url: /placements-at-maac
+            - paragraph [ref=e244]:
+              - link "About Us" [ref=e245] [cursor=pointer]:
+                - /url: /about-maac
+            - paragraph [ref=e246]:
+              - link "Contact Us" [ref=e247] [cursor=pointer]:
+                - /url: /contact-us
+          - generic [ref=e248]:
+            - paragraph [ref=e249]:
+              - link "Blog" [ref=e250] [cursor=pointer]:
+                - /url: /blog
+            - paragraph [ref=e251]:
+              - link "Disclaimer" [ref=e252] [cursor=pointer]:
+                - /url: /disclaimer
+            - paragraph [ref=e253]:
+              - link "FAQ" [ref=e254] [cursor=pointer]:
+                - /url: /FAQs
+            - paragraph [ref=e255]:
+              - link "Sitemap" [ref=e256] [cursor=pointer]:
+                - /url: /sitemap
+          - generic [ref=e257]:
+            - paragraph [ref=e258]:
+              - link "Student Enquiry" [ref=e259] [cursor=pointer]:
+                - /url: /student-enquiry
+            - paragraph [ref=e260]:
+              - link "Privacy Policy" [ref=e261] [cursor=pointer]:
+                - /url: /privacy-policy
+            - paragraph [ref=e262]:
+              - link "Profanity Policy" [ref=e263] [cursor=pointer]:
+                - /url: /profanity-policy
+            - paragraph [ref=e264]:
+              - link "Verify Your Certificate" [ref=e265] [cursor=pointer]:
+                - /url: /verify-your-certificate
+            - paragraph [ref=e266]:
+              - link "Laptop Scheme Terms" [ref=e267] [cursor=pointer]:
+                - /url: /laptop-scheme-terms
+        - generic [ref=e268]:
+          - heading "Did you find the information you were looking for?" [level=3] [ref=e269]
+          - generic [ref=e270]:
+            - button "Yes Yes" [ref=e271] [cursor=pointer]:
+              - generic [ref=e273]: Yes Yes
+            - button "No No" [ref=e274] [cursor=pointer]:
+              - generic [ref=e276]: No No
+    - contentinfo [ref=e277]:
+      - generic [ref=e278]:
+        - generic [ref=e279]:
+          - paragraph [ref=e280]: Follow us for updates, inspiration, and student stories
+          - generic [ref=e281]:
+            - link "Facebook" [ref=e282] [cursor=pointer]:
+              - /url: https://www.facebook.com/maacindia
+              - img [ref=e283]
+            - link "Twitter" [ref=e285] [cursor=pointer]:
+              - /url: https://x.com/MayaAcademyInd
+              - img [ref=e286]
+            - link "Instagram" [ref=e288] [cursor=pointer]:
+              - /url: https://www.instagram.com/maacindiaofficial/
+              - img [ref=e289]
+            - link "YouTube" [ref=e291] [cursor=pointer]:
+              - /url: https://www.youtube.com/user/maacindia
+              - img [ref=e292]
+            - link "LinkedIn" [ref=e294] [cursor=pointer]:
+              - /url: https://www.linkedin.com/school/maac/
+              - img [ref=e295]
+        - img "official stamp" [ref=e298]
+        - paragraph [ref=e300]:
+          - text: Reach Us at
+          - link "1-800-209-6222" [ref=e301] [cursor=pointer]:
+            - /url: tel:18002096222
+          - text: "|"
+          - link "info@maacmail.com" [ref=e302] [cursor=pointer]:
+            - /url: mailto:info@maacmail.com
+      - paragraph [ref=e303]: Copyright © 2026 Aptech Ltd. All rights reserved.
+  - region "Notifications Alt+T"
+  - img "Chatbot" [ref=e305] [cursor=pointer]
