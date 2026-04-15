@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { useGSAP } from "@gsap/react";
 import gsap from "@/lib/gsap";
 import { CheckCircle2 } from "lucide-react";
@@ -10,25 +11,19 @@ const certifications = [
     name: "MESC",
     fullName: "Media & Entertainment Skills Council",
     description: "Govt-recognized certification focused on job-ready creative skills.",
-    logoHint: "Add logo: /public/logos/mesc.svg",
+    logo: "/govt/mesc.png",
   },
   {
     name: "NSDC",
     fullName: "National Skill Development Corporation",
     description: "Government initiative that promotes national skilling and certification.",
-    logoHint: "Add logo: /public/logos/nsdc.svg",
+    logo: "/govt/nsdc.png",
   },
   {
     name: "Skill India",
     fullName: "Skill India Mission",
     description: "National mission empowering youth with industry-ready digital skills.",
-    logoHint: "Add logo: /public/logos/skill-india.svg",
-  },
-  {
-    name: "B.Voc Degree",
-    fullName: "Bachelor of Vocation (UGC Recognized)",
-    description: "UGC-recognized degree that combines academics with practical training.",
-    logoHint: "Add logo: /public/logos/bvoc-ugc.svg",
+    logo: "/govt/skillIndia.jpg",
   },
 ];
 
@@ -60,22 +55,29 @@ export default function TrustBadges() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
           {certifications.map((cert) => (
             <div
               key={cert.name}
-              className="trust-badge rounded-2xl p-5 bg-[#111111] border border-white/8 hover:border-[#E31837]/30 transition-colors duration-300"
+              className="trust-badge rounded-2xl p-6 md:p-8 bg-[#111111] border border-white/8 hover:border-[#E31837]/30 transition-colors duration-300"
             >
-              <div className="flex items-start justify-between gap-3">
-                <div className="h-12 w-20 rounded-xl border border-dashed border-white/20 bg-white/[0.02] flex items-center justify-center text-[9px] text-white/45 uppercase tracking-wider">
-                  Logo
-                </div>
-                <CheckCircle2 size={18} className="text-[#E31837] shrink-0 mt-0.5" />
+              <div className="h-20 md:h-24 rounded-xl bg-white/5 flex items-center justify-center p-4">
+                <Image 
+                  src={cert.logo} 
+                  alt={cert.name}
+                  width={140}
+                  height={70}
+                  className="object-contain w-full h-full"
+                />
               </div>
-              <h3 className="text-white font-bold text-lg mt-4">{cert.name}</h3>
-              <p className="text-[#E31837] text-[11px] font-semibold uppercase tracking-[0.12em] mt-1">{cert.fullName}</p>
-              <p className="text-[#A8A29C] text-sm leading-relaxed mt-2.5">{cert.description}</p>
-              <p className="text-white/35 text-[10px] mt-3">{cert.logoHint}</p>
+              <div className="flex items-center justify-between mt-4">
+                <div>
+                  <h3 className="text-white font-bold text-lg">{cert.name}</h3>
+                  <p className="text-[#E31837] text-[11px] font-semibold uppercase tracking-[0.12em] mt-1">{cert.fullName}</p>
+                </div>
+                <CheckCircle2 size={18} className="text-[#E31837] shrink-0" />
+              </div>
+              <p className="text-[#A8A29C] text-sm leading-relaxed mt-3">{cert.description}</p>
             </div>
           ))}
         </div>
@@ -83,7 +85,6 @@ export default function TrustBadges() {
         <div className="mt-7 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-center">
           {[
             "NSDC Certified Programs",
-            "UGC Recognized B.Voc Degree",
             "Skill India Partner",
             "30+ Years of Excellence",
           ].map((item) => (
