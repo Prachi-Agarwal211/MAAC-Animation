@@ -6,6 +6,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "@/lib/gsap";
 import Link from "next/link";
 import { siteCoursesData } from "@/data/siteData";
+import { courseCategories, coursesData } from "@/data/courses";
 import { ArrowUpRight } from "lucide-react";
 
 const CategoryIcon = ({ type }: { type: string }) => {
@@ -65,9 +66,24 @@ const CategoryIcon = ({ type }: { type: string }) => {
   return icons[type] || icons.animation;
 };
 
-function SlideUpCard({ course }: { course: any }) {
+type CourseCardItem = {
+  id: string;
+  title: string;
+  description: string;
+  fullDescription: string;
+  icon: string;
+  image?: string;
+  careers: string[];
+  href: string;
+};
+
+type CourseCategoriesProps = {
+  mode?: "home" | "courses-page";
+};
+
+function SlideUpCard({ course }: { course: CourseCardItem }) {
   const [isHovered, setIsHovered] = useState(false);
-  const isTouchDevice = typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches;
+  const isTouchDevice = typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches;
 
   return (
     <div
@@ -105,36 +121,76 @@ function SlideUpCard({ course }: { course: any }) {
         <div
           className={`absolute inset-0 bg-[#0C0C0C]/95 p-8 md:p-10 flex flex-col justify-center transition-all duration-1000 ease-expo-out`}
           style={{
-            clipPath: isHovered ? 'circle(150% at 100% 100%)' : 'circle(0% at 100% 100%)',
+            clipPath: isHovered ? "circle(150% at 100% 100%)" : "circle(0% at 100% 100%)",
           }}
         >
-           <p className="text-white/80 text-sm md:text-base leading-relaxed mb-6 border-l-2 border-[#E31837] pl-6">
-             {course.fullDescription}
-           </p>
-           <div className="mb-8">
-             <h4 className="text-white text-xs font-bold uppercase tracking-[0.2em] mb-3">Your Future Roles</h4>
-             <div className="flex flex-wrap gap-2">
-               {course.careers.map((c: string) => (
-                 <span key={c} className="text-[9px] font-bold uppercase tracking-[0.15em] text-white/60 border border-white/10 px-3 py-1.5 rounded-full">
-                   {c}
-                 </span>
-               ))}
-             </div>
-           </div>
-           <Link href="/courses" className="inline-flex items-center gap-4 text-white text-[10px] font-bold tracking-[0.3em] uppercase group/link">
-             Read More
-             <div className="w-10 h-10 rounded-full bg-[#E31837] flex items-center justify-center transition-transform group-hover/link:scale-110">
-               <ArrowUpRight size={16} />
-             </div>
-           </Link>
+          <p className="text-white/80 text-sm md:text-base leading-relaxed mb-6 border-l-2 border-[#E31837] pl-6">
+            {course.fullDescription}
+          </p>
+          <div className="mb-8">
+            <h4 className="text-white text-xs font-bold uppercase tracking-[0.2em] mb-3">Your Future Roles</h4>
+            <div className="flex flex-wrap gap-2">
+              {course.careers.map((c) => (
+                <span key={c} className="text-[9px] font-bold uppercase tracking-[0.15em] text-white/60 border border-white/10 px-3 py-1.5 rounded-full">
+                  {c}
+                </span>
+              ))}
+            </div>
+          </div>
+          <Link href={course.href} className="inline-flex items-center gap-4 text-white text-[10px] font-bold tracking-[0.3em] uppercase group/link">
+            Read More
+            <div className="w-10 h-10 rounded-full bg-[#E31837] flex items-center justify-center transition-transform group-hover/link:scale-110">
+              <ArrowUpRight size={16} />
+            </div>
+          </Link>
         </div>
       </div>
     </div>
   );
 }
 
-export default function CourseCategories() {
+const courseCategoryImageMap = Object.fromEntries(courseCategories.map((category) => [category.id, category.image]));
+
+function getIconForCourseCategory(category: string): string {
+  const categoryToIcon: Record<string, string> = {
+    animation: "animation",
+    vfx: "vfx",
+    gaming: "gaming",
+    filmmaking: "filmmaking",
+    design: "digital",
+    media: "motion",
+  };
+  return categoryToIcon[category] || "animation";
+}
+
+export default function CourseCategories({ mode = "home" }: CourseCategoriesProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const isHome = mode === "home";
+
+  const courseItems: CourseCardItem[] = isHome
+    ? siteCoursesData.categories.map((course) => ({
+        id: course.id,
+        title: course.title,
+        description: course.description,
+        fullDescription: course.fullDescription,
+        icon: course.icon,
+        image: course.image,
+        careers: course.careers,
+        href: "/courses",
+      }))
+    : coursesData
+        .slice()
+        .sort((a, b) => a.priority - b.priority)
+        .map((course) => ({
+          id: course.slug,
+          title: course.name,
+          description: course.shortDescription,
+          fullDescription: course.fullDescription,
+          icon: getIconForCourseCategory(course.category),
+          image: courseCategoryImageMap[course.category] || "/courses_images/image-4.png",
+          careers: course.career,
+          href: `/courses/${course.slug}`,
+        }));
 
   useGSAP(() => {
     const tl = gsap.timeline({
@@ -142,7 +198,7 @@ export default function CourseCategories() {
         trigger: containerRef.current,
         start: "top 80%",
         toggleActions: "play none none reverse",
-      }
+      },
     });
 
     tl.fromTo(".categories-heading", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1, ease: "expo.out" })
@@ -150,26 +206,51 @@ export default function CourseCategories() {
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} id="courses" className="relative py-24 md:py-40 overflow-hidden bg-[#0C0C0C]">
+    <section ref={containerRef} id={isHome ? "courses" : undefined} className="relative py-24 md:py-32 overflow-hidden bg-[#0C0C0C]">
       <div className="atmosphere-blob blob-orange bottom-0 -left-20 opacity-5" />
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8 z-10">
-        <div className="categories-heading text-center mb-20 md:mb-28">
+        <div className="categories-heading text-center mb-16 md:mb-20">
           <p className="text-[#E31837] text-sm font-bold tracking-[0.2em] uppercase mb-6 flex items-center justify-center gap-3">
             <span className="w-6 h-[1px] bg-[#E31837]" />
-            Courses at MAAC
+            {isHome ? "Courses at MAAC" : "All Courses"}
             <span className="w-6 h-[1px] bg-[#E31837]" />
           </p>
           <h2 className="font-display font-bold text-[clamp(1.6rem,4vw,2.8rem)] text-[#F0EBE1] leading-[0.95] tracking-tight">
-            Explore Our <span className="gradient-text">Course Categories</span>
+            {isHome ? (
+              <>
+                Explore Our <span className="gradient-text">Course Categories</span>
+              </>
+            ) : (
+              <>
+                Explore All <span className="gradient-text">Programs</span>
+              </>
+            )}
           </h2>
+          {isHome && (
+            <p className="text-[#A8A29C] text-sm md:text-base mt-4">
+              Swipe left-right to explore all categories
+            </p>
+          )}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
-          {siteCoursesData.categories.map((course) => (
-            <SlideUpCard key={course.id} course={course} />
-          ))}
-        </div>
+        {isHome ? (
+          <div className="overflow-x-auto pb-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+            <div className="flex gap-6 md:gap-10 snap-x snap-mandatory pr-6">
+              {courseItems.map((course) => (
+                <div key={course.id} className="w-[86%] sm:w-[62%] lg:w-[42%] xl:w-[32%] shrink-0 snap-start">
+                  <SlideUpCard course={course} />
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
+            {courseItems.map((course) => (
+              <SlideUpCard key={course.id} course={course} />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

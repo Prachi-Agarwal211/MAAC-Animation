@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { useGSAP } from "@gsap/react";
 import gsap from "@/lib/gsap";
 
@@ -66,10 +67,19 @@ export default function BentoGallery() {
     <section ref={containerRef} className="bg-[#080808] py-24 md:py-40 px-6 lg:px-20 overflow-hidden">
       <div className="max-w-[1600px] mx-auto">
         <div className="text-center mb-20">
-          <span className="inline-block text-[#E31837] text-xs font-bold tracking-[0.4em] uppercase mb-6">Excellence in Craft</span>
+          <span className="inline-block text-[#E31837] text-xs font-bold tracking-[0.4em] uppercase mb-6">Our</span>
           <h2 className="font-display font-black text-[clamp(1.8rem,4.5vw,3rem)] text-white leading-[0.9] tracking-tighter">
-            The Bento <span className="gradient-text">Showreel</span>
+            Student <span className="gradient-text">Work</span>
           </h2>
+          <Link 
+            href="/student-work" 
+            className="inline-flex items-center gap-2 mt-8 px-8 py-3 bg-[#E31837] text-white font-bold text-sm tracking-wide rounded-full hover:bg-[#c41230] transition-colors duration-300"
+          >
+            View All Work
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </Link>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6 auto-rows-[250px] md:auto-rows-[300px]">

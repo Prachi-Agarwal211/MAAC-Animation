@@ -12,15 +12,12 @@ const VerticalCardGallery = dynamic(() => import("@/components/VerticalCardGalle
 const CourseCategories = dynamic(() => import("@/components/CourseCategories"), { ssr: true });
 const IndustryPartners = dynamic(() => import("@/components/IndustryPartners"), { ssr: true });
 const PopularCourses = dynamic(() => import("@/components/PopularCourses"), { ssr: true });
-const Testimonials = dynamic(() => import("@/components/Testimonials"), { ssr: true });
-const Awards = dynamic(() => import("@/components/Awards"), { ssr: true });
 const Placements = dynamic(() => import("@/components/Placements"), { ssr: true });
 const ApplyNow = dynamic(() => import("@/components/ApplyNow"), { ssr: true });
 const FAQSection = dynamic(() => import("@/components/FAQSection"), { ssr: true });
 const CareerCreatorComparison = dynamic(() => import("@/components/CareerCreatorComparison"), { ssr: true });
 const BentoGallery = dynamic(() => import("@/components/BentoGallery"), { ssr: true });
 const LiquidReveal = dynamic(() => import("@/components/ui/LiquidReveal"), { ssr: true });
-const MAACEvents = dynamic(() => import("@/components/MAACEvents"), { ssr: true });
 const StudentSuccessStories = dynamic(() => import("@/components/StudentSuccessStories"), { ssr: true });
 const StudentShowcase = dynamic(() => import("@/components/StudentShowcase"), { ssr: false });
 
@@ -35,6 +32,10 @@ export default function HomePageClient() {
 
       {landingReady && (
         <>
+          <ErrorBoundary>
+            <TrustBadges />
+          </ErrorBoundary>
+
           <div id="features" className="relative z-10">
             <ErrorBoundary>
               <VerticalCardGallery />
@@ -51,15 +52,15 @@ export default function HomePageClient() {
             </ErrorBoundary>
           </LiquidReveal>
 
-          <ErrorBoundary>
-            <BentoGallery />
-          </ErrorBoundary>
-
           <section id="courses" className="relative z-10">
             <ErrorBoundary>
               <CourseCategories />
             </ErrorBoundary>
           </section>
+
+          <ErrorBoundary>
+            <BentoGallery />
+          </ErrorBoundary>
 
           <ErrorBoundary>
             <IndustryPartners />
@@ -74,29 +75,13 @@ export default function HomePageClient() {
           </ErrorBoundary>
 
           <ErrorBoundary>
-            <Testimonials />
-          </ErrorBoundary>
-
-          <ErrorBoundary>
-            <Awards />
-          </ErrorBoundary>
-
-          <ErrorBoundary>
             <section id="placements" className="relative z-10">
               <Placements />
             </section>
           </ErrorBoundary>
 
           <ErrorBoundary>
-            <TrustBadges />
-          </ErrorBoundary>
-
-          <ErrorBoundary>
             <StudentSuccessStories />
-          </ErrorBoundary>
-
-          <ErrorBoundary>
-            <MAACEvents />
           </ErrorBoundary>
 
           <ErrorBoundary>

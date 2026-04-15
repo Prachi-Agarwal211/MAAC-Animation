@@ -11,6 +11,7 @@ const HERO_VIDEO_MP4 = "/hero-video-compressed.mp4";
 const HERO_VIDEO_WEBM = "/hero-video.webm";
 const INTRO_VIDEO_MP4 = "/intro.mp4";
 const INTRO_VIDEO_WEBM = "/intro.webm";
+const INTRO_DONE_KEY = "maac_intro_done";
 
 type Props = {
   /** Fires when the intro is done and the rest of the homepage may mount (after exit animation). */
@@ -33,6 +34,24 @@ export default function MAACXHero({ onIntroReveal }: Props) {
   const [introLayerDone, setIntroLayerDone] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const [videoError, setVideoError] = useState(false);
+
+  const markIntroDone = useCallback(() => {
+    document.documentElement.dataset.maacIntroDone = "1";
+    try {
+      window.sessionStorage.setItem(INTRO_DONE_KEY, "1");
+    } catch {
+      // Ignore storage errors (private mode / strict browser policies).
+    }
+  }, []);
+
+  const isIntroAlreadyDone = useCallback(() => {
+    if (document.documentElement.dataset.maacIntroDone === "1") return true;
+    try {
+      return window.sessionStorage.getItem(INTRO_DONE_KEY) === "1";
+    } catch {
+      return false;
+    }
+  }, []);
 
   const setProgressToFull = useCallback(() => {
     const bar = progressRef.current;
@@ -76,7 +95,7 @@ export default function MAACXHero({ onIntroReveal }: Props) {
 
     const tl = gsap.timeline({
       onComplete: () => {
-        document.documentElement.dataset.maacIntroDone = "1";
+        markIntroDone();
         setIntroLayerDone(true);
         onIntroReveal?.();
         window.dispatchEvent(new Event("maac:intro_revealed"));
@@ -93,11 +112,11 @@ export default function MAACXHero({ onIntroReveal }: Props) {
       });
     } else {
       setIntroLayerDone(true);
-      document.documentElement.dataset.maacIntroDone = "1";
+      markIntroDone();
       onIntroReveal?.();
       window.dispatchEvent(new Event("maac:intro_revealed"));
     }
-  }, [introLayerDone, onIntroReveal, setProgressToFull]);
+  }, [introLayerDone, markIntroDone, onIntroReveal, setProgressToFull]);
 
   const applyMuteState = useCallback((next: boolean) => {
     setIsMuted(next);
@@ -118,10 +137,21 @@ export default function MAACXHero({ onIntroReveal }: Props) {
   }, [isMuted]);
 
   useEffect(() => {
+    if (isIntroAlreadyDone()) {
+      hasEndedRef.current = true;
+      setHeroRevealed(true);
+      setIntroLayerDone(true);
+      requestAnimationFrame(() => {
+        onIntroReveal?.();
+        window.dispatchEvent(new Event("maac:intro_revealed"));
+      });
+      return;
+    }
+
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReducedMotion) {
       hasEndedRef.current = true;
-      document.documentElement.dataset.maacIntroDone = "1";
+      markIntroDone();
       setHeroRevealed(true);
       setIntroLayerDone(true);
       requestAnimationFrame(() => {
@@ -129,7 +159,7 @@ export default function MAACXHero({ onIntroReveal }: Props) {
         window.dispatchEvent(new Event("maac:intro_revealed"));
       });
     }
-  }, [onIntroReveal]);
+  }, [isIntroAlreadyDone, markIntroDone, onIntroReveal]);
 
   useEffect(() => {
     if (introLayerDone) return;

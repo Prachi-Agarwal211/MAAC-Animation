@@ -275,23 +275,11 @@ export const navLinks: NavLinkItem[] = [
   {
     label: "Student's World",
     href: "/student-work",
-    children: [
-      { label: "Gallery", href: "/gallery" },
-      { label: "Placements", href: "/placements" },
-      { label: "Student Work", href: "/student-work" },
-    ],
   },
-  { label: "Events", href: "/#events" },
+  { label: "Events", href: "/events" },
   {
     label: "About Us",
     href: "/about",
-    children: [
-      { label: "About MAAC Jaipur", href: "/about" },
-      { label: "Heritage & milestones", href: "/about#heritage" },
-      { label: "Faculty", href: "/about#faculty" },
-      { label: "Jaipur centres", href: "/locations/c-scheme" },
-      { label: "Blog", href: "/blog" },
-    ],
   },
   { label: "Contact", href: "/contact", mobileOnly: true },
 ];
