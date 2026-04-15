@@ -89,7 +89,7 @@ const EventCard = ({ event, index }: { event: typeof eventsData[0]; index: numbe
 
         {/* CTA */}
         <Link
-          href="/events-at-maac"
+          href="/demo-class"
           className="inline-flex items-center gap-3 text-[10px] font-bold tracking-[0.25em] uppercase group/link"
           style={{ color: event.color }}
         >

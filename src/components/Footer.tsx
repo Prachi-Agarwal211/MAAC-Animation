@@ -128,7 +128,7 @@ export default function Footer() {
               { label: "Courses", href: "/courses" },
               { label: "Placements", href: "/placements" },
               { label: "Student Work", href: "/student-work" },
-              { label: "Events", href: "/#events" },
+              { label: "Events", href: "/events" },
               { label: "Gallery", href: "/gallery" },
               { label: "Locate a Centre", href: "/locations/c-scheme" },
             ].map(link => (

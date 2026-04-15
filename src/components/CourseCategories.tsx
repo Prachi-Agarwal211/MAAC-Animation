@@ -114,7 +114,7 @@ function SlideUpCard({ course }: { course: CourseCardItem }) {
             <CategoryIcon type={course.icon} />
           </div>
           <h3 className="text-white font-display font-bold text-2xl md:text-3xl mb-2 leading-tight">{course.title}</h3>
-          <p className="text-[#A8A29C] text-sm md:text-base line-clamp-2 transition-opacity duration-500 group-hover:opacity-0">{course.description}</p>
+          <p className="text-[#A8A29C] text-sm md:text-base line-clamp-2">{course.description}</p>
         </div>
 
         {/* Hover Details */}
@@ -137,7 +137,7 @@ function SlideUpCard({ course }: { course: CourseCardItem }) {
               ))}
             </div>
           </div>
-          <Link href={course.href} className="inline-flex items-center gap-4 text-white text-[10px] font-bold tracking-[0.3em] uppercase group/link">
+          <Link href="/contact" className="inline-flex items-center gap-4 text-white text-[10px] font-bold tracking-[0.3em] uppercase group/link">
             Read More
             <div className="w-10 h-10 rounded-full bg-[#E31837] flex items-center justify-center transition-transform group-hover/link:scale-110">
               <ArrowUpRight size={16} />

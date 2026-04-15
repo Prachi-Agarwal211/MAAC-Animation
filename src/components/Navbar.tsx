@@ -7,6 +7,7 @@ import Image from "next/image";
 import { navLinks, contactInfo, type NavLinkItem } from "@/data/siteData";
 import { useUIStore } from "@/lib/store";
 import { MessageSquare, ChevronDown, X, Menu } from "lucide-react";
+import SideScroller from "./SideScroller";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -65,7 +66,21 @@ export default function Navbar() {
               : "bg-transparent"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-14 sm:h-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16 sm:h-20">
+          <div className="flex items-center gap-2">
+            {/* Home Button */}
+            <Link
+              href="/"
+              className="hidden sm:flex items-center gap-2 px-3 py-2 rounded-lg text-[#A8A29C] hover:text-white hover:bg-white/5 transition-colors"
+              aria-label="Back to Home"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+              </svg>
+              <span className="text-xs font-bold uppercase tracking-wider">Home</span>
+            </Link>
+          </div>
+
           <div className="flex-shrink-0 min-w-0">
             <Link href="/" className="flex items-center gap-2 sm:gap-3 group" aria-label="MAAC Jaipur C-Scheme - Home">
               <Image
@@ -73,7 +88,7 @@ export default function Navbar() {
                 alt="MAAC Animation Jaipur Logo"
                 width={48}
                 height={48}
-                className="rounded sm:w-14 sm:h-14 transition-transform duration-200 group-hover:scale-[1.02]"
+                className="rounded sm:w-14 sm:h-14 transition-transform duration-200 group-hover:scale-[1.02] object-contain"
                 priority
               />
               <div className="hidden sm:flex flex-col leading-none min-w-0">
@@ -202,6 +217,8 @@ export default function Navbar() {
           </div>
         </div>
       </nav>
+
+      <SideScroller />
 
       <div
         className={`fixed inset-0 z-40 bg-[#0C0C0C] flex flex-col transition-opacity duration-200 pt-14 sm:pt-16 ${

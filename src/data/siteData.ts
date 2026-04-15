@@ -273,7 +273,7 @@ export const navLinks: NavLinkItem[] = [
     megaGroups: courseMegaMenuJaipur,
   },
   {
-    label: "Student's World",
+    label: "Student Work",
     href: "/student-work",
   },
   { label: "Events", href: "/events" },

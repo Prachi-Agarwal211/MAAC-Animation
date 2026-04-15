@@ -102,15 +102,15 @@ function Placements() {
   // Render company logo card with image
   const renderCompany = (company: typeof placementCompanies[0], i: number) => (
     <div key={`${company.name}-${i}`} className="group">
-      <div 
-        className="h-16 sm:h-18 md:h-20 lg:h-20 w-full rounded-xl border border-white/10 bg-white flex items-center justify-center px-6 transition-transform duration-300 hover:scale-[1.02] overflow-hidden"
+      <div
+        className="h-20 sm:h-24 md:h-28 w-full rounded-xl border border-white/10 bg-white flex items-center justify-center px-4 sm:px-6 transition-transform duration-300 hover:scale-[1.02] overflow-hidden"
         style={{ backgroundColor: company.bgColor }}
       >
         {/* Company Logo Image */}
         <img
           src={company.logo}
           alt={`${company.name} logo`}
-          className="max-h-full w-auto object-contain object-center opacity-90 group-hover:opacity-100 transition-opacity duration-300"
+          className="h-full w-auto object-contain object-center opacity-90 group-hover:opacity-100 transition-opacity duration-300"
           onError={(e) => {
             const target = e.target as HTMLImageElement;
             target.style.display = "none";
@@ -118,7 +118,7 @@ function Placements() {
             if (fallback) fallback.style.display = "flex";
           }}
         />
-        
+
         {/* Fallback company name (hidden by default) */}
         <span className="text-[11px] text-gray-800 font-bold uppercase tracking-wider text-center items-center justify-center hidden w-full h-full">
           {company.name}
@@ -143,9 +143,6 @@ function Placements() {
           <h2 className="font-display font-black text-[clamp(1.8rem,4.5vw,3rem)] text-white leading-[0.95] tracking-tight mb-8 uppercase">
             The Alumni <span className="gradient-text italic">Network</span>
           </h2>
-          <p className="text-[#A8A29C] text-lg md:text-xl max-w-2xl mx-auto italic">
-            Engineering success at the world&apos;s most prestigious production houses.
-          </p>
         </div>
 
         {/* Alumni Network Logo Rows (like reference screenshot) */}

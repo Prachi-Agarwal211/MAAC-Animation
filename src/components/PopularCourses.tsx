@@ -109,7 +109,7 @@ export default function PopularCourses() {
                   <p className="text-[#6B6560] text-xs font-bold uppercase tracking-wider mb-6">{course.fullName}</p>
                   <p className="text-[#A8A29C] text-sm leading-relaxed line-clamp-3 mb-8">{course.description}</p>
                   
-                  <a href="/demo-class" className="inline-flex items-center gap-3 text-white text-xs font-bold tracking-[0.2em] uppercase group/btn">
+                  <a href="/courses" className="inline-flex items-center gap-3 text-white text-xs font-bold tracking-[0.2em] uppercase group/btn">
                     Course Details
                     <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover/btn:bg-[#E31837] transition-all duration-500">
                       <ArrowRight size={14} className="text-white" />

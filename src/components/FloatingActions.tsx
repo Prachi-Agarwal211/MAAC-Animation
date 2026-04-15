@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-import { useUIStore } from "@/lib/store";
 import { contactInfo } from "@/data/siteData";
 import { MessageSquare, Send } from "lucide-react";
 import Link from "next/link";
@@ -11,16 +10,11 @@ interface FloatingActionsProps {
 }
 
 function DesktopCTA() {
-  const { mobileMenuOpen, isScrolled } = useUIStore();
-  const visible = isScrolled && !mobileMenuOpen;
-
   const whatsappUrl = `https://wa.me/${contactInfo.whatsapp.replace(/[^0-9]/g, "")}?text=Hi%20MAAC%20Jaipur`;
 
   return (
     <div
-      className={`fixed right-6 md:right-10 z-[60] hidden lg:flex flex-col gap-3 transition-opacity duration-300 ${
-        visible ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-      }`}
+      className="fixed right-6 md:right-10 z-[60] hidden lg:flex flex-col gap-3"
       style={{ bottom: "max(32px, calc(32px + env(safe-area-inset-bottom)))" }}
     >
       <a
