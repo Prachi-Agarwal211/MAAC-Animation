@@ -79,7 +79,7 @@ export default function AboutClient() {
             </span>
           </h1>
           <p className="text-[#A8A29C] text-lg md:text-2xl font-medium leading-relaxed max-w-3xl border-l-2 border-[#E31837] pl-8">
-            Welcome to Maya Academy of Advanced Cinematics (MAAC) — Jaipur&apos;s premier hub for VFX, Animation, and Game Design excellence.
+            Welcome to Maya Academy of Advanced Creativity (MAAC) — Jaipur&apos;s premier hub for VFX, Animation, and Game Design excellence.
           </p>
         </div>
       </section>

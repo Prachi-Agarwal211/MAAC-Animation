@@ -131,7 +131,7 @@ export const getCourseSchema = (courseName: string, description: string, duratio
 // LocalBusiness Schema - Enhanced with reviews and offerings
 export const localBusinessSchema = {
   "@type": "EducationalOrganization",
-  "name": "MAAC Jaipur — Maya Academy of Advanced Cinematics",
+  "name": "MAAC Jaipur — Maya Academy of Advanced Creativity",
   "alternateName": "MAAC Animation Institute Jaipur",
   "url": "https://www.maacanimationjaipur.com",
   "logo": {

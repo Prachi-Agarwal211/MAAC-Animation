@@ -56,7 +56,7 @@ export default function AnimationInstituteJaipurPage() {
             Best Animation Institute in Jaipur
           </h1>
           <p className="text-[#A8A29C] text-xl max-w-3xl mb-8 leading-relaxed">
-            Welcome to MAAC (Maya Academy of Advanced Cinematics) — Jaipur&apos;s most trusted animation institute with 25+ years of excellence. We offer B.Voc degrees, diplomas, and certificate programs in 3D Animation, Visual Effects, Game Design, Digital Filmmaking, and Graphic Design.
+            Welcome to MAAC (Maya Academy of Advanced Creativity) — Jaipur&apos;s most trusted animation institute with 25+ years of excellence. We offer B.Voc degrees, diplomas, and certificate programs in 3D Animation, Visual Effects, Game Design, Digital Filmmaking, and Graphic Design.
           </p>
           <div className="flex gap-4 flex-wrap">
             <Link href="/demo-class" className="btn btn-primary px-8 py-4">Book Free Demo Class</Link>
@@ -149,7 +149,7 @@ export default function AnimationInstituteJaipurPage() {
           {[
             {
               q: "Which is the best animation institute in Jaipur?",
-              a: "MAAC (Maya Academy of Advanced Cinematics) is consistently rated as Jaipur&apos;s best animation institute with a 95% placement rate, NSDC certification, B.Voc degree option, and 25+ years of excellence.",
+              a: "MAAC (Maya Academy of Advanced Creativity) is consistently rated as Jaipur&apos;s best animation institute with a 95% placement rate, NSDC certification, B.Voc degree option, and 25+ years of excellence.",
             },
             {
               q: "What is the fee for animation courses in Jaipur?",
