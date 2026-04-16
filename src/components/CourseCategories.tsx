@@ -87,7 +87,7 @@ function SlideUpCard({ course }: { course: CourseCardItem }) {
 
   return (
     <div
-      className="category-card glass-card relative aspect-[4/5] overflow-hidden cursor-pointer group transition-all duration-500 hover:border-[#E31837]/30"
+      className="category-card glass-card relative aspect-[2/3] overflow-hidden cursor-pointer group transition-all duration-500 hover:border-[#E31837]/30"
       onMouseEnter={() => !isTouchDevice && setIsHovered(true)}
       onMouseLeave={() => !isTouchDevice && setIsHovered(false)}
       onClick={() => isTouchDevice && setIsHovered(!isHovered)}
@@ -119,30 +119,34 @@ function SlideUpCard({ course }: { course: CourseCardItem }) {
 
         {/* Hover Details */}
         <div
-          className={`absolute inset-0 bg-[#0C0C0C]/95 p-8 md:p-10 flex flex-col justify-center transition-all duration-1000 ease-expo-out`}
+          className={`absolute inset-0 bg-[#0C0C0C]/95 p-8 md:p-10 flex flex-col transition-all duration-1000 ease-expo-out overflow-y-auto`}
           style={{
             clipPath: isHovered ? "circle(150% at 100% 100%)" : "circle(0% at 100% 100%)",
           }}
         >
-          <p className="text-white/80 text-sm md:text-base leading-relaxed mb-6 border-l-2 border-[#E31837] pl-6">
-            {course.fullDescription}
-          </p>
-          <div className="mb-8">
-            <h4 className="text-white text-xs font-bold uppercase tracking-[0.2em] mb-3">Your Future Roles</h4>
-            <div className="flex flex-wrap gap-2">
-              {course.careers.map((c) => (
-                <span key={c} className="text-[9px] font-bold uppercase tracking-[0.15em] text-white/60 border border-white/10 px-3 py-1.5 rounded-full">
-                  {c}
-                </span>
-              ))}
+          <div className="flex-1 flex flex-col justify-center min-h-0">
+            <p className="text-white/80 text-sm md:text-base leading-relaxed mb-6 border-l-2 border-[#E31837] pl-6">
+              {course.fullDescription}
+            </p>
+            <div className="mb-8">
+              <h4 className="text-white text-xs font-bold uppercase tracking-[0.2em] mb-3">Your Future Roles</h4>
+              <div className="flex flex-wrap gap-2">
+                {course.careers.map((c) => (
+                  <span key={c} className="text-[9px] font-bold uppercase tracking-[0.15em] text-white/60 border border-white/10 px-3 py-1.5 rounded-full">
+                    {c}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div className="mt-auto">
+              <Link href="/contact" className="inline-flex items-center gap-4 text-white text-[10px] font-bold tracking-[0.3em] uppercase group/link">
+                Read More
+                <div className="w-10 h-10 rounded-full bg-[#E31837] flex items-center justify-center transition-transform group-hover/link:scale-110">
+                  <ArrowUpRight size={16} />
+                </div>
+              </Link>
             </div>
           </div>
-          <Link href="/contact" className="inline-flex items-center gap-4 text-white text-[10px] font-bold tracking-[0.3em] uppercase group/link">
-            Read More
-            <div className="w-10 h-10 rounded-full bg-[#E31837] flex items-center justify-center transition-transform group-hover/link:scale-110">
-              <ArrowUpRight size={16} />
-            </div>
-          </Link>
         </div>
       </div>
     </div>

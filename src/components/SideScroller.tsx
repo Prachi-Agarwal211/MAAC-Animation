@@ -1,71 +1,51 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import Link from "next/link";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useState, useEffect } from "react";
+import { ArrowUp } from "lucide-react";
 
-const quickLinks = [
-  { label: "Home", href: "/" },
-  { label: "About Us", href: "/about" },
-  { label: "Courses", href: "/courses" },
-  { label: "Student Work", href: "/student-work" },
-  { label: "Events", href: "/events" },
-  { label: "Gallery", href: "/gallery" },
-  { label: "Contact Us", href: "/contact" },
-  { label: "Blog", href: "/blog" },
-];
-
-export default function SideScroller() {
-  const [isLeftVisible, setIsLeftVisible] = useState(false);
-  const [isRightVisible, setIsRightVisible] = useState(false);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
+export default function ScrollIndicator() {
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [showBackToTop, setShowBackToTop] = useState(false);
 
   useEffect(() => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
-
-    const handleScroll = () => {
-      const { scrollLeft, scrollWidth, clientWidth } = container;
-      setIsLeftVisible(scrollLeft > 0);
-      setIsRightVisible(scrollLeft < scrollWidth - clientWidth - 1);
+    const updateScrollProgress = () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      setScrollProgress(progress);
+      setShowBackToTop(scrollTop > 400);
     };
 
-    container.addEventListener("scroll", handleScroll);
-    handleScroll();
+    window.addEventListener("scroll", updateScrollProgress);
+    updateScrollProgress();
 
-    return () => container.removeEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", updateScrollProgress);
   }, []);
 
-  const scroll = (direction: "left" | "right") => {
-    if (scrollContainerRef.current) {
-      const scrollAmount = 300;
-      scrollContainerRef.current.scrollBy({
-        left: direction === "left" ? -scrollAmount : scrollAmount,
-        behavior: "smooth",
-      });
-    }
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
-    <div className="fixed right-0 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-2 p-2">
-      {isLeftVisible && (
+    <>
+      {/* Top Scroll Progress Bar */}
+      <div className="fixed top-0 left-0 w-full h-1 bg-white/10 z-50">
+        <div
+          className="h-full bg-[#E31837] transition-all duration-300 ease-out"
+          style={{ width: `${scrollProgress}%` }}
+        />
+      </div>
+
+      {/* Back to Top Button */}
+      {showBackToTop && (
         <button
-          onClick={() => scroll("left")}
-          className="w-12 h-12 rounded-full glass border border-white/10 bg-[#0C0C0C]/90 backdrop-blur-md flex items-center justify-center text-white/80 hover:text-white hover:border-[#E31837]/30 transition-all"
-          aria-label="Scroll left"
+          onClick={scrollToTop}
+          className="fixed bottom-8 right-8 w-14 h-14 rounded-full glass border border-white/10 bg-[#0C0C0C]/90 backdrop-blur-md flex items-center justify-center text-white/80 hover:text-white hover:border-[#E31837]/30 hover:bg-[#E31837]/10 transition-all duration-300 z-40"
+          aria-label="Scroll to top"
         >
-          <ChevronLeft size={20} />
+          <ArrowUp size={24} />
         </button>
       )}
-      {isRightVisible && (
-        <button
-          onClick={() => scroll("right")}
-          className="w-12 h-12 rounded-full glass border border-white/10 bg-[#0C0C0C]/90 backdrop-blur-md flex items-center justify-center text-white/80 hover:text-white hover:border-[#E31837]/30 transition-all"
-          aria-label="Scroll right"
-        >
-          <ChevronRight size={20} />
-        </button>
-      )}
-    </div>
+    </>
   );
 }

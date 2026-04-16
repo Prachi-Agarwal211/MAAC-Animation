@@ -7,7 +7,7 @@ import Image from "next/image";
 import { navLinks, contactInfo, type NavLinkItem } from "@/data/siteData";
 import { useUIStore } from "@/lib/store";
 import { MessageSquare, ChevronDown, X, Menu } from "lucide-react";
-import SideScroller from "./SideScroller";
+import ScrollIndicator from "./SideScroller";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -218,7 +218,7 @@ export default function Navbar() {
         </div>
       </nav>
 
-      <SideScroller />
+      <ScrollIndicator />
 
       <div
         className={`fixed inset-0 z-40 bg-[#0C0C0C] flex flex-col transition-opacity duration-200 pt-14 sm:pt-16 ${

@@ -62,12 +62,12 @@ export default function TrustBadges() {
               className="trust-badge rounded-2xl p-6 md:p-8 bg-white/[0.03] backdrop-blur-xl border border-white/10 hover:border-[#E31837]/30 transition-all duration-300"
             >
               <div className="h-20 md:h-24 rounded-xl bg-white/5 flex items-center justify-center p-4">
-                <Image 
-                  src={cert.logo} 
+                <Image
+                  src={cert.logo}
                   alt={cert.name}
-                  width={140}
-                  height={70}
-                  className="object-contain w-full h-full"
+                  width={120}
+                  height={60}
+                  className="object-contain max-w-full max-h-full"
                 />
               </div>
               <div className="flex items-center justify-between mt-4">

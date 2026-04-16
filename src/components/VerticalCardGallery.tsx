@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { useGSAP } from "@gsap/react";
 import gsap from "@/lib/gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -326,12 +327,12 @@ export default function VerticalCardGallery() {
                       <p className="text-[#A8A29C] text-sm md:text-base leading-relaxed mb-6">
                         {card.desc}
                       </p>
-                      <div className="flex items-center gap-4">
-                        <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-[#E31837] group-hover:border-[#E31837] transition-all duration-500">
-                          <ArrowRight size={16} className="text-white transition-transform group-hover:translate-x-1" />
-                        </div>
-                        <span className="text-[9px] font-bold tracking-[0.2em] uppercase text-white/40 group-hover:text-white transition-colors">Details</span>
-                      </div>
+                       <Link href="/contact" className="flex items-center gap-4 group/link">
+                         <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover/link:bg-[#E31837] group-hover/link:border-[#E31837] transition-all duration-500">
+                           <ArrowRight size={16} className="text-white transition-transform group-hover/link:translate-x-1" />
+                         </div>
+                         <span className="text-[9px] font-bold tracking-[0.2em] uppercase text-white/40 group-hover/link:text-white transition-colors">Details</span>
+                       </Link>
                     </div>
                   </div>
                 </div>
