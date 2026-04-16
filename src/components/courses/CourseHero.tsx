@@ -104,7 +104,7 @@ export default function CourseHero({ course }: { course: Course }) {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4">
             <Link
-              href="/demo-class"
+              href="/contact"
               className="btn btn-primary bg-gradient-to-r from-[#E31837] to-[#C4132D] text-white hover:opacity-90 border border-[#E31837]/50 shadow-[0_0_20px_rgba(227,24,55,0.3)] px-8 py-4 rounded-lg font-semibold text-center"
             >
               Book Free Demo Class

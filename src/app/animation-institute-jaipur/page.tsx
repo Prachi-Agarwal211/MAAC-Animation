@@ -59,7 +59,7 @@ export default function AnimationInstituteJaipurPage() {
             Welcome to MAAC (Maya Academy of Advanced Creativity) — Jaipur&apos;s most trusted animation institute with 25+ years of excellence. We offer B.Voc degrees, diplomas, and certificate programs in 3D Animation, Visual Effects, Game Design, Digital Filmmaking, and Graphic Design.
           </p>
           <div className="flex gap-4 flex-wrap">
-            <Link href="/demo-class" className="btn btn-primary px-8 py-4">Book Free Demo Class</Link>
+            <Link href="/contact" className="btn btn-primary px-8 py-4">Book Free Demo Class</Link>
             <a href="tel:+917300001589" className="btn bg-white/10 text-white border border-white/20 px-8 py-4">Call: +91-7300001589</a>
           </div>
         </div>
@@ -185,7 +185,7 @@ export default function AnimationInstituteJaipurPage() {
           <p className="text-[#A8A29C] text-lg mb-8">
             Book a free demo class today. No commitment, no fees — just experience the MAAC difference.
           </p>
-          <Link href="/demo-class" className="btn btn-primary px-10 py-4 text-lg">
+          <Link href="/contact" className="btn btn-primary px-10 py-4 text-lg">
             Book Free Demo Class
           </Link>
         </div>

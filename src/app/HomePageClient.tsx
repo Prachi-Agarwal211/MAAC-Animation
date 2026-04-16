@@ -91,7 +91,9 @@ export default function HomePageClient() {
           </ErrorBoundary>
 
           <ErrorBoundary>
-            <FAQSection />
+            <div id="faq" className="relative z-20">
+              <FAQSection />
+            </div>
           </ErrorBoundary>
 
           <ErrorBoundary>

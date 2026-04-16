@@ -74,7 +74,7 @@ export default function Footer() {
 
           <div className="relative z-10 flex flex-col sm:flex-row gap-6">
             <MagneticButton>
-              <Link href="/demo-class" className="btn btn-primary px-10 py-5 rounded-2xl text-base font-bold tracking-widest shadow-2xl">
+              <Link href="/contact" className="btn btn-primary px-10 py-5 rounded-2xl text-base font-bold tracking-widest shadow-2xl">
                 Book Free Demo
               </Link>
             </MagneticButton>
@@ -126,11 +126,9 @@ export default function Footer() {
               { label: "Home", href: "/" },
               { label: "About Us", href: "/about" },
               { label: "Courses", href: "/courses" },
-              { label: "Placements", href: "/placements" },
               { label: "Student Work", href: "/student-work" },
               { label: "Events", href: "/events" },
               { label: "Gallery", href: "/gallery" },
-              { label: "Locate a Centre", href: "/locations/c-scheme" },
             ].map(link => (
               <li key={link.label}>
                 <Link href={link.href} className="text-[#6B6560] hover:text-white transition-colors flex items-center justify-between group">
@@ -149,9 +147,7 @@ export default function Footer() {
             {[
               { label: "Blog", href: "/blog" },
               { label: "Contact Us", href: "/contact" },
-              { label: "Student Enquiry", href: "/demo-class" },
               { label: "FAQ", href: "/#faq" },
-              { label: "Disclaimer", href: "/disclaimer" },
               { label: "Sitemap", href: "/sitemap.xml" },
             ].map(link => (
               <li key={link.label}>
@@ -164,16 +160,13 @@ export default function Footer() {
           </ul>
         </div>
 
-        {/* Links Col 3 - Policies */}
+        {/* Links Col 3 - Policies & Locate Us */}
         <div className="footer-reveal lg:col-span-3 space-y-8">
-          <h4 className="text-white text-xs font-bold uppercase tracking-[0.2em]">Policies & Verification</h4>
+          <h4 className="text-white text-xs font-bold uppercase tracking-[0.2em]">Policies</h4>
           <ul className="space-y-4">
             {[
               { label: "Privacy Policy", href: "/privacy-policy" },
               { label: "Terms & Conditions", href: "/terms-of-service" },
-              { label: "Verify Your Certificate", href: "/verify-certificate" },
-              { label: "Profanity Policy", href: "/profanity-policy" },
-              { label: "Laptop Scheme Terms", href: "/laptop-scheme" },
             ].map(link => (
               <li key={link.label}>
                 <Link href={link.href} className="text-[#6B6560] hover:text-white transition-colors flex items-center justify-between group">
@@ -183,11 +176,8 @@ export default function Footer() {
               </li>
             ))}
           </ul>
-        </div>
-
-        {/* Contact Col */}
-        <div className="footer-reveal lg:col-span-3 space-y-8">
-          <h4 className="text-white text-xs font-bold uppercase tracking-[0.2em]">Locate Us</h4>
+          
+          <h4 className="text-white text-xs font-bold uppercase tracking-[0.2em] pt-8">Locate Us</h4>
           <div className="space-y-6">
             <div className="flex gap-4">
               <MapPin size={20} className="text-[#E31837] shrink-0" />

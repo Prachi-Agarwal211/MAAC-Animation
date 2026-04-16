@@ -15,9 +15,9 @@ export default function TermsPage() {
           <h2 className="text-2xl text-white font-bold mt-8 mb-4">1. Acceptance of Terms</h2>
           <p>By accessing and using this website, you accept and agree to be bound by the terms and provisions of this agreement.</p>
           <h2 className="text-2xl text-white font-bold mt-8 mb-4">2. Use License</h2>
-          <p>Permission is granted to temporarily download one copy of the materials on MAAC Jaipur's website for personal, non-commercial transitory viewing only.</p>
+          <p>Permission is granted to temporarily download one copy of the materials on MAAC Jaipur&apos;s website for personal, non-commercial transitory viewing only.</p>
           <h2 className="text-2xl text-white font-bold mt-8 mb-4">3. Intellectual Property</h2>
-          <p>The materials on MAAC Jaipur's website are protected by copyright laws.</p>
+          <p>The materials on MAAC Jaipur&apos;s website are protected by copyright laws.</p>
         </div>
       </div>
     </main>

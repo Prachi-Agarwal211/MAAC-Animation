@@ -40,12 +40,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${base}/placements`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
       url: `${base}/student-work`,
       lastModified: now,
       changeFrequency: "monthly",
@@ -58,64 +52,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.6,
     },
     {
-      url: `${base}/demo-class`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${base}/locations/malviya-nagar`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${base}/locations/c-scheme`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${base}/locations/vaishali-nagar`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${base}/locations/mansarovar`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${base}/disclaimer`,
-      lastModified: now,
-      changeFrequency: "yearly",
-      priority: 0.3,
-    },
-    {
       url: `${base}/terms-of-service`,
       lastModified: now,
       changeFrequency: "yearly",
       priority: 0.3,
-    },
-    {
-      url: `${base}/verify-certificate`,
-      lastModified: now,
-      changeFrequency: "yearly",
-      priority: 0.4,
-    },
-    {
-      url: `${base}/profanity-policy`,
-      lastModified: now,
-      changeFrequency: "yearly",
-      priority: 0.3,
-    },
-    {
-      url: `${base}/laptop-scheme`,
-      lastModified: now,
-      changeFrequency: "yearly",
-      priority: 0.4,
     },
 
     // Blog Pages (manual entries)

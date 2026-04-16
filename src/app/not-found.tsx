@@ -71,13 +71,10 @@ export default function NotFound() {
             <Link href="/courses" className="bg-[#161616] rounded-lg p-4 border border-white/5 hover:border-[#E31837]/30 transition-colors text-center">
               <span className="text-[#F0EBE1] font-medium text-sm">All Courses</span>
             </Link>
-            <Link href="/placements" className="bg-[#161616] rounded-lg p-4 border border-white/5 hover:border-[#E31837]/30 transition-colors text-center">
-              <span className="text-[#F0EBE1] font-medium text-sm">Placements</span>
-            </Link>
             <Link href="/student-work" className="bg-[#161616] rounded-lg p-4 border border-white/5 hover:border-[#E31837]/30 transition-colors text-center">
               <span className="text-[#F0EBE1] font-medium text-sm">Student Work</span>
             </Link>
-            <Link href="/demo-class" className="bg-[#161616] rounded-lg p-4 border border-white/5 hover:border-[#E31837]/30 transition-colors text-center">
+            <Link href="/contact" className="bg-[#161616] rounded-lg p-4 border border-white/5 hover:border-[#E31837]/30 transition-colors text-center">
               <span className="text-[#F0EBE1] font-medium text-sm">Free Demo</span>
             </Link>
           </div>

@@ -49,7 +49,7 @@ function FAQSection() {
 
           <div className="pt-8 border-t border-white/5 space-y-6">
             <p className="text-[#6B6560] text-xs font-bold uppercase tracking-[0.2em]">Still have questions?</p>
-            <a href="/demo-class" className="inline-flex items-center gap-4 group">
+            <a href="/contact" className="inline-flex items-center gap-4 group">
               <div className="w-12 h-12 rounded-full bg-[#E31837]/10 flex items-center justify-center border border-[#E31837]/20 group-hover:bg-[#E31837] transition-all duration-500">
                 <MessageSquare size={20} className="text-[#E31837] group-hover:text-white" />
               </div>

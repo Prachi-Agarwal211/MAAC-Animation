@@ -15,7 +15,7 @@ export default function CourseCTA() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <MagneticButton>
             <Link
-              href="/demo-class"
+              href="/contact"
               className="btn bg-gradient-to-r from-[#E31837] to-[#C4132D] text-white hover:opacity-90 border border-[#E31837]/50 px-8 py-4 rounded-lg font-semibold shadow-[0_0_20px_rgba(227,24,55,0.3)]"
             >
               Book Free Demo Class
