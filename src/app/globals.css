@@ -34,25 +34,27 @@
 
 /* ── Luxury Utilities ── */
 .glass {
-  background: var(--bg-glass);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05);
 }
 
 .glass-card {
   background: rgba(255, 255, 255, 0.02);
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(16px) saturate(160%);
   border: 1px solid rgba(255, 255, 255, 0.05);
   transition: all 0.6s var(--ease-expo);
-  border-radius: 16px;
+  border-radius: 24px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
 .glass-card:hover {
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(227, 24, 55, 0.3);
-  transform: translateY(-10px) scale(1.01);
-  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6), 0 0 0 1px var(--red-glow);
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(227, 24, 55, 0.4);
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(227, 24, 55, 0.2);
 }
 
 .liquid-border {
@@ -136,10 +138,11 @@ body::after {
 
 html {
   scroll-behavior: auto;
+  background: transparent;
 }
 
 body {
-  background: var(--bg-dark);
+  background: transparent;
   color: var(--text-main);
   font-family: var(--font-inter), sans-serif;
   overflow-x: clip;
@@ -296,13 +299,13 @@ body.demo-bar-visible .page-wrapper {
    SECTION BACKGROUNDS
    ═══════════════════════════════════════════════════════ */
 .bg-gradient-section {
-  background: linear-gradient(135deg, #0C0C0C 0%, #1A0505 50%, #0C0C0C 100%);
+  background: transparent;
   position: relative;
 }
 
 /* Hero pattern background */
 .bg-hero-pattern {
-  background: linear-gradient(160deg, #0C0C0C 0%, #1C0A0C 40%, #0C0C0C 100%);
+  background: transparent;
 }
 
 /* Atmospheric blobs */
@@ -685,7 +688,7 @@ body.demo-bar-visible .page-wrapper {
   z-index: 20;
   margin-top: -100px;
   border-radius: 60px 60px 0 0;
-  background: #0C0C0C;
+  background: transparent;
   box-shadow: 0 -30px 100px rgba(0,0,0,0.8);
 }
 

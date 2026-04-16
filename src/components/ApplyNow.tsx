@@ -15,7 +15,7 @@ export default function ApplyNow() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [formData, setFormData] = useState({
-    name: "", phone: "", email: "", course: "", message: "",
+    name: "", phone: "", email: "", message: "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -37,7 +37,6 @@ export default function ApplyNow() {
     if (!formData.name.trim()) errs.name = "Name is required";
     if (!/^\d{10}$/.test(formData.phone.replace(/\D/g, ""))) errs.phone = "Valid 10-digit phone required";
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) errs.email = "Valid email required";
-    if (!formData.course) errs.course = "Please select a course";
     setErrors(errs);
     return Object.keys(errs).length === 0;
   };
@@ -63,7 +62,7 @@ export default function ApplyNow() {
 
   if (submitted) {
     return (
-      <section className="relative py-24 md:py-40 overflow-hidden bg-[#0C0C0C]">
+      <section className="relative py-24 md:py-40 overflow-hidden bg-transparent">
         <div className="max-w-2xl mx-auto px-6 text-center">
           <div className="w-20 h-20 rounded-full bg-[#25D366]/10 border border-[#25D366]/30 flex items-center justify-center mx-auto mb-8">
             <Send size={32} className="text-[#25D366]" />
@@ -79,7 +78,7 @@ export default function ApplyNow() {
     `w-full px-6 py-4 rounded-2xl bg-white/5 border ${errors[field] ? "border-red-500" : "border-white/10"} text-white placeholder-[#6B6560] focus:outline-none focus:border-[#E31837]/50 transition-all duration-300 text-base`;
 
   return (
-    <section ref={sectionRef} className="relative py-24 md:py-40 overflow-hidden bg-[#0C0C0C]">
+    <section ref={sectionRef} className="relative py-24 md:py-40 overflow-hidden bg-transparent">
       <div className="atmosphere-blob blob-red top-0 left-0 opacity-10" />
       
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
@@ -156,21 +155,7 @@ export default function ApplyNow() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <select value={formData.course}
-                    onChange={(e) => setFormData({ ...formData, course: e.target.value })}
-                    className={`${inputClass("course")} appearance-none bg-[#0a0a0a]`}>
-                    <option value="" className="bg-[#0a0a0a] text-white">Select Course *</option>
-                    <option value="animation" className="bg-[#0a0a0a] text-white">3D Animation</option>
-                    <option value="vfx" className="bg-[#0a0a0a] text-white">Visual Effects (VFX)</option>
-                    <option value="gaming" className="bg-[#0a0a0a] text-white">Game Design</option>
-                    <option value="filmmaking" className="bg-[#0a0a0a] text-white">Digital Filmmaking</option>
-                    <option value="digital-media" className="bg-[#0a0a0a] text-white">Digital Media & Design</option>
-                    <option value="architectural" className="bg-[#0a0a0a] text-white">Architectural Design</option>
-                  </select>
-                </div>
-
-                <textarea placeholder="Tell us about your goals (Optional)" rows={3} value={formData.message}
+                <textarea placeholder="Additional Message or Note" rows={3} value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   className={`${inputClass("message")} resize-none`} />
               </div>

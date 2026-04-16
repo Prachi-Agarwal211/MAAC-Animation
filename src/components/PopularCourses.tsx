@@ -24,7 +24,7 @@ export default function PopularCourses() {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: containerRef.current,
-        start: "top 80%",
+        start: "top 95%",
         toggleActions: "play none none reverse",
       }
     });
@@ -41,7 +41,7 @@ export default function PopularCourses() {
   };
 
   return (
-    <section ref={containerRef} className="relative bg-[#0C0C0C] py-24 md:py-40 overflow-hidden">
+    <section ref={containerRef} className="relative bg-transparent py-24 md:py-40 overflow-hidden">
       <div className="atmosphere-blob blob-red top-1/2 left-0 opacity-10" />
       
       {/* Header */}
@@ -80,7 +80,7 @@ export default function PopularCourses() {
               key={course.code}
               className="course-card flex-shrink-0 w-[85vw] sm:w-[420px] snap-center"
             >
-              <div className="group relative rounded-[32px] overflow-hidden bg-[#111111] border border-white/5 transition-all duration-500 hover:border-[#E31837]/20 shadow-2xl">
+              <div className="group glass-card relative overflow-hidden transition-all duration-500 hover:border-[#E31837]/30 shadow-2xl">
                 {/* Image */}
                 <div className="h-[240px] relative overflow-hidden">
                   {coursePortfolioImages[course.code] ? (

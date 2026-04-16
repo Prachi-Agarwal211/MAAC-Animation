@@ -72,7 +72,7 @@ const EventCard = ({ event, index }: { event: typeof eventsData[0]; index: numbe
   return (
     <div
       ref={cardRef}
-      className="event-card group relative rounded-[24px] overflow-hidden bg-[#111111] border border-white/5 hover:border-[#E31837]/30 transition-all duration-700 cursor-pointer"
+      className="event-card glass-card group relative overflow-hidden transition-all duration-700 cursor-pointer"
     >
       {/* Icon & Color Accent */}
       <div className="absolute top-0 right-0 w-32 h-32 rounded-bl-full opacity-10 transition-opacity group-hover:opacity-20" style={{ backgroundColor: event.color }} />
@@ -110,7 +110,7 @@ export default function MAACEvents() {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
-        start: "top 80%",
+        start: "top 95%",
         toggleActions: "play none none reverse",
       },
     });
@@ -120,7 +120,7 @@ export default function MAACEvents() {
   }, { scope: sectionRef });
 
   return (
-    <section ref={sectionRef} id="events" className="relative py-24 md:py-40 overflow-hidden bg-[#0C0C0C]">
+    <section ref={sectionRef} id="events" className="relative py-24 md:py-40 overflow-hidden bg-transparent">
       {/* Background Accent */}
       <div className="atmosphere-blob blob-red top-20 -right-40 opacity-5" />
 

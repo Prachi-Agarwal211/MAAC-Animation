@@ -95,7 +95,7 @@ export default function IndustryPartners() {
   return (
     <section 
       ref={containerRef} 
-      className="relative bg-[#0a0a0a] py-20 md:py-28 overflow-hidden border-y border-yellow-600/30"
+      className="relative bg-transparent py-20 md:py-28 overflow-hidden border-y border-yellow-600/30"
     >
       <div className="relative z-10 max-w-[1800px] mx-auto">
         {/* Header */}
@@ -108,8 +108,8 @@ export default function IndustryPartners() {
         {/* Dual-Row Scrolling */}
         <div className="relative space-y-6">
           {/* Gradient overlays */}
-          <div className="absolute left-0 top-0 bottom-0 w-24 md:w-48 bg-gradient-to-r from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-24 md:w-48 bg-gradient-to-l from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
+          <div className="absolute left-0 top-0 bottom-0 w-24 md:w-48 bg-gradient-to-r from-[#0a0a0a]/80 to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 md:w-48 bg-gradient-to-l from-[#0a0a0a]/80 to-transparent z-10 pointer-events-none" />
 
           {/* Row 1 - Scrolls Left */}
           <div 
@@ -120,7 +120,7 @@ export default function IndustryPartners() {
           >
             {extendedPartners.map((partner, i) => (
               <div key={`${partner}-${i}`} className="shrink-0 group">
-                <div className="w-48 h-20 md:w-56 md:h-24 bg-[#0d0d0d] border-2 border-yellow-500/70 flex items-center justify-center px-6 transition-all duration-300 hover:border-yellow-400 hover:bg-[#111111] hover:scale-105">
+                <div className="w-48 h-20 md:w-56 md:h-24 bg-white/[0.03] backdrop-blur-xl border border-white/10 flex items-center justify-center px-6 transition-all duration-300 hover:border-yellow-400/50 hover:bg-white/[0.08] hover:scale-105">
                   <span className="text-xs md:text-sm text-white font-bold uppercase tracking-wider text-center">
                     {partner}
                   </span>
@@ -138,7 +138,7 @@ export default function IndustryPartners() {
           >
             {reversedPartners.map((partner, i) => (
               <div key={`${partner}-${i}`} className="shrink-0 group">
-                <div className="w-48 h-20 md:w-56 md:h-24 bg-[#0d0d0d] border-2 border-yellow-500/70 flex items-center justify-center px-6 transition-all duration-300 hover:border-yellow-400 hover:bg-[#111111] hover:scale-105">
+                <div className="w-48 h-20 md:w-56 md:h-24 bg-white/[0.03] backdrop-blur-xl border border-white/10 flex items-center justify-center px-6 transition-all duration-300 hover:border-yellow-400/50 hover:bg-white/[0.08] hover:scale-105">
                   <span className="text-xs md:text-sm text-white font-bold uppercase tracking-wider text-center">
                     {partner}
                   </span>

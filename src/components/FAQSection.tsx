@@ -16,17 +16,17 @@ function FAQSection() {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: containerRef.current,
-        start: "top 80%",
+        start: "top 95%",
         toggleActions: "play none none reverse",
       }
     });
 
-    tl.fromTo(".faq-header > *", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1, stagger: 0.1, ease: "expo.out" })
-      .fromTo(".faq-item", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8, stagger: 0.08, ease: "expo.out" }, "-=0.6");
+    tl.fromTo(".faq-header > *", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: "expo.out" })
+      .fromTo(".faq-item", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.08, ease: "expo.out" }, "-=0.6");
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="relative py-24 md:py-40 overflow-hidden bg-[#0C0C0C]">
+    <section ref={containerRef} className="relative py-24 md:py-40 overflow-hidden bg-transparent">
       <div className="atmosphere-blob blob-orange bottom-0 right-0 opacity-5" />
       
       <div className="max-w-[1400px] mx-auto px-6 lg:px-20 grid lg:grid-cols-12 gap-16 md:gap-24">
@@ -65,7 +65,7 @@ function FAQSection() {
             return (
               <div
                 key={index}
-                className={`faq-item group rounded-3xl border transition-all duration-500 ${isOpen ? 'bg-[#161616] border-[#E31837]/30 shadow-2xl' : 'bg-[#111111]/50 border-white/5 hover:border-white/10'}`}
+                className={`faq-item group rounded-3xl border transition-all duration-500 ${isOpen ? 'bg-white/[0.05] border-[#E31837]/30 shadow-2xl backdrop-blur-xl' : 'bg-white/[0.02] border-white/5 hover:border-white/10 backdrop-blur-md'}`}
               >
                 <button
                   onClick={() => setOpenIndex(isOpen ? null : index)}

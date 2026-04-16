@@ -11,6 +11,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Providers } from "./providers";
 import { contactInfo } from "@/data/siteData";
 import ErrorBoundary from "@/components/ErrorBoundary";
+import DynamicBackground from "@/components/ui/DynamicBackground";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -184,9 +185,12 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.variable} ${syne.variable} font-body antialiased bg-[#0C0C0C] text-[#F0EBE1]`}
+        className={`${inter.variable} ${syne.variable} font-body antialiased bg-transparent text-[#F0EBE1]`}
       >
-        <div className="animated-bg" aria-hidden="true" />
+        {/* Base layer to prevent white flash/background on mobile */}
+        <div className="fixed inset-0 z-[-10] bg-[#080808]" aria-hidden="true" />
+        
+        <DynamicBackground />
 
         <Providers>
           <a
@@ -203,7 +207,7 @@ export default function RootLayout({
           <LenisProvider>
             <Navbar />
             <ErrorBoundary><ClientShell>
-              <main id="main-content" tabIndex={-1} className="page-wrapper">{children}</main>
+              <main id="main-content" tabIndex={-1} className="page-wrapper relative z-10">{children}</main>
             </ClientShell></ErrorBoundary>
             <FloatingActions />
             <Analytics />

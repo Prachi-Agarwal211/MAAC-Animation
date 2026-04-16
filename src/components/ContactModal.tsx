@@ -16,7 +16,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
     name: "",
     phone: "",
     email: "",
-    course: "",
+    message: "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
@@ -90,7 +90,6 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
       errs.phone = "Valid 10-digit number required";
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email))
       errs.email = "Valid email required";
-    if (!formData.course) errs.course = "Please select";
     setErrors(errs);
     return Object.keys(errs).length === 0;
   };
@@ -106,8 +105,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
       data.set("name", formData.name);
       data.set("phone", formData.phone);
       data.set("email", formData.email);
-      data.set("course", formData.course);
-      data.set("source", "popup_modal");
+      data.set("message", formData.message);
       
       const result = await submitContactForm(data);
       
@@ -143,13 +141,12 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
     >
       <div
         ref={modalRef}
-        className="relative w-full max-w-md rounded-3xl overflow-hidden"
+        className="relative w-full max-w-md rounded-3xl overflow-hidden shadow-2xl"
         style={{
-          background:
-            "linear-gradient(135deg, #1C1410 0%, #111111 60%, #1a0508 100%)",
+          background: "linear-gradient(135deg, rgba(28,20,16,0.7) 0%, rgba(17,17,17,0.8) 60%, rgba(26,5,8,0.7) 100%)",
+          backdropFilter: "blur(20px)",
           border: "1px solid rgba(227,24,55,0.2)",
-          boxShadow:
-            "0 40px 100px rgba(0,0,0,0.7), 0 0 0 1px rgba(227,24,55,0.1), inset 0 1px 0 rgba(255,255,255,0.05)",
+          boxShadow: "0 40px 100px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.05)",
         }}
       >
         {/* Top accent bar */}
@@ -301,34 +298,21 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                   )}
                 </div>
 
-                {/* Course */}
+                {/* Message */}
                 <div>
-                  <select
-                    value={formData.course}
+                  <textarea
+                    placeholder="Additional Message or Note"
+                    value={formData.message}
                     onChange={(e) =>
-                      setFormData({ ...formData, course: e.target.value })
+                      setFormData({ ...formData, message: e.target.value })
                     }
-                    className="w-full px-4 py-3 rounded-xl text-sm focus:outline-none transition-all appearance-none"
+                    className="w-full px-4 py-3 rounded-xl text-sm text-white placeholder-[#6B6560] focus:outline-none transition-all min-h-[80px] resize-none"
                     style={{
                       background: "rgba(255,255,255,0.05)",
-                      border: `1px solid ${errors.course ? "#E31837" : "rgba(255,255,255,0.08)"}`,
-                      color: formData.course ? "#F0EBE1" : "#6B6560",
+                      border: "1px solid rgba(255,255,255,0.08)",
                       fontSize: "16px",
                     }}
-                  >
-                    <option value="">Course Interested In... *</option>
-                    <option value="animation">3D Animation</option>
-                    <option value="vfx">Visual Effects (VFX)</option>
-                    <option value="gaming">Game Design</option>
-                    <option value="filmmaking">Digital Filmmaking</option>
-                    <option value="digital-media">Digital Media & Design</option>
-                    <option value="architectural">Architectural Design</option>
-                  </select>
-                  {errors.course && (
-                    <p className="text-[#E31837] text-[10px] mt-1">
-                      {errors.course}
-                    </p>
-                  )}
+                  />
                 </div>
 
                 <button

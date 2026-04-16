@@ -25,13 +25,13 @@ export default function StudentShowcase() {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: containerRef.current,
-        start: "top 80%",
+        start: "top 95%",
         toggleActions: "play none none reverse",
       }
     });
 
-    tl.fromTo(".ss-header > *", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1, stagger: 0.1, ease: "expo.out" })
-      .fromTo(".ss-main", { opacity: 0, scale: 0.98 }, { opacity: 1, scale: 1, duration: 1.2, ease: "expo.out" }, "-=0.8");
+    tl.fromTo(".ss-header > *", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: "expo.out" })
+      .fromTo(".ss-main", { opacity: 0, scale: 0.98 }, { opacity: 1, scale: 1, duration: 0.8, ease: "expo.out" }, "-=0.6");
   }, { scope: containerRef });
 
   useEffect(() => {
@@ -66,7 +66,7 @@ export default function StudentShowcase() {
   };
 
   return (
-    <section ref={containerRef} className="relative min-h-screen bg-[#080808] py-24 md:py-40 flex flex-col overflow-hidden">
+    <section ref={containerRef} className="relative min-h-screen bg-transparent py-24 md:py-40 flex flex-col overflow-hidden">
       <div className="atmosphere-blob blob-red top-1/4 -right-20 opacity-10" />
       
       {/* ── HEADER ── */}
@@ -84,21 +84,29 @@ export default function StudentShowcase() {
         <div className="relative aspect-video rounded-[40px] overflow-hidden bg-black shadow-[0_40px_100px_rgba(0,0,0,0.8)] border border-white/5 group">
           
           {showcaseVideos.map((item, i) => {
-            // Only load active video and adjacent ones for smooth transitions
-            const shouldLoadVideo = i === active || i === active - 1 || i === active + 1;
+            const isActive = i === active;
             
             return (
-              <div key={i} className={`absolute inset-0 transition-all duration-1000 ease-expo-out ${i === active ? 'opacity-100 scale-100' : 'opacity-0 scale-105 pointer-events-none'}`}>
+              <div key={i} className={`absolute inset-0 transition-all duration-1000 ease-expo-out ${isActive ? 'opacity-100 scale-100' : 'opacity-0 scale-105 pointer-events-none'}`}>
+                {/* Only set src for the active video to save bandwidth */}
                 <video
                   ref={el => { videoRefs.current[i] = el; }}
-                  src={shouldLoadVideo ? item.video : undefined}
+                  src={isActive ? item.video : undefined}
+                  poster={item.fallbackImage}
                   className="w-full h-full object-cover"
                   muted={isMuted}
                   loop
                   playsInline
-                  autoPlay={i === active}
+                  autoPlay={isActive}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
+                
+                {/* Loader overlay for when video is buffering */}
+                {isActive && !isPaused && (
+                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20">
+                     <div className="w-12 h-12 border-4 border-[#E31837] border-t-transparent rounded-full animate-spin" />
+                  </div>
+                )}
               </div>
             );
           })}

@@ -52,7 +52,7 @@ export default function BentoGallery() {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: containerRef.current,
-        start: "top 80%",
+        start: "top 95%",
         toggleActions: "play none none reverse",
       }
     });
@@ -64,7 +64,7 @@ export default function BentoGallery() {
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="bg-[#080808] py-24 md:py-40 px-6 lg:px-20 overflow-hidden">
+    <section ref={containerRef} className="bg-transparent py-24 md:py-40 px-6 lg:px-20 overflow-hidden">
       <div className="max-w-[1600px] mx-auto">
         <div className="text-center mb-20">
           <span className="inline-block text-[#E31837] text-xs font-bold tracking-[0.4em] uppercase mb-6">Our</span>
@@ -86,7 +86,7 @@ export default function BentoGallery() {
           {bentoItems.map((item, i) => (
             <div
               key={i}
-              className={`bento-item group relative overflow-hidden rounded-[32px] bg-[#111111] border border-white/5 transition-all duration-700 hover:border-[#E31837]/30 ${item.span}`}
+              className={`bento-item group relative overflow-hidden rounded-[32px] bg-white/[0.03] backdrop-blur-xl border border-white/10 transition-all duration-700 hover:border-[#E31837]/30 ${item.span}`}
             >
               <Image
                 src={item.image}

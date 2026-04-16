@@ -55,7 +55,7 @@ export default function Footer() {
   }, { scope: footerRef });
 
   return (
-    <footer ref={footerRef} className="relative bg-[#080808] pt-24 md:pt-40 overflow-hidden">
+    <footer ref={footerRef} className="relative bg-transparent pt-24 md:pt-40 overflow-hidden">
       <div className="atmosphere-blob blob-red -bottom-20 -right-20 opacity-10" />
 
       {/* ── TOP BANNER ── */}

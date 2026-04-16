@@ -93,7 +93,7 @@ function Placements() {
         ease: "expo.out",
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top 80%",
+          start: "top 95%",
         }
       }
     );
@@ -130,7 +130,7 @@ function Placements() {
   return (
     <section 
       ref={containerRef} 
-      className="relative bg-[#080408] py-24 md:py-32 overflow-hidden"
+      className="relative bg-transparent py-24 md:py-32 overflow-hidden"
     >
       <div className="relative z-10 max-w-6xl mx-auto px-6">
         {/* Header */}

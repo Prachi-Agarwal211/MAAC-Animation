@@ -43,7 +43,7 @@ export default function InstituteIntro() {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: containerRef.current,
-        start: "top 85%",
+        start: "top 95%",
         toggleActions: "play none none reverse",
       },
     });
@@ -56,7 +56,7 @@ export default function InstituteIntro() {
   }, { scope: containerRef });
 
   return (
-    <div ref={containerRef} className="relative z-20 bg-[#0C0C0C] py-24 md:py-40">
+    <div ref={containerRef} className="relative z-20 bg-transparent py-24 md:py-40">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-center">
           

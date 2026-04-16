@@ -58,11 +58,11 @@ export default function Navbar() {
   return (
     <div className={revealNav ? "contents" : "hidden"} aria-hidden={!revealNav}>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-200 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled || mobileMenuOpen
-            ? "bg-[#0C0C0C]/95 backdrop-blur-md border-b border-white/10"
+            ? "bg-white/[0.03] backdrop-blur-xl border-b border-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.3)]"
             : isHome
-              ? "bg-gradient-to-b from-black/70 via-black/30 to-transparent"
+              ? "bg-gradient-to-b from-black/80 via-black/20 to-transparent"
               : "bg-transparent"
         }`}
       >

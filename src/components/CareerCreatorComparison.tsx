@@ -22,12 +22,12 @@ export default function CareerCreatorComparison() {
   }, { scope: containerRef });
 
   return (
-    <div ref={containerRef} className="relative overflow-hidden bg-[#080808]">
+    <div ref={containerRef} className="relative overflow-hidden bg-transparent">
       <div className="flex flex-col lg:flex-row min-h-[80svh]">
 
         {/* LEFT: CAREER X */}
         <div className="ccc-panel group relative flex-1 overflow-hidden transition-all duration-700 ease-expo-out lg:hover:flex-[1.5]">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#1a0000] to-[#080808]" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#1a0000]/80 to-transparent" />
           <div className="absolute inset-0 bg-[#E31837]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
           <div className="relative z-10 p-6 md:p-10 h-full flex flex-col justify-between">
@@ -72,7 +72,7 @@ export default function CareerCreatorComparison() {
 
         {/* RIGHT: CREATOR X */}
         <div className="ccc-panel group relative flex-1 overflow-hidden transition-all duration-700 ease-expo-out lg:hover:flex-[1.5] border-t lg:border-t-0 lg:border-l border-white/5">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#0c0805] to-[#080808]" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#0c0805]/80 to-transparent" />
           <div className="absolute inset-0 bg-[#FF6B35]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
           <div className="relative z-10 p-6 md:p-10 h-full flex flex-col justify-between">

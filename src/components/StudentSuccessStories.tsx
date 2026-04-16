@@ -63,7 +63,7 @@ export default function StudentSuccessStories() {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
-        start: "top 80%",
+        start: "top 95%",
         toggleActions: "play none none reverse",
       },
     });
@@ -73,7 +73,7 @@ export default function StudentSuccessStories() {
   }, { scope: sectionRef });
 
   return (
-    <section ref={sectionRef} id="success-stories" className="relative py-24 md:py-40 overflow-hidden bg-[#0C0C0C]">
+    <section ref={sectionRef} id="success-stories" className="relative py-24 md:py-40 overflow-hidden bg-transparent">
       {/* Background Accent */}
       <div className="atmosphere-blob blob-purple bottom-0 -left-40 opacity-5" />
 
@@ -119,7 +119,7 @@ export default function StudentSuccessStories() {
           {successStories.map((story, index) => (
             <div
               key={index}
-              className="success-card group relative rounded-[24px] overflow-hidden bg-[#111111] border border-white/5 hover:border-[#E31837]/30 transition-all duration-700"
+              className="success-card glass-card group relative overflow-hidden transition-all duration-700"
             >
               {/* Top Gradient Line */}
               <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#E31837] to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />

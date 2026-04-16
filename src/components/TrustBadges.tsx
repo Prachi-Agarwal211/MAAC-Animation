@@ -39,7 +39,7 @@ export default function TrustBadges() {
   }, { scope: sectionRef });
 
   return (
-    <section ref={sectionRef} className="relative py-10 md:py-12 bg-[#0A0A0A] border-y border-white/5">
+    <section ref={sectionRef} className="relative py-10 md:py-12 bg-transparent border-y border-white/5">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="text-center mb-8">
           <p className="text-[#E31837] text-[11px] font-bold tracking-[0.2em] uppercase mb-3 flex items-center justify-center gap-3">
@@ -59,7 +59,7 @@ export default function TrustBadges() {
           {certifications.map((cert) => (
             <div
               key={cert.name}
-              className="trust-badge rounded-2xl p-6 md:p-8 bg-[#111111] border border-white/8 hover:border-[#E31837]/30 transition-colors duration-300"
+              className="trust-badge rounded-2xl p-6 md:p-8 bg-white/[0.03] backdrop-blur-xl border border-white/10 hover:border-[#E31837]/30 transition-all duration-300"
             >
               <div className="h-20 md:h-24 rounded-xl bg-white/5 flex items-center justify-center p-4">
                 <Image 

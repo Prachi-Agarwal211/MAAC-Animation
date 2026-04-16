@@ -189,7 +189,7 @@ export default function VerticalCardGallery() {
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="relative bg-[#080808] min-h-[100vh]">
+    <section ref={containerRef} className="relative bg-[#080808] min-h-[100vh] z-[100]">
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-16 py-20 lg:py-12">
         {/* Section Header */}
         <div className="text-center mb-12">

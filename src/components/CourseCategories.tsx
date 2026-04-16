@@ -87,7 +87,7 @@ function SlideUpCard({ course }: { course: CourseCardItem }) {
 
   return (
     <div
-      className="category-card relative aspect-[4/5] rounded-[32px] overflow-hidden cursor-pointer group bg-[#111111] border border-white/5 transition-all duration-500 hover:border-[#E31837]/30"
+      className="category-card glass-card relative aspect-[4/5] overflow-hidden cursor-pointer group transition-all duration-500 hover:border-[#E31837]/30"
       onMouseEnter={() => !isTouchDevice && setIsHovered(true)}
       onMouseLeave={() => !isTouchDevice && setIsHovered(false)}
       onClick={() => isTouchDevice && setIsHovered(!isHovered)}
@@ -196,7 +196,7 @@ export default function CourseCategories({ mode = "home" }: CourseCategoriesProp
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: containerRef.current,
-        start: "top 80%",
+        start: "top 95%",
         toggleActions: "play none none reverse",
       },
     });
@@ -206,7 +206,7 @@ export default function CourseCategories({ mode = "home" }: CourseCategoriesProp
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} id={isHome ? "courses" : undefined} className="relative py-24 md:py-32 overflow-hidden bg-[#0C0C0C]">
+    <section ref={containerRef} id={isHome ? "courses" : undefined} className="relative py-24 md:py-32 overflow-hidden bg-transparent">
       <div className="atmosphere-blob blob-orange bottom-0 -left-20 opacity-5" />
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8 z-10">

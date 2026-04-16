@@ -112,17 +112,11 @@ export default function ContactClient() {
 
               <div className="space-y-5">
                 <div className="grid md:grid-cols-2 gap-5">
-                  <input type="text" placeholder="FULL NAME" required className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-xs font-bold tracking-wider text-white focus:outline-none focus:border-[#E31837]/50 transition-all uppercase placeholder:text-white/10" />
-                  <input type="email" placeholder="EMAIL ADDRESS" required className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-xs font-bold tracking-wider text-white focus:outline-none focus:border-[#E31837]/50 transition-all uppercase placeholder:text-white/10" />
+                  <input type="text" name="name" placeholder="FULL NAME" required className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-xs font-bold tracking-wider text-white focus:outline-none focus:border-[#E31837]/50 transition-all uppercase placeholder:text-white/10" />
+                  <input type="email" name="email" placeholder="EMAIL ADDRESS" required className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-xs font-bold tracking-wider text-white focus:outline-none focus:border-[#E31837]/50 transition-all uppercase placeholder:text-white/10" />
                 </div>
-                <input type="tel" placeholder="MOBILE NUMBER" required className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-xs font-bold tracking-wider text-white focus:outline-none focus:border-[#E31837]/50 transition-all uppercase placeholder:text-white/10" />
-                <select className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-xs font-bold tracking-wider text-white/40 focus:outline-none focus:border-[#E31837]/50 transition-all uppercase appearance-none">
-                  <option value="">SELECT SPECIALIZATION</option>
-                  <option value="vfx">Visual Effects</option>
-                  <option value="animation">3D Animation</option>
-                  <option value="game">Game Design</option>
-                </select>
-                <textarea placeholder="HOW CAN WE HELP?" rows={4} className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-xs font-bold tracking-wider text-white focus:outline-none focus:border-[#E31837]/50 transition-all uppercase placeholder:text-white/10 resize-none" />
+                <input type="tel" name="phone" placeholder="MOBILE NUMBER" required className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-xs font-bold tracking-wider text-white focus:outline-none focus:border-[#E31837]/50 transition-all uppercase placeholder:text-white/10" />
+                <textarea name="message" placeholder="ADDITIONAL MESSAGE OR NOTE" rows={4} className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-xs font-bold tracking-wider text-white focus:outline-none focus:border-[#E31837]/50 transition-all uppercase placeholder:text-white/10 resize-none" />
               </div>
 
               <div className="mt-10 flex flex-col sm:flex-row items-center justify-between gap-6">

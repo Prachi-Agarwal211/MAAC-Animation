@@ -118,18 +118,10 @@ export default function DemoClassClient() {
               
               <div className="grid md:grid-cols-2 gap-6 mb-6">
                 <input type="tel" name="phone" placeholder="MOBILE NUMBER" required className="w-full bg-white/5 border border-white/10 rounded-2xl px-8 py-5 text-sm font-bold tracking-widest text-white focus:outline-none focus:border-[#E31837]/50 transition-all uppercase" />
-                <select name="course" className="w-full bg-white/5 border border-white/10 rounded-2xl px-8 py-5 text-sm font-bold tracking-widest text-white/40 focus:outline-none focus:border-[#E31837]/50 transition-all uppercase appearance-none">
-                  <option value="">SELECT COURSE</option>
-                  {coursesData.map(c => <option key={c.slug} value={c.slug}>{c.fullName}</option>)}
-                </select>
+                <input type="text" name="message" placeholder="ADDITIONAL MESSAGE OR NOTE" className="w-full bg-white/5 border border-white/10 rounded-2xl px-8 py-5 text-sm font-bold tracking-widest text-white focus:outline-none focus:border-[#E31837]/50 transition-all uppercase" />
               </div>
 
-              <div className="mb-12">
-                <label className="block text-[10px] font-bold text-white/20 uppercase tracking-[0.3em] mb-4">Preferred Date</label>
-                <input type="date" name="date" className="w-full bg-white/5 border border-white/10 rounded-2xl px-8 py-5 text-sm font-bold tracking-widest text-white/40 focus:outline-none focus:border-[#E31837]/50 transition-all uppercase" />
-              </div>
-
-              <div className="flex flex-col sm:flex-row items-center justify-between gap-8">
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-8 mt-8">
                 <MagneticButton>
                   <button type="submit" disabled={isSubmitting} className="btn btn-primary px-12 py-6 rounded-2xl text-xs font-bold tracking-[0.4em] flex items-center gap-4">
                     {isSubmitting ? "PROCESSING..." : "CONFIRM BOOKING"} <ArrowRight size={18} />

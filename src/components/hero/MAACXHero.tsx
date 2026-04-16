@@ -316,7 +316,7 @@ export default function MAACXHero({ onIntroReveal }: Props) {
 
       <section
         ref={containerRef}
-        className="relative isolate min-h-[100svh] w-full bg-[#080808] overflow-x-hidden"
+        className="relative isolate min-h-[100svh] w-full bg-transparent overflow-x-hidden"
         aria-hidden={!heroRevealed}
       >
         {/* Full-bleed background video */}
@@ -336,11 +336,11 @@ export default function MAACXHero({ onIntroReveal }: Props) {
               <source src={HERO_VIDEO_WEBM} type="video/webm" />
             </video>
           ) : (
-            <div className="absolute inset-0 bg-[#080808]" aria-hidden />
+            <div className="absolute inset-0 bg-transparent" aria-hidden />
           )}
-          {/* Readability: lighter on small screens so type stays legible */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/25 to-black/85 md:from-black/75 md:via-black/20 md:to-black/90" />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/45 via-transparent to-black/15 md:from-black/50" />
+          {/* Readability: semi-transparent gradients to allow background to show through */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#080808]/60 via-transparent to-[#080808]/80" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#080808]/50 via-transparent to-transparent" />
         </div>
 
         {/* Foreground: clear of fixed header + safe areas; content anchored bottom */}
