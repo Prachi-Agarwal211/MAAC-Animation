@@ -121,7 +121,7 @@ export default function EventsPage() {
                 Why Attend<br />MAAC Events?
               </h2>
               <p className="text-sm md:text-base text-white leading-relaxed max-w-lg">
-                At MAAC, we don't just teach - we transform careers. Whether you aspire to be an animator, VFX artist, game designer, filmmaker, or digital creator, we equip you with the skills, tools, and global opportunities to succeed.
+                At MAAC, we don&apos;t just teach - we transform careers. Whether you aspire to be an animator, VFX artist, game designer, filmmaker, or digital creator, we equip you with the skills, tools, and global opportunities to succeed.
               </p>
               <button className="mt-6 flex items-center gap-2 text-yellow-400 hover:text-yellow-300 transition-colors">
                 <span className="font-semibold">Learn More</span>
@@ -351,12 +351,12 @@ export default function EventsPage() {
                   <div className="w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center">
                     <span className="text-black font-bold text-sm">NSM</span>
                   </div>
-                  <span className="text-yellow-400 font-bold text-sm">National Students' Meet</span>
+                  <span className="text-yellow-400 font-bold text-sm">National Students&apos; Meet</span>
                 </div>
               </div>
               
               <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight">
-                National Students' Meet (NSM)
+National Students&apos; Meet (NSM)
               </h3>
               
               <p className="text-sm md:text-base text-white/90 leading-relaxed mb-8 max-w-lg">
