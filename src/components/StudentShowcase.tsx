@@ -66,7 +66,7 @@ export default function StudentShowcase() {
   };
 
   return (
-    <section ref={containerRef} className="relative min-h-screen bg-transparent py-24 md:py-40 flex flex-col overflow-hidden">
+    <section ref={containerRef} className="relative min-h-screen bg-transparent py-16 md:py-24 flex flex-col overflow-hidden">
       <div className="atmosphere-blob blob-red top-1/4 -right-20 opacity-10" />
       
       {/* ── HEADER ── */}

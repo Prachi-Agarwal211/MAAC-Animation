@@ -63,7 +63,7 @@ export default function ContactClient() {
       </section>
 
       {/* ── CONTACT GRID ── */}
-      <section className="relative py-20 md:py-28 px-6 md:px-12 lg:px-24 contact-grid">
+      <section className="relative py-12 md:py-20 px-6 md:px-12 lg:px-24 contact-grid">
         <div className="max-w-[1800px] mx-auto grid lg:grid-cols-12 gap-12 md:gap-16">
 
           {/* Left: Info */}

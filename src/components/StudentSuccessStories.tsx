@@ -73,7 +73,7 @@ export default function StudentSuccessStories() {
   }, { scope: sectionRef });
 
   return (
-    <section ref={sectionRef} id="success-stories" className="relative py-24 md:py-40 overflow-hidden bg-transparent">
+    <section ref={sectionRef} id="success-stories" className="relative py-16 md:py-24 overflow-hidden bg-transparent">
       {/* Background Accent */}
       <div className="atmosphere-blob blob-purple bottom-0 -left-40 opacity-5" />
 

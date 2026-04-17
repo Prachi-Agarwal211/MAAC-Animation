@@ -41,7 +41,7 @@ export default function PopularCourses() {
   };
 
   return (
-    <section ref={containerRef} className="relative bg-transparent py-24 md:py-40 overflow-hidden">
+    <section ref={containerRef} className="relative bg-transparent py-16 md:py-24 overflow-hidden">
       <div className="atmosphere-blob blob-red top-1/2 left-0 opacity-10" />
       
       {/* Header */}

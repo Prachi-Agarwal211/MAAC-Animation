@@ -52,7 +52,7 @@ function Testimonials() {
   const prev = () => setActive((prev) => (prev - 1 + testimonialsData.length) % testimonialsData.length);
 
   return (
-    <section ref={sectionRef} className="relative py-24 md:py-40 overflow-hidden bg-[#080808]">
+    <section ref={sectionRef} className="relative py-16 md:py-24 overflow-hidden bg-[#080808]">
       <div className="atmosphere-blob blob-red top-1/4 -left-20 opacity-5" />
       
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8 z-10">

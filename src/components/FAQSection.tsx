@@ -26,7 +26,7 @@ function FAQSection() {
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="relative py-24 md:py-40 overflow-hidden bg-transparent">
+    <section ref={containerRef} className="relative py-16 md:py-24 overflow-hidden bg-transparent">
       <div className="atmosphere-blob blob-orange bottom-0 right-0 opacity-5" />
       
       <div className="max-w-[1400px] mx-auto px-6 lg:px-20 grid lg:grid-cols-12 gap-16 md:gap-24">

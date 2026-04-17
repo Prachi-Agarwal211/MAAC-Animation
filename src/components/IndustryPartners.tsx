@@ -93,9 +93,9 @@ export default function IndustryPartners() {
   }, { scope: containerRef });
 
   return (
-    <section 
-      ref={containerRef} 
-      className="relative bg-transparent py-20 md:py-28 overflow-hidden border-y border-yellow-600/30"
+    <section
+      ref={containerRef}
+      className="relative bg-transparent py-12 md:py-20 overflow-hidden border-y border-yellow-600/30"
     >
       <div className="relative z-10 max-w-[1800px] mx-auto">
         {/* Header */}

@@ -39,7 +39,7 @@ export default function TrustBadges() {
   }, { scope: sectionRef });
 
   return (
-    <section ref={sectionRef} className="relative py-10 md:py-12 bg-transparent border-y border-white/5">
+    <section ref={sectionRef} className="relative py-6 md:py-8 bg-transparent border-y border-white/5">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="text-center mb-8">
           <p className="text-[#E31837] text-[11px] font-bold tracking-[0.2em] uppercase mb-3 flex items-center justify-center gap-3">

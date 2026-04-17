@@ -75,7 +75,7 @@ export default function BlogIndexPage() {
         />
         <div className="absolute top-20 right-10 w-64 h-64 rounded-full opacity-10" style={{ background: "radial-gradient(circle, #E31837 0%, transparent 70%)" }} />
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="max-w-3xl">
             <nav className="mb-8" aria-label="Breadcrumb">
               <ol className="flex items-center gap-2 text-sm text-[#6B6560]">
@@ -96,7 +96,7 @@ export default function BlogIndexPage() {
       </section>
 
       {/* Blog Posts */}
-      <section className="py-20 md:py-28 bg-[#0C0C0C]">
+      <section className="py-12 md:py-20 bg-[#0C0C0C]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-8">
             {blogPosts.map((post) => (

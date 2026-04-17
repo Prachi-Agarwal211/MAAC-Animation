@@ -66,7 +66,7 @@ export default function AnimationInstituteJaipurPage() {
       </section>
 
       {/* Why MAAC Jaipur */}
-      <section className="py-20 bg-[#0f0f0f]">
+      <section className="py-12 bg-[#0f0f0f]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="font-display font-bold text-3xl text-[#F0EBE1] mb-8">Why Choose MAAC as Your Animation Institute in Jaipur?</h2>
           <div className="prose prose-lg text-[#A8A29C] max-w-none">
@@ -101,7 +101,7 @@ export default function AnimationInstituteJaipurPage() {
       </section>
 
       {/* Comparison Table */}
-      <section className="py-20">
+      <section className="py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="font-display font-bold text-3xl text-[#F0EBE1] mb-8 text-center">
             How MAAC Compares to Other Animation Institutes in Jaipur
@@ -141,7 +141,7 @@ export default function AnimationInstituteJaipurPage() {
       </section>
 
       {/* FAQ */}
-      <section className="py-20 bg-[#0f0f0f]">
+      <section className="py-12 bg-[#0f0f0f]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="font-display font-bold text-3xl text-[#F0EBE1] mb-8 text-center">
             Frequently Asked Questions — Animation Institute Jaipur

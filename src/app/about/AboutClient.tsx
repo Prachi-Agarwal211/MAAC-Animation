@@ -85,7 +85,7 @@ export default function AboutClient() {
       </section>
 
       {/* ── MISSION SECTION ── */}
-      <section className="relative py-24 md:py-40 bg-[#0C0C0C]">
+      <section className="relative py-16 md:py-24 bg-[#0C0C0C]">
         <div className="max-w-7xl mx-auto px-6 md:px-12 grid lg:grid-cols-2 gap-16 md:gap-32">
           <div className="space-y-12">
             <RevealHeading className="text-white text-4xl md:text-6xl tracking-tighter">The Visionary Core</RevealHeading>
@@ -109,7 +109,7 @@ export default function AboutClient() {
       </section>
 
       {/* ── TIMELINE SECTION ── */}
-      <section id="heritage" className="timeline-section relative py-24 md:py-40 scroll-mt-28">
+      <section id="heritage" className="timeline-section relative py-16 md:py-24 scroll-mt-28">
         <div className="max-w-7xl mx-auto px-6 md:px-12 mb-24">
           <h2 className="font-display font-black text-white text-5xl md:text-8xl tracking-tighter">OUR <span className="text-white/10">ODYSSEY</span></h2>
         </div>
@@ -128,7 +128,7 @@ export default function AboutClient() {
       </section>
 
       {/* ── FACULTY SECTION ── */}
-      <section id="faculty" className="py-24 md:py-40 bg-[#080808] scroll-mt-28">
+      <section id="faculty" className="py-16 md:py-24 bg-[#080808] scroll-mt-28">
         <div className="max-w-7xl mx-auto px-6 md:px-12 text-center mb-24">
           <span className="text-[#E31837] text-sm font-bold tracking-[0.3em] uppercase mb-6 block">Industry Titans</span>
           <h2 className="text-white font-display font-black text-5xl md:text-8xl tracking-tighter">EXPERIENCED <span className="gradient-text">FACULTY</span></h2>

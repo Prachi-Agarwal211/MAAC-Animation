@@ -120,7 +120,7 @@ export default function MAACEvents() {
   }, { scope: sectionRef });
 
   return (
-    <section ref={sectionRef} id="events" className="relative py-24 md:py-40 overflow-hidden bg-transparent">
+    <section ref={sectionRef} id="events" className="relative py-16 md:py-24 overflow-hidden bg-transparent">
       {/* Background Accent */}
       <div className="atmosphere-blob blob-red top-20 -right-40 opacity-5" />
 

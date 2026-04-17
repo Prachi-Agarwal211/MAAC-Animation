@@ -27,7 +27,7 @@ export default function NotFound() {
         <div className="absolute top-20 right-10 w-64 h-64 rounded-full opacity-10" style={{ background: "radial-gradient(circle, #E31837 0%, transparent 70%)" }} />
         <div className="absolute bottom-10 left-10 w-48 h-48 rounded-full opacity-5" style={{ background: "radial-gradient(circle, #C4A882 0%, transparent 70%)" }} />
 
-        <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
+        <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
           {/* 404 Number */}
           <div className="mb-8">
             <span

@@ -128,9 +128,9 @@ function Placements() {
   );
 
   return (
-    <section 
-      ref={containerRef} 
-      className="relative bg-transparent py-24 md:py-32 overflow-hidden"
+    <section
+      ref={containerRef}
+      className="relative bg-transparent py-16 md:py-24 overflow-hidden"
     >
       <div className="relative z-10 max-w-6xl mx-auto px-6">
         {/* Header */}
