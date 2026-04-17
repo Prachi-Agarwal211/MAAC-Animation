@@ -18,7 +18,7 @@ function Waveform() {
       {heights.map((height, i) => (
         <div
           key={i}
-          className="w-1 bg-[#E31837] rounded-full animate-pulse"
+          className="w-1 metallic-gold-accent rounded-full animate-pulse"
           style={{
             height: `${height}%`,
             animationDelay: `${i * 0.1}s`,
@@ -52,14 +52,14 @@ function Testimonials() {
   const prev = () => setActive((prev) => (prev - 1 + testimonialsData.length) % testimonialsData.length);
 
   return (
-    <section ref={sectionRef} className="relative py-16 md:py-24 overflow-hidden bg-[#080808]">
+    <section ref={sectionRef} className="relative py-16 md:py-24 overflow-hidden bg-transparent">
       <div className="atmosphere-blob blob-red top-1/4 -left-20 opacity-5" />
       
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8 z-10">
         <div className="tm-header text-center mb-24">
-          <p className="text-[#E31837] text-sm font-bold tracking-[0.3em] uppercase mb-6">Success Stories</p>
-          <h2 className="font-display font-black text-[clamp(1.8rem,4.5vw,3rem)] text-white leading-[0.9] tracking-tighter">
-            The Alumni <span className="gradient-text">Voices</span>
+          <p className="metallic-gold-text text-sm font-bold tracking-[0.3em] uppercase mb-6">Success Stories</p>
+          <h2 className="font-display font-black text-[clamp(1.8rem,4.5vw,3rem)] text-white leading-[0.9] tracking-tighter uppercase">
+            The Alumni <span className="metallic-gold-text">Voices</span>
           </h2>
         </div>
 
@@ -72,11 +72,11 @@ function Testimonials() {
             {/* Header: Audio UI */}
             <div className="flex items-center justify-between mb-16 border-b border-white/5 pb-8">
                <div className="flex items-center gap-6">
-                  <div className="w-12 h-12 rounded-full bg-[#E31837] flex items-center justify-center text-white">
+                  <div className="w-12 h-12 rounded-full metallic-gold-accent flex items-center justify-center text-white">
                     <Play size={20} fill="currentColor" />
                   </div>
                   <div>
-                    <span className="block text-[10px] font-bold text-[#E31837] uppercase tracking-[0.3em] mb-1">Live Playback</span>
+                    <span className="block text-[10px] font-bold metallic-gold-text uppercase tracking-[0.3em] mb-1">Live Playback</span>
                     <Waveform />
                   </div>
                </div>
@@ -94,27 +94,27 @@ function Testimonials() {
               </p>
               
               <div className="flex flex-col items-center gap-6">
-                <div className="w-24 h-24 rounded-3xl bg-gradient-to-br from-[#E31837] to-[#FF6B35] p-[1px] rotate-3 group-hover:rotate-0 transition-transform duration-700">
+                <div className="w-24 h-24 rounded-3xl bg-gradient-to-br from-[#BF953F] to-[#FF6B35] p-[1px] rotate-3 group-hover:rotate-0 transition-transform duration-700">
                   <div className="w-full h-full rounded-3xl bg-[#080808] flex items-center justify-center text-3xl font-display font-black text-white">
                     {testimonialsData[active].name.charAt(0)}
                   </div>
                 </div>
                 <div>
                   <h4 className="text-white text-2xl font-display font-bold tracking-tight mb-1">{testimonialsData[active].name}</h4>
-                  <p className="text-[#E31837] text-xs font-bold tracking-[0.3em] uppercase">{testimonialsData[active].role}</p>
+                  <p className="metallic-gold-text text-xs font-bold tracking-[0.3em] uppercase">{testimonialsData[active].role}</p>
                 </div>
               </div>
             </div>
 
             {/* Navigation Arrows */}
             <div className="absolute inset-y-0 left-4 md:left-10 flex items-center">
-               <button onClick={prev} className="w-14 h-14 rounded-full glass border border-white/5 flex items-center justify-center text-white/40 hover:text-white hover:border-[#E31837]/30 transition-all active:scale-90">
-                 <ChevronLeft size={28} />
+               <button onClick={prev} className="w-14 h-14 rounded-full glass border border-white/20 flex items-center justify-center text-white/40 hover:text-white hover:border-[#BF953F]/40 transition-all active:scale-90 group/arrow">
+                 <ChevronLeft size={28} className="group-hover/arrow:scale-110 transition-transform" />
                </button>
             </div>
             <div className="absolute inset-y-0 right-4 md:right-10 flex items-center">
-               <button onClick={next} className="w-14 h-14 rounded-full glass border border-white/5 flex items-center justify-center text-white/40 hover:text-white hover:border-[#E31837]/30 transition-all active:scale-90">
-                 <ChevronRight size={28} />
+               <button onClick={next} className="w-14 h-14 rounded-full glass border border-white/20 flex items-center justify-center text-white/40 hover:text-white hover:border-[#BF953F]/40 transition-all active:scale-90 group/arrow">
+                 <ChevronRight size={28} className="group-hover/arrow:scale-110 transition-transform" />
                </button>
             </div>
           </div>
@@ -126,7 +126,7 @@ function Testimonials() {
                 key={index}
                 onClick={() => setActive(index)}
                 className={`transition-all duration-700 rounded-full h-1 ${
-                  index === active ? "w-16 bg-[#E31837]" : "w-2 bg-white/10 hover:bg-white/20"
+                  index === active ? "w-16 metallic-gold-accent" : "w-2 bg-white/10 hover:bg-white/20"
                 }`}
                 aria-label={`Testimonial ${index + 1}`}
               />

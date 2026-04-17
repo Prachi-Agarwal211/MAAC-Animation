@@ -52,33 +52,37 @@ export default function TrustBadges() {
         }
       `}} />
       
-      <div className="max-w-7xl mx-auto px-6 mb-6">
-        <p className="text-[#E31837] text-[11px] font-bold tracking-[0.2em] uppercase flex items-center gap-3">
-          <span className="w-8 h-[1px] bg-[#E31837]" />
-          Government Affiliated & Recognized
+      <div className="max-w-7xl mx-auto px-6 mb-16 text-center">
+        <p className="metallic-gold-text text-[10px] font-bold tracking-[0.3em] uppercase mb-4 flex items-center justify-center gap-3">
+          <span className="w-8 h-[1px] metallic-gold-accent" />
+          Govt Affiliated & Recognized
+          <span className="w-8 h-[1px] metallic-gold-accent" />
         </p>
+        <h2 className="font-display font-black text-[clamp(1.8rem,4.5vw,2.8rem)] leading-[0.9] tracking-tighter text-white uppercase">
+          RECOGNIZED <span className="metallic-gold-text italic">EXCELLENCE</span>
+        </h2>
       </div>
 
-      <div className="relative w-full overflow-hidden flex items-center before:absolute before:left-0 before:w-24 before:h-full before:bg-gradient-to-r before:from-bg-primary before:to-transparent before:z-10 after:absolute after:right-0 after:w-24 after:h-full after:bg-gradient-to-l after:from-bg-primary after:to-transparent after:z-10">
+      <div className="relative w-full overflow-hidden flex items-center before:absolute before:left-0 before:w-24 before:h-full before:bg-gradient-to-r before:from-black before:to-transparent before:z-10 after:absolute after:right-0 after:w-24 after:h-full after:bg-gradient-to-l after:from-black after:to-transparent after:z-10">
         <div ref={marqueeRef} className="animate-marquee flex gap-6 px-3 cursor-pointer">
           {duplicatedCerts.map((cert, index) => (
             <div
               key={`${cert.name}-${index}`}
-              className="flex-shrink-0 group relative w-36 h-36 md:w-40 md:h-40 bg-white/[0.02] backdrop-blur-md border border-white/10 rounded-2xl flex flex-col items-center justify-center p-4 hover:border-[#E31837]/40 hover:bg-white/[0.04] transition-all duration-300"
+              className="flex-shrink-0 group relative w-36 h-36 md:w-40 md:h-40 bg-white/[0.01] backdrop-blur-sm border border-white/5 rounded-2xl flex flex-col items-center justify-center p-6 hover:border-white/20 transition-all duration-700"
             >
-              <div className="w-full h-16 md:h-20 mb-3 flex items-center justify-center relative">
+              <div className="w-full h-16 md:h-20 mb-4 flex items-center justify-center relative">
                 <Image
                   src={cert.logo}
                   alt={cert.name}
                   fill
-                  className="object-contain transition-all duration-500"
+                  className="object-contain opacity-40 grayscale brightness-75 transition-all duration-700 group-hover:opacity-100 group-hover:grayscale-0 group-hover:brightness-100"
                 />
               </div>
-              <span className="text-[#A8A29C] group-hover:text-white text-xs md:text-sm font-bold tracking-widest uppercase transition-colors duration-300">
+              <span className="text-[#8A827A] group-hover:text-white text-[10px] md:text-[11px] font-black tracking-[0.2em] uppercase transition-all duration-500">
                 {cert.name}
               </span>
               
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#E31837]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+              <div className="absolute inset-x-4 bottom-0 h-[1px] bg-gradient-to-r from-transparent via-metallic-gold/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
             </div>
           ))}
         </div>

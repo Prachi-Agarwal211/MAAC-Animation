@@ -42,7 +42,7 @@ export default function CustomCursor() {
       gsap.to(cursor, {
         scale: 1,
         backgroundColor: "transparent",
-        borderColor: "#E31837",
+        borderColor: "#FFD700",
         duration: 0.4,
         ease: "expo.out"
       });
@@ -82,12 +82,12 @@ export default function CustomCursor() {
     <>
       <div
         ref={cursorRef}
-        className="fixed top-0 left-0 w-10 h-10 rounded-full border border-[#E31837] pointer-events-none z-[9999] mix-blend-difference -translate-x-1/2 -translate-y-1/2 flex items-center justify-center transition-[border-color,background-color] duration-300"
+        className="fixed top-0 left-0 w-10 h-10 rounded-full border border-[#FFD700] pointer-events-none z-[9999] mix-blend-difference -translate-x-1/2 -translate-y-1/2 flex items-center justify-center transition-[border-color,background-color] duration-300"
         style={{ willChange: "transform" }}
       />
       <div
         ref={dotRef}
-        className="fixed top-0 left-0 w-1.5 h-1.5 rounded-full bg-[#E31837] pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2"
+        className="fixed top-0 left-0 w-1.5 h-1.5 rounded-full bg-[#FFD700] pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2"
         style={{ willChange: "transform" }}
       />
     </>

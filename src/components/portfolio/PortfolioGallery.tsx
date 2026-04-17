@@ -48,12 +48,12 @@ export default function PortfolioGallery() {
               onClick={() => setActiveFilter(cat.id)}
               className={`px-5 py-2.5 rounded-full border text-sm font-medium transition-all duration-300 ${
                 activeFilter === cat.id
-                  ? "border-[#E31837] text-[#E31837] bg-[#E31837]/10 shadow-[0_0_15px_rgba(227,24,55,0.2)]"
-                  : "border-white/10 text-[#A8A29C] hover:border-[#E31837]/50 hover:text-[#E31837] bg-[#161616]"
+                  ? "border-[#FFD700] text-[#FFD700] bg-[#FFD700]/10 shadow-[0_0_15px_rgba(227,24,55,0.2)]"
+                  : "border-white/10 text-[#A8A29C] hover:border-[#FFD700]/50 hover:text-[#FFD700] bg-[#161616]"
               }`}
             >
               {cat.label}
-              <span className={`ml-1.5 text-xs ${activeFilter === cat.id ? "text-[#E31837]/70" : "text-[#6B6560]"}`}>
+              <span className={`ml-1.5 text-xs ${activeFilter === cat.id ? "text-[#FFD700]/70" : "text-[#6B6560]"}`}>
                 ({count})
               </span>
             </button>
@@ -111,7 +111,7 @@ function PortfolioCard({
 
   return (
     <article
-      className="group relative bg-[#161616] rounded-xl overflow-hidden border border-white/5 hover:border-[#E31837]/30 transition-all duration-300 hover:shadow-[0_8px_32px_rgba(227,24,55,0.15)] cursor-pointer"
+      className="group relative bg-[#161616] rounded-xl overflow-hidden border border-white/5 hover:border-[#FFD700]/30 transition-all duration-300 hover:shadow-[0_8px_32px_rgba(227,24,55,0.15)] cursor-pointer"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       onClick={() => onClick(0)}
@@ -138,7 +138,7 @@ function PortfolioCard({
 
         {/* Category badge */}
         <div className="absolute top-3 left-3">
-          <span className="bg-[#E31837]/90 text-white text-[10px] font-semibold px-2.5 py-1 rounded-full uppercase tracking-wider">
+          <span className="bg-[#FFD700]/90 text-white text-[10px] font-semibold px-2.5 py-1 rounded-full uppercase tracking-wider">
             {categories.find((c) => c.id === entry.category)?.label || entry.category}
           </span>
         </div>
@@ -165,7 +165,7 @@ function PortfolioCard({
 
       {/* Content */}
       <div className="p-5">
-        <h3 className="font-display font-semibold text-[#F0EBE1] text-base mb-1.5 group-hover:text-[#E31837] transition-colors line-clamp-1">
+        <h3 className="font-display font-semibold text-[#F0EBE1] text-base mb-1.5 group-hover:text-[#FFD700] transition-colors line-clamp-1">
           {entry.studentName}
         </h3>
         <p className="text-[#6B6560] text-xs mb-2">

@@ -135,13 +135,13 @@ function Placements() {
       <div className="relative z-10 max-w-6xl mx-auto px-6">
         {/* Header */}
         <div className="pl-header text-center mb-16">
-          <p className="text-[#E31837] text-[10px] font-bold tracking-[0.4em] uppercase mb-6 flex items-center justify-center gap-3">
-            <span className="w-6 h-[1px] bg-[#E31837]" />
+          <p className="metallic-gold-text text-[10px] font-bold tracking-[0.4em] uppercase mb-4 flex items-center justify-center gap-3">
+            <span className="w-8 h-[1px] metallic-gold-accent" />
             Career Trajectory
-            <span className="w-6 h-[1px] bg-[#E31837]" />
+            <span className="w-8 h-[1px] metallic-gold-accent" />
           </p>
-          <h2 className="font-display font-black text-[clamp(1.8rem,4.5vw,3rem)] text-white leading-[0.95] tracking-tight mb-8 uppercase">
-            The Alumni <span className="gradient-text italic">Network</span>
+          <h2 className="font-display font-black text-[clamp(2.2rem,5.5vw,3.5rem)] leading-[0.85] tracking-tighter text-white uppercase">
+            The Alumni <span className="metallic-gold-text italic">Network</span>
           </h2>
         </div>
 
@@ -169,7 +169,7 @@ function Placements() {
             { l: "30+ YEARS LEGACY", i: <Briefcase size={14} /> }
           ].map((item, i) => (
             <div key={i} className="flex items-center gap-4 text-white/40 font-black uppercase tracking-[0.4em] text-[10px]">
-              <span className="text-[#E31837]">{item.i}</span>
+              <span className="text-[#FFD700]">{item.i}</span>
               {item.l}
             </div>
           ))}
@@ -180,7 +180,7 @@ function Placements() {
             { l: "30+ YEARS LEGACY", i: <Briefcase size={14} /> }
           ].map((item, i) => (
             <div key={`d-${i}`} className="flex items-center gap-4 text-white/40 font-black uppercase tracking-[0.4em] text-[10px]">
-              <span className="text-[#E31837]">{item.i}</span>
+              <span className="text-[#FFD700]">{item.i}</span>
               {item.l}
             </div>
           ))}

@@ -79,22 +79,22 @@ export default function StudentSuccessStories() {
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8 z-10">
         {/* Heading */}
-        <div className="success-heading text-center mb-20 md:mb-28">
-          <p className="text-[#E31837] text-sm font-bold tracking-[0.2em] uppercase mb-6 flex items-center justify-center gap-3">
-            <span className="w-6 h-[1px] bg-[#E31837]" />
-            Student Success Stories
-            <span className="w-6 h-[1px] bg-[#E31837]" />
+        <div className="success-heading text-center mb-16 md:mb-24">
+          <p className="metallic-gold-text text-[10px] font-bold tracking-[0.3em] uppercase mb-4 flex items-center justify-center gap-3">
+            <span className="w-8 h-[1px] metallic-gold-accent" />
+            Inspiring Journeys
+            <span className="w-8 h-[1px] metallic-gold-accent" />
           </p>
-          <h2 className="font-display font-bold text-[clamp(1.6rem,4vw,2.8rem)] text-[#F0EBE1] leading-[0.95] tracking-tight">
-            Real <span className="gradient-text">Placements</span>, Real Salaries
+          <h2 className="font-display font-black text-[clamp(2rem,5.5vw,3.5rem)] leading-[0.85] tracking-tighter text-white uppercase">
+            REAL <span className="metallic-gold-text italic">PLACEMENTS</span>, REAL SALARIES
           </h2>
-          <p className="text-[#A8A29C] text-lg mt-6 max-w-2xl mx-auto">
+          <p className="text-[#A8A29C] text-sm md:text-base mt-6 max-w-2xl mx-auto">
             Our students don&apos;t just learn — they launch thriving careers. Here&apos;s what MAAC alumni are earning and where they&apos;re working.
           </p>
         </div>
 
         {/* Stats Bar */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16 p-8 rounded-[24px] bg-gradient-to-br from-[#1c1c1c] to-[#0c0c0c] border border-white/5">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16 p-8 rounded-[24px] glass-card border border-white/5">
           {[
             { label: "Average Starting Salary", value: "6-9 LPA", icon: TrendingUp },
             { label: "Highest Package", value: "12+ LPA", icon: Star },
@@ -105,7 +105,7 @@ export default function StudentSuccessStories() {
             return (
               <div key={i} className="text-center">
                 <div className="flex justify-center mb-3">
-                  <Icon size={20} className="text-[#E31837]" />
+                  <Icon size={20} className="metallic-gold-text" />
                 </div>
                 <div className="text-white font-bold text-2xl md:text-3xl mb-1">{stat.value}</div>
                 <div className="text-[#A8A29C] text-xs uppercase tracking-[0.15em]">{stat.label}</div>
@@ -122,12 +122,12 @@ export default function StudentSuccessStories() {
               className="success-card glass-card group relative overflow-hidden transition-all duration-700"
             >
               {/* Top Gradient Line */}
-              <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#E31837] to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#BF953F] to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
               <div className="p-8">
                 {/* Avatar & Info */}
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-[#E31837]/30 flex-shrink-0">
+                  <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-[#BF953F]/30 flex-shrink-0">
                     <img
                       src={story.image}
                       alt={story.name}
@@ -136,7 +136,7 @@ export default function StudentSuccessStories() {
                   </div>
                   <div>
                     <h3 className="text-white font-bold text-lg">{story.name}</h3>
-                    <p className="text-[#E31837] text-sm font-medium">{story.role}</p>
+                    <p className="metallic-gold-text text-sm font-medium">{story.role}</p>
                   </div>
                 </div>
 
@@ -153,7 +153,7 @@ export default function StudentSuccessStories() {
                   </div>
                   <div className="text-right">
                     <div className="text-[#6B6560] text-[10px] uppercase tracking-[0.2em] mb-1">Package</div>
-                    <div className="text-[#E31837] font-bold text-lg">{story.salary} LPA</div>
+                    <div className="text-[#BF953F] font-bold text-lg">{story.salary} LPA</div>
                   </div>
                 </div>
               </div>

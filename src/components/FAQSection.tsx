@@ -34,12 +34,12 @@ function FAQSection() {
         {/* Left: Content */}
         <div className="faq-header lg:col-span-5 space-y-8">
           <div>
-            <p className="text-[#E31837] text-sm font-bold tracking-[0.2em] uppercase mb-6 flex items-center gap-3">
-              <span className="w-8 h-[1px] bg-[#E31837]" />
+            <p className="metallic-gold-text text-[10px] font-bold tracking-[0.3em] uppercase mb-4 flex items-center gap-3">
+              <span className="w-8 h-[1px] metallic-gold-accent" />
               Support Hub
             </p>
-            <h2 className="font-display font-bold text-[clamp(1.8rem,4.5vw,3rem)] text-[#F0EBE1] leading-[0.95] tracking-tight">
-              Answering Your <span className="gradient-text">Ambitions</span>
+            <h2 className="font-display font-black text-[clamp(2.2rem,5.5vw,3.5rem)] leading-[0.8] tracking-tighter text-white uppercase">
+              ANSWERING YOUR <span className="metallic-gold-text italic">AMBITIONS</span>
             </h2>
           </div>
           
@@ -50,10 +50,10 @@ function FAQSection() {
           <div className="pt-8 border-t border-white/5 space-y-6">
             <p className="text-[#6B6560] text-xs font-bold uppercase tracking-[0.2em]">Still have questions?</p>
             <a href="/contact" className="inline-flex items-center gap-4 group">
-              <div className="w-12 h-12 rounded-full bg-[#E31837]/10 flex items-center justify-center border border-[#E31837]/20 group-hover:bg-[#E31837] transition-all duration-500">
-                <MessageSquare size={20} className="text-[#E31837] group-hover:text-white" />
+              <div className="w-12 h-12 rounded-full bg-[#FFD700]/10 flex items-center justify-center border border-white/20 group-hover:bg-[#FFD700] group-hover:border-[#FFD700] transition-all duration-500 shadow-lg">
+                <MessageSquare size={20} className="text-[#FFD700] group-hover:text-white" />
               </div>
-              <span className="text-white text-sm font-bold tracking-widest uppercase border-b border-white/10 pb-1 group-hover:border-[#E31837] transition-all">Talk to Admissions</span>
+              <span className="text-white text-sm font-bold tracking-widest uppercase border-b border-white/10 pb-1 group-hover:border-[#FFD700] transition-all">Talk to Admissions</span>
             </a>
           </div>
         </div>
@@ -65,7 +65,7 @@ function FAQSection() {
             return (
               <div
                 key={index}
-                className={`faq-item group rounded-3xl border transition-all duration-500 ${isOpen ? 'bg-white/[0.05] border-[#E31837]/30 shadow-2xl backdrop-blur-xl' : 'bg-white/[0.02] border-white/5 hover:border-white/10 backdrop-blur-md'}`}
+                className={`faq-item group rounded-3xl border transition-all duration-500 ${isOpen ? 'bg-white/[0.05] border-[#FFD700]/40 shadow-2xl backdrop-blur-xl' : 'bg-white/[0.02] border-white/20 hover:border-white/30 backdrop-blur-md'}`}
               >
                 <button
                   onClick={() => setOpenIndex(isOpen ? null : index)}
@@ -74,7 +74,7 @@ function FAQSection() {
                   <span className={`font-display font-bold text-lg md:text-xl transition-colors duration-300 ${isOpen ? 'text-white' : 'text-[#A8A29C] group-hover:text-white'}`}>
                     {faq.name}
                   </span>
-                  <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 ${isOpen ? 'bg-[#E31837] text-white rotate-180' : 'bg-white/5 text-[#6B6560]'}`}>
+                  <div className={`w-10 h-10 rounded-full border flex items-center justify-center transition-all duration-500 ${isOpen ? 'bg-[#FFD700] border-[#FFD700] text-white rotate-180' : 'bg-white/5 border-white/10 text-[#6B6560]'}`}>
                     {isOpen ? <Minus size={18} /> : <Plus size={18} />}
                   </div>
                 </button>

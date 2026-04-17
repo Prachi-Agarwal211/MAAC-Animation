@@ -49,7 +49,7 @@ export default function AnimationInstituteJaipurPage() {
       <section className="relative pt-32 pb-20 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <nav className="mb-8 text-sm text-[#6B6560]">
-            <Link href="/" className="hover:text-[#E31837]">Home</Link>
+            <Link href="/" className="hover:text-[#FFD700]">Home</Link>
             <span className="ml-1 text-[#A8A29C]">/ Animation Institute Jaipur</span>
           </nav>
           <h1 className="font-display font-extrabold text-4xl md:text-6xl text-[#F0EBE1] mb-6 leading-tight">
@@ -109,7 +109,7 @@ export default function AnimationInstituteJaipurPage() {
           <div className="overflow-x-auto">
             <table className="w-full border-collapse text-sm">
               <thead>
-                <tr className="bg-[#E31837]">
+                <tr className="bg-[#FFD700]">
                   <th className="text-white p-4 text-left">Feature</th>
                   <th className="text-white p-4 text-center">MAAC Jaipur</th>
                   <th className="text-white p-4 text-center">Arena Animation</th>
@@ -129,7 +129,7 @@ export default function AnimationInstituteJaipurPage() {
                 ].map(([feature, maac, arena, frame], i) => (
                   <tr key={i} className={`border-b border-white/5 ${i % 2 === 0 ? "bg-[#161616]" : "bg-[#0f0f0f]"}`}>
                     <td className="p-4 text-[#F0EBE1] font-medium">{feature}</td>
-                    <td className="p-4 text-center text-[#E31837] font-semibold">{maac}</td>
+                    <td className="p-4 text-center text-[#FFD700] font-semibold">{maac}</td>
                     <td className="p-4 text-center">{arena}</td>
                     <td className="p-4 text-center">{frame}</td>
                   </tr>

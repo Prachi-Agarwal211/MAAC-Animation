@@ -22,28 +22,39 @@ export default function CareerCreatorComparison() {
   }, { scope: containerRef });
 
   return (
-    <div ref={containerRef} className="relative overflow-hidden bg-transparent">
-      <div className="flex flex-col lg:flex-row min-h-[80svh]">
+    <div ref={containerRef} className="relative overflow-hidden bg-transparent py-24 md:py-32">
+      <div className="max-w-7xl mx-auto px-6 mb-16 md:mb-24 text-center">
+        <p className="metallic-gold-text text-[10px] font-bold tracking-[0.3em] uppercase mb-4 flex items-center justify-center gap-3">
+          <span className="w-8 h-[1px] metallic-gold-accent" />
+          Custom Engineered Career Tracks
+          <span className="w-8 h-[1px] metallic-gold-accent" />
+        </p>
+        <h2 className="font-display font-black text-[clamp(2rem,5vw,3.5rem)] leading-[0.8] tracking-tighter text-white uppercase">
+          CHOOSE YOUR <span className="metallic-gold-text italic">PATHWAY</span>
+        </h2>
+      </div>
+
+      <div className="flex flex-col lg:flex-row min-h-[70svh]">
 
         {/* LEFT: CAREER X */}
         <div className="ccc-panel group relative flex-1 overflow-hidden transition-all duration-700 ease-expo-out lg:hover:flex-[1.5]">
           <div className="absolute inset-0 bg-gradient-to-br from-[#1a0000]/80 to-transparent" />
-          <div className="absolute inset-0 bg-[#E31837]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+          <div className="absolute inset-0 bg-[#FFD700]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
           <div className="relative z-10 p-6 md:p-10 h-full flex flex-col justify-between">
             <div>
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-[#E31837]/10 flex items-center justify-center border border-[#E31837]/30">
-                  <Rocket size={18} className="text-[#E31837]" />
+                <div className="w-10 h-10 rounded-xl bg-[#FFD700]/10 flex items-center justify-center border border-[#FFD700]/30">
+                  <Rocket size={18} className="text-[#FFD700]" />
                 </div>
-                <span className="text-[#E31837] text-[10px] font-bold tracking-[0.3em] uppercase">Pathway 01</span>
+                <span className="text-[#FFD700] text-[10px] font-bold tracking-[0.3em] uppercase">Pathway 01</span>
               </div>
 
               <h2 className="font-display font-black text-[clamp(1.5rem,3.5vw,2.5rem)] text-white leading-[0.85] tracking-tighter mb-6">
                 CAREER<span className="gradient-text italic">X</span>
               </h2>
 
-              <p className="text-[#A8A29C] text-base md:text-lg font-medium max-w-md leading-relaxed mb-8 border-l-2 border-[#E31837] pl-4">
+              <p className="text-[#A8A29C] text-base md:text-lg font-medium max-w-md leading-relaxed mb-8 border-l-2 border-[#FFD700] pl-4">
                 Studio-aligned programs designed for those seeking high-impact careers in global production houses.
               </p>
 

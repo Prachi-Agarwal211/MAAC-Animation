@@ -67,7 +67,7 @@ export default function AboutClient() {
         </div>
 
         <div className="relative z-20 max-w-5xl">
-          <span className="inline-block text-[#E31837] text-xs font-bold tracking-[0.4em] uppercase mb-8">
+          <span className="inline-block text-[#FFD700] text-xs font-bold tracking-[0.4em] uppercase mb-8">
             Established 1986
           </span>
           <h1 className="mb-10">
@@ -78,7 +78,7 @@ export default function AboutClient() {
               <SplitTextReveal delay={0.2}>Digital Future</SplitTextReveal>
             </span>
           </h1>
-          <p className="text-[#A8A29C] text-lg md:text-2xl font-medium leading-relaxed max-w-3xl border-l-2 border-[#E31837] pl-8">
+          <p className="text-[#A8A29C] text-lg md:text-2xl font-medium leading-relaxed max-w-3xl border-l-2 border-[#FFD700] pl-8">
             Welcome to Maya Academy of Advanced Creativity (MAAC) — Jaipur&apos;s premier hub for VFX, Animation, and Game Design excellence.
           </p>
         </div>
@@ -95,8 +95,8 @@ export default function AboutClient() {
           </div>
           <div className="grid gap-8">
             {["Mission", "Vision"].map((type, i) => (
-              <div key={type} className="p-10 rounded-[40px] glass border border-white/5 group hover:border-[#E31837]/30 transition-all duration-700">
-                <span className="text-[#E31837] text-[10px] font-bold uppercase tracking-[0.3em] mb-4 block">0{i+1} · {type}</span>
+              <div key={type} className="p-10 rounded-[40px] glass border border-white/5 group hover:border-[#FFD700]/30 transition-all duration-700">
+                <span className="text-[#FFD700] text-[10px] font-bold uppercase tracking-[0.3em] mb-4 block">0{i+1} · {type}</span>
                 <p className="text-white/80 leading-relaxed">
                   {i === 0 
                     ? "To inspire and empower aspiring artists through industry-aligned curriculum and hands-on studio experience."
@@ -117,8 +117,8 @@ export default function AboutClient() {
         <div className="relative border-t border-white/5">
           <div className="grid md:grid-cols-2 lg:grid-cols-4">
             {milestones.map((m, i) => (
-              <div key={i} className="milestone-card p-10 md:p-12 border-b md:border-b-0 md:border-r border-white/5 hover:bg-[#E31837]/5 transition-colors duration-700 group">
-                <div className="text-[#E31837] font-display font-black text-5xl mb-8 group-hover:scale-110 group-hover:-translate-y-2 transition-transform duration-500">{m.year}</div>
+              <div key={i} className="milestone-card p-10 md:p-12 border-b md:border-b-0 md:border-r border-white/5 hover:bg-[#FFD700]/5 transition-colors duration-700 group">
+                <div className="text-[#FFD700] font-display font-black text-5xl mb-8 group-hover:scale-110 group-hover:-translate-y-2 transition-transform duration-500">{m.year}</div>
                 <h3 className="text-white text-xl font-display font-bold mb-4 uppercase tracking-widest">{m.title}</h3>
                 <p className="text-[#6B6560] text-sm leading-relaxed group-hover:text-white transition-colors">{m.description}</p>
               </div>
@@ -130,18 +130,18 @@ export default function AboutClient() {
       {/* ── FACULTY SECTION ── */}
       <section id="faculty" className="py-16 md:py-24 bg-[#080808] scroll-mt-28">
         <div className="max-w-7xl mx-auto px-6 md:px-12 text-center mb-24">
-          <span className="text-[#E31837] text-sm font-bold tracking-[0.3em] uppercase mb-6 block">Industry Titans</span>
+          <span className="text-[#FFD700] text-sm font-bold tracking-[0.3em] uppercase mb-6 block">Industry Titans</span>
           <h2 className="text-white font-display font-black text-5xl md:text-8xl tracking-tighter">EXPERIENCED <span className="gradient-text">FACULTY</span></h2>
         </div>
 
         <div className="max-w-[1600px] mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {faculty.map((f, i) => (
             <div key={i} className="group relative aspect-[3/4] rounded-[40px] overflow-hidden bg-[#111111] border border-white/5">
-              <div className="absolute inset-0 bg-gradient-to-br from-[#E31837]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+              <div className="absolute inset-0 bg-gradient-to-br from-[#FFD700]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
               <div className="absolute inset-0 flex items-center justify-center text-[15rem] font-display font-black text-white/[0.02] group-hover:text-white/[0.05] transition-colors">{f.name[0]}</div>
               
               <div className="absolute bottom-0 left-0 right-0 p-10 translate-y-4 group-hover:translate-y-0 transition-transform duration-700">
-                <span className="text-[#E31837] text-[10px] font-bold uppercase tracking-[0.3em] mb-2 block">{f.role}</span>
+                <span className="text-[#FFD700] text-[10px] font-bold uppercase tracking-[0.3em] mb-2 block">{f.role}</span>
                 <h3 className="text-white text-2xl font-display font-bold mb-2">{f.name}</h3>
                 <p className="text-[#6B6560] text-xs font-bold uppercase tracking-widest mb-6">{f.exp} EXPERIENCE</p>
                 <p className="text-white/40 text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-100">

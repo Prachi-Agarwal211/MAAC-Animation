@@ -33,7 +33,7 @@ export default function CourseCurriculum({ course }: { course: Course }) {
           {defaultCurriculum.map((mod, i) => (
             <div key={i} className="bg-[#161616] rounded-xl p-6 md:p-8 border border-white/5">
               <div className="flex items-center gap-4 mb-4">
-                <span className="w-10 h-10 rounded-full bg-[#E31837]/10 border border-[#E31837]/30 flex items-center justify-center text-[#E31837] font-bold text-sm">
+                <span className="w-10 h-10 rounded-full bg-[#FFD700]/10 border border-[#FFD700]/30 flex items-center justify-center text-[#FFD700] font-bold text-sm">
                   {i + 1}
                 </span>
                 <h3 className="font-display font-semibold text-[#F0EBE1] text-lg">{mod.module}</h3>
@@ -41,7 +41,7 @@ export default function CourseCurriculum({ course }: { course: Course }) {
               <ul className="grid md:grid-cols-2 gap-3 ml-14">
                 {mod.topics.map((topic, j) => (
                   <li key={j} className="flex items-center gap-2 text-[#A8A29C] text-sm">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#E31837]/60" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#FFD700]/60" />
                     {topic}
                   </li>
                 ))}

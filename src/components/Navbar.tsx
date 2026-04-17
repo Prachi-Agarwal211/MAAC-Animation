@@ -59,15 +59,15 @@ export default function Navbar() {
   return (
     <div className={revealNav ? "contents" : "hidden"} aria-hidden={!revealNav}>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled || mobileMenuOpen
-            ? "bg-white/[0.03] backdrop-blur-xl border-b border-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.3)]"
+            ? "bg-[#0A0A0A]/80 backdrop-blur-2xl border-b border-white/5 shadow-[0_15px_50px_rgba(0,0,0,0.5)] py-1"
             : isHome
-              ? "bg-gradient-to-b from-black/80 via-black/20 to-transparent"
-              : "bg-transparent"
+              ? "bg-gradient-to-b from-black/90 via-black/40 to-transparent py-2"
+              : "bg-transparent py-2"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center h-16 sm:h-20">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 flex items-center h-16 sm:h-20">
           <div className="flex-shrink-0 mr-16">
             <Link href="/" className="flex items-center group" aria-label="MAAC Jaipur - Home">
               <Image
@@ -75,7 +75,7 @@ export default function Navbar() {
                 alt="MAAC Animation Jaipur Logo"
                 width={240}
                 height={240}
-                className="w-28 h-28 sm:w-56 sm:h-56 transition-transform duration-200 group-hover:scale-[1.02] object-contain"
+                className={`transition-all duration-500 group-hover:scale-[1.02] object-contain ${scrolled ? 'w-24 h-24 sm:w-48 sm:h-48' : 'w-28 h-28 sm:w-56 sm:h-56'}`}
                 priority
               />
             </Link>
@@ -85,7 +85,7 @@ export default function Navbar() {
             <li className="relative group">
               <Link
                 href="/"
-                className="flex items-center gap-1 px-2.5 py-2 text-[13px] text-white/85 hover:text-white transition-colors"
+                className="flex items-center gap-1.5 px-3 py-2 text-[13px] font-medium text-white/70 hover:text-white transition-all duration-300 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]"
               >
                 Home
               </Link>
@@ -104,10 +104,10 @@ export default function Navbar() {
                 ) : (
                   <Link
                     href={link.href}
-                    className="flex items-center gap-1 px-2.5 py-2 text-[13px] text-white/85 hover:text-white transition-colors"
+                    className="flex items-center gap-1.5 px-3 py-2 text-[13px] font-medium text-white/70 hover:text-white transition-all duration-300 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]"
                   >
                     {link.label}
-                    {hasSubmenu(link) && <ChevronDown size={13} className="opacity-45 shrink-0" aria-hidden />}
+                    {hasSubmenu(link) && <ChevronDown size={12} className="opacity-40 shrink-0 transition-transform group-hover:rotate-180" aria-hidden />}
                   </Link>
                 )}
 
@@ -191,11 +191,11 @@ export default function Navbar() {
             <button
               type="button"
               onClick={toggleMobileMenu}
-              className="text-white p-2 -mr-2 rounded-md hover:bg-white/5 transition-colors"
+              className="text-white p-2.5 -mr-2 rounded-xl border border-white/10 hover:bg-white/5 hover:border-white/20 transition-all duration-300"
               aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
               aria-expanded={mobileMenuOpen}
             >
-              {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
         </div>
@@ -236,7 +236,7 @@ export default function Navbar() {
                   <div className="pb-4 space-y-5">
                     {link.megaGroups.map((group) => (
                       <div key={group.title}>
-                        <p className="text-[10px] uppercase tracking-widest text-[#E31837] font-semibold mb-2 pl-3">
+                        <p className="text-[10px] uppercase tracking-widest metallic-gold-text font-semibold mb-2 pl-3">
                           {group.title}
                         </p>
                         <ul className="pl-3 space-y-0">
@@ -257,7 +257,7 @@ export default function Navbar() {
                     <Link
                       href="/contact"
                       onClick={toggleMobileMenu}
-                      className="block ml-3 py-2 text-[13px] text-[#E31837] font-medium"
+                      className="block ml-3 py-2 text-[13px] text-[#FFD700] font-medium"
                     >
                       View e-brochure / enquire — Jaipur
                     </Link>

@@ -67,13 +67,13 @@ export default function BentoGallery() {
     <section ref={containerRef} className="bg-transparent py-24 md:py-40 px-6 lg:px-20 overflow-hidden">
       <div className="max-w-[1600px] mx-auto">
         <div className="text-center mb-20">
-          <span className="inline-block text-[#E31837] text-xs font-bold tracking-[0.4em] uppercase mb-6">Our</span>
+          <span className="inline-block metallic-gold-text text-xs font-bold tracking-[0.4em] uppercase mb-6">Our</span>
           <h2 className="font-display font-black text-[clamp(1.8rem,4.5vw,3rem)] text-white leading-[0.9] tracking-tighter">
-            Student <span className="gradient-text">Work</span>
+            Student <span className="metallic-gold-text">Work</span>
           </h2>
           <Link 
             href="/student-work" 
-            className="inline-flex items-center gap-2 mt-8 px-8 py-3 bg-[#E31837] text-white font-bold text-sm tracking-wide rounded-full hover:bg-[#c41230] transition-colors duration-300"
+            className="inline-flex items-center gap-2 mt-8 px-8 py-3 metallic-gold-accent text-white font-bold text-sm tracking-wide rounded-full hover:bg-[#c41230] transition-colors duration-300 shadow-[0_4px_15px_rgba(191,149,63,0.3)]"
           >
             View All Work
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -86,7 +86,7 @@ export default function BentoGallery() {
           {bentoItems.map((item, i) => (
             <div
               key={i}
-              className={`bento-item group relative overflow-hidden rounded-[32px] bg-white/[0.03] backdrop-blur-xl border border-white/10 transition-all duration-700 hover:border-[#E31837]/30 ${item.span}`}
+              className={`bento-item group relative overflow-hidden rounded-[32px] glass-card border border-white/10 transition-all duration-700 hover:border-[#BF953F]/50 ${item.span}`}
             >
               <Image
                 src={item.image}
@@ -98,7 +98,7 @@ export default function BentoGallery() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               
               <div className="absolute bottom-8 left-8 right-8 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-                <span className="text-[#E31837] text-[10px] font-bold uppercase tracking-[0.2em]">{item.category}</span>
+                <span className="metallic-gold-text text-[10px] font-bold uppercase tracking-[0.2em]">{item.category}</span>
                 <h3 className="text-white text-xl md:text-2xl font-display font-bold mt-2">{item.title}</h3>
               </div>
             </div>

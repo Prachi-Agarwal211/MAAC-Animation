@@ -530,7 +530,7 @@ National Students&apos; Meet (NSM)
           <svg className="w-full h-full" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
             <defs>
               <linearGradient id="wave-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" style={{ stopColor: "#E31837", stopOpacity: 0.3 }} />
+                <stop offset="0%" style={{ stopColor: "#FFD700", stopOpacity: 0.3 }} />
                 <stop offset="100%" style={{ stopColor: "#8B2635", stopOpacity: 0.1 }} />
               </linearGradient>
             </defs>
@@ -556,7 +556,7 @@ National Students&apos; Meet (NSM)
                 <div className="flex items-center gap-8 w-full max-w-3xl">
                   {/* Simple number without circle - fixed width for alignment */}
                   <div className="flex-shrink-0 w-12 flex justify-center items-center">
-                    <span className="text-4xl md:text-5xl font-bold" style={{ WebkitTextStroke: '2px #E31837', color: 'transparent' }}>1</span>
+                    <span className="text-4xl md:text-5xl font-bold" style={{ WebkitTextStroke: '2px #FFD700', color: 'transparent' }}>1</span>
                   </div>
                   
                   <p className="text-xl md:text-2xl text-white leading-relaxed font-medium flex-grow">
@@ -564,7 +564,7 @@ National Students&apos; Meet (NSM)
                   </p>
 
                   {/* Red checkmark on right */}
-                  <svg className="w-12 h-12 md:w-16 md:h-16 flex-shrink-0" fill="#E31837" viewBox="0 0 24 24">
+                  <svg className="w-12 h-12 md:w-16 md:h-16 flex-shrink-0" fill="#FFD700" viewBox="0 0 24 24">
                     <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
                   </svg>
                 </div>
@@ -577,7 +577,7 @@ National Students&apos; Meet (NSM)
                 <div className="flex items-center gap-8 w-full max-w-3xl">
                   {/* Simple number without circle - fixed width for alignment */}
                   <div className="flex-shrink-0 w-12 flex justify-center items-center">
-                    <span className="text-4xl md:text-5xl font-bold" style={{ WebkitTextStroke: '2px #E31837', color: 'transparent' }}>2</span>
+                    <span className="text-4xl md:text-5xl font-bold" style={{ WebkitTextStroke: '2px #FFD700', color: 'transparent' }}>2</span>
                   </div>
                   
                   <p className="text-xl md:text-2xl text-white leading-relaxed font-medium flex-grow">
@@ -585,7 +585,7 @@ National Students&apos; Meet (NSM)
                   </p>
 
                   {/* Red checkmark on right */}
-                  <svg className="w-12 h-12 md:w-16 md:h-16 flex-shrink-0" fill="#E31837" viewBox="0 0 24 24">
+                  <svg className="w-12 h-12 md:w-16 md:h-16 flex-shrink-0" fill="#FFD700" viewBox="0 0 24 24">
                     <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
                   </svg>
                 </div>
@@ -598,7 +598,7 @@ National Students&apos; Meet (NSM)
                 <div className="flex items-center gap-8 w-full max-w-3xl">
                   {/* Simple number without circle - fixed width for alignment */}
                   <div className="flex-shrink-0 w-12 flex justify-center items-center">
-                    <span className="text-4xl md:text-5xl font-bold" style={{ WebkitTextStroke: '2px #E31837', color: 'transparent' }}>3</span>
+                    <span className="text-4xl md:text-5xl font-bold" style={{ WebkitTextStroke: '2px #FFD700', color: 'transparent' }}>3</span>
                   </div>
                   
                   <p className="text-xl md:text-2xl text-white leading-relaxed font-medium flex-grow">
@@ -606,7 +606,7 @@ National Students&apos; Meet (NSM)
                   </p>
 
                   {/* Red checkmark on right */}
-                  <svg className="w-12 h-12 md:w-16 md:h-16 flex-shrink-0" fill="#E31837" viewBox="0 0 24 24">
+                  <svg className="w-12 h-12 md:w-16 md:h-16 flex-shrink-0" fill="#FFD700" viewBox="0 0 24 24">
                     <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
                   </svg>
                 </div>

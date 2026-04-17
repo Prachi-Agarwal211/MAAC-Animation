@@ -16,100 +16,86 @@ const fragmentShader = `
   precision highp float;
   uniform float uTime;
   uniform vec2 uMouse;
-  uniform vec3 uColor1; // Royal Blue
-  uniform vec3 uColor2; // Deep Red
-  uniform vec3 uColor3; // Teal Green
+  uniform vec2 uResolution;
+  uniform vec3 uColor1; // Teal
+  uniform vec3 uColor2; // Red
+  uniform vec3 uColor3; // Black
   varying vec2 vUv;
 
-  float random (vec2 st) {
-      return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
-  }
-
-  float noise (vec2 st) {
-      vec2 i = floor(st);
-      vec2 f = fract(st);
-      float a = random(i);
-      float b = random(i + vec2(1.0, 0.0));
-      float c = random(i + vec2(0.0, 1.0));
-      float d = random(i + vec2(1.0, 1.0));
-      vec2 u = f*f*(3.0-2.0*f);
-      return mix(a, b, u.x) + (c - a)* u.y * (1.0 - u.x) + (d - b) * u.x * u.y;
-  }
-
-  float fbm(vec2 st) {
-      float value = 0.0;
-      float amplitude = 0.5;
-      for (int i = 0; i < 4; i++) {
-          value += amplitude * noise(st);
-          st *= 2.2;
-          amplitude *= 0.5;
-      }
-      return value;
-  }
-
   void main() {
-    vec2 uv = vUv;
-    float t = uTime * 0.4;
+    // True Screen-Space Coordinates to prevent stretching
+    vec2 uv = gl_FragCoord.xy / uResolution.xy;
+    float aspect = uResolution.x / uResolution.y;
+    vec2 st = (uv - 0.5);
+    st.x *= aspect;
+
+    float t = uTime * 0.3; // Gentle flow
     
-    // Create organic flowing movement
-    vec2 p = uv * 2.5;
-    float n = fbm(p + t * 0.2 + uMouse * 0.1);
+    // Silk-Smooth Blobs (Mesh Gradient logic)
+    // We use large distance fields instead of noise grids to avoid all "lining" artifacts
+    vec2 b1 = vec2(0.5 * sin(t * 0.6), 0.3 * cos(t * 0.8));
+    vec2 b2 = vec2(0.6 * cos(t * 1.1), 0.4 * sin(t * 0.9));
+    vec2 b3 = vec2(-0.4 * sin(t * 0.4), -0.5 * cos(t * 0.7));
+    vec2 b4 = vec2(-0.6 * cos(t * 1.3), 0.2 * sin(t * 1.2));
+
+    float f1 = 1.0 - smoothstep(0.0, 1.4, length(st - b1));
+    float f2 = 1.0 - smoothstep(0.0, 1.6, length(st - b2));
+    float f3 = 1.0 - smoothstep(0.0, 1.3, length(st - b3));
+    float f4 = 1.0 - smoothstep(0.0, 1.5, length(st - b4));
+
+    // Interactive mouse glow
+    float mDist = length(uv - (uMouse * 0.5 + 0.5));
+    float mouseGlow = 1.0 - smoothstep(0.0, 0.45, mDist);
+
+    vec3 color = uColor3; // Base Cinematic Void
     
-    // Plasma-like color interference
-    float c1 = sin(uv.x * 3.0 + t + n);
-    float c2 = cos(uv.y * 2.0 - t * 0.5 + n);
-    float c3 = sin((uv.x + uv.y) * 1.5 + t + n);
-
-    // Dynamic Color Palette
-    vec3 blue = uColor1 * (c1 * 0.5 + 0.5);
-    vec3 red = uColor2 * (c2 * 0.5 + 0.5);
-    vec3 teal = uColor3 * (c3 * 0.5 + 0.5);
-
-    // Blend layers with high contrast
-    vec3 finalColor = blue;
-    finalColor = mix(finalColor, red, smoothstep(0.2, 0.8, n));
-    finalColor = mix(finalColor, teal, smoothstep(0.4, 0.9, sin(t * 0.3 + n)));
-
-    // Add glowing "energy" veins
-    float veins = pow(1.0 - abs(n - 0.5), 12.0);
-    finalColor += (uColor1 + uColor3) * veins * 0.6;
-
-    // Darken but keep visible
-    finalColor *= 0.8; // Lower intensity overall
+    // Smoothly blend the "Aurora" blobs
+    color = mix(color, uColor1, f1 * 0.5);
+    color = mix(color, uColor2, f2 * 0.4);
+    color = mix(color, uColor1, f3 * 0.3);
+    color = mix(color, uColor2, f4 * 0.2);
     
-    // Shifting dark voids
-    float mask = fbm(uv * 1.5 - t * 0.1);
-    finalColor *= smoothstep(0.1, 1.0, mask);
+    // Add subtle interactive highlight
+    color += uColor1 * mouseGlow * 0.12;
 
-    // Soft Vignette
-    float vignette = 1.0 - distance(uv, vec2(0.5)) * 1.2;
-    gl_FragColor = vec4(finalColor * clamp(vignette, 0.2, 1.0), 1.0);
+    // Cinematic Vignette (Readability Focus)
+    float vignette = smoothstep(1.6, 0.4, length(st));
+    color *= vignette;
+    
+    // Premium Fine Grain
+    float grain = fract(sin(dot(uv + t*0.001, vec2(12.9898, 78.233))) * 43758.5453);
+    color += (grain - 0.5) * 0.025;
+
+    // Clamp for absolute legibility
+    gl_FragColor = vec4(clamp(color, 0.0, 0.55), 1.0);
   }
 `;
 
 function BackgroundMesh() {
   const meshRef = useRef<THREE.Mesh>(null!);
-  const { viewport } = useThree();
+  const { viewport, size } = useThree();
   
   const uniforms = useMemo(() => ({
     uTime: { value: 0 },
     uMouse: { value: new THREE.Vector2(0, 0) },
-    uColor1: { value: new THREE.Color("#0f0203") }, // Very dark crimson void
-    uColor2: { value: new THREE.Color("#8c0f20") }, // Deep MAAC Red
-    uColor3: { value: new THREE.Color("#181412") }, // Charcoal with slight warmth
+    uResolution: { value: new THREE.Vector2(size.width, size.height) },
+    uColor1: { value: new THREE.Color("#0D3D3D") }, // Deep Emerald Teal
+    uColor2: { value: new THREE.Color("#4D0A0A") }, // Deep Crimson Red
+    uColor3: { value: new THREE.Color("#000000") }, // Absolute Black
   }), []);
 
   useFrame((state) => {
     uniforms.uTime.value = state.clock.getElapsedTime();
+    uniforms.uResolution.value.set(state.size.width, state.size.height);
     uniforms.uMouse.value.lerp(
       new THREE.Vector2(state.mouse.x, state.mouse.y),
-      0.05 // Smoother, subtler mouse interaction
+      0.02
     );
   });
 
   return (
     <mesh ref={meshRef} scale={[viewport.width, viewport.height, 1]}>
-      <planeGeometry args={[1, 1, 32, 32]} />
+      <planeGeometry args={[1, 1]} />
       <shaderMaterial
         vertexShader={vertexShader}
         fragmentShader={fragmentShader}
@@ -120,28 +106,78 @@ function BackgroundMesh() {
   );
 }
 
+function SoftBokeh({ count = 600 }) {
+  const mesh = useRef<THREE.InstancedMesh>(null!);
+  const { viewport } = useThree();
+
+  const dummy = useMemo(() => new THREE.Object3D(), []);
+  const particles = useMemo(() => {
+    const temp = [];
+    for (let i = 0; i < count; i++) {
+      const t = Math.random() * 100;
+      const speed = 0.001 + Math.random() / 800;
+      const xFactor = -50 + Math.random() * 100;
+      const yFactor = -50 + Math.random() * 100;
+      const zFactor = -20 + Math.random() * 15;
+      const size = 1.0 + Math.random() * 2.5;
+      temp.push({ t, speed, xFactor, yFactor, zFactor, size, mx: 0, my: 0 });
+    }
+    return temp;
+  }, [count]);
+
+  useFrame((state) => {
+    particles.forEach((p, i) => {
+      p.t += p.speed;
+      const { t, xFactor, yFactor, zFactor, size } = p;
+      const s = Math.cos(t) * 0.5 + 0.5;
+      
+      p.mx += (state.mouse.x * viewport.width - p.mx) * 0.002;
+      p.my += (state.mouse.y * viewport.height - p.my) * 0.002;
+
+      dummy.position.set(
+        xFactor + Math.cos(t) * 3.0 + p.mx * 0.015,
+        yFactor + Math.sin(t) * 3.0 + p.my * 0.015,
+        zFactor
+      );
+      
+      dummy.scale.set(size * s, size * s, size * s);
+      dummy.updateMatrix();
+      mesh.current.setMatrixAt(i, dummy.matrix);
+    });
+    mesh.current.instanceMatrix.needsUpdate = true;
+  });
+
+  return (
+    <instancedMesh ref={mesh} args={[undefined, undefined, count]}>
+      <circleGeometry args={[0.3, 12]} />
+      <meshBasicMaterial 
+        color="#20B2AA" 
+        transparent 
+        opacity={0.05} 
+        blending={THREE.AdditiveBlending} 
+      />
+    </instancedMesh>
+  );
+}
+
 export default function DynamicBackground() {
   const [shouldRender, setShouldRender] = useState(false);
 
   useEffect(() => {
-    console.log("DynamicBackground: Checking device...");
-    // Enable for all devices
     setShouldRender(true);
-    console.log("DynamicBackground: Rendering enabled.");
   }, []);
 
   if (!shouldRender) return null;
 
   return (
-    <div className="fixed inset-0 z-[1] pointer-events-none overflow-hidden">
+    <div className="fixed inset-0 z-[-1] pointer-events-none overflow-hidden bg-black">
       <Canvas
         camera={{ position: [0, 0, 1] }}
-        gl={{ antialias: false, stencil: false, depth: false }}
-        // Optimization: Cap DPR at 1.2 for mobile to keep frame rate high
-        dpr={typeof window !== 'undefined' && window.innerWidth < 768 ? 1 : [1, 1.5]}
-        onCreated={() => console.log("WebGL Canvas Created successfully")}
+        gl={{ antialias: true, stencil: false, depth: false, powerPreference: "high-performance" }}
+        dpr={typeof window !== 'undefined' ? Math.min(window.devicePixelRatio, 2) : 1}
       >
         <BackgroundMesh />
+        <SoftBokeh count={typeof window !== 'undefined' && window.innerWidth < 768 ? 150 : 600} />
       </Canvas>
     </div>
   );

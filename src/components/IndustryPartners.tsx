@@ -95,21 +95,25 @@ export default function IndustryPartners() {
   return (
     <section
       ref={containerRef}
-      className="relative bg-transparent py-12 md:py-20 overflow-hidden border-y border-yellow-600/30"
+      className="relative bg-transparent py-12 md:py-20 overflow-hidden border-y border-white/5"
     >
       <div className="relative z-10 max-w-[1800px] mx-auto">
         {/* Header */}
-        <div className="ip-header text-center mb-12">
-          <h2 className="font-display font-black text-[clamp(1.5rem,3.5vw,2.5rem)] text-white leading-[0.9] tracking-tighter uppercase">
-            Hiring <span className="text-yellow-500 italic">Ecosystem</span>
+        <div className="ip-header text-center mb-16 md:mb-20">
+          <p className="metallic-gold-text text-[10px] font-bold tracking-[0.3em] uppercase mb-4 flex items-center justify-center gap-3">
+            <span className="w-8 h-[1px] metallic-gold-accent" />
+            Powering the Studio Network
+            <span className="w-8 h-[1px] metallic-gold-accent" />
+          </p>
+          <h2 className="font-display font-black text-[clamp(2.5rem,6vw,3.5rem)] leading-[0.8] tracking-tighter text-white uppercase">
+            HIRING <span className="metallic-gold-text italic">ECOSYSTEM</span>
           </h2>
         </div>
 
-        {/* Dual-Row Scrolling */}
         <div className="relative space-y-6">
           {/* Gradient overlays */}
-          <div className="absolute left-0 top-0 bottom-0 w-24 md:w-48 bg-gradient-to-r from-[#0a0a0a]/80 to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-24 md:w-48 bg-gradient-to-l from-[#0a0a0a]/80 to-transparent z-10 pointer-events-none" />
+          <div className="absolute left-0 top-0 bottom-0 w-24 md:w-32 bg-gradient-to-r from-black/60 to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 md:w-32 bg-gradient-to-l from-black/60 to-transparent z-10 pointer-events-none" />
 
           {/* Row 1 - Scrolls Left */}
           <div 
@@ -120,7 +124,7 @@ export default function IndustryPartners() {
           >
             {extendedPartners.map((partner, i) => (
               <div key={`${partner}-${i}`} className="shrink-0 group">
-                <div className="w-48 h-20 md:w-56 md:h-24 bg-white/[0.03] backdrop-blur-xl border border-white/10 flex items-center justify-center px-6 transition-all duration-300 hover:border-yellow-400/50 hover:bg-white/[0.08] hover:scale-105">
+                <div className="w-48 h-20 md:w-56 md:h-24 glass-card border border-white/10 flex items-center justify-center px-6 transition-all duration-300 hover:border-[#BF953F]/50 hover:bg-white/[0.08] hover:scale-105">
                   <span className="text-xs md:text-sm text-white font-bold uppercase tracking-wider text-center">
                     {partner}
                   </span>
@@ -138,7 +142,7 @@ export default function IndustryPartners() {
           >
             {reversedPartners.map((partner, i) => (
               <div key={`${partner}-${i}`} className="shrink-0 group">
-                <div className="w-48 h-20 md:w-56 md:h-24 bg-white/[0.03] backdrop-blur-xl border border-white/10 flex items-center justify-center px-6 transition-all duration-300 hover:border-yellow-400/50 hover:bg-white/[0.08] hover:scale-105">
+                <div className="w-48 h-20 md:w-56 md:h-24 glass-card border border-white/10 flex items-center justify-center px-6 transition-all duration-300 hover:border-[#BF953F]/50 hover:bg-white/[0.08] hover:scale-105">
                   <span className="text-xs md:text-sm text-white font-bold uppercase tracking-wider text-center">
                     {partner}
                   </span>

@@ -155,7 +155,7 @@ export default function ImageLightbox({
               key={idx}
               onClick={() => setCurrentIndex(idx)}
               className={`flex-shrink-0 w-16 h-12 rounded-md overflow-hidden border-2 transition-all ${
-                idx === currentIndex ? "border-[#E31837] scale-110" : "border-transparent opacity-60 hover:opacity-100"
+                idx === currentIndex ? "border-[#FFD700] scale-110" : "border-transparent opacity-60 hover:opacity-100"
               }`}
               aria-label={`Go to image ${idx + 1}`}
             >

@@ -76,7 +76,7 @@ export default function ApplyNow() {
   }
 
   const inputClass = (field: string) =>
-    `w-full px-6 py-4 rounded-2xl bg-white/5 border ${errors[field] ? "border-red-500" : "border-white/10"} text-white placeholder-[#6B6560] focus:outline-none focus:border-[#E31837]/50 transition-all duration-300 text-base`;
+    `w-full px-6 py-4 rounded-2xl bg-white/[0.03] border ${errors[field] ? "border-[#FFD700]" : "border-white/5"} text-white placeholder-[#555] focus:outline-none focus:border-[#FFD700]/30 transition-all duration-300 text-base focus:ring-1 focus:ring-[#FFD700]/20`;
 
   return (
     <section ref={sectionRef} className="relative py-24 md:py-40 overflow-hidden bg-transparent">
@@ -87,12 +87,12 @@ export default function ApplyNow() {
           {/* Left */}
           <div className="an-heading space-y-10">
             <div>
-              <p className="text-[#E31837] text-sm font-bold tracking-[0.2em] uppercase mb-6 flex items-center gap-3">
-                <span className="w-8 h-[1px] bg-[#E31837]" />
+              <p className="metallic-gold-text text-[10px] font-bold tracking-[0.3em] uppercase mb-4 flex items-center gap-3">
+                <span className="w-8 h-[1px] metallic-gold-accent" />
                 Admissions Open
               </p>
-              <h2 className="font-display font-bold text-[clamp(1.8rem,4.5vw,3rem)] text-[#F0EBE1] leading-[0.95] tracking-tight">
-                Ignite Your <span className="gradient-text">Potential</span>
+              <h2 className="font-display font-black text-[clamp(2.2rem,5.5vw,3.5rem)] leading-[0.8] tracking-tighter text-white uppercase">
+                IGNITE YOUR <span className="metallic-gold-text italic">POTENTIAL</span>
               </h2>
               <p className="text-[#A8A29C] text-lg md:text-2xl font-medium leading-relaxed mt-8 max-w-lg">
                 Join India&apos;s most prestigious academy for digital arts. Your journey to a global creative career starts here.
@@ -103,8 +103,8 @@ export default function ApplyNow() {
             <div className="grid grid-cols-2 gap-4">
               {["NSDC Partner", "MESC Certified", "Skill India", "B.Voc Degree"].map((badge) => (
                 <div key={badge} className="flex items-center gap-3 p-4 rounded-2xl glass border border-white/5 text-[#F0EBE1] text-xs font-bold uppercase tracking-wider">
-                  <div className="w-6 h-6 rounded-full bg-[#E31837]/10 flex items-center justify-center">
-                    <ShieldCheck size={14} className="text-[#E31837]" />
+                  <div className="w-6 h-6 rounded-full bg-[#FFD700]/10 flex items-center justify-center">
+                    <ShieldCheck size={14} className="text-[#FFD700]" />
                   </div>
                   {badge}
                 </div>
@@ -120,7 +120,7 @@ export default function ApplyNow() {
                   </a>
                 </MagneticButton>
                 <MagneticButton>
-                  <a href={`tel:${contactInfo.phone}`} className="flex items-center gap-3 px-6 py-3 rounded-full bg-[#E31837]/10 border border-[#E31837]/20 text-[#E31837] text-xs font-bold uppercase tracking-widest hover:bg-[#E31837]/20 transition-all">
+                  <a href={`tel:${contactInfo.phone}`} className="flex items-center gap-3 px-6 py-3 rounded-full bg-[#BF953F]/10 border border-[#BF953F]/20 text-[#BF953F] text-xs font-bold uppercase tracking-widest hover:bg-[#BF953F]/20 transition-all">
                     <Phone size={16} /> Call Now
                   </a>
                 </MagneticButton>
@@ -133,9 +133,9 @@ export default function ApplyNow() {
             <form
               ref={formRef}
               onSubmit={handleSubmit}
-              className="glass rounded-[40px] p-8 md:p-12 space-y-6 border-white/5 relative overflow-hidden"
+              className="glass rounded-[2.5rem] p-8 md:p-12 space-y-6 border-white/5 relative overflow-hidden shadow-2xl"
             >
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#E31837] to-[#FF6B35]" />
+              <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#BF953F] to-transparent" />
               <h3 className="font-display font-bold text-2xl text-white mb-4">Express Interest</h3>
 
               <div className="space-y-4">
@@ -161,16 +161,18 @@ export default function ApplyNow() {
                   className={`${inputClass("message")} resize-none`} />
               </div>
 
-              <MagneticButton>
+              <div className="pt-2">
                 <SmokyButton 
                   type="submit" 
                   disabled={isSubmitting}
-                  className="w-full py-5 rounded-2xl text-[12px] font-bold tracking-widest flex items-center justify-center gap-3 disabled:opacity-50"
+                  className="w-full min-h-[56px] flex items-center justify-center gap-3 disabled:opacity-50"
                 >
-                  {isSubmitting ? 'Sending...' : 'Secure Your Spot'}
-                  {!isSubmitting && <Send size={18} />}
+                  <span className="text-[12px] font-bold tracking-[0.2em]">
+                    {isSubmitting ? 'Sending...' : 'Secure Your Spot'}
+                  </span>
+                  {!isSubmitting && <Send size={15} className="mt-[-2px]" />}
                 </SmokyButton>
-              </MagneticButton>
+              </div>
               
               {submitError && (
                 <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm text-center">

@@ -3,10 +3,6 @@
 import withBundleAnalyzer from '@next/bundle-analyzer';
 
 const nextConfig = {
-  // Optimize package imports for better tree-shaking
-  experimental: {
-    optimizePackageImports: ['lucide-react', 'gsap'],
-  },
   // Enforce no trailing slashes everywhere (canonical URL consistency)
   trailingSlash: false,
   // Image optimization configuration

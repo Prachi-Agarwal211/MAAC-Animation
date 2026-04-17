@@ -52,11 +52,11 @@ export default function ContactClient() {
       {/* ── HERO SECTION ── */}
       <section className="relative pt-32 pb-20 px-6 md:px-12 lg:px-24 border-b border-white/5">
         <div className="max-w-[1800px] mx-auto contact-hero-content">
-          <span className="inline-block text-[#E31837] text-[10px] font-bold tracking-[0.4em] uppercase mb-6">Connect with Elite</span>
+          <span className="inline-block text-[#FFD700] text-[10px] font-bold tracking-[0.4em] uppercase mb-6">Connect with Elite</span>
           <h1 className="font-display font-black text-[clamp(2.5rem,7vw,5rem)] text-white leading-[0.9] tracking-tighter mb-8">
             START THE <br /> <span className="gradient-text">DIALOGUE</span>
           </h1>
-          <p className="text-[#A8A29C] text-base md:text-lg font-medium leading-relaxed max-w-2xl italic border-l-2 border-[#E31837] pl-6">
+          <p className="text-[#A8A29C] text-base md:text-lg font-medium leading-relaxed max-w-2xl italic border-l-2 border-[#FFD700] pl-6">
             Have questions about our world-class curriculum? Our advisors are ready to guide your creative evolution.
           </p>
         </div>
@@ -68,9 +68,9 @@ export default function ContactClient() {
 
           {/* Left: Info */}
           <div className="lg:col-span-5 space-y-8">
-            <div className="contact-card p-8 rounded-3xl glass border border-white/5 space-y-6 group hover:border-[#E31837]/30 transition-all duration-700">
+            <div className="contact-card p-8 rounded-3xl glass border border-white/5 space-y-6 group hover:border-[#FFD700]/30 transition-all duration-700">
                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-[#E31837]/10 flex items-center justify-center text-[#E31837]">
+                  <div className="w-12 h-12 rounded-xl bg-[#FFD700]/10 flex items-center justify-center text-[#FFD700]">
                     <MapPin size={20} />
                   </div>
                   <h3 className="text-white font-display font-bold text-base uppercase tracking-wider">HQ Location</h3>
@@ -84,13 +84,13 @@ export default function ContactClient() {
             </div>
 
             <div className="grid sm:grid-cols-2 gap-6">
-               <div className="contact-card p-6 rounded-2xl glass border border-white/5 space-y-3 hover:border-[#E31837]/30 transition-all">
-                  <Phone size={16} className="text-[#E31837]" />
+               <div className="contact-card p-6 rounded-2xl glass border border-white/5 space-y-3 hover:border-[#FFD700]/30 transition-all">
+                  <Phone size={16} className="text-[#FFD700]" />
                   <h4 className="text-white font-display font-bold text-xs uppercase tracking-wider">Phone</h4>
                   <a href="tel:+917300001589" className="block text-[#A8A29C] text-xs hover:text-white transition-colors">+91 73000 01589</a>
                </div>
-               <div className="contact-card p-6 rounded-2xl glass border border-white/5 space-y-3 hover:border-[#E31837]/30 transition-all">
-                  <Mail size={16} className="text-[#E31837]" />
+               <div className="contact-card p-6 rounded-2xl glass border border-white/5 space-y-3 hover:border-[#FFD700]/30 transition-all">
+                  <Mail size={16} className="text-[#FFD700]" />
                   <h4 className="text-white font-display font-bold text-xs uppercase tracking-wider">Email</h4>
                   <a href="mailto:maacanimationjaipur@gmail.com" className="block text-[#A8A29C] text-xs hover:text-white transition-colors break-all">maacanimationjaipur@gmail.com</a>
                </div>
@@ -107,16 +107,16 @@ export default function ContactClient() {
           {/* Right: Form */}
           <div className="lg:col-span-7">
             <form onSubmit={handleSubmit} className="contact-card p-8 md:p-12 rounded-3xl glass border border-white/5 relative overflow-hidden">
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#E31837] to-[#FF6B35]" />
-              <h2 className="text-white font-display font-black text-2xl md:text-3xl tracking-tighter mb-8 uppercase">Express <span className="text-[#E31837]">Interest</span></h2>
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#FFD700] to-[#FF6B35]" />
+              <h2 className="text-white font-display font-black text-2xl md:text-3xl tracking-tighter mb-8 uppercase">Express <span className="text-[#FFD700]">Interest</span></h2>
 
               <div className="space-y-5">
                 <div className="grid md:grid-cols-2 gap-5">
-                  <input type="text" name="name" placeholder="FULL NAME" required className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-xs font-bold tracking-wider text-white focus:outline-none focus:border-[#E31837]/50 transition-all uppercase placeholder:text-white/10" />
-                  <input type="email" name="email" placeholder="EMAIL ADDRESS" required className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-xs font-bold tracking-wider text-white focus:outline-none focus:border-[#E31837]/50 transition-all uppercase placeholder:text-white/10" />
+                  <input type="text" name="name" placeholder="FULL NAME" required className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-xs font-bold tracking-wider text-white focus:outline-none focus:border-[#FFD700]/50 transition-all uppercase placeholder:text-white/10" />
+                  <input type="email" name="email" placeholder="EMAIL ADDRESS" required className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-xs font-bold tracking-wider text-white focus:outline-none focus:border-[#FFD700]/50 transition-all uppercase placeholder:text-white/10" />
                 </div>
-                <input type="tel" name="phone" placeholder="MOBILE NUMBER" required className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-xs font-bold tracking-wider text-white focus:outline-none focus:border-[#E31837]/50 transition-all uppercase placeholder:text-white/10" />
-                <textarea name="message" placeholder="ADDITIONAL MESSAGE OR NOTE" rows={4} className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-xs font-bold tracking-wider text-white focus:outline-none focus:border-[#E31837]/50 transition-all uppercase placeholder:text-white/10 resize-none" />
+                <input type="tel" name="phone" placeholder="MOBILE NUMBER" required className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-xs font-bold tracking-wider text-white focus:outline-none focus:border-[#FFD700]/50 transition-all uppercase placeholder:text-white/10" />
+                <textarea name="message" placeholder="ADDITIONAL MESSAGE OR NOTE" rows={4} className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-xs font-bold tracking-wider text-white focus:outline-none focus:border-[#FFD700]/50 transition-all uppercase placeholder:text-white/10 resize-none" />
               </div>
 
               <div className="mt-10 flex flex-col sm:flex-row items-center justify-between gap-6">

@@ -31,7 +31,7 @@ export default function ScrollIndicator() {
       {/* Top Scroll Progress Bar */}
       <div className="fixed top-0 left-0 w-full h-1 bg-white/10 z-50">
         <div
-          className="h-full bg-[#E31837] transition-all duration-300 ease-out"
+          className="h-full metallic-gold-accent transition-all duration-300 ease-out"
           style={{ width: `${scrollProgress}%` }}
         />
       </div>
@@ -40,7 +40,7 @@ export default function ScrollIndicator() {
       {showBackToTop && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 w-14 h-14 rounded-full glass border border-white/10 bg-[#0C0C0C]/90 backdrop-blur-md flex items-center justify-center text-white/80 hover:text-white hover:border-[#E31837]/30 hover:bg-[#E31837]/10 transition-all duration-300 z-40"
+          className="fixed bottom-8 right-8 w-14 h-14 rounded-full glass border border-white/10 bg-[#0C0C0C]/90 backdrop-blur-md flex items-center justify-center text-white/80 hover:text-white hover:border-[#BF953F]/30 hover:bg-[#BF953F]/10 transition-all duration-300 z-40"
           aria-label="Scroll to top"
         >
           <ArrowUp size={24} />

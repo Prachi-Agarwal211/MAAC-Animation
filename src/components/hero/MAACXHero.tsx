@@ -316,7 +316,7 @@ export default function MAACXHero({ onIntroReveal }: Props) {
                 <div className="max-w-4xl mx-auto h-1.5 sm:h-2 w-full rounded-full bg-white/10 overflow-hidden">
                   <div
                     ref={progressRef}
-                    className="h-full w-0 rounded-full bg-[#E31837] shadow-[0_0_12px_rgba(227,24,55,0.5)]"
+                    className="h-full w-0 rounded-full metallic-gold-accent shadow-[0_0_20px_rgba(227,24,55,0.6)]"
                   />
                 </div>
               </div>
@@ -349,9 +349,9 @@ export default function MAACXHero({ onIntroReveal }: Props) {
           ) : (
             <div className="absolute inset-0 bg-transparent" aria-hidden />
           )}
-          {/* Readability: semi-transparent gradients to allow background to show through */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#080808]/60 via-transparent to-[#080808]/80" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#080808]/50 via-transparent to-transparent" />
+          {/* Readability: very light semi-transparent gradients to allow background to show through clearly */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-transparent" />
         </div>
 
         {/* Foreground: clear of fixed header + safe areas; content anchored bottom */}
@@ -360,8 +360,8 @@ export default function MAACXHero({ onIntroReveal }: Props) {
         >
           <div className="flex w-full flex-col gap-8 lg:flex-row lg:items-end lg:justify-between lg:gap-12">
             <div className="maacx-content min-w-0 max-w-3xl flex-1 [&>*]:opacity-0">
-              <div className="mb-4 sm:mb-5">
-                <span className="inline-block rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.28em] text-white/95 backdrop-blur-md sm:px-4 sm:text-[10px] sm:tracking-[0.3em]">
+              <div className="mb-2">
+                <span className="inline-block rounded-full bg-white px-3 py-1.5 text-[9px] font-black uppercase tracking-[0.28em] text-black mix-blend-screen sm:px-4 sm:text-[10px] sm:tracking-[0.3em]">
                   Animation & VFX Academy · Jaipur
                 </span>
               </div>
@@ -370,12 +370,12 @@ export default function MAACXHero({ onIntroReveal }: Props) {
                 <span className="block font-display font-bold uppercase leading-[1.02] tracking-tighter gradient-text-premium text-[clamp(1.65rem,6.5vw,3rem)] drop-shadow-lg">
                   <SplitTextReveal>Learn Animation & VFX</SplitTextReveal>
                 </span>
-                <span className="font-display mt-2 block text-[clamp(1.25rem,5vw,2.25rem)] font-black uppercase leading-[1.08] tracking-tight text-[#E31837] drop-shadow-md">
+                <span className="font-display mt-0.5 block text-[clamp(1.25rem,5vw,2.25rem)] font-extrabold uppercase leading-[1.08] tracking-normal metallic-gold-text">
                   From Basics to Portfolio
                 </span>
               </h1>
 
-              <p className="mb-6 max-w-xl text-[15px] font-medium leading-relaxed text-[#C4BEB6] sm:mb-8 sm:text-base md:text-lg md:leading-relaxed lg:border-l-2 lg:border-[#E31837]/40 lg:pl-5 lg:italic">
+              <p className="mb-6 max-w-xl text-[15px] font-medium leading-relaxed text-[#C4BEB6] sm:mb-8 sm:text-base md:text-lg md:leading-relaxed lg:border-l-2 lg:metallic-gold-accent lg:pl-5 lg:italic">
                 Get hands-on training in 3D, VFX, motion graphics, and game art—learn industry tools, build real
                 projects, and graduate with a showreel that’s ready for interviews.
               </p>
@@ -388,12 +388,12 @@ export default function MAACXHero({ onIntroReveal }: Props) {
                   >
                     Enquire Now
                   </SmokyButton>
-                  <a
+                  <SmokyButton
                     href="#courses"
-                    className="btn btn-ghost flex min-h-[48px] w-full items-center justify-center rounded-full border border-white/20 hover:border-white/40 px-6 py-3.5 text-center text-[11px] font-bold tracking-[0.2em] text-white/90 sm:w-auto sm:min-w-[188px] sm:px-8 bg-white/5 backdrop-blur-sm"
+                    className="flex min-h-[48px] w-full items-center justify-center sm:w-auto sm:min-w-[188px]"
                   >
                     View Programs
-                  </a>
+                  </SmokyButton>
                 </div>
 
                 <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
@@ -426,7 +426,6 @@ export default function MAACXHero({ onIntroReveal }: Props) {
               </div>
             </div>
 
-            {/* Desktop / large: stats column */}
             <div className="maacx-hero-stats hidden shrink-0 text-right opacity-0 xl:block xl:pb-2">
               <div className="space-y-10">
                 {[
@@ -434,7 +433,7 @@ export default function MAACXHero({ onIntroReveal }: Props) {
                   { v: "30+", l: "YEARS LEGACY" },
                 ].map((s) => (
                   <div key={s.l} className="group cursor-default">
-                    <div className="font-display text-5xl font-black leading-none text-white transition-all duration-500 group-hover:-translate-x-1 group-hover:text-[#E31837]">
+                    <div className="font-display text-5xl font-black leading-none text-white transition-all duration-500 group-hover:-translate-x-1 group-hover:metallic-gold-text">
                       {s.v}
                     </div>
                     <div className="mt-3 text-[9px] font-bold uppercase tracking-[0.4em] text-[#6B6560]">{s.l}</div>

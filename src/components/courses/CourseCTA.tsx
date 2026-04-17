@@ -16,7 +16,7 @@ export default function CourseCTA() {
           <MagneticButton>
             <Link
               href="/contact"
-              className="btn bg-gradient-to-r from-[#E31837] to-[#C4132D] text-white hover:opacity-90 border border-[#E31837]/50 px-8 py-4 rounded-lg font-semibold shadow-[0_0_20px_rgba(227,24,55,0.3)]"
+              className="btn bg-gradient-to-r from-[#FFD700] to-[#C4132D] text-white hover:opacity-90 border border-[#FFD700]/50 px-8 py-4 rounded-lg font-semibold shadow-[0_0_20px_rgba(227,24,55,0.3)]"
             >
               Book Free Demo Class
             </Link>

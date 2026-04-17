@@ -89,7 +89,7 @@ export default function GalleryClient() {
       <section className="relative pt-20 md:pt-32 pb-16 md:pb-20 overflow-hidden">
         <div className="absolute inset-0 bg-hero-pattern" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 gallery-hero">
-          <p className="text-[#E31837] text-xs font-inter font-semibold tracking-[0.2em] uppercase mb-4">
+          <p className="text-[#FFD700] text-xs font-inter font-semibold tracking-[0.2em] uppercase mb-4">
             Showcase
           </p>
           <h1 className="font-display font-extrabold text-[clamp(2.5rem,5vw,5rem)] text-[#f5f0e8] leading-[1.05] tracking-tight mb-6">
@@ -110,7 +110,7 @@ export default function GalleryClient() {
             {galleryImages.map((item) => (
               <div
                 key={item.id}
-                className="gallery-item group relative glass-card rounded-2xl overflow-hidden border border-white/5 hover:border-[#E31837]/30 transition-all duration-300"
+                className="gallery-item group relative glass-card rounded-2xl overflow-hidden border border-white/5 hover:border-[#FFD700]/30 transition-all duration-300"
               >
                 <div className="relative aspect-square">
                   <Image
@@ -123,7 +123,7 @@ export default function GalleryClient() {
                   />
                   {/* Category badge */}
                   <div className="absolute top-3 left-3">
-                    <span className="bg-[#E31837]/90 text-white text-[10px] font-semibold px-2 py-1 rounded-full uppercase tracking-wider">
+                    <span className="bg-[#FFD700]/90 text-white text-[10px] font-semibold px-2 py-1 rounded-full uppercase tracking-wider">
                       {categoryEmojis[item.category] || "🎓"} {item.category.replace(/-/g, " ")}
                     </span>
                   </div>
@@ -131,7 +131,7 @@ export default function GalleryClient() {
 
                 {/* Hover overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-5">
-                  <span className="text-[#E31837] text-xs font-medium uppercase tracking-wider">
+                  <span className="text-[#FFD700] text-xs font-medium uppercase tracking-wider">
                     {item.category.replace(/-/g, " ")}
                   </span>
                   <h3 className="text-[#f5f0e8] font-display font-semibold">
@@ -147,7 +147,7 @@ export default function GalleryClient() {
           <div className="text-center mt-12">
             <a
               href="/student-work"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-[#E31837]/10 border border-[#E31837]/30 text-[#E31837] font-semibold hover:bg-[#E31837]/20 transition-colors"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-[#FFD700]/10 border border-[#FFD700]/30 text-[#FFD700] font-semibold hover:bg-[#FFD700]/20 transition-colors"
             >
               View Full Portfolio Gallery
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

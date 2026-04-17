@@ -89,7 +89,7 @@ export default function StudentWorkPage() {
           className="absolute inset-0"
           style={{ background: "linear-gradient(135deg, #1A0508 0%, #0C0C0C 50%, #0C0C0C 100%)" }}
         />
-        <div className="absolute top-20 right-10 w-64 h-64 rounded-full opacity-10" style={{ background: "radial-gradient(circle, #E31837 0%, transparent 70%)" }} />
+        <div className="absolute top-20 right-10 w-64 h-64 rounded-full opacity-10" style={{ background: "radial-gradient(circle, #FFD700 0%, transparent 70%)" }} />
         <div className="absolute bottom-10 left-10 w-48 h-48 rounded-full opacity-5" style={{ background: "radial-gradient(circle, #C4A882 0%, transparent 70%)" }} />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -97,7 +97,7 @@ export default function StudentWorkPage() {
             {/* Breadcrumb */}
             <nav className="mb-8" aria-label="Breadcrumb">
               <ol className="flex items-center gap-2 text-sm text-[#6B6560]">
-                <li><Link href="/" className="hover:text-[#E31837] transition-colors">Home</Link></li>
+                <li><Link href="/" className="hover:text-[#FFD700] transition-colors">Home</Link></li>
                 <li>/</li>
                 <li className="text-[#A8A29C]">Student Work</li>
               </ol>
@@ -137,7 +137,7 @@ export default function StudentWorkPage() {
             <MagneticButton>
               <Link
                 href="/contact"
-                className="btn bg-gradient-to-r from-[#E31837] to-[#C4132D] text-white hover:opacity-90 border border-[#E31837]/50 px-8 py-4 rounded-lg font-semibold shadow-[0_0_20px_rgba(227,24,55,0.3)]"
+                className="btn bg-gradient-to-r from-[#FFD700] to-[#C4132D] text-white hover:opacity-90 border border-[#FFD700]/50 px-8 py-4 rounded-lg font-semibold shadow-[0_0_20px_rgba(227,24,55,0.3)]"
               >
                 Book Free Demo Class
               </Link>

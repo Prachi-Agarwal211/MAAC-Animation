@@ -48,7 +48,7 @@ export default function CourseFeeAdmission({ course }: { course: Course }) {
               </div>
               <div>
                 <dt className="text-[#6B6560] text-sm">Easy EMI Option</dt>
-                <dd className="text-[#E31837] font-semibold">Starting {fees.emi}</dd>
+                <dd className="text-[#FFD700] font-semibold">Starting {fees.emi}</dd>
               </div>
               <div>
                 <dt className="text-[#6B6560] text-sm">Education Loan</dt>
@@ -79,15 +79,15 @@ export default function CourseFeeAdmission({ course }: { course: Course }) {
                 "Pay first installment and confirm your batch",
               ].map((step, i) => (
                 <li key={i} className="flex gap-3 text-[#A8A29C] text-sm">
-                  <span className="w-6 h-6 rounded-full bg-[#E31837]/20 text-[#E31837] flex items-center justify-center text-xs font-bold flex-shrink-0">
+                  <span className="w-6 h-6 rounded-full bg-[#FFD700]/20 text-[#FFD700] flex items-center justify-center text-xs font-bold flex-shrink-0">
                     {i + 1}
                   </span>
                   {step}
                 </li>
               ))}
             </ol>
-            <div className="mt-6 p-4 bg-[#E31837]/10 border border-[#E31837]/20 rounded-lg">
-              <p className="text-[#E31837] text-sm font-semibold">Eligibility: {course.eligibility}</p>
+            <div className="mt-6 p-4 bg-[#FFD700]/10 border border-[#FFD700]/20 rounded-lg">
+              <p className="text-[#FFD700] text-sm font-semibold">Eligibility: {course.eligibility}</p>
               <p className="text-[#A8A29C] text-xs mt-1">Duration: {course.duration}</p>
             </div>
           </div>

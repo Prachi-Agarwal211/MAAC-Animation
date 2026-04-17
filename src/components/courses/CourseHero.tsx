@@ -68,25 +68,25 @@ export default function CourseHero({ course }: { course: Course }) {
       )}
 
       {/* Decorative elements */}
-      <div className="absolute top-20 right-10 w-64 h-64 rounded-full opacity-10" style={{ background: "radial-gradient(circle, #E31837 0%, transparent 70%)" }} />
-      <div className="absolute bottom-10 left-10 w-48 h-48 rounded-full opacity-5" style={{ background: "radial-gradient(circle, #C4A882 0%, transparent 70%)" }} />
+      <div className="absolute top-20 right-10 w-64 h-64 rounded-full opacity-10" style={{ background: "radial-gradient(circle, #BF953F 0%, transparent 70%)" }} />
+      <div className="absolute bottom-10 left-10 w-48 h-48 rounded-full opacity-5" style={{ background: "radial-gradient(circle, #BF953F 0%, transparent 70%)" }} />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="max-w-3xl">
           {/* Breadcrumb */}
           <nav className="mb-8" aria-label="Breadcrumb">
             <ol className="flex items-center gap-2 text-sm text-[#6B6560]">
-              <li><Link href="/" className="hover:text-[#E31837] transition-colors">Home</Link></li>
+              <li><Link href="/" className="hover:metallic-gold-text transition-colors">Home</Link></li>
               <li>/</li>
-              <li><Link href="/courses" className="hover:text-[#E31837] transition-colors">Courses</Link></li>
+              <li><Link href="/courses" className="hover:metallic-gold-text transition-colors">Courses</Link></li>
               <li>/</li>
               <li className="text-[#A8A29C]">{course.title}</li>
             </ol>
           </nav>
 
           {/* Course badge */}
-          <div className="inline-flex items-center gap-2 bg-[#E31837]/10 border border-[#E31837]/30 rounded-full px-4 py-2 mb-6">
-            <span className="text-[#E31837] text-xs font-semibold tracking-wider uppercase">{course.code}</span>
+          <div className="inline-flex items-center gap-2 bg-[#BF953F]/10 border border-[#BF953F]/30 rounded-full px-4 py-2 mb-6">
+            <span className="metallic-gold-text text-xs font-semibold tracking-wider uppercase">{course.code}</span>
             <span className="text-[#6B6560]">•</span>
             <span className="text-[#A8A29C] text-sm">{course.duration}</span>
           </div>
@@ -105,7 +105,7 @@ export default function CourseHero({ course }: { course: Course }) {
           <div className="flex flex-col sm:flex-row gap-4">
             <Link
               href="/contact"
-              className="btn btn-primary bg-gradient-to-r from-[#E31837] to-[#C4132D] text-white hover:opacity-90 border border-[#E31837]/50 shadow-[0_0_20px_rgba(227,24,55,0.3)] px-8 py-4 rounded-lg font-semibold text-center"
+              className="btn btn-primary bg-gradient-to-r from-[#BF953F] to-[#C4132D] text-white hover:opacity-90 border border-[#BF953F]/50 shadow-[0_0_20px_rgba(227,24,55,0.3)] px-8 py-4 rounded-lg font-semibold text-center uppercase tracking-widest text-[10px]"
             >
               Book Free Demo Class
             </Link>

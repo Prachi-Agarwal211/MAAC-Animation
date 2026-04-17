@@ -71,12 +71,16 @@ export default function StudentShowcase() {
       
       {/* ── HEADER ── */}
       <div className="ss-header relative z-10 max-w-7xl mx-auto px-6 mb-16 md:mb-24 text-center">
-        <span className="inline-block px-4 py-2 bg-[#E31837]/10 backdrop-blur-md border border-[#E31837]/30 rounded-full text-[#E31837] text-[11px] font-bold tracking-[0.2em] uppercase mb-6">
-          Premium Student Reel
-        </span>
-        <h2 className="font-display font-bold text-[clamp(1.8rem,4.5vw,3rem)] text-white leading-[0.9] tracking-tighter">
-          Cinematic <span className="gradient-text">Showcase</span>
-        </h2>
+        <div className="text-center mb-16 md:mb-20">
+          <p className="metallic-gold-text text-[10px] font-bold tracking-[0.3em] uppercase mb-4 flex items-center justify-center gap-3">
+            <span className="w-8 h-[1px] metallic-gold-accent" />
+            Witness the Talent
+            <span className="w-8 h-[1px] metallic-gold-accent" />
+          </p>
+          <h2 className="font-display font-black text-[clamp(2.5rem,6vw,3.5rem)] text-white leading-[0.9] tracking-tighter uppercase">
+            STUDENT <span className="metallic-gold-text italic">SHOWCASE</span>
+          </h2>
+        </div>
       </div>
 
       {/* ── MAIN THEATRE ── */}
@@ -104,7 +108,7 @@ export default function StudentShowcase() {
                 {/* Loader overlay for when video is buffering */}
                 {isActive && !isPaused && (
                   <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20">
-                     <div className="w-12 h-12 border-4 border-[#E31837] border-t-transparent rounded-full animate-spin" />
+                     <div className="w-12 h-12 border-4 border-[#FFD700] border-t-transparent rounded-full animate-spin" />
                   </div>
                 )}
               </div>
@@ -121,7 +125,7 @@ export default function StudentShowcase() {
 
             <div className="flex items-end justify-between gap-8">
               <div className="flex-1">
-                <p className="text-[#E31837] text-xs font-bold tracking-[0.2em] uppercase mb-3">{showcaseVideos[active].category}</p>
+                <p className="text-[#FFD700] text-xs font-bold tracking-[0.2em] uppercase mb-3">{showcaseVideos[active].category}</p>
                 <h3 className="text-white text-3xl md:text-5xl font-display font-bold tracking-tighter">{showcaseVideos[active].title}</h3>
                 
                 {/* Tech Stats Overlay */}
@@ -147,7 +151,7 @@ export default function StudentShowcase() {
 
           {/* Timeline Bar */}
           <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-white/10 z-20">
-            <div className="h-full bg-[#E31837] transition-all duration-100 ease-linear shadow-[0_0_15px_#E31837]" style={{ width: `${progress}%` }} />
+            <div className="h-full bg-[#FFD700] transition-all duration-100 ease-linear shadow-[0_0_15px_#FFD700]" style={{ width: `${progress}%` }} />
           </div>
         </div>
 
@@ -157,7 +161,7 @@ export default function StudentShowcase() {
             <button 
               key={i} 
               onClick={() => setActive(i)}
-              className={`relative flex-shrink-0 w-40 md:w-64 aspect-video rounded-2xl overflow-hidden border-2 transition-all duration-500 ${i === active ? 'border-[#E31837] scale-95 shadow-lg shadow-[#E31837]/20' : 'border-white/5 opacity-40 hover:opacity-100'}`}
+              className={`relative flex-shrink-0 w-40 md:w-64 aspect-video rounded-2xl overflow-hidden border-2 transition-all duration-500 ${i === active ? 'border-[#FFD700] scale-95 shadow-lg shadow-[#FFD700]/20' : 'border-white/5 opacity-40 hover:opacity-100'}`}
             >
               <Image src={item.fallbackImage} alt={item.title} fill className="object-cover" />
               <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
@@ -172,7 +176,7 @@ export default function StudentShowcase() {
       <div className="relative z-10 mt-20 flex justify-center">
         <a href="/student-work" className="group flex items-center gap-4 text-white text-xs font-bold tracking-[0.3em] uppercase">
           View All Projects
-          <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-[#E31837] group-hover:border-[#E31837] transition-all duration-500">
+          <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-[#FFD700] group-hover:border-[#FFD700] transition-all duration-500">
             <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
           </div>
         </a>

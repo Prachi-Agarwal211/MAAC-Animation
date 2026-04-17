@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { gsap } from "@/lib/gsap";
 import { submitContactForm } from "@/app/actions";
+import SmokyButton from "./ui/SmokyButton";
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -141,21 +142,21 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
     >
       <div
         ref={modalRef}
-        className="relative w-full max-w-md rounded-3xl overflow-hidden shadow-2xl"
+        className="relative w-full max-w-md rounded-[2.5rem] overflow-hidden shadow-2xl"
         style={{
-          background: "linear-gradient(135deg, rgba(28,20,16,0.7) 0%, rgba(17,17,17,0.8) 60%, rgba(26,5,8,0.7) 100%)",
-          backdropFilter: "blur(20px)",
-          border: "1px solid rgba(227,24,55,0.2)",
-          boxShadow: "0 40px 100px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.05)",
+          background: "linear-gradient(135deg, rgba(20,20,20,0.95) 0%, rgba(10,10,10,0.98) 60%, rgba(30,5,5,0.95) 100%)",
+          backdropFilter: "blur(25px)",
+          border: "1px solid rgba(227,24,55,0.15)",
+          boxShadow: "0 40px 120px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.05)",
         }}
       >
         {/* Top accent bar */}
-        <div className="h-[3px] w-full bg-gradient-to-r from-[#E31837] via-[#FF6B35] to-[#E31837]" />
+        <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-[#FFD700] to-transparent" />
 
         {/* Close button */}
         <button
           onClick={handleClose}
-          className="absolute top-4 right-4 w-9 h-9 rounded-full flex items-center justify-center text-white/40 hover:text-white hover:bg-white/10 transition-all duration-200 z-10"
+          className="absolute top-4 right-4 w-9 h-9 rounded-xl border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all duration-200 z-10"
           aria-label="Close"
         >
           <svg
@@ -173,7 +174,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
         <div className="p-7 pt-6">
           {submitted ? (
             <div className="text-center py-6">
-              <div className="w-14 h-14 rounded-full bg-[#E31837]/15 border border-[#E31837]/30 flex items-center justify-center mx-auto mb-4 text-[#E31837]">
+              <div className="w-14 h-14 rounded-full bg-[#FFD700]/15 border border-[#FFD700]/30 flex items-center justify-center mx-auto mb-4 text-[#FFD700]">
                 <svg
                   width="24"
                   height="24"
@@ -196,7 +197,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
             <>
               {/* Header */}
               <div className="mb-6">
-                <span className="inline-block px-3 py-1 rounded-full bg-[#E31837]/10 border border-[#E31837]/20 text-[#E31837] text-[10px] font-bold tracking-[0.15em] uppercase mb-3">
+                <span className="inline-block px-3 py-1 rounded-full bg-[#FFD700]/10 border border-[#FFD700]/20 text-[#FFD700] text-[10px] font-bold tracking-[0.15em] uppercase mb-3">
                   Free Demo Class
                 </span>
                 <h2 className="font-display font-bold text-2xl text-[#F0EBE1] leading-tight mb-1">
@@ -224,15 +225,15 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                     onChange={(e) =>
                       setFormData({ ...formData, name: e.target.value })
                     }
-                    className="w-full px-4 py-3 rounded-xl text-sm text-white placeholder-[#6B6560] focus:outline-none transition-all"
+                    className="w-full px-5 py-4 rounded-2xl text-sm text-white placeholder-[#555] focus:outline-none focus:ring-1 focus:ring-[#FFD700]/30 transition-all"
                     style={{
-                      background: "rgba(255,255,255,0.05)",
-                      border: `1px solid ${errors.name ? "#E31837" : "rgba(255,255,255,0.08)"}`,
+                      background: "rgba(255,255,255,0.03)",
+                      border: `1px solid ${errors.name ? "#FFD700" : "rgba(255,255,255,0.05)"}`,
                       fontSize: "16px",
                     }}
                   />
                   {errors.name && (
-                    <p className="text-[#E31837] text-[10px] mt-1">
+                    <p className="text-[#FFD700] text-[10px] mt-1">
                       {errors.name}
                     </p>
                   )}
@@ -259,16 +260,16 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                       onChange={(e) =>
                         setFormData({ ...formData, phone: e.target.value })
                       }
-                      className="flex-1 px-4 py-3 rounded-r-xl text-sm text-white placeholder-[#6B6560] focus:outline-none transition-all"
+                      className="flex-1 px-5 py-4 rounded-r-2xl text-sm text-white placeholder-[#555] focus:outline-none focus:ring-1 focus:ring-[#FFD700]/30 transition-all"
                       style={{
-                        background: "rgba(255,255,255,0.05)",
-                        border: `1px solid ${errors.phone ? "#E31837" : "rgba(255,255,255,0.08)"}`,
+                        background: "rgba(255,255,255,0.03)",
+                        border: `1px solid ${errors.phone ? "#FFD700" : "rgba(255,255,255,0.05)"}`,
                         fontSize: "16px",
                       }}
                     />
                   </div>
                   {errors.phone && (
-                    <p className="text-[#E31837] text-[10px] mt-1">
+                    <p className="text-[#FFD700] text-[10px] mt-1">
                       {errors.phone}
                     </p>
                   )}
@@ -284,15 +285,15 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                     onChange={(e) =>
                       setFormData({ ...formData, email: e.target.value })
                     }
-                    className="w-full px-4 py-3 rounded-xl text-sm text-white placeholder-[#6B6560] focus:outline-none transition-all"
+                    className="w-full px-5 py-4 rounded-2xl text-sm text-white placeholder-[#555] focus:outline-none focus:ring-1 focus:ring-[#FFD700]/30 transition-all"
                     style={{
-                      background: "rgba(255,255,255,0.05)",
-                      border: `1px solid ${errors.email ? "#E31837" : "rgba(255,255,255,0.08)"}`,
+                      background: "rgba(255,255,255,0.03)",
+                      border: `1px solid ${errors.email ? "#FFD700" : "rgba(255,255,255,0.05)"}`,
                       fontSize: "16px",
                     }}
                   />
                   {errors.email && (
-                    <p className="text-[#E31837] text-[10px] mt-1">
+                    <p className="text-[#FFD700] text-[10px] mt-1">
                       {errors.email}
                     </p>
                   )}
@@ -315,41 +316,15 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                   />
                 </div>
 
-                <button
-                  type="submit"
-                  disabled={submitting}
-                  className="w-full py-3.5 rounded-xl font-display font-semibold text-white text-sm tracking-wide transition-all duration-300 disabled:opacity-60 flex items-center justify-center gap-2"
-                  style={{
-                    background: "linear-gradient(135deg, #E31837, #c4132d)",
-                  }}
-                >
-                  {submitting ? (
-                    <>
-                      <svg
-                        className="animate-spin h-4 w-4"
-                        viewBox="0 0 24 24"
-                      >
-                        <circle
-                          className="opacity-25"
-                          cx="12"
-                          cy="12"
-                          r="10"
-                          stroke="currentColor"
-                          strokeWidth="4"
-                          fill="none"
-                        />
-                        <path
-                          className="opacity-75"
-                          fill="currentColor"
-                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
-                        />
-                      </svg>
-                      Booking...
-                    </>
-                  ) : (
-                    "Book Free Demo →"
-                  )}
-                </button>
+                <div className="pt-2">
+                  <SmokyButton
+                    type="submit"
+                    disabled={submitting}
+                    className="w-full min-h-[56px] flex items-center justify-center text-[12px] font-bold tracking-[0.2em]"
+                  >
+                    {submitting ? "Processing..." : "Book Free Demo →"}
+                  </SmokyButton>
+                </div>
 
                 <p className="text-center text-[#6B6560] text-[11px]">
                   🔒 No spam. We respect your privacy.

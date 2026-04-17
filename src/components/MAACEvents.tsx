@@ -12,7 +12,7 @@ const eventsData = [
     name: "CREATA",
     description: "India's premier multi-category creative competition. Showcase your skills in Animation, VFX, Gaming, Comics, and Digital Design against the best talent from across the nation.",
     icon: Trophy,
-    color: "#E31837",
+    color: "#BF953F",
   },
   {
     id: "rain",
@@ -127,10 +127,10 @@ export default function MAACEvents() {
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8 z-10">
         {/* Heading */}
         <div className="events-heading text-center mb-20 md:mb-28">
-          <p className="text-[#E31837] text-sm font-bold tracking-[0.2em] uppercase mb-6 flex items-center justify-center gap-3">
-            <span className="w-6 h-[1px] bg-[#E31837]" />
+          <p className="metallic-gold-text text-sm font-bold tracking-[0.2em] uppercase mb-6 flex items-center justify-center gap-3">
+            <span className="w-6 h-[1px] metallic-gold-accent" />
             Events at MAAC
-            <span className="w-6 h-[1px] bg-[#E31837]" />
+            <span className="w-6 h-[1px] metallic-gold-accent" />
           </p>
           <h2 className="font-display font-bold text-[clamp(1.6rem,4vw,2.8rem)] text-[#F0EBE1] leading-[0.95] tracking-tight">
             Where <span className="gradient-text">Creativity Meets</span> Competition

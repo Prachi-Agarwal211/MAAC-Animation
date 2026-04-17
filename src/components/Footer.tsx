@@ -8,6 +8,7 @@ import gsap from "@/lib/gsap";
 import { contactInfo } from "@/data/siteData";
 import MagneticButton from "@/components/ui/MagneticButton";
 import { ArrowUpRight, MapPin, Phone, Mail } from "lucide-react";
+import SmokyButton from "./ui/SmokyButton";
 
 const SocialIcons = {
   Facebook: () => (
@@ -61,11 +62,11 @@ export default function Footer() {
       {/* ── TOP BANNER ── */}
       <div className="max-w-[1800px] mx-auto px-6 md:px-12 mb-24">
         <div className="relative rounded-[40px] overflow-hidden bg-gradient-to-br from-[#1c1c1c] to-[#0c0c0c] border border-white/5 p-10 md:p-20 flex flex-col lg:flex-row items-center justify-between gap-12 group">
-          <div className="absolute inset-0 bg-[#E31837]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+          <div className="absolute inset-0 bg-[#FFD700]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
 
           <div className="relative z-10 max-w-2xl text-center lg:text-left">
-            <h2 className="font-display font-bold text-[clamp(1.8rem,4.5vw,3rem)] text-white leading-[0.9] tracking-tighter mb-8">
-              Start Your <span className="gradient-text">Creative Legacy</span>
+            <h2 className="font-display font-black text-[clamp(1.8rem,4.5vw,3rem)] text-white leading-[0.9] tracking-tighter mb-8 uppercase">
+              Start Your <span className="metallic-gold-text">Creative Legacy</span>
             </h2>
             <p className="text-[#A8A29C] text-lg md:text-xl font-medium leading-relaxed">
               Book a free counseling session or demo class with our industry experts today.
@@ -73,16 +74,20 @@ export default function Footer() {
           </div>
 
           <div className="relative z-10 flex flex-col sm:flex-row gap-6">
-            <MagneticButton>
-              <Link href="/contact" className="btn btn-primary px-10 py-5 rounded-2xl text-base font-bold tracking-widest shadow-2xl">
-                Book Free Demo
-              </Link>
-            </MagneticButton>
-            <MagneticButton>
-              <a href="https://wa.me/917300001589" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 px-10 py-5 rounded-2xl glass border border-white/10 text-white font-bold tracking-widest text-sm hover:bg-white/5 transition-all">
-                WhatsApp Us
-              </a>
-            </MagneticButton>
+            <SmokyButton
+              href="/contact"
+              className="min-h-[60px] min-w-[240px] flex items-center justify-center text-[12px] font-bold tracking-[0.25em]"
+            >
+              Book Free Demo
+            </SmokyButton>
+            <a
+              href="https://wa.me/917300001589"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-3 px-10 py-5 rounded-full border border-white/20 text-white font-bold tracking-[0.2em] text-[11px] uppercase hover:bg-white/5 hover:border-[#BF953F]/40 transition-all duration-300"
+            >
+              <SocialIcons.Instagram /> WhatsApp Us
+            </a>
           </div>
         </div>
       </div>
@@ -111,7 +116,7 @@ export default function Footer() {
               { Icon: SocialIcons.Youtube, url: contactInfo.social.youtube },
               { Icon: SocialIcons.Linkedin, url: contactInfo.social.linkedin }
             ].map((social, i) => (
-              <a key={i} href={social.url} className="w-12 h-12 rounded-full glass border border-white/5 flex items-center justify-center text-white/40 hover:text-[#E31837] hover:border-[#E31837]/30 transition-all duration-500">
+              <a key={i} href={social.url} className="w-12 h-12 rounded-full glass border border-white/20 flex items-center justify-center text-white/40 hover:text-[#FFD700] hover:border-[#FFD700]/50 transition-all duration-500 shadow-lg">
                 <social.Icon />
               </a>
             ))}
@@ -180,18 +185,18 @@ export default function Footer() {
           <h4 className="text-white text-xs font-bold uppercase tracking-[0.2em] pt-8">Locate Us</h4>
           <div className="space-y-6">
             <div className="flex gap-4">
-              <MapPin size={20} className="text-[#E31837] shrink-0" />
+              <MapPin size={20} className="text-[#FFD700] shrink-0" />
               <p className="text-[#A8A29C] text-sm leading-relaxed">{contactInfo.address}</p>
             </div>
             <div className="flex gap-4">
-              <Phone size={20} className="text-[#E31837] shrink-0" />
+              <Phone size={20} className="text-[#FFD700] shrink-0" />
               <div className="space-y-1">
                 <a href={`tel:${contactInfo.phone}`} className="block text-white font-bold">{contactInfo.phone}</a>
                 <a href={`tel:${contactInfo.phoneSecondary}`} className="block text-[#6B6560] text-sm">{contactInfo.phoneSecondary}</a>
               </div>
             </div>
             <div className="flex gap-4">
-              <Mail size={20} className="text-[#E31837] shrink-0" />
+              <Mail size={20} className="text-[#FFD700] shrink-0" />
               <a href={`mailto:${contactInfo.email}`} className="text-white font-bold break-all">{contactInfo.email}</a>
             </div>
           </div>

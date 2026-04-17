@@ -48,22 +48,22 @@ export default function PopularCourses() {
       <div className="courses-heading relative z-10 max-w-7xl mx-auto px-6 mb-20">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
           <div className="max-w-2xl">
-            <p className="text-[#C4A882] text-sm font-bold tracking-[0.2em] uppercase mb-6 flex items-center gap-3">
-              <span className="w-8 h-[1px] bg-[#C4A882]" />
+            <p className="metallic-gold-text text-[10px] font-bold tracking-[0.3em] uppercase mb-4 flex items-center gap-3">
+              <span className="w-8 h-[1px] metallic-gold-accent" />
               Master Your Craft
             </p>
 
-            <h2 className="font-display font-bold text-[clamp(1.6rem,4vw,2.8rem)] text-[#F0EBE1] leading-[0.95] tracking-tight">
-              Most Popular <span className="gradient-text">Programs</span>
+            <h2 className="font-display font-black text-[clamp(2.2rem,5.5vw,3.5rem)] leading-[0.85] tracking-tighter text-white uppercase">
+              MOST POPULAR <span className="metallic-gold-text italic">PROGRAMS</span>
             </h2>
           </div>
           
           <div className="hidden md:flex gap-4">
-            <button onClick={() => scroll('left')} className="w-14 h-14 rounded-full glass border border-white/5 flex items-center justify-center text-white/40 hover:text-white hover:border-[#E31837]/30 transition-all">
-              <ChevronLeft size={24} />
+            <button onClick={() => scroll('left')} className="w-14 h-14 rounded-full glass border border-white/20 flex items-center justify-center text-white/40 hover:text-white hover:border-[#FFD700]/40 transition-all group/arrow">
+              <ChevronLeft size={24} className="group-hover/arrow:scale-110 transition-transform" />
             </button>
-            <button onClick={() => scroll('right')} className="w-14 h-14 rounded-full glass border border-white/5 flex items-center justify-center text-white/40 hover:text-white hover:border-[#E31837]/30 transition-all">
-              <ChevronRight size={24} />
+            <button onClick={() => scroll('right')} className="w-14 h-14 rounded-full glass border border-white/20 flex items-center justify-center text-white/40 hover:text-white hover:border-[#FFD700]/40 transition-all group/arrow">
+              <ChevronRight size={24} className="group-hover/arrow:scale-110 transition-transform" />
             </button>
           </div>
         </div>
@@ -80,7 +80,7 @@ export default function PopularCourses() {
               key={course.code}
               className="course-card flex-shrink-0 w-[85vw] sm:w-[420px] snap-center"
             >
-              <div className="group glass-card relative overflow-hidden transition-all duration-500 hover:border-[#E31837]/30 shadow-2xl">
+              <div className="group glass-card relative overflow-hidden transition-all duration-500 hover:border-[#FFD700]/30 shadow-2xl">
                 {/* Image */}
                 <div className="h-[240px] relative overflow-hidden">
                   {coursePortfolioImages[course.code] ? (
@@ -105,13 +105,13 @@ export default function PopularCourses() {
 
                 {/* Content */}
                 <div className="p-8 md:p-10">
-                  <h3 className="font-display font-bold text-2xl text-white mb-2 group-hover:text-[#E31837] transition-colors">{course.name}</h3>
+                  <h3 className="font-display font-bold text-2xl text-white mb-2 group-hover:text-[#FFD700] transition-colors">{course.name}</h3>
                   <p className="text-[#6B6560] text-xs font-bold uppercase tracking-wider mb-6">{course.fullName}</p>
                   <p className="text-[#A8A29C] text-sm leading-relaxed line-clamp-3 mb-8">{course.description}</p>
                   
                   <a href="/courses" className="inline-flex items-center gap-3 text-white text-xs font-bold tracking-[0.2em] uppercase group/btn">
                     Course Details
-                    <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover/btn:bg-[#E31837] transition-all duration-500">
+                    <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover/btn:bg-[#FFD700] transition-all duration-500">
                       <ArrowRight size={14} className="text-white" />
                     </div>
                   </a>

@@ -60,7 +60,7 @@ export default function MobileBottomNav() {
 
         <Link
           href="/contact"
-          className="mobile-fab-item flex-[1.8] flex flex-col items-center justify-center py-4 bg-[#E31837] text-white rounded-[24px] gap-1.5 shadow-xl shadow-[#E31837]/20 transition-all active:scale-95 border border-white/10"
+          className="mobile-fab-item flex-[1.8] flex flex-col items-center justify-center py-4 bg-[#FFD700] text-white rounded-[24px] gap-1.5 shadow-xl shadow-[#FFD700]/20 transition-all active:scale-95 border border-white/10"
         >
           <Calendar size={20} />
           <span className="text-[8px] font-black uppercase tracking-[0.2em]">Book Free Demo</span>

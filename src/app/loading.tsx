@@ -5,7 +5,7 @@ export default function Loading() {
         {/* Elegant loading spinner */}
         <div className="w-16 h-16 border-2 border-white/10 rounded-full" />
         <div
-          className="absolute inset-0 w-16 h-16 border-2 border-transparent border-t-[#E31837] rounded-full animate-spin"
+          className="absolute inset-0 w-16 h-16 border-2 border-transparent border-t-[#FFD700] rounded-full animate-spin"
           style={{ animationDuration: '0.8s' }}
         />
       </div>

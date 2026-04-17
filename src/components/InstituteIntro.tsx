@@ -30,7 +30,7 @@ function CountUpStat({ number, suffix, label }: { number: number; suffix: string
     <div className="text-center px-4 group">
       <div className="font-display font-black text-[clamp(1.5rem,3.5vw,2.5rem)] leading-none text-white tabular-nums flex items-center justify-center tracking-tighter">
         <span ref={countRef}>0</span>
-        <span className="text-[#E31837] ml-1">{suffix}</span>
+        <span className="metallic-gold-text ml-1">{suffix}</span>
       </div>
       <div className="text-[#6B6560] text-[9px] mt-3 font-bold tracking-[0.3em] uppercase transition-colors group-hover:text-white">{label}</div>
     </div>
@@ -63,16 +63,18 @@ export default function InstituteIntro() {
           
           {/* Left: Video */}
           <div className="lg:col-span-7 institute-video-container">
-            <VideoFacade youtubeId="dQw4w9WgXcQ" title="MAAC Animation Showreel" className="aspect-video" />
+            <VideoFacade youtubeId="jO4xZJe_ql8" title="MAAC Animation Showreel" className="aspect-video" />
           </div>
 
           {/* Right: Text */}
           <div className="lg:col-span-5">
-            <div className="flex items-start gap-4 mb-8">
-              <div className="w-1 h-12 bg-[#E31837] flex-shrink-0 rounded-full mt-1" />
-              <h2 className="institute-title font-display font-bold text-[clamp(1.4rem,3vw,2.2rem)] leading-tight text-white uppercase tracking-tighter">
-                Jaipur&apos;s Elite <br />
-                <span className="text-[#E31837]">Creative Powerhouse</span>
+            <div className="mb-10">
+              <p className="metallic-gold-text text-[10px] font-bold tracking-[0.3em] uppercase mb-4 flex items-center gap-3">
+                <span className="w-8 h-[1px] metallic-gold-accent" />
+                Jaipur&apos;s Creative Authority
+              </p>
+              <h2 className="institute-title font-display font-black text-[clamp(1.8rem,4vw,2.8rem)] leading-[0.9] text-white uppercase tracking-tighter">
+                ELITE <span className="metallic-gold-text italic">POWERHOUSE</span>
               </h2>
             </div>
 
@@ -87,9 +89,9 @@ export default function InstituteIntro() {
               {["NSDC Partner", "MESC Certified", "B.Voc Degree"].map((badge) => (
                 <span
                   key={badge}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-[10px] font-bold tracking-widest uppercase glass border border-white/10 text-white/80"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-[10px] font-bold tracking-widest uppercase glass border border-white/20 text-white/80 hover:border-[#BF953F]/40 transition-colors cursor-default"
                 >
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#E31837]" />
+                  <div className="w-1.5 h-1.5 rounded-full metallic-gold-accent" />
                   {badge}
                 </span>
               ))}

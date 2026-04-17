@@ -45,6 +45,7 @@ const fragmentShaderSource = `
   float fbm(vec2 pos) {
       float v = 0.0;
       float a = 0.5;
+      float t = iTime * 0.45; // Increased speed for better fluid perception
       vec2 shift = vec2(20.0);
       mat2 rot = mat2(cos(0.5), sin(0.5), -sin(0.5), cos(0.5));
       for (int i = 0; i < 8; i++) {
@@ -73,27 +74,29 @@ const fragmentShaderSource = `
       
       vec3 color = mix(
           vec3(0.0, 0.0, 0.0),
-          vec3(1.0, 0.05, 0.0), // Intense MAAC Red
+          vec3(1.0, 0.0, 0.0), // Pure Vibrant Red
           clamp((f * f) * 8.0, 0.0, 6.0)
       );
 
       color = mix(
           color,
-          vec3(1.0, 0.3, 0.0), // Fiery Orange
+          vec3(0.8, 0.0, 0.0), // Pure Deep Red
           clamp(length(q) * 2.0, 0.0, 1.0)
       );
 
       color = mix(
           color,
-          vec3(1.0, 0.9, 0.4), // Yellow flame core
+          vec3(1.0, 1.0, 1.0), // Pure White Highlight
           clamp(length(r.x) * 1.5, 0.0, 0.2)
       );
 
       // Sharpen the color edges by using higher powers of f
       float fPower = pow(f, 1.8);
-      vec3 finalColor = vec3(0.12, 0.0, 0.0) + (fPower * 1.5 + f * f * 0.8) * color;
+      vec3 finalColor = vec3(0.1, 0.0, 0.0) + (fPower * 1.5 + f * f * 0.8) * color;
       
       // Vignette to keep edges sharp and centered
+      // Final darkening for readability; subtle metallic sheen
+      finalColor *= 0.85; // Increased brightness for "vibrant" look
       float vig = 1.0 - length(vUv - 0.5) * 1.2;
       finalColor *= clamp(vig, 0.2, 1.0);
 
@@ -208,18 +211,19 @@ export default function SmokyButton({ href, onClick, className, children, ...pro
 
   const innerHTML = (
     <>
-      {/* Base background overlay to unify the look and prevent 'rings' */}
-      <div className="absolute inset-0 bg-black/45 group-hover:bg-black/25 transition-colors duration-500" />
+      {/* Default solid white background overlay - Fades out on hover to reveal smoke */}
+      <div className="absolute inset-0 bg-white group-hover:opacity-0 transition-opacity duration-700 z-0" />
       
-      <div className="absolute -z-[1] -inset-4">
+      {/* Smoky Animation Container - Hidden by default, reveals on hover */}
+      <div className="absolute -z-[1] -inset-4 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
         <canvas 
           ref={canvasRef} 
-          className="absolute top-0 left-0 w-full h-full group-hover:scale-[1.2] group-hover:rotate-[10deg] transition-all duration-700 ease-[cubic-bezier(0.2,0.8,0.2,1)]" 
+          className="absolute top-0 left-0 w-full h-full group-hover:scale-[1.15] transition-transform duration-1000 ease-out" 
         />
       </div>
 
-      <div className="relative z-10 flex w-full h-full items-center justify-center px-10 py-4 transition-all duration-500">
-        <div className="text-white whitespace-nowrap group-hover:scale-[1.05] drop-shadow-lg transition-all duration-500 uppercase tracking-[0.3em] text-[11px] font-bold leading-none">
+      <div className="relative z-10 flex w-full h-full items-center justify-center px-10 py-4">
+        <div className="text-black group-hover:text-white whitespace-nowrap transition-all duration-500 uppercase tracking-[0.3em] text-[11px] font-bold leading-none">
           {children}
         </div>
       </div>
@@ -227,8 +231,8 @@ export default function SmokyButton({ href, onClick, className, children, ...pro
   );
 
   const containerClasses = cn(
-    "group relative rounded-full text-base font-medium overflow-hidden border border-white/5",
-    "shadow-[0_4px_24px_rgba(227,24,55,0.2)] hover:shadow-[0_8px_32px_rgba(227,24,55,0.4)] transition-shadow duration-500 flex",
+    "group relative rounded-full text-base font-medium overflow-hidden border border-white/20",
+    "shadow-[0_0_0_rgba(227,24,55,0)] hover:shadow-[0_8px_48px_rgba(227,24,55,0.4)] border-white/40 hover:border-white transition-all duration-700 flex",
     className
   );
 

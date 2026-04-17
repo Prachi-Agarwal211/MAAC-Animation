@@ -71,8 +71,8 @@ export default function VerticalCardGallery() {
       if (!seg) return;
       if (i === index) {
         gsap.to(seg, {
-          strokeWidth: 3,
-          stroke: "#E31837",
+          strokeWidth: 4,
+          stroke: "#E31837", // Use Red for active segment stroke
           filter: "url(#segGlow)",
           duration: 0.3
         });
@@ -91,14 +91,16 @@ export default function VerticalCardGallery() {
       if (!label) return;
       if (i === index) {
         gsap.to(label, {
-          color: "#fff",
-          scale: 1.1,
+          color: "#FFD700", // Gold for active label
+          scale: 1.15,
+          opacity: 1,
           duration: 0.3
         });
       } else {
         gsap.to(label, {
-          color: "rgba(255,255,255,0.2)",
+          color: "rgba(255,255,255,0.45)", // Brighter resting state
           scale: 1,
+          opacity: 0.6,
           duration: 0.3
         });
       }
@@ -190,15 +192,15 @@ export default function VerticalCardGallery() {
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="relative bg-[#080808] min-h-[100vh] z-[100]">
+    <section ref={containerRef} className="relative bg-transparent min-h-[100vh] z-[100]">
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-16 py-20 lg:py-12">
         {/* Section Header */}
         <div className="text-center mb-12">
-          <p className="text-[#E31837] text-[10px] font-bold tracking-[0.3em] uppercase mb-4">
+          <p className="metallic-gold-text text-[10px] font-bold tracking-[0.3em] uppercase mb-4">
             The MAAC Standard
           </p>
-          <h2 className="font-display font-black text-[clamp(2rem,5vw,3.5rem)] leading-[0.85] tracking-tighter text-white">
-            CREATIVE <span className="gradient-text italic">EVOLUTION</span>
+          <h2 className="font-display font-black text-[clamp(2.5rem,6vw,4rem)] leading-[0.8] tracking-tighter text-white">
+            CREATIVE <span className="metallic-gold-text italic">EVOLUTION</span>
           </h2>
         </div>
 
@@ -211,9 +213,9 @@ export default function VerticalCardGallery() {
               <div className="relative w-full max-w-[360px] sm:max-w-[420px] lg:max-w-[480px] mx-auto -mt-4 sm:-mt-6 lg:mt-0" style={{ aspectRatio: "1/1" }}>
                 <svg viewBox="0 0 512 512" className="w-full h-full relative z-10">
                   <defs>
-                    <filter id="segGlow" x="-30%" y="-30%" width="160%" height="160%">
-                      <feGaussianBlur stdDeviation="10" result="blur" />
-                      <feFlood floodColor="#E31837" floodOpacity="0.4" result="color" />
+                    <filter id="segGlow" x="-50%" y="-50%" width="200%" height="200%">
+                      <feGaussianBlur stdDeviation="12" result="blur" />
+                      <feFlood floodColor="#E31837" floodOpacity="0.6" result="color" />
                       <feComposite in="color" in2="blur" operator="in" result="glow" />
                       <feMerge>
                         <feMergeNode in="glow" />
@@ -255,10 +257,10 @@ export default function VerticalCardGallery() {
                     </g>
                   ))}
 
-                  {/* Center circle */}
-                  <circle cx={CX} cy={CY} r={INNER_R} fill="#080808" stroke="rgba(255,255,255,0.1)" strokeWidth="1" />
-                  <text ref={pieCenterTextRef} x={CX} y={CY - 4} textAnchor="middle" className="fill-white font-display font-black" style={{ fontSize: "32px" }}>01</text>
-                  <text x={CX} y={CY + 18} textAnchor="middle" className="fill-[#6B6560] font-bold uppercase tracking-widest" style={{ fontSize: "9px", letterSpacing: "0.2em" }}>OF {SEGMENTS}</text>
+                  {/* Center circle - Enhanced with glow */}
+                  <circle cx={CX} cy={CY} r={INNER_R} fill="#0C0C0C" stroke="#FFD700" strokeWidth="1.5" className="drop-shadow-[0_0_15px_rgba(255,215,0,0.3)]" />
+                  <text ref={pieCenterTextRef} x={CX} y={CY - 4} textAnchor="middle" className="fill-white font-display font-black" style={{ fontSize: "36px" }}>01</text>
+                  <text x={CX} y={CY + 20} textAnchor="middle" className="fill-[#A8A29C] font-bold uppercase tracking-[0.3em]" style={{ fontSize: "10px" }}>OF {SEGMENTS}</text>
                 </svg>
 
                 {/* Labels */}
@@ -279,7 +281,8 @@ export default function VerticalCardGallery() {
                         left: `${(lx / 512) * 100}%`,
                         top: `${(ly / 512) * 100}%`,
                         transform: `translate(${isLeft ? "-100%" : "0%"}, -50%)`,
-                        color: "rgba(255,255,255,0.2)",
+                        color: "rgba(255,255,255,0.45)",
+                        opacity: 0.6,
                       }}
                     >
                       {card.title}
@@ -300,7 +303,7 @@ export default function VerticalCardGallery() {
                 <div
                   key={index}
                   ref={el => { cardRefs.current[index] = el; }}
-                  className="group relative overflow-hidden rounded-2xl bg-[#111] border border-white/5 transition-all duration-500 hover:border-[#E31837]/30"
+                  className="group relative overflow-hidden rounded-2xl bg-[#111] border border-white/5 transition-all duration-500 hover:border-[#FFD700]/30"
                 >
                   <div className="flex flex-col md:flex-row">
                     {/* Image */}
@@ -318,20 +321,20 @@ export default function VerticalCardGallery() {
                     {/* Content */}
                     <div className="w-full md:w-3/5 p-6 md:p-8 flex flex-col justify-center">
                       <div className="flex items-center gap-3 mb-4">
-                        <div className="w-8 h-[1px] bg-[#E31837]" />
-                        <span className="text-[#E31837] text-[9px] font-bold tracking-[0.3em] uppercase">Insight</span>
+                        <div className="w-8 h-[1px] metallic-gold-accent" />
+                        <span className="metallic-gold-text text-[9px] font-bold tracking-[0.3em] uppercase">Insight</span>
                       </div>
-                      <h4 className="font-display font-bold text-xl md:text-2xl text-white mb-3 leading-[0.95]">
+                      <h4 className="font-display font-bold text-2xl md:text-3xl text-white mb-4 leading-[0.95] group-hover:metallic-gold-text transition-colors">
                         {card.title}
                       </h4>
-                      <p className="text-[#A8A29C] text-sm md:text-base leading-relaxed mb-6">
+                      <p className="text-[#D1CEC7] text-sm md:text-base leading-relaxed mb-6 font-medium">
                         {card.desc}
                       </p>
                        <Link href="/contact" className="flex items-center gap-4 group/link">
-                         <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover/link:bg-[#E31837] group-hover/link:border-[#E31837] transition-all duration-500">
+                         <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center group-hover/link:bg-[#E31837] group-hover/link:border-[#E31837] transition-all duration-500 shadow-lg shadow-[#E31837]/0 group-hover/link:shadow-[#E31837]/20">
                            <ArrowRight size={16} className="text-white transition-transform group-hover/link:translate-x-1" />
                          </div>
-                         <span className="text-[9px] font-bold tracking-[0.2em] uppercase text-white/40 group-hover/link:text-white transition-colors">Details</span>
+                         <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-white/60 group-hover/link:text-white transition-colors">Details</span>
                        </Link>
                     </div>
                   </div>

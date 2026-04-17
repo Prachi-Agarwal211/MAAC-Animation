@@ -73,13 +73,13 @@ export default function BlogIndexPage() {
           className="absolute inset-0"
           style={{ background: "linear-gradient(135deg, #1A0508 0%, #0C0C0C 50%, #0C0C0C 100%)" }}
         />
-        <div className="absolute top-20 right-10 w-64 h-64 rounded-full opacity-10" style={{ background: "radial-gradient(circle, #E31837 0%, transparent 70%)" }} />
+        <div className="absolute top-20 right-10 w-64 h-64 rounded-full opacity-10" style={{ background: "radial-gradient(circle, #FFD700 0%, transparent 70%)" }} />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="max-w-3xl">
             <nav className="mb-8" aria-label="Breadcrumb">
               <ol className="flex items-center gap-2 text-sm text-[#6B6560]">
-                <li><Link href="/" className="hover:text-[#E31837] transition-colors">Home</Link></li>
+                <li><Link href="/" className="hover:text-[#FFD700] transition-colors">Home</Link></li>
                 <li>/</li>
                 <li className="text-[#A8A29C]">Blog</li>
               </ol>
@@ -102,7 +102,7 @@ export default function BlogIndexPage() {
             {blogPosts.map((post) => (
               <article
                 key={post.slug}
-                className="group bg-[#161616] rounded-xl overflow-hidden border border-white/5 hover:border-[#E31837]/30 transition-all duration-300"
+                className="group bg-[#161616] rounded-xl overflow-hidden border border-white/5 hover:border-[#FFD700]/30 transition-all duration-300"
               >
                 {/* Image */}
                 <Link href={`/blog/${post.slug}`} className="block relative aspect-video overflow-hidden bg-[#1A1A1A]">
@@ -115,7 +115,7 @@ export default function BlogIndexPage() {
                     loading="lazy"
                   />
                   <div className="absolute top-3 left-3">
-                    <span className="bg-[#E31837]/90 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                    <span className="bg-[#FFD700]/90 text-white text-xs font-semibold px-3 py-1 rounded-full">
                       {post.category}
                     </span>
                   </div>
@@ -136,7 +136,7 @@ export default function BlogIndexPage() {
                   </div>
 
                   <Link href={`/blog/${post.slug}`}>
-                    <h2 className="font-display font-semibold text-[#F0EBE1] text-xl mb-3 group-hover:text-[#E31837] transition-colors">
+                    <h2 className="font-display font-semibold text-[#F0EBE1] text-xl mb-3 group-hover:text-[#FFD700] transition-colors">
                       {post.title}
                     </h2>
                   </Link>
@@ -158,7 +158,7 @@ export default function BlogIndexPage() {
 
                   <Link
                     href={`/blog/${post.slug}`}
-                    className="text-[#E31837] text-sm font-medium hover:underline inline-flex items-center gap-1"
+                    className="text-[#FFD700] text-sm font-medium hover:underline inline-flex items-center gap-1"
                   >
                     Read More
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
