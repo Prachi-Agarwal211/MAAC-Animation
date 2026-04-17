@@ -67,22 +67,8 @@ export default function Navbar() {
               : "bg-transparent"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16 sm:h-20">
-          <div className="flex items-center gap-2">
-            {/* Home Button */}
-            <Link
-              href="/"
-              className="hidden sm:flex items-center gap-2 px-3 py-2 rounded-lg text-[#A8A29C] hover:text-white hover:bg-white/5 transition-colors"
-              aria-label="Back to Home"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-              </svg>
-              <span className="text-xs font-bold uppercase tracking-wider">Home</span>
-            </Link>
-          </div>
-
-          <div className="flex-shrink-0">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center h-16 sm:h-20">
+          <div className="flex-shrink-0 mr-16">
             <Link href="/" className="flex items-center group" aria-label="MAAC Jaipur - Home">
               <Image
                 src="/maac%20logo.png"
@@ -95,7 +81,15 @@ export default function Navbar() {
             </Link>
           </div>
 
-          <ul className="hidden lg:flex items-center gap-0.5">
+          <ul className="hidden lg:flex items-center gap-0.5 flex-1">
+            <li className="relative group">
+              <Link
+                href="/"
+                className="flex items-center gap-1 px-2.5 py-2 text-[13px] text-white/85 hover:text-white transition-colors"
+              >
+                Home
+              </Link>
+            </li>
             {desktopLinks.map((link) => (
               <li key={link.label} className="relative group">
                 {link.external ? (
@@ -122,44 +116,40 @@ export default function Navbar() {
                     className="absolute right-0 top-full z-50 pt-1.5 opacity-0 invisible pointer-events-none translate-y-0.5 transition-[opacity,visibility,transform] duration-150 group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto group-hover:translate-y-0 xl:left-0 xl:right-auto"
                     role="menu"
                   >
-                    <div className="rounded-xl border border-white/10 bg-[#121212] shadow-2xl w-[min(100vw-1.5rem,52rem)] max-h-[min(78vh,32rem)] flex flex-col">
-                      <p className="px-5 pt-4 pb-2 text-[10px] uppercase tracking-[0.2em] text-[#E31837] font-semibold border-b border-white/5">
-                        Courses at MAAC Jaipur (same programs as MAAC India)
-                      </p>
-                      <div className="overflow-y-auto p-5">
-                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-5">
+                    <div className="rounded-xl border border-white/10 bg-black shadow-2xl w-[min(100vw-1.5rem,24rem)] flex flex-col">
+                      <div className="p-5">
+                        <div className="space-y-1">
                           {link.megaGroups.map((group) => (
-                            <div key={group.title}>
-                              <p className="text-[10px] uppercase tracking-[0.16em] text-white/45 font-semibold mb-2">
+                            <div key={group.title} className="relative group/submenu">
+                              <Link
+                                href="/courses"
+                                className="flex items-center justify-between py-2 text-[15px] leading-snug text-white/75 hover:text-white hover:bg-white/5 rounded px-2 -mx-2 transition-colors"
+                                role="menuitem"
+                              >
                                 {group.title}
-                              </p>
-                              <ul className="space-y-0.5">
-                                {group.links.map((child) => (
-                                  <li key={child.label}>
-                                    <Link
-                                      href="/courses"
-                                      className="block py-1.5 text-[12px] leading-snug text-white/75 hover:text-white hover:bg-white/5 rounded px-1 -mx-1 transition-colors"
-                                      role="menuitem"
-                                    >
-                                      {child.label}
-                                    </Link>
-                                  </li>
-                                ))}
-                              </ul>
+                                {group.links && group.links.length > 0 && (
+                                  <ChevronDown size={12} className="opacity-45 shrink-0 rotate-[-90deg]" />
+                                )}
+                              </Link>
+                              {group.links && group.links.length > 0 && (
+                                <div className="absolute left-full top-0 ml-1 opacity-0 invisible pointer-events-none translate-x-[-4px] transition-[opacity,visibility,transform] duration-150 group-hover/submenu:opacity-100 group-hover/submenu:visible group-hover/submenu:pointer-events-auto group-hover/submenu:translate-x-0 z-50">
+                                  <div className="rounded-lg border border-white/10 bg-black py-2 min-w-[240px] shadow-xl">
+                                    {group.links.map((child) => (
+                                      <Link
+                                        key={child.label}
+                                        href={child.href}
+                                        className="block px-4 py-2 text-[15px] text-white/80 hover:text-white hover:bg-white/5 transition-colors"
+                                        role="menuitem"
+                                      >
+                                        {child.label}
+                                      </Link>
+                                    ))}
+                                  </div>
+                                </div>
+                              )}
                             </div>
                           ))}
                         </div>
-                      </div>
-                      <div className="border-t border-white/10 px-5 py-3 flex flex-wrap items-center justify-between gap-2 bg-black/20">
-                        <Link
-                          href="/contact"
-                          className="text-[11px] font-semibold uppercase tracking-wider text-[#E31837] hover:text-red-400"
-                        >
-                          View e-brochure / enquire — Jaipur centre
-                        </Link>
-                        <Link href="/courses" className="text-[11px] uppercase tracking-wider text-white/50 hover:text-white">
-                          All courses →
-                        </Link>
                       </div>
                     </div>
                   </div>

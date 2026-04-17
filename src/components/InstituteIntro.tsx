@@ -63,7 +63,7 @@ export default function InstituteIntro() {
           
           {/* Left: Video */}
           <div className="lg:col-span-7 institute-video-container">
-            <VideoFacade youtubeId="_D7gd6bSE0A" title="MAAC Animation Showreel" className="aspect-video" />
+            <VideoFacade youtubeId="dQw4w9WgXcQ" title="MAAC Animation Showreel" className="aspect-video" />
           </div>
 
           {/* Right: Text */}

@@ -221,7 +221,7 @@ export const courseMegaMenuJaipur: NavMegaGroup[] = [
       { label: "3DGAI", href: "/courses#game-design" },
       { label: "APGDI", href: "/courses#game-design" },
       { label: "PMGDI", href: "/courses#game-design" },
-      { label: "ADIDG Plus — Powered by CareerX | CreatorX", href: "/courses#game-design" },
+      { label: "ADIDG Plus — Powered by CareerX | CreatorX NEW", href: "/courses#game-design" },
     ],
   },
   {
@@ -254,7 +254,7 @@ export const courseMegaMenuJaipur: NavMegaGroup[] = [
   },
   {
     title: "Blended Model of Learning",
-    links: [{ label: "Blended learning at MAAC Jaipur", href: "/courses" }],
+    links: [],
   },
   {
     title: "Visual Arts & Design",
