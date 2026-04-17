@@ -99,9 +99,9 @@ export default function EventsPage() {
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-yellow-400 mb-6 leading-tight">
                 Why Attend<br />MAAC Events?
               </h2>
-              <p className="text-sm md:text-base text-white leading-relaxed max-w-lg">
-                At MAAC, we don't just teach - we transform careers. Whether you aspire to be an animator, VFX artist, game designer, filmmaker, or digital creator, we equip you with the skills, tools, and global opportunities to succeed.
-              </p>
+<p className="text-sm md:text-base text-white leading-relaxed max-w-lg">
+                  At MAAC, we don&apos;t just teach - we transform careers. Whether you aspire to be an animator, VFX artist, game designer, filmmaker, or digital creator, we equip you with the skills, tools, and global opportunities to succeed.
+                </p>
               <button className="mt-6 flex items-center gap-2 text-yellow-400 hover:text-yellow-300 transition-colors">
                 <span className="font-semibold">Learn More</span>
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
