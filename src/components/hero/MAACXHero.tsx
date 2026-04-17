@@ -6,6 +6,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "@/lib/gsap";
 import { VolumeX, Volume2 } from "lucide-react";
 import SplitTextReveal from "@/components/ui/SplitTextReveal";
+import SmokyButton from "@/components/ui/SmokyButton";
 
 const HERO_VIDEO_MP4 = "/hero-video-compressed.mp4";
 const HERO_VIDEO_WEBM = "/hero-video.webm";
@@ -28,9 +29,7 @@ export default function MAACXHero({ onIntroReveal }: Props) {
   const hasEndedRef = useRef(false);
   const introStartedAtRef = useRef<number | null>(null);
 
-  /** Hero video + section mount under the intro layer (before overlay finishes fading out). */
   const [heroRevealed, setHeroRevealed] = useState(false);
-  /** Intro overlay removed; rest of app + scroll unlocked. */
   const [introLayerDone, setIntroLayerDone] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const [videoError, setVideoError] = useState(false);
@@ -38,16 +37,17 @@ export default function MAACXHero({ onIntroReveal }: Props) {
   const markIntroDone = useCallback(() => {
     document.documentElement.dataset.maacIntroDone = "1";
     try {
-      window.sessionStorage.setItem(INTRO_DONE_KEY, "1");
+      window.localStorage.setItem(INTRO_DONE_KEY, "1");
     } catch {
       // Ignore storage errors (private mode / strict browser policies).
     }
   }, []);
 
   const isIntroAlreadyDone = useCallback(() => {
+    if (typeof window === "undefined") return false;
     if (document.documentElement.dataset.maacIntroDone === "1") return true;
     try {
-      return window.sessionStorage.getItem(INTRO_DONE_KEY) === "1";
+      return window.localStorage.getItem(INTRO_DONE_KEY) === "1";
     } catch {
       return false;
     }
@@ -238,7 +238,8 @@ export default function MAACXHero({ onIntroReveal }: Props) {
     applyMuteState(!isMuted);
   };
 
-  const toggleIntroMute = () => {
+  const toggleIntroMute = (e: React.MouseEvent) => {
+    e.stopPropagation();
     applyMuteState(!isMuted);
   };
 
@@ -286,14 +287,24 @@ export default function MAACXHero({ onIntroReveal }: Props) {
                 <source src={INTRO_VIDEO_WEBM} type="video/webm" />
               </video>
 
-              <button
-                type="button"
-                onClick={toggleIntroMute}
-                className="absolute bottom-20 right-4 z-30 flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-black/40 text-white/75 backdrop-blur-sm transition-colors hover:text-white sm:bottom-24 sm:right-8"
-                aria-label={isMuted ? "Unmute intro video" : "Mute intro video"}
-              >
-                {isMuted ? <VolumeX size={18} strokeWidth={2} /> : <Volume2 size={18} strokeWidth={2} />}
-              </button>
+              <div className="absolute top-6 left-6 right-6 z-[10060] flex items-center justify-between pointer-events-none">
+                <button
+                  type="button"
+                  onClick={toggleIntroMute}
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-black/40 text-white/75 backdrop-blur-sm transition-colors hover:text-white pointer-events-auto"
+                  aria-label={isMuted ? "Unmute intro video" : "Mute intro video"}
+                >
+                  {isMuted ? <VolumeX size={18} strokeWidth={2} /> : <Volume2 size={18} strokeWidth={2} />}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={finishIntro}
+                  className="px-6 py-2.5 rounded-full border border-white/20 bg-black/40 text-[10px] font-bold uppercase tracking-[0.2em] text-white/75 backdrop-blur-sm transition-all hover:bg-white/10 hover:text-white pointer-events-auto"
+                >
+                  Skip Intro
+                </button>
+              </div>
 
               <div className="absolute bottom-0 left-0 right-0 z-20 px-4 sm:px-8 pb-6 sm:pb-8 pt-4 bg-gradient-to-t from-black/80 to-transparent pointer-events-none">
                 <div className="flex items-end justify-between gap-4 max-w-4xl mx-auto mb-2">
@@ -356,10 +367,10 @@ export default function MAACXHero({ onIntroReveal }: Props) {
               </div>
 
               <h1 className="mb-5 sm:mb-6">
-                <span className="block font-display font-bold uppercase leading-[1.02] tracking-tighter text-white text-[clamp(1.45rem,5.5vw,2.55rem)]">
+                <span className="block font-display font-bold uppercase leading-[1.02] tracking-tighter gradient-text-premium text-[clamp(1.65rem,6.5vw,3rem)] drop-shadow-lg">
                   <SplitTextReveal>Learn Animation & VFX</SplitTextReveal>
                 </span>
-                <span className="font-display mt-2 block text-[clamp(1.15rem,4.6vw,2rem)] font-black uppercase leading-[1.08] tracking-tight text-white/90">
+                <span className="font-display mt-2 block text-[clamp(1.25rem,5vw,2.25rem)] font-black uppercase leading-[1.08] tracking-tight text-[#E31837] drop-shadow-md">
                   From Basics to Portfolio
                 </span>
               </h1>
@@ -370,18 +381,18 @@ export default function MAACXHero({ onIntroReveal }: Props) {
               </p>
 
               <div className="flex w-full max-w-xl flex-col gap-4">
-                <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-stretch">
-                  <Link
+                <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-stretch mt-2">
+                  <SmokyButton
                     href="/contact"
-                    className="btn btn-primary flex min-h-[48px] w-full items-center justify-center rounded-xl px-6 py-3.5 text-center text-[10px] font-bold tracking-[0.26em] sm:w-auto sm:min-w-[188px] sm:px-8"
+                    className="flex min-h-[48px] w-full items-center justify-center sm:w-auto sm:min-w-[188px]"
                   >
                     Enquire Now
-                  </Link>
+                  </SmokyButton>
                   <a
                     href="#courses"
-                    className="btn btn-ghost flex min-h-[48px] w-full items-center justify-center rounded-xl border border-white/18 px-6 py-3.5 text-center text-[10px] font-bold tracking-[0.26em] text-white/90 sm:w-auto sm:min-w-[188px] sm:px-8"
+                    className="btn btn-ghost flex min-h-[48px] w-full items-center justify-center rounded-full border border-white/20 hover:border-white/40 px-6 py-3.5 text-center text-[11px] font-bold tracking-[0.2em] text-white/90 sm:w-auto sm:min-w-[188px] sm:px-8 bg-white/5 backdrop-blur-sm"
                   >
-                    View programs
+                    View Programs
                   </a>
                 </div>
 

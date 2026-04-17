@@ -94,9 +94,9 @@ function BackgroundMesh() {
   const uniforms = useMemo(() => ({
     uTime: { value: 0 },
     uMouse: { value: new THREE.Vector2(0, 0) },
-    uColor1: { value: new THREE.Color("#0044ff") }, // Electric Royal Blue
-    uColor2: { value: new THREE.Color("#ff0000") }, // Deep Red
-    uColor3: { value: new THREE.Color("#00ffcc") }, // Vibrant Teal Green
+    uColor1: { value: new THREE.Color("#0f0203") }, // Very dark crimson void
+    uColor2: { value: new THREE.Color("#8c0f20") }, // Deep MAAC Red
+    uColor3: { value: new THREE.Color("#181412") }, // Charcoal with slight warmth
   }), []);
 
   useFrame((state) => {

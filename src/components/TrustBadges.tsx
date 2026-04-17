@@ -4,96 +4,82 @@ import { useRef } from "react";
 import Image from "next/image";
 import { useGSAP } from "@gsap/react";
 import gsap from "@/lib/gsap";
-import { CheckCircle2 } from "lucide-react";
 
 const certifications = [
   {
     name: "MESC",
-    fullName: "Media & Entertainment Skills Council",
-    description: "Govt-recognized certification focused on job-ready creative skills.",
     logo: "/govt/mesc.png",
   },
   {
     name: "NSDC",
-    fullName: "National Skill Development Corporation",
-    description: "Government initiative that promotes national skilling and certification.",
     logo: "/govt/nsdc.png",
   },
   {
     name: "Skill India",
-    fullName: "Skill India Mission",
-    description: "National mission empowering youth with industry-ready digital skills.",
     logo: "/govt/skillIndia.jpg",
   },
 ];
 
 export default function TrustBadges() {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const marqueeRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
+    // Basic intro animation for the section
     gsap.fromTo(
-      ".trust-badge",
-      { opacity: 0, y: 20, scale: 0.98 },
-      { opacity: 1, y: 0, scale: 1, duration: 0.65, stagger: 0.1, ease: "expo.out" }
+      sectionRef.current,
+      { opacity: 0 },
+      { opacity: 1, duration: 1, ease: "power2.out" }
     );
   }, { scope: sectionRef });
 
-  return (
-    <section ref={sectionRef} className="relative py-6 md:py-8 bg-transparent border-y border-white/5">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="text-center mb-8">
-          <p className="text-[#E31837] text-[11px] font-bold tracking-[0.2em] uppercase mb-3 flex items-center justify-center gap-3">
-            <span className="w-5 h-[1px] bg-[#E31837]" />
-            Recognized & Certified
-            <span className="w-5 h-[1px] bg-[#E31837]" />
-          </p>
-          <h2 className="font-display font-bold text-[clamp(1.25rem,2.8vw,1.8rem)] text-[#F0EBE1] leading-tight tracking-tight">
-            Government Recognized Certifications
-          </h2>
-          <p className="text-[#A8A29C] text-sm md:text-base mt-2.5 max-w-3xl mx-auto">
-            MAAC is aligned with national skill development initiatives, so your certification is valued across India and globally.
-          </p>
-        </div>
+  // Create an array with duplicated items to ensure smooth infinite scrolling
+  const duplicatedCerts = [...certifications, ...certifications, ...certifications, ...certifications];
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
-          {certifications.map((cert) => (
+  return (
+    <section ref={sectionRef} className="relative py-8 md:py-10 bg-transparent border-y border-white/5 overflow-hidden">
+      <style dangerouslySetInnerHTML={{ __html: `
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+          animation: marquee 25s linear infinite;
+          width: max-content;
+        }
+        .animate-marquee:hover {
+          animation-play-state: paused;
+        }
+      `}} />
+      
+      <div className="max-w-7xl mx-auto px-6 mb-6">
+        <p className="text-[#E31837] text-[11px] font-bold tracking-[0.2em] uppercase flex items-center gap-3">
+          <span className="w-8 h-[1px] bg-[#E31837]" />
+          Government Affiliated & Recognized
+        </p>
+      </div>
+
+      <div className="relative w-full overflow-hidden flex items-center before:absolute before:left-0 before:w-24 before:h-full before:bg-gradient-to-r before:from-bg-primary before:to-transparent before:z-10 after:absolute after:right-0 after:w-24 after:h-full after:bg-gradient-to-l after:from-bg-primary after:to-transparent after:z-10">
+        <div ref={marqueeRef} className="animate-marquee flex gap-6 px-3 cursor-pointer">
+          {duplicatedCerts.map((cert, index) => (
             <div
-              key={cert.name}
-              className="trust-badge rounded-2xl p-6 md:p-8 bg-white/[0.03] backdrop-blur-xl border border-white/10 hover:border-[#E31837]/30 transition-all duration-300"
+              key={`${cert.name}-${index}`}
+              className="flex-shrink-0 group relative w-36 h-36 md:w-40 md:h-40 bg-white/[0.02] backdrop-blur-md border border-white/10 rounded-2xl flex flex-col items-center justify-center p-4 hover:border-[#E31837]/40 hover:bg-white/[0.04] transition-all duration-300"
             >
-              <div className="h-20 md:h-24 rounded-xl bg-white/5 flex items-center justify-center p-4">
+              <div className="w-full h-16 md:h-20 mb-3 flex items-center justify-center relative">
                 <Image
                   src={cert.logo}
                   alt={cert.name}
-                  width={120}
-                  height={60}
-                  className="object-contain max-w-full max-h-full"
+                  fill
+                  className="object-contain transition-all duration-500"
                 />
               </div>
-              <div className="flex items-center justify-between mt-4">
-                <div>
-                  <h3 className="text-white font-bold text-lg">{cert.name}</h3>
-                  <p className="text-[#E31837] text-[11px] font-semibold uppercase tracking-[0.12em] mt-1">{cert.fullName}</p>
-                </div>
-                <CheckCircle2 size={18} className="text-[#E31837] shrink-0" />
-              </div>
-              <p className="text-[#A8A29C] text-sm leading-relaxed mt-3">{cert.description}</p>
+              <span className="text-[#A8A29C] group-hover:text-white text-xs md:text-sm font-bold tracking-widest uppercase transition-colors duration-300">
+                {cert.name}
+              </span>
+              
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#E31837]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
             </div>
-          ))}
-        </div>
-
-        <div className="mt-7 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-center">
-          {[
-            "NSDC Certified Programs",
-            "Skill India Partner",
-            "30+ Years of Excellence",
-          ].map((item) => (
-            <span
-              key={item}
-              className="inline-flex items-center rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 text-[11px] font-medium text-white/80"
-            >
-              {item}
-            </span>
           ))}
         </div>
       </div>

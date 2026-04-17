@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import SmokyButton from "./ui/SmokyButton";
 import { navLinks, contactInfo, type NavLinkItem } from "@/data/siteData";
 import { useUIStore } from "@/lib/store";
 import { MessageSquare, ChevronDown, X, Menu } from "lucide-react";
@@ -21,7 +22,7 @@ export default function Navbar() {
       setRevealNav(true);
       return;
     }
-    if (typeof document !== "undefined" && document.documentElement.dataset.maacIntroDone === "1") {
+    if (typeof document !== "undefined" && (document.documentElement.dataset.maacIntroDone === "1" || localStorage.getItem('maac_intro_done') === '1')) {
       setRevealNav(true);
       return;
     }
@@ -81,24 +82,16 @@ export default function Navbar() {
             </Link>
           </div>
 
-          <div className="flex-shrink-0 min-w-0">
-            <Link href="/" className="flex items-center gap-2 sm:gap-3 group" aria-label="MAAC Jaipur C-Scheme - Home">
+          <div className="flex-shrink-0">
+            <Link href="/" className="flex items-center group" aria-label="MAAC Jaipur - Home">
               <Image
-                src="/image.png"
+                src="/maac%20logo.png"
                 alt="MAAC Animation Jaipur Logo"
-                width={48}
-                height={48}
-                className="rounded sm:w-14 sm:h-14 transition-transform duration-200 group-hover:scale-[1.02] object-contain"
+                width={240}
+                height={240}
+                className="w-28 h-28 sm:w-56 sm:h-56 transition-transform duration-200 group-hover:scale-[1.02] object-contain"
                 priority
               />
-              <div className="hidden sm:flex flex-col leading-none min-w-0">
-                <span className="font-syne font-bold text-white text-[15px] sm:text-[17px] tracking-wide truncate">
-                  MAAC Jaipur
-                </span>
-                <span className="text-red-500 text-[9px] sm:text-[10px] tracking-[0.18em] uppercase font-semibold">
-                  C-Scheme
-                </span>
-              </div>
             </Link>
           </div>
 
@@ -196,12 +189,12 @@ export default function Navbar() {
           </ul>
 
           <div className="hidden lg:block flex-shrink-0">
-            <Link
+            <SmokyButton
               href="/contact"
-              className="inline-flex items-center justify-center bg-[#E31837] hover:bg-[#c41431] text-white text-xs font-semibold px-5 py-2.5 rounded-md tracking-wide uppercase transition-colors"
+              className="flex min-h-[48px] items-center justify-center sm:min-w-[170px] text-[11px] font-bold tracking-[0.2em]"
             >
               Enquire Now
-            </Link>
+            </SmokyButton>
           </div>
 
           <div className="flex lg:hidden items-center gap-2">
@@ -299,14 +292,14 @@ export default function Navbar() {
             ))}
           </ul>
 
-          <div className="mt-8 flex flex-col gap-3 max-w-md mx-auto">
-            <Link
+          <div className="mt-8 flex flex-col gap-3 max-w-md mx-auto w-full">
+            <SmokyButton
               href="/contact"
               onClick={toggleMobileMenu}
-              className="flex items-center justify-center bg-[#E31837] hover:bg-[#c41431] text-white py-3.5 text-sm font-semibold uppercase tracking-wide rounded-md transition-colors"
+              className="flex min-h-[52px] w-full items-center justify-center text-[11px] font-bold tracking-[0.2em]"
             >
               Enquire Now
-            </Link>
+            </SmokyButton>
             <a
               href={whatsappUrl}
               target="_blank"

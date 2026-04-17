@@ -4,6 +4,7 @@ import Script from "next/script";
 import Footer from "@/components/Footer";
 import { useEffect, useRef } from "react";
 import gsap, { ScrollTrigger } from "@/lib/gsap";
+import VideoFacade from "@/components/ui/VideoFacade";
 
 export default function EventsPage() {
   const video24FPSRef = useRef<HTMLDivElement>(null);
@@ -76,14 +77,25 @@ export default function EventsPage() {
       />
 
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Black background */}
-        <div className="absolute inset-0 bg-black" />
-        
+        {/* Background video */}
+        <video
+          className="absolute inset-0 w-full h-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+        >
+          <source src="/event.mp4" type="video/mp4" />
+        </video>
+
+        {/* Black overlay */}
+        <div className="absolute inset-0 bg-black/60" />
+
         {/* Abstract decorative elements */}
         <div className="absolute top-20 left-20 w-72 h-72 bg-gray-800 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse" />
         <div className="absolute top-40 right-20 w-96 h-96 bg-gray-700 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse animation-delay-2000" />
         <div className="absolute bottom-20 left-1/2 w-80 h-80 bg-gray-600 rounded-full mix-blend-multiply filter blur-xl opacity-25 animate-pulse animation-delay-4000" />
-        
+
         {/* Additional abstract shapes */}
         <div className="absolute top-1/3 left-1/4 w-32 h-32 bg-white/10 rounded-full blur-md" />
         <div className="absolute bottom-1/3 right-1/4 w-48 h-48 bg-white/5 rounded-full blur-lg" />
@@ -99,15 +111,7 @@ export default function EventsPage() {
           </p>
         </div>
 
-        {/* Ask Me button in bottom right */}
-        <div className="absolute bottom-8 right-8 z-20">
-          <button className="bg-white/20 backdrop-blur-md text-white px-4 py-2 rounded-full border border-white/30 hover:bg-white/30 transition-all duration-300 flex items-center gap-2 shadow-lg">
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            Ask Me
-          </button>
-        </div>
+
       </section>
 
       {/* Why Attend MAAC Events Section */}
@@ -223,15 +227,8 @@ export default function EventsPage() {
               </svg>
 
               {/* Video Card */}
-              <div ref={video24FPSRef} className="bg-gray-800 rounded-lg shadow-lg overflow-hidden w-full max-w-md">
-                <iframe
-                  className="w-full h-64"
-                  src="https://www.youtube.com/embed/C2ix6uKTaAQ"
-                  title="24FPS International Animation Awards"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
+              <div ref={video24FPSRef} className="rounded-2xl shadow-lg overflow-hidden w-full max-w-md h-64 border border-white/5">
+                <VideoFacade youtubeId="C2ix6uKTaAQ" title="24FPS International Animation Awards" />
               </div>
             </div>
           </div>
@@ -272,15 +269,8 @@ export default function EventsPage() {
               </svg>
 
               {/* Video Card */}
-              <div ref={video100HoursRef} className="relative w-full max-w-md bg-gray-800 rounded-lg shadow-lg overflow-hidden">
-                <iframe
-                  className="w-full h-64"
-                  src="https://www.youtube.com/embed/3BuVrYHjIq4"
-                  title="100 Hours - The Ultimate Creative Marathon"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
+              <div ref={video100HoursRef} className="relative w-full max-w-md rounded-2xl shadow-lg overflow-hidden h-64 border border-white/5">
+                <VideoFacade youtubeId="3BuVrYHjIq4" title="100 Hours - The Ultimate Creative Marathon" />
               </div>
             </div>
           </div>
@@ -321,15 +311,8 @@ export default function EventsPage() {
               </svg>
 
               {/* Video Card */}
-              <div ref={videoManifestRef} className="bg-gray-800 rounded-lg shadow-lg overflow-hidden w-full max-w-md">
-                <iframe
-                  className="w-full h-64"
-                  src="https://www.youtube.com/embed/RaQivBSoEak"
-                  title="MAAC Manifest"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
+              <div ref={videoManifestRef} className="rounded-2xl shadow-lg overflow-hidden w-full max-w-md h-64 border border-white/5">
+                <VideoFacade youtubeId="RaQivBSoEak" title="MAAC Manifest" />
               </div>
             </div>
           </div>
@@ -378,15 +361,8 @@ National Students&apos; Meet (NSM)
             {/* Right side: Video Card */}
             <div className="flex justify-center lg:justify-end">
               <div className="relative w-full max-w-sm">
-                <div ref={videoNSMRef} className="bg-gray-800 rounded-lg shadow-lg overflow-hidden">
-                  <iframe
-                    className="w-full h-56"
-                    src="https://www.youtube.com/embed/FPgueLMvlMI"
-                    title="National Students' Meet (NSM)"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
+                <div ref={videoNSMRef} className="rounded-2xl shadow-lg overflow-hidden h-56 border border-white/5">
+                  <VideoFacade youtubeId="FPgueLMvlMI" title="National Students' Meet (NSM)" />
                 </div>
               </div>
             </div>
@@ -436,15 +412,8 @@ National Students&apos; Meet (NSM)
             {/* Right side: Video Card */}
             <div className="flex justify-center lg:justify-end">
               <div className="relative w-full max-w-sm">
-                <div ref={videoMCLRef} className="bg-gray-800 rounded-lg shadow-lg overflow-hidden">
-                  <iframe
-                    className="w-full h-56"
-                    src="https://www.youtube.com/embed/FPgueLMvlMI"
-                    title="MAAC Creative League (MCL)"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
+                <div ref={videoMCLRef} className="rounded-2xl shadow-lg overflow-hidden h-56 border border-white/5">
+                  <VideoFacade youtubeId="FPgueLMvlMI" title="MAAC Creative League (MCL)" />
                 </div>
               </div>
             </div>
@@ -494,15 +463,8 @@ National Students&apos; Meet (NSM)
             {/* Right side: Video Card */}
             <div className="flex justify-center lg:justify-end">
               <div className="relative w-full max-w-sm">
-                <div ref={videoKlickRef} className="bg-gray-800 rounded-lg shadow-lg overflow-hidden">
-                  <iframe
-                    className="w-full h-56"
-                    src="https://www.youtube.com/embed/ao5k9ZTVbS0"
-                    title="MAAC Klick - Nature & Wildlife Photography Expeditions"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
+                <div ref={videoKlickRef} className="rounded-2xl shadow-lg overflow-hidden h-56 border border-white/5">
+                  <VideoFacade youtubeId="ao5k9ZTVbS0" title="MAAC Klick - Nature & Wildlife Photography Expeditions" />
                 </div>
               </div>
             </div>
@@ -552,15 +514,8 @@ National Students&apos; Meet (NSM)
             {/* Right side: Video Card */}
             <div className="flex justify-center lg:justify-end">
               <div className="relative w-full max-w-sm">
-                <div ref={videoBTSRef} className="bg-gray-800 rounded-lg shadow-lg overflow-hidden">
-                  <iframe
-                    className="w-full h-56"
-                    src="https://www.youtube.com/embed/Fs6YutaEejc"
-                    title="BTS: Behind the Screen"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
+                <div ref={videoBTSRef} className="rounded-2xl shadow-lg overflow-hidden h-56 border border-white/5">
+                  <VideoFacade youtubeId="Fs6YutaEejc" title="BTS: Behind the Screen" />
                 </div>
               </div>
             </div>
@@ -660,25 +615,7 @@ National Students&apos; Meet (NSM)
           </div>
         </div>
 
-        {/* Ask Me button with camera icon and speech bubble in bottom right */}
-        <div className="absolute bottom-8 right-8 z-20">
-          <button className="relative flex items-center gap-3 bg-white/10 backdrop-blur-md text-white px-6 py-3 rounded-full border border-white/30 hover:bg-white/20 transition-all duration-300 shadow-lg">
-            {/* Camera icon */}
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
-            </svg>
-            
-            {/* Speech bubble */}
-            <div className="relative">
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
-              </svg>
-            </div>
-            
-            <span className="font-semibold">Ask Me</span>
-          </button>
-        </div>
+
       </section>
 
       <Footer />

@@ -52,7 +52,11 @@ export const metadata: Metadata = {
   },
   manifest: '/manifest.json',
   keywords: [
-    "animation institute jaipur",
+    "animation academy",
+    "VFX courses in Jaipur",
+    "3D animation Jaipur",
+    "MAAC Jaipur",
+    "animation institute",
     "maac jaipur c scheme",
     "3d animation course jaipur",
     "vfx training jaipur",
@@ -60,7 +64,6 @@ export const metadata: Metadata = {
     "game design course jaipur",
     "best animation institute rajasthan",
     "animation courses jaipur",
-    "vfx courses jaipur",
     "graphic design course jaipur",
     "filmmaking course jaipur",
     "b.voc animation jaipur",
@@ -119,7 +122,7 @@ const jsonLd = {
       name: "MAAC Animation Jaipur C-Scheme",
       alternateName: "MAAC Jaipur",
       url: "https://www.maacanimationjaipur.com",
-      logo: "https://www.maacanimationjaipur.com/image.png",
+      logo: "https://www.maacanimationjaipur.com/maac-logo.png",
       image: "https://www.maacanimationjaipur.com/og-image.jpg",
       description:
         "MAAC Jaipur C-Scheme is Rajasthan's leading Animation, VFX and Game Design institute. Offering B.Voc, Diploma and short-term courses. NSDC & MESC certified with 95% placement support.",
@@ -156,10 +159,19 @@ const jsonLd = {
         "@type": "OfferCatalog",
         name: "Animation & VFX Courses",
         itemListElement: [
-          { "@type": "Course", name: "Advanced Program in Visual Effects (ADVFX)", description: "Master compositing, rotoscopy, matchmoving and CG integration", provider: { "@type": "Organization", name: "MAAC Jaipur" } },
-          { "@type": "Course", name: "Advanced Program in 3D Animation (AD3D Edge)", description: "Comprehensive training in modeling, texturing, rigging and character animation using Maya", provider: { "@type": "Organization", name: "MAAC Jaipur" } },
-          { "@type": "Course", name: "Program in Game Design & Integration (DGDI)", description: "Learn game art, game design, level design and game engine integration", provider: { "@type": "Organization", name: "MAAC Jaipur" } },
-          { "@type": "Course", name: "Advanced Program in Digital Media & Design (APDMD)", description: "Master graphic design, web design, UI/UX, motion graphics and digital marketing", provider: { "@type": "Organization", name: "MAAC Jaipur" } },
+          { "@type": "Course", name: "3D Animation (AD3D Edge)", description: "Advanced 3D Animation course covering modeling, texturing, rigging and character animation using Maya.", provider: { "@type": "Organization", name: "MAAC Jaipur" } },
+          { "@type": "Course", name: "Visual Effects (ADVFX)", description: "Master compositing, rotoscopy, matchmoving and CG integration for film and TV.", provider: { "@type": "Organization", name: "MAAC Jaipur" } },
+          { "@type": "Course", name: "Game Design & Integration (DGDI)", description: "Learn game art, level design and engine integration with Unity and Unreal Engine.", provider: { "@type": "Organization", name: "MAAC Jaipur" } },
+          { "@type": "Course", name: "Digital Media & Design (APDMD)", description: "Advanced program in graphic design, web design, UI/UX and motion graphics.", provider: { "@type": "Organization", name: "MAAC Jaipur" } },
+          { "@type": "Course", name: "Design Viz Pro", description: "Architectural visualization and design communication program.", provider: { "@type": "Organization", name: "MAAC Jaipur" } },
+          { "@type": "Course", name: "Digital Animation & Film Making (DAFM)", description: "Comprehensive program in filmmaking and animation production.", provider: { "@type": "Organization", name: "MAAC Jaipur" } },
+          { "@type": "Course", name: "VFX Plus", description: "Program in visual effects with focus on compositing and motion graphics.", provider: { "@type": "Organization", name: "MAAC Jaipur" } },
+          { "@type": "Course", name: "Maya Pro", description: "Specialized certificate course in Autodesk Maya.", provider: { "@type": "Organization", name: "MAAC Jaipur" } },
+          { "@type": "Course", name: "Max Pro", description: "Specialized certificate course in Autodesk 3ds Max.", provider: { "@type": "Organization", name: "MAAC Jaipur" } },
+          { "@type": "Course", name: "Graphic Design", description: "Certificate program in graphic design and visual communication.", provider: { "@type": "Organization", name: "MAAC Jaipur" } },
+          { "@type": "Course", name: "Composite & Editing Pro", description: "Focused program on video editing and compositing.", provider: { "@type": "Organization", name: "MAAC Jaipur" } },
+          { "@type": "Course", name: "Digital Filmmaking (DFM)", description: "Hands-on digital filmmaking from pre to post production.", provider: { "@type": "Organization", name: "MAAC Jaipur" } },
+          { "@type": "Course", name: "Gaming Design", description: "Comprehensive game art and design pipeline training.", provider: { "@type": "Organization", name: "MAAC Jaipur" } },
         ],
       },
     },
@@ -174,6 +186,20 @@ export default function RootLayout({
   return (
     <html lang="en" className={`scroll-smooth ${inter.variable} ${syne.variable}`}>
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var done = localStorage.getItem('maac_intro_done');
+                  if (done === '1') {
+                    document.documentElement.dataset.maacIntroDone = '1';
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
         {/* Intro first on home; hero loads after intro completes (see MAACXHero). */}
         <link rel="preload" as="video" href="/intro.mp4" type="video/mp4" />
         <link rel="preload" as="video" href="/intro.webm" type="video/webm" />
@@ -216,5 +242,5 @@ export default function RootLayout({
         </Providers>
       </body>
     </html>
-  );
+   );
 }

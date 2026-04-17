@@ -7,6 +7,7 @@ import { contactInfo } from "@/data/siteData";
 import MagneticButton from "@/components/ui/MagneticButton";
 import { submitContactForm } from "@/app/actions";
 import { Send, Phone, MessageSquare, Mail, ShieldCheck } from "lucide-react";
+import SmokyButton from "@/components/ui/SmokyButton";
 
 export default function ApplyNow() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -161,14 +162,14 @@ export default function ApplyNow() {
               </div>
 
               <MagneticButton>
-                <button 
+                <SmokyButton 
                   type="submit" 
                   disabled={isSubmitting}
-                  className="w-full btn btn-primary py-5 rounded-2xl text-base font-bold tracking-widest flex items-center justify-center gap-3 disabled:opacity-50"
+                  className="w-full py-5 rounded-2xl text-[12px] font-bold tracking-widest flex items-center justify-center gap-3 disabled:opacity-50"
                 >
                   {isSubmitting ? 'Sending...' : 'Secure Your Spot'}
                   {!isSubmitting && <Send size={18} />}
-                </button>
+                </SmokyButton>
               </MagneticButton>
               
               {submitError && (

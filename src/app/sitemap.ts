@@ -62,38 +62,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: `${base}/blog`,
       lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.6,
-    },
-    {
-      url: `${base}/blog/transitions-in-ux-design`,
-      lastModified: now,
-      changeFrequency: "yearly",
-      priority: 0.5,
-    },
-    {
-      url: `${base}/blog/career-in-animation`,
-      lastModified: now,
-      changeFrequency: "yearly",
-      priority: 0.5,
-    },
-    {
-      url: `${base}/blog/animation-courses-jaipur`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.6,
-    },
-    {
-      url: `${base}/blog/vfx-career-india`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.6,
-    },
-    {
-      url: `${base}/blog/game-design-course-jaipur`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.6,
+      changeFrequency: "weekly",
+      priority: 0.8,
     },
     // Auto-generated blog posts (from blogPosts)
     ...blogUrls,

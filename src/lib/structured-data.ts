@@ -136,9 +136,9 @@ export const localBusinessSchema = {
   "url": "https://www.maacanimationjaipur.com",
   "logo": {
     "@type": "ImageObject",
-    "url": "https://www.maacanimationjaipur.com/wp-content/uploads/2021/09/v-toy-sl-3.png",
-    "width": 600,
-    "height": 600
+    "url": "https://www.maacanimationjaipur.com/maac-logo.png",
+    "width": 512,
+    "height": 512
   },
   "description": "Rajasthan's leading animation, VFX, and multimedia institute with 30+ years of excellence. Offering B.Voc degrees, diploma courses in 3D Animation, Visual Effects, Game Design, and Digital Filmmaking with 95% placement record.",
   "foundingDate": "1998",

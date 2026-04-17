@@ -11,10 +11,23 @@ interface FloatingActionsProps {
 
 function DesktopCTA() {
   const whatsappUrl = `https://wa.me/${contactInfo.whatsapp.replace(/[^0-9]/g, "")}?text=Hi%20MAAC%20Jaipur`;
+  const [reveal, setReveal] = useState(false);
+
+  useEffect(() => {
+    if (typeof document !== "undefined" && document.documentElement.dataset.maacIntroDone === "1") {
+      setReveal(true);
+      return;
+    }
+    const onReveal = () => setReveal(true);
+    window.addEventListener("maac:intro_revealed", onReveal, { once: true });
+    return () => window.removeEventListener("maac:intro_revealed", onReveal);
+  }, []);
+
+  if (!reveal) return null;
 
   return (
     <div
-      className="fixed right-6 md:right-10 z-[60] hidden lg:flex flex-col gap-3"
+      className="fixed right-6 md:right-10 z-[60] hidden lg:flex flex-col gap-3 animate-in fade-in slide-in-from-bottom-4 duration-700"
       style={{ bottom: "max(32px, calc(32px + env(safe-area-inset-bottom)))" }}
     >
       <a
@@ -39,8 +52,19 @@ function DesktopCTA() {
 
 function MobileBottomNav() {
   const [visible, setVisible] = useState(false);
+  const [reveal, setReveal] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const tickingRef = useRef(false);
+
+  useEffect(() => {
+    if (typeof document !== "undefined" && document.documentElement.dataset.maacIntroDone === "1") {
+      setReveal(true);
+    } else {
+      const onReveal = () => setReveal(true);
+      window.addEventListener("maac:intro_revealed", onReveal, { once: true });
+      return () => window.removeEventListener("maac:intro_revealed", onReveal);
+    }
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -58,6 +82,8 @@ function MobileBottomNav() {
   }, []);
 
   const whatsappUrl = `https://wa.me/${contactInfo.whatsapp.replace(/[^0-9]/g, "")}?text=Hi%20MAAC%20Jaipur`;
+
+  if (!reveal) return null;
 
   return (
     <div

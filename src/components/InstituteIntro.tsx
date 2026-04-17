@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "@/lib/gsap";
+import VideoFacade from "@/components/ui/VideoFacade";
 
 function CountUpStat({ number, suffix, label }: { number: number; suffix: string; label: string }) {
   const countRef = useRef<HTMLDivElement>(null);
@@ -62,16 +63,7 @@ export default function InstituteIntro() {
           
           {/* Left: Video */}
           <div className="lg:col-span-7 institute-video-container">
-            <div className="relative aspect-video rounded-3xl overflow-hidden shadow-2xl shadow-black/80 border border-white/5 group">
-              <iframe
-                className="absolute inset-0 w-full h-full"
-                src="https://www.youtube.com/embed/_D7gd6bSE0A?autoplay=0&controls=1&rel=0&modestbranding=1&showinfo=0"
-                title="MAAC Animation Showreel"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                style={{ border: 0 }}
-              />
-            </div>
+            <VideoFacade youtubeId="_D7gd6bSE0A" title="MAAC Animation Showreel" className="aspect-video" />
           </div>
 
           {/* Right: Text */}

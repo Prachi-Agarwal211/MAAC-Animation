@@ -20,6 +20,14 @@ const nextConfig = {
         protocol: "https",
         hostname: "www.maacanimationjaipur.com",
       },
+      {
+        protocol: "https",
+        hostname: "img.youtube.com",
+      },
+      {
+        protocol: "https",
+        hostname: "i.ytimg.com",
+      },
     ],
   },
   // 301 Redirects from WordPress URLs to Next.js routes

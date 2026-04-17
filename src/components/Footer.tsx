@@ -92,14 +92,14 @@ export default function Footer() {
 
         {/* Brand Col */}
         <div className="footer-reveal lg:col-span-4 space-y-10">
-          <Link href="/" className="flex items-center gap-4 group">
-            <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center transition-colors group-hover:border-[#E31837]/50">
-              <Image src="/image.png" alt="MAAC" width={48} height={48} className="rounded" />
-            </div>
-            <div>
-              <span className="block text-white font-display font-black text-2xl tracking-tighter">MAAC</span>
-              <span className="block text-[#E31837] text-xs font-bold tracking-[0.3em] uppercase">JAIPUR</span>
-            </div>
+          <Link href="/" className="flex items-center group" aria-label="MAAC Jaipur - Home">
+            <Image
+              src="/maac%20logo.png"
+              alt="MAAC Animation Jaipur Logo"
+              width={240}
+              height={240}
+              className="w-32 h-32 md:w-64 md:h-64 transition-transform duration-200 group-hover:scale-[1.02] object-contain"
+            />
           </Link>
           <p className="text-[#A8A29C] text-lg leading-relaxed max-w-sm">
             Empowering the next generation of 3D artists and VFX masters with 30+ years of educational excellence.

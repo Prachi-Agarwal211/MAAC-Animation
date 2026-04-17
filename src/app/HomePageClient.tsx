@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MAACXHero from "@/components/hero/MAACXHero";
 import InstituteIntro from "@/components/InstituteIntro";
 import Footer from "@/components/Footer";
@@ -23,6 +23,14 @@ const StudentShowcase = dynamic(() => import("@/components/StudentShowcase"), { 
 
 export default function HomePageClient() {
   const [landingReady, setLandingReady] = useState(false);
+
+  useEffect(() => {
+    const isDone = window.localStorage.getItem("maac_intro_done") === "1" || 
+                   document.documentElement.dataset.maacIntroDone === "1";
+    if (isDone) {
+      setLandingReady(true);
+    }
+  }, []);
 
   return (
     <>
