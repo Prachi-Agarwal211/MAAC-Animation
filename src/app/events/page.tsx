@@ -85,7 +85,7 @@ export default function EventsPage() {
           loop
           playsInline
         >
-          <source src="/event.mp4" type="video/mp4" />
+          <source src="/events/event.mp4" type="video/mp4" />
         </video>
 
         {/* Black overlay */}
@@ -103,7 +103,7 @@ export default function EventsPage() {
 
         {/* Main content */}
         <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-8 leading-tight">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-8 leading-tight metallic-gold-text">
             MAAC EVENTS!
           </h1>
           <p className="text-lg md:text-xl lg:text-2xl text-white/90 max-w-3xl mx-auto leading-relaxed">
@@ -115,24 +115,24 @@ export default function EventsPage() {
       </section>
 
       {/* Why Attend MAAC Events Section */}
-      <section className="relative py-8 md:py-12 overflow-hidden" style={{ background: "#8B2635" }}>
+      <section className="relative py-8 md:py-12 overflow-hidden bg-black">
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Two column layout: Left heading, Right cards */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             {/* Left side: Heading and description */}
             <div className="text-left">
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-yellow-400 mb-6 leading-tight">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold metallic-gold-text mb-6 leading-tight">
                 Why Attend<br />MAAC Events?
               </h2>
               <p className="text-sm md:text-base text-white leading-relaxed max-w-lg">
                 At MAAC, we don&apos;t just teach - we transform careers. Whether you aspire to be an animator, VFX artist, game designer, filmmaker, or digital creator, we equip you with the skills, tools, and global opportunities to succeed.
               </p>
-              <button className="mt-6 flex items-center gap-2 text-yellow-400 hover:text-yellow-300 transition-colors">
-                <span className="font-semibold">Learn More</span>
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+              <a href="/contact" className="mt-6 inline-flex items-center gap-2 metallic-gold-text hover:text-yellow-300 transition-colors">
+                <span className="font-semibold text-sm">Learn More</span>
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                 </svg>
-              </button>
+              </a>
             </div>
 
             {/* Right side: Four feature cards in 2x2 grid */}
@@ -144,7 +144,7 @@ export default function EventsPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
                   </svg>
                 </div>
-                <h3 className="text-xl font-bold text-yellow-400 mb-3">Hands-on Learning</h3>
+                <h3 className="text-xl font-bold metallic-gold-text mb-3">Hands-on Learning</h3>
                 <p className="text-white text-sm leading-relaxed">
                   Gain industry insights through live projects, competitions, and expert-led sessions.
                 </p>
@@ -157,7 +157,7 @@ export default function EventsPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
                   </svg>
                 </div>
-                <h3 className="text-xl font-bold text-yellow-400 mb-3">Showcase Your Talent</h3>
+                <h3 className="text-xl font-bold metallic-gold-text mb-3">Showcase Your Talent</h3>
                 <p className="text-white text-sm leading-relaxed">
                   Showcase your talent in national competitions and get noticed by top studios.
                 </p>
@@ -170,7 +170,7 @@ export default function EventsPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                   </svg>
                 </div>
-                <h3 className="text-xl font-bold text-yellow-400 mb-3">Network with the Best</h3>
+                <h3 className="text-xl font-bold metallic-gold-text mb-3">Network with the Best</h3>
                 <p className="text-white text-sm leading-relaxed">
                   Connect with alumni, faculty, and industry professionals worldwide.
                 </p>
@@ -183,7 +183,7 @@ export default function EventsPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                   </svg>
                 </div>
-                <h3 className="text-xl font-bold text-yellow-400 mb-3">Get Job-Ready</h3>
+                <h3 className="text-xl font-bold metallic-gold-text mb-3">Get Job-Ready</h3>
                 <p className="text-white text-sm leading-relaxed">
                   Access job placements and internships with leading animation studios.
                 </p>
@@ -194,9 +194,9 @@ export default function EventsPage() {
       </section>
 
       {/* Signature MAAC Events Section */}
-      <section className="relative py-8 md:py-12 overflow-hidden" style={{ background: "#1a1a1a" }}>
+      <section className="relative py-8 md:py-12 overflow-hidden bg-black">
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-yellow-400 mb-16 leading-tight text-center">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold metallic-gold-text mb-16 leading-tight text-center">
             Signature MAAC Events You Can Be a Part Of!
           </h2>
 
@@ -204,7 +204,7 @@ export default function EventsPage() {
             {/* Left side: 24FPS International Animation Awards content */}
             <div className="text-left">
               <div className="mb-6">
-                <div className="w-32 h-32 bg-yellow-400 rounded-lg flex items-center justify-center">
+                <div className="w-32 h-32 metallic-gold-accent rounded-lg flex items-center justify-center">
                   <span className="text-2xl font-bold text-gray-900">24FPS</span>
                 </div>
               </div>
@@ -214,15 +214,15 @@ export default function EventsPage() {
               <p className="text-lg text-white/90 leading-relaxed mb-8">
                 A globally recognized event where students compete with the best in the animation and VFX industry. This is your chance to impress industry leaders and make a mark in the creative world!
               </p>
-              <button className="px-8 py-3 bg-yellow-400 text-gray-900 font-semibold rounded-full hover:bg-yellow-300 transition-colors">
+              <a href="/contact" className="px-6 py-2 bg-yellow-400 text-gray-900 font-semibold rounded-full hover:bg-yellow-300 transition-colors text-sm">
                 Read More
-              </button>
+              </a>
             </div>
 
             {/* Right side: Arrow and Video Card */}
             <div className="flex flex-col items-center justify-center lg:flex-row lg:justify-end gap-8">
-              {/* Large yellow arrow */}
-              <svg className="w-20 h-20 text-yellow-400 transform rotate-90 lg:rotate-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
+              {/* Large metallic gold arrow */}
+              <svg className="w-20 h-20 metallic-gold-text transform rotate-90 lg:rotate-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
               </svg>
 
@@ -246,7 +246,7 @@ export default function EventsPage() {
             <div className="text-left">
               {/* 100 Race Against Time Logo */}
               <div className="mb-6">
-                <div className="w-32 h-16 bg-yellow-400 rounded-lg flex items-center justify-center">
+                <div className="w-32 h-16 metallic-gold-accent rounded-lg flex items-center justify-center">
                   <span className="text-xl font-bold text-black">100 RACE</span>
                 </div>
               </div>
@@ -256,15 +256,15 @@ export default function EventsPage() {
               <p className="text-base text-white/90 leading-relaxed mb-8 max-w-lg">
                 Push your limits! Create a 3D-animated short film or a 1-minute mobile film in just 100 hours! Work non-stop, collaborate with teammates, and experience the thrill of filmmaking under real-world deadlines.
               </p>
-              <button className="px-8 py-3 border border-yellow-400 text-yellow-400 font-semibold rounded-full hover:bg-yellow-400 hover:text-black transition-colors">
+              <a href="/contact" className="px-6 py-2 border border-yellow-400 text-yellow-400 font-semibold rounded-full hover:bg-yellow-400 hover:text-black transition-colors text-sm">
                 Read More
-              </button>
+              </a>
             </div>
 
             {/* Right side: Arrow and Image Card */}
             <div className="flex flex-col items-center justify-center lg:flex-row lg:justify-end gap-8">
               {/* Large yellow arrow */}
-              <svg className="w-20 h-20 text-yellow-400 transform rotate-90 lg:rotate-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
+              <svg className="w-20 h-20 metallic-gold-text transform rotate-90 lg:rotate-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
               </svg>
 
@@ -288,7 +288,7 @@ export default function EventsPage() {
             <div className="text-left">
               {/* Logo placeholder */}
               <div className="mb-6">
-                <div className="w-32 h-16 bg-yellow-400 rounded-lg flex items-center justify-center">
+                <div className="w-32 h-16 metallic-gold-accent rounded-lg flex items-center justify-center">
                   <span className="text-xl font-bold text-black">MAAC</span>
                 </div>
               </div>
@@ -298,15 +298,15 @@ export default function EventsPage() {
               <p className="text-base text-white/90 leading-relaxed mb-8 max-w-lg">
                 We celebrate YOU! MAAC Manifest is where we honor our students and alumni for their outstanding contributions to the animation and VFX industry. Get recognized for your talent and be inspired by industry leaders.
               </p>
-              <button className="px-8 py-3 border border-yellow-400 text-yellow-400 font-semibold rounded-full hover:bg-yellow-400 hover:text-black transition-colors">
+              <a href="/contact" className="px-6 py-2 border border-yellow-400 text-yellow-400 font-semibold rounded-full hover:bg-yellow-400 hover:text-black transition-colors text-sm">
                 Read More
-              </button>
+              </a>
             </div>
 
             {/* Right side: Arrow and Video Card */}
             <div className="flex flex-col items-center justify-center lg:flex-row lg:justify-end gap-8">
               {/* Large yellow arrow */}
-              <svg className="w-20 h-20 text-yellow-400 transform rotate-90 lg:rotate-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
+              <svg className="w-20 h-20 metallic-gold-text transform rotate-90 lg:rotate-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
               </svg>
 
@@ -325,16 +325,16 @@ export default function EventsPage() {
           {/* Top white line */}
           <div className="border-t border-white mb-8"></div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-[auto_1fr_1fr] gap-8 items-center">
             {/* Left side: NSM Logo, Title, Description, Button */}
-            <div className="text-left lg:pr-8">
+            <div className="text-left lg:pr-4 max-w-md">
               {/* NSM Logo */}
               <div className="mb-6">
                 <div className="flex items-center gap-2">
-                  <div className="w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center">
+                  <div className="w-12 h-12 metallic-gold-accent rounded-full flex items-center justify-center">
                     <span className="text-black font-bold text-sm">NSM</span>
                   </div>
-                  <span className="text-yellow-400 font-bold text-sm">National Students&apos; Meet</span>
+                  <span className="metallic-gold-text font-bold text-sm">National Students&apos; Meet</span>
                 </div>
               </div>
               
@@ -342,18 +342,18 @@ export default function EventsPage() {
 National Students&apos; Meet (NSM)
               </h3>
               
-              <p className="text-sm md:text-base text-white/90 leading-relaxed mb-8 max-w-lg">
+              <p className="text-sm md:text-base text-white/90 leading-relaxed mb-8 max-w-md">
                 A dream event for every MAAC student! Meet like-minded artists from across India, participate in creative workshops, panel discussions, and exclusive hands-on training sessions with industry pros.
               </p>
               
-              <button className="px-8 py-3 border border-yellow-400 text-yellow-400 font-semibold rounded-full hover:bg-yellow-400 hover:text-black transition-colors">
+              <a href="/contact" className="px-6 py-2 border border-yellow-400 text-yellow-400 font-semibold rounded-full hover:bg-yellow-400 hover:text-black transition-colors text-sm">
                 Read More
-              </button>
+              </a>
             </div>
 
             {/* Center: Large Golden Arrow */}
             <div className="flex justify-center">
-              <svg className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
+              <svg className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 metallic-gold-text" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
               </svg>
             </div>
@@ -376,16 +376,16 @@ National Students&apos; Meet (NSM)
           {/* Top white line */}
           <div className="border-t border-white mb-8"></div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-[auto_1fr_1fr] gap-8 items-center">
             {/* Left side: MCL Logo, Title, Description, Button */}
-            <div className="text-left lg:pr-8">
+            <div className="text-left lg:pr-4 max-w-md">
               {/* MCL Logo */}
               <div className="mb-6">
                 <div className="flex items-center gap-2">
-                  <div className="w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center">
+                  <div className="w-12 h-12 metallic-gold-accent rounded-full flex items-center justify-center">
                     <span className="text-black font-bold text-sm">MCL</span>
                   </div>
-                  <span className="text-yellow-400 font-bold text-sm">MAAC Creative League</span>
+                  <span className="metallic-gold-text font-bold text-sm">MAAC Creative League</span>
                 </div>
               </div>
               
@@ -393,18 +393,18 @@ National Students&apos; Meet (NSM)
                 MAAC Creative League (MCL)
               </h3>
               
-              <p className="text-sm md:text-base text-white/90 leading-relaxed mb-8 max-w-lg">
+              <p className="text-sm md:text-base text-white/90 leading-relaxed mb-8 max-w-md">
                 Compete in one of the most exciting design and animation challenges at MAAC! Unleash your creativity, showcase your talent, and win exciting prizes as you go head-to-head with the best in the field.
               </p>
               
-              <button className="px-8 py-3 border border-yellow-400 text-yellow-400 font-semibold rounded-full hover:bg-yellow-400 hover:text-black transition-colors">
+              <a href="/contact" className="px-6 py-2 border border-yellow-400 text-yellow-400 font-semibold rounded-full hover:bg-yellow-400 hover:text-black transition-colors text-sm">
                 Read More
-              </button>
+              </a>
             </div>
 
             {/* Center: Large Golden Arrow */}
             <div className="flex justify-center">
-              <svg className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
+              <svg className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 metallic-gold-text" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
               </svg>
             </div>
@@ -427,16 +427,16 @@ National Students&apos; Meet (NSM)
           {/* Top white line */}
           <div className="border-t border-white mb-8"></div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-[auto_1fr_1fr] gap-8 items-center">
             {/* Left side: MAAC Klick Logo, Title, Description, Button */}
-            <div className="text-left lg:pr-8">
+            <div className="text-left lg:pr-4 max-w-md">
               {/* MAAC Klick Logo */}
               <div className="mb-6">
                 <div className="flex items-center gap-2">
-                  <div className="w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center">
+                  <div className="w-12 h-12 metallic-gold-accent rounded-full flex items-center justify-center">
                     <span className="text-black font-bold text-sm">Klick</span>
                   </div>
-                  <span className="text-yellow-400 font-bold text-sm">MAAC Klick</span>
+                  <span className="metallic-gold-text font-bold text-sm">MAAC Klick</span>
                 </div>
               </div>
               
@@ -444,18 +444,18 @@ National Students&apos; Meet (NSM)
                 MAAC Klick - Nature & Wildlife Photography Expeditions
               </h3>
               
-              <p className="text-sm md:text-base text-white/90 leading-relaxed mb-8 max-w-lg">
+              <p className="text-sm md:text-base text-white/90 leading-relaxed mb-8 max-w-md">
                 Step outside the classroom and capture breathtaking moments! Travel to stunning locations like Coorg, Ranthambore, and Sariska National Park, and learn the art of professional photography in real-world environments.
               </p>
               
-              <button className="px-8 py-3 border border-yellow-400 text-yellow-400 font-semibold rounded-full hover:bg-yellow-400 hover:text-black transition-colors">
+              <a href="/contact" className="px-6 py-2 border border-yellow-400 text-yellow-400 font-semibold rounded-full hover:bg-yellow-400 hover:text-black transition-colors text-sm">
                 Read More
-              </button>
+              </a>
             </div>
 
             {/* Center: Large Golden Arrow */}
             <div className="flex justify-center">
-              <svg className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
+              <svg className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 metallic-gold-text" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
               </svg>
             </div>
@@ -478,16 +478,16 @@ National Students&apos; Meet (NSM)
           {/* Top white line */}
           <div className="border-t border-white mb-8"></div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-[auto_1fr_1fr] gap-8 items-center">
             {/* Left side: Logo, Title, Description, Button */}
-            <div className="text-left lg:pr-8">
+            <div className="text-left lg:pr-4 max-w-md">
               {/* BTS Logo */}
               <div className="mb-6">
                 <div className="flex items-center gap-2">
-                  <div className="w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center">
+                  <div className="w-12 h-12 metallic-gold-accent rounded-full flex items-center justify-center">
                     <span className="text-black font-bold text-sm">BTS</span>
                   </div>
-                  <span className="text-yellow-400 font-bold text-sm">Behind the Screen</span>
+                  <span className="metallic-gold-text font-bold text-sm">Behind the Screen</span>
                 </div>
               </div>
               
@@ -495,18 +495,18 @@ National Students&apos; Meet (NSM)
                 BTS: Behind the Screen
               </h3>
               
-              <p className="text-sm md:text-base text-white/90 leading-relaxed mb-8 max-w-lg">
+              <p className="text-sm md:text-base text-white/90 leading-relaxed mb-8 max-w-md">
                 Gain exclusive insights from industry legends through our webinars and Masterclasses. Learn about cutting-edge tools, techniques, and career opportunities straight from professionals & our Alumni who have worked on blockbuster movies and AAA games.
               </p>
               
-              <button className="px-8 py-3 border border-yellow-400 text-yellow-400 font-semibold rounded-full hover:bg-yellow-400 hover:text-black transition-colors">
+              <a href="/contact" className="px-6 py-2 border border-yellow-400 text-yellow-400 font-semibold rounded-full hover:bg-yellow-400 hover:text-black transition-colors text-sm">
                 Read More
-              </button>
+              </a>
             </div>
 
             {/* Center: Large Golden Arrow */}
             <div className="flex justify-center">
-              <svg className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
+              <svg className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 metallic-gold-text" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
               </svg>
             </div>
@@ -524,7 +524,7 @@ National Students&apos; Meet (NSM)
       </section>
 
       {/* Who Can Attend MAAC Events Section */}
-      <section className="relative py-8 md:py-12 overflow-hidden" style={{ background: "#2D1F1F" }}>
+      <section className="relative py-8 md:py-12 overflow-hidden bg-black">
         {/* Subtle wavy pattern background */}
         <div className="absolute inset-0 opacity-5">
           <svg className="w-full h-full" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
@@ -541,7 +541,7 @@ National Students&apos; Meet (NSM)
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight text-left" style={{ color: "#FFD700" }}>
+          <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight text-left metallic-gold-text">
             Who Can Attend MAAC Events?
           </h2>
 
@@ -556,7 +556,7 @@ National Students&apos; Meet (NSM)
                 <div className="flex items-center gap-8 w-full max-w-3xl">
                   {/* Simple number without circle - fixed width for alignment */}
                   <div className="flex-shrink-0 w-12 flex justify-center items-center">
-                    <span className="text-4xl md:text-5xl font-bold" style={{ WebkitTextStroke: '2px #FFD700', color: 'transparent' }}>1</span>
+                    <span className="text-4xl md:text-5xl font-bold metallic-gold-text">1</span>
                   </div>
                   
                   <p className="text-xl md:text-2xl text-white leading-relaxed font-medium flex-grow">
@@ -564,7 +564,7 @@ National Students&apos; Meet (NSM)
                   </p>
 
                   {/* Red checkmark on right */}
-                  <svg className="w-12 h-12 md:w-16 md:h-16 flex-shrink-0" fill="#FFD700" viewBox="0 0 24 24">
+                  <svg className="w-12 h-12 md:w-16 md:h-16 flex-shrink-0 metallic-gold-text" viewBox="0 0 24 24">
                     <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
                   </svg>
                 </div>
@@ -577,7 +577,7 @@ National Students&apos; Meet (NSM)
                 <div className="flex items-center gap-8 w-full max-w-3xl">
                   {/* Simple number without circle - fixed width for alignment */}
                   <div className="flex-shrink-0 w-12 flex justify-center items-center">
-                    <span className="text-4xl md:text-5xl font-bold" style={{ WebkitTextStroke: '2px #FFD700', color: 'transparent' }}>2</span>
+                    <span className="text-4xl md:text-5xl font-bold metallic-gold-text">2</span>
                   </div>
                   
                   <p className="text-xl md:text-2xl text-white leading-relaxed font-medium flex-grow">
@@ -585,7 +585,7 @@ National Students&apos; Meet (NSM)
                   </p>
 
                   {/* Red checkmark on right */}
-                  <svg className="w-12 h-12 md:w-16 md:h-16 flex-shrink-0" fill="#FFD700" viewBox="0 0 24 24">
+                  <svg className="w-12 h-12 md:w-16 md:h-16 flex-shrink-0 metallic-gold-text" viewBox="0 0 24 24">
                     <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
                   </svg>
                 </div>
@@ -598,7 +598,7 @@ National Students&apos; Meet (NSM)
                 <div className="flex items-center gap-8 w-full max-w-3xl">
                   {/* Simple number without circle - fixed width for alignment */}
                   <div className="flex-shrink-0 w-12 flex justify-center items-center">
-                    <span className="text-4xl md:text-5xl font-bold" style={{ WebkitTextStroke: '2px #FFD700', color: 'transparent' }}>3</span>
+                    <span className="text-4xl md:text-5xl font-bold metallic-gold-text">3</span>
                   </div>
                   
                   <p className="text-xl md:text-2xl text-white leading-relaxed font-medium flex-grow">
@@ -606,7 +606,7 @@ National Students&apos; Meet (NSM)
                   </p>
 
                   {/* Red checkmark on right */}
-                  <svg className="w-12 h-12 md:w-16 md:h-16 flex-shrink-0" fill="#FFD700" viewBox="0 0 24 24">
+                  <svg className="w-12 h-12 md:w-16 md:h-16 flex-shrink-0 metallic-gold-text" viewBox="0 0 24 24">
                     <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
                   </svg>
                 </div>
