@@ -1,63 +1,26 @@
-import type { Metadata } from "next";
+"use client";
+
 import Link from "next/link";
 import Script from "next/script";
-import MagneticButton from "@/components/ui/MagneticButton";
+import Footer from "@/components/Footer";
+import IndustryPartners from "@/components/IndustryPartners";
 import StudentWorkGallery from "./StudentWorkGallery";
-
-export const metadata: Metadata = {
-  title: "Student Work - maacanimationjaipur.com",
-  description:
-    "At MAAC Animation Institute, we're committed to empowering aspiring artists and filmmakers to unleash their creative potential, hone their skills,",
-  keywords: [
-    "student work animation jaipur",
-    "maac student projects",
-    "animation student portfolio",
-    "vfx student work jaipur",
-    "gaming design student projects",
-  ],
-  openGraph: {
-    type: "website",
-    title: "Student Work - maacanimationjaipur.com",
-    description:
-      "At MAAC Animation Institute, we're committed to empowering aspiring artists and filmmakers to unleash their creative potential, hone their skills,",
-    url: "https://www.maacanimationjaipur.com/student-work",
-    siteName: "maacanimationjaipur.com",
-    locale: "en_US",
-    images: [
-      {
-        url: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/07/Screenshot-2025-07-04-163930-400x89.png",
-        width: 1200,
-        height: 630,
-        alt: "MAAC Animation Jaipur Student Work",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Student Work - maacanimationjaipur.com",
-    description:
-      "At MAAC Animation Institute, we're committed to empowering aspiring artists and filmmakers to unleash their creative potential, hone their skills,",
-    images: [
-      "https://www.maacanimationjaipur.com/wp-content/uploads/2025/07/Screenshot-2025-07-04-163930-400x89.png",
-    ],
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-      "max-video-preview": -1,
-    },
-  },
-  alternates: {
-    canonical: "https://www.maacanimationjaipur.com/student-work",
-  },
-};
+import { useEffect, useRef } from "react";
+import gsap from "@/lib/gsap";
 
 export default function StudentWorkPage() {
+  const heroRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (heroRef.current) {
+      gsap.fromTo(
+        heroRef.current.querySelectorAll(".animate-in"),
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 1, stagger: 0.2, ease: "power3.out" }
+      );
+    }
+  }, []);
+
   return (
     <>
       {/* JSON-LD Structured Data */}
@@ -70,10 +33,8 @@ export default function StudentWorkPage() {
             "@type": "CollectionPage",
             name: "Student Work - MAAC Animation Jaipur",
             description:
-              "At MAAC Animation Institute, we're committed to empowering aspiring artists and filmmakers to unleash their creative potential, hone their skills,",
+              "Explore incredible projects from MAAC Jaipur students. Portfolio-ready work in 3D Animation, VFX, and Game Design.",
             url: "https://www.maacanimationjaipur.com/student-work",
-            image:
-              "https://www.maacanimationjaipur.com/wp-content/uploads/2025/07/Screenshot-2025-07-04-163930-400x89.png",
             publisher: {
               "@type": "Organization",
               name: "MAAC Animation Jaipur",
@@ -83,77 +44,54 @@ export default function StudentWorkPage() {
         }}
       />
 
-      {/* Hero Section */}
-      <section className="relative min-h-[50vh] md:min-h-[60vh] flex items-center overflow-hidden">
-        <div
-          className="absolute inset-0"
-          style={{ background: "linear-gradient(135deg, #1A0508 0%, #0C0C0C 50%, #0C0C0C 100%)" }}
-        />
-        <div className="absolute top-20 right-10 w-64 h-64 rounded-full opacity-10" style={{ background: "radial-gradient(circle, #FFD700 0%, transparent 70%)" }} />
-        <div className="absolute bottom-10 left-10 w-48 h-48 rounded-full opacity-5" style={{ background: "radial-gradient(circle, #C4A882 0%, transparent 70%)" }} />
+      <main className="bg-[#080808] min-h-screen">
+        {/* Hero Section */}
+        <section 
+          ref={heroRef}
+          className="relative min-h-[60vh] flex items-center justify-center overflow-hidden border-b border-white/5"
+        >
+          <div className="absolute inset-0 z-0">
+            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-[#080808] z-10" />
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="w-full h-full object-cover opacity-40"
+            >
+              <source src="/hero-video-compressed.mp4" type="video/mp4" />
+            </video>
+          </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="max-w-3xl">
-            {/* Breadcrumb */}
-            <nav className="mb-8" aria-label="Breadcrumb">
-              <ol className="flex items-center gap-2 text-sm text-[#6B6560]">
-                <li><Link href="/" className="hover:text-[#FFD700] transition-colors">Home</Link></li>
-                <li>/</li>
-                <li className="text-[#A8A29C]">Student Work</li>
-              </ol>
-            </nav>
-
-            <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-[#F0EBE1] leading-[1.1] mb-6">
-              Student Work
+          <div className="relative z-20 text-center px-6 pt-20">
+            <p className="animate-in metallic-gold-text text-[10px] font-bold tracking-[0.3em] uppercase mb-4 flex items-center justify-center gap-3">
+              <span className="w-8 h-[1px] metallic-gold-accent" />
+              Excellence in Motion
+              <span className="w-8 h-[1px] metallic-gold-accent" />
+            </p>
+            <h1 className="animate-in font-display font-black text-[clamp(2.5rem,8vw,5rem)] leading-[0.85] tracking-tighter text-white uppercase mb-6">
+              Student <span className="metallic-gold-text italic text-[1.1em]">Work</span>
             </h1>
-            <p className="text-[#A8A29C] text-lg md:text-xl leading-relaxed max-w-2xl">
-              At MAAC Animation Institute, we&apos;re committed to empowering aspiring artists and filmmakers to unleash their creative potential, hone their skills, and build professional portfolios that open doors to the industry.
+            <p className="animate-in text-[#A8A29C] text-lg max-w-2xl mx-auto leading-relaxed">
+              At MAAC Animation Institute, we&apos;re committed to empowering aspiring artists to unleash their creative potential and build professional portfolios.
             </p>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Gallery Section */}
-      <section className="py-12 md:py-20 bg-[#0C0C0C]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <StudentWorkGallery />
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section
-        className="py-12 md:py-20"
-        style={{ background: "linear-gradient(135deg, #2A080C 0%, #170406 100%)" }}
-      >
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="font-display font-bold text-3xl md:text-4xl text-[#F0EBE1] mb-6">
-            Ready to Create Your Own Masterpiece?
-          </h2>
-          <p className="text-[#A8A29C] text-lg mb-10 max-w-2xl mx-auto">
-            Join MAAC Jaipur and build a professional portfolio that gets you hired. Book a free demo class today.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <MagneticButton>
-              <Link
-                href="/contact"
-                className="btn bg-gradient-to-r from-[#FFD700] to-[#C4132D] text-white hover:opacity-90 border border-[#FFD700]/50 px-8 py-4 rounded-lg font-semibold shadow-[0_0_20px_rgba(227,24,55,0.3)]"
-              >
-                Book Free Demo Class
-              </Link>
-            </MagneticButton>
-
-            <MagneticButton>
-              <Link
-                href="/courses"
-                className="btn bg-white/10 text-white border border-white/20 hover:bg-white/20 px-8 py-4 rounded-lg font-semibold"
-              >
-                Explore Courses
-              </Link>
-            </MagneticButton>
+        {/* Gallery Section */}
+        <section className="py-24 md:py-32 bg-transparent relative">
+          <div className="atmosphere-blob blob-orange top-0 left-0 opacity-5" />
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <StudentWorkGallery />
           </div>
+        </section>
+
+        <div className="border-t border-white/5">
+          <IndustryPartners />
         </div>
-      </section>
+
+        <Footer />
+      </main>
     </>
   );
 }

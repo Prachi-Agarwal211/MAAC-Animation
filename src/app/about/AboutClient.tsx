@@ -153,6 +153,14 @@ export default function AboutClient() {
         </div>
       </section>
 
+      <div className="border-t border-white/5">
+        <IndustryPartners />
+      </div>
+
+      <div className="border-t border-white/5">
+        <ApplyNow />
+      </div>
+
       <Footer />
     </main>
   );

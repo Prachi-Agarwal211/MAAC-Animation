@@ -1,50 +1,28 @@
-import type { Metadata } from "next";
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
+import Footer from "@/components/Footer";
+import IndustryPartners from "@/components/IndustryPartners";
+import ApplyNow from "@/components/ApplyNow";
 import { blogPosts } from "@/data/blog";
-
-export const metadata: Metadata = {
-  title: "Animation Career Blog | MAAC Jaipur Insights",
-  description:
-    "Insights, tips, and career guidance from MAAC Animation Jaipur. Learn about animation, VFX, game design, and the creative industry.",
-  keywords: [
-    "animation blog jaipur",
-    "vfx career tips",
-    "game design career advice",
-    "maac jaipur blog",
-    "animation industry insights",
-  ],
-  openGraph: {
-    type: "website",
-    title: "Blog - MAAC Animation Jaipur",
-    description:
-      "Insights, tips, and career guidance from MAAC Animation Jaipur.",
-    url: "https://www.maacanimationjaipur.com/blog",
-    siteName: "maacanimationjaipur.com",
-    locale: "en_US",
-    images: [
-      {
-        url: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/06/3.jpg",
-        width: 1200,
-        height: 630,
-        alt: "MAAC Animation Jaipur Blog",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-  alternates: {
-    canonical: "https://www.maacanimationjaipur.com/blog",
-  },
-};
+import { useEffect, useRef } from "react";
+import gsap from "@/lib/gsap";
 
 export default function BlogIndexPage() {
+  const heroRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (heroRef.current) {
+      gsap.fromTo(
+        heroRef.current.querySelectorAll(".animate-in"),
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 1, stagger: 0.2, ease: "power3.out" }
+      );
+    }
+  }, []);
+
   return (
     <>
       {/* JSON-LD Structured Data */}
@@ -67,110 +45,119 @@ export default function BlogIndexPage() {
         }}
       />
 
-      {/* Hero Section */}
-      <section className="relative min-h-[40vh] md:min-h-[50vh] flex items-center overflow-hidden">
-        <div
-          className="absolute inset-0"
-          style={{ background: "linear-gradient(135deg, #1A0508 0%, #0C0C0C 50%, #0C0C0C 100%)" }}
-        />
-        <div className="absolute top-20 right-10 w-64 h-64 rounded-full opacity-10" style={{ background: "radial-gradient(circle, #FFD700 0%, transparent 70%)" }} />
+      <main className="bg-[#080808] min-h-screen">
+        {/* Hero Section */}
+        <section 
+          ref={heroRef}
+          className="relative min-h-[60vh] flex items-center justify-center overflow-hidden border-b border-white/5"
+        >
+          <div className="absolute inset-0 z-0">
+            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-[#080808] z-10" />
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="w-full h-full object-cover opacity-40"
+            >
+              <source src="/hero-video-compressed.mp4" type="video/mp4" />
+            </video>
+          </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="max-w-3xl">
-            <nav className="mb-8" aria-label="Breadcrumb">
-              <ol className="flex items-center gap-2 text-sm text-[#6B6560]">
-                <li><Link href="/" className="hover:text-[#FFD700] transition-colors">Home</Link></li>
-                <li>/</li>
-                <li className="text-[#A8A29C]">Blog</li>
-              </ol>
-            </nav>
-
-            <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-[#F0EBE1] leading-[1.1] mb-6">
-              Blog & Insights
+          <div className="relative z-20 text-center px-6 pt-20">
+            <p className="animate-in metallic-gold-text text-[10px] font-bold tracking-[0.3em] uppercase mb-4 flex items-center justify-center gap-3">
+              <span className="w-8 h-[1px] metallic-gold-accent" />
+              Creative Insights
+              <span className="w-8 h-[1px] metallic-gold-accent" />
+            </p>
+            <h1 className="animate-in font-display font-black text-[clamp(2.5rem,8vw,5rem)] leading-[0.85] tracking-tighter text-white uppercase mb-6">
+              Blog & <span className="metallic-gold-text italic text-[1.1em]">Insights</span>
             </h1>
-            <p className="text-[#A8A29C] text-lg md:text-xl leading-relaxed max-w-2xl">
-              Industry insights, career guidance, and creative inspiration from MAAC Animation Jaipur.
+            <p className="animate-in text-[#A8A29C] text-lg max-w-2xl mx-auto leading-relaxed">
+              Industry trends, career guidance, and expert tips from the masters at MAAC Animation Jaipur.
             </p>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Blog Posts */}
-      <section className="py-12 md:py-20 bg-[#0C0C0C]">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-8">
-            {blogPosts.map((post) => (
-              <article
-                key={post.slug}
-                className="group bg-[#161616] rounded-xl overflow-hidden border border-white/5 hover:border-[#FFD700]/30 transition-all duration-300"
-              >
-                {/* Image */}
-                <Link href={`/blog/${post.slug}`} className="block relative aspect-video overflow-hidden bg-[#1A1A1A]">
-                  <Image
-                    src={post.ogImage}
-                    alt={post.title}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    loading="lazy"
-                  />
-                  <div className="absolute top-3 left-3">
-                    <span className="bg-[#FFD700]/90 text-white text-xs font-semibold px-3 py-1 rounded-full">
-                      {post.category}
-                    </span>
-                  </div>
-                </Link>
-
-                {/* Content */}
-                <div className="p-6">
-                  <div className="flex items-center gap-3 text-sm text-[#6B6560] mb-3">
-                    <time dateTime={post.date}>
-                      {new Date(post.date).toLocaleDateString("en-IN", {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                      })}
-                    </time>
-                    <span>&middot;</span>
-                    <span>{post.readTime}</span>
-                  </div>
-
-                  <Link href={`/blog/${post.slug}`}>
-                    <h2 className="font-display font-semibold text-[#F0EBE1] text-xl mb-3 group-hover:text-[#FFD700] transition-colors">
-                      {post.title}
-                    </h2>
-                  </Link>
-
-                  <p className="text-[#A8A29C] text-sm leading-relaxed mb-4">
-                    {post.excerpt}
-                  </p>
-
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {post.tags.slice(0, 3).map((tag, i) => (
-                      <span
-                        key={i}
-                        className="text-xs bg-white/5 text-[#6B6560] px-2 py-1 rounded"
-                      >
-                        {tag}
+        {/* Blog Posts */}
+        <section className="py-24 md:py-32 bg-transparent relative">
+          <div className="atmosphere-blob blob-orange top-0 left-0 opacity-5" />
+          <div className="max-w-6xl mx-auto px-6 lg:px-8">
+            <div className="grid md:grid-cols-2 gap-10">
+              {blogPosts.map((post) => (
+                <article
+                  key={post.slug}
+                  className="group bg-white/[0.02] rounded-3xl overflow-hidden border border-white/5 hover:border-[#FFD700]/30 transition-all duration-500 hover:-translate-y-2 shadow-2xl"
+                >
+                  {/* Image */}
+                  <Link href={`/blog/${post.slug}`} className="block relative aspect-video overflow-hidden">
+                    <Image
+                      src={post.ogImage}
+                      alt={post.title}
+                      fill
+                      className="object-cover group-hover:scale-110 transition-transform duration-1000"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      loading="lazy"
+                    />
+                    <div className="absolute top-4 left-4 z-10">
+                      <span className="bg-[#FFD700] text-black text-[10px] font-bold px-4 py-1.5 rounded-full uppercase tracking-widest">
+                        {post.category}
                       </span>
-                    ))}
-                  </div>
-
-                  <Link
-                    href={`/blog/${post.slug}`}
-                    className="text-[#FFD700] text-sm font-medium hover:underline inline-flex items-center gap-1"
-                  >
-                    Read More
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
+                    </div>
                   </Link>
-                </div>
-              </article>
-            ))}
+
+                  {/* Content */}
+                  <div className="p-8 md:p-10">
+                    <div className="flex items-center gap-4 text-[11px] font-bold uppercase tracking-widest text-[#6B6560] mb-6">
+                      <time dateTime={post.date}>
+                        {new Date(post.date).toLocaleDateString("en-IN", {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                        })}
+                      </time>
+                      <span className="w-1 h-1 bg-[#FFD700] rounded-full" />
+                      <span>{post.readTime}</span>
+                    </div>
+
+                    <Link href={`/blog/${post.slug}`}>
+                      <h2 className="font-display font-bold text-white text-2xl mb-4 group-hover:text-[#FFD700] transition-colors leading-tight">
+                        {post.title}
+                      </h2>
+                    </Link>
+
+                    <p className="text-[#A8A29C] text-base leading-relaxed mb-8 line-clamp-3">
+                      {post.excerpt}
+                    </p>
+
+                    <Link
+                      href={`/blog/${post.slug}`}
+                      className="inline-flex items-center gap-3 text-white text-[11px] font-bold uppercase tracking-[0.2em] group/btn"
+                    >
+                      Read Article
+                      <div className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center group-hover/btn:bg-[#FFD700] group-hover/btn:border-[#FFD700] group-hover/btn:text-black transition-all">
+                        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                      </div>
+                    </Link>
+                  </div>
+                </article>
+              ))}
+            </div>
           </div>
+        </section>
+
+        <div className="border-t border-white/5">
+          <IndustryPartners />
         </div>
-      </section>
+
+        <div className="border-t border-white/5">
+          <ApplyNow />
+        </div>
+
+        <Footer />
+      </main>
     </>
   );
 }

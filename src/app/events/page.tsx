@@ -115,7 +115,7 @@ export default function EventsPage() {
       </section>
 
       {/* Why Attend MAAC Events Section */}
-      <section className="relative py-8 md:py-12 overflow-hidden bg-black">
+      <section className="relative py-8 md:py-12 overflow-hidden bg-black border-t border-white/5">
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Two column layout: Left heading, Right cards */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
@@ -617,6 +617,14 @@ National Students&apos; Meet (NSM)
 
 
       </section>
+
+      <div className="border-t border-white/5">
+        <IndustryPartners />
+      </div>
+
+      <div className="border-t border-white/5">
+        <ApplyNow />
+      </div>
 
       <Footer />
     </>
