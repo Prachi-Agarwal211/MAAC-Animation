@@ -85,7 +85,7 @@ export default function EventsPage() {
           loop
           playsInline
         >
-          <source src="/events/event.mp4" type="video/mp4" />
+          <source src="/event-compressed.mp4" type="video/mp4" />
         </video>
 
         {/* Black overlay */}

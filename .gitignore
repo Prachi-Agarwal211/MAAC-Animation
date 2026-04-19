@@ -52,4 +52,5 @@ next-env.d.ts
 !public/intro.mp4
 !public/hero-video-compressed.mp4
 !public/hero-video.webm
+!public/event-compressed.mp4
 !public/student-work/*-compressed.mp4
