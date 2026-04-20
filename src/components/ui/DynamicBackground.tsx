@@ -17,57 +17,59 @@ const fragmentShader = `
   uniform float uTime;
   uniform vec2 uMouse;
   uniform vec2 uResolution;
-  uniform vec3 uColor1; // Teal
-  uniform vec3 uColor2; // Red
-  uniform vec3 uColor3; // Black
+  uniform vec3 uColor1; // Teal (20%)
+  uniform vec3 uColor2; // Red (40%)
+  uniform vec3 uColor3; // Black (40%)
   varying vec2 vUv;
 
   void main() {
-    // True Screen-Space Coordinates to prevent stretching
     vec2 uv = gl_FragCoord.xy / uResolution.xy;
     float aspect = uResolution.x / uResolution.y;
     vec2 st = (uv - 0.5);
     st.x *= aspect;
 
-    float t = uTime * 0.3; // Gentle flow
+    float t = uTime * 0.15; // Deeper, slower flow
     
-    // Silk-Smooth Blobs (Mesh Gradient logic)
-    // We use large distance fields instead of noise grids to avoid all "lining" artifacts
-    vec2 b1 = vec2(0.5 * sin(t * 0.6), 0.3 * cos(t * 0.8));
-    vec2 b2 = vec2(0.6 * cos(t * 1.1), 0.4 * sin(t * 0.9));
-    vec2 b3 = vec2(-0.4 * sin(t * 0.4), -0.5 * cos(t * 0.7));
-    vec2 b4 = vec2(-0.6 * cos(t * 1.3), 0.2 * sin(t * 1.2));
+    // Deeply shifting motion with multi-frequency sines
+    vec2 b1 = vec2(0.8 * sin(t * 0.3 + sin(t * 0.5)), 0.5 * cos(t * 0.4));
+    vec2 b2 = vec2(0.9 * cos(t * 0.6 - cos(t * 0.2)), 0.6 * sin(t * 0.5));
+    vec2 b3 = vec2(-0.7 * sin(t * 0.25), -0.8 * cos(t * 0.35 + sin(t * 0.15)));
+    vec2 b4 = vec2(-0.8 * cos(t * 0.7), 0.4 * sin(t * 0.8));
+    vec2 b5 = vec2(0.5 * sin(t * 1.1), -0.5 * cos(t * 1.3)); // Extra center-shifting blob
 
-    float f1 = 1.0 - smoothstep(0.0, 1.4, length(st - b1));
-    float f2 = 1.0 - smoothstep(0.0, 1.6, length(st - b2));
-    float f3 = 1.0 - smoothstep(0.0, 1.3, length(st - b3));
-    float f4 = 1.0 - smoothstep(0.0, 1.5, length(st - b4));
+    // Soft distance fields for color infusion
+    float f1 = 1.0 - smoothstep(0.0, 2.2, length(st - b1));
+    float f2 = 1.0 - smoothstep(0.0, 2.4, length(st - b2));
+    float f3 = 1.0 - smoothstep(0.0, 2.0, length(st - b3));
+    float f4 = 1.0 - smoothstep(0.0, 2.1, length(st - b4));
+    float f5 = 1.0 - smoothstep(0.0, 1.8, length(st - b5));
 
-    // Interactive mouse glow
+    // Interactive mouse glow - enhanced
     float mDist = length(uv - (uMouse * 0.5 + 0.5));
-    float mouseGlow = 1.0 - smoothstep(0.0, 0.45, mDist);
+    float mouseGlow = 1.0 - smoothstep(0.0, 0.7, mDist);
 
-    vec3 color = uColor3; // Base Cinematic Void
+    // Cinematic base void
+    vec3 color = uColor3; 
     
-    // Smoothly blend the "Aurora" blobs
-    color = mix(color, uColor1, f1 * 0.5);
-    color = mix(color, uColor2, f2 * 0.4);
-    color = mix(color, uColor1, f3 * 0.3);
-    color = mix(color, uColor2, f4 * 0.2);
+    // Infuse Dark Blood Red (uColor2) - Main atmospheric driver
+    color = mix(color, uColor2, f1 * 0.85 + f3 * 0.45 + f5 * 0.2);
     
-    // Add subtle interactive highlight
-    color += uColor1 * mouseGlow * 0.12;
+    // Infuse Deep Teal (uColor1) - Sophisticated contrast
+    color = mix(color, uColor1, f2 * 0.5 + f4 * 0.25 + f5 * 0.15);
+    
+    // Add interactive teal highlight
+    color += uColor1 * mouseGlow * 0.15;
 
-    // Cinematic Vignette (Readability Focus)
-    float vignette = smoothstep(1.6, 0.4, length(st));
+    // Soft focus vignette for depth
+    float vignette = smoothstep(2.2, 0.1, length(st));
     color *= vignette;
     
-    // Premium Fine Grain
-    float grain = fract(sin(dot(uv + t*0.001, vec2(12.9898, 78.233))) * 43758.5453);
-    color += (grain - 0.5) * 0.025;
+    // Cinematic Grain overlay
+    float grain = fract(sin(dot(uv + t*0.0001, vec2(12.9898, 78.233))) * 43758.5453);
+    color += (grain - 0.5) * 0.02;
 
-    // Clamp for absolute legibility
-    gl_FragColor = vec4(clamp(color, 0.0, 0.55), 1.0);
+    // Final output - slightly brighter than before but still deep and moody
+    gl_FragColor = vec4(clamp(color, 0.0, 0.65), 1.0);
   }
 `;
 
@@ -79,10 +81,10 @@ function BackgroundMesh() {
     uTime: { value: 0 },
     uMouse: { value: new THREE.Vector2(0, 0) },
     uResolution: { value: new THREE.Vector2(size.width, size.height) },
-    uColor1: { value: new THREE.Color("#0D3D3D") }, // Deep Emerald Teal
-    uColor2: { value: new THREE.Color("#4D0A0A") }, // Deep Crimson Red
-    uColor3: { value: new THREE.Color("#000000") }, // Absolute Black
-  }), []);
+    uColor1: { value: new THREE.Color("#004D4D") }, // Deep Teal (20% weight)
+    uColor2: { value: new THREE.Color("#4A0000") }, // Dark Blood Red (40% weight)
+    uColor3: { value: new THREE.Color("#000000") }, // Absolute Black (40% weight)
+  }), [size]);
 
   useFrame((state) => {
     uniforms.uTime.value = state.clock.getElapsedTime();

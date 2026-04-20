@@ -106,20 +106,6 @@ html, body {
   background-clip: text;
 }
 
-body::after {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url("https://res.cloudinary.com/did67v7it/image/upload/v1676212424/grain_u0zkzo.png");
-  opacity: 0.03;
-  pointer-events: none;
-  z-index: 9999;
-  mix-blend-mode: overlay;
-}
-
 .perspective-1000 {
   perspective: 1000px;
 }
@@ -717,8 +703,8 @@ body.demo-bar-visible .page-wrapper {
    ═══════════════════════════════════════════════════════ */
 .animated-mesh-bg {
   background: 
-    radial-gradient(circle at 15% 50%, rgba(0, 128, 128, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 85% 30%, rgba(184, 19, 44, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 15% 50%, rgba(0, 77, 77, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 85% 30%, rgba(74, 0, 0, 0.12) 0%, transparent 40%),
     #050505;
   background-size: 200% 200%;
   animation: luxury-mesh-drift 20s ease-in-out infinite alternate;

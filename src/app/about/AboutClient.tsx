@@ -4,6 +4,8 @@ import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "@/lib/gsap";
 import Footer from "@/components/Footer";
+import IndustryPartners from "@/components/IndustryPartners";
+import ApplyNow from "@/components/ApplyNow";
 import { localBusinessSchema, breadcrumbSchema } from "@/lib/structured-data";
 import RevealHeading from "@/components/ui/RevealHeading";
 import SplitTextReveal from "@/components/ui/SplitTextReveal";
@@ -74,7 +76,7 @@ export default function AboutClient() {
             <span className="block text-white font-display font-black text-[clamp(3.5rem,10vw,8.5rem)] leading-[0.85] tracking-tighter">
               <SplitTextReveal>Crafting the</SplitTextReveal>
             </span>
-            <span className="block gradient-text font-display font-black text-[clamp(3rem,8vw,7rem)] leading-[0.85] tracking-tighter mt-4">
+            <span className="block metallic-gold-text font-display font-black text-[clamp(3rem,8vw,7rem)] leading-[0.85] tracking-tighter mt-4">
               <SplitTextReveal delay={0.2}>Digital Future</SplitTextReveal>
             </span>
           </h1>

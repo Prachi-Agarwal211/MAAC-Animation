@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import Script from "next/script";
 import Footer from "@/components/Footer";
 import IndustryPartners from "@/components/IndustryPartners";

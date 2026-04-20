@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef, useState, useEffect, useCallback } from "react";
-import Link from "next/link";
 import { useGSAP } from "@gsap/react";
 import gsap from "@/lib/gsap";
 import { VolumeX, Volume2 } from "lucide-react";

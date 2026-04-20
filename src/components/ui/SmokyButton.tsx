@@ -74,29 +74,29 @@ const fragmentShaderSource = `
       
       vec3 color = mix(
           vec3(0.0, 0.0, 0.0),
-          vec3(1.0, 0.0, 0.0), // Pure Vibrant Red
+          vec3(1.0, 0.84, 0.0), // Golden Yellow
           clamp((f * f) * 8.0, 0.0, 6.0)
       );
 
       color = mix(
           color,
-          vec3(0.8, 0.0, 0.0), // Pure Deep Red
+          vec3(0.75, 0.58, 0.2), // Deep Gold / Bronze
           clamp(length(q) * 2.0, 0.0, 1.0)
       );
 
       color = mix(
           color,
-          vec3(1.0, 1.0, 1.0), // Pure White Highlight
+          vec3(1.0, 0.95, 0.7), // Pale Gold Highlight
           clamp(length(r.x) * 1.5, 0.0, 0.2)
       );
 
       // Sharpen the color edges by using higher powers of f
       float fPower = pow(f, 1.8);
-      vec3 finalColor = vec3(0.1, 0.0, 0.0) + (fPower * 1.5 + f * f * 0.8) * color;
+      vec3 finalColor = vec3(0.05, 0.04, 0.0) + (fPower * 1.5 + f * f * 0.8) * color;
       
       // Vignette to keep edges sharp and centered
       // Final darkening for readability; subtle metallic sheen
-      finalColor *= 0.85; // Increased brightness for "vibrant" look
+      finalColor *= 0.95; // Golden pop
       float vig = 1.0 - length(vUv - 0.5) * 1.2;
       finalColor *= clamp(vig, 0.2, 1.0);
 
@@ -232,7 +232,7 @@ export default function SmokyButton({ href, onClick, className, children, ...pro
 
   const containerClasses = cn(
     "group relative rounded-full text-base font-medium overflow-hidden border border-white/20",
-    "shadow-[0_0_0_rgba(227,24,55,0)] hover:shadow-[0_8px_48px_rgba(227,24,55,0.4)] border-white/40 hover:border-white transition-all duration-700 flex",
+    "shadow-[0_0_0_rgba(255,215,0,0)] hover:shadow-[0_8px_48px_rgba(212,175,55,0.4)] border-white/40 hover:border-white transition-all duration-700 flex",
     className
   );
 

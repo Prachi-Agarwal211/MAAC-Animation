@@ -2,6 +2,8 @@
 
 import Script from "next/script";
 import Footer from "@/components/Footer";
+import IndustryPartners from "@/components/IndustryPartners";
+import ApplyNow from "@/components/ApplyNow";
 import { useEffect, useRef } from "react";
 import gsap, { ScrollTrigger } from "@/lib/gsap";
 import VideoFacade from "@/components/ui/VideoFacade";

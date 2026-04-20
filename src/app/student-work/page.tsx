@@ -1,9 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import Script from "next/script";
 import Footer from "@/components/Footer";
 import IndustryPartners from "@/components/IndustryPartners";
+import ApplyNow from "@/components/ApplyNow";
 import StudentWorkGallery from "./StudentWorkGallery";
 import { useEffect, useRef } from "react";
 import gsap from "@/lib/gsap";
@@ -88,6 +88,10 @@ export default function StudentWorkPage() {
 
         <div className="border-t border-white/5">
           <IndustryPartners />
+        </div>
+
+        <div className="border-t border-white/5">
+          <ApplyNow />
         </div>
 
         <Footer />

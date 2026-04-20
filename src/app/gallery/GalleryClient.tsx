@@ -4,6 +4,8 @@ import { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
 import { shouldAnimate } from "@/lib/animationUtils";
 import Footer from "@/components/Footer";
+import IndustryPartners from "@/components/IndustryPartners";
+import ApplyNow from "@/components/ApplyNow";
 import Image from "next/image";
 import { portfolioEntries } from "@/data/portfolio";
 
@@ -93,7 +95,7 @@ export default function GalleryClient() {
             Showcase
           </p>
           <h1 className="font-display font-extrabold text-[clamp(2.5rem,5vw,5rem)] text-[#f5f0e8] leading-[1.05] tracking-tight mb-6">
-            Student <span className="gradient-text">Gallery</span>
+            Student <span className="metallic-gold-text">Gallery</span>
           </h1>
           <p className="text-[#6b6b6b] text-lg max-w-2xl">
             Explore the incredible work created by our talented students across
