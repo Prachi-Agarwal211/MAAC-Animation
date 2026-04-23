@@ -3,7 +3,6 @@
 import { useRef, memo } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "@/lib/gsap";
-import { Globe, Star, ShieldCheck, Briefcase } from "lucide-react";
 
 const placementCompanies = [
   { 
@@ -156,34 +155,6 @@ function Placements() {
               {placementCompanies.slice(7).map((company, i) => renderCompany(company, i + 7))}
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* Trust Ticker */}
-      <div className="mt-32 py-12 border-y border-white/5 bg-[#111111]/50 backdrop-blur-md">
-        <div className="animate-marquee-fast flex items-center gap-20 whitespace-nowrap">
-          {[
-            { l: "95% PLACEMENT SUCCESS", i: <ShieldCheck size={14} /> },
-            { l: "500+ HIRING PARTNERS", i: <Globe size={14} /> },
-            { l: "₹15L TOP PACKAGE", i: <Star size={14} /> },
-            { l: "30+ YEARS LEGACY", i: <Briefcase size={14} /> }
-          ].map((item, i) => (
-            <div key={i} className="flex items-center gap-4 text-white/40 font-black uppercase tracking-[0.4em] text-[10px]">
-              <span className="text-[#FFD700]">{item.i}</span>
-              {item.l}
-            </div>
-          ))}
-          {[
-            { l: "95% PLACEMENT SUCCESS", i: <ShieldCheck size={14} /> },
-            { l: "500+ HIRING PARTNERS", i: <Globe size={14} /> },
-            { l: "₹15L TOP PACKAGE", i: <Star size={14} /> },
-            { l: "30+ YEARS LEGACY", i: <Briefcase size={14} /> }
-          ].map((item, i) => (
-            <div key={`d-${i}`} className="flex items-center gap-4 text-white/40 font-black uppercase tracking-[0.4em] text-[10px]">
-              <span className="text-[#FFD700]">{item.i}</span>
-              {item.l}
-            </div>
-          ))}
         </div>
       </div>
     </section>
