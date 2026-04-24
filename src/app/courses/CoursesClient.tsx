@@ -47,7 +47,7 @@ export default function CoursesClient() {
             Master Your Craft
             <span className="w-8 h-[1px] metallic-gold-accent" />
           </p>
-          <h1 className="animate-in font-display font-black text-[clamp(2.5rem,8vw,5rem)] leading-[0.85] tracking-tighter text-white uppercase mb-6">
+          <h1 className="animate-in font-display text-[clamp(2.5rem,8vw,5rem)] leading-[0.85] text-white mb-6 font-light uppercase leading-[1.1] tracking-[0.1em]">
             Our <span className="metallic-gold-text italic text-[1.1em]">Programs</span>
           </h1>
           <p className="animate-in text-[#A8A29C] text-lg max-w-2xl mx-auto leading-relaxed">

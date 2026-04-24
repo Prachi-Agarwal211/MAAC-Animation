@@ -165,7 +165,7 @@ function PortfolioCard({
 
       {/* Content */}
       <div className="p-5">
-        <h3 className="font-display font-semibold text-[#F0EBE1] text-base mb-1.5 group-hover:text-[#FFD700] transition-colors line-clamp-1">
+        <h3 className="font-display text-[#F0EBE1] text-base mb-1.5 group-hover:text-[#FFD700] transition-colors line-clamp-1 font-light uppercase leading-[1.1] tracking-[0.1em]">
           {entry.studentName}
         </h3>
         <p className="text-[#6B6560] text-xs mb-2">

@@ -9,14 +9,11 @@ import ErrorBoundary from "@/components/ErrorBoundary";
 import TrustBadges from "@/components/TrustBadges";
 
 const VerticalCardGallery = dynamic(() => import("@/components/VerticalCardGallery"), { ssr: true });
-const CourseCategories = dynamic(() => import("@/components/CourseCategories"), { ssr: true });
 const IndustryPartners = dynamic(() => import("@/components/IndustryPartners"), { ssr: true });
 const PopularCourses = dynamic(() => import("@/components/PopularCourses"), { ssr: true });
-const Placements = dynamic(() => import("@/components/Placements"), { ssr: true });
 const ApplyNow = dynamic(() => import("@/components/ApplyNow"), { ssr: true });
 const FAQSection = dynamic(() => import("@/components/FAQSection"), { ssr: true });
 const CareerCreatorComparison = dynamic(() => import("@/components/CareerCreatorComparison"), { ssr: true });
-const BentoGallery = dynamic(() => import("@/components/BentoGallery"), { ssr: true });
 const LiquidReveal = dynamic(() => import("@/components/ui/LiquidReveal"), { ssr: true });
 const StudentSuccessStories = dynamic(() => import("@/components/StudentSuccessStories"), { ssr: true });
 const StudentShowcase = dynamic(() => import("@/components/StudentShowcase"), { ssr: false });
@@ -50,6 +47,10 @@ export default function HomePageClient() {
             </ErrorBoundary>
           </div>
 
+          <ErrorBoundary>
+            <PopularCourses />
+          </ErrorBoundary>
+
           <div id="intro" className="relative z-20">
             <InstituteIntro />
           </div>
@@ -60,32 +61,12 @@ export default function HomePageClient() {
             </ErrorBoundary>
           </LiquidReveal>
 
-          <section id="courses" className="relative z-10">
-            <ErrorBoundary>
-              <CourseCategories />
-            </ErrorBoundary>
-          </section>
-
-          <ErrorBoundary>
-            <BentoGallery />
-          </ErrorBoundary>
-
           <ErrorBoundary>
             <IndustryPartners />
           </ErrorBoundary>
 
           <ErrorBoundary>
-            <PopularCourses />
-          </ErrorBoundary>
-
-          <ErrorBoundary>
             <StudentShowcase />
-          </ErrorBoundary>
-
-          <ErrorBoundary>
-            <section id="placements" className="relative z-10">
-              <Placements />
-            </section>
           </ErrorBoundary>
 
           <ErrorBoundary>

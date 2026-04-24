@@ -4,8 +4,6 @@ import { useRef, useState, useEffect, useCallback } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "@/lib/gsap";
 import { VolumeX, Volume2 } from "lucide-react";
-import SplitTextReveal from "@/components/ui/SplitTextReveal";
-import SmokyButton from "@/components/ui/SmokyButton";
 
 const HERO_VIDEO_MP4 = "/hero-video-compressed.mp4";
 const HERO_VIDEO_WEBM = "/hero-video.webm";
@@ -357,88 +355,62 @@ export default function MAACXHero({ onIntroReveal }: Props) {
         <div
           className="relative z-10 mx-auto flex min-h-[100svh] w-full max-w-[1800px] flex-col justify-end px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-[calc(5rem+env(safe-area-inset-top))] sm:px-8 sm:pb-10 sm:pt-[calc(5.5rem+env(safe-area-inset-top))] lg:px-16 lg:pb-12 xl:px-24 xl:pb-14"
         >
-          <div className="flex w-full flex-col gap-8 lg:flex-row lg:items-end lg:justify-between lg:gap-12">
+          <div className="flex w-full flex-col gap-16 lg:flex-row lg:items-end lg:justify-between lg:gap-12">
             <div className="maacx-content min-w-0 max-w-3xl flex-1 [&>*]:opacity-0">
-              <div className="mb-2">
-                <span className="inline-block rounded-full bg-white px-3 py-1.5 text-[9px] font-black uppercase tracking-[0.28em] text-black mix-blend-screen sm:px-4 sm:text-[10px] sm:tracking-[0.3em]">
-                  Animation & VFX Academy · Jaipur
+              <h1 className="mb-10 sm:mb-12">
+                <span className="block font-display text-[clamp(2rem,6vw,3.8rem)] font-light uppercase leading-[1.1] tracking-[0.15em] text-white">
+                  FROM BASICS
                 </span>
-              </div>
-
-              <h1 className="mb-5 sm:mb-6">
-                <span className="block font-display font-bold uppercase leading-[1.02] tracking-tighter gradient-text-premium text-[clamp(1.65rem,6.5vw,3rem)] drop-shadow-lg">
-                  <SplitTextReveal>Learn Animation & VFX</SplitTextReveal>
-                </span>
-                <span className="font-display mt-0.5 block text-[clamp(1.25rem,5vw,2.25rem)] font-extrabold uppercase leading-[1.08] tracking-normal metallic-gold-text">
-                  From Basics to Portfolio
+                <span className="block font-display mt-1 text-[clamp(2rem,6vw,3.8rem)] font-light uppercase leading-[1.1] tracking-[0.15em] metallic-gold-text">
+                  TO PORTFOLIO
                 </span>
               </h1>
 
-              <p className="mb-6 max-w-xl text-[15px] font-medium leading-relaxed text-[#C4BEB6] sm:mb-8 sm:text-base md:text-lg md:leading-relaxed lg:border-l-2 lg:metallic-gold-accent lg:pl-5 lg:italic">
-                Get hands-on training in 3D, VFX, motion graphics, and game art—learn industry tools, build real
-                projects, and graduate with a showreel that’s ready for interviews.
-              </p>
-
-              <div className="flex w-full max-w-xl flex-col gap-4">
-                <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-stretch mt-2">
-                  <SmokyButton
-                    href="/contact"
-                    className="flex min-h-[48px] w-full items-center justify-center sm:w-auto sm:min-w-[188px]"
-                  >
-                    Enquire Now
-                  </SmokyButton>
-                  <SmokyButton
-                    href="#courses"
-                    className="flex min-h-[48px] w-full items-center justify-center sm:w-auto sm:min-w-[188px]"
-                  >
-                    View Programs
-                  </SmokyButton>
-                </div>
-
-                <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
-                  {/* Stats: always visible; compact on phone, column on large desktop */}
-                  <div className="flex flex-wrap gap-x-8 gap-y-3 border-t border-white/10 pt-4 sm:gap-x-10 lg:border-t-0 lg:pt-0 xl:hidden">
-                    {[
-                      { v: "95%", l: "Placements" },
-                      { v: "30+", l: "Years legacy" },
-                    ].map((s) => (
-                      <div key={s.l} className="min-w-[6rem]">
-                        <div className="font-display text-2xl font-black leading-none text-white sm:text-3xl">{s.v}</div>
-                        <div className="mt-1 text-[9px] font-semibold uppercase tracking-[0.35em] text-[#8A827A]">{s.l}</div>
-                      </div>
-                    ))}
+              <div className="flex flex-col gap-12">
+                <a
+                  href="#courses"
+                  className="group inline-flex items-center gap-6 self-start"
+                >
+                  <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-white/90 group-hover:text-white transition-colors">
+                    Explore Programs
+                  </span>
+                  <div className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center transition-all duration-500 group-hover:bg-white group-hover:border-white">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="h-4 w-4 text-white group-hover:text-black transition-transform duration-500 group-hover:translate-x-0.5"
+                    >
+                      <path d="M5 12h14" />
+                      <path d="m12 5 7 7-7 7" />
+                    </svg>
                   </div>
+                </a>
 
-                  <button
-                    type="button"
-                    onClick={toggleHeroMute}
-                    className="group inline-flex items-center justify-center gap-3 self-start sm:justify-start"
-                  >
-                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/12 bg-white/[0.06] text-white/65 transition-all hover:border-white/25 hover:text-white">
-                      {isMuted ? <VolumeX size={18} strokeWidth={2} /> : <Volume2 size={18} strokeWidth={2} />}
-                    </span>
-                    <span className="text-[9px] font-black uppercase tracking-[0.28em] text-white/35 transition-colors group-hover:text-white/80">
-                      {isMuted ? "Play reel audio" : "Mute"}
-                    </span>
-                  </button>
-                </div>
+                {/* Sound Button Placeholder / Actual */}
+                <button
+                  type="button"
+                  onClick={toggleHeroMute}
+                  className="group inline-flex items-center gap-3.5 self-start mt-4 sm:mt-10"
+                >
+                  <div className="flex h-4 items-center gap-0.5 opacity-70 transition-opacity group-hover:opacity-100">
+                    <div className={`w-[2px] bg-white transition-all duration-300 ${!isMuted ? 'h-full' : 'h-1.5'}`} />
+                    <div className={`w-[2px] bg-white transition-all duration-300 ${!isMuted ? 'h-2' : 'h-1.5'}`} />
+                    <div className={`w-[2px] bg-white transition-all duration-300 delay-75 ${!isMuted ? 'h-3' : 'h-1.5'}`} />
+                    <div className={`w-[2px] bg-white transition-all duration-300 delay-100 ${!isMuted ? 'h-4' : 'h-1.5'}`} />
+                  </div>
+                  <span className="text-[10px] font-medium uppercase tracking-[0.25em] text-white/50 transition-colors group-hover:text-white/90">
+                    SOUND {isMuted ? "OFF" : "ON"}
+                  </span>
+                </button>
               </div>
             </div>
 
-            <div className="maacx-hero-stats hidden shrink-0 text-right opacity-0 xl:block xl:pb-2">
-              <div className="space-y-10">
-                {[
-                  { v: "95%", l: "PLACEMENTS" },
-                  { v: "30+", l: "YEARS LEGACY" },
-                ].map((s) => (
-                  <div key={s.l} className="group cursor-default">
-                    <div className="font-display text-5xl font-black leading-none text-white transition-all duration-500 group-hover:-translate-x-1 group-hover:metallic-gold-text">
-                      {s.v}
-                    </div>
-                    <div className="mt-3 text-[9px] font-bold uppercase tracking-[0.4em] text-[#6B6560]">{s.l}</div>
-                  </div>
-                ))}
-              </div>
+            {/* Desktop & Mobile Stats aligned to bottom-right style - Removed per request */}
+            <div className="maacx-hero-stats opacity-0 flex flex-row gap-12 sm:gap-16 pb-2 lg:pb-0 justify-start lg:justify-end">
             </div>
           </div>
 

@@ -626,7 +626,6 @@ body.demo-bar-visible .page-wrapper {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   display: inline-block;
-  font-weight: 800;
   text-shadow: 0 0 15px rgba(191, 149, 63, 0.4);
 }
 

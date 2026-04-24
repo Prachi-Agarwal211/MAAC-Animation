@@ -94,7 +94,7 @@ export default function GalleryClient() {
           <p className="text-[#FFD700] text-xs font-inter font-semibold tracking-[0.2em] uppercase mb-4">
             Showcase
           </p>
-          <h1 className="font-display font-extrabold text-[clamp(2.5rem,5vw,5rem)] text-[#f5f0e8] leading-[1.05] tracking-tight mb-6">
+          <h1 className="font-display text-[clamp(2.5rem,5vw,5rem)] text-[#f5f0e8] leading-[1.05] mb-6 font-light uppercase leading-[1.1] tracking-[0.1em]">
             Student <span className="metallic-gold-text">Gallery</span>
           </h1>
           <p className="text-[#6b6b6b] text-lg max-w-2xl">
@@ -136,7 +136,7 @@ export default function GalleryClient() {
                   <span className="text-[#FFD700] text-xs font-medium uppercase tracking-wider">
                     {item.category.replace(/-/g, " ")}
                   </span>
-                  <h3 className="text-[#f5f0e8] font-display font-semibold">
+                  <h3 className="text-[#f5f0e8] font-display font-light uppercase leading-[1.1] tracking-[0.1em]">
                     {item.studentName}
                   </h3>
                   <p className="text-[#6b6b6b] text-xs mt-1">{item.course}</p>

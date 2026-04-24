@@ -77,7 +77,7 @@ export default function StudentShowcase() {
             Witness the Talent
             <span className="w-8 h-[1px] metallic-gold-accent" />
           </p>
-          <h2 className="font-display font-black text-[clamp(2.5rem,6vw,3.5rem)] text-white leading-[0.9] tracking-tighter uppercase">
+          <h2 className="font-display text-[clamp(2.5rem,6vw,3.5rem)] text-white leading-[0.9] font-light uppercase leading-[1.1] tracking-[0.1em]">
             STUDENT <span className="metallic-gold-text italic">SHOWCASE</span>
           </h2>
         </div>
@@ -126,7 +126,7 @@ export default function StudentShowcase() {
             <div className="flex items-end justify-between gap-8">
               <div className="flex-1">
                 <p className="text-[#FFD700] text-xs font-bold tracking-[0.2em] uppercase mb-3">{showcaseVideos[active].category}</p>
-                <h3 className="text-white text-3xl md:text-5xl font-display font-bold tracking-tighter">{showcaseVideos[active].title}</h3>
+                <h3 className="text-white text-3xl md:text-5xl font-display font-light uppercase leading-[1.1] tracking-[0.1em]">{showcaseVideos[active].title}</h3>
                 
                 {/* Tech Stats Overlay */}
                 <div className="mt-6 flex flex-wrap gap-6 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-700 delay-100">

@@ -25,7 +25,7 @@ export default function CourseCurriculum({ course }: { course: Course }) {
   return (
     <section className="py-20 md:py-28" style={{ background: "linear-gradient(180deg, #0C0C0C 0%, #17110C 50%, #0C0C0C 100%)" }}>
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="font-display font-bold text-3xl md:text-4xl text-[#F0EBE1] mb-12 text-center">
+        <h2 className="font-display text-3xl md:text-4xl text-[#F0EBE1] mb-12 text-center font-light uppercase leading-[1.1] tracking-[0.1em]">
           Course Curriculum
         </h2>
 
@@ -36,7 +36,7 @@ export default function CourseCurriculum({ course }: { course: Course }) {
                 <span className="w-10 h-10 rounded-full bg-[#FFD700]/10 border border-[#FFD700]/30 flex items-center justify-center text-[#FFD700] font-bold text-sm">
                   {i + 1}
                 </span>
-                <h3 className="font-display font-semibold text-[#F0EBE1] text-lg">{mod.module}</h3>
+                <h3 className="font-display text-[#F0EBE1] text-lg font-light uppercase leading-[1.1] tracking-[0.1em]">{mod.module}</h3>
               </div>
               <ul className="grid md:grid-cols-2 gap-3 ml-14">
                 {mod.topics.map((topic, j) => (

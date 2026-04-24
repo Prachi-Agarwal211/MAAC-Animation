@@ -92,7 +92,7 @@ export default function CourseHero({ course }: { course: Course }) {
           </div>
 
           {/* Title */}
-          <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-[#F0EBE1] leading-[1.1] mb-6">
+          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl text-[#F0EBE1] leading-[1.1] mb-6 font-light uppercase leading-[1.1] tracking-[0.1em]">
             {course.fullName}
           </h1>
 

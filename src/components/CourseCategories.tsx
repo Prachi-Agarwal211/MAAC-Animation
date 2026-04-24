@@ -113,7 +113,7 @@ function SlideUpCard({ course }: { course: CourseCardItem }) {
           <div className="text-[#FFD700] mb-6">
             <CategoryIcon type={course.icon} />
           </div>
-          <h3 className="text-white font-display font-bold text-2xl md:text-3xl mb-2 leading-tight">{course.title}</h3>
+          <h3 className="text-white font-display text-2xl md:text-3xl mb-2 font-light uppercase leading-[1.1] tracking-[0.1em]">{course.title}</h3>
           <p className="text-[#A8A29C] text-sm md:text-base line-clamp-2">{course.description}</p>
         </div>
 
@@ -220,7 +220,7 @@ export default function CourseCategories({ mode = "home" }: CourseCategoriesProp
             {isHome ? "The Academy Portfolio" : "All Programs"}
             <span className="w-8 h-[1px] metallic-gold-accent" />
           </p>
-          <h2 className="font-display font-black text-[clamp(2rem,5.5vw,3.5rem)] leading-[0.85] tracking-tighter text-white uppercase">
+          <h2 className="font-display text-[clamp(2rem,5.5vw,3.5rem)] leading-[0.85] text-white font-light uppercase leading-[1.1] tracking-[0.1em]">
             {isHome ? (
               <>
                 Expertly Crafted <span className="metallic-gold-text italic">Curriculum</span>

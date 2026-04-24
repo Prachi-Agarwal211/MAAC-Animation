@@ -53,7 +53,7 @@ export default function ContactClient() {
       <section className="relative pt-32 pb-20 px-6 md:px-12 lg:px-24 border-b border-white/5">
         <div className="max-w-[1800px] mx-auto contact-hero-content">
           <span className="inline-block text-[#FFD700] text-[10px] font-bold tracking-[0.4em] uppercase mb-6">Connect with Elite</span>
-          <h1 className="font-display font-black text-[clamp(2.5rem,7vw,5rem)] text-white leading-[0.9] tracking-tighter mb-8">
+          <h1 className="font-display text-[clamp(2.5rem,7vw,5rem)] text-white leading-[0.9] mb-8 font-light uppercase leading-[1.1] tracking-[0.1em]">
             START THE <br /> <span className="gradient-text">DIALOGUE</span>
           </h1>
           <p className="text-[#A8A29C] text-base md:text-lg font-medium leading-relaxed max-w-2xl italic border-l-2 border-[#FFD700] pl-6">
@@ -73,7 +73,7 @@ export default function ContactClient() {
                   <div className="w-12 h-12 rounded-xl bg-[#FFD700]/10 flex items-center justify-center text-[#FFD700]">
                     <MapPin size={20} />
                   </div>
-                  <h3 className="text-white font-display font-bold text-base uppercase tracking-wider">HQ Location</h3>
+                  <h3 className="text-white font-display text-base tracking-wider font-light uppercase leading-[1.1] tracking-[0.1em]">HQ Location</h3>
                </div>
                <p className="text-[#A8A29C] leading-relaxed text-sm">
                  711-712, Ambition Tower, 7th Floor, Agrasain Circle, Subhash Marg, Jaipur, 302001
@@ -86,12 +86,12 @@ export default function ContactClient() {
             <div className="grid sm:grid-cols-2 gap-6">
                <div className="contact-card p-6 rounded-2xl glass border border-white/5 space-y-3 hover:border-[#FFD700]/30 transition-all">
                   <Phone size={16} className="text-[#FFD700]" />
-                  <h4 className="text-white font-display font-bold text-xs uppercase tracking-wider">Phone</h4>
+                  <h4 className="text-white font-display text-xs tracking-wider font-light uppercase leading-[1.1] tracking-[0.1em]">Phone</h4>
                   <a href="tel:+917300001589" className="block text-[#A8A29C] text-xs hover:text-white transition-colors">+91 73000 01589</a>
                </div>
                <div className="contact-card p-6 rounded-2xl glass border border-white/5 space-y-3 hover:border-[#FFD700]/30 transition-all">
                   <Mail size={16} className="text-[#FFD700]" />
-                  <h4 className="text-white font-display font-bold text-xs uppercase tracking-wider">Email</h4>
+                  <h4 className="text-white font-display text-xs tracking-wider font-light uppercase leading-[1.1] tracking-[0.1em]">Email</h4>
                   <a href="mailto:maacanimationjaipur@gmail.com" className="block text-[#A8A29C] text-xs hover:text-white transition-colors break-all">maacanimationjaipur@gmail.com</a>
                </div>
             </div>
@@ -108,7 +108,7 @@ export default function ContactClient() {
           <div className="lg:col-span-7">
             <form onSubmit={handleSubmit} className="contact-card p-8 md:p-12 rounded-3xl glass border border-white/5 relative overflow-hidden">
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#FFD700] to-[#FF6B35]" />
-              <h2 className="text-white font-display font-black text-2xl md:text-3xl tracking-tighter mb-8 uppercase">Express <span className="text-[#FFD700]">Interest</span></h2>
+              <h2 className="text-white font-display text-2xl md:text-3xl mb-8 font-light uppercase leading-[1.1] tracking-[0.1em]">Express <span className="text-[#FFD700]">Interest</span></h2>
 
               <div className="space-y-5">
                 <div className="grid md:grid-cols-2 gap-5">

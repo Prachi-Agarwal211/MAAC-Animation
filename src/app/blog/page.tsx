@@ -70,7 +70,7 @@ export default function BlogIndexPage() {
               Creative Insights
               <span className="w-8 h-[1px] metallic-gold-accent" />
             </p>
-            <h1 className="animate-in font-display font-black text-[clamp(2.5rem,8vw,5rem)] leading-[0.85] tracking-tighter text-white uppercase mb-6">
+            <h1 className="animate-in font-display text-[clamp(2.5rem,8vw,5rem)] leading-[0.85] text-white mb-6 font-light uppercase leading-[1.1] tracking-[0.1em]">
               Blog & <span className="metallic-gold-text italic text-[1.1em]">Insights</span>
             </h1>
             <p className="animate-in text-[#A8A29C] text-lg max-w-2xl mx-auto leading-relaxed">
@@ -121,7 +121,7 @@ export default function BlogIndexPage() {
                     </div>
 
                     <Link href={`/blog/${post.slug}`}>
-                      <h2 className="font-display font-bold text-white text-2xl mb-4 group-hover:text-[#FFD700] transition-colors leading-tight">
+                      <h2 className="font-display text-white text-2xl mb-4 group-hover:text-[#FFD700] transition-colors font-light uppercase leading-[1.1] tracking-[0.1em]">
                         {post.title}
                       </h2>
                     </Link>

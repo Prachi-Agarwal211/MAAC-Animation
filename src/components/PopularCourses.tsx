@@ -50,11 +50,11 @@ export default function PopularCourses() {
           <div className="max-w-2xl">
             <p className="metallic-gold-text text-[10px] font-bold tracking-[0.3em] uppercase mb-4 flex items-center gap-3">
               <span className="w-8 h-[1px] metallic-gold-accent" />
-              Master Your Craft
+              The Academy Portfolio
             </p>
 
-            <h2 className="font-display font-black text-[clamp(2.2rem,5.5vw,3.5rem)] leading-[0.85] tracking-tighter text-white uppercase">
-              MOST POPULAR <span className="metallic-gold-text italic">PROGRAMS</span>
+            <h2 className="font-display text-[clamp(2.2rem,5.5vw,3.5rem)] leading-[0.85] text-white font-light uppercase leading-[1.1] tracking-[0.1em]">
+              EXPERTLY CRAFTED <span className="metallic-gold-text italic">CURRICULUM</span>
             </h2>
           </div>
           
@@ -105,7 +105,7 @@ export default function PopularCourses() {
 
                 {/* Content */}
                 <div className="p-8 md:p-10">
-                  <h3 className="font-display font-bold text-2xl text-white mb-2 group-hover:text-[#FFD700] transition-colors">{course.name}</h3>
+                  <h3 className="font-display text-2xl text-white mb-2 group-hover:text-[#FFD700] transition-colors font-light uppercase leading-[1.1] tracking-[0.1em]">{course.name}</h3>
                   <p className="text-[#6B6560] text-xs font-bold uppercase tracking-wider mb-6">{course.fullName}</p>
                   <p className="text-[#A8A29C] text-sm leading-relaxed line-clamp-3 mb-8">{course.description}</p>
                   

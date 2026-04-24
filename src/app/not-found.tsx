@@ -31,7 +31,7 @@ export default function NotFound() {
           {/* 404 Number */}
           <div className="mb-8">
             <span
-              className="font-display font-bold text-[10rem] md:text-[14rem] leading-none"
+              className="font-display text-[10rem] md:text-[14rem] font-light uppercase leading-[1.1] tracking-[0.1em]"
               style={{
                 background: "linear-gradient(135deg, #FFD700 0%, #C4A882 100%)",
                 WebkitBackgroundClip: "text",
@@ -43,7 +43,7 @@ export default function NotFound() {
           </div>
 
           {/* Message */}
-          <h1 className="font-display font-bold text-3xl md:text-4xl text-[#F0EBE1] mb-4">
+          <h1 className="font-display text-3xl md:text-4xl text-[#F0EBE1] mb-4 font-light uppercase leading-[1.1] tracking-[0.1em]">
             Oops! Page Not Found
           </h1>
           <p className="text-[#A8A29C] text-lg md:text-xl leading-relaxed mb-10 max-w-xl mx-auto">
@@ -81,7 +81,7 @@ export default function NotFound() {
 
           {/* Popular Courses */}
           <div>
-            <h2 className="font-display font-semibold text-xl text-[#F0EBE1] mb-6">
+            <h2 className="font-display text-xl text-[#F0EBE1] mb-6 font-light uppercase leading-[1.1] tracking-[0.1em]">
               Popular Courses
             </h2>
             <div className="grid md:grid-cols-3 gap-4 text-left">

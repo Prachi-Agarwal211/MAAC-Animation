@@ -64,7 +64,7 @@ export default function AboutClient() {
           <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent z-10" />
           <div className="about-hero-media relative w-full h-full">
              <div className="absolute inset-0 bg-[#1c1c1c] animated-mesh-bg opacity-40" />
-             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[30vw] font-display font-black text-white/[0.02] select-none pointer-events-none">ABOUT</div>
+             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[30vw] font-display text-white/[0.02] select-none pointer-events-none font-light uppercase leading-[1.1] tracking-[0.1em]">ABOUT</div>
           </div>
         </div>
 
@@ -73,10 +73,10 @@ export default function AboutClient() {
             Established 1986
           </span>
           <h1 className="mb-10">
-            <span className="block text-white font-display font-black text-[clamp(3.5rem,10vw,8.5rem)] leading-[0.85] tracking-tighter">
+            <span className="block text-white font-display text-[clamp(3.5rem,10vw,8.5rem)] leading-[0.85] font-light uppercase leading-[1.1] tracking-[0.1em]">
               <SplitTextReveal>Crafting the</SplitTextReveal>
             </span>
-            <span className="block metallic-gold-text font-display font-black text-[clamp(3rem,8vw,7rem)] leading-[0.85] tracking-tighter mt-4">
+            <span className="block metallic-gold-text font-display text-[clamp(3rem,8vw,7rem)] leading-[0.85] mt-4 font-light uppercase leading-[1.1] tracking-[0.1em]">
               <SplitTextReveal delay={0.2}>Digital Future</SplitTextReveal>
             </span>
           </h1>
@@ -113,15 +113,15 @@ export default function AboutClient() {
       {/* ── TIMELINE SECTION ── */}
       <section id="heritage" className="timeline-section relative py-16 md:py-24 scroll-mt-28">
         <div className="max-w-7xl mx-auto px-6 md:px-12 mb-24">
-          <h2 className="font-display font-black text-white text-5xl md:text-8xl tracking-tighter">OUR <span className="text-white/10">ODYSSEY</span></h2>
+          <h2 className="font-display text-white text-5xl md:text-8xl font-light uppercase leading-[1.1] tracking-[0.1em]">OUR <span className="text-white/10">ODYSSEY</span></h2>
         </div>
         
         <div className="relative border-t border-white/5">
           <div className="grid md:grid-cols-2 lg:grid-cols-4">
             {milestones.map((m, i) => (
               <div key={i} className="milestone-card p-10 md:p-12 border-b md:border-b-0 md:border-r border-white/5 hover:bg-[#FFD700]/5 transition-colors duration-700 group">
-                <div className="text-[#FFD700] font-display font-black text-5xl mb-8 group-hover:scale-110 group-hover:-translate-y-2 transition-transform duration-500">{m.year}</div>
-                <h3 className="text-white text-xl font-display font-bold mb-4 uppercase tracking-widest">{m.title}</h3>
+                <div className="text-[#FFD700] font-display text-5xl mb-8 group-hover:scale-110 group-hover:-translate-y-2 transition-transform duration-500 font-light uppercase leading-[1.1] tracking-[0.1em]">{m.year}</div>
+                <h3 className="text-white text-xl font-display mb-4 tracking-widest font-light uppercase leading-[1.1] tracking-[0.1em]">{m.title}</h3>
                 <p className="text-[#6B6560] text-sm leading-relaxed group-hover:text-white transition-colors">{m.description}</p>
               </div>
             ))}
@@ -133,18 +133,18 @@ export default function AboutClient() {
       <section id="faculty" className="py-16 md:py-24 bg-[#080808] scroll-mt-28">
         <div className="max-w-7xl mx-auto px-6 md:px-12 text-center mb-24">
           <span className="text-[#FFD700] text-sm font-bold tracking-[0.3em] uppercase mb-6 block">Industry Titans</span>
-          <h2 className="text-white font-display font-black text-5xl md:text-8xl tracking-tighter">EXPERIENCED <span className="gradient-text">FACULTY</span></h2>
+          <h2 className="text-white font-display text-5xl md:text-8xl font-light uppercase leading-[1.1] tracking-[0.1em]">EXPERIENCED <span className="gradient-text">FACULTY</span></h2>
         </div>
 
         <div className="max-w-[1600px] mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {faculty.map((f, i) => (
             <div key={i} className="group relative aspect-[3/4] rounded-[40px] overflow-hidden bg-[#111111] border border-white/5">
               <div className="absolute inset-0 bg-gradient-to-br from-[#FFD700]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-              <div className="absolute inset-0 flex items-center justify-center text-[15rem] font-display font-black text-white/[0.02] group-hover:text-white/[0.05] transition-colors">{f.name[0]}</div>
+              <div className="absolute inset-0 flex items-center justify-center text-[15rem] font-display text-white/[0.02] group-hover:text-white/[0.05] transition-colors font-light uppercase leading-[1.1] tracking-[0.1em]">{f.name[0]}</div>
               
               <div className="absolute bottom-0 left-0 right-0 p-10 translate-y-4 group-hover:translate-y-0 transition-transform duration-700">
                 <span className="text-[#FFD700] text-[10px] font-bold uppercase tracking-[0.3em] mb-2 block">{f.role}</span>
-                <h3 className="text-white text-2xl font-display font-bold mb-2">{f.name}</h3>
+                <h3 className="text-white text-2xl font-display mb-2 font-light uppercase leading-[1.1] tracking-[0.1em]">{f.name}</h3>
                 <p className="text-[#6B6560] text-xs font-bold uppercase tracking-widest mb-6">{f.exp} EXPERIENCE</p>
                 <p className="text-white/40 text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-100">
                   {f.bio}

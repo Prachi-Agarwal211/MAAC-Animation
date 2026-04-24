@@ -139,7 +139,7 @@ function Placements() {
             Career Trajectory
             <span className="w-8 h-[1px] metallic-gold-accent" />
           </p>
-          <h2 className="font-display font-black text-[clamp(2.2rem,5.5vw,3.5rem)] leading-[0.85] tracking-tighter text-white uppercase">
+          <h2 className="font-display text-[clamp(2.2rem,5.5vw,3.5rem)] leading-[0.85] text-white font-light uppercase leading-[1.1] tracking-[0.1em]">
             The Alumni <span className="metallic-gold-text italic">Network</span>
           </h2>
         </div>

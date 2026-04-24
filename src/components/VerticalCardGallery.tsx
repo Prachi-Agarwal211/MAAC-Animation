@@ -1,12 +1,21 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useGSAP } from "@gsap/react";
 import gsap from "@/lib/gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowRight } from "lucide-react";
+import { 
+  ArrowRight, 
+  Calendar, 
+  Folder, 
+  TrendingUp, 
+  Users, 
+  Building2, 
+  Rocket, 
+  Briefcase 
+} from "lucide-react";
 
 const cardImages: Record<number, string> = {
   0: "/portfolio/featured/nancy-verma-page1.jpg",
@@ -18,6 +27,10 @@ const cardImages: Record<number, string> = {
   6: "/portfolio/architectural-design/sharanjit-kaur-page1.jpg",
 };
 
+const featureIcons = [
+  Calendar, Folder, TrendingUp, Users, Building2, Rocket, Briefcase
+];
+
 const featureCards = [
   { title: "Educational Events", desc: "Industry workshops, masterclasses, and live projects that bridge classroom learning with real-world experience" },
   { title: "Portfolio Mastery", desc: "Build a professional portfolio with live projects, animations, and visual effects work that showcases your skills" },
@@ -28,7 +41,7 @@ const featureCards = [
   { title: "Creative Careers", desc: "Placement support, career counseling, and alumni network that helps you land your dream job" },
 ];
 
-const CX = 256, CY = 256, OUTER_R = 200, INNER_R = 80;
+const CX = 256, CY = 256, OUTER_R = 190, INNER_R = 75;
 const SEGMENTS = featureCards.length;
 const ANGLE_PER_SEG = 360 / SEGMENTS;
 
@@ -37,6 +50,7 @@ function getSegmentPath(index: number, outerR: number, innerR: number) {
   const endDeg = (index + 1) * ANGLE_PER_SEG - 90;
   const start = startDeg * (Math.PI / 180);
   const end = endDeg * (Math.PI / 180);
+  
   const x1o = CX + outerR * Math.cos(start);
   const y1o = CY + outerR * Math.sin(start);
   const x2o = CX + outerR * Math.cos(end);
@@ -45,6 +59,7 @@ function getSegmentPath(index: number, outerR: number, innerR: number) {
   const y1i = CY + innerR * Math.sin(end);
   const x2i = CX + innerR * Math.cos(start);
   const y2i = CY + innerR * Math.sin(start);
+  
   const large = ANGLE_PER_SEG > 180 ? 1 : 0;
   return `M ${x1o} ${y1o} A ${outerR} ${outerR} 0 ${large} 1 ${x2o} ${y2o} L ${x1i} ${y1i} A ${innerR} ${innerR} 0 ${large} 0 ${x2i} ${y2i} Z`;
 }
@@ -58,49 +73,49 @@ export default function VerticalCardGallery() {
   const pieCenterTextRef = useRef<SVGTextElement | null>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
+  const [activeIndex, setActiveIndex] = useState(0);
+
   const updateActiveSegment = (index: number) => {
     if (index < 0 || index >= SEGMENTS) return;
+    setActiveIndex(index);
 
-    // Update center text
     if (pieCenterTextRef.current) {
       pieCenterTextRef.current.textContent = String(index + 1).padStart(2, "0");
     }
 
-    // Update segments
     segmentRefs.current.forEach((seg, i) => {
       if (!seg) return;
       if (i === index) {
         gsap.to(seg, {
-          strokeWidth: 4,
-          stroke: "#E31837", // Use Red for active segment stroke
-          filter: "url(#segGlow)",
+          strokeWidth: 3,
+          stroke: "#E5D7B3", 
+          filter: "drop-shadow(0px 0px 8px rgba(229,215,179,0.3))",
           duration: 0.3
         });
       } else {
         gsap.to(seg, {
           strokeWidth: 1,
-          stroke: "rgba(255,255,255,0.05)",
+          stroke: "rgba(255,255,255,0.1)",
           filter: "none",
           duration: 0.3
         });
       }
     });
 
-    // Update labels
     labelRefs.current.forEach((label, i) => {
       if (!label) return;
       if (i === index) {
         gsap.to(label, {
-          color: "#FFD700", // Gold for active label
-          scale: 1.15,
+          color: "#E5D7B3",
+          scale: 1.05,
           opacity: 1,
           duration: 0.3
         });
       } else {
         gsap.to(label, {
-          color: "rgba(255,255,255,0.45)", // Brighter resting state
+          color: "rgba(255,255,255,0.4)",
           scale: 1,
-          opacity: 0.6,
+          opacity: 0.5,
           duration: 0.3
         });
       }
@@ -110,7 +125,6 @@ export default function VerticalCardGallery() {
   useGSAP(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    // Initialize first segment
     updateActiveSegment(0);
 
     const mm = gsap.matchMedia();
@@ -123,7 +137,6 @@ export default function VerticalCardGallery() {
 
       const getMaxTranslate = () => Math.max(0, track.scrollHeight - viewport.clientHeight);
 
-      // Animate the right column "internally" while the whole section stays pinned.
       const tween = gsap.to(track, {
         y: () => -getMaxTranslate(),
         ease: "none",
@@ -146,7 +159,6 @@ export default function VerticalCardGallery() {
             const y = self.progress * max;
             const focusY = y + viewport.clientHeight * 0.35;
 
-            // Pick active card based on which card is closest to the focus line.
             let active = 0;
             for (let i = 0; i < cardRefs.current.length; i++) {
               const el = cardRefs.current[i];
@@ -166,8 +178,6 @@ export default function VerticalCardGallery() {
     });
 
     mm.add("(max-width: 1023px)", () => {
-      // Mobile: normal page scroll (no pin) to avoid blank/black gaps.
-      // We still update the pie highlight based on which card is in view.
       const cards = cardRefs.current.filter(Boolean) as HTMLDivElement[];
       const triggers: ScrollTrigger[] = [];
 
@@ -192,151 +202,191 @@ export default function VerticalCardGallery() {
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="relative bg-transparent min-h-[100vh] z-[100]">
-      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-16 py-20 lg:py-12">
+    <section ref={containerRef} className="relative bg-[#080808] min-h-[100vh] z-[100] border-t border-white/5 pb-20 lg:pb-0">
+      <div className="relative z-10 max-w-[1700px] mx-auto px-6 lg:px-12 py-12 lg:py-16">
+        
         {/* Section Header */}
-        <div className="text-center mb-12">
-          <p className="metallic-gold-text text-[10px] font-bold tracking-[0.3em] uppercase mb-4">
+        <div className="text-center mb-10 lg:mb-12">
+          <p className="text-[9px] font-bold tracking-[0.4em] uppercase mb-4 text-[#C19A5B] opacity-60">
             The MAAC Standard
           </p>
-          <h2 className="font-display font-black text-[clamp(2.5rem,6vw,4rem)] leading-[0.8] tracking-tighter text-white">
-            CREATIVE <span className="metallic-gold-text italic">EVOLUTION</span>
+          <h2 className="font-display font-light text-[clamp(1.5rem,5.5vw,4rem)] text-white/90 uppercase leading-[1.1] tracking-[0.15em] px-4">
+            CREATIVE <span className="metallic-gold-text italic tracking-normal">EVOLUTION</span>
           </h2>
         </div>
 
-        {/* Two Column Layout */}
-        <div className="flex flex-col lg:flex-row gap-10 lg:gap-16">
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-10 xl:gap-16 items-start">
+          
+          {/* LEFT: Sticky Pie Chart + Timeline */}
+          <div className="hidden lg:flex lg:w-[48%] xl:w-[50%] flex-shrink-0 sticky top-24 z-20 items-center justify-between pl-4 xl:pl-16">
+            
+            {/* The SVG Pie Chart - Scaled robustly */}
+            <div className="relative w-full max-w-[min(600px,65vh)] xl:max-w-[700px]">
+              <svg viewBox="0 0 512 512" className="w-full h-full relative z-10 scale-[0.8] md:scale-[0.95] xl:scale-[1.15] overflow-visible">
+                <defs>
+                  {featureCards.map((_, i) => (
+                    <clipPath key={`clip-${i}`} id={`segClip-${i}`}>
+                      <path d={getSegmentPath(i, OUTER_R, INNER_R)} />
+                    </clipPath>
+                  ))}
+                </defs>
 
-          {/* LEFT: Sticky Pie Chart */}
-          <div className="lg:w-[45%] lg:flex-shrink-0">
-            <div className="sticky top-20 lg:top-24 z-20">
-              <div className="relative w-full max-w-[360px] sm:max-w-[420px] lg:max-w-[480px] mx-auto -mt-4 sm:-mt-6 lg:mt-0" style={{ aspectRatio: "1/1" }}>
-                <svg viewBox="0 0 512 512" className="w-full h-full relative z-10">
-                  <defs>
-                    <filter id="segGlow" x="-50%" y="-50%" width="200%" height="200%">
-                      <feGaussianBlur stdDeviation="12" result="blur" />
-                      <feFlood floodColor="#E31837" floodOpacity="0.6" result="color" />
-                      <feComposite in="color" in2="blur" operator="in" result="glow" />
-                      <feMerge>
-                        <feMergeNode in="glow" />
-                        <feMergeNode in="SourceGraphic" />
-                      </feMerge>
-                    </filter>
-                    {featureCards.map((_, i) => (
-                      <clipPath key={`clip-${i}`} id={`segClip-${i}`}>
-                        <path d={getSegmentPath(i, OUTER_R, INNER_R)} />
-                      </clipPath>
-                    ))}
-                  </defs>
+                <circle cx={CX} cy={CY} r={OUTER_R} fill="#111" stroke="rgba(255,255,255,0.05)" strokeWidth="1" />
 
-                  {/* Background circle */}
-                  <circle cx={CX} cy={CY} r={OUTER_R} fill="#111" stroke="rgba(255,255,255,0.05)" strokeWidth="1" />
+                {/* Segments + Connector Lines */}
+                {featureCards.map((card, i) => {
+                  const midDeg = (i + 0.5) * ANGLE_PER_SEG - 90;
+                  const midRad = midDeg * (Math.PI / 180);
+                  // Connector line logic
+                  const lineStartR = OUTER_R + 5;
+                  const lineEndR = OUTER_R + 65;
+                  const sx = CX + lineStartR * Math.cos(midRad);
+                  const sy = CY + lineStartR * Math.sin(midRad);
+                  const ex = CX + lineEndR * Math.cos(midRad);
+                  const ey = CY + lineEndR * Math.sin(midRad);
 
-                  {/* Segments */}
-                  {featureCards.map((card, i) => (
+                  return (
                     <g key={i}>
+                      {/* Radiating Connector Line */}
+                      <line 
+                        x1={sx} y1={sy} x2={ex} y2={ey} 
+                        stroke="rgba(255,255,255,0.15)" strokeWidth="1" 
+                      />
+                      
                       <path
                         ref={el => { segmentRefs.current[i] = el; }}
                         d={getSegmentPath(i, OUTER_R, INNER_R)}
-                        fill="#1a1a1a"
-                        stroke="rgba(255,255,255,0.05)"
+                        fill="#000"
+                        stroke="rgba(255,255,255,0.08)"
                         strokeWidth="1"
+                        className="transition-all duration-300"
                       />
+                      
                       <g clipPath={`url(#segClip-${i})`}>
                         <image
-                          href={cardImages[i]}
+                          href={cardImages[i] || "/placeholder.jpg"}
                           x={CX - OUTER_R}
                           y={CY - OUTER_R}
                           width={OUTER_R * 2}
                           height={OUTER_R * 2}
                           preserveAspectRatio="xMidYMid slice"
-                          opacity="0.6"
+                          opacity={activeIndex === i ? "0.6" : "0.15"}
+                          className="transition-opacity duration-500"
                         />
                       </g>
-                      <path d={getSegmentPath(i, OUTER_R, INNER_R)} fill="rgba(8,8,8,0.4)" />
                     </g>
-                  ))}
-
-                  {/* Center circle - Enhanced with glow */}
-                  <circle cx={CX} cy={CY} r={INNER_R} fill="#0C0C0C" stroke="#FFD700" strokeWidth="1.5" className="drop-shadow-[0_0_15px_rgba(255,215,0,0.3)]" />
-                  <text ref={pieCenterTextRef} x={CX} y={CY - 4} textAnchor="middle" className="fill-white font-display font-black" style={{ fontSize: "36px" }}>01</text>
-                  <text x={CX} y={CY + 20} textAnchor="middle" className="fill-[#A8A29C] font-bold uppercase tracking-[0.3em]" style={{ fontSize: "10px" }}>OF {SEGMENTS}</text>
-                </svg>
-
-                {/* Labels */}
-                {featureCards.map((card, i) => {
-                  const midDeg = (i + 0.5) * ANGLE_PER_SEG - 90;
-                  const midRad = midDeg * (Math.PI / 180);
-                  const labelR = OUTER_R + 36;
-                  const lx = CX + labelR * Math.cos(midRad);
-                  const ly = CY + labelR * Math.sin(midRad);
-                  const isLeft = lx < CX;
-
-                  return (
-                    <div
-                      key={i}
-                      ref={el => { labelRefs.current[i] = el; }}
-                      className="absolute text-[9px] sm:text-[10px] font-bold tracking-wider uppercase transition-all duration-300 whitespace-nowrap"
-                      style={{
-                        left: `${(lx / 512) * 100}%`,
-                        top: `${(ly / 512) * 100}%`,
-                        transform: `translate(${isLeft ? "-100%" : "0%"}, -50%)`,
-                        color: "rgba(255,255,255,0.45)",
-                        opacity: 0.6,
-                      }}
-                    >
-                      {card.title}
-                    </div>
                   );
                 })}
-              </div>
+
+                {/* Center Circle */}
+                <circle cx={CX} cy={CY} r={INNER_R} fill="#080808" stroke="#E5D7B3" strokeWidth="2" className="drop-shadow-[0_0_15px_rgba(229,215,179,0.2)]" />
+                
+                <text ref={pieCenterTextRef} x={CX} y={CY + 5} textAnchor="middle" className="fill-white font-display font-light uppercase leading-[1.1] tracking-[0.1em]" style={{ fontSize: "56px" }}>01</text>
+                <text x={CX} y={CY + 32} textAnchor="middle" className="fill-[#C19A5B] font-bold uppercase tracking-[0.2em]" style={{ fontSize: "14px" }}>OF {String(SEGMENTS).padStart(2,'0')}</text>
+              </svg>
+
+              {/* DOM Labels mounted over the SVG */}
+              {featureCards.map((card, i) => {
+                const midDeg = (i + 0.5) * ANGLE_PER_SEG - 90;
+                const midRad = midDeg * (Math.PI / 180);
+                const labelR = OUTER_R + 85; 
+                const lx = CX + labelR * Math.cos(midRad);
+                const ly = CY + labelR * Math.sin(midRad);
+                
+                const Icon = featureIcons[i];
+
+                return (
+                  <div
+                    key={`label-${i}`}
+                    ref={el => { labelRefs.current[i] = el; }}
+                    className="absolute flex flex-col items-center gap-1 xl:gap-2 transition-all duration-300 w-[100px] xl:w-[140px]"
+                    style={{
+                      left: `${(lx / 512) * 100}%`,
+                      top: `${(ly / 512) * 100}%`,
+                      transform: `translate(-50%, -50%) scale(var(--tw-scale-x))`,
+                      color: "rgba(255,255,255,0.45)",
+                      opacity: 0.6,
+                    }}
+                  >
+                    <Icon strokeWidth={1.5} className={`w-4 h-4 xl:w-5 xl:h-5 ${activeIndex === i ? "text-[#E5D7B3]" : "text-white/40"}`} />
+                    <span className="text-[7.5px] xl:text-[9px] font-bold tracking-[0.1em] xl:tracking-[0.15em] uppercase text-center max-w-[90px] xl:max-w-[120px] leading-tight break-words">
+                      {card.title}
+                    </span>
+                  </div>
+                );
+              })}
             </div>
+
+            {/* Vertical Scroll Timeline Indicator */}
+            <div className="relative h-[360px] xl:h-[480px] w-8 xl:w-12 flex flex-col items-center justify-between ml-auto mr-2 xl:mr-10 py-[30px] xl:py-[40px]">
+               {/* Background Track Line */}
+               <div className="absolute top-[30px] xl:top-[40px] bottom-[30px] xl:bottom-[40px] left-1/2 -translate-x-1/2 w-[1px] bg-white/10 z-0" />
+               
+               {/* Line Ticks */}
+               {featureCards.map((_, i) => (
+                 <div key={i} className="w-[4px] h-[4px] xl:w-[5px] xl:h-[5px] rounded-full border border-white/20 bg-[#080808] z-10 relative">
+                 </div>
+               ))}
+
+               {/* Active Glowing Dot */}
+               <div 
+                 className="absolute left-1/2 -translate-x-1/2 w-[7px] h-[7px] xl:w-[9px] xl:h-[9px] rounded-full bg-[#E5D7B3] shadow-[0_0_12px_rgba(229,215,179,0.8)] z-20 transition-all duration-300 ease-out"
+                 style={{
+                   top: `calc(100% * (${activeIndex} / ${Math.max(1, SEGMENTS - 1)}))`,
+                   marginTop: `calc(30px + (100% - 60px) * (${activeIndex} / ${Math.max(1, SEGMENTS - 1)}) - (100% * (${activeIndex} / ${Math.max(1, SEGMENTS - 1)})))`,  // This calculates perfectly or use a simpler offset
+                   transform: `translate(-50%, -50%)`
+                 }}
+               />
+            </div>
+            
           </div>
 
-          {/* RIGHT: Scrolling Cards */}
+          {/* RIGHT: Scrolling Cards (Floating Layout) */}
           <div
             ref={rightViewportRef}
-            className="lg:w-[55%] lg:h-[calc(100vh-8rem)] lg:overflow-hidden"
+            className="w-full lg:w-[55%] xl:w-[50%] lg:h-[calc(100vh-8rem)] lg:overflow-hidden px-4 sm:px-8 lg:px-0"
           >
-            <div ref={rightTrackRef} className="space-y-8">
+            <div ref={rightTrackRef} className="space-y-16 lg:space-y-24 lg:pb-[25vh]">
               {featureCards.map((card, index) => (
                 <div
                   key={index}
                   ref={el => { cardRefs.current[index] = el; }}
-                  className="group relative overflow-hidden rounded-2xl bg-[#111] border border-white/5 transition-all duration-500 hover:border-[#FFD700]/30"
+                  className="w-full flex-shrink-0 group flex flex-col md:flex-row items-center gap-8 md:gap-12 transition-all duration-500"
                 >
-                  <div className="flex flex-col md:flex-row">
-                    {/* Image */}
-                    <div className="w-full md:w-2/5 aspect-square relative overflow-hidden">
-                      <Image
-                        src={cardImages[index]}
-                        alt={card.title}
-                        fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-105"
-                        sizes="(max-width: 768px) 100vw, 40vw"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#111] via-transparent to-transparent md:bg-gradient-to-r" />
-                    </div>
+                  {/* Card Left Image Container */}
+                  <div className="w-full md:w-[45%] aspect-[4/5] relative bg-black rounded-[1.5rem] md:rounded-[2rem] overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.4)]">
+                     <Image
+                      src={cardImages[index] || "/placeholder.jpg"}
+                      alt={card.title}
+                      fill
+                      className="object-cover opacity-90 transition-transform duration-700 group-hover:scale-105"
+                      sizes="(max-width: 1024px) 100vw, 30vw"
+                    />
+                  </div>
 
-                    {/* Content */}
-                    <div className="w-full md:w-3/5 p-6 md:p-8 flex flex-col justify-center">
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className="w-8 h-[1px] metallic-gold-accent" />
-                        <span className="metallic-gold-text text-[9px] font-bold tracking-[0.3em] uppercase">Insight</span>
-                      </div>
-                      <h4 className="font-display font-bold text-2xl md:text-3xl text-white mb-4 leading-[0.95] group-hover:metallic-gold-text transition-colors">
-                        {card.title}
-                      </h4>
-                      <p className="text-[#D1CEC7] text-sm md:text-base leading-relaxed mb-6 font-medium">
-                        {card.desc}
-                      </p>
-                       <Link href="/contact" className="flex items-center gap-4 group/link">
-                         <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center group-hover/link:bg-[#E31837] group-hover/link:border-[#E31837] transition-all duration-500 shadow-lg shadow-[#E31837]/0 group-hover/link:shadow-[#E31837]/20">
-                           <ArrowRight size={16} className="text-white transition-transform group-hover/link:translate-x-1" />
-                         </div>
-                         <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-white/60 group-hover/link:text-white transition-colors">Details</span>
-                       </Link>
+                  {/* Card Right Floating Typography */}
+                  <div className="w-full md:w-[55%] flex flex-col justify-center py-4 md:pl-6">
+                    <div className="text-[#E5D7B3] font-display text-[10px] md:text-[11px] tracking-[0.2em] mb-4 opacity-70 font-light uppercase leading-[1.1] tracking-[0.1em]">
+                      {String(index + 1).padStart(2, '0')}
                     </div>
+                    
+                    {/* Floating Title with Header Font Style */}
+                    <h3 className="font-display font-light text-[15px] md:text-[17px] text-white/90 mb-5 tracking-[0.25em] leading-snug font-light uppercase leading-[1.1] tracking-[0.1em]">
+                      {card.title}
+                    </h3>
+                    
+                    <p className="text-white/40 text-[11px] md:text-[12px] leading-[2] mb-12 max-w-[300px] font-light">
+                      {card.desc}
+                    </p>
+                    
+                    <Link href="/contact" className="mt-4 group/link flex items-center justify-between w-[85%] border-t border-white/10 pt-5">
+                      <span className="text-[9px] font-bold tracking-[0.25em] uppercase text-white/40 group-hover/link:text-white transition-colors">
+                        View Details
+                      </span>
+                      <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center transition-all group-hover/link:bg-[#E5D7B3] group-hover/link:border-[#E5D7B3]">
+                         <ArrowRight size={12} className="text-white/50 group-hover/link:text-black transition-colors" />
+                      </div>
+                    </Link>
                   </div>
                 </div>
               ))}

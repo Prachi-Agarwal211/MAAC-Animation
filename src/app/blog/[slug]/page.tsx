@@ -72,7 +72,7 @@ function renderContent(content: string) {
     // Headings
     if (line.startsWith("## ")) {
       elements.push(
-        <h2 key={index} className="font-display font-bold text-2xl text-[#F0EBE1] mt-10 mb-4">
+        <h2 key={index} className="font-display text-2xl text-[#F0EBE1] mt-10 mb-4 font-light uppercase leading-[1.1] tracking-[0.1em]">
           {line.replace("## ", "")}
         </h2>
       );
@@ -81,7 +81,7 @@ function renderContent(content: string) {
 
     if (line.startsWith("### ")) {
       elements.push(
-        <h3 key={index} className="font-display font-semibold text-xl text-[#F0EBE1] mt-8 mb-3">
+        <h3 key={index} className="font-display text-xl text-[#F0EBE1] mt-8 mb-3 font-light uppercase leading-[1.1] tracking-[0.1em]">
           {line.replace("### ", "")}
         </h3>
       );
@@ -218,7 +218,7 @@ export default function BlogPostPage({
               <span className="text-[#A8A29C] text-[10px] font-bold uppercase tracking-[0.2em]">{post.readTime}</span>
             </div>
             
-            <h1 className="animate-in font-display font-black text-[clamp(2rem,6vw,4rem)] leading-[1] tracking-tighter text-white uppercase mb-8">
+            <h1 className="animate-in font-display text-[clamp(2rem,6vw,4rem)] leading-[1] text-white mb-8 font-light uppercase leading-[1.1] tracking-[0.1em]">
               {post.title}
             </h1>
             
@@ -257,7 +257,7 @@ export default function BlogPostPage({
         <article className="py-12 bg-transparent relative">
           <div className="atmosphere-blob blob-orange top-1/4 -left-20 opacity-5" />
           <div className="max-w-3xl mx-auto px-6 lg:px-8">
-            <div className="prose prose-invert prose-lg max-w-none prose-headings:font-display prose-headings:uppercase prose-headings:tracking-tighter">
+            <div className="prose prose-invert prose-lg max-w-none prose-headings:font-display prose-headings: prose-headings: font-light uppercase leading-[1.1] tracking-[0.1em]">
               {renderContent(post.content)}
             </div>
 

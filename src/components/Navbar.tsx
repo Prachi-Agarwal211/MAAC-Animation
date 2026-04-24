@@ -4,10 +4,10 @@ import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import SmokyButton from "./ui/SmokyButton";
+
 import { navLinks, contactInfo, type NavLinkItem } from "@/data/siteData";
 import { useUIStore } from "@/lib/store";
-import { MessageSquare, ChevronDown, X, Menu } from "lucide-react";
+import { MessageSquare, ChevronDown, X, Menu, ArrowRight } from "lucide-react";
 import ScrollIndicator from "./SideScroller";
 
 export default function Navbar() {
@@ -179,12 +179,17 @@ export default function Navbar() {
           </ul>
 
           <div className="hidden lg:block flex-shrink-0">
-            <SmokyButton
+            <Link
               href="/contact"
-              className="flex min-h-[48px] items-center justify-center sm:min-w-[170px] text-[11px] font-bold tracking-[0.2em]"
+              className="group flex items-center gap-3 px-6 py-2.5 rounded-full border border-white/20 hover:border-white transition-all duration-500 ease-out"
             >
-              Enquire Now
-            </SmokyButton>
+              <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-white/80 group-hover:text-white transition-colors">
+                Enquire Now
+              </span>
+              <div className="w-5 h-5 flex items-center justify-center rounded-full bg-white/10 group-hover:bg-white transition-all duration-500">
+                <ArrowRight size={12} className="text-white group-hover:text-black transition-colors" />
+              </div>
+            </Link>
           </div>
 
           <div className="flex lg:hidden items-center gap-2">
@@ -283,13 +288,15 @@ export default function Navbar() {
           </ul>
 
           <div className="mt-8 flex flex-col gap-3 max-w-md mx-auto w-full">
-            <SmokyButton
+            <Link
               href="/contact"
               onClick={toggleMobileMenu}
-              className="flex min-h-[52px] w-full items-center justify-center text-[11px] font-bold tracking-[0.2em]"
+              className="group flex w-full items-center justify-center gap-3 px-6 py-4 rounded-full border border-white/20 hover:border-white hover:bg-white transition-all duration-500 ease-out"
             >
-              Enquire Now
-            </SmokyButton>
+              <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-white/80 group-hover:text-black transition-colors">
+                Enquire Now
+              </span>
+            </Link>
             <a
               href={whatsappUrl}
               target="_blank"

@@ -8,7 +8,6 @@ import gsap from "@/lib/gsap";
 import { contactInfo } from "@/data/siteData";
 import MagneticButton from "@/components/ui/MagneticButton";
 import { ArrowUpRight, MapPin, Phone, Mail } from "lucide-react";
-import SmokyButton from "./ui/SmokyButton";
 
 const SocialIcons = {
   Facebook: () => (
@@ -65,7 +64,7 @@ export default function Footer() {
           <div className="absolute inset-0 bg-[#FFD700]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
 
           <div className="relative z-10 max-w-2xl text-center lg:text-left">
-            <h2 className="font-display font-black text-[clamp(1.8rem,4.5vw,3rem)] text-white leading-[0.9] tracking-tighter mb-8 uppercase">
+            <h2 className="font-display text-[clamp(1.8rem,4.5vw,3rem)] text-white leading-[0.9] mb-8 font-light uppercase leading-[1.1] tracking-[0.1em]">
               Start Your <span className="metallic-gold-text">Creative Legacy</span>
             </h2>
             <p className="text-[#A8A29C] text-lg md:text-xl font-medium leading-relaxed">
@@ -74,12 +73,12 @@ export default function Footer() {
           </div>
 
           <div className="relative z-10 flex flex-col sm:flex-row gap-6">
-            <SmokyButton
+            <Link
               href="/contact"
-              className="min-h-[60px] min-w-[240px] flex items-center justify-center text-[12px] font-bold tracking-[0.25em]"
+              className="inline-flex min-h-[60px] min-w-[240px] items-center justify-center text-[12px] font-bold tracking-[0.25em] uppercase border border-white/20 hover:border-white hover:bg-white text-white hover:text-black rounded-full transition-all duration-500"
             >
               Book Free Demo
-            </SmokyButton>
+            </Link>
             <a
               href="https://wa.me/917300001589"
               target="_blank"

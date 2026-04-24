@@ -17,7 +17,7 @@ export default function CourseCareer({ course }: { course: Course }) {
   return (
     <section className="py-20 md:py-28" style={{ background: "linear-gradient(180deg, #0C0C0C 0%, #1A0508 50%, #0C0C0C 100%)" }}>
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="font-display font-bold text-3xl md:text-4xl text-[#F0EBE1] mb-4 text-center">
+        <h2 className="font-display text-3xl md:text-4xl text-[#F0EBE1] mb-4 text-center font-light uppercase leading-[1.1] tracking-[0.1em]">
           Career Options After Completion
         </h2>
         <p className="text-[#A8A29C] text-lg text-center mb-12 max-w-2xl mx-auto">

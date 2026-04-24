@@ -5,7 +5,7 @@ export default function CourseCTA() {
   return (
     <section className="py-20 md:py-28" style={{ background: "linear-gradient(135deg, #2A080C 0%, #170406 100%)" }}>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 className="font-display font-bold text-3xl md:text-4xl text-[#F0EBE1] mb-6">
+        <h2 className="font-display text-3xl md:text-4xl text-[#F0EBE1] mb-6 font-light uppercase leading-[1.1] tracking-[0.1em]">
           Ready to Start Your Journey?
         </h2>
         <p className="text-[#A8A29C] text-lg mb-10 max-w-2xl mx-auto">

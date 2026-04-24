@@ -34,13 +34,13 @@ export default function CourseFeeAdmission({ course }: { course: Course }) {
   return (
     <section className="py-20 bg-[#0f0f0f]">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="font-display font-bold text-3xl text-[#F0EBE1] mb-8 text-center">
+        <h2 className="font-display text-3xl text-[#F0EBE1] mb-8 text-center font-light uppercase leading-[1.1] tracking-[0.1em]">
           {course.fullName} — Fee Structure & Admission
         </h2>
         <div className="grid md:grid-cols-2 gap-8">
           {/* Fee Card */}
           <div className="bg-[#161616] rounded-xl p-8 border border-white/5">
-            <h3 className="font-display font-bold text-xl text-[#F0EBE1] mb-4">Course Fees in Jaipur</h3>
+            <h3 className="font-display text-xl text-[#F0EBE1] mb-4 font-light uppercase leading-[1.1] tracking-[0.1em]">Course Fees in Jaipur</h3>
             <dl className="space-y-4">
               <div>
                 <dt className="text-[#6B6560] text-sm">Course Fee Range</dt>
@@ -69,7 +69,7 @@ export default function CourseFeeAdmission({ course }: { course: Course }) {
 
           {/* Admission Card */}
           <div className="bg-[#161616] rounded-xl p-8 border border-white/5">
-            <h3 className="font-display font-bold text-xl text-[#F0EBE1] mb-4">Admission Process</h3>
+            <h3 className="font-display text-xl text-[#F0EBE1] mb-4 font-light uppercase leading-[1.1] tracking-[0.1em]">Admission Process</h3>
             <ol className="space-y-3">
               {[
                 "Book a free demo class online or by calling us",
@@ -95,7 +95,7 @@ export default function CourseFeeAdmission({ course }: { course: Course }) {
 
         {/* Location-specific paragraph */}
         <div className="mt-8 p-6 bg-[#161616] rounded-xl border border-white/5">
-          <h3 className="font-display font-bold text-lg text-[#F0EBE1] mb-2">
+          <h3 className="font-display text-lg text-[#F0EBE1] mb-2 font-light uppercase leading-[1.1] tracking-[0.1em]">
             {course.fullName} in Jaipur — Why MAAC?
           </h3>
           <p className="text-[#A8A29C] leading-relaxed">

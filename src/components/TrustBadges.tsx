@@ -4,87 +4,140 @@ import { useRef } from "react";
 import Image from "next/image";
 import { useGSAP } from "@gsap/react";
 import gsap from "@/lib/gsap";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 const certifications = [
   {
+    name: "SKILL INDIA",
+    logo: "/govt/skillIndia.jpg",
+    sub: "कौशल भारत - कुशल भारत",
+  },
+  {
     name: "MESC",
     logo: "/govt/mesc.png",
+    sub: "Media & Entertainment\nSkills Council",
   },
   {
     name: "NSDC",
     logo: "/govt/nsdc.png",
+    sub: "RE IMAGINE FUTURE",
   },
   {
-    name: "Skill India",
+    name: "SKILL INDIA",
     logo: "/govt/skillIndia.jpg",
+    sub: "कौशल भारत - कुशल भारत",
+  },
+  {
+    name: "MESC",
+    logo: "/govt/mesc.png",
+    sub: "Media & Entertainment\nSkills Council",
   },
 ];
 
 export default function TrustBadges() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const marqueeRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
-    // Basic intro animation for the section
+    // Optional GSAP animations if needed later
     gsap.fromTo(
       sectionRef.current,
-      { opacity: 0 },
-      { opacity: 1, duration: 1, ease: "power2.out" }
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 1, ease: "power3.out", scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top 80%",
+      }}
     );
   }, { scope: sectionRef });
 
-  // Create an array with duplicated items to ensure smooth infinite scrolling
-  const duplicatedCerts = [...certifications, ...certifications, ...certifications, ...certifications];
+  const scrollLeft = () => {
+    if (containerRef.current) {
+      containerRef.current.scrollBy({ left: -300, behavior: "smooth" });
+    }
+  };
+
+  const scrollRight = () => {
+    if (containerRef.current) {
+      containerRef.current.scrollBy({ left: 300, behavior: "smooth" });
+    }
+  };
 
   return (
-    <section ref={sectionRef} className="relative py-8 md:py-10 bg-transparent border-y border-white/5 overflow-hidden">
-      <style dangerouslySetInnerHTML={{ __html: `
-        @keyframes marquee {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        .animate-marquee {
-          animation: marquee 25s linear infinite;
-          width: max-content;
-        }
-        .animate-marquee:hover {
-          animation-play-state: paused;
-        }
-      `}} />
-      
-      <div className="max-w-7xl mx-auto px-6 mb-16 text-center">
-        <p className="metallic-gold-text text-[10px] font-bold tracking-[0.3em] uppercase mb-4 flex items-center justify-center gap-3">
-          <span className="w-8 h-[1px] metallic-gold-accent" />
-          Govt Affiliated & Recognized
-          <span className="w-8 h-[1px] metallic-gold-accent" />
-        </p>
-        <h2 className="font-display font-black text-[clamp(1.8rem,4.5vw,2.8rem)] leading-[0.9] tracking-tighter text-white uppercase">
-          RECOGNIZED <span className="metallic-gold-text italic">EXCELLENCE</span>
-        </h2>
-      </div>
-
-      <div className="relative w-full overflow-hidden flex items-center before:absolute before:left-0 before:w-24 before:h-full before:bg-gradient-to-r before:from-black before:to-transparent before:z-10 after:absolute after:right-0 after:w-24 after:h-full after:bg-gradient-to-l after:from-black after:to-transparent after:z-10">
-        <div ref={marqueeRef} className="animate-marquee flex gap-6 px-3 cursor-pointer">
-          {duplicatedCerts.map((cert, index) => (
-            <div
-              key={`${cert.name}-${index}`}
-              className="flex-shrink-0 group relative w-36 h-36 md:w-40 md:h-40 bg-white/[0.01] backdrop-blur-sm border border-white/5 rounded-2xl flex flex-col items-center justify-center p-6 hover:border-white/20 transition-all duration-700"
-            >
-              <div className="w-full h-16 md:h-20 mb-4 flex items-center justify-center relative">
-                <Image
-                  src={cert.logo}
-                  alt={cert.name}
-                  fill
-                  className="object-contain opacity-40 grayscale brightness-75 transition-all duration-700 group-hover:opacity-100 group-hover:grayscale-0 group-hover:brightness-100"
-                />
-              </div>
-              <span className="text-[#8A827A] group-hover:text-white text-[10px] md:text-[11px] font-black tracking-[0.2em] uppercase transition-all duration-500">
-                {cert.name}
+    <section ref={sectionRef} className="relative py-10 md:py-16 bg-transparent border-t border-white/5 overflow-hidden">
+      <div className="max-w-[1800px] mx-auto px-6 md:px-12 lg:px-20">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 mt-4">
+          
+          {/* Left Content */}
+          <div className="w-full lg:w-[45%] flex flex-col items-start z-10 shrink-0">
+            <div className="flex items-center gap-4 mb-6">
+              <div className="w-6 h-[1px] metallic-gold-accent" />
+              <span className="metallic-gold-text text-[11px] font-bold tracking-[0.25em] uppercase">
+                Govt Affiliated & Recognized
               </span>
-              
-              <div className="absolute inset-x-4 bottom-0 h-[1px] bg-gradient-to-r from-transparent via-metallic-gold/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
             </div>
-          ))}
+            
+            <h2 className="font-display font-light text-[clamp(2.5rem,5vw,4.2rem)] leading-[1.1] uppercase mb-8">
+              <span className="block text-white/90 tracking-[0.15em]">RECOGNIZED</span>
+              <span className="block metallic-gold-text italic tracking-normal">EXCELLENCE</span>
+            </h2>
+            
+            <div className="flex flex-row items-center gap-4">
+              <div className="w-[1px] h-6 metallic-gold-accent" />
+              <p className="text-white/60 text-lg md:text-xl font-light tracking-wide">
+                Industry aligned. Future focused.
+              </p>
+            </div>
+          </div>
+
+          {/* Right Content - Cards setup */}
+          <div className="w-full lg:w-[55%] relative flex flex-col gap-6">
+            <div 
+              ref={containerRef}
+              className="flex gap-4 md:gap-5 overflow-x-auto hide-scrollbar snap-x snap-mandatory mask-gradient-right pb-2"
+              style={{
+                scrollbarWidth: "none",
+                msOverflowStyle: "none",
+                maskImage: "linear-gradient(to right, black 85%, transparent 100%)",
+                WebkitMaskImage: "linear-gradient(to right, black 85%, transparent 100%)",
+              }}
+            >
+              {certifications.map((cert, index) => (
+                <div
+                  key={`${cert.name}-${index}`}
+                  className="snap-start shrink-0 w-[240px] md:w-[280px] aspect-square rounded-3xl bg-[#090909] border border-white/5 flex flex-col items-center justify-center p-4 relative overflow-hidden group hover:border-white/10 transition-colors duration-500"
+                >
+                  {/* Largest possible unified white badge container */}
+                  <div className="w-full h-full bg-white rounded-2xl relative flex items-center justify-center shadow-lg group-hover:scale-[1.03] transition-transform duration-500">
+                    <Image
+                       src={cert.logo}
+                       alt={cert.name}
+                       fill
+                       className="object-contain p-6 mix-blend-multiply opacity-100"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Navigation Arrows positioned concisely */}
+            <div className="flex items-center justify-end gap-2 pr-6">
+              <button 
+                onClick={scrollLeft}
+                className="p-3 text-white/30 hover:text-white hover:bg-white/5 rounded-full transition-all"
+                aria-label="Previous"
+              >
+                <ArrowLeft className="w-4 h-4" />
+              </button>
+              <button 
+                onClick={scrollRight}
+                className="p-3 text-white/30 hover:text-white hover:bg-white/5 rounded-full transition-all"
+                aria-label="Next"
+              >
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>

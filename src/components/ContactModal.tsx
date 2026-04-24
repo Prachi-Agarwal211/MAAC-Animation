@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { gsap } from "@/lib/gsap";
 import { submitContactForm } from "@/app/actions";
-import SmokyButton from "./ui/SmokyButton";
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -186,7 +185,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
               </div>
-              <h3 className="font-display font-bold text-xl text-[#F0EBE1] mb-2">
+              <h3 className="font-display text-xl text-[#F0EBE1] mb-2 font-light uppercase leading-[1.1] tracking-[0.1em]">
                 Transmission Successful!
               </h3>
               <p className="text-[#A8A29C] text-sm">
@@ -200,7 +199,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                 <span className="inline-block px-3 py-1 rounded-full bg-[#FFD700]/10 border border-[#FFD700]/20 text-[#FFD700] text-[10px] font-bold tracking-[0.15em] uppercase mb-3">
                   Free Demo Class
                 </span>
-                <h2 className="font-display font-bold text-2xl text-[#F0EBE1] leading-tight mb-1">
+                <h2 className="font-display text-2xl text-[#F0EBE1] mb-1 font-light uppercase leading-[1.1] tracking-[0.1em]">
                   Start Your Creative Journey
                 </h2>
                 <p className="text-[#A8A29C] text-sm">
@@ -317,13 +316,13 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                 </div>
 
                 <div className="pt-2">
-                  <SmokyButton
+                  <button
                     type="submit"
                     disabled={submitting}
-                    className="w-full min-h-[56px] flex items-center justify-center text-[12px] font-bold tracking-[0.2em]"
+                    className="w-full min-h-[56px] flex items-center justify-center text-[12px] font-bold tracking-[0.2em] uppercase border border-white/20 hover:border-white hover:bg-white text-white hover:text-black rounded-full transition-all duration-500 disabled:opacity-50"
                   >
                     {submitting ? "Processing..." : "Book Free Demo →"}
-                  </SmokyButton>
+                  </button>
                 </div>
 
                 <p className="text-center text-[#6B6560] text-[11px]">

@@ -7,7 +7,6 @@ import { contactInfo } from "@/data/siteData";
 import MagneticButton from "@/components/ui/MagneticButton";
 import { submitContactForm } from "@/app/actions";
 import { Send, Phone, MessageSquare, Mail, ShieldCheck } from "lucide-react";
-import SmokyButton from "@/components/ui/SmokyButton";
 
 export default function ApplyNow() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -68,7 +67,7 @@ export default function ApplyNow() {
           <div className="w-20 h-20 rounded-full bg-[#25D366]/10 border border-[#25D366]/30 flex items-center justify-center mx-auto mb-8">
             <Send size={32} className="text-[#25D366]" />
           </div>
-          <h2 className="font-display font-bold text-4xl text-white mb-6">Success!</h2>
+          <h2 className="font-display text-4xl text-white mb-6 font-light uppercase leading-[1.1] tracking-[0.1em]">Success!</h2>
           <p className="text-[#A8A29C] text-xl leading-relaxed">Our admissions team will contact you within 24 hours to guide you through the process.</p>
         </div>
       </section>
@@ -91,11 +90,11 @@ export default function ApplyNow() {
                 <span className="w-8 h-[1px] metallic-gold-accent" />
                 Admissions Open
               </p>
-              <h2 className="font-display font-black text-[clamp(2.2rem,5.5vw,3.5rem)] leading-[0.8] tracking-tighter text-white uppercase">
-                IGNITE YOUR <span className="metallic-gold-text italic">POTENTIAL</span>
+              <h2 className="font-display text-[clamp(2.2rem,5.5vw,3.5rem)] leading-[0.8] text-white font-light uppercase leading-[1.1] tracking-[0.1em]">
+                START YOUR CREATIVE <span className="metallic-gold-text italic">LEGACY</span>
               </h2>
               <p className="text-[#A8A29C] text-lg md:text-2xl font-medium leading-relaxed mt-8 max-w-lg">
-                Join India&apos;s most prestigious academy for digital arts. Your journey to a global creative career starts here.
+                Book a free counseling session or demo class with our industry experts today.
               </p>
             </div>
 
@@ -136,7 +135,7 @@ export default function ApplyNow() {
               className="glass rounded-[2.5rem] p-8 md:p-12 space-y-6 border-white/5 relative overflow-hidden shadow-2xl"
             >
               <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#BF953F] to-transparent" />
-              <h3 className="font-display font-bold text-2xl text-white mb-4">Express Interest</h3>
+              <h3 className="font-display text-2xl text-white mb-4 font-light uppercase leading-[1.1] tracking-[0.1em]">Express Interest</h3>
 
               <div className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -162,16 +161,16 @@ export default function ApplyNow() {
               </div>
 
               <div className="pt-2">
-                <SmokyButton 
+                <button 
                   type="submit" 
                   disabled={isSubmitting}
-                  className="w-full min-h-[56px] flex items-center justify-center gap-3 disabled:opacity-50"
+                  className="w-full min-h-[56px] flex items-center justify-center gap-3 disabled:opacity-50 border border-white/20 hover:bg-white hover:text-black transition-colors duration-500 rounded-full text-white bg-transparent group"
                 >
-                  <span className="text-[12px] font-bold tracking-[0.2em]">
+                  <span className="text-[12px] font-bold tracking-[0.2em] group-hover:text-black">
                     {isSubmitting ? 'Sending...' : 'Secure Your Spot'}
                   </span>
-                  {!isSubmitting && <Send size={15} className="mt-[-2px]" />}
-                </SmokyButton>
+                  {!isSubmitting && <Send size={15} className="mt-[-2px] group-hover:text-black" />}
+                </button>
               </div>
               
               {submitError && (
