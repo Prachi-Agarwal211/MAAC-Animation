@@ -6,7 +6,7 @@ import gsap from "@/lib/gsap";
 import { contactInfo } from "@/data/siteData";
 import MagneticButton from "@/components/ui/MagneticButton";
 import { submitContactForm } from "@/app/actions";
-import { Send, Phone, MessageSquare, Mail, ShieldCheck } from "lucide-react";
+import { Send, Phone, MessageSquare, ShieldCheck } from "lucide-react";
 
 export default function ApplyNow() {
   const sectionRef = useRef<HTMLDivElement>(null);

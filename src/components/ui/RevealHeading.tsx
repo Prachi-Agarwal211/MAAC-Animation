@@ -17,7 +17,7 @@ export default function RevealHeading({
   as: Tag = 'h2',
   delay = 0
 }: RevealHeadingProps) {
-  const containerRef = useRef<HTMLElement>(null);
+  const containerRef = useRef<HTMLHeadingElement>(null);
 
   useGSAP(() => {
     if (!containerRef.current) return;
@@ -44,7 +44,7 @@ export default function RevealHeading({
   }, { dependencies: [children, delay], scope: containerRef });
 
   return (
-    <Tag ref={containerRef as any} className={`${className} flex flex-wrap gap-x-[0.3em]`}>
+    <Tag ref={containerRef} className={`${className} flex flex-wrap gap-x-[0.3em]`}>
       {children.split(' ').map((word, i) => (
         <span key={i} className="word-wrapper inline-block overflow-hidden py-1">
           <span className="word-inner inline-block will-change-transform origin-left">

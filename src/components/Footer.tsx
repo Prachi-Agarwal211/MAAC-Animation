@@ -6,7 +6,6 @@ import Image from "next/image";
 import { useGSAP } from "@gsap/react";
 import gsap from "@/lib/gsap";
 import { contactInfo } from "@/data/siteData";
-import MagneticButton from "@/components/ui/MagneticButton";
 import { ArrowUpRight, MapPin, Phone, Mail } from "lucide-react";
 
 const SocialIcons = {

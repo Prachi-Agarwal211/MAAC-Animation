@@ -65,7 +65,7 @@ const eventsData = [
   },
 ];
 
-const EventCard = ({ event, index }: { event: typeof eventsData[0]; index: number }) => {
+const EventCard = ({ event }: { event: typeof eventsData[0] }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const Icon = event.icon;
 
@@ -142,8 +142,8 @@ export default function MAACEvents() {
 
         {/* Events Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
-          {eventsData.map((event, index) => (
-            <EventCard key={event.id} event={event} index={index} />
+          {eventsData.map((event) => (
+            <EventCard key={event.id} event={event} />
           ))}
         </div>
       </div>

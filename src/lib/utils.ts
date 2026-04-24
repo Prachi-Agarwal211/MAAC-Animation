@@ -9,7 +9,7 @@ export function cn(...inputs: ClassValue[]) {
   // Basic implementation to avoid "Module not found" if libraries are being installed/restored
   try {
     return twMerge(clsx(inputs));
-  } catch (e) {
+  } catch {
     return inputs.filter(Boolean).join(" ");
   }
 }

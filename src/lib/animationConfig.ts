@@ -9,7 +9,7 @@ import { gsap } from './gsap';
 export const isLowEndDevice = () => {
   if (typeof window === 'undefined') return false;
   
-  const memory = (navigator as any).deviceMemory;
+  const memory = (navigator as Navigator & { deviceMemory?: number }).deviceMemory;
   const cores = navigator.hardwareConcurrency;
   const isTouch = window.matchMedia('(pointer: coarse)').matches;
   

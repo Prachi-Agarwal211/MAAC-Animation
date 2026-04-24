@@ -87,7 +87,7 @@ export default function SplitTextReveal({
     ));
   };
 
-  const Component = Tag as any;
+  const Component = Tag as React.ElementType;
 
   return (
     <Component ref={containerRef} className={`${className} inline-block perspective-1000`}>

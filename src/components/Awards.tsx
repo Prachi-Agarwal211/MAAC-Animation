@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "@/lib/gsap";
 import { awardsData } from "@/data/siteData";
-import { Trophy, ArrowUpRight } from "lucide-react";
+import { Trophy } from "lucide-react";
 
 function Awards() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -14,8 +14,8 @@ function Awards() {
 
     mm.add("(min-width: 1024px)", () => {
       // Desktop: Kinetic Typography Parallax
-      const rows = gsap.utils.toArray(".awards-row");
-      rows.forEach((row: any, i) => {
+      const rows = gsap.utils.toArray<HTMLElement>(".awards-row");
+      rows.forEach((row, i) => {
         const speed = (i + 1) * 50;
         gsap.to(row, {
           x: i % 2 === 0 ? -speed : speed,

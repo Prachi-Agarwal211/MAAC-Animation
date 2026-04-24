@@ -33,7 +33,6 @@ function Waveform() {
 function Testimonials() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
 
   useGSAP(() => {
     const tl = gsap.timeline({
@@ -66,8 +65,6 @@ function Testimonials() {
         <div className="tm-main max-w-5xl mx-auto relative">
           <div
             className="glass rounded-[48px] p-10 md:p-20 relative overflow-hidden group border-white/5"
-            onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => setIsPaused(false)}
           >
             {/* Header: Audio UI */}
             <div className="flex items-center justify-between mb-16 border-b border-white/5 pb-8">
