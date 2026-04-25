@@ -36,51 +36,61 @@ export default function HomePageClient() {
       </ErrorBoundary>
 
       {landingReady && (
-        <>
+        <main className="bg-transparent">
           <ErrorBoundary>
             <TrustBadges />
           </ErrorBoundary>
 
-          <div id="features" className="relative z-10">
+          <div id="features" className="relative z-10 bg-transparent">
             <ErrorBoundary>
               <VerticalCardGallery />
             </ErrorBoundary>
           </div>
 
-          <ErrorBoundary>
-            <PopularCourses />
-          </ErrorBoundary>
+          <div className="bg-transparent">
+            <ErrorBoundary>
+              <PopularCourses />
+            </ErrorBoundary>
+          </div>
 
-          <div id="intro" className="relative z-20">
+          <div id="intro" className="relative z-20 bg-transparent">
             <InstituteIntro />
           </div>
 
-          <LiquidReveal>
+          <div className="bg-transparent">
+            <LiquidReveal>
+              <ErrorBoundary>
+                <CareerCreatorComparison />
+              </ErrorBoundary>
+            </LiquidReveal>
+          </div>
+
+          <div className="bg-transparent">
             <ErrorBoundary>
-              <CareerCreatorComparison />
+              <IndustryPartners />
             </ErrorBoundary>
-          </LiquidReveal>
+          </div>
+
+          <div className="bg-transparent">
+            <ErrorBoundary>
+              <StudentShowcase />
+            </ErrorBoundary>
+          </div>
+
+          <div className="bg-transparent">
+            <ErrorBoundary>
+              <StudentSuccessStories />
+            </ErrorBoundary>
+          </div>
 
           <ErrorBoundary>
-            <IndustryPartners />
-          </ErrorBoundary>
-
-          <ErrorBoundary>
-            <StudentShowcase />
-          </ErrorBoundary>
-
-          <ErrorBoundary>
-            <StudentSuccessStories />
-          </ErrorBoundary>
-
-          <ErrorBoundary>
-            <div id="apply" className="relative z-20">
+            <div id="apply" className="relative z-20 bg-transparent">
               <ApplyNow />
             </div>
           </ErrorBoundary>
 
           <ErrorBoundary>
-            <div id="faq" className="relative z-20">
+            <div id="faq" className="relative z-20 bg-transparent">
               <FAQSection />
             </div>
           </ErrorBoundary>
@@ -88,7 +98,7 @@ export default function HomePageClient() {
           <ErrorBoundary>
             <Footer />
           </ErrorBoundary>
-        </>
+        </main>
       )}
     </>
   );

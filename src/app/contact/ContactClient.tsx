@@ -47,7 +47,7 @@ export default function ContactClient() {
   };
 
   return (
-    <main ref={containerRef} className="bg-[#080808] overflow-hidden">
+    <main ref={containerRef} className="bg-transparent overflow-hidden">
 
       {/* ── HERO SECTION ── */}
       <section className="relative pt-32 pb-20 px-6 md:px-12 lg:px-24 border-b border-white/5">

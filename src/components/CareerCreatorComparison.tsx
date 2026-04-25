@@ -29,7 +29,7 @@ export default function CareerCreatorComparison() {
           Custom Engineered Career Tracks
           <span className="w-8 h-[1px] metallic-gold-accent" />
         </p>
-        <h2 className="font-display text-[clamp(2rem,5vw,3.5rem)] leading-[0.8] text-white font-light uppercase leading-[1.1] tracking-[0.1em]">
+        <h2 className="font-display text-[clamp(2rem,5vw,3.5rem)] leading-[0.8] text-white font-bold uppercase leading-[1.1] tracking-[0.1em]">
           CHOOSE YOUR <span className="metallic-gold-text italic">PATHWAY</span>
         </h2>
       </div>
@@ -50,17 +50,17 @@ export default function CareerCreatorComparison() {
                 <span className="text-[#FFD700] text-[10px] font-bold tracking-[0.3em] uppercase">Pathway 01</span>
               </div>
 
-              <h2 className="font-display text-[clamp(1.5rem,3.5vw,2.5rem)] text-white leading-[0.85] mb-6 font-light uppercase leading-[1.1] tracking-[0.1em]">
+              <h2 className="font-display text-[clamp(1.5rem,3.5vw,2.5rem)] text-white leading-[0.85] mb-6 font-bold uppercase leading-[1.1] tracking-[0.1em]">
                 CAREER <span className="metallic-gold-text italic">X</span>
               </h2>
 
-              <p className="text-[#A8A29C] text-base md:text-lg font-medium max-w-md leading-relaxed mb-8 border-l-2 border-[#FFD700] pl-4">
+              <p className="text-[#A8A29C] text-whitease md:text-lg font-bold max-w-md leading-relaxed mb-8 border-l-2 border-[#FFD700] pl-4">
                 Studio-aligned programs designed for those seeking high-impact careers in global production houses.
               </p>
 
               <ul className="space-y-4 mb-8">
                 {["Industry-academia learning", "Studio-led delivery", "Live case studies", "End-to-end production workflow"].map((item) => (
-                  <li key={item} className="text-white/60 text-sm font-bold uppercase tracking-wider pl-2">
+                  <li key={item} className="text-white text-sm font-bold uppercase tracking-wider pl-2">
                     {item}
                   </li>
                 ))}
@@ -70,7 +70,7 @@ export default function CareerCreatorComparison() {
             <div className="space-y-4">
               <div className="flex flex-wrap gap-2">
                 {["DNEG", "MPC", "Framestore", "Prime Focus"].map(s => (
-                  <span key={s} className="px-3 py-1.5 rounded-full glass border border-white/5 text-[9px] font-bold tracking-widest text-white/40">{s}</span>
+                  <span key={s} className="px-3 py-1.5 rounded-full glass border border-white/5 text-[9px] font-bold tracking-widest text-white">{s}</span>
                 ))}
               </div>
               <Link href="/courses" className="inline-flex items-center justify-center gap-3 px-8 py-4 border border-white/20 hover:bg-white hover:text-black transition-colors duration-500 rounded-full text-white bg-transparent text-xs font-bold tracking-[0.3em] uppercase group/btn">
@@ -95,17 +95,17 @@ export default function CareerCreatorComparison() {
                 <span className="text-[#FF6B35] text-[10px] font-bold tracking-[0.3em] uppercase">Pathway 02</span>
               </div>
 
-              <h2 className="font-display text-[clamp(1.5rem,3.5vw,2.5rem)] text-white leading-[0.85] mb-6 font-light uppercase leading-[1.1] tracking-[0.1em]">
+              <h2 className="font-display text-[clamp(1.5rem,3.5vw,2.5rem)] text-white leading-[0.85] mb-6 font-bold uppercase leading-[1.1] tracking-[0.1em]">
                 CREATOR <span className="text-[#FF6B35] italic">X</span>
               </h2>
 
-              <p className="text-[#A8A29C] text-base md:text-lg font-medium max-w-md leading-relaxed mb-8 border-l-2 border-[#FF6B35] pl-4">
+              <p className="text-[#A8A29C] text-whitease md:text-lg font-bold max-w-md leading-relaxed mb-8 border-l-2 border-[#FF6B35] pl-4">
                 Empowering independent artists to build their own brand, manage clients, and master the gig economy.
               </p>
 
               <ul className="space-y-4 mb-8">
                 {["Entrepreneurship readiness", "Freelance strategy", "IP creation & growth", "Client management", "Monetization"].map((item) => (
-                  <li key={item} className="flex items-center gap-3 text-white/60 text-sm font-bold uppercase tracking-wider">
+                  <li key={item} className="flex items-center gap-3 text-white text-sm font-bold uppercase tracking-wider">
                     <div className="w-1 h-1 rounded-full bg-[#FF6B35] flex-shrink-0" />
                     {item}
                   </li>

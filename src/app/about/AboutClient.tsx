@@ -41,7 +41,7 @@ export default function AboutClient() {
   }, { scope: containerRef });
 
   return (
-    <main ref={containerRef} className="bg-[#080808] overflow-hidden">
+    <main ref={containerRef} className="bg-transparent overflow-hidden">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -130,7 +130,7 @@ export default function AboutClient() {
       </section>
 
       {/* ── FACULTY SECTION ── */}
-      <section id="faculty" className="py-16 md:py-24 bg-[#080808] scroll-mt-28">
+      <section id="faculty" className="py-16 md:py-24 bg-transparent scroll-mt-28">
         <div className="max-w-7xl mx-auto px-6 md:px-12 text-center mb-24">
           <span className="text-[#FFD700] text-sm font-bold tracking-[0.3em] uppercase mb-6 block">Industry Titans</span>
           <h2 className="text-white font-display text-5xl md:text-8xl font-light uppercase leading-[1.1] tracking-[0.1em]">EXPERIENCED <span className="gradient-text">FACULTY</span></h2>

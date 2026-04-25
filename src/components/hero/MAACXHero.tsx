@@ -212,7 +212,7 @@ export default function MAACXHero({ onIntroReveal }: Props) {
     tl.fromTo(
       ".maacx-hero-video",
       { opacity: 0, scale: 1.035 },
-      { opacity: 1, scale: 1, duration: 1.2, ease: "power2.out" },
+      { opacity: 0.7, scale: 1, duration: 1.2, ease: "power2.out" },
       0
     )
       .fromTo(
@@ -305,8 +305,8 @@ export default function MAACXHero({ onIntroReveal }: Props) {
 
               <div className="absolute bottom-0 left-0 right-0 z-20 px-4 sm:px-8 pb-6 sm:pb-8 pt-4 bg-gradient-to-t from-black/80 to-transparent pointer-events-none">
                 <div className="flex items-end justify-between gap-4 max-w-4xl mx-auto mb-2">
-                  <span className="text-[10px] sm:text-xs font-medium tracking-widest text-white/35 uppercase">Loading</span>
-                  <span ref={percentLabelRef} className="text-[11px] sm:text-sm font-semibold tabular-nums text-white/90">
+                  <span className="text-[10px] sm:text-xs font-bold tracking-widest text-white/35 uppercase">Loading</span>
+                  <span ref={percentLabelRef} className="text-[11px] sm:text-sm font-black tabular-nums text-white/90">
                     0%
                   </span>
                 </div>
@@ -328,7 +328,7 @@ export default function MAACXHero({ onIntroReveal }: Props) {
         aria-hidden={!heroRevealed}
       >
         {/* Full-bleed background video */}
-        <div className="maacx-hero-video absolute inset-0 z-0 opacity-0">
+        <div className="maacx-hero-video absolute inset-0 z-0 opacity-0 bg-transparent">
           {heroRevealed ? (
             <video
               ref={heroVideoRef}
@@ -346,9 +346,9 @@ export default function MAACXHero({ onIntroReveal }: Props) {
           ) : (
             <div className="absolute inset-0 bg-transparent" aria-hidden />
           )}
-          {/* Readability: very light semi-transparent gradients to allow background to show through clearly */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60" />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-transparent" />
+          {/* Readability: very light semi-transparent red-tinted gradients to allow background to show through clearly */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#1a0000]/40 via-transparent to-[#050000]/60" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#1a0000]/20 via-transparent to-transparent" />
         </div>
 
         {/* Foreground: clear of fixed header + safe areas; content anchored bottom */}
@@ -358,10 +358,10 @@ export default function MAACXHero({ onIntroReveal }: Props) {
           <div className="flex w-full flex-col gap-16 lg:flex-row lg:items-end lg:justify-between lg:gap-12">
             <div className="maacx-content min-w-0 max-w-3xl flex-1 [&>*]:opacity-0">
               <h1 className="mb-10 sm:mb-12">
-                <span className="block font-display text-[clamp(2rem,6vw,3.8rem)] font-light uppercase leading-[1.1] tracking-[0.15em] text-white">
+                <span className="block font-display text-[clamp(2.3rem,6vw,4.2rem)] font-bold uppercase leading-[0.9] tracking-[0.1em] text-white">
                   FROM BASICS
                 </span>
-                <span className="block font-display mt-1 text-[clamp(2rem,6vw,3.8rem)] font-light uppercase leading-[1.1] tracking-[0.15em] metallic-gold-text">
+                <span className="block font-display mt-2 text-[clamp(2.3rem,6vw,4.2rem)] font-bold uppercase leading-[0.9] tracking-[0.1em] metallic-gold-text italic">
                   TO PORTFOLIO
                 </span>
               </h1>
@@ -402,7 +402,7 @@ export default function MAACXHero({ onIntroReveal }: Props) {
                     <div className={`w-[2px] bg-white transition-all duration-300 delay-75 ${!isMuted ? 'h-3' : 'h-1.5'}`} />
                     <div className={`w-[2px] bg-white transition-all duration-300 delay-100 ${!isMuted ? 'h-4' : 'h-1.5'}`} />
                   </div>
-                  <span className="text-[10px] font-medium uppercase tracking-[0.25em] text-white/50 transition-colors group-hover:text-white/90">
+                  <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-white/50 transition-colors group-hover:text-white/90">
                     SOUND {isMuted ? "OFF" : "ON"}
                   </span>
                 </button>

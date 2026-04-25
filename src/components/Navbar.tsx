@@ -85,7 +85,7 @@ export default function Navbar() {
             <li className="relative group">
               <Link
                 href="/"
-                className="flex items-center gap-1.5 px-3 py-2 text-[13px] font-medium text-white/70 hover:text-white transition-all duration-300 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]"
+                className="flex items-center gap-1.5 px-3 py-2 text-[13px] font-bold text-white/70 hover:text-white transition-all duration-300 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]"
               >
                 Home
               </Link>
@@ -104,7 +104,7 @@ export default function Navbar() {
                 ) : (
                   <Link
                     href={link.href}
-                    className="flex items-center gap-1.5 px-3 py-2 text-[13px] font-medium text-white/70 hover:text-white transition-all duration-300 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]"
+                    className="flex items-center gap-1.5 px-3 py-2 text-[13px] font-bold text-white/70 hover:text-white transition-all duration-300 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]"
                   >
                     {link.label}
                     {hasSubmenu(link) && <ChevronDown size={12} className="opacity-40 shrink-0 transition-transform group-hover:rotate-180" aria-hidden />}
@@ -138,7 +138,7 @@ export default function Navbar() {
                                       <Link
                                         key={child.label}
                                         href={child.href}
-                                        className="block px-4 py-2 text-[15px] text-white/80 hover:text-white hover:bg-white/5 transition-colors"
+                                        className="block px-4 py-2 text-[15px] text-white hover:text-white hover:bg-white/5 transition-colors"
                                         role="menuitem"
                                       >
                                         {child.label}
@@ -165,7 +165,7 @@ export default function Navbar() {
                         <Link
                           key={child.label}
                           href={child.href}
-                          className="block px-4 py-2 text-[13px] text-white/80 hover:text-white hover:bg-white/5 transition-colors"
+                          className="block px-4 py-2 text-[13px] text-white hover:text-white hover:bg-white/5 transition-colors"
                           role="menuitem"
                         >
                           {child.label}
@@ -183,7 +183,7 @@ export default function Navbar() {
               href="/contact"
               className="group flex items-center gap-3 px-6 py-2.5 rounded-full border border-white/20 hover:border-white transition-all duration-500 ease-out"
             >
-              <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-white/80 group-hover:text-white transition-colors">
+              <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-white group-hover:text-white transition-colors">
                 Enquire Now
               </span>
               <div className="w-5 h-5 flex items-center justify-center rounded-full bg-white/10 group-hover:bg-white transition-all duration-500">
@@ -224,7 +224,7 @@ export default function Navbar() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block py-3.5 text-lg font-semibold text-white/90"
+                    className="block py-3.5 text-lg font-black text-white/90"
                   >
                     {link.label}
                   </a>
@@ -232,7 +232,7 @@ export default function Navbar() {
                   <Link
                     href={link.href}
                     onClick={toggleMobileMenu}
-                    className="block py-3.5 text-lg font-semibold text-white/90"
+                    className="block py-3.5 text-lg font-black text-white/90"
                   >
                     {link.label}
                   </Link>
@@ -241,7 +241,7 @@ export default function Navbar() {
                   <div className="pb-4 space-y-5">
                     {link.megaGroups.map((group) => (
                       <div key={group.title}>
-                        <p className="text-[10px] uppercase tracking-widest metallic-gold-text font-semibold mb-2 pl-3">
+                        <p className="text-[10px] uppercase tracking-widest metallic-gold-text font-black mb-2 pl-3">
                           {group.title}
                         </p>
                         <ul className="pl-3 space-y-0">
@@ -262,7 +262,7 @@ export default function Navbar() {
                     <Link
                       href="/contact"
                       onClick={toggleMobileMenu}
-                      className="block ml-3 py-2 text-[13px] text-[#FFD700] font-medium"
+                      className="block ml-3 py-2 text-[13px] text-[#FFD700] font-bold"
                     >
                       View e-brochure / enquire — Jaipur
                     </Link>
@@ -293,7 +293,7 @@ export default function Navbar() {
               onClick={toggleMobileMenu}
               className="group flex w-full items-center justify-center gap-3 px-6 py-4 rounded-full border border-white/20 hover:border-white hover:bg-white transition-all duration-500 ease-out"
             >
-              <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-white/80 group-hover:text-black transition-colors">
+              <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-white group-hover:text-black transition-colors">
                 Enquire Now
               </span>
             </Link>
@@ -301,7 +301,7 @@ export default function Navbar() {
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 border border-white/15 text-white py-3 text-sm font-medium rounded-md hover:bg-white/5 transition-colors"
+              className="flex items-center justify-center gap-2 border border-white/15 text-white py-3 text-sm font-bold rounded-md hover:bg-white/5 transition-colors"
             >
               <MessageSquare size={18} /> WhatsApp us
             </a>

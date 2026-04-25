@@ -211,11 +211,8 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.variable} ${syne.variable} font-body antialiased bg-transparent text-[#F0EBE1]`}
+        className={`${inter.variable} ${syne.variable} font-body antialiased text-[#F0EBE1]`}
       >
-        {/* Base layer to prevent white flash/background on mobile */}
-        <div className="fixed inset-0 z-[-10] bg-[#080808]" aria-hidden="true" />
-        
         <DynamicBackground />
 
         <Providers>

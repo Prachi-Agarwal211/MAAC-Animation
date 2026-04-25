@@ -44,7 +44,7 @@ export default function StudentWorkPage() {
         }}
       />
 
-      <main className="bg-[#080808] min-h-screen">
+      <main className="bg-transparent min-h-screen">
         {/* Hero Section */}
         <section 
           ref={heroRef}

@@ -85,10 +85,10 @@ export default function StudentSuccessStories() {
             Inspiring Journeys
             <span className="w-8 h-[1px] metallic-gold-accent" />
           </p>
-          <h2 className="font-display text-[clamp(2rem,5.5vw,3.5rem)] leading-[0.85] text-white font-light uppercase leading-[1.1] tracking-[0.1em]">
+          <h2 className="font-display text-[clamp(1.6rem,6vw,3.5rem)] leading-[0.85] text-white font-bold uppercase leading-[1.1] tracking-[0.1em]">
             REAL <span className="metallic-gold-text italic">PLACEMENTS</span>, REAL SALARIES
           </h2>
-          <p className="text-[#A8A29C] text-sm md:text-base mt-6 max-w-2xl mx-auto">
+          <p className="text-[#A8A29C] text-sm md:text-whitease mt-6 max-w-2xl mx-auto">
             Our students don&apos;t just learn — they launch thriving careers. Here&apos;s what MAAC alumni are earning and where they&apos;re working.
           </p>
         </div>
@@ -107,7 +107,7 @@ export default function StudentSuccessStories() {
                 <div className="flex justify-center mb-3">
                   <Icon size={20} className="metallic-gold-text" />
                 </div>
-                <div className="text-white font-bold text-2xl md:text-3xl mb-1">{stat.value}</div>
+                <div className="text-white font-bold text-[#F0EBE1]xl md:text-3xl mb-1">{stat.value}</div>
                 <div className="text-[#A8A29C] text-xs uppercase tracking-[0.15em]">{stat.label}</div>
               </div>
             );
@@ -136,7 +136,7 @@ export default function StudentSuccessStories() {
                   </div>
                   <div>
                     <h3 className="text-white font-bold text-lg">{story.name}</h3>
-                    <p className="metallic-gold-text text-sm font-medium">{story.role}</p>
+                    <p className="metallic-gold-text text-sm font-bold">{story.role}</p>
                   </div>
                 </div>
 

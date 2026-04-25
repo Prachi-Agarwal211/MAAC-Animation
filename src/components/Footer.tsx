@@ -6,7 +6,7 @@ import Image from "next/image";
 import { useGSAP } from "@gsap/react";
 import gsap from "@/lib/gsap";
 import { contactInfo } from "@/data/siteData";
-import { ArrowUpRight, MapPin, Phone, Mail } from "lucide-react";
+import { ArrowUpRight, MapPin, Phone, Mail, MessageSquare } from "lucide-react";
 
 const SocialIcons = {
   Facebook: () => (
@@ -59,14 +59,14 @@ export default function Footer() {
 
       {/* ── TOP BANNER ── */}
       <div className="max-w-[1800px] mx-auto px-6 md:px-12 mb-24">
-        <div className="relative rounded-[40px] overflow-hidden bg-gradient-to-br from-[#1c1c1c] to-[#0c0c0c] border border-white/5 p-10 md:p-20 flex flex-col lg:flex-row items-center justify-between gap-12 group">
+        <div className="relative rounded-[40px] overflow-hidden glass border border-white/10 p-6 md:p-12 lg:p-20 flex flex-col lg:flex-row items-center justify-between gap-12 group shadow-[0_40px_100px_-20px_rgba(0,0,0,0.7)]">
           <div className="absolute inset-0 bg-[#FFD700]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
 
           <div className="relative z-10 max-w-2xl text-center lg:text-left">
-            <h2 className="font-display text-[clamp(1.8rem,4.5vw,3rem)] text-white leading-[0.9] mb-8 font-light uppercase leading-[1.1] tracking-[0.1em]">
+            <h2 className="font-display text-[clamp(1.5rem,5vw,3rem)] text-white leading-[0.9] mb-8 font-bold uppercase leading-[1.1] tracking-[0.1em]">
               Start Your <span className="metallic-gold-text">Creative Legacy</span>
             </h2>
-            <p className="text-[#A8A29C] text-lg md:text-xl font-medium leading-relaxed">
+            <p className="text-[#A8A29C] text-lg md:text-xl font-bold leading-relaxed">
               Book a free counseling session or demo class with our industry experts today.
             </p>
           </div>
@@ -82,9 +82,9 @@ export default function Footer() {
               href="https://wa.me/917300001589"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-3 px-10 py-5 rounded-full border border-white/20 text-white font-bold tracking-[0.2em] text-[11px] uppercase hover:bg-white/5 hover:border-[#BF953F]/40 transition-all duration-300"
+              className="group/wa flex items-center justify-center gap-3 px-10 py-5 rounded-full border border-white/20 text-white font-bold tracking-[0.2em] text-[11px] uppercase hover:bg-white/5 hover:border-[#BF953F]/40 transition-all duration-300"
             >
-              <SocialIcons.Instagram /> WhatsApp Us
+              <MessageSquare size={18} className="text-white group-hover/wa:text-[#25D366] transition-colors" /> WhatsApp Us
             </a>
           </div>
         </div>
@@ -114,7 +114,7 @@ export default function Footer() {
               { Icon: SocialIcons.Youtube, url: contactInfo.social.youtube },
               { Icon: SocialIcons.Linkedin, url: contactInfo.social.linkedin }
             ].map((social, i) => (
-              <a key={i} href={social.url} className="w-12 h-12 rounded-full glass border border-white/20 flex items-center justify-center text-white/40 hover:text-[#FFD700] hover:border-[#FFD700]/50 transition-all duration-500 shadow-lg">
+              <a key={i} href={social.url} className="w-12 h-12 rounded-full glass border border-white/20 flex items-center justify-center text-white hover:text-[#FFD700] hover:border-[#FFD700]/50 transition-all duration-500 shadow-lg">
                 <social.Icon />
               </a>
             ))}

@@ -77,7 +77,7 @@ export default function StudentShowcase() {
             Witness the Talent
             <span className="w-8 h-[1px] metallic-gold-accent" />
           </p>
-          <h2 className="font-display text-[clamp(2.5rem,6vw,3.5rem)] text-white leading-[0.9] font-light uppercase leading-[1.1] tracking-[0.1em]">
+          <h2 className="font-display text-[clamp(2.5rem,6vw,3.5rem)] text-white leading-[0.9] font-bold uppercase leading-[1.1] tracking-[0.1em]">
             STUDENT <span className="metallic-gold-text italic">SHOWCASE</span>
           </h2>
         </div>
@@ -85,7 +85,7 @@ export default function StudentShowcase() {
 
       {/* ── MAIN THEATRE ── */}
       <div className="ss-main relative flex-1 max-w-[1600px] mx-auto w-full px-4 md:px-10">
-        <div className="relative aspect-video rounded-[40px] overflow-hidden bg-black shadow-[0_40px_100px_rgba(0,0,0,0.8)] border border-white/5 group">
+        <div className="relative aspect-video rounded-[40px] overflow-hidden bg-[#050000] shadow-[0_40px_100px_rgba(0,0,0,0.8)] border border-white/5 group">
           
           {showcaseVideos.map((item, i) => {
             const isActive = i === active;
@@ -126,7 +126,7 @@ export default function StudentShowcase() {
             <div className="flex items-end justify-between gap-8">
               <div className="flex-1">
                 <p className="text-[#FFD700] text-xs font-bold tracking-[0.2em] uppercase mb-3">{showcaseVideos[active].category}</p>
-                <h3 className="text-white text-3xl md:text-5xl font-display font-light uppercase leading-[1.1] tracking-[0.1em]">{showcaseVideos[active].title}</h3>
+                <h3 className="text-white text-3xl md:text-5xl font-display font-bold uppercase leading-[1.1] tracking-[0.1em]">{showcaseVideos[active].title}</h3>
                 
                 {/* Tech Stats Overlay */}
                 <div className="mt-6 flex flex-wrap gap-6 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-700 delay-100">
@@ -137,7 +137,7 @@ export default function StudentShowcase() {
                    ].map((stat, i) => (
                      <div key={i} className="flex flex-col">
                         <span className="text-[10px] text-white/30 font-bold uppercase tracking-widest">{stat.label}</span>
-                        <span className="text-white/80 text-xs font-mono tabular-nums">{stat.val}</span>
+                        <span className="text-white text-xs font-mono tabular-nums">{stat.val}</span>
                      </div>
                    ))}
                 </div>

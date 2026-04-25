@@ -68,7 +68,7 @@ export default function MobileBottomNav() {
 
         <a
           href={callUrl}
-          className="mobile-fab-item flex-1 flex flex-col items-center justify-center py-4 bg-white/5 text-white/60 rounded-[24px] gap-1.5 transition-all active:scale-95"
+          className="mobile-fab-item flex-1 flex flex-col items-center justify-center py-4 bg-white/5 text-white rounded-[24px] gap-1.5 transition-all active:scale-95"
         >
           <Phone size={20} />
           <span className="text-[8px] font-black uppercase tracking-[0.2em]">Call</span>

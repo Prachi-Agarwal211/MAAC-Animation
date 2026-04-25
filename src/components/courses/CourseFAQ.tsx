@@ -50,7 +50,7 @@ export default function CourseFAQ({ course }: { course: Course }) {
   return (
     <section className="py-20 md:py-28 bg-[#0C0C0C]">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="font-display text-3xl md:text-4xl text-[#F0EBE1] mb-12 text-center font-light uppercase leading-[1.1] tracking-[0.1em]">
+        <h2 className="font-display text-3xl md:text-4xl text-[#F0EBE1] mb-12 text-center font-black uppercase leading-[1.1] tracking-[0.1em]">
           Frequently Asked Questions
         </h2>
 
@@ -61,7 +61,7 @@ export default function CourseFAQ({ course }: { course: Course }) {
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
                 className="w-full flex items-center justify-between p-6 text-left hover:bg-white/[0.02] transition-colors"
               >
-                <span className="text-[#F0EBE1] font-medium pr-4">{faq.q}</span>
+                <span className="text-[#F0EBE1] font-bold pr-4">{faq.q}</span>
                 <svg
                   className={`w-5 h-5 text-[#6B6560] flex-shrink-0 transition-transform duration-300 ${openIndex === i ? "rotate-180" : ""}`}
                   fill="none"

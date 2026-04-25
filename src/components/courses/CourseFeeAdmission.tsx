@@ -34,13 +34,13 @@ export default function CourseFeeAdmission({ course }: { course: Course }) {
   return (
     <section className="py-20 bg-[#0f0f0f]">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="font-display text-3xl text-[#F0EBE1] mb-8 text-center font-light uppercase leading-[1.1] tracking-[0.1em]">
+        <h2 className="font-display text-3xl text-[#F0EBE1] mb-8 text-center font-black uppercase leading-[1.1] tracking-[0.1em]">
           {course.fullName} — Fee Structure & Admission
         </h2>
         <div className="grid md:grid-cols-2 gap-8">
           {/* Fee Card */}
           <div className="bg-[#161616] rounded-xl p-8 border border-white/5">
-            <h3 className="font-display text-xl text-[#F0EBE1] mb-4 font-light uppercase leading-[1.1] tracking-[0.1em]">Course Fees in Jaipur</h3>
+            <h3 className="font-display text-xl text-[#F0EBE1] mb-4 font-black uppercase leading-[1.1] tracking-[0.1em]">Course Fees in Jaipur</h3>
             <dl className="space-y-4">
               <div>
                 <dt className="text-[#6B6560] text-sm">Course Fee Range</dt>
@@ -48,7 +48,7 @@ export default function CourseFeeAdmission({ course }: { course: Course }) {
               </div>
               <div>
                 <dt className="text-[#6B6560] text-sm">Easy EMI Option</dt>
-                <dd className="text-[#FFD700] font-semibold">Starting {fees.emi}</dd>
+                <dd className="text-[#FFD700] font-black">Starting {fees.emi}</dd>
               </div>
               <div>
                 <dt className="text-[#6B6560] text-sm">Education Loan</dt>
@@ -69,7 +69,7 @@ export default function CourseFeeAdmission({ course }: { course: Course }) {
 
           {/* Admission Card */}
           <div className="bg-[#161616] rounded-xl p-8 border border-white/5">
-            <h3 className="font-display text-xl text-[#F0EBE1] mb-4 font-light uppercase leading-[1.1] tracking-[0.1em]">Admission Process</h3>
+            <h3 className="font-display text-xl text-[#F0EBE1] mb-4 font-black uppercase leading-[1.1] tracking-[0.1em]">Admission Process</h3>
             <ol className="space-y-3">
               {[
                 "Book a free demo class online or by calling us",
@@ -87,7 +87,7 @@ export default function CourseFeeAdmission({ course }: { course: Course }) {
               ))}
             </ol>
             <div className="mt-6 p-4 bg-[#FFD700]/10 border border-[#FFD700]/20 rounded-lg">
-              <p className="text-[#FFD700] text-sm font-semibold">Eligibility: {course.eligibility}</p>
+              <p className="text-[#FFD700] text-sm font-black">Eligibility: {course.eligibility}</p>
               <p className="text-[#A8A29C] text-xs mt-1">Duration: {course.duration}</p>
             </div>
           </div>
@@ -95,7 +95,7 @@ export default function CourseFeeAdmission({ course }: { course: Course }) {
 
         {/* Location-specific paragraph */}
         <div className="mt-8 p-6 bg-[#161616] rounded-xl border border-white/5">
-          <h3 className="font-display text-lg text-[#F0EBE1] mb-2 font-light uppercase leading-[1.1] tracking-[0.1em]">
+          <h3 className="font-display text-lg text-[#F0EBE1] mb-2 font-black uppercase leading-[1.1] tracking-[0.1em]">
             {course.fullName} in Jaipur — Why MAAC?
           </h3>
           <p className="text-[#A8A29C] leading-relaxed">

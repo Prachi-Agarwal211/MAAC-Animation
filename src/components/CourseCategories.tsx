@@ -113,8 +113,8 @@ function SlideUpCard({ course }: { course: CourseCardItem }) {
           <div className="text-[#FFD700] mb-6">
             <CategoryIcon type={course.icon} />
           </div>
-          <h3 className="text-white font-display text-2xl md:text-3xl mb-2 font-light uppercase leading-[1.1] tracking-[0.1em]">{course.title}</h3>
-          <p className="text-[#A8A29C] text-sm md:text-base line-clamp-2">{course.description}</p>
+          <h3 className="text-white font-display text-[#F0EBE1]xl md:text-3xl mb-2 font-bold uppercase leading-[1.1] tracking-[0.1em]">{course.title}</h3>
+          <p className="text-[#A8A29C] text-sm md:text-whitease line-clamp-2">{course.description}</p>
         </div>
 
         {/* Hover Details */}
@@ -125,14 +125,14 @@ function SlideUpCard({ course }: { course: CourseCardItem }) {
           }}
         >
           <div className="flex-1 flex flex-col justify-center min-h-0">
-            <p className="text-white/80 text-sm md:text-base leading-relaxed mb-6 border-l-2 border-[#FFD700] pl-6">
+            <p className="text-white text-sm md:text-whitease leading-relaxed mb-6 border-l-2 border-[#FFD700] pl-6">
               {course.fullDescription}
             </p>
             <div className="mb-8">
               <h4 className="text-white text-xs font-bold uppercase tracking-[0.2em] mb-3">Your Future Roles</h4>
               <div className="flex flex-wrap gap-2">
                 {course.careers.map((c) => (
-                  <span key={c} className="text-[9px] font-bold uppercase tracking-[0.15em] text-white/60 border border-white/10 px-3 py-1.5 rounded-full">
+                  <span key={c} className="text-[9px] font-bold uppercase tracking-[0.15em] text-white border border-white/10 px-3 py-1.5 rounded-full">
                     {c}
                   </span>
                 ))}
@@ -220,7 +220,7 @@ export default function CourseCategories({ mode = "home" }: CourseCategoriesProp
             {isHome ? "The Academy Portfolio" : "All Programs"}
             <span className="w-8 h-[1px] metallic-gold-accent" />
           </p>
-          <h2 className="font-display text-[clamp(2rem,5.5vw,3.5rem)] leading-[0.85] text-white font-light uppercase leading-[1.1] tracking-[0.1em]">
+          <h2 className="font-display text-[clamp(1.6rem,6vw,3.5rem)] leading-[0.85] text-white font-bold uppercase leading-[1.1] tracking-[0.1em]">
             {isHome ? (
               <>
                 Expertly Crafted <span className="metallic-gold-text italic">Curriculum</span>
@@ -232,7 +232,7 @@ export default function CourseCategories({ mode = "home" }: CourseCategoriesProp
             )}
           </h2>
           {isHome && (
-            <p className="text-[#A8A29C] text-sm md:text-base mt-4">
+            <p className="text-[#A8A29C] text-sm md:text-whitease mt-4">
               Swipe left-right to explore all categories
             </p>
           )}

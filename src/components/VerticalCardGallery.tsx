@@ -202,7 +202,7 @@ export default function VerticalCardGallery() {
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="relative bg-[#080808] min-h-[100vh] z-[100] border-t border-white/5 pb-20 lg:pb-0">
+    <section ref={containerRef} className="relative bg-transparent min-h-[100vh] z-10 pb-20 lg:pb-0">
       <div className="relative z-10 max-w-[1700px] mx-auto px-6 lg:px-12 py-12 lg:py-16">
         
         {/* Section Header */}
@@ -210,7 +210,7 @@ export default function VerticalCardGallery() {
           <p className="text-[9px] font-bold tracking-[0.4em] uppercase mb-4 text-[#C19A5B] opacity-60">
             The MAAC Standard
           </p>
-          <h2 className="font-display font-light text-[clamp(1.5rem,5.5vw,4rem)] text-white/90 uppercase leading-[1.1] tracking-[0.15em] px-4">
+          <h2 className="font-display font-bold text-[clamp(1.5rem,5.5vw,4rem)] text-white/90 uppercase leading-[1.1] tracking-[0.15em] px-4">
             CREATIVE <span className="metallic-gold-text italic tracking-normal">EVOLUTION</span>
           </h2>
         </div>
@@ -222,7 +222,7 @@ export default function VerticalCardGallery() {
             
             {/* The SVG Pie Chart - Scaled robustly */}
             <div className="relative w-full max-w-[min(600px,65vh)] xl:max-w-[700px]">
-              <svg viewBox="0 0 512 512" className="w-full h-full relative z-10 scale-[0.8] md:scale-[0.95] xl:scale-[1.15] overflow-visible">
+              <svg viewBox="0 0 512 512" className="w-full h-full relative z-10 scale-[0.85] md:scale-[0.9] lg:scale-[1.0] xl:scale-[1.15] overflow-visible">
                 <defs>
                   {featureCards.map((_, i) => (
                     <clipPath key={`clip-${i}`} id={`segClip-${i}`}>
@@ -231,7 +231,7 @@ export default function VerticalCardGallery() {
                   ))}
                 </defs>
 
-                <circle cx={CX} cy={CY} r={OUTER_R} fill="#111" stroke="rgba(255,255,255,0.05)" strokeWidth="1" />
+                <circle cx={CX} cy={CY} r={OUTER_R} fill="rgba(20,20,20,0.2)" stroke="rgba(255,255,255,0.2)" strokeWidth="2" />
 
                 {/* Segments + Connector Lines */}
                 {featureCards.map((card, i) => {
@@ -250,15 +250,15 @@ export default function VerticalCardGallery() {
                       {/* Radiating Connector Line */}
                       <line 
                         x1={sx} y1={sy} x2={ex} y2={ey} 
-                        stroke="rgba(255,255,255,0.15)" strokeWidth="1" 
+                        stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" 
                       />
                       
                       <path
                         ref={el => { segmentRefs.current[i] = el; }}
                         d={getSegmentPath(i, OUTER_R, INNER_R)}
-                        fill="#000"
-                        stroke="rgba(255,255,255,0.08)"
-                        strokeWidth="1"
+                        fill="rgba(255,255,255,0.03)"
+                        stroke="rgba(255,255,255,0.2)"
+                        strokeWidth="1.5"
                         className="transition-all duration-300"
                       />
                       
@@ -270,7 +270,7 @@ export default function VerticalCardGallery() {
                           width={OUTER_R * 2}
                           height={OUTER_R * 2}
                           preserveAspectRatio="xMidYMid slice"
-                          opacity={activeIndex === i ? "0.6" : "0.15"}
+                          opacity={activeIndex === i ? "0.8" : "0.2"}
                           className="transition-opacity duration-500"
                         />
                       </g>
@@ -279,10 +279,10 @@ export default function VerticalCardGallery() {
                 })}
 
                 {/* Center Circle */}
-                <circle cx={CX} cy={CY} r={INNER_R} fill="#080808" stroke="#E5D7B3" strokeWidth="2" className="drop-shadow-[0_0_15px_rgba(229,215,179,0.2)]" />
+                <circle cx={CX} cy={CY} r={INNER_R} fill="rgba(10,10,10,0.9)" stroke="#FFD700" strokeWidth="3" className="drop-shadow-[0_0_20px_rgba(255,215,0,0.4)]" />
                 
-                <text ref={pieCenterTextRef} x={CX} y={CY + 5} textAnchor="middle" className="fill-white font-display font-light uppercase leading-[1.1] tracking-[0.1em]" style={{ fontSize: "56px" }}>01</text>
-                <text x={CX} y={CY + 32} textAnchor="middle" className="fill-[#C19A5B] font-bold uppercase tracking-[0.2em]" style={{ fontSize: "14px" }}>OF {String(SEGMENTS).padStart(2,'0')}</text>
+                <text ref={pieCenterTextRef} x={CX} y={CY + 5} textAnchor="middle" className="fill-white font-display font-bold uppercase leading-[1.1] tracking-[0.1em]" style={{ fontSize: "64px" }}>01</text>
+                <text x={CX} y={CY + 38} textAnchor="middle" className="fill-[#FFD700] font-black uppercase tracking-[0.3em]" style={{ fontSize: "16px" }}>OF {String(SEGMENTS).padStart(2,'0')}</text>
               </svg>
 
               {/* DOM Labels mounted over the SVG */}
@@ -304,12 +304,12 @@ export default function VerticalCardGallery() {
                       left: `${(lx / 512) * 100}%`,
                       top: `${(ly / 512) * 100}%`,
                       transform: `translate(-50%, -50%) scale(var(--tw-scale-x))`,
-                      color: "rgba(255,255,255,0.45)",
-                      opacity: 0.6,
+                      color: activeIndex === i ? "#FFD700" : "rgba(255,255,255,0.6)",
+                      opacity: activeIndex === i ? 1 : 0.7,
                     }}
                   >
-                    <Icon strokeWidth={1.5} className={`w-4 h-4 xl:w-5 xl:h-5 ${activeIndex === i ? "text-[#E5D7B3]" : "text-white/40"}`} />
-                    <span className="text-[7.5px] xl:text-[9px] font-bold tracking-[0.1em] xl:tracking-[0.15em] uppercase text-center max-w-[90px] xl:max-w-[120px] leading-tight break-words">
+                    <Icon strokeWidth={2.5} className={`w-5 h-5 xl:w-6 xl:h-6 ${activeIndex === i ? "text-[#FFD700]" : "text-white"}`} />
+                    <span className="text-[8px] xl:text-[10px] font-black tracking-[0.15em] xl:tracking-[0.2em] uppercase text-center max-w-[90px] xl:max-w-[120px] leading-tight break-words drop-shadow-md">
                       {card.title}
                     </span>
                   </div>
@@ -324,7 +324,7 @@ export default function VerticalCardGallery() {
                
                {/* Line Ticks */}
                {featureCards.map((_, i) => (
-                 <div key={i} className="w-[4px] h-[4px] xl:w-[5px] xl:h-[5px] rounded-full border border-white/20 bg-[#080808] z-10 relative">
+                 <div key={i} className="w-[4px] h-[4px] xl:w-[5px] xl:h-[5px] rounded-full border border-white/40 bg-black/60 z-10 relative">
                  </div>
                ))}
 
@@ -366,21 +366,21 @@ export default function VerticalCardGallery() {
 
                   {/* Card Right Floating Typography */}
                   <div className="w-full md:w-[55%] flex flex-col justify-center py-4 md:pl-6">
-                    <div className="text-[#E5D7B3] font-display text-[10px] md:text-[11px] tracking-[0.2em] mb-4 opacity-70 font-light uppercase leading-[1.1] tracking-[0.1em]">
+                    <div className="text-[#E5D7B3] font-display text-[10px] md:text-[11px] tracking-[0.2em] mb-4 opacity-70 font-bold uppercase leading-[1.1] tracking-[0.1em]">
                       {String(index + 1).padStart(2, '0')}
                     </div>
                     
                     {/* Floating Title with Header Font Style */}
-                    <h3 className="font-display font-light text-[15px] md:text-[17px] text-white/90 mb-5 tracking-[0.25em] leading-snug font-light uppercase leading-[1.1] tracking-[0.1em]">
+                    <h3 className="font-display font-bold text-[15px] md:text-[17px] text-white/90 mb-5 tracking-[0.25em] leading-snug font-bold uppercase leading-[1.1] tracking-[0.1em]">
                       {card.title}
                     </h3>
                     
-                    <p className="text-white/40 text-[11px] md:text-[12px] leading-[2] mb-12 max-w-[300px] font-light">
+                    <p className="text-white text-[11px] md:text-[12px] leading-[2] mb-12 max-w-[300px] font-bold">
                       {card.desc}
                     </p>
                     
                     <Link href="/contact" className="mt-4 group/link flex items-center justify-between w-[85%] border-t border-white/10 pt-5">
-                      <span className="text-[9px] font-bold tracking-[0.25em] uppercase text-white/40 group-hover/link:text-white transition-colors">
+                      <span className="text-[9px] font-bold tracking-[0.25em] uppercase text-white group-hover/link:text-white transition-colors">
                         View Details
                       </span>
                       <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center transition-all group-hover/link:bg-[#E5D7B3] group-hover/link:border-[#E5D7B3]">

@@ -67,7 +67,7 @@ export default function ApplyNow() {
           <div className="w-20 h-20 rounded-full bg-[#25D366]/10 border border-[#25D366]/30 flex items-center justify-center mx-auto mb-8">
             <Send size={32} className="text-[#25D366]" />
           </div>
-          <h2 className="font-display text-4xl text-white mb-6 font-light uppercase leading-[1.1] tracking-[0.1em]">Success!</h2>
+          <h2 className="font-display text-4xl text-white mb-6 font-bold uppercase leading-[1.1] tracking-[0.1em]">Success!</h2>
           <p className="text-[#A8A29C] text-xl leading-relaxed">Our admissions team will contact you within 24 hours to guide you through the process.</p>
         </div>
       </section>
@@ -75,14 +75,14 @@ export default function ApplyNow() {
   }
 
   const inputClass = (field: string) =>
-    `w-full px-6 py-4 rounded-2xl bg-white/[0.03] border ${errors[field] ? "border-[#FFD700]" : "border-white/5"} text-white placeholder-[#555] focus:outline-none focus:border-[#FFD700]/30 transition-all duration-300 text-base focus:ring-1 focus:ring-[#FFD700]/20`;
+    `w-full px-6 py-4 rounded-2xl bg-white/[0.03] border ${errors[field] ? "border-[#FFD700]" : "border-white/5"} text-white placeholder-[#555] focus:outline-none focus:border-[#FFD700]/30 transition-all duration-300 text-whitease focus:ring-1 focus:ring-[#FFD700]/20`;
 
   return (
     <section ref={sectionRef} className="relative py-24 md:py-40 overflow-hidden bg-transparent">
       <div className="atmosphere-blob blob-red top-0 left-0 opacity-10" />
       
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+        <div className="grid lg:grid-cols-2 gap-10 md:gap-16 lg:gap-24 items-start">
           {/* Left */}
           <div className="an-heading space-y-10">
             <div>
@@ -90,10 +90,10 @@ export default function ApplyNow() {
                 <span className="w-8 h-[1px] metallic-gold-accent" />
                 Admissions Open
               </p>
-              <h2 className="font-display text-[clamp(2.2rem,5.5vw,3.5rem)] leading-[0.8] text-white font-light uppercase leading-[1.1] tracking-[0.1em]">
+              <h2 className="font-display text-[clamp(1.8rem,6vw,3.5rem)] leading-[0.8] text-white font-bold uppercase leading-[1.1] tracking-[0.1em]">
                 START YOUR CREATIVE <span className="metallic-gold-text italic">LEGACY</span>
               </h2>
-              <p className="text-[#A8A29C] text-lg md:text-2xl font-medium leading-relaxed mt-8 max-w-lg">
+              <p className="text-[#A8A29C] text-lg md:text-[#F0EBE1]xl font-bold leading-relaxed mt-8 max-w-lg">
                 Book a free counseling session or demo class with our industry experts today.
               </p>
             </div>
@@ -135,7 +135,7 @@ export default function ApplyNow() {
               className="glass rounded-[2.5rem] p-8 md:p-12 space-y-6 border-white/5 relative overflow-hidden shadow-2xl"
             >
               <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#BF953F] to-transparent" />
-              <h3 className="font-display text-2xl text-white mb-4 font-light uppercase leading-[1.1] tracking-[0.1em]">Express Interest</h3>
+              <h3 className="font-display text-[#F0EBE1]xl text-white mb-4 font-bold uppercase leading-[1.1] tracking-[0.1em]">Express Interest</h3>
 
               <div className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

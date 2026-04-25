@@ -57,14 +57,14 @@ function Testimonials() {
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8 z-10">
         <div className="tm-header text-center mb-24">
           <p className="metallic-gold-text text-sm font-bold tracking-[0.3em] uppercase mb-6">Success Stories</p>
-          <h2 className="font-display text-[clamp(1.8rem,4.5vw,3rem)] text-white leading-[0.9] font-light uppercase leading-[1.1] tracking-[0.1em]">
+          <h2 className="font-display text-[clamp(1.5rem,5vw,3rem)] text-white leading-[0.9] font-bold uppercase leading-[1.1] tracking-[0.1em]">
             The Alumni <span className="metallic-gold-text">Voices</span>
           </h2>
         </div>
 
         <div className="tm-main max-w-5xl mx-auto relative">
           <div
-            className="glass rounded-[48px] p-10 md:p-20 relative overflow-hidden group border-white/5"
+            className="glass rounded-[48px] p-6 md:p-12 lg:p-20 relative overflow-hidden group border-white/5"
           >
             {/* Header: Audio UI */}
             <div className="flex items-center justify-between mb-16 border-b border-white/5 pb-8">
@@ -85,19 +85,19 @@ function Testimonials() {
 
             <div className="relative z-10 flex flex-col items-center text-center">
               <p 
-                className="text-[#A8A29C] text-xl md:text-3xl leading-relaxed mb-16 font-medium italic min-h-[180px] flex items-center justify-center transition-all duration-700"
+                className="text-[#A8A29C] text-xl md:text-3xl leading-relaxed mb-16 font-bold italic min-h-[180px] flex items-center justify-center transition-all duration-700"
               >
                 &ldquo;{testimonialsData[active].text}&rdquo;
               </p>
               
               <div className="flex flex-col items-center gap-6">
                 <div className="w-24 h-24 rounded-3xl bg-gradient-to-br from-[#BF953F] to-[#FF6B35] p-[1px] rotate-3 group-hover:rotate-0 transition-transform duration-700">
-                  <div className="w-full h-full rounded-3xl bg-[#080808] flex items-center justify-center text-3xl font-display text-white font-light uppercase leading-[1.1] tracking-[0.1em]">
+                  <div className="w-full h-full rounded-3xl bg-[#080808] flex items-center justify-center text-3xl font-display text-white font-bold uppercase leading-[1.1] tracking-[0.1em]">
                     {testimonialsData[active].name.charAt(0)}
                   </div>
                 </div>
                 <div>
-                  <h4 className="text-white text-2xl font-display mb-1 font-light uppercase leading-[1.1] tracking-[0.1em]">{testimonialsData[active].name}</h4>
+                  <h4 className="text-white text-[#F0EBE1]xl font-display mb-1 font-bold uppercase leading-[1.1] tracking-[0.1em]">{testimonialsData[active].name}</h4>
                   <p className="metallic-gold-text text-xs font-bold tracking-[0.3em] uppercase">{testimonialsData[active].role}</p>
                 </div>
               </div>
@@ -105,12 +105,12 @@ function Testimonials() {
 
             {/* Navigation Arrows */}
             <div className="absolute inset-y-0 left-4 md:left-10 flex items-center">
-               <button onClick={prev} className="w-14 h-14 rounded-full glass border border-white/20 flex items-center justify-center text-white/40 hover:text-white hover:border-[#BF953F]/40 transition-all active:scale-90 group/arrow">
+               <button onClick={prev} className="w-14 h-14 rounded-full glass border border-white/20 flex items-center justify-center text-white hover:text-white hover:border-[#BF953F]/40 transition-all active:scale-90 group/arrow">
                  <ChevronLeft size={28} className="group-hover/arrow:scale-110 transition-transform" />
                </button>
             </div>
             <div className="absolute inset-y-0 right-4 md:right-10 flex items-center">
-               <button onClick={next} className="w-14 h-14 rounded-full glass border border-white/20 flex items-center justify-center text-white/40 hover:text-white hover:border-[#BF953F]/40 transition-all active:scale-90 group/arrow">
+               <button onClick={next} className="w-14 h-14 rounded-full glass border border-white/20 flex items-center justify-center text-white hover:text-white hover:border-[#BF953F]/40 transition-all active:scale-90 group/arrow">
                  <ChevronRight size={28} className="group-hover/arrow:scale-110 transition-transform" />
                </button>
             </div>

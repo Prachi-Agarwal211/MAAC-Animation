@@ -53,16 +53,16 @@ export default function PopularCourses() {
               The Academy Portfolio
             </p>
 
-            <h2 className="font-display text-[clamp(2.2rem,5.5vw,3.5rem)] leading-[0.85] text-white font-light uppercase leading-[1.1] tracking-[0.1em]">
+            <h2 className="font-display text-[clamp(1.8rem,6vw,3.5rem)] leading-[0.85] text-white font-bold uppercase leading-[1.1] tracking-[0.1em]">
               EXPERTLY CRAFTED <span className="metallic-gold-text italic">CURRICULUM</span>
             </h2>
           </div>
           
           <div className="hidden md:flex gap-4">
-            <button onClick={() => scroll('left')} className="w-14 h-14 rounded-full glass border border-white/20 flex items-center justify-center text-white/40 hover:text-white hover:border-[#FFD700]/40 transition-all group/arrow">
+            <button onClick={() => scroll('left')} className="w-14 h-14 rounded-full glass border border-white/20 flex items-center justify-center text-white hover:text-white hover:border-[#FFD700]/40 transition-all group/arrow">
               <ChevronLeft size={24} className="group-hover/arrow:scale-110 transition-transform" />
             </button>
-            <button onClick={() => scroll('right')} className="w-14 h-14 rounded-full glass border border-white/20 flex items-center justify-center text-white/40 hover:text-white hover:border-[#FFD700]/40 transition-all group/arrow">
+            <button onClick={() => scroll('right')} className="w-14 h-14 rounded-full glass border border-white/20 flex items-center justify-center text-white hover:text-white hover:border-[#FFD700]/40 transition-all group/arrow">
               <ChevronRight size={24} className="group-hover/arrow:scale-110 transition-transform" />
             </button>
           </div>
@@ -73,7 +73,7 @@ export default function PopularCourses() {
       <div className="relative z-10">
         <div
           ref={trackRef}
-          className="flex gap-8 overflow-x-auto snap-x snap-mandatory px-6 md:px-12 lg:px-24 pb-12 no-scrollbar"
+          className="flex gap-8 overflow-x-auto snap-x snap-mandatory px-5 md:px-12 lg:px-24 pb-12 no-scrollbar"
         >
           {siteCoursesData.popularCourses.map((course) => (
             <div
@@ -91,8 +91,8 @@ export default function PopularCourses() {
                       className="object-cover transition-transform duration-1000 group-hover:scale-110"
                     />
                   ) : (
-                    <div className="absolute inset-0 bg-[#1c1c1c] flex items-center justify-center">
-                       <span className="text-white/5 font-black text-8xl">{course.code}</span>
+                    <div className="absolute inset-0 bg-[#1a0000] flex items-center justify-center">
+                       <span className="text-white/5 font-black text-[#F0EBE1]xl">{course.code}</span>
                     </div>
                   )}
                   <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-transparent to-transparent" />
@@ -105,7 +105,7 @@ export default function PopularCourses() {
 
                 {/* Content */}
                 <div className="p-8 md:p-10">
-                  <h3 className="font-display text-2xl text-white mb-2 group-hover:text-[#FFD700] transition-colors font-light uppercase leading-[1.1] tracking-[0.1em]">{course.name}</h3>
+                  <h3 className="font-display text-[#F0EBE1]xl text-white mb-2 group-hover:text-[#FFD700] transition-colors font-bold uppercase leading-[1.1] tracking-[0.1em]">{course.name}</h3>
                   <p className="text-[#6B6560] text-xs font-bold uppercase tracking-wider mb-6">{course.fullName}</p>
                   <p className="text-[#A8A29C] text-sm leading-relaxed line-clamp-3 mb-8">{course.description}</p>
                   

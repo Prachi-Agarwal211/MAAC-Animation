@@ -38,7 +38,7 @@ function FAQSection() {
               <span className="w-8 h-[1px] metallic-gold-accent" />
               Support Hub
             </p>
-            <h2 className="font-display text-[clamp(2.2rem,5.5vw,3.5rem)] leading-[0.8] text-white font-light uppercase leading-[1.1] tracking-[0.1em]">
+            <h2 className="font-display text-[clamp(1.8rem,6vw,3.5rem)] leading-[0.8] text-white font-bold uppercase leading-[1.1] tracking-[0.1em]">
               ANSWERING YOUR <span className="metallic-gold-text italic">AMBITIONS</span>
             </h2>
           </div>
@@ -71,7 +71,7 @@ function FAQSection() {
                   onClick={() => setOpenIndex(isOpen ? null : index)}
                   className="w-full px-8 py-8 flex items-center justify-between gap-6 text-left"
                 >
-                  <span className={`font-display text-lg md:text-xl transition-colors duration-300 ${isOpen ? 'font-light uppercase leading-[1.1] tracking-[0.1em] text-white' : 'text-[#A8A29C] group-hover:text-white'}`}>
+                  <span className={`font-display text-lg md:text-xl transition-colors duration-300 ${isOpen ? 'font-bold uppercase leading-[1.1] tracking-[0.1em] text-white' : 'text-[#A8A29C] group-hover:text-white'}`}>
                     {faq.name}
                   </span>
                   <div className={`w-10 h-10 rounded-full border flex items-center justify-center transition-all duration-500 ${isOpen ? 'bg-[#FFD700] border-[#FFD700] text-white rotate-180' : 'bg-white/5 border-white/10 text-[#6B6560]'}`}>
@@ -83,7 +83,7 @@ function FAQSection() {
                   className={`overflow-hidden transition-all duration-500 ease-expo-out ${isOpen ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0'}`}
                 >
                   <div className="px-8 pb-8 pt-0">
-                    <p className="text-[#A8A29C] text-base md:text-lg leading-relaxed border-t border-white/5 pt-6">
+                    <p className="text-[#A8A29C] text-whitease md:text-lg leading-relaxed border-t border-white/5 pt-6">
                       {faq.acceptedAnswer.text}
                     </p>
                   </div>

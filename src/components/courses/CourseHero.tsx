@@ -47,10 +47,10 @@ export default function CourseHero({ course }: { course: Course }) {
 
   return (
     <section className="relative min-h-[60vh] md:min-h-[70vh] flex items-center overflow-hidden">
-      {/* Background gradient */}
+      {/* Background gradient - Semi-transparent to allow global bg to peek through */}
       <div
         className="absolute inset-0"
-        style={{ background: "linear-gradient(135deg, #1A0508 0%, #0C0C0C 50%, #0C0C0C 100%)" }}
+        style={{ background: "linear-gradient(135deg, rgba(26, 5, 8, 0.8) 0%, rgba(5, 0, 0, 0.9) 50%, rgba(5, 0, 0, 1) 100%)" }}
       />
 
       {/* Portfolio image background */}
@@ -86,13 +86,13 @@ export default function CourseHero({ course }: { course: Course }) {
 
           {/* Course badge */}
           <div className="inline-flex items-center gap-2 bg-[#BF953F]/10 border border-[#BF953F]/30 rounded-full px-4 py-2 mb-6">
-            <span className="metallic-gold-text text-xs font-semibold tracking-wider uppercase">{course.code}</span>
+            <span className="metallic-gold-text text-xs font-black tracking-wider uppercase">{course.code}</span>
             <span className="text-[#6B6560]">•</span>
             <span className="text-[#A8A29C] text-sm">{course.duration}</span>
           </div>
 
           {/* Title */}
-          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl text-[#F0EBE1] leading-[1.1] mb-6 font-light uppercase leading-[1.1] tracking-[0.1em]">
+          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl text-[#F0EBE1] leading-[1.1] mb-6 font-black uppercase leading-[1.1] tracking-[0.1em]">
             {course.fullName}
           </h1>
 
@@ -105,7 +105,7 @@ export default function CourseHero({ course }: { course: Course }) {
           <div className="flex flex-col sm:flex-row gap-4">
             <Link
               href="/contact"
-              className="btn btn-primary bg-gradient-to-r from-[#BF953F] to-[#C4132D] text-white hover:opacity-90 border border-[#BF953F]/50 shadow-[0_0_20px_rgba(227,24,55,0.3)] px-8 py-4 rounded-lg font-semibold text-center uppercase tracking-widest text-[10px]"
+              className="btn btn-primary bg-gradient-to-r from-[#BF953F] to-[#C4132D] text-white hover:opacity-90 border border-[#BF953F]/50 shadow-[0_0_20px_rgba(227,24,55,0.3)] px-8 py-4 rounded-lg font-black text-center uppercase tracking-widest text-[10px]"
             >
               Book Free Demo Class
             </Link>
@@ -113,7 +113,7 @@ export default function CourseHero({ course }: { course: Course }) {
               href="https://wa.me/917300001589"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn bg-white/10 text-white border border-white/20 hover:bg-white/20 px-8 py-4 rounded-lg font-semibold text-center"
+              className="btn bg-white/10 text-white border border-white/20 hover:bg-white/20 px-8 py-4 rounded-lg font-black text-center"
             >
               WhatsApp Us
             </a>
@@ -123,15 +123,15 @@ export default function CourseHero({ course }: { course: Course }) {
           <div className="mt-12 grid grid-cols-2 md:grid-cols-3 gap-6">
             <div>
               <p className="text-[#6B6560] text-xs uppercase tracking-wider mb-1">Duration</p>
-              <p className="text-[#F0EBE1] font-semibold">{course.duration}</p>
+              <p className="text-[#F0EBE1] font-black">{course.duration}</p>
             </div>
             <div>
               <p className="text-[#6B6560] text-xs uppercase tracking-wider mb-1">Eligibility</p>
-              <p className="text-[#F0EBE1] font-semibold">{course.eligibility}</p>
+              <p className="text-[#F0EBE1] font-black">{course.eligibility}</p>
             </div>
             <div className="col-span-2 md:col-span-1">
               <p className="text-[#6B6560] text-xs uppercase tracking-wider mb-1">Tools You&apos;ll Learn</p>
-              <p className="text-[#F0EBE1] font-semibold text-sm">{course.tools.slice(0, 3).join(", ")}</p>
+              <p className="text-[#F0EBE1] font-black text-sm">{course.tools.slice(0, 3).join(", ")}</p>
             </div>
           </div>
         </div>

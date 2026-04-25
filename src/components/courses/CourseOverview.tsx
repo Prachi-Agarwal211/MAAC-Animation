@@ -37,7 +37,7 @@ export default function CourseOverview({ course }: { course: Course }) {
     <section ref={sectionRef} className="py-20 md:py-28 bg-[#0C0C0C]">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="overview-content">
-          <h2 className="font-display text-3xl md:text-4xl text-[#F0EBE1] mb-8 font-light uppercase leading-[1.1] tracking-[0.1em]">
+          <h2 className="font-display text-3xl md:text-4xl text-[#F0EBE1] mb-8 font-black uppercase leading-[1.1] tracking-[0.1em]">
             About This Course
           </h2>
 
@@ -50,7 +50,7 @@ export default function CourseOverview({ course }: { course: Course }) {
 
             {/* Course Info Card */}
             <div className="bg-[#161616] rounded-xl p-6 border border-white/5 h-fit">
-              <h3 className="font-display text-[#F0EBE1] mb-4 font-light uppercase leading-[1.1] tracking-[0.1em]">Course Details</h3>
+              <h3 className="font-display text-[#F0EBE1] mb-4 font-black uppercase leading-[1.1] tracking-[0.1em]">Course Details</h3>
               <dl className="space-y-4">
                 <div>
                   <dt className="text-[#6B6560] text-xs uppercase tracking-wider mb-1">Course Code</dt>
@@ -70,7 +70,7 @@ export default function CourseOverview({ course }: { course: Course }) {
 
           {/* Highlights */}
           <div>
-            <h3 className="font-display text-[#F0EBE1] text-xl mb-6 font-light uppercase leading-[1.1] tracking-[0.1em]">Course Highlights</h3>
+            <h3 className="font-display text-[#F0EBE1] text-xl mb-6 font-black uppercase leading-[1.1] tracking-[0.1em]">Course Highlights</h3>
             <ul className="grid md:grid-cols-2 gap-4">
               {course.highlights.map((highlight, i) => (
                 <li key={i} className="flex items-start gap-3">

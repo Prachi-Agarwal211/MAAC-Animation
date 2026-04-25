@@ -28,7 +28,7 @@ function CountUpStat({ number, suffix, label }: { number: number; suffix: string
 
   return (
     <div className="text-center px-4 group">
-      <div className="font-display text-[clamp(1.5rem,3.5vw,2.5rem)] text-white tabular-nums flex items-center justify-center font-light uppercase leading-[1.1] tracking-[0.1em]">
+      <div className="font-display text-[clamp(1.5rem,3.5vw,2.5rem)] text-white tabular-nums flex items-center justify-center font-bold uppercase leading-[1.1] tracking-[0.1em]">
         <span ref={countRef}>0</span>
         <span className="metallic-gold-text ml-1">{suffix}</span>
       </div>
@@ -58,8 +58,8 @@ export default function InstituteIntro() {
 
   return (
     <div ref={containerRef} className="relative z-20 bg-transparent py-16 md:py-24">
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-center">
+      <div className="max-w-[1400px] mx-auto px-5 md:px-12 lg:px-20">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-16 lg:gap-24 items-center">
           
           {/* Left: Video */}
           <div className="lg:col-span-7 institute-video-container">
@@ -73,12 +73,12 @@ export default function InstituteIntro() {
                 <span className="w-8 h-[1px] metallic-gold-accent" />
                 Jaipur&apos;s Creative Authority
               </p>
-              <h2 className="institute-title font-display text-[clamp(1.8rem,4vw,2.8rem)] leading-[0.9] text-white font-light uppercase leading-[1.1] tracking-[0.1em]">
+              <h2 className="institute-title font-display text-[clamp(1.4rem,4.5vw,2.8rem)] leading-[0.9] text-white font-bold uppercase leading-[1.1] tracking-[0.1em]">
                 ELITE <span className="metallic-gold-text italic">POWERHOUSE</span>
               </h2>
             </div>
 
-            <div className="institute-description text-[#A8A29C] text-base md:text-lg leading-relaxed mb-10">
+            <div className="institute-description text-[#A8A29C] text-whitease md:text-lg leading-relaxed mb-10">
               <p>
                 As Rajasthan&apos;s leading Animation and VFX institute, MAAC Jaipur provides industry-aligned training engineered for the global production pipeline.
               </p>
@@ -89,7 +89,7 @@ export default function InstituteIntro() {
               {["NSDC Partner", "MESC Certified", "B.Voc Degree"].map((badge) => (
                 <span
                   key={badge}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-[10px] font-bold tracking-widest uppercase glass border border-white/20 text-white/80 hover:border-[#BF953F]/40 transition-colors cursor-default"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-[10px] font-bold tracking-widest uppercase glass border border-white/20 text-white hover:border-[#BF953F]/40 transition-colors cursor-default"
                 >
                   <div className="w-1.5 h-1.5 rounded-full metallic-gold-accent" />
                   {badge}

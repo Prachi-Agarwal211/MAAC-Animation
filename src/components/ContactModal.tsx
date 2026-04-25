@@ -155,7 +155,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
         {/* Close button */}
         <button
           onClick={handleClose}
-          className="absolute top-4 right-4 w-9 h-9 rounded-xl border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all duration-200 z-10"
+          className="absolute top-4 right-4 w-9 h-9 rounded-xl border border-white/10 flex items-center justify-center text-white hover:text-white hover:bg-white/10 hover:border-white/20 transition-all duration-200 z-10"
           aria-label="Close"
         >
           <svg
@@ -185,7 +185,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
               </div>
-              <h3 className="font-display text-xl text-[#F0EBE1] mb-2 font-light uppercase leading-[1.1] tracking-[0.1em]">
+              <h3 className="font-display text-xl text-[#F0EBE1] mb-2 font-bold uppercase leading-[1.1] tracking-[0.1em]">
                 Transmission Successful!
               </h3>
               <p className="text-[#A8A29C] text-sm">
@@ -199,7 +199,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                 <span className="inline-block px-3 py-1 rounded-full bg-[#FFD700]/10 border border-[#FFD700]/20 text-[#FFD700] text-[10px] font-bold tracking-[0.15em] uppercase mb-3">
                   Free Demo Class
                 </span>
-                <h2 className="font-display text-2xl text-[#F0EBE1] mb-1 font-light uppercase leading-[1.1] tracking-[0.1em]">
+                <h2 className="font-display text-[#F0EBE1]xl text-[#F0EBE1] mb-1 font-bold uppercase leading-[1.1] tracking-[0.1em]">
                   Start Your Creative Journey
                 </h2>
                 <p className="text-[#A8A29C] text-sm">

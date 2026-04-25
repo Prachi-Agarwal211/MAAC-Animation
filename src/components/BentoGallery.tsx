@@ -68,7 +68,7 @@ export default function BentoGallery() {
       <div className="max-w-[1600px] mx-auto">
         <div className="text-center mb-20">
           <span className="inline-block metallic-gold-text text-xs font-bold tracking-[0.4em] uppercase mb-6">Our</span>
-          <h2 className="font-display text-[clamp(1.8rem,4.5vw,3rem)] text-white leading-[0.9] font-light uppercase leading-[1.1] tracking-[0.1em]">
+          <h2 className="font-display text-[clamp(1.5rem,5vw,3rem)] text-white leading-[0.9] font-bold uppercase leading-[1.1] tracking-[0.1em]">
             Student <span className="metallic-gold-text">Work</span>
           </h2>
           <Link 
@@ -99,7 +99,7 @@ export default function BentoGallery() {
               
               <div className="absolute bottom-8 left-8 right-8 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
                 <span className="metallic-gold-text text-[10px] font-bold uppercase tracking-[0.2em]">{item.category}</span>
-                <h3 className="text-white text-xl md:text-2xl font-display mt-2 font-light uppercase leading-[1.1] tracking-[0.1em]">{item.title}</h3>
+                <h3 className="text-white text-xl md:text-[#F0EBE1]xl font-display mt-2 font-bold uppercase leading-[1.1] tracking-[0.1em]">{item.title}</h3>
               </div>
             </div>
           ))}

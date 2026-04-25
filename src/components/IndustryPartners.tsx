@@ -105,7 +105,7 @@ export default function IndustryPartners() {
             Powering the Studio Network
             <span className="w-8 h-[1px] metallic-gold-accent" />
           </p>
-          <h2 className="font-display text-[clamp(2.5rem,6vw,3.5rem)] leading-[0.8] text-white font-light uppercase leading-[1.1] tracking-[0.1em]">
+          <h2 className="font-display text-[clamp(2.5rem,6vw,3.5rem)] leading-[0.8] text-white font-bold uppercase leading-[1.1] tracking-[0.1em]">
             HIRING <span className="metallic-gold-text italic">ECOSYSTEM</span>
           </h2>
         </div>

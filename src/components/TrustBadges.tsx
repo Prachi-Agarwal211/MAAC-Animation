@@ -64,7 +64,7 @@ export default function TrustBadges() {
 
   return (
     <section ref={sectionRef} className="relative py-10 md:py-16 bg-transparent border-t border-white/5 overflow-hidden">
-      <div className="max-w-[1800px] mx-auto px-6 md:px-12 lg:px-20">
+      <div className="max-w-[1800px] mx-auto px-5 md:px-12 lg:px-20">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12 mt-4">
           
           {/* Left Content */}
@@ -76,14 +76,14 @@ export default function TrustBadges() {
               </span>
             </div>
             
-            <h2 className="font-display font-light text-[clamp(2.5rem,5vw,4.2rem)] leading-[1.1] uppercase mb-8">
+            <h2 className="font-display font-bold text-[clamp(2.5rem,5vw,4.2rem)] leading-[1.1] uppercase mb-8">
               <span className="block text-white/90 tracking-[0.15em]">RECOGNIZED</span>
               <span className="block metallic-gold-text italic tracking-normal">EXCELLENCE</span>
             </h2>
             
             <div className="flex flex-row items-center gap-4">
               <div className="w-[1px] h-6 metallic-gold-accent" />
-              <p className="text-white/60 text-lg md:text-xl font-light tracking-wide">
+              <p className="text-white text-lg md:text-xl font-bold tracking-wide">
                 Industry aligned. Future focused.
               </p>
             </div>
@@ -104,7 +104,7 @@ export default function TrustBadges() {
               {certifications.map((cert, index) => (
                 <div
                   key={`${cert.name}-${index}`}
-                  className="snap-start shrink-0 w-[240px] md:w-[280px] aspect-square rounded-3xl bg-[#090909] border border-white/5 flex flex-col items-center justify-center p-4 relative overflow-hidden group hover:border-white/10 transition-colors duration-500"
+                  className="snap-start shrink-0 w-[240px] md:w-[280px] aspect-square rounded-3xl bg-[#050000] border border-white/5 flex flex-col items-center justify-center p-4 relative overflow-hidden group hover:border-white/10 transition-colors duration-500"
                 >
                   {/* Largest possible unified white badge container */}
                   <div className="w-full h-full bg-white rounded-2xl relative flex items-center justify-center shadow-lg group-hover:scale-[1.03] transition-transform duration-500">
