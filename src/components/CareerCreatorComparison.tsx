@@ -1,40 +1,24 @@
-"use client";
-
-import { useRef } from "react";
-import { useGSAP } from "@gsap/react";
-import gsap from "@/lib/gsap";
 import Link from "next/link";
 import { ArrowRight, Sparkles, Rocket } from "lucide-react";
+import FadeIn from "@/components/animations/FadeIn";
 
 export default function CareerCreatorComparison() {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useGSAP(() => {
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top 80%",
-        toggleActions: "play none none reverse",
-      }
-    });
-
-    tl.fromTo(".ccc-panel", { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 1.2, stagger: 0.2, ease: "expo.out" });
-  }, { scope: containerRef });
-
   return (
-    <div ref={containerRef} className="relative overflow-hidden bg-transparent py-24 md:py-32">
+    <div className="relative overflow-hidden bg-transparent py-24 md:py-32">
       <div className="max-w-7xl mx-auto px-6 mb-16 md:mb-24 text-center">
-        <p className="metallic-gold-text text-[10px] font-bold tracking-[0.3em] uppercase mb-4 flex items-center justify-center gap-3">
-          <span className="w-8 h-[1px] metallic-gold-accent" />
-          Custom Engineered Career Tracks
-          <span className="w-8 h-[1px] metallic-gold-accent" />
-        </p>
-        <h2 className="font-display text-[clamp(2rem,5vw,3.5rem)] leading-[0.8] text-white font-bold uppercase leading-[1.1] tracking-[0.1em]">
-          CHOOSE YOUR <span className="metallic-gold-text italic">PATHWAY</span>
-        </h2>
+        <FadeIn>
+          <p className="metallic-gold-text text-[10px] font-bold tracking-[0.3em] uppercase mb-4 flex items-center justify-center gap-3">
+            <span className="w-8 h-[1px] metallic-gold-accent" />
+            Custom Engineered Career Tracks
+            <span className="w-8 h-[1px] metallic-gold-accent" />
+          </p>
+          <h2 className="font-display text-[clamp(2rem,5vw,3.5rem)] leading-[0.8] text-white font-bold uppercase leading-[1.1] tracking-[0.1em]">
+            CHOOSE YOUR <span className="metallic-gold-text italic">PATHWAY</span>
+          </h2>
+        </FadeIn>
       </div>
 
-      <div className="flex flex-col lg:flex-row min-h-[70svh]">
+      <FadeIn stagger={0.2} y={50} className="flex flex-col lg:flex-row min-h-[70svh]">
 
         {/* LEFT: CAREER X */}
         <div className="ccc-panel group relative flex-1 overflow-hidden transition-all duration-700 ease-expo-out lg:hover:flex-[1.5]">
@@ -54,7 +38,7 @@ export default function CareerCreatorComparison() {
                 CAREER <span className="metallic-gold-text italic">X</span>
               </h2>
 
-              <p className="text-[#A8A29C] text-whitease md:text-lg font-bold max-w-md leading-relaxed mb-8 border-l-2 border-[#FFD700] pl-4">
+              <p className="text-[#A8A29C] md:text-lg font-bold max-w-md leading-relaxed mb-8 border-l-2 border-[#FFD700] pl-4">
                 Studio-aligned programs designed for those seeking high-impact careers in global production houses.
               </p>
 
@@ -99,7 +83,7 @@ export default function CareerCreatorComparison() {
                 CREATOR <span className="text-[#FF6B35] italic">X</span>
               </h2>
 
-              <p className="text-[#A8A29C] text-whitease md:text-lg font-bold max-w-md leading-relaxed mb-8 border-l-2 border-[#FF6B35] pl-4">
+              <p className="text-[#A8A29C] md:text-lg font-bold max-w-md leading-relaxed mb-8 border-l-2 border-[#FF6B35] pl-4">
                 Empowering independent artists to build their own brand, manage clients, and master the gig economy.
               </p>
 
@@ -123,7 +107,7 @@ export default function CareerCreatorComparison() {
           </div>
         </div>
 
-      </div>
+      </FadeIn>
     </div>
   );
 }

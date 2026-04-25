@@ -1,12 +1,8 @@
-"use client";
-
-import { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useGSAP } from "@gsap/react";
-import gsap from "@/lib/gsap";
 import { contactInfo } from "@/data/siteData";
 import { ArrowUpRight, MapPin, Phone, Mail, MessageSquare } from "lucide-react";
+import FadeIn from "@/components/animations/FadeIn";
 
 const SocialIcons = {
   Facebook: () => (
@@ -37,64 +33,52 @@ const SocialIcons = {
 };
 
 export default function Footer() {
-  const footerRef = useRef<HTMLElement>(null);
-
-  useGSAP(() => {
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: footerRef.current,
-        start: "top 90%",
-      }
-    });
-
-    tl.fromTo(".footer-reveal",
-      { y: 30, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1, stagger: 0.1, ease: "expo.out" }
-    );
-  }, { scope: footerRef });
+  const currentYear = new Date().getFullYear();
 
   return (
-    <footer ref={footerRef} className="relative bg-transparent pt-24 md:pt-40 overflow-hidden">
+    <footer className="relative bg-transparent pt-24 md:pt-40 overflow-hidden">
       <div className="atmosphere-blob blob-red -bottom-20 -right-20 opacity-10" />
 
       {/* ── TOP BANNER ── */}
       <div className="max-w-[1800px] mx-auto px-6 md:px-12 mb-24">
-        <div className="relative rounded-[40px] overflow-hidden glass border border-white/10 p-6 md:p-12 lg:p-20 flex flex-col lg:flex-row items-center justify-between gap-12 group shadow-[0_40px_100px_-20px_rgba(0,0,0,0.7)]">
-          <div className="absolute inset-0 bg-[#FFD700]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+        <FadeIn>
+          <div className="relative rounded-[40px] overflow-hidden glass border border-white/10 p-6 md:p-12 lg:p-20 flex flex-col lg:flex-row items-center justify-between gap-12 group shadow-[0_40px_100px_-20px_rgba(0,0,0,0.7)]">
+            <div className="absolute inset-0 bg-[#FFD700]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
 
-          <div className="relative z-10 max-w-2xl text-center lg:text-left">
-            <h2 className="font-display text-[clamp(1.5rem,5vw,3rem)] text-white leading-[0.9] mb-8 font-bold uppercase leading-[1.1] tracking-[0.1em]">
-              Start Your <span className="metallic-gold-text">Creative Legacy</span>
-            </h2>
-            <p className="text-[#A8A29C] text-lg md:text-xl font-bold leading-relaxed">
-              Book a free counseling session or demo class with our industry experts today.
-            </p>
-          </div>
+            <div className="relative z-10 max-w-2xl text-center lg:text-left">
+              <h2 className="font-display text-[clamp(1.5rem,5vw,3rem)] text-white leading-[0.9] mb-8 font-bold uppercase leading-[1.1] tracking-[0.1em]">
+                Start Your <span className="metallic-gold-text">Creative Legacy</span>
+              </h2>
+              <p className="text-[#A8A29C] text-lg md:text-xl font-bold leading-relaxed">
+                Book a free counseling session or demo class with our industry experts today.
+              </p>
+            </div>
 
-          <div className="relative z-10 flex flex-col sm:flex-row gap-6">
-            <Link
-              href="/contact"
-              className="inline-flex min-h-[60px] min-w-[240px] items-center justify-center text-[12px] font-bold tracking-[0.25em] uppercase border border-white/20 hover:border-white hover:bg-white text-white hover:text-black rounded-full transition-all duration-500"
-            >
-              Book Free Demo
-            </Link>
-            <a
-              href="https://wa.me/917300001589"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group/wa flex items-center justify-center gap-3 px-10 py-5 rounded-full border border-white/20 text-white font-bold tracking-[0.2em] text-[11px] uppercase hover:bg-white/5 hover:border-[#BF953F]/40 transition-all duration-300"
-            >
-              <MessageSquare size={18} className="text-white group-hover/wa:text-[#25D366] transition-colors" /> WhatsApp Us
-            </a>
+            <div className="relative z-10 flex flex-col sm:flex-row gap-6">
+              <Link
+                href="/contact"
+                className="inline-flex min-h-[60px] min-w-[240px] items-center justify-center text-[12px] font-bold tracking-[0.25em] uppercase border border-white/20 hover:border-white hover:bg-white text-white hover:text-black rounded-full transition-all duration-500"
+              >
+                Book Free Demo
+              </Link>
+              <a
+                href="https://wa.me/917300001589"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group/wa flex items-center justify-center gap-3 px-10 py-5 rounded-full border border-white/20 text-white font-bold tracking-[0.2em] text-[11px] uppercase hover:bg-white/5 hover:border-[#BF953F]/40 transition-all duration-300"
+              >
+                <MessageSquare size={18} className="text-white group-hover/wa:text-[#25D366] transition-colors" /> WhatsApp Us
+              </a>
+            </div>
           </div>
-        </div>
+        </FadeIn>
       </div>
 
       {/* ── MAIN CONTENT ── */}
-      <div className="max-w-[1800px] mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 pb-20">
+      <FadeIn stagger={0.1} className="max-w-[1800px] mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 pb-20">
 
         {/* Brand Col */}
-        <div className="footer-reveal lg:col-span-4 space-y-10">
+        <div className="lg:col-span-4 space-y-10">
           <Link href="/" className="flex items-center group" aria-label="MAAC Jaipur - Home">
             <Image
               src="/maac%20logo.png"
@@ -122,7 +106,7 @@ export default function Footer() {
         </div>
 
         {/* Links Col 1 */}
-        <div className="footer-reveal lg:col-span-2 space-y-8">
+        <div className="lg:col-span-2 space-y-8">
           <h4 className="text-white text-xs font-bold uppercase tracking-[0.2em]">Explore</h4>
           <ul className="space-y-4">
             {[
@@ -144,7 +128,7 @@ export default function Footer() {
         </div>
 
         {/* Links Col 2 - Resources */}
-        <div className="footer-reveal lg:col-span-3 space-y-8">
+        <div className="lg:col-span-3 space-y-8">
           <h4 className="text-white text-xs font-bold uppercase tracking-[0.2em]">Resources</h4>
           <ul className="space-y-4">
             {[
@@ -164,7 +148,7 @@ export default function Footer() {
         </div>
 
         {/* Links Col 3 - Policies & Locate Us */}
-        <div className="footer-reveal lg:col-span-3 space-y-8">
+        <div className="lg:col-span-3 space-y-8">
           <h4 className="text-white text-xs font-bold uppercase tracking-[0.2em]">Policies</h4>
           <ul className="space-y-4">
             {[
@@ -199,13 +183,13 @@ export default function Footer() {
             </div>
           </div>
         </div>
-      </div>
+      </FadeIn>
 
       {/* ── BOTTOM BAR ── */}
       <div className="border-t border-white/5 py-10 px-6 md:px-12">
         <div className="max-w-[1800px] mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
           <p className="text-[#6B6560] text-[10px] font-bold uppercase tracking-[0.3em]">
-            © {new Date().getFullYear()} MAAC India · Crafting Digital Futures
+            © {currentYear} MAAC India · Crafting Digital Futures
           </p>
           <div className="flex flex-wrap gap-6 md:gap-8">
             {[

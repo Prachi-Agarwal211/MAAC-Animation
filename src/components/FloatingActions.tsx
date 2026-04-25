@@ -82,34 +82,44 @@ function MobileBottomNav() {
   }, []);
 
   const whatsappUrl = `https://wa.me/${contactInfo.whatsapp.replace(/[^0-9]/g, "")}?text=Hi%20MAAC%20Jaipur`;
+  const callUrl = `tel:${contactInfo.phone.replace(/[^0-9+]/g, "")}`;
 
   if (!reveal) return null;
 
   return (
     <div
       ref={containerRef}
-      className={`fixed left-4 right-4 z-[60] lg:hidden transition-all duration-300 ${
-        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
+      className={`fixed left-4 right-4 z-[1000] lg:hidden transition-all duration-500 ease-expo-out ${
+        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10 pointer-events-none"
       }`}
-      style={{ bottom: "max(16px, calc(16px + env(safe-area-inset-bottom)))" }}
+      style={{ bottom: "max(24px, calc(24px + env(safe-area-inset-bottom)))" }}
     >
-      <div className="glass rounded-2xl p-2 shadow-[0_30px_60px_rgba(0,0,0,0.8)] flex items-stretch gap-2 border border-white/10 backdrop-blur-3xl">
+      <div className="bg-[#050000]/80 backdrop-blur-3xl rounded-[32px] p-2 shadow-[0_30px_60px_rgba(0,0,0,0.8)] flex items-stretch gap-2 border border-white/10">
         <a
           href={whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex-1 flex flex-col items-center justify-center py-3.5 bg-[#25D366]/10 text-[#25D366] rounded-xl gap-1 active:scale-[0.98] transition-transform"
+          className="flex-1 flex flex-col items-center justify-center py-4 bg-[#25D366]/10 text-[#25D366] rounded-[24px] gap-1 active:scale-[0.95] transition-all"
         >
           <MessageSquare size={20} />
-          <span className="text-[8px] font-bold uppercase tracking-wider">WhatsApp</span>
+          <span className="text-[9px] font-black uppercase tracking-wider">WhatsApp</span>
         </a>
         <Link
           href="/contact"
-          className="flex-[1.4] flex flex-col items-center justify-center py-3.5 bg-[#E31837] text-white rounded-xl gap-1 shadow-lg shadow-[#E31837]/20 active:scale-[0.98] transition-transform border border-white/10"
+          className="flex-[1.6] flex flex-col items-center justify-center py-4 bg-[#FFD700] text-black rounded-[24px] gap-1 shadow-lg shadow-[#FFD700]/20 active:scale-[0.95] transition-all border border-white/10"
         >
-          <Send size={20} strokeWidth={2.25} />
-          <span className="text-[8px] font-bold uppercase tracking-wider">Enquire</span>
+          <Send size={20} strokeWidth={2.5} />
+          <span className="text-[9px] font-black uppercase tracking-wider">Enquire Now</span>
         </Link>
+        <a
+          href={callUrl}
+          className="flex-1 flex flex-col items-center justify-center py-4 bg-white/5 text-white rounded-[24px] gap-1 active:scale-[0.95] transition-all"
+        >
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+          </svg>
+          <span className="text-[9px] font-black uppercase tracking-wider">Call</span>
+        </a>
       </div>
     </div>
   );

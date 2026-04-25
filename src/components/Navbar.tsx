@@ -59,14 +59,20 @@ export default function Navbar() {
   return (
     <div className={revealNav ? "contents" : "hidden"} aria-hidden={!revealNav}>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        className={`fixed left-0 right-0 z-50 transition-all duration-700 ease-in-out ${
           scrolled || mobileMenuOpen
-            ? "bg-[#0A0A0A]/80 backdrop-blur-2xl border-b border-white/5 shadow-[0_15px_50px_rgba(0,0,0,0.5)] py-1"
+            ? "top-4 mx-auto max-w-[95%] rounded-[24px] bg-[#0A0000]/70 backdrop-blur-3xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] py-1"
             : isHome
-              ? "bg-gradient-to-b from-black/90 via-black/40 to-transparent py-2"
-              : "bg-transparent py-2"
+              ? "top-0 bg-gradient-to-b from-[#1a0000]/60 via-transparent to-transparent py-3"
+              : "top-0 bg-transparent py-3"
         }`}
       >
+        {/* Subtle rim light effect for scrolled state */}
+        {(scrolled || mobileMenuOpen) && (
+          <div className="absolute inset-0 rounded-[24px] pointer-events-none overflow-hidden" aria-hidden="true">
+            <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+          </div>
+        )}
         <div className="max-w-7xl mx-auto px-6 sm:px-8 flex items-center h-16 sm:h-20">
           <div className="flex-shrink-0 mr-16">
             <Link href="/" className="flex items-center group" aria-label="MAAC Jaipur - Home">

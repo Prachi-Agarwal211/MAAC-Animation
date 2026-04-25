@@ -1,17 +1,21 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Syne } from "next/font/google";
 import "./globals.css";
-import LenisProvider from "@/components/LenisProvider";
-import CustomCursor from "@/components/hero/CustomCursor";
-import FloatingActions from "@/components/FloatingActions";
-import Navbar from "@/components/Navbar";
-import ClientShell from "@/components/ClientShell";
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Providers } from "./providers";
 import { contactInfo } from "@/data/siteData";
 import ErrorBoundary from "@/components/ErrorBoundary";
-import DynamicBackground from "@/components/ui/DynamicBackground";
+import Navbar from "@/components/Navbar";
+
+// Heavy Client Components - Lazy loaded
+const DynamicBackground = dynamic(() => import("@/components/ui/DynamicBackground"), { ssr: false });
+const CustomCursor = dynamic(() => import("@/components/hero/CustomCursor"), { ssr: false });
+const FloatingActions = dynamic(() => import("@/components/FloatingActions"), { ssr: false });
+const LenisProvider = dynamic(() => import("@/components/LenisProvider"), { ssr: false });
+const ClientShell = dynamic(() => import("@/components/ClientShell"), { ssr: true });
 
 const inter = Inter({
   subsets: ["latin"],
@@ -112,7 +116,6 @@ export const metadata: Metadata = {
   },
 };
 
-// JSON-LD LocalBusiness + EducationalOrganization structured data
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
@@ -200,20 +203,20 @@ export default function RootLayout({
             `,
           }}
         />
-        {/* Intro first on home; hero loads after intro completes (see MAACXHero). */}
         <link rel="preload" as="video" href="/intro.mp4" type="video/mp4" />
         <link rel="preload" as="video" href="/intro.webm" type="video/webm" />
         <link rel="preload" as="image" href="/hero-poster.jpg" />
-        {/* JSON-LD Structured Data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
       <body
-        className={`${inter.variable} ${syne.variable} font-body antialiased text-[#F0EBE1]`}
+        className={`${inter.variable} ${syne.variable} font-body antialiased text-[#F0EBE1] bg-[#0C0C0C]`}
       >
-        <DynamicBackground />
+        <Suspense fallback={<div className="fixed inset-0 bg-[#0C0C0C]" />}>
+          <DynamicBackground />
+        </Suspense>
 
         <Providers>
           <a
@@ -225,17 +228,26 @@ export default function RootLayout({
 
           <div className="grain-overlay" aria-hidden="true" />
 
-          <CustomCursor />
-
-          <LenisProvider>
-            <Navbar />
-            <ErrorBoundary><ClientShell>
-              <main id="main-content" tabIndex={-1} className="page-wrapper relative z-10">{children}</main>
-            </ClientShell></ErrorBoundary>
-            <FloatingActions />
-            <Analytics />
-            <SpeedInsights />
-          </LenisProvider>
+          <Suspense fallback={null}>
+            <LenisProvider>
+              <Navbar />
+              <ErrorBoundary>
+                <ClientShell>
+                  <main id="main-content" tabIndex={-1} className="page-wrapper relative z-10">
+                    {children}
+                  </main>
+                </ClientShell>
+              </ErrorBoundary>
+              <Suspense fallback={null}>
+                <FloatingActions />
+              </Suspense>
+              <Suspense fallback={null}>
+                <CustomCursor />
+              </Suspense>
+              <Analytics />
+              <SpeedInsights />
+            </LenisProvider>
+          </Suspense>
         </Providers>
       </body>
     </html>

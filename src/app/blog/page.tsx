@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
@@ -7,22 +5,9 @@ import Footer from "@/components/Footer";
 import IndustryPartners from "@/components/IndustryPartners";
 import ApplyNow from "@/components/ApplyNow";
 import { blogPosts } from "@/data/blog";
-import { useEffect, useRef } from "react";
-import gsap from "@/lib/gsap";
+import FadeIn from "@/components/animations/FadeIn";
 
 export default function BlogIndexPage() {
-  const heroRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (heroRef.current) {
-      gsap.fromTo(
-        heroRef.current.querySelectorAll(".animate-in"),
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 1, stagger: 0.2, ease: "power3.out" }
-      );
-    }
-  }, []);
-
   return (
     <>
       {/* JSON-LD Structured Data */}
@@ -48,7 +33,6 @@ export default function BlogIndexPage() {
       <main className="bg-[#080808] min-h-screen">
         {/* Hero Section */}
         <section 
-          ref={heroRef}
           className="relative min-h-[60vh] flex items-center justify-center overflow-hidden border-b border-white/5"
         >
           <div className="absolute inset-0 z-0">
@@ -65,17 +49,19 @@ export default function BlogIndexPage() {
           </div>
 
           <div className="relative z-20 text-center px-6 pt-20">
-            <p className="animate-in metallic-gold-text text-[10px] font-bold tracking-[0.3em] uppercase mb-4 flex items-center justify-center gap-3">
-              <span className="w-8 h-[1px] metallic-gold-accent" />
-              Creative Insights
-              <span className="w-8 h-[1px] metallic-gold-accent" />
-            </p>
-            <h1 className="animate-in font-display text-[clamp(2.5rem,8vw,5rem)] leading-[0.85] text-white mb-6 font-light uppercase leading-[1.1] tracking-[0.1em]">
-              Blog & <span className="metallic-gold-text italic text-[1.1em]">Insights</span>
-            </h1>
-            <p className="animate-in text-[#A8A29C] text-lg max-w-2xl mx-auto leading-relaxed">
-              Industry trends, career guidance, and expert tips from the masters at MAAC Animation Jaipur.
-            </p>
+            <FadeIn>
+              <p className="metallic-gold-text text-[10px] font-bold tracking-[0.3em] uppercase mb-4 flex items-center justify-center gap-3">
+                <span className="w-8 h-[1px] metallic-gold-accent" />
+                Creative Insights
+                <span className="w-8 h-[1px] metallic-gold-accent" />
+              </p>
+              <h1 className="font-display text-[clamp(2.5rem,8vw,5rem)] leading-[0.85] text-white mb-6 font-bold uppercase leading-[1.1] tracking-[0.1em]">
+                Blog & <span className="metallic-gold-text italic text-[1.1em]">Insights</span>
+              </h1>
+              <p className="text-[#A8A29C] text-lg max-w-2xl mx-auto leading-relaxed">
+                Industry trends, career guidance, and expert tips from the masters at MAAC Animation Jaipur.
+              </p>
+            </FadeIn>
           </div>
         </section>
 
@@ -83,7 +69,7 @@ export default function BlogIndexPage() {
         <section className="py-24 md:py-32 bg-transparent relative">
           <div className="atmosphere-blob blob-orange top-0 left-0 opacity-5" />
           <div className="max-w-6xl mx-auto px-6 lg:px-8">
-            <div className="grid md:grid-cols-2 gap-10">
+            <FadeIn stagger={0.1} className="grid md:grid-cols-2 gap-10">
               {blogPosts.map((post) => (
                 <article
                   key={post.slug}
@@ -121,7 +107,7 @@ export default function BlogIndexPage() {
                     </div>
 
                     <Link href={`/blog/${post.slug}`}>
-                      <h2 className="font-display text-white text-2xl mb-4 group-hover:text-[#FFD700] transition-colors font-light uppercase leading-[1.1] tracking-[0.1em]">
+                      <h2 className="font-display text-white text-2xl mb-4 group-hover:text-[#FFD700] transition-colors font-bold uppercase leading-[1.1] tracking-[0.1em]">
                         {post.title}
                       </h2>
                     </Link>
@@ -144,7 +130,7 @@ export default function BlogIndexPage() {
                   </div>
                 </article>
               ))}
-            </div>
+            </FadeIn>
           </div>
         </section>
 

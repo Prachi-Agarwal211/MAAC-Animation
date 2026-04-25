@@ -1,10 +1,6 @@
-"use client";
-
-import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useGSAP } from "@gsap/react";
-import gsap from "@/lib/gsap";
+import FadeIn from "@/components/animations/FadeIn";
 
 const bentoItems = [
   {
@@ -46,27 +42,10 @@ const bentoItems = [
 ];
 
 export default function BentoGallery() {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useGSAP(() => {
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top 95%",
-        toggleActions: "play none none reverse",
-      }
-    });
-
-    tl.fromTo(".bento-item", 
-      { opacity: 0, scale: 0.9, y: 30 },
-      { opacity: 1, scale: 1, y: 0, duration: 1, stagger: 0.1, ease: "expo.out" }
-    );
-  }, { scope: containerRef });
-
   return (
-    <section ref={containerRef} className="bg-transparent py-24 md:py-40 px-6 lg:px-20 overflow-hidden">
+    <section className="bg-transparent py-24 md:py-40 px-6 lg:px-20 overflow-hidden">
       <div className="max-w-[1600px] mx-auto">
-        <div className="text-center mb-20">
+        <FadeIn className="text-center mb-20">
           <span className="inline-block metallic-gold-text text-xs font-bold tracking-[0.4em] uppercase mb-6">Our</span>
           <h2 className="font-display text-[clamp(1.5rem,5vw,3rem)] text-white leading-[0.9] font-bold uppercase leading-[1.1] tracking-[0.1em]">
             Student <span className="metallic-gold-text">Work</span>
@@ -80,13 +59,13 @@ export default function BentoGallery() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </Link>
-        </div>
+        </FadeIn>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6 auto-rows-[250px] md:auto-rows-[300px]">
+        <FadeIn stagger={0.1} className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6 auto-rows-[250px] md:auto-rows-[300px]">
           {bentoItems.map((item, i) => (
             <div
               key={i}
-              className={`bento-item group relative overflow-hidden rounded-[32px] glass-card border border-white/10 transition-all duration-700 hover:border-[#BF953F]/50 ${item.span}`}
+              className={`group relative overflow-hidden rounded-[32px] glass-card border border-white/10 transition-all duration-700 hover:border-[#BF953F]/50 ${item.span}`}
             >
               <Image
                 src={item.image}
@@ -99,11 +78,11 @@ export default function BentoGallery() {
               
               <div className="absolute bottom-8 left-8 right-8 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
                 <span className="metallic-gold-text text-[10px] font-bold uppercase tracking-[0.2em]">{item.category}</span>
-                <h3 className="text-white text-xl md:text-[#F0EBE1]xl font-display mt-2 font-bold uppercase leading-[1.1] tracking-[0.1em]">{item.title}</h3>
+                <h3 className="text-white text-xl font-display mt-2 font-bold uppercase leading-[1.1] tracking-[0.1em]">{item.title}</h3>
               </div>
             </div>
           ))}
-        </div>
+        </FadeIn>
       </div>
     </section>
   );

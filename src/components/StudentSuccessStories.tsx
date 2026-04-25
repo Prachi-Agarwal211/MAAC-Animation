@@ -1,9 +1,5 @@
-"use client";
-
-import { useRef } from "react";
-import { useGSAP } from "@gsap/react";
-import gsap from "@/lib/gsap";
 import { Star, TrendingUp } from "lucide-react";
+import FadeIn from "@/components/animations/FadeIn";
 
 const successStories = [
   {
@@ -57,29 +53,14 @@ const successStories = [
 ];
 
 export default function StudentSuccessStories() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-
-  useGSAP(() => {
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top 95%",
-        toggleActions: "play none none reverse",
-      },
-    });
-
-    tl.fromTo(".success-heading", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1, ease: "expo.out" })
-      .fromTo(".success-card", { opacity: 0, y: 50, scale: 0.95 }, { opacity: 1, y: 0, scale: 1, duration: 0.8, stagger: 0.1, ease: "expo.out" }, "-=0.6");
-  }, { scope: sectionRef });
-
   return (
-    <section ref={sectionRef} id="success-stories" className="relative py-16 md:py-24 overflow-hidden bg-transparent">
+    <section id="success-stories" className="relative py-16 md:py-24 overflow-hidden bg-transparent">
       {/* Background Accent */}
       <div className="atmosphere-blob blob-purple bottom-0 -left-40 opacity-5" />
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8 z-10">
         {/* Heading */}
-        <div className="success-heading text-center mb-16 md:mb-24">
+        <FadeIn className="text-center mb-16 md:mb-24">
           <p className="metallic-gold-text text-[10px] font-bold tracking-[0.3em] uppercase mb-4 flex items-center justify-center gap-3">
             <span className="w-8 h-[1px] metallic-gold-accent" />
             Inspiring Journeys
@@ -91,10 +72,10 @@ export default function StudentSuccessStories() {
           <p className="text-[#A8A29C] text-sm md:text-whitease mt-6 max-w-2xl mx-auto">
             Our students don&apos;t just learn — they launch thriving careers. Here&apos;s what MAAC alumni are earning and where they&apos;re working.
           </p>
-        </div>
+        </FadeIn>
 
         {/* Stats Bar */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16 p-8 rounded-[24px] glass-card border border-white/5">
+        <FadeIn delay={0.2} className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16 p-8 rounded-[24px] glass-card border border-white/5">
           {[
             { label: "Average Starting Salary", value: "6-9 LPA", icon: TrendingUp },
             { label: "Highest Package", value: "12+ LPA", icon: Star },
@@ -107,15 +88,15 @@ export default function StudentSuccessStories() {
                 <div className="flex justify-center mb-3">
                   <Icon size={20} className="metallic-gold-text" />
                 </div>
-                <div className="text-white font-bold text-[#F0EBE1]xl md:text-3xl mb-1">{stat.value}</div>
+                <div className="text-white font-bold text-xl md:text-3xl mb-1">{stat.value}</div>
                 <div className="text-[#A8A29C] text-xs uppercase tracking-[0.15em]">{stat.label}</div>
               </div>
             );
           })}
-        </div>
+        </FadeIn>
 
         {/* Stories Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <FadeIn delay={0.4} stagger={0.1} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {successStories.map((story, index) => (
             <div
               key={index}
@@ -127,7 +108,7 @@ export default function StudentSuccessStories() {
               <div className="p-8">
                 {/* Avatar & Info */}
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-[#BF953F]/30 flex-shrink-0">
+                  <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-[#BF953F]/30 flex-shrink-0 relative">
                     <img
                       src={story.image}
                       alt={story.name}
@@ -159,7 +140,7 @@ export default function StudentSuccessStories() {
               </div>
             </div>
           ))}
-        </div>
+        </FadeIn>
       </div>
     </section>
   );

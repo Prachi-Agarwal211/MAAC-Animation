@@ -1,8 +1,4 @@
-"use client";
-
-import { useRef } from "react";
-import { useGSAP } from "@gsap/react";
-import gsap from "@/lib/gsap";
+import FadeIn from "@/components/animations/FadeIn";
 
 const partners = [
   "NILEE GAMES",
@@ -27,79 +23,13 @@ const extendedPartners = [...partners, ...partners, ...partners, ...partners];
 const reversedPartners = [...extendedPartners].reverse();
 
 export default function IndustryPartners() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const row1Ref = useRef<HTMLDivElement>(null);
-  const row2Ref = useRef<HTMLDivElement>(null);
-
-  useGSAP(() => {
-    // Setup Row 1: Scroll left
-    if (row1Ref.current) {
-      const row1 = row1Ref.current;
-      const items = Array.from(row1.children) as HTMLElement[];
-      
-      let singleSetWidth = 0;
-      for (let i = 0; i < partners.length && i < items.length; i++) {
-        singleSetWidth += items[i].offsetWidth + 32; // 32px gap
-      }
-
-      const duration = singleSetWidth / 80; // 80px per second
-
-      gsap.to(row1, {
-        x: -singleSetWidth,
-        duration,
-        ease: "none",
-        repeat: -1,
-        onRepeat: () => { gsap.set(row1, { x: 0 }); }
-      });
-    }
-
-    // Setup Row 2: Scroll right
-    if (row2Ref.current) {
-      const row2 = row2Ref.current;
-      const items = Array.from(row2.children) as HTMLElement[];
-      
-      let singleSetWidth = 0;
-      for (let i = 0; i < partners.length && i < items.length; i++) {
-        singleSetWidth += items[i].offsetWidth + 32;
-      }
-
-      const duration = singleSetWidth / 80;
-
-      gsap.set(row2, { x: -singleSetWidth });
-      gsap.to(row2, {
-        x: 0,
-        duration,
-        ease: "none",
-        repeat: -1,
-        onRepeat: () => { gsap.set(row2, { x: -singleSetWidth }); }
-      });
-    }
-
-    // Header animation
-    gsap.fromTo(".ip-header > *",
-      { opacity: 0, y: 30 },
-      { 
-        opacity: 1, 
-        y: 0, 
-        duration: 1, 
-        stagger: 0.1, 
-        ease: "expo.out",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 80%",
-        }
-      }
-    );
-  }, { scope: containerRef });
-
   return (
     <section
-      ref={containerRef}
       className="relative bg-transparent py-12 md:py-20 overflow-hidden border-y border-white/5"
     >
       <div className="relative z-10 max-w-[1800px] mx-auto">
         {/* Header */}
-        <div className="ip-header text-center mb-16 md:mb-20">
+        <FadeIn className="text-center mb-16 md:mb-20">
           <p className="metallic-gold-text text-[10px] font-bold tracking-[0.3em] uppercase mb-4 flex items-center justify-center gap-3">
             <span className="w-8 h-[1px] metallic-gold-accent" />
             Powering the Studio Network
@@ -108,7 +38,7 @@ export default function IndustryPartners() {
           <h2 className="font-display text-[clamp(2.5rem,6vw,3.5rem)] leading-[0.8] text-white font-bold uppercase leading-[1.1] tracking-[0.1em]">
             HIRING <span className="metallic-gold-text italic">ECOSYSTEM</span>
           </h2>
-        </div>
+        </FadeIn>
 
         <div className="relative space-y-6">
           {/* Gradient overlays */}
@@ -116,12 +46,7 @@ export default function IndustryPartners() {
           <div className="absolute right-0 top-0 bottom-0 w-24 md:w-32 bg-gradient-to-l from-black/60 to-transparent z-10 pointer-events-none" />
 
           {/* Row 1 - Scrolls Left */}
-          <div 
-            ref={row1Ref}
-            className="flex items-center gap-8 w-max"
-            onMouseEnter={(e) => gsap.to(e.currentTarget, { timeScale: 0.2, duration: 0.3 })}
-            onMouseLeave={(e) => gsap.to(e.currentTarget, { timeScale: 1, duration: 0.3 })}
-          >
+          <div className="flex items-center gap-8 w-max animate-marquee">
             {extendedPartners.map((partner, i) => (
               <div key={`${partner}-${i}`} className="shrink-0 group">
                 <div className="w-48 h-20 md:w-56 md:h-24 glass-card border border-white/10 flex items-center justify-center px-6 transition-all duration-300 hover:border-[#BF953F]/50 hover:bg-white/[0.08] hover:scale-105">
@@ -134,12 +59,7 @@ export default function IndustryPartners() {
           </div>
 
           {/* Row 2 - Scrolls Right */}
-          <div 
-            ref={row2Ref}
-            className="flex items-center gap-8 w-max"
-            onMouseEnter={(e) => gsap.to(e.currentTarget, { timeScale: 0.2, duration: 0.3 })}
-            onMouseLeave={(e) => gsap.to(e.currentTarget, { timeScale: 1, duration: 0.3 })}
-          >
+          <div className="flex items-center gap-8 w-max animate-marquee-reverse">
             {reversedPartners.map((partner, i) => (
               <div key={`${partner}-${i}`} className="shrink-0 group">
                 <div className="w-48 h-20 md:w-56 md:h-24 glass-card border border-white/10 flex items-center justify-center px-6 transition-all duration-300 hover:border-[#BF953F]/50 hover:bg-white/[0.08] hover:scale-105">
