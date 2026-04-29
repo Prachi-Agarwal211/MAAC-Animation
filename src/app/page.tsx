@@ -55,65 +55,47 @@ export default function Home() {
       <main className="relative z-10 bg-transparent">
         <ErrorBoundary>
           <TrustBadges />
-        </ErrorBoundary>
 
-        <div id="features" className="relative z-10 bg-transparent">
-          <ErrorBoundary>
+          <div id="features" className="relative z-10 bg-transparent">
             <Suspense fallback={<div className="h-[100vh] bg-black/20 animate-pulse" />}>
               <VerticalCardGallery />
             </Suspense>
-          </ErrorBoundary>
-        </div>
+          </div>
 
-        <div className="bg-transparent">
-          <ErrorBoundary>
+          <div className="bg-transparent">
             <PopularCourses />
-          </ErrorBoundary>
-        </div>
+          </div>
 
-        <div id="intro" className="relative z-20 bg-transparent">
-          <InstituteIntro />
-        </div>
+          <div id="intro" className="relative z-20 bg-transparent">
+            <InstituteIntro />
+          </div>
 
-        <div className="bg-transparent">
-          <ErrorBoundary>
+          <div className="bg-transparent">
             <CareerCreatorComparison />
-          </ErrorBoundary>
-        </div>
+          </div>
 
-        <div className="bg-transparent">
-          <ErrorBoundary>
+          <div className="bg-transparent">
             <IndustryPartners />
-          </ErrorBoundary>
-        </div>
+          </div>
 
-        <div className="bg-transparent">
-          <ErrorBoundary>
+          <div className="bg-transparent">
             <Suspense fallback={<div className="h-[60vh] bg-black/20 animate-pulse" />}>
               <StudentShowcase />
             </Suspense>
-          </ErrorBoundary>
-        </div>
+          </div>
 
-        <div className="bg-transparent">
-          <ErrorBoundary>
+          <div className="bg-transparent">
             <StudentSuccessStories />
-          </ErrorBoundary>
-        </div>
+          </div>
 
-        <div id="apply" className="relative z-20 bg-transparent">
-          <ErrorBoundary>
+          <div id="apply" className="relative z-20 bg-transparent">
             <ApplyNow />
-          </ErrorBoundary>
-        </div>
+          </div>
 
-        <div id="faq" className="relative z-20 bg-transparent">
-          <ErrorBoundary>
+          <div id="faq" className="relative z-20 bg-transparent">
             <FAQSection />
-          </ErrorBoundary>
-        </div>
+          </div>
 
-        <ErrorBoundary>
           <Footer />
         </ErrorBoundary>
       </main>
