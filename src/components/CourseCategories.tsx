@@ -113,8 +113,8 @@ function SlideUpCard({ course }: { course: CourseCardItem }) {
           <div className="text-[#FFD700] mb-6">
             <CategoryIcon type={course.icon} />
           </div>
-          <h3 className="text-white font-display text-[#F0EBE1]xl md:text-3xl mb-2 font-bold uppercase leading-[1.1] tracking-[0.1em]">{course.title}</h3>
-          <p className="text-[#A8A29C] text-sm md:text-whitease line-clamp-2">{course.description}</p>
+          <h3 className="text-[#F0EBE1] font-display text-xs md:text-sm mb-2 font-medium uppercase leading-none tracking-tight">{course.title}</h3>
+          <p className="text-[#A8A29C] text-sm md:text-white/80 line-clamp-2">{course.description}</p>
         </div>
 
         {/* Hover Details */}
@@ -125,7 +125,7 @@ function SlideUpCard({ course }: { course: CourseCardItem }) {
           }}
         >
           <div className="flex-1 flex flex-col justify-center min-h-0">
-            <p className="text-white text-sm md:text-whitease leading-relaxed mb-6 border-l-2 border-[#FFD700] pl-6">
+            <p className="text-white text-sm md:text-white/80 leading-relaxed mb-6 border-l-2 border-[#FFD700] pl-6">
               {course.fullDescription}
             </p>
             <div className="mb-8">
@@ -220,19 +220,19 @@ export default function CourseCategories({ mode = "home" }: CourseCategoriesProp
             {isHome ? "The Academy Portfolio" : "All Programs"}
             <span className="w-8 h-[1px] metallic-gold-accent" />
           </p>
-          <h2 className="font-display text-[clamp(1.6rem,6vw,3.5rem)] leading-[0.85] text-white font-bold uppercase leading-[1.1] tracking-[0.1em]">
+          <h2 className="font-display text-[clamp(0.875rem,3vw,1.5rem)] leading-[0.85] text-white font-bold uppercase tracking-wide">
             {isHome ? (
               <>
-                Expertly Crafted <span className="metallic-gold-text italic">Curriculum</span>
+                Expertly Crafted <span className="metallic-gold-text italic tracking-wider">Curriculum</span>
               </>
             ) : (
               <>
-                Explore All <span className="metallic-gold-text italic">Programs</span>
+                Explore All <span className="metallic-gold-text italic tracking-wider">Programs</span>
               </>
             )}
           </h2>
           {isHome && (
-            <p className="text-[#A8A29C] text-sm md:text-whitease mt-4">
+            <p className="text-[#A8A29C] text-sm md:text-white/80 mt-4">
               Swipe left-right to explore all categories
             </p>
           )}
@@ -259,3 +259,16 @@ export default function CourseCategories({ mode = "home" }: CourseCategoriesProp
     </section>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
