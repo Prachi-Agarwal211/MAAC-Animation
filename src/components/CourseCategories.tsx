@@ -113,7 +113,7 @@ function SlideUpCard({ course }: { course: CourseCardItem }) {
           <div className="text-[#FFD700] mb-6">
             <CategoryIcon type={course.icon} />
           </div>
-          <h3 className="text-[#F0EBE1] font-display text-xs md:text-sm mb-2 font-medium uppercase leading-none tracking-tight">{course.title}</h3>
+          <h3 className="text-[#F0EBE1] font-display text-sm md:text-sm mb-2 font-medium uppercase leading-none tracking-tight">{course.title}</h3>
           <p className="text-[#A8A29C] text-sm md:text-white/80 line-clamp-2">{course.description}</p>
         </div>
 
@@ -259,6 +259,7 @@ export default function CourseCategories({ mode = "home" }: CourseCategoriesProp
     </section>
   );
 }
+
 
 
 
