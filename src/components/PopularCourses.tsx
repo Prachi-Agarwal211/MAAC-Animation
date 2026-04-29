@@ -25,8 +25,8 @@ export default function PopularCourses() {
               The Academy Portfolio
             </p>
 
-            <h2 className="font-display text-[clamp(1.8rem,6vw,3.5rem)] leading-[0.85] text-white font-bold uppercase leading-[1.1] tracking-[0.1em]">
-              EXPERTLY CRAFTED <span className="metallic-gold-text italic">CURRICULUM</span>
+            <h2 className="font-display text-[clamp(1rem,4vw,1.75rem)] leading-[0.85] text-white font-bold uppercase tracking-wide">
+              EXPERTLY CRAFTED <span className="metallic-gold-text italic tracking-wider">CURRICULUM</span>
             </h2>
           </FadeIn>
         </div>
@@ -40,3 +40,5 @@ export default function PopularCourses() {
     </section>
   );
 }
+
+

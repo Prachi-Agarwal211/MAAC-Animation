@@ -60,7 +60,7 @@ export default function PopularCoursesScroll({ courses, coursePortfolioImages }:
                     />
                   ) : (
                     <div className="absolute inset-0 bg-[#1a0000] flex items-center justify-center">
-                       <span className="text-white/5 font-black text-[#F0EBE1]xl">{course.code}</span>
+                       <span className="text-white/5 font-black text-[#F0EBE1] text-xs xl:text-[5rem]">{course.code}</span>
                     </div>
                   )}
                   <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-transparent to-transparent" />
@@ -73,7 +73,7 @@ export default function PopularCoursesScroll({ courses, coursePortfolioImages }:
 
                 {/* Content */}
                 <div className="p-8 md:p-10">
-                  <h3 className="font-display text-[#F0EBE1]xl text-white mb-2 group-hover:text-[#FFD700] transition-colors font-bold uppercase leading-[1.1] tracking-[0.1em]">{course.name}</h3>
+                  <h3 className="font-display text-[#F0EBE1] text-sm md:text-base mb-2 group-hover:text-[#FFD700] transition-colors font-bold uppercase leading-none tracking-tight">{course.name}</h3>
                   <p className="text-[#6B6560] text-xs font-bold uppercase tracking-wider mb-6">{course.fullName}</p>
                   <p className="text-[#A8A29C] text-sm leading-relaxed line-clamp-3 mb-8">{course.description}</p>
                   
@@ -92,3 +92,6 @@ export default function PopularCoursesScroll({ courses, coursePortfolioImages }:
     </>
   );
 }
+
+
+
