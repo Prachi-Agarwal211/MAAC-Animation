@@ -84,7 +84,7 @@ const EventCard = ({ event }: { event: typeof eventsData[0] }) => {
         </div>
 
         {/* Content */}
-        <h3 className="text-white font-display text-xl md:text-[#F0EBE1]xl mb-4 font-bold uppercase leading-[1.1] tracking-[0.1em]">{event.name}</h3>
+        <h3 className="text-white font-display text-xl md:text-[#F0EBE1] mb-4 font-bold uppercase leading-[1.1] tracking-[0.1em]">{event.name}</h3>
         <p className="text-[#A8A29C] text-sm leading-relaxed flex-grow mb-8">{event.description}</p>
 
         {/* CTA */}
@@ -150,3 +150,6 @@ export default function MAACEvents() {
     </section>
   );
 }
+
+
+

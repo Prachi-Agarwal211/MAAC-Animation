@@ -97,7 +97,7 @@ function Testimonials() {
                   </div>
                 </div>
                 <div>
-                  <h4 className="text-white text-[#F0EBE1]xl font-display mb-1 font-bold uppercase leading-[1.1] tracking-[0.1em]">{testimonialsData[active].name}</h4>
+                  <h4 className="text-[#F0EBE1] text-xl font-display mb-1 font-bold uppercase leading-[1.1] tracking-[0.1em]">{testimonialsData[active].name}</h4>
                   <p className="metallic-gold-text text-xs font-bold tracking-[0.3em] uppercase">{testimonialsData[active].role}</p>
                 </div>
               </div>
@@ -136,3 +136,6 @@ function Testimonials() {
 }
 
 export default memo(Testimonials);
+
+
+

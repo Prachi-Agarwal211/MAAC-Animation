@@ -199,7 +199,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                 <span className="inline-block px-3 py-1 rounded-full bg-[#FFD700]/10 border border-[#FFD700]/20 text-[#FFD700] text-[10px] font-bold tracking-[0.15em] uppercase mb-3">
                   Free Demo Class
                 </span>
-                <h2 className="font-display text-[#F0EBE1]xl text-[#F0EBE1] mb-1 font-bold uppercase leading-[1.1] tracking-[0.1em]">
+                <h2 className="font-display text-[#F0EBE1] text-xl mb-1 font-bold uppercase leading-[1.1] tracking-[0.1em]">
                   Start Your Creative Journey
                 </h2>
                 <p className="text-[#A8A29C] text-sm">
@@ -336,3 +336,6 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
     </div>
   );
 }
+
+
+

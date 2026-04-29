@@ -69,7 +69,7 @@ export default function StudentSuccessStories() {
           <h2 className="font-display text-[clamp(1.6rem,6vw,3.5rem)] leading-[0.85] text-white font-bold uppercase leading-[1.1] tracking-[0.1em]">
             REAL <span className="metallic-gold-text italic">PLACEMENTS</span>, REAL SALARIES
           </h2>
-          <p className="text-[#A8A29C] text-sm md:text-whitease mt-6 max-w-2xl mx-auto">
+          <p className="text-[#A8A29C] text-sm md:text-white/80 mt-6 max-w-2xl mx-auto">
             Our students don&apos;t just learn — they launch thriving careers. Here&apos;s what MAAC alumni are earning and where they&apos;re working.
           </p>
         </FadeIn>
@@ -145,3 +145,4 @@ export default function StudentSuccessStories() {
     </section>
   );
 }
+

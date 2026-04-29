@@ -231,7 +231,7 @@ export default function SmokyButton({ href, onClick, className, children, ...pro
   );
 
   const containerClasses = cn(
-    "group relative rounded-full text-whitease font-bold overflow-hidden border border-white/20",
+    "group relative rounded-full text-white/80 font-bold overflow-hidden border border-white/20",
     "shadow-[0_0_0_rgba(255,215,0,0)] hover:shadow-[0_8px_48px_rgba(212,175,55,0.4)] border-white/40 hover:border-white transition-all duration-700 flex",
     className
   );
@@ -250,3 +250,4 @@ export default function SmokyButton({ href, onClick, className, children, ...pro
     </button>
   );
 }
+
