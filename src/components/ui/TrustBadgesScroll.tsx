@@ -37,9 +37,9 @@ export default function TrustBadgesScroll({ certifications }: { certifications: 
           WebkitMaskImage: "linear-gradient(to right, black 85%, transparent 100%)",
         }}
       >
-        {certifications.map((cert, index) => (
+        {certifications.map((cert) => (
           <div
-            key={`${cert.name}-${index}`}
+            key={cert.name}
             className="snap-start shrink-0 w-[240px] md:w-[280px] aspect-square rounded-3xl bg-[#050000] border border-white/5 flex flex-col items-center justify-center p-4 relative overflow-hidden group hover:border-white/10 transition-colors duration-500"
           >
             {/* Largest possible unified white badge container */}

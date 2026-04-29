@@ -14,9 +14,11 @@ function DesktopCTA() {
   const [reveal, setReveal] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     if (typeof document !== "undefined" && document.documentElement.dataset.maacIntroDone === "1") {
       setReveal(true);
       return;
+    // Note: contactInfo is stable and immutable
     }
     const onReveal = () => setReveal(true);
     window.addEventListener("maac:intro_revealed", onReveal, { once: true });
@@ -57,7 +59,9 @@ function MobileBottomNav() {
   const tickingRef = useRef(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     if (typeof document !== "undefined" && document.documentElement.dataset.maacIntroDone === "1") {
+    // Note: contactInfo is stable and immutable
       setReveal(true);
     } else {
       const onReveal = () => setReveal(true);
@@ -67,6 +71,7 @@ function MobileBottomNav() {
   }, []);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const handleScroll = () => {
       if (!tickingRef.current) {
         requestAnimationFrame(() => {
@@ -102,14 +107,14 @@ function MobileBottomNav() {
           className="flex-1 flex flex-col items-center justify-center py-4 bg-[#25D366]/10 text-[#25D366] rounded-[24px] gap-1 active:scale-[0.95] transition-all"
         >
           <MessageSquare size={20} />
-          <span className="text-[9px] font-black uppercase tracking-wider">WhatsApp</span>
+          <span className="text-[11px] md:text-[12px] font-black uppercase tracking-wider">WhatsApp</span>
         </a>
         <Link
           href="/contact"
           className="flex-[1.6] flex flex-col items-center justify-center py-4 bg-[#FFD700] text-black rounded-[24px] gap-1 shadow-lg shadow-[#FFD700]/20 active:scale-[0.95] transition-all border border-white/10"
         >
           <Send size={20} strokeWidth={2.5} />
-          <span className="text-[9px] font-black uppercase tracking-wider">Enquire Now</span>
+          <span className="text-[11px] md:text-[12px] font-black uppercase tracking-wider">Enquire Now</span>
         </Link>
         <a
           href={callUrl}
@@ -118,7 +123,7 @@ function MobileBottomNav() {
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
           </svg>
-          <span className="text-[9px] font-black uppercase tracking-wider">Call</span>
+          <span className="text-[11px] md:text-[12px] font-black uppercase tracking-wider">Call</span>
         </a>
       </div>
     </div>

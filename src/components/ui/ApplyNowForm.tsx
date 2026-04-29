@@ -108,7 +108,7 @@ export default function ApplyNowForm() {
         </div>
       )}
 
-      <p className="text-[#6B6560] text-[10px] text-center uppercase tracking-widest flex items-center justify-center gap-2">
+      <p className="text-[#6B6560] text-[12px] text-center uppercase tracking-widest flex items-center justify-center gap-2">
         <ShieldCheck size={12} className="text-[#25D366]" />
         Strict Privacy Policy • No Spam Guaranteed
       </p>

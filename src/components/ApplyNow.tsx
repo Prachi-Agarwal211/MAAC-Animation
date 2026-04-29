@@ -18,8 +18,8 @@ export default function ApplyNow() {
                 <span className="w-8 h-[1px] metallic-gold-accent" />
                 Admissions Open
               </p>
-              <h2 className="font-display text-[clamp(1.8rem,6vw,3.5rem)] leading-[0.8] text-white font-bold uppercase leading-[1.1] tracking-[0.1em]">
-                START YOUR CREATIVE <span className="metallic-gold-text italic">LEGACY</span>
+              <h2 className="font-display text-[clamp(1.2rem,5vw,2rem)] leading-[0.85] text-white font-bold uppercase tracking-wide">
+                START YOUR CREATIVE <span className="metallic-gold-text italic tracking-wider">LEGACY</span>
               </h2>
               <p className="text-[#A8A29C] text-lg md:text-xl font-bold leading-relaxed mt-8 max-w-lg">
                 Book a free counseling session or demo class with our industry experts today.
@@ -56,7 +56,7 @@ export default function ApplyNow() {
           </div>
 
           {/* Right — Form (Client Island) */}
-          <FadeIn delay={0.2} x={30}>
+          <FadeIn delay={0.2} y={30}>
             <ApplyNowForm />
           </FadeIn>
         </div>
@@ -64,3 +64,5 @@ export default function ApplyNow() {
     </section>
   );
 }
+
+
