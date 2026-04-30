@@ -276,7 +276,14 @@ export const navLinks: NavLinkItem[] = [
     label: "Student Work",
     href: "/student-work",
   },
-  { label: "Events", href: "/events" },
+  { 
+  label: "Events", 
+  href: "/events",
+  children: [
+    { label: "Events at MAAC", href: "/events" },
+    { label: "Annual Trips at MAAC", href: "/annual-trip" }
+  ]
+},
   {
     label: "About Us",
     href: "/about",
@@ -303,3 +310,4 @@ export const contactInfo = {
     twitter: "https://twitter.com/MAAClndia",
   },
 };
+

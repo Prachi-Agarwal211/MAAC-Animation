@@ -115,7 +115,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
       } else {
         setErrors({ submit: result.message });
       }
-    } catch (error: any) {
+    } catch (error: Error) {
       setErrors({ submit: error.message || "Something went wrong. Please try again." });
     } finally {
       setSubmitting(false);
