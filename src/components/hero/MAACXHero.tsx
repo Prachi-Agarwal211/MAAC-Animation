@@ -17,19 +17,13 @@ type Props = {
 };
 
 export default function MAACXHero({ onIntroReveal }: Props) {
-  const containerRef = useRef<HTMLElement>(null);
   const introVideoRef = useRef<HTMLVideoElement>(null);
   const heroVideoRef = useRef<HTMLVideoElement>(null);
   const introOverlayRef = useRef<HTMLDivElement>(null);
-  const progressRef = useRef<HTMLDivElement>(null);
-  const percentLabelRef = useRef<HTMLSpanElement>(null);
-  const hasEndedRef = useRef(false);
-  const introStartedAtRef = useRef<number | null>(null);
 
   const [heroRevealed, setHeroRevealed] = useState(false);
   const [introLayerDone, setIntroLayerDone] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
-  const [videoError, setVideoError] = useState(false);
 
   const markIntroDone = useCallback(() => {
     document.documentElement.dataset.maacIntroDone = "1";
@@ -50,57 +44,20 @@ export default function MAACXHero({ onIntroReveal }: Props) {
     }
   }, []);
 
-  const setProgressToFull = useCallback(() => {
-    const bar = progressRef.current;
-    const label = percentLabelRef.current;
-    if (bar) bar.style.width = "100%";
-    if (label) label.textContent = "100%";
-  }, []);
-
-  const getIntroDuration = useCallback((el: HTMLVideoElement) => {
-    const d = el.duration;
-    if (d === Infinity) {
-      if (el.seekable && el.seekable.length > 0) {
-        const end = el.seekable.end(el.seekable.length - 1);
-        if (Number.isFinite(end) && end > 0) return end;
-      }
-      if (el.buffered && el.buffered.length > 0) {
-        const end = el.buffered.end(el.buffered.length - 1);
-        if (Number.isFinite(end) && end > 0) return end;
-      }
-      return 0;
-    }
-    if (Number.isFinite(d) && d > 0) return d;
-    if (el.seekable && el.seekable.length > 0) {
-      const end = el.seekable.end(el.seekable.length - 1);
-      if (Number.isFinite(end) && end > 0) return end;
-    }
-    if (el.buffered && el.buffered.length > 0) {
-      const end = el.buffered.end(el.buffered.length - 1);
-      if (Number.isFinite(end) && end > 0) return end;
-    }
-    return 0;
-  }, []);
-
   const finishIntro = useCallback(() => {
-    if (hasEndedRef.current || introLayerDone) return;
-    hasEndedRef.current = true;
-    setProgressToFull();
-
-    // Mount hero + start exit transition so hero is visible *under* the fading intro.
-    setHeroRevealed(true);
-
-    const tl = gsap.timeline({
-      onComplete: () => {
-        markIntroDone();
-        setIntroLayerDone(true);
-        onIntroReveal?.();
-        window.dispatchEvent(new Event("maac:intro_revealed"));
-      },
-    });
+    if (introLayerDone) return;
+    setIntroLayerDone(true);
 
     const overlay = introOverlayRef.current;
     if (overlay) {
+      const tl = gsap.timeline({
+        onComplete: () => {
+          markIntroDone();
+          onIntroReveal?.();
+          window.dispatchEvent(new Event("maac:intro_revealed"));
+        },
+      });
+
       tl.to(overlay, {
         opacity: 0,
         scale: 1.02,
@@ -108,12 +65,11 @@ export default function MAACXHero({ onIntroReveal }: Props) {
         ease: "power3.inOut",
       });
     } else {
-      setIntroLayerDone(true);
       markIntroDone();
       onIntroReveal?.();
       window.dispatchEvent(new Event("maac:intro_revealed"));
     }
-  }, [introLayerDone, markIntroDone, onIntroReveal, setProgressToFull]);
+  }, [introLayerDone, markIntroDone, onIntroReveal]);
 
   const applyMuteState = useCallback((next: boolean) => {
     setIsMuted(next);
@@ -135,7 +91,6 @@ export default function MAACXHero({ onIntroReveal }: Props) {
 
   useEffect(() => {
     if (isIntroAlreadyDone()) {
-      hasEndedRef.current = true;
       setHeroRevealed(true);
       setIntroLayerDone(true);
       requestAnimationFrame(() => {
@@ -147,9 +102,8 @@ export default function MAACXHero({ onIntroReveal }: Props) {
 
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReducedMotion) {
-      hasEndedRef.current = true;
-      markIntroDone();
       setHeroRevealed(true);
+      markIntroDone();
       setIntroLayerDone(true);
       requestAnimationFrame(() => {
         onIntroReveal?.();
@@ -168,68 +122,20 @@ export default function MAACXHero({ onIntroReveal }: Props) {
   }, [introLayerDone]);
 
   useEffect(() => {
-    if (introLayerDone || videoError) return;
+    if (introLayerDone) return;
     const v = introVideoRef.current;
     if (!v) return;
-    introStartedAtRef.current = performance.now();
-    v.play().catch(() => setVideoError(true));
-  }, [introLayerDone, videoError]);
+    v.play().catch(() => {});
+  }, [introLayerDone]);
 
   useEffect(() => {
     if (introLayerDone) return;
     // Guard against broken media metadata/network stalls so home content is never blocked.
     const timeout = window.setTimeout(() => {
-      if (!hasEndedRef.current) finishIntro();
+      finishIntro();
     }, 18000);
     return () => window.clearTimeout(timeout);
   }, [introLayerDone, finishIntro]);
-
-  const onIntroTimeUpdate = () => {
-    const el = introVideoRef.current;
-    const bar = progressRef.current;
-    const label = percentLabelRef.current;
-    if (!el || !bar) return;
-    const dur = getIntroDuration(el);
-    let pct = 0;
-    if (dur && Number.isFinite(dur)) {
-      pct = Math.min(100, (el.currentTime / dur) * 100);
-    } else if (introStartedAtRef.current) {
-      // Metadata can be unavailable for some encodes; show a time-based loading fallback.
-      const elapsed = performance.now() - introStartedAtRef.current;
-      pct = Math.min(95, (elapsed / 9000) * 100);
-    } else {
-      return;
-    }
-    bar.style.width = `${pct}%`;
-    if (label) label.textContent = `${Math.min(100, Math.floor(pct))}%`;
-  };
-
-  useGSAP(() => {
-    if (!heroRevealed) return;
-
-    const tl = gsap.timeline({ defaults: { ease: "expo.out" } });
-
-    tl.fromTo(
-      ".maacx-hero-video",
-      { opacity: 0, scale: 1.035 },
-      { opacity: 0.7, scale: 1, duration: 1.2, ease: "power2.out" },
-      0
-    )
-      .fromTo(
-        ".maacx-content > *",
-        { opacity: 0, y: 26 },
-        { opacity: 1, y: 0, duration: 0.9, stagger: 0.065, ease: "expo.out" },
-        0.12
-      )
-      .fromTo(
-        ".maacx-hero-stats",
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.85, ease: "expo.out" },
-        0.22
-      );
-
-    playHeroVideo();
-  }, { dependencies: [heroRevealed, playHeroVideo], scope: containerRef });
 
   const toggleHeroMute = () => {
     applyMuteState(!isMuted);
@@ -247,85 +153,48 @@ export default function MAACXHero({ onIntroReveal }: Props) {
           ref={introOverlayRef}
           className="fixed inset-0 z-[10050] bg-black overflow-hidden will-change-[opacity,transform]"
         >
-          {videoError ? (
-            <div className="absolute inset-0 flex flex-col items-center justify-center gap-6 z-20 px-6 text-center">
+          <>
+            <video
+              ref={introVideoRef}
+              className="absolute inset-0 w-full h-full object-contain pointer-events-none"
+              autoPlay
+              muted={isMuted}
+              playsInline
+              preload="auto"
+              onEnded={finishIntro}
+              onError={() => {}}
+            >
+              <source src={INTRO_VIDEO_MP4} type="video/mp4" />
+              <source src={INTRO_VIDEO_WEBM} type="video/webm" />
+            </video>
+
+            <div className="absolute top-6 left-6 right-6 z-[10060] flex items-center justify-between pointer-events-none">
+              <button
+                type="button"
+                onClick={toggleIntroMute}
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-black/40 text-white/75 backdrop-blur-sm transition-colors hover:text-white pointer-events-auto"
+                aria-label={isMuted ? "Unmute intro video" : "Mute intro video"}
+              >
+                {isMuted ? <VolumeX size={18} strokeWidth={2} /> : <Volume2 size={18} strokeWidth={2} />}
+              </button>
+
               <button
                 type="button"
                 onClick={finishIntro}
-                className="text-[10px] font-bold tracking-[0.3em] uppercase text-white border border-white/20 px-8 py-3 rounded-lg hover:bg-white/10 transition-colors"
+                className="px-6 py-2.5 rounded-full border border-white/20 bg-black/40 text-[10px] font-bold uppercase tracking-[0.2em] text-white/75 backdrop-blur-sm transition-all hover:bg-white/10 hover:text-white pointer-events-auto"
               >
-                Continue
+                Skip Intro
               </button>
             </div>
-          ) : (
-            <>
-              <video
-                ref={introVideoRef}
-                className="absolute inset-0 w-full h-full object-contain pointer-events-none"
-                autoPlay
-                muted={isMuted}
-                playsInline
-                preload="auto"
-                onEnded={finishIntro}
-                onTimeUpdate={onIntroTimeUpdate}
-                onProgress={onIntroTimeUpdate}
-                onLoadedMetadata={() => {
-                  const el = introVideoRef.current;
-                  const label = percentLabelRef.current;
-                  if (label) label.textContent = "0%";
-                  if (el && progressRef.current) progressRef.current.style.width = "0%";
-                  onIntroTimeUpdate();
-                }}
-                onLoadedData={onIntroTimeUpdate}
-                onCanPlay={onIntroTimeUpdate}
-                onError={() => setVideoError(true)}
-              >
-                <source src={INTRO_VIDEO_MP4} type="video/mp4" />
-                <source src={INTRO_VIDEO_WEBM} type="video/webm" />
-              </video>
 
-              <div className="absolute top-6 left-6 right-6 z-[10060] flex items-center justify-between pointer-events-none">
-                <button
-                  type="button"
-                  onClick={toggleIntroMute}
-                  className="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-black/40 text-white/75 backdrop-blur-sm transition-colors hover:text-white pointer-events-auto"
-                  aria-label={isMuted ? "Unmute intro video" : "Mute intro video"}
-                >
-                  {isMuted ? <VolumeX size={18} strokeWidth={2} /> : <Volume2 size={18} strokeWidth={2} />}
-                </button>
-
-                <button
-                  type="button"
-                  onClick={finishIntro}
-                  className="px-6 py-2.5 rounded-full border border-white/20 bg-black/40 text-[10px] font-bold uppercase tracking-[0.2em] text-white/75 backdrop-blur-sm transition-all hover:bg-white/10 hover:text-white pointer-events-auto"
-                >
-                  Skip Intro
-                </button>
-              </div>
-
-              <div className="absolute bottom-0 left-0 right-0 z-20 px-4 sm:px-8 pb-6 sm:pb-8 pt-4 bg-gradient-to-t from-black/80 to-transparent pointer-events-none">
-                <div className="flex items-end justify-between gap-4 max-w-4xl mx-auto mb-2">
-                  <span className="text-[10px] sm:text-xs font-bold tracking-widest text-white/35 uppercase">Loading</span>
-                  <span ref={percentLabelRef} className="text-[11px] sm:text-sm font-black tabular-nums text-white/90">
-                    0%
-                  </span>
-                </div>
-                <div className="max-w-4xl mx-auto h-1.5 sm:h-2 w-full rounded-full bg-white/10 overflow-hidden">
-                  <div
-                    ref={progressRef}
-                    className="h-full w-0 rounded-full metallic-gold-accent shadow-[0_0_20px_rgba(227,24,55,0.6)]"
-                  />
-                </div>
-              </div>
-            </>
-          )}
+            <div className="absolute bottom-0 left-0 right-0 z-20 px-4 sm:px-8 pb-6 sm:pb-8 pt-4 bg-gradient-to-t from-black/80 to-transparent pointer-events-none">
+            </div>
+          </>
         </div>
       )}
 
       <section
-        ref={containerRef}
         className="relative isolate min-h-[100svh] w-full bg-transparent overflow-x-hidden"
-        aria-hidden={!heroRevealed}
       >
         {/* Full-bleed background video */}
         <div className="maacx-hero-video absolute inset-0 z-0 opacity-0 bg-transparent">
