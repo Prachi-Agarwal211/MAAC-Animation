@@ -1,8 +1,10 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Send, ShieldCheck } from "lucide-react";
 import { submitContactForm } from "@/app/actions";
+import { getUtmParams } from "@/lib/utm";
+import { trackLead } from "@/lib/tracking";
 
 export default function ApplyNowForm() {
   const formRef = useRef<HTMLFormElement>(null);
@@ -13,6 +15,12 @@ export default function ApplyNowForm() {
     name: "", phone: "", email: "", message: "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const utmRef = useRef<ReturnType<typeof getUtmParams>>({});
+
+  // Capture UTM params on mount
+  useEffect(() => {
+    utmRef.current = getUtmParams();
+  }, []);
 
   const validate = () => {
     const errs: Record<string, string> = {};
@@ -32,9 +40,25 @@ export default function ApplyNowForm() {
     try {
       const data = new FormData();
       Object.entries(formData).forEach(([k, v]) => data.set(k, v));
+      const utm = utmRef.current;
+      if (utm.utm_source) data.set("utm_source", utm.utm_source);
+      if (utm.utm_medium) data.set("utm_medium", utm.utm_medium);
+      if (utm.utm_campaign) data.set("utm_campaign", utm.utm_campaign);
+      if (utm.utm_content) data.set("utm_content", utm.utm_content);
+      if (utm.fbclid) data.set("fbclid", utm.fbclid);
       const result = await submitContactForm(data);
-      if (result.success) setSubmitted(true);
-      else setSubmitError(result.message);
+      if (result.success) {
+        setSubmitted(true);
+        // Fire Lead event to Meta + Google Ads (unified)
+        trackLead({
+          content_name: "Apply Now Form",
+          content_category: "Enquiry",
+          value: 1,
+          currency: "INR",
+        });
+      } else {
+        setSubmitError(result.message);
+      }
     } catch {
       setSubmitError('Something went wrong. Please try again.');
     } finally {

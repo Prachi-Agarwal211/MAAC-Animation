@@ -37,10 +37,26 @@ export default function Footer() {
 
   return (
     <footer className="relative bg-transparent pt-24 md:pt-40 overflow-hidden">
+      {/* Background video */}
+      <div className="absolute inset-0 z-0 opacity-45">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="none"
+          className="absolute inset-0 h-full w-full object-cover"
+        >
+          <source src="/hero-video-compressed.mp4" type="video/mp4" />
+          <source src="/hero-video.webm" type="video/webm" />
+        </video>
+        <div className="absolute inset-0 bg-black/40" />
+      </div>
+
       <div className="atmosphere-blob blob-red -bottom-20 -right-20 opacity-10" />
 
       {/* ── TOP BANNER ── */}
-      <div className="max-w-[1800px] mx-auto px-6 md:px-12 mb-24">
+      <div className="relative z-10 max-w-[1800px] mx-auto px-6 md:px-12 mb-24">
         <FadeIn>
           <div className="relative rounded-[40px] overflow-hidden glass border border-white/10 p-6 md:p-12 lg:p-20 flex flex-col lg:flex-row items-center justify-between gap-12 group shadow-[0_40px_100px_-20px_rgba(0,0,0,0.7)]">
             <div className="absolute inset-0 bg-[#FFD700]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
@@ -75,7 +91,7 @@ export default function Footer() {
       </div>
 
       {/* ── MAIN CONTENT ── */}
-      <FadeIn stagger={0.1} className="max-w-[1800px] mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 pb-20">
+      <FadeIn stagger={0.1} className="relative z-10 max-w-[1800px] mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 pb-20">
 
         {/* Brand Col */}
         <div className="lg:col-span-4 space-y-10">
@@ -186,7 +202,7 @@ export default function Footer() {
       </FadeIn>
 
       {/* ── BOTTOM BAR ── */}
-      <div className="border-t border-white/5 py-10 px-6 md:px-12">
+      <div className="relative z-10 border-t border-white/5 py-10 px-6 md:px-12">
         <div className="max-w-[1800px] mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
           <p className="text-[#6B6560] text-[10px] font-bold uppercase tracking-[0.3em]">
             © {currentYear} MAAC India · Crafting Digital Futures

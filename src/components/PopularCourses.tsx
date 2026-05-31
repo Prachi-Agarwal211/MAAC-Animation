@@ -18,7 +18,7 @@ export default function PopularCourses() {
       
       {/* Header */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 mb-20">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12 md:mb-16">
           <FadeIn className="max-w-2xl">
             <p className="metallic-gold-text text-[10px] font-bold tracking-[0.3em] uppercase mb-4 flex items-center gap-3">
               <span className="w-8 h-[1px] metallic-gold-accent" />

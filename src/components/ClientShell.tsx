@@ -13,17 +13,27 @@ export default function ClientShell({ children }: { children: React.ReactNode })
     const shown = sessionStorage.getItem("maac_modal_shown");
     if (shown) return;
 
-    // Show modal AFTER intro sweep completes (not before!)
-    const handler = () => {
-      // Longer delay on mobile (8s) vs desktop (2s) for better UX
-      const delay = window.innerWidth < 768 ? 8000 : 2000;
+    let triggered = false;
+
+    const triggerModal = () => {
+      if (triggered) return;
+      triggered = true;
+      const delay = window.innerWidth < 768 ? 1400 : 900;
       setTimeout(() => {
         setShowModal(true);
         sessionStorage.setItem("maac_modal_shown", "1");
       }, delay);
     };
-    window.addEventListener("maac:intro_revealed", handler, { once: true });
-    return () => window.removeEventListener("maac:intro_revealed", handler);
+
+    window.addEventListener("maac:intro_revealed", triggerModal, { once: true });
+    
+    // Fallback if not on homepage (where intro_revealed might not fire)
+    const fallbackTimer = setTimeout(triggerModal, 3000);
+
+    return () => {
+      window.removeEventListener("maac:intro_revealed", triggerModal);
+      clearTimeout(fallbackTimer);
+    };
   }, []);
 
   return (

@@ -20,6 +20,16 @@ html, body {
   --gold-glow: rgba(255, 215, 0, 0.25);
   --sand: #F0EBE1;
   
+  /* ── Z-Index Scale ── */
+  --z-base: 1;
+  --z-section: 10;
+  --z-overlap: 20;
+  --z-header: 1000;
+  --z-overlay: 9999;
+  --z-toast: 10000;
+  --z-demo-bar: 200;
+  --z-hero: 10050;
+  
   /* ── Layout ── */
   --demo-bar-height: 40px;
   
@@ -53,9 +63,9 @@ html, body {
   background: rgba(255, 255, 255, 0.003);
   backdrop-filter: blur(18px) saturate(180%) brightness(0.9);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  transition: all 0.8s var(--ease-expo);
   border-radius: 24px;
   box-shadow: 0 15px 50px -10px rgba(0, 0, 0, 0.6);
+  transition: border-color 0.8s var(--ease-expo), box-shadow 0.8s var(--ease-expo), background 0.8s var(--ease-expo);
 }
 
 .glass-card:hover {

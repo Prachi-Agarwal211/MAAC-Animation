@@ -60,8 +60,8 @@ function getSegmentPath(index: number, outerR: number, innerR: number) {
   const x2i = CX + innerR * Math.cos(start);
   const y2i = CY + innerR * Math.sin(start);
   
-  const large = ANGLE_PER_SEG > 180 ? 1 : 0;
-  return `M ${x1o} ${y1o} A ${outerR} ${outerR} 0 ${large} 1 ${x2o} ${y2o} L ${x1i} ${y1i} A ${innerR} ${innerR} 0 ${large} 0 ${x2i} ${y2i} Z`;
+  const largeArcFlag = ANGLE_PER_SEG > 180 ? 1 : 0;
+  return `M ${x1o} ${y1o} A ${outerR} ${outerR} 0 ${largeArcFlag} 1 ${x2o} ${y2o} L ${x1i} ${y1i} A ${innerR} ${innerR} 0 ${largeArcFlag} 0 ${x2i} ${y2i} Z`;
 }
 
 export default function VerticalCardGallery() {
@@ -129,47 +129,43 @@ export default function VerticalCardGallery() {
 
     const mm = gsap.matchMedia();
 
-    mm.add("(min-width: 1024px)", () => {
-      const section = containerRef.current;
-      const viewport = rightViewportRef.current;
-      const track = rightTrackRef.current;
-      if (!section || !viewport || !track) return;
+mm.add("(min-width: 1024px)", () => {
+       const section = containerRef.current;
+       const viewport = rightViewportRef.current;
+       const track = rightTrackRef.current;
+       if (!section || !viewport || !track) return;
 
-      const getMaxTranslate = () => Math.max(0, track.scrollHeight - viewport.clientHeight);
+       const getMaxTranslate = () => Math.max(1, track.scrollHeight - viewport.clientHeight);
 
-      const tween = gsap.to(track, {
-        y: () => -getMaxTranslate(),
-        ease: "none",
-        scrollTrigger: {
-          trigger: section,
-          start: "top top",
-          end: () => `+=${Math.max(1, getMaxTranslate())}`,
-          scrub: true,
-          pin: true,
-          pinReparent: true,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-          onUpdate: (self) => {
-            const max = getMaxTranslate();
-            if (max <= 0) {
-              updateActiveSegment(0);
-              return;
-            }
+       const tween = gsap.to(track, {
+         y: () => -getMaxTranslate(),
+         ease: "none",
+         scrollTrigger: {
+           trigger: section,
+           start: "top top",
+           end: () => `+=${getMaxTranslate()}`,
+           scrub: true,
+           pin: true,
+           pinReparent: true,
+           anticipatePin: 1,
+           invalidateOnRefresh: true,
+           onUpdate: (self) => {
+             const max = getMaxTranslate();
 
-            const y = self.progress * max;
-            const focusY = y + viewport.clientHeight * 0.35;
+             const y = self.progress * max;
+             const focusY = y + viewport.clientHeight * 0.35;
 
-            let active = 0;
-            for (let i = 0; i < cardRefs.current.length; i++) {
-              const el = cardRefs.current[i];
-              if (!el) continue;
-              const top = el.offsetTop;
-              if (top <= focusY) active = i;
-            }
-            updateActiveSegment(Math.min(SEGMENTS - 1, Math.max(0, active)));
-          },
-        },
-      });
+             let active = 0;
+             for (let i = 0; i < cardRefs.current.length; i++) {
+               const el = cardRefs.current[i];
+               if (!el) continue;
+               const top = el.offsetTop;
+               if (top <= focusY) active = i;
+             }
+             updateActiveSegment(Math.min(SEGMENTS - 1, Math.max(0, active)));
+           },
+         },
+       });
 
       return () => {
         tween.scrollTrigger?.kill();
@@ -206,7 +202,7 @@ export default function VerticalCardGallery() {
       <div className="relative z-10 max-w-[1700px] mx-auto px-6 lg:px-12 py-12 lg:py-16">
         
         {/* Section Header */}
-        <div className="text-center mb-10 lg:mb-12">
+        <div className="text-center mb-16 lg:mb-12 xl:mb-20">
           <p className="text-[9px] font-bold tracking-[0.4em] uppercase mb-4 text-[#C19A5B] opacity-60">
             The MAAC Standard
           </p>
@@ -217,12 +213,18 @@ export default function VerticalCardGallery() {
 
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-10 xl:gap-16 items-start">
           
-          {/* LEFT: Sticky Pie Chart + Timeline */}
-          <div className="hidden lg:flex lg:w-[48%] xl:w-[50%] flex-shrink-0 sticky top-24 z-20 items-center justify-between pl-4 xl:pl-16">
+          {/* LEFT / TOP (mobile): Creative Evolution Circle / Pie - now hidden on mobile */}
+          {/* Desktop: sticky side-by-side with pinned scroll. */}
+          <div className="hidden lg:flex w-full lg:w-[48%] xl:w-[50%] flex-shrink-0 sticky top-[70px] lg:top-16 z-30 flex-col items-center lg:items-start lg:pl-4 xl:pl-16 bg-[#0C0C0C]/90 lg:bg-transparent backdrop-blur-md lg:backdrop-blur-none py-6 lg:py-0 border-b border-white/5 lg:border-none shadow-2xl lg:shadow-none">
             
-            {/* The SVG Pie Chart - Scaled robustly */}
-            <div className="relative w-full max-w-[min(600px,65vh)] xl:max-w-[700px]">
-              <svg viewBox="0 0 512 512" className="w-full h-full relative z-10 scale-[0.85] md:scale-[0.9] lg:scale-[1.0] xl:scale-[1.15] overflow-visible">
+            {/* Mobile-only label for the interactive circle (top) */}
+            <div className="lg:hidden text-center mb-4">
+              <p className="text-[10px] font-bold tracking-[0.3em] uppercase text-[#C19A5B] opacity-70">Scroll to explore</p>
+            </div>
+
+            {/* The SVG Pie Chart - now visible + animated on mobile too */}
+            <div className="relative w-full max-w-[280px] sm:max-w-[320px] lg:max-w-[min(380px,45vh)] xl:max-w-[480px] mx-auto lg:mx-0">
+              <svg viewBox="0 0 512 512" className="w-full h-full relative z-10 scale-[0.85] lg:scale-[0.9] xl:scale-100 overflow-visible">
                 <defs>
                   {featureCards.map((_, i) => (
                     <clipPath key={`clip-${i}`} id={`segClip-${i}`}>
@@ -285,7 +287,7 @@ export default function VerticalCardGallery() {
                 <text x={CX} y={CY + 38} textAnchor="middle" className="fill-[#FFD700] font-black uppercase tracking-[0.3em]" style={{ fontSize: "16px" }}>OF {String(SEGMENTS).padStart(2,'0')}</text>
               </svg>
 
-              {/* DOM Labels mounted over the SVG */}
+              {/* DOM Labels mounted over the SVG — desktop only (too cramped + absolute positioning on mobile) */}
               {featureCards.map((card, i) => {
                 const midDeg = (i + 0.5) * ANGLE_PER_SEG - 90;
                 const midRad = midDeg * (Math.PI / 180);
@@ -299,7 +301,7 @@ export default function VerticalCardGallery() {
                   <div
                     key={`label-${i}`}
                     ref={el => { labelRefs.current[i] = el; }}
-                    className="absolute flex flex-col items-center gap-1 xl:gap-2 transition-all duration-300 w-[100px] xl:w-[140px]"
+                    className="absolute hidden lg:flex flex-col items-center gap-1 xl:gap-2 transition-all duration-300 w-[100px] xl:w-[140px]"
                     style={{
                       left: `${(lx / 512) * 100}%`,
                       top: `${(ly / 512) * 100}%`,
@@ -317,8 +319,8 @@ export default function VerticalCardGallery() {
               })}
             </div>
 
-            {/* Vertical Scroll Timeline Indicator */}
-            <div className="relative h-[360px] xl:h-[480px] w-8 xl:w-12 flex flex-col items-center justify-between ml-auto mr-2 xl:mr-10 py-[30px] xl:py-[40px]">
+            {/* Vertical Scroll Timeline Indicator — desktop only */}
+            <div className="absolute hidden lg:flex h-[min(360px,50vh)] xl:h-[480px] w-8 xl:w-12 flex-col items-center justify-between right-0 xl:right-8 top-1/2 -translate-y-1/2 py-[30px] xl:py-[40px]">
                {/* Background Track Line */}
                <div className="absolute top-[30px] xl:top-[40px] bottom-[30px] xl:bottom-[40px] left-1/2 -translate-x-1/2 w-[1px] bg-white/10 z-0" />
                
@@ -332,8 +334,7 @@ export default function VerticalCardGallery() {
                <div 
                  className="absolute left-1/2 -translate-x-1/2 w-[7px] h-[7px] xl:w-[9px] xl:h-[9px] rounded-full bg-[#E5D7B3] shadow-[0_0_12px_rgba(229,215,179,0.8)] z-20 transition-all duration-300 ease-out"
                  style={{
-                   top: `calc(100% * (${activeIndex} / ${Math.max(1, SEGMENTS - 1)}))`,
-                   marginTop: `calc(30px + (100% - 60px) * (${activeIndex} / ${Math.max(1, SEGMENTS - 1)}) - (100% * (${activeIndex} / ${Math.max(1, SEGMENTS - 1)})))`,  // This calculates perfectly or use a simpler offset
+                   top: `calc(30px + (100% - 60px) * (${activeIndex} / ${Math.max(1, SEGMENTS - 1)}))`,
                    transform: `translate(-50%, -50%)`
                  }}
                />
@@ -341,10 +342,10 @@ export default function VerticalCardGallery() {
             
           </div>
 
-          {/* RIGHT: Scrolling Cards (Floating Layout) */}
+          {/* RIGHT: Scrolling Cards (images) — on mobile flows naturally BELOW the circle at top */}
           <div
             ref={rightViewportRef}
-            className="w-full lg:w-[55%] xl:w-[50%] lg:h-[calc(100vh-8rem)] lg:overflow-hidden px-4 sm:px-8 lg:px-0"
+            className="w-full lg:w-[55%] xl:w-[50%] lg:h-[calc(100vh-8rem)] lg:overflow-hidden px-4 sm:px-8 lg:px-0 pt-2 lg:pt-0"
           >
             <div ref={rightTrackRef} className="space-y-16 lg:space-y-24 lg:pb-[25vh]">
               {featureCards.map((card, index) => (
@@ -371,15 +372,15 @@ export default function VerticalCardGallery() {
                     </div>
                     
                     {/* Floating Title with Header Font Style */}
-                    <h3 className="font-display font-bold text-[15px] md:text-[17px] text-white/90 mb-5 tracking-[0.25em] leading-snug font-bold uppercase leading-[1.1] tracking-[0.1em]">
+                    <h3 className="font-display font-bold text-[15px] md:text-[17px] text-white/90 mb-3 tracking-[0.25em] leading-snug uppercase">
                       {card.title}
                     </h3>
                     
-                    <p className="text-white text-[11px] md:text-[12px] leading-[2] mb-12 max-w-[300px] font-bold">
+                    <p className="text-white/70 text-[11px] md:text-[12px] leading-[1.8] mb-8 max-w-[300px]">
                       {card.desc}
                     </p>
                     
-                    <Link href="/contact" className="mt-4 group/link flex items-center justify-between w-[85%] border-t border-white/10 pt-5">
+                    <Link href="/contact" className="mt-auto group/link flex items-center justify-between w-[85%] border-t border-white/10 pt-5">
                       <span className="text-[9px] font-bold tracking-[0.25em] uppercase text-white group-hover/link:text-white transition-colors">
                         View Details
                       </span>

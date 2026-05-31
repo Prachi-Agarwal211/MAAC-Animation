@@ -1,9 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
+import { sendMetaCapiLead } from "@/lib/meta-capi";
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const { name, phone, email, course, message, source } = body;
+
+    // Capture UTM params passed from client
+    const utm_source = body.utm_source || "";
+    const utm_medium = body.utm_medium || "";
+    const utm_campaign = body.utm_campaign || "";
+    const utm_content = body.utm_content || "";
+    const fbclid = body.fbclid || "";
 
     // Validate required fields
     if (!name || !phone || !email) {
@@ -12,6 +20,9 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
+
+    // Fire Meta CAPI (server-side, doesn't block)
+    sendMetaCapiLead({ email, phone, url: "https://www.maacanimationjaipur.com/contact" });
 
     // Only send email if API key is configured
     const resendApiKey = process.env.RESEND_API_KEY;
@@ -50,6 +61,14 @@ export async function POST(request: NextRequest) {
               ${source ? `<tr>
                 <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Source</td>
                 <td style="padding: 12px; border: 1px solid #ddd;">${source}</td>
+              </tr>` : ''}
+              ${utm_source ? `<tr style="background: #f9f9f9;">
+                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">UTM Source</td>
+                <td style="padding: 12px; border: 1px solid #ddd;">${utm_source}</td>
+              </tr>` : ''}
+              ${utm_campaign ? `<tr>
+                <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">UTM Campaign</td>
+                <td style="padding: 12px; border: 1px solid #ddd;">${utm_campaign}</td>
               </tr>` : ''}
             </table>
             <p style="margin-top: 20px; color: #666; font-size: 14px;">

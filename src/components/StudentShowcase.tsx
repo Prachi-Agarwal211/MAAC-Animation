@@ -87,33 +87,35 @@ export default function StudentShowcase() {
       <div className="ss-main relative flex-1 max-w-[1600px] mx-auto w-full px-4 md:px-10">
         <div className="relative aspect-video rounded-[40px] overflow-hidden bg-[#050000] shadow-[0_40px_100px_rgba(0,0,0,0.8)] border border-white/5 group">
           
-          {showcaseVideos.map((item, i) => {
-            const isActive = i === active;
-            
-            return (
-              <div key={i} className={`absolute inset-0 transition-all duration-1000 ease-expo-out ${isActive ? 'opacity-100 scale-100' : 'opacity-0 scale-105 pointer-events-none'}`}>
-                {/* Only set src for the active video to save bandwidth */}
-                <video
-                  ref={el => { videoRefs.current[i] = el; }}
-                  src={isActive ? item.video : undefined}
-                  poster={item.fallbackImage}
-                  className="w-full h-full object-cover"
-                  muted={isMuted}
-                  loop
-                  playsInline
-                  autoPlay={isActive}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
-                
-                {/* Loader overlay for when video is buffering */}
-                {isActive && !isPaused && (
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20">
-                     <div className="w-12 h-12 border-4 border-[#FFD700] border-t-transparent rounded-full animate-spin" />
-                  </div>
-                )}
-              </div>
-            );
-          })}
+{showcaseVideos.map((item, i) => {
+             const isActive = i === active;
+             // Only load active + adjacent videos to save bandwidth
+             const shouldLoad = isActive || i === active - 1 || i === active + 1;
+             
+             return (
+               <div key={i} className={`absolute inset-0 transition-all duration-1000 ease-expo-out ${isActive ? 'opacity-100 scale-100' : 'opacity-0 scale-105 pointer-events-none'}`}>
+                 {/* Only set src for active and adjacent videos to save bandwidth */}
+                 <video
+                   ref={el => { videoRefs.current[i] = el; }}
+                   src={shouldLoad ? item.video : undefined}
+                   poster={item.fallbackImage}
+                   className="w-full h-full object-cover"
+                   muted={isMuted}
+                   loop
+                   playsInline
+                   autoPlay={isActive}
+                 />
+                 <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
+                 
+                 {/* Loader overlay for when video is buffering */}
+                 {isActive && !isPaused && (
+                   <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20">
+                      <div className="w-12 h-12 border-4 border-[#FFD700] border-t-transparent rounded-full animate-spin" />
+                   </div>
+                 )}
+               </div>
+             );
+           })}
 
           {/* Controls Overlay */}
           <div className="absolute inset-0 z-10 flex flex-col justify-between p-8 md:p-12 opacity-0 group-hover:opacity-100 transition-opacity duration-500">

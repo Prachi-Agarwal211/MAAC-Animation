@@ -413,11 +413,11 @@ National Students&apos; Meet (NSM)
 
             {/* Right side: Video Card */}
             <div className="flex justify-center lg:justify-end">
-              <div className="relative w-full max-w-sm">
-                <div ref={videoMCLRef} className="rounded-2xl shadow-lg overflow-hidden h-56 border border-white/5">
-                  <VideoFacade youtubeId="FPgueLMvlMI" title="MAAC Creative League (MCL)" />
-                </div>
-              </div>
+<div className="relative w-full max-w-sm">
+                 <div ref={videoMCLRef} className="rounded-2xl shadow-lg overflow-hidden h-56 border border-white/5">
+                   <VideoFacade youtubeId="dQw4w9WgXcQ" title="MAAC Creative League (MCL)" />
+                 </div>
+               </div>
             </div>
           </div>
         </div>

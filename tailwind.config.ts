@@ -5,6 +5,7 @@ const config: Config = {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
@@ -47,6 +48,20 @@ const config: Config = {
       spacing: {
         navbar: "80px",
         "demo-bar": "36px",
+      },
+      keyframes: {
+        marqueeLeft: {
+          "0%": { transform: "translateX(0%)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
+        marqueeRight: {
+          "0%": { transform: "translateX(-50%)" },
+          "100%": { transform: "translateX(0%)" },
+        },
+      },
+      animation: {
+        "marquee-left": "marqueeLeft 40s linear infinite",
+        "marquee-right": "marqueeRight 40s linear infinite",
       },
     },
   },

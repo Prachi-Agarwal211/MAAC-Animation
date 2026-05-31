@@ -57,9 +57,11 @@ export default function Navbar() {
     );
 
   return (
-    <div className={revealNav ? "contents" : "hidden"} aria-hidden={!revealNav}>
+    <div className="contents" aria-hidden={!revealNav}>
       <nav
-        className={`fixed left-0 right-0 z-50 transition-all duration-700 ease-in-out ${
+        className={`fixed left-0 right-0 z-50 transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          !revealNav ? "opacity-0 -translate-y-full pointer-events-none" : "opacity-100 translate-y-0 pointer-events-auto"
+        } ${
           scrolled || mobileMenuOpen
             ? "top-4 mx-auto max-w-[95%] rounded-[24px] bg-[#0A0000]/70 backdrop-blur-3xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] py-1"
             : isHome
@@ -198,7 +200,7 @@ export default function Navbar() {
             </Link>
           </div>
 
-          <div className="flex lg:hidden items-center gap-2">
+          <div className="flex lg:hidden items-center gap-2 ml-auto">
             <button
               type="button"
               onClick={toggleMobileMenu}

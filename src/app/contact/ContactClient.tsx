@@ -1,17 +1,25 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "@/lib/gsap";
 import Footer from "@/components/Footer";
 import { MapPin, Phone, Mail, Send, ShieldCheck, Globe } from "lucide-react";
 import MagneticButton from "@/components/ui/MagneticButton";
 import { submitContactForm } from "@/app/actions";
+import { getUtmParams } from "@/lib/utm";
+import { trackLead } from "@/lib/tracking";
 
 export default function ContactClient() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  // Store UTM params on mount
+  const utmRef = useRef<ReturnType<typeof getUtmParams>>({});
+
+  useEffect(() => {
+    utmRef.current = getUtmParams();
+  }, []);
 
   useGSAP(() => {
     const tl = gsap.timeline();
@@ -32,10 +40,24 @@ export default function ContactClient() {
     const formData = new FormData(form);
     formData.set("source", "contact_page");
 
+    const utm = utmRef.current;
+    if (utm.utm_source) formData.set("utm_source", utm.utm_source);
+    if (utm.utm_medium) formData.set("utm_medium", utm.utm_medium);
+    if (utm.utm_campaign) formData.set("utm_campaign", utm.utm_campaign);
+    if (utm.utm_content) formData.set("utm_content", utm.utm_content);
+    if (utm.fbclid) formData.set("fbclid", utm.fbclid);
+
     try {
       const result = await submitContactForm(formData);
       if (result.success) {
         setSubmitSuccess(true);
+        // Fire Lead event to Meta + Google Ads (unified)
+        trackLead({
+          content_name: "Contact Page Form",
+          content_category: "Enquiry",
+          value: 1,
+          currency: "INR",
+        });
         form.reset();
         setTimeout(() => setSubmitSuccess(false), 5000);
       }

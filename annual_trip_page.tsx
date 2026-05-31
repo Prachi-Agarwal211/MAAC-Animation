@@ -1,188 +1,377 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
-import gsap, { ScrollTrigger } from "@/lib/gsap";
 import Footer from "@/components/Footer";
+import ImageLightbox from "@/components/ui/ImageLightbox";
 
+// Rich trip data — all 25 moments with beautiful titles
 const tripImages = [
-  { title: "A Misty Morning", src: "/annual trip/trip-01.jpeg" },
-  { title: "Mountain Views", src: "/annual trip/trip-02.jpeg" },
-  { title: "Sunrise Peaks", src: "/annual trip/trip-03.jpeg" },
-  { title: "Valley Beauty", src: "/annual trip/trip-04.jpeg" },
-  { title: "Forest Trails", src: "/annual trip/trip-05.jpeg" },
-  { title: "River Crossing", src: "/annual trip/trip-06.jpeg" },
-  { title: "Campsite Vibes", src: "/annual trip/trip-07.jpeg" },
-  { title: "Night Sky", src: "/annual trip/trip-08.jpeg" },
-  { title: "Morning Dew", src: "/annual trip/trip-09.jpeg" },
-  { title: "Highland Views", src: "/annual trip/trip-10.jpeg" },
-  { title: "Trail Adventure", src: "/annual trip/trip-11.jpeg" },
-  { title: "Lakeside Calm", src: "/annual trip/trip-12.jpeg" },
-  { title: "Rocky Paths", src: "/annual trip/trip-13.jpeg" },
-  { title: "Golden Hour", src: "/annual trip/trip-14.jpeg" },
-  { title: "Dense Forests", src: "/annual trip/trip-15.jpeg" },
-  { title: "Scenic Drives", src: "/annual trip/trip-16.jpeg" },
-  { title: "Hilltop Camp", src: "/annual trip/trip-17.jpeg" },
-  { title: "Pine Valleys", src: "/annual trip/trip-18.jpeg" },
-  { title: "Sunset Glow", src: "/annual trip/trip-19.jpeg" },
-  { title: "Misty Trails", src: "/annual trip/trip-20.jpeg" },
-  { title: "Alpine Meadows", src: "/annual trip/trip-21.jpeg" },
-  { title: "Waterfall Magic", src: "/annual trip/trip-22.jpeg" },
-  { title: "Cabin Retreat", src: "/annual trip/trip-23.jpeg" },
-  { title: "Journey's End", src: "/annual trip/trip-24.jpeg" },
-  { title: "Memories Made", src: "/annual trip/trip-25.jpeg" },
+  { title: "A Misty Morning", src: "/annual-trip/trip-01.jpeg" },
+  { title: "Mountain Views", src: "/annual-trip/trip-02.jpeg" },
+  { title: "Sunrise Peaks", src: "/annual-trip/trip-03.jpeg" },
+  { title: "Valley Beauty", src: "/annual-trip/trip-04.jpeg" },
+  { title: "Forest Trails", src: "/annual-trip/trip-05.jpeg" },
+  { title: "River Crossing", src: "/annual-trip/trip-06.jpeg" },
+  { title: "Campsite Vibes", src: "/annual-trip/trip-07.jpeg" },
+  { title: "Night Sky", src: "/annual-trip/trip-08.jpeg" },
+  { title: "Morning Dew", src: "/annual-trip/trip-09.jpeg" },
+  { title: "Highland Views", src: "/annual-trip/trip-10.jpeg" },
+  { title: "Trail Adventure", src: "/annual-trip/trip-11.jpeg" },
+  { title: "Lakeside Calm", src: "/annual-trip/trip-12.jpeg" },
+  { title: "Rocky Paths", src: "/annual-trip/trip-13.jpeg" },
+  { title: "Golden Hour", src: "/annual-trip/trip-14.jpeg" },
+  { title: "Dense Forests", src: "/annual-trip/trip-15.jpeg" },
+  { title: "Scenic Drives", src: "/annual-trip/trip-16.jpeg" },
+  { title: "Hilltop Camp", src: "/annual-trip/trip-17.jpeg" },
+  { title: "Pine Valleys", src: "/annual-trip/trip-18.jpeg" },
+  { title: "Sunset Glow", src: "/annual-trip/trip-19.jpeg" },
+  { title: "Misty Trails", src: "/annual-trip/trip-20.jpeg" },
+  { title: "Alpine Meadows", src: "/annual-trip/trip-21.jpeg" },
+  { title: "Waterfall Magic", src: "/annual-trip/trip-22.jpeg" },
+  { title: "Cabin Retreat", src: "/annual-trip/trip-23.jpeg" },
+  { title: "Journey's End", src: "/annual-trip/trip-24.jpeg" },
+  { title: "Memories Made", src: "/annual-trip/trip-25.jpeg" },
 ];
 
 export default function AnnualTripPage() {
-  const carouselRef = useRef<HTMLDivElement>(null);
-  const [hasMounted, setHasMounted] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
 
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const reducedMotionRef = useRef(false);
+  const thumbnailRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const mainViewerRef = useRef<HTMLDivElement>(null);
+
+  const currentImage = tripImages[currentIndex];
+
+  // Detect reduced motion preference (run once)
   useEffect(() => {
-    setHasMounted(true);
+    if (typeof window !== "undefined") {
+      reducedMotionRef.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    }
   }, []);
 
+  // Auto-advance slideshow timer
+  const startAutoPlay = useCallback(() => {
+    if (timerRef.current) clearTimeout(timerRef.current);
+    if (reducedMotionRef.current) return;
+
+    timerRef.current = setTimeout(() => {
+      setCurrentIndex((prev) => (prev + 1) % tripImages.length);
+    }, 4200);
+  }, []);
+
+  const stopAutoPlay = useCallback(() => {
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+      timerRef.current = null;
+    }
+  }, []);
+
+  // Manage autoplay when isPlaying changes or index changes
   useEffect(() => {
-    if (!hasMounted || !carouselRef.current) return;
+    if (isPlaying && !reducedMotionRef.current) {
+      startAutoPlay();
+    } else {
+      stopAutoPlay();
+    }
+    return stopAutoPlay;
+  }, [isPlaying, currentIndex, startAutoPlay, stopAutoPlay]);
 
-    const cards = gsap.utils.toArray<HTMLDivElement>(".trip-card");
-    const totalCards = cards.length;
-    const radius = Math.min(window.innerWidth, window.innerHeight) * 0.35;
+  // Scroll active thumbnail into view (centered)
+  const scrollActiveThumbnail = useCallback((index: number) => {
+    const thumb = thumbnailRefs.current[index];
+    if (thumb) {
+      thumb.scrollIntoView({
+        behavior: reducedMotionRef.current ? "auto" : "smooth",
+        block: "nearest",
+        inline: "center",
+      });
+    }
+  }, []);
 
-    gsap.set(cards, (i: number) => {
-      const angle = (i / totalCards) * Math.PI * 2;
-      const x = Math.sin(angle) * radius;
-      const z = Math.cos(angle) * radius - radius;
-      const cos = Math.cos(angle);
-      const opacity = 0.3 + 0.7 * Math.max(0, cos);
-      const scale = 0.6 + 0.4 * Math.max(0, cos);
-      const blur = Math.max(0, (1 - cos) * 6);
-      const gray = 1 - cos;
+  const goToSlide = useCallback((index: number) => {
+    const newIndex = (index + tripImages.length) % tripImages.length;
+    setCurrentIndex(newIndex);
+    scrollActiveThumbnail(newIndex);
+  }, [scrollActiveThumbnail]);
 
-      return {
-        x: x,
-        z: z,
-        opacity: opacity,
-        scale: scale,
-        filter: `blur(${blur}px) grayscale(${gray})`,
-        transformOrigin: "center center",
-      };
-    });
+  const goToNext = useCallback(() => {
+    goToSlide(currentIndex + 1);
+  }, [currentIndex, goToSlide]);
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: carouselRef.current,
-        start: "top top",
-        end: "bottom bottom",
-        scrub: 1,
-        onUpdate: (self) => {
-          const rotate = self.progress * 360;
-          gsap.set(cards, (i: number) => {
-            const angleOffset = (i / totalCards) * Math.PI * 2;
-            const rotateRad = (rotate * Math.PI) / 180;
-            const angle = angleOffset - rotateRad;
-            const cos = Math.cos(angle);
-            const x = Math.sin(angle) * radius;
-            const z = Math.cos(angle) * radius - radius;
-            const opacity = 0.3 + 0.7 * Math.max(0, cos);
-            const scale = 0.6 + 0.4 * Math.max(0, cos);
-            const blur = Math.max(0, (1 - cos) * 6);
-            const gray = 1 - cos;
+  const goToPrev = useCallback(() => {
+    goToSlide(currentIndex - 1);
+  }, [currentIndex, goToSlide]);
 
-            return {
-              x: x,
-              z: z,
-              opacity: opacity,
-              scale: scale,
-              filter: `blur(${blur}px) grayscale(${gray})`,
-              zIndex: Math.floor(cos * 100),
-            };
-          });
-        },
-      },
-    });
+  // Toggle autoplay
+  const togglePlay = useCallback(() => {
+    if (reducedMotionRef.current) return;
+    setIsPlaying((prev) => !prev);
+  }, []);
 
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+  // Open the professional shared lightbox (at current slide)
+  const openLightbox = useCallback((index?: number) => {
+    const target = index ?? currentIndex;
+    setLightboxIndex(target);
+    setLightboxOpen(true);
+    document.body.style.overflow = "hidden";
+    // Pause our own slideshow while lightbox is open
+    setIsPlaying(false);
+  }, [currentIndex]);
+
+  const closeLightbox = useCallback(() => {
+    setLightboxOpen(false);
+    document.body.style.overflow = "auto";
+    // Sync our slideshow position to where user left the lightbox
+    setCurrentIndex(lightboxIndex);
+    setIsPlaying(true); // Resume autoplay when closing lightbox
+  }, [lightboxIndex]);
+
+  // Keyboard support for the page slideshow + lightbox handoff
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // If lightbox is open, let the shared component handle keys
+      if (lightboxOpen) return;
+
+      switch (e.key) {
+        case "ArrowRight":
+        case " ":
+          e.preventDefault();
+          goToNext();
+          break;
+        case "ArrowLeft":
+          e.preventDefault();
+          goToPrev();
+          break;
+        case "Enter":
+        case "f":
+        case "F":
+          openLightbox();
+          break;
+        case "Escape":
+          break;
+      }
     };
-  }, [hasMounted]);
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [lightboxOpen, goToNext, goToPrev, openLightbox]);
+
+  // Prepare images array for the shared lightbox
+  const lightboxImages = tripImages.map((img) => img.src);
+
+  // Structured data for SEO (ImageGallery)
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "ImageGallery",
+    name: "MAAC Annual Trip — Dalhousie & Khajjiar",
+    description: "A visual journey through the breathtaking landscapes of Dalhousie and Khajjiar. 25 moments of creativity, adventure, and camaraderie from MAAC Animation Jaipur's annual student trip.",
+    url: "https://www.maacanimationjaipur.com/annual-trip",
+    image: tripImages.map((img) => `https://www.maacanimationjaipur.com${img.src}`),
+    author: {
+      "@type": "Organization",
+      name: "MAAC Animation Jaipur",
+    },
+    numberOfItems: tripImages.length,
+  };
 
   return (
-    <div className="min-h-screen bg-[#0C0C0C] overflow-x-hidden">
-      {/* Hero Section */}
-      <section className="relative h-[60vh] flex items-center-center overflow-hidden border-b border-white/5">
-        <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-[#0C0C0C] z-10" />
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="w-full h-full object-cover opacity-40"
-          >
-            <source src="/hero-video-compressed.mp4" type="video/mp4" />
-          </video>
-        </div>
+    <div className="bg-transparent min-h-screen pt-24 sm:pt-32 relative flex flex-col">
+      <div className="w-full flex-grow">
+        {/* Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
 
-        <div className="relative z-20 text-center px-6">
+        {/* Hero Header */}
+        <div className="text-center mb-10 md:mb-14 relative z-10 px-6">
           <p className="metallic-gold-text text-[10px] font-bold tracking-[0.3em] uppercase mb-4 flex items-center justify-center gap-3">
             <span className="w-8 h-[1px] metallic-gold-accent" />
-            Memories to Last Forever
+            Dalhousie &amp; Khajjiar
             <span className="w-8 h-[1px] metallic-gold-accent" />
           </p>
-          <h1 className="font-display text-[clamp(2.5rem,8vw,5rem)] leading-[0.85] text-white mb-6 font-light uppercase tracking-[0.1em]">
-            ANNUAL TRIPS AT <span className="metallic-gold-text italic">MAAC</span>
+          <h1 className="font-display text-[clamp(2.25rem,6vw,4.75rem)] leading-[0.82] text-white font-bold uppercase tracking-wide">
+            ANNUAL <span className="metallic-gold-text italic tracking-wider">TRIP</span>
           </h1>
-          <p className="text-[#A8A29C] text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
-            Explore the breathtaking journeys and unforgettable memories from our annual adventure trips across the most beautiful destinations.
+          <p className="text-[#A8A29C] text-sm md:text-base mt-5 max-w-xl mx-auto">
+            A journey of creativity and camaraderie.<br className="hidden sm:block" /> 25 moments from the mountains that forged lifelong memories.
           </p>
         </div>
-      </section>
 
-      {/* Carousel Container */}
-      <section
-        ref={carouselRef}
-        className="relative min-h-screen bg-transparent overflow-hidden"
-        style={{ height: `${tripImages.length * 100}vh` }}
-      >
-        <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
-          <div className="relative" style={{ width: '80vw', height: '80vh', perspective: '1200px' }}>
-            {tripImages.map((trip, i) => (
-              <div
-                key={i}
-                className="trip-card absolute top-0 left-0 w-full h-full flex items-center justify-center"
-                style={{ willChange: "transform, opacity, filter" }}
+        {/* Main Premium Slideshow */}
+        <div className="max-w-6xl mx-auto px-5 md:px-8 pb-16">
+          {/* Section label */}
+          <div className="flex items-center justify-between mb-4 px-1">
+            <div>
+              <span className="text-[10px] font-bold tracking-[0.25em] uppercase text-[#FFD700]/80">The Visual Story</span>
+              <h2 className="text-white text-xl md:text-2xl font-display tracking-wide mt-1">Manali Trip</h2>
+            </div>
+            <button
+              onClick={() => openLightbox()}
+              className="hidden md:flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors border border-white/15 hover:border-white/30 px-4 h-9 rounded-full"
+            >
+              <span>Open Full Gallery</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+              </svg>
+            </button>
+          </div>
+
+          {/* The Big Slideshow Viewer */}
+          <div
+            ref={mainViewerRef}
+            className="group relative w-full rounded-3xl overflow-hidden glass-card border border-white/10 shadow-2xl bg-[#0A0A0A]"
+            style={{ aspectRatio: '16/9' }}
+          >
+            {/* Main Image with smooth swap */}
+            <div className="absolute inset-0">
+              <Image
+                key={currentIndex}
+                src={currentImage.src}
+                alt={currentImage.title}
+                fill
+                className="object-cover transition-all duration-700 ease-out opacity-100 scale-100"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1100px"
+                priority={currentIndex < 3}
+                unoptimized
+              />
+            </div>
+
+            {/* Subtle gradient for text legibility at bottom */}
+            <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 via-black/50 to-transparent pointer-events-none" />
+
+            {/* Top-right controls */}
+            <div className="absolute top-4 right-4 z-30 flex items-center gap-2">
+              {/* Fullscreen / Lightbox trigger */}
+              <button
+                onClick={() => openLightbox()}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium tracking-widest bg-black/60 text-white/90 border border-white/20 hover:bg-white/10 hover:text-white backdrop-blur-md transition-all"
+                aria-label="Open full screen lightbox"
               >
-                <div className="relative w-[70%] h-[80%] rounded-2xl overflow-hidden glass-card border border-white/10 shadow-2xl">
-                  <Image
-                    src={trip.src}
-                    alt={trip.title}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 90vw, 70vw"
-                    loading={i === 0 ? "eager" : "lazy"}
-                    priority={i === 0}
-                  />
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-8 md:p-12">
-                    <h2 className="font-display text-2xl md:text-4xl text-white font-bold uppercase tracking-[0.1em] leading-tight">
-                      {trip.title}
-                    </h2>
-                  </div>
-                </div>
+                <span className="hidden sm:inline">FULLSCREEN</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.75">
+                  <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Large elegant Prev / Next arrows */}
+            <button
+              onClick={goToPrev}
+              className="absolute left-3 md:left-5 top-1/2 -translate-y-1/2 z-30 w-11 h-11 md:w-12 md:h-12 rounded-full glass border border-white/25 flex items-center justify-center text-white/70 hover:text-white hover:border-[#FFD700]/60 hover:bg-white/5 active:scale-95 transition-all"
+              aria-label="Previous photo"
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
+            </button>
+            <button
+              onClick={goToNext}
+              className="absolute right-3 md:right-5 top-1/2 -translate-y-1/2 z-30 w-11 h-11 md:w-12 md:h-12 rounded-full glass border border-white/25 flex items-center justify-center text-white/70 hover:text-white hover:border-[#FFD700]/60 hover:bg-white/5 active:scale-95 transition-all"
+              aria-label="Next photo"
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M9 18l6-6-6-6" />
+              </svg>
+            </button>
+
+            {/* Bottom info bar — Counter only */}
+            <div className="absolute bottom-0 left-0 right-0 z-20 p-5 md:p-7 flex justify-end">
+              <div className="text-right text-white/60 text-sm font-mono tracking-widest tabular-nums shrink-0 drop-shadow-md">
+                {currentIndex + 1} <span className="text-white/40">/ {tripImages.length}</span>
               </div>
-            ))}
+            </div>
+
+          </div>
+
+          {/* Interactive Filmstrip Thumbnails */}
+          <div className="mt-5">
+            <div className="flex items-center justify-between px-1 mb-2.5">
+              <p className="text-[#A8A29C] text-xs tracking-widest uppercase">Browse the full story</p>
+              <p className="text-[#A8A29C] text-[10px] hidden md:block">Click any frame • Use ← → keys • Press F for fullscreen</p>
+            </div>
+
+            <div className="relative">
+              {/* Edge fades for the filmstrip */}
+              <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-[#0C0C0C] to-transparent z-10 rounded-l-2xl" />
+              <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-[#0C0C0C] to-transparent z-10 rounded-r-2xl" />
+
+              <div className="flex gap-3 overflow-x-auto pb-3 snap-x snap-mandatory no-scrollbar px-1">
+                {tripImages.map((img, idx) => {
+                  const isActive = idx === currentIndex;
+                  return (
+                    <button
+                      key={idx}
+                      ref={(el) => { thumbnailRefs.current[idx] = el; }}
+                      onClick={() => goToSlide(idx)}
+                      className={`group relative flex-shrink-0 w-24 h-16 md:w-28 md:h-20 rounded-xl overflow-hidden border-2 transition-all duration-200 snap-start outline-none focus-visible:ring-2 focus-visible:ring-[#FFD700]/70 ${isActive
+                          ? "border-[#FFD700] scale-[1.03] shadow-lg shadow-black/50 z-10"
+                          : "border-white/10 hover:border-white/30 opacity-80 hover:opacity-100"
+                        }`}
+                      aria-label={`Go to ${img.title}`}
+                      aria-current={isActive ? "true" : "false"}
+                    >
+                      <Image
+                        src={img.src}
+                        alt={img.title}
+                        fill
+                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                        sizes="110px"
+                        loading={idx < 6 ? "eager" : "lazy"}
+                        unoptimized
+                      />
+                      {/* Active indicator + title hint on hover */}
+                      <div className={`absolute inset-0 transition-opacity ${isActive ? "bg-black/10" : "bg-black/40 group-hover:bg-black/20"}`} />
+                      {isActive && (
+                        <div className="absolute bottom-1.5 right-1.5 px-1.5 py-px text-[9px] font-bold tracking-wider bg-black/70 text-[#FFD700] rounded">
+                          NOW
+                        </div>
+                      )}
+                      {/* Removed title on hover to keep it clean */}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom actions row */}
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 mt-6 px-1 text-sm">
+            <button
+              onClick={() => openLightbox()}
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full border border-white/15 hover:border-[#FFD700]/40 px-6 h-11 text-white/90 hover:text-white transition-all active:scale-[0.985]"
+            >
+              View all 25 images in fullscreen gallery
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" /></svg>
+            </button>
+
+            <div className="text-[#A8A29C] text-xs text-center sm:text-right max-w-[260px]">
+              Use ← → keys to navigate
+            </div>
           </div>
         </div>
 
-        {/* Scroll Indicator */}
-        <div className="fixed right-8 top-1/2 -translate-y-1/2 z-30 flex flex-col items-center gap-2">
-          <div className="w-[1px] h-16 bg-gradient-to-b from-transparent via-white/20 to-transparent animate-pulse" />
-          <span className="text-[10px] uppercase tracking-widest text-white/40 rotate-90 origin-center">
-            Scroll
-          </span>
-        </div>
-      </section>
+        {/* Grid and poetic lines removed as requested */}
+      </div>
 
-      <Footer />
+      {/* Footer */}
+      <div className="relative z-10 mt-auto w-full">
+        <Footer />
+      </div>
+
+      {/* Professional Shared Lightbox (used for the immersive fullscreen experience) */}
+      <ImageLightbox
+        images={lightboxImages}
+        alt="MAAC Annual Trip — Dalhousie & Khajjiar"
+        initialIndex={lightboxIndex}
+        isOpen={lightboxOpen}
+        onClose={closeLightbox}
+      />
     </div>
   );
 }

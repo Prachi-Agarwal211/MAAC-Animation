@@ -1,6 +1,7 @@
 "use server";
 
 import { google } from "googleapis";
+import { sendMetaCapiLead } from "@/lib/meta-capi";
 
 const sanitize = (text: string | null | undefined): string => {
   if (!text) return "";
@@ -62,6 +63,11 @@ export async function submitContactForm(formData: FormData) {
         values,
       },
     });
+
+    // Fire Meta CAPI server-side event (doesn't block response)
+    if (email && phone) {
+      sendMetaCapiLead({ email, phone, name, url: "https://www.maacanimationjaipur.com/contact" });
+    }
 
     return { success: true, message: "Application submitted successfully! We'll contact you soon." };
   } catch (error) {

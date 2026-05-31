@@ -45,12 +45,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.6,
     },
-    {
-      url: `${base}/gallery`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.6,
-    },
+     {
+       url: `${base}/gallery`,
+       lastModified: now,
+       changeFrequency: "monthly",
+       priority: 0.6,
+     },
+     {
+       url: `${base}/annual-trip`,
+       lastModified: now,
+       changeFrequency: "monthly",
+       priority: 0.6,
+     },
     {
       url: `${base}/terms-of-service`,
       lastModified: now,

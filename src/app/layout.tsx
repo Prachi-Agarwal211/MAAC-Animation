@@ -3,12 +3,14 @@ import { Inter, Syne } from "next/font/google";
 import "./globals.css";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
+import Script from "next/script";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Providers } from "./providers";
 import { contactInfo } from "@/data/siteData";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import Navbar from "@/components/Navbar";
+import MetaPixel from "@/components/MetaPixel";
 
 // Heavy Client Components - Lazy loaded
 const DynamicBackground = dynamic(() => import("@/components/ui/DynamicBackground"), { ssr: false });
@@ -206,6 +208,58 @@ export default function RootLayout({
         <link rel="preload" as="video" href="/intro.mp4" type="video/mp4" />
         <link rel="preload" as="video" href="/intro.webm" type="video/webm" />
         <link rel="preload" as="image" href="/hero-poster.jpg" />
+
+        {/* Preload first critical images for the Annual Trip slideshow (fast LCP when users land on /annual-trip) */}
+        <link rel="preload" as="image" href="/annual-trip/trip-01.jpeg" />
+        <link rel="preload" as="image" href="/annual-trip/trip-02.jpeg" />
+        <link rel="preload" as="image" href="/annual-trip/trip-03.jpeg" />
+        <link rel="preload" as="image" href="/annual-trip/trip-04.jpeg" />
+
+        {/* =====================================================================
+            ADVERTISING & ANALYTICS TAGS - Meta + Google Ads
+            These load early for accurate ad attribution and conversion tracking.
+            Configure IDs in .env (see .env.example for full guide)
+        ===================================================================== */}
+
+        {/* Google Tag Manager (Recommended for Google Ads + GA4) */}
+        {process.env.NEXT_PUBLIC_GTM_ID && (
+          <Script
+            id="gtm"
+            strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `
+                (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                })(window,document,'script','dataLayer','${process.env.NEXT_PUBLIC_GTM_ID}');
+              `,
+            }}
+          />
+        )}
+
+        {/* Google Ads global site tag (gtag.js) - used if you have direct Google Ads conversion ID */}
+        {process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_ID && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script
+              id="google-ads"
+              strategy="afterInteractive"
+              dangerouslySetInnerHTML={{
+                __html: `
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_ID}');
+                `,
+              }}
+            />
+          </>
+        )}
+
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -214,6 +268,18 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${syne.variable} font-body antialiased text-[#F0EBE1] bg-[#0C0C0C]`}
       >
+        {/* Google Tag Manager noscript fallback (for users with JS disabled) */}
+        {process.env.NEXT_PUBLIC_GTM_ID && (
+          <noscript>
+            <iframe
+              src={`https://www.googletagmanager.com/ns.html?id=${process.env.NEXT_PUBLIC_GTM_ID}`}
+              height="0"
+              width="0"
+              style={{ display: "none", visibility: "hidden" }}
+            />
+          </noscript>
+        )}
+
         <Suspense fallback={<div className="fixed inset-0 bg-[#0C0C0C]" />}>
           <DynamicBackground />
         </Suspense>
@@ -243,6 +309,9 @@ export default function RootLayout({
               </Suspense>
               <Suspense fallback={null}>
                 <CustomCursor />
+              </Suspense>
+                  <Suspense fallback={null}>
+                <MetaPixel />
               </Suspense>
               <Analytics />
               <SpeedInsights />
