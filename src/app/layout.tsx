@@ -209,11 +209,11 @@ export default function RootLayout({
         <link rel="preload" as="video" href="/intro.webm" type="video/webm" />
         <link rel="preload" as="image" href="/hero-poster.jpg" />
 
-        {/* Preload first critical images for the Annual Trip slideshow (fast LCP when users land on /annual-trip) */}
-        <link rel="preload" as="image" href="/annual-trip/trip-01.jpeg" />
-        <link rel="preload" as="image" href="/annual-trip/trip-02.jpeg" />
-        <link rel="preload" as="image" href="/annual-trip/trip-03.jpeg" />
-        <link rel="preload" as="image" href="/annual-trip/trip-04.jpeg" />
+        {/* Preload first critical images for the Annual Trip slideshow (using the images the user placed in the folder) */}
+        <link rel="preload" as="image" href="/annual-trip/event-002.jpeg" />
+        <link rel="preload" as="image" href="/annual-trip/event-003.jpeg" />
+        <link rel="preload" as="image" href="/annual-trip/event-004.jpeg" />
+        <link rel="preload" as="image" href="/annual-trip/event-005.jpeg" />
 
         {/* =====================================================================
             ADVERTISING & ANALYTICS TAGS - Meta + Google Ads

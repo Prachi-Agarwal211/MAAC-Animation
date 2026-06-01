@@ -4,9 +4,12 @@ import Script from "next/script";
 import Footer from "@/components/Footer";
 import IndustryPartners from "@/components/IndustryPartners";
 import ApplyNow from "@/components/ApplyNow";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import gsap, { ScrollTrigger } from "@/lib/gsap";
 import VideoFacade from "@/components/ui/VideoFacade";
+import Image from "next/image";
+import ImageLightbox from "@/components/ui/ImageLightbox";
+import { EVENT_PHOTOS } from "@/data/events";
 
 export default function EventsPage() {
   const video24FPSRef = useRef<HTMLDivElement>(null);
@@ -16,6 +19,78 @@ export default function EventsPage() {
   const videoMCLRef = useRef<HTMLDivElement>(null);
   const videoKlickRef = useRef<HTMLDivElement>(null);
   const videoBTSRef = useRef<HTMLDivElement>(null);
+
+  // === Minimal Slideshow for the new event photos (user requested) ===
+  const [slideIndex, setSlideIndex] = useState(0);
+  const [isSlidePlaying, setIsSlidePlaying] = useState(true);
+  const [showLightbox, setShowLightbox] = useState(false);
+  const [lightboxStart, setLightboxStart] = useState(0);
+  const slideTimer = useRef<NodeJS.Timeout | null>(null);
+  const prefersReduced = useRef(false);
+  const thumbRefs = useRef<(HTMLButtonElement | null)[]>([]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      prefersReduced.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    }
+  }, []);
+
+  const runSlide = useCallback(() => {
+    if (slideTimer.current) clearTimeout(slideTimer.current);
+    if (prefersReduced.current) return;
+    slideTimer.current = setTimeout(() => {
+      setSlideIndex((i) => (i + 1) % EVENT_PHOTOS.length);
+    }, 3800);
+  }, []);
+
+  const stopSlide = useCallback(() => {
+    if (slideTimer.current) {
+      clearTimeout(slideTimer.current);
+      slideTimer.current = null;
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isSlidePlaying && !prefersReduced.current) runSlide();
+    else stopSlide();
+    return stopSlide;
+  }, [isSlidePlaying, slideIndex, runSlide, stopSlide]);
+
+  const goToPhoto = (i: number) => {
+    const next = (i + EVENT_PHOTOS.length) % EVENT_PHOTOS.length;
+    setSlideIndex(next);
+    thumbRefs.current[next]?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+  };
+  const nextPhoto = () => goToPhoto(slideIndex + 1);
+  const prevPhoto = () => goToPhoto(slideIndex - 1);
+  const toggleSlidePlay = () => setIsSlidePlaying((p) => !p);
+
+  const openPhotosLightbox = (idx?: number) => {
+    const target = idx ?? slideIndex;
+    setLightboxStart(target);
+    setShowLightbox(true);
+    document.body.style.overflow = "hidden";
+    setIsSlidePlaying(false);
+  };
+  const closePhotosLightbox = () => {
+    setShowLightbox(false);
+    document.body.style.overflow = "";
+    setSlideIndex(lightboxStart);
+    setIsSlidePlaying(true);
+  };
+
+  // Keyboard for slideshow
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (showLightbox) return;
+      if (e.key === "ArrowRight" || e.key === " ") { e.preventDefault(); nextPhoto(); }
+      if (e.key === "ArrowLeft") { e.preventDefault(); prevPhoto(); }
+      if (e.key.toLowerCase() === "f") openPhotosLightbox();
+      if (e.key.toLowerCase() === "p") toggleSlidePlay();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [showLightbox, slideIndex]);
 
   useEffect(() => {
     const videoRefs = [
@@ -78,46 +153,154 @@ export default function EventsPage() {
         }}
       />
 
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Background video */}
+      <section className="relative min-h-[100svh] flex items-center justify-center overflow-hidden isolate">
+        {/* Background video — kept prominent and highlighted */}
         <video
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover object-center"
           autoPlay
           muted
           loop
           playsInline
+          preload="auto"
         >
           <source src="/event-compressed.mp4" type="video/mp4" />
         </video>
 
-        {/* Black overlay */}
-        <div className="absolute inset-0 bg-black/60" />
+        {/* Much lighter overlay so the main video background is highlighted (user request) */}
+        <div className="absolute inset-0 bg-black/35" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-black/45" />
 
-        {/* Abstract decorative elements */}
-        <div className="absolute top-20 left-20 w-72 h-72 bg-gray-800 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse" />
-        <div className="absolute top-40 right-20 w-96 h-96 bg-gray-700 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse animation-delay-2000" />
-        <div className="absolute bottom-20 left-1/2 w-80 h-80 bg-gray-600 rounded-full mix-blend-multiply filter blur-xl opacity-25 animate-pulse animation-delay-4000" />
+        {/* Minimal decorative accents only (removed heavy black blobs) */}
+        <div className="absolute top-1/3 left-1/4 w-28 h-28 bg-white/5 rounded-full blur-2xl" />
+        <div className="absolute bottom-1/4 right-1/3 w-40 h-40 bg-white/5 rounded-full blur-3xl" />
 
-        {/* Additional abstract shapes */}
-        <div className="absolute top-1/3 left-1/4 w-32 h-32 bg-white/10 rounded-full blur-md" />
-        <div className="absolute bottom-1/3 right-1/4 w-48 h-48 bg-white/5 rounded-full blur-lg" />
-        <div className="absolute top-1/2 right-1/3 w-24 h-24 bg-white/8 rounded-full blur-sm" />
-
-        {/* Main content */}
-        <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-8 leading-tight metallic-gold-text">
-            MAAC EVENTS!
+        {/* Main content — landing-matched typography */}
+        <div className="relative z-10 mx-auto max-w-5xl px-6 text-center pt-16">
+          <p className="metallic-gold-text text-xs font-bold tracking-[0.35em] mb-4">EXPERIENCES THAT DEFINE US</p>
+          <h1 className="font-display text-[clamp(2.6rem,7.8vw,5.8rem)] leading-[0.88] font-bold tracking-[-0.01em] text-white mb-6">
+            MAAC <span className="metallic-gold-text italic">EVENTS</span>
           </h1>
-          <p className="text-lg md:text-xl lg:text-2xl text-white/90 max-w-3xl mx-auto leading-relaxed">
+          <p className="max-w-2xl mx-auto text-lg md:text-xl text-[#A8A29C] leading-snug mb-8">
             At MAAC, our dedicated team works tirelessly throughout the year to organize exciting events across various locations, bringing together students, alumni, and faculty.
           </p>
+          <a href="#moments" className="inline-flex items-center gap-2 text-sm font-bold tracking-[0.2em] border-b border-[#FFD700]/50 pb-1 text-[#F0EBE1] hover:text-white hover:border-[#FFD700] transition-colors">
+            SEE THE MOMENTS ↓
+          </a>
         </div>
-
-
       </section>
 
-      {/* Why Attend MAAC Events Section */}
-      <section className="relative py-8 md:py-12 overflow-hidden bg-black border-t border-white/5">
+      {/* ========== SLIDESHOW: Event Photos (from the separated collection) ========== */}
+      <section id="moments" className="relative py-12 md:py-16 border-t border-white/10 bg-transparent">
+        <div className="max-w-[1280px] mx-auto px-5 md:px-8">
+          <div className="flex items-end justify-between mb-5 px-1">
+            <div>
+              <span className="metallic-gold-text text-[10px] font-bold tracking-[0.3em] uppercase">CAPTURED ON CAMPUS</span>
+              <h3 className="font-display text-3xl md:text-4xl text-white font-bold tracking-tight mt-1">Recent Event Moments</h3>
+            </div>
+            <button
+              onClick={() => openPhotosLightbox()}
+              className="hidden md:block text-xs tracking-[0.2em] uppercase text-[#A8A29C] hover:text-white border-b border-white/20 hover:border-[#FFD700] pb-px transition"
+            >
+              VIEW ALL IN FULLSCREEN
+            </button>
+          </div>
+
+          {/* Clean main viewer — flexible container so both landscape and portrait photos fit the screen well */}
+          <div className="relative rounded-2xl overflow-hidden bg-[#0a0a0a] shadow-xl" style={{ maxHeight: '72vh', minHeight: '320px' }}>
+            <Image
+              key={slideIndex}
+              src={EVENT_PHOTOS[slideIndex]}
+              alt={`Event moment ${slideIndex + 1}`}
+              fill
+              className="object-contain bg-black"
+              sizes="(max-width: 768px) 100vw, 1200px"
+              unoptimized
+            />
+
+            {/* Very light controls so background photo stays prominent */}
+            <div className="absolute top-3 right-3 z-30 flex gap-2">
+              <button onClick={toggleSlidePlay} className="px-3 py-1.5 text-[10px] tracking-widest rounded-full bg-black/50 border border-white/15 text-white/80 hover:bg-white/10 hover:text-white transition">
+                {isSlidePlaying ? "PAUSE" : "PLAY"}
+              </button>
+              <button onClick={() => openPhotosLightbox()} className="px-3 py-1.5 text-[10px] tracking-widest rounded-full bg-black/50 border border-white/15 text-white/80 hover:bg-white/10 hover:text-white transition">
+                ALL PHOTOS
+              </button>
+            </div>
+
+            <button onClick={prevPhoto} className="absolute left-3 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full bg-black/40 border border-white/20 text-white/70 hover:text-white flex items-center justify-center">←</button>
+            <button onClick={nextPhoto} className="absolute right-3 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full bg-black/40 border border-white/20 text-white/70 hover:text-white flex items-center justify-center">→</button>
+
+            <div className="absolute bottom-3 right-4 text-[10px] font-mono text-white/50 z-30">
+              {slideIndex + 1} / {EVENT_PHOTOS.length}
+            </div>
+          </div>
+
+          {/* Filmstrip — photos front and center, very little chrome */}
+          <div className="mt-3 relative">
+            <div className="flex gap-2 overflow-x-auto pb-3 snap-x no-scrollbar px-1">
+              {EVENT_PHOTOS.map((src, i) => {
+                const active = i === slideIndex;
+                return (
+                  <button
+                    key={i}
+                    ref={(el) => { thumbRefs.current[i] = el; }}
+                    onClick={() => goToPhoto(i)}
+                    className={`flex-shrink-0 rounded-xl overflow-hidden border transition snap-start ${active ? "border-[#FFD700] scale-[1.02]" : "border-white/10 hover:border-white/30"}`}
+                    style={{ width: 78, height: 52 }}
+                  >
+                    <Image src={src} alt="" fill className="object-contain bg-black/30" unoptimized loading={i < 6 ? "eager" : "lazy"} />
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+          <p className="text-center text-[10px] text-[#A8A29C]/60 tracking-widest mt-1">Photos from our latest campus celebration • Click any frame or use arrows / F</p>
+        </div>
+      </section>
+
+      {/* ========== NEW: In the Press — Newspaper & Media Cutouts ========== */}
+      <section className="relative py-14 md:py-20 border-t border-white/10 bg-transparent">
+        <div className="max-w-6xl mx-auto px-6 lg:px-10">
+          <div className="text-center mb-8">
+            <p className="metallic-gold-text text-[10px] font-bold tracking-[0.3em] mb-2">MAKING HEADLINES</p>
+            <h2 className="font-display text-3xl md:text-[2.6rem] leading-none text-white font-bold tracking-tight">In the Press</h2>
+            <p className="text-[#A8A29C] mt-3 max-w-lg mx-auto">Our events and community making the news.</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {PRESS_PHOTOS.map((photo, idx) => {
+              const globalIdx = EVENT_PHOTOS.findIndex(p => p.src === photo.src);
+              return (
+                <div 
+                  key={idx}
+                  onClick={() => openPhotosLightbox(globalIdx >= 0 ? globalIdx : 0)}
+                  className="group glass-card overflow-hidden cursor-pointer border border-white/10 hover:border-[#FFD700]/40 transition-all"
+                >
+                  <div className="bg-[#f8f1e3] p-3"> {/* warm paper-like bg for authentic newspaper feel */}
+                    <Image 
+                      src={photo.src} 
+                      alt={photo.title || "Newspaper clipping from MAAC event"} 
+                      width={720} 
+                      height={920} 
+                      className="w-full h-auto object-contain" 
+                    />
+                  </div>
+                  <div className="px-4 py-3 text-xs text-[#A8A29C]">
+                    <span className="font-medium text-white">{photo.title}</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          <p className="text-center text-[10px] tracking-widest text-[#A8A29C]/50 mt-5">
+            More clippings from the collection • Tap to view full
+          </p>
+        </div>
+      </section>
+
+      {/* Why Attend MAAC Events Section — lighter treatment so video/photo backgrounds stay prominent */}
+      <section className="relative py-8 md:py-12 overflow-hidden bg-transparent border-t border-white/10">
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Two column layout: Left heading, Right cards */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
@@ -196,7 +379,7 @@ export default function EventsPage() {
       </section>
 
       {/* Signature MAAC Events Section */}
-      <section className="relative py-8 md:py-12 overflow-hidden bg-black">
+      <section className="relative py-8 md:py-12 overflow-hidden bg-transparent">
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold metallic-gold-text mb-16 leading-tight text-center">
             Signature MAAC Events You Can Be a Part Of!
@@ -229,7 +412,7 @@ export default function EventsPage() {
               </svg>
 
               {/* Video Card */}
-              <div ref={video24FPSRef} className="rounded-2xl shadow-lg overflow-hidden w-full max-w-md h-64 border border-white/5">
+              <div ref={video24FPSRef} className="rounded-2xl shadow-lg overflow-hidden w-full max-w-md h-64 border border-white/10">
                 <VideoFacade youtubeId="C2ix6uKTaAQ" title="24FPS International Animation Awards" />
               </div>
             </div>
@@ -238,10 +421,10 @@ export default function EventsPage() {
       </section>
 
       {/* 100 Hours - The Ultimate Creative Marathon Section */}
-      <section className="relative py-8 md:py-12 overflow-hidden bg-black">
+      <section className="relative py-8 md:py-12 overflow-hidden bg-transparent">
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Top white line */}
-          <div className="border-t border-white/30 mb-12"></div>
+          <div className="border-t border-white/10 mb-12"></div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left side: Logo, Heading, Description, Button */}
@@ -271,7 +454,7 @@ export default function EventsPage() {
               </svg>
 
               {/* Video Card */}
-              <div ref={video100HoursRef} className="relative w-full max-w-md rounded-2xl shadow-lg overflow-hidden h-64 border border-white/5">
+              <div ref={video100HoursRef} className="relative w-full max-w-md rounded-2xl shadow-lg overflow-hidden h-64 border border-white/10">
                 <VideoFacade youtubeId="3BuVrYHjIq4" title="100 Hours - The Ultimate Creative Marathon" />
               </div>
             </div>
@@ -280,10 +463,10 @@ export default function EventsPage() {
       </section>
 
       {/* New Event Section - Same Layout */}
-      <section className="relative py-8 md:py-12 overflow-hidden bg-black">
+      <section className="relative py-8 md:py-12 overflow-hidden bg-transparent">
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Top white line */}
-          <div className="border-t border-white/30 mb-12"></div>
+          <div className="border-t border-white/10 mb-12"></div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left side: Logo, Heading, Description, Button */}
@@ -313,7 +496,7 @@ export default function EventsPage() {
               </svg>
 
               {/* Video Card */}
-              <div ref={videoManifestRef} className="rounded-2xl shadow-lg overflow-hidden w-full max-w-md h-64 border border-white/5">
+              <div ref={videoManifestRef} className="rounded-2xl shadow-lg overflow-hidden w-full max-w-md h-64 border border-white/10">
                 <VideoFacade youtubeId="RaQivBSoEak" title="MAAC Manifest" />
               </div>
             </div>
@@ -322,10 +505,10 @@ export default function EventsPage() {
       </section>
 
       {/* NSM - National Students' Meet Section */}
-      <section className="relative py-8 md:py-12 overflow-hidden bg-black">
+      <section className="relative py-8 md:py-12 overflow-hidden bg-transparent">
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Top white line */}
-          <div className="border-t border-white mb-8"></div>
+          <div className="border-t border-white/10 mb-8"></div>
 
           <div className="grid grid-cols-1 lg:grid-cols-[auto_1fr_1fr] gap-8 items-center">
             {/* Left side: NSM Logo, Title, Description, Button */}
@@ -363,8 +546,8 @@ National Students&apos; Meet (NSM)
             {/* Right side: Video Card */}
             <div className="flex justify-center lg:justify-end">
               <div className="relative w-full max-w-sm">
-                <div ref={videoNSMRef} className="rounded-2xl shadow-lg overflow-hidden h-56 border border-white/5">
-                  <VideoFacade youtubeId="FPgueLMvlMI" title="National Students' Meet (NSM)" />
+                <div ref={videoNSMRef} className="rounded-2xl shadow-lg overflow-hidden h-56 border border-white/10">
+                  <VideoFacade youtubeId="F0WMuSpXMK0" title="National Students' Meet (NSM)" />
                 </div>
               </div>
             </div>
@@ -373,10 +556,10 @@ National Students&apos; Meet (NSM)
       </section>
 
       {/* MCL - MAAC Creative League Section */}
-      <section className="relative py-8 md:py-12 overflow-hidden bg-black">
+      <section className="relative py-8 md:py-12 overflow-hidden bg-transparent">
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Top white line */}
-          <div className="border-t border-white mb-8"></div>
+          <div className="border-t border-white/10 mb-8"></div>
 
           <div className="grid grid-cols-1 lg:grid-cols-[auto_1fr_1fr] gap-8 items-center">
             {/* Left side: MCL Logo, Title, Description, Button */}
@@ -414,8 +597,8 @@ National Students&apos; Meet (NSM)
             {/* Right side: Video Card */}
             <div className="flex justify-center lg:justify-end">
 <div className="relative w-full max-w-sm">
-                 <div ref={videoMCLRef} className="rounded-2xl shadow-lg overflow-hidden h-56 border border-white/5">
-                   <VideoFacade youtubeId="dQw4w9WgXcQ" title="MAAC Creative League (MCL)" />
+                 <div ref={videoMCLRef} className="rounded-2xl shadow-lg overflow-hidden h-56 border border-white/10">
+                   <VideoFacade youtubeId="FPgueLMvlMI" title="MAAC Creative League (MCL)" />
                  </div>
                </div>
             </div>
@@ -424,10 +607,10 @@ National Students&apos; Meet (NSM)
       </section>
 
       {/* MAAC Klick - Nature & Wildlife Photography Expeditions Section */}
-      <section className="relative py-8 md:py-12 overflow-hidden bg-black">
+      <section className="relative py-8 md:py-12 overflow-hidden bg-transparent">
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Top white line */}
-          <div className="border-t border-white mb-8"></div>
+          <div className="border-t border-white/10 mb-8"></div>
 
           <div className="grid grid-cols-1 lg:grid-cols-[auto_1fr_1fr] gap-8 items-center">
             {/* Left side: MAAC Klick Logo, Title, Description, Button */}
@@ -465,7 +648,7 @@ National Students&apos; Meet (NSM)
             {/* Right side: Video Card */}
             <div className="flex justify-center lg:justify-end">
               <div className="relative w-full max-w-sm">
-                <div ref={videoKlickRef} className="rounded-2xl shadow-lg overflow-hidden h-56 border border-white/5">
+                <div ref={videoKlickRef} className="rounded-2xl shadow-lg overflow-hidden h-56 border border-white/10">
                   <VideoFacade youtubeId="ao5k9ZTVbS0" title="MAAC Klick - Nature & Wildlife Photography Expeditions" />
                 </div>
               </div>
@@ -475,10 +658,10 @@ National Students&apos; Meet (NSM)
       </section>
 
       {/* New Section - Same Layout */}
-      <section className="relative py-8 md:py-12 overflow-hidden bg-black">
+      <section className="relative py-8 md:py-12 overflow-hidden bg-transparent">
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Top white line */}
-          <div className="border-t border-white mb-8"></div>
+          <div className="border-t border-white/10 mb-8"></div>
 
           <div className="grid grid-cols-1 lg:grid-cols-[auto_1fr_1fr] gap-8 items-center">
             {/* Left side: Logo, Title, Description, Button */}
@@ -516,7 +699,7 @@ National Students&apos; Meet (NSM)
             {/* Right side: Video Card */}
             <div className="flex justify-center lg:justify-end">
               <div className="relative w-full max-w-sm">
-                <div ref={videoBTSRef} className="rounded-2xl shadow-lg overflow-hidden h-56 border border-white/5">
+                <div ref={videoBTSRef} className="rounded-2xl shadow-lg overflow-hidden h-56 border border-white/10">
                   <VideoFacade youtubeId="Fs6YutaEejc" title="BTS: Behind the Screen" />
                 </div>
               </div>
@@ -526,7 +709,7 @@ National Students&apos; Meet (NSM)
       </section>
 
       {/* Who Can Attend MAAC Events Section */}
-      <section className="relative py-8 md:py-12 overflow-hidden bg-black">
+      <section className="relative py-8 md:py-12 overflow-hidden bg-transparent">
         {/* Subtle wavy pattern background */}
         <div className="absolute inset-0 opacity-5">
           <svg className="w-full h-full" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
@@ -629,6 +812,15 @@ National Students&apos; Meet (NSM)
       </div>
 
       <Footer />
+
+      {/* The professional lightbox for the event photos */}
+      <ImageLightbox
+        images={EVENT_PHOTOS}
+        alt="MAAC Jaipur Event Moments"
+        initialIndex={lightboxStart}
+        isOpen={showLightbox}
+        onClose={closePhotosLightbox}
+      />
     </>
   );
 }

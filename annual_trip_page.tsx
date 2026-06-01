@@ -5,33 +5,45 @@ import Image from "next/image";
 import Footer from "@/components/Footer";
 import ImageLightbox from "@/components/ui/ImageLightbox";
 
-// Rich trip data — all 25 moments with beautiful titles
+// Images for the Annual Trip page — using exactly the files the user manually placed in public/annual-trip/
 const tripImages = [
-  { title: "A Misty Morning", src: "/annual-trip/trip-01.jpeg" },
-  { title: "Mountain Views", src: "/annual-trip/trip-02.jpeg" },
-  { title: "Sunrise Peaks", src: "/annual-trip/trip-03.jpeg" },
-  { title: "Valley Beauty", src: "/annual-trip/trip-04.jpeg" },
-  { title: "Forest Trails", src: "/annual-trip/trip-05.jpeg" },
-  { title: "River Crossing", src: "/annual-trip/trip-06.jpeg" },
-  { title: "Campsite Vibes", src: "/annual-trip/trip-07.jpeg" },
-  { title: "Night Sky", src: "/annual-trip/trip-08.jpeg" },
-  { title: "Morning Dew", src: "/annual-trip/trip-09.jpeg" },
-  { title: "Highland Views", src: "/annual-trip/trip-10.jpeg" },
-  { title: "Trail Adventure", src: "/annual-trip/trip-11.jpeg" },
-  { title: "Lakeside Calm", src: "/annual-trip/trip-12.jpeg" },
-  { title: "Rocky Paths", src: "/annual-trip/trip-13.jpeg" },
-  { title: "Golden Hour", src: "/annual-trip/trip-14.jpeg" },
-  { title: "Dense Forests", src: "/annual-trip/trip-15.jpeg" },
-  { title: "Scenic Drives", src: "/annual-trip/trip-16.jpeg" },
-  { title: "Hilltop Camp", src: "/annual-trip/trip-17.jpeg" },
-  { title: "Pine Valleys", src: "/annual-trip/trip-18.jpeg" },
-  { title: "Sunset Glow", src: "/annual-trip/trip-19.jpeg" },
-  { title: "Misty Trails", src: "/annual-trip/trip-20.jpeg" },
-  { title: "Alpine Meadows", src: "/annual-trip/trip-21.jpeg" },
-  { title: "Waterfall Magic", src: "/annual-trip/trip-22.jpeg" },
-  { title: "Cabin Retreat", src: "/annual-trip/trip-23.jpeg" },
-  { title: "Journey's End", src: "/annual-trip/trip-24.jpeg" },
-  { title: "Memories Made", src: "/annual-trip/trip-25.jpeg" },
+  { title: "Annual Trip Moment 01", src: "/annual-trip/event-002.jpeg" },
+  { title: "Annual Trip Moment 02", src: "/annual-trip/event-003.jpeg" },
+  { title: "Annual Trip Moment 03", src: "/annual-trip/event-004.jpeg" },
+  { title: "Annual Trip Moment 04", src: "/annual-trip/event-005.jpeg" },
+  { title: "Annual Trip Moment 05", src: "/annual-trip/event-006.jpeg" },
+  { title: "Annual Trip Moment 06", src: "/annual-trip/event-007.jpeg" },
+  { title: "Annual Trip Moment 07", src: "/annual-trip/event-008.jpeg" },
+  { title: "Annual Trip Moment 08", src: "/annual-trip/event-009.jpeg" },
+  { title: "Annual Trip Moment 09", src: "/annual-trip/event-010.jpeg" },
+  { title: "Annual Trip Moment 10", src: "/annual-trip/event-011.jpeg" },
+  { title: "Annual Trip Moment 11", src: "/annual-trip/event-012.jpeg" },
+  { title: "Annual Trip Moment 12", src: "/annual-trip/event-013.jpeg" },
+  { title: "Annual Trip Moment 13", src: "/annual-trip/event-014.jpeg" },
+  { title: "Annual Trip Moment 14", src: "/annual-trip/event-015.jpeg" },
+  { title: "Annual Trip Moment 15", src: "/annual-trip/event-016.jpeg" },
+  { title: "Annual Trip Moment 16", src: "/annual-trip/event-017.jpeg" },
+  { title: "Annual Trip Moment 17", src: "/annual-trip/event-018.jpeg" },
+  { title: "Annual Trip Moment 18", src: "/annual-trip/event-019.jpeg" },
+  { title: "Annual Trip Moment 19", src: "/annual-trip/event-020.jpeg" },
+  { title: "Annual Trip Moment 20", src: "/annual-trip/event-021.jpeg" },
+  { title: "Annual Trip Moment 21", src: "/annual-trip/event-022.jpeg" },
+  { title: "Annual Trip Moment 22", src: "/annual-trip/event-023.jpeg" },
+  { title: "Annual Trip Moment 23", src: "/annual-trip/event-024.jpeg" },
+  { title: "Annual Trip Moment 24", src: "/annual-trip/event-025.jpeg" },
+  { title: "Annual Trip Moment 25", src: "/annual-trip/event-027.jpeg" },
+  { title: "Annual Trip Moment 26", src: "/annual-trip/event-028.jpeg" },
+  { title: "Annual Trip Moment 27", src: "/annual-trip/event-029.jpeg" },
+  { title: "Annual Trip Moment 28", src: "/annual-trip/event-030.jpeg" },
+  { title: "Annual Trip Moment 29", src: "/annual-trip/event-031.jpeg" },
+  { title: "Annual Trip Moment 30", src: "/annual-trip/event-032.jpeg" },
+  { title: "Annual Trip Moment 31", src: "/annual-trip/event-033.jpeg" },
+  { title: "Annual Trip Moment 32", src: "/annual-trip/event-034.jpeg" },
+  { title: "Annual Trip Moment 33", src: "/annual-trip/event-035.jpeg" },
+  { title: "Annual Trip Moment 34", src: "/annual-trip/event-036.jpeg" },
+  { title: "Annual Trip Moment 35", src: "/annual-trip/event-037.jpeg" },
+  { title: "Annual Trip Moment 36", src: "/annual-trip/event-040.jpeg" },
+  { title: "Annual Trip Moment 37", src: "/annual-trip/event-065.jpeg" },
 ];
 
 export default function AnnualTripPage() {
@@ -168,8 +180,8 @@ export default function AnnualTripPage() {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "ImageGallery",
-    name: "MAAC Annual Trip — Dalhousie & Khajjiar",
-    description: "A visual journey through the breathtaking landscapes of Dalhousie and Khajjiar. 25 moments of creativity, adventure, and camaraderie from MAAC Animation Jaipur's annual student trip.",
+    name: "MAAC Annual Trip",
+    description: "Moments from MAAC Animation Jaipur's annual student trip — creativity, adventure, and camaraderie captured on the road.",
     url: "https://www.maacanimationjaipur.com/annual-trip",
     image: tripImages.map((img) => `https://www.maacanimationjaipur.com${img.src}`),
     author: {
@@ -199,7 +211,7 @@ export default function AnnualTripPage() {
             ANNUAL <span className="metallic-gold-text italic tracking-wider">TRIP</span>
           </h1>
           <p className="text-[#A8A29C] text-sm md:text-base mt-5 max-w-xl mx-auto">
-            A journey of creativity and camaraderie.<br className="hidden sm:block" /> 25 moments from the mountains that forged lifelong memories.
+            A journey of creativity and camaraderie.<br className="hidden sm:block" /> Moments from our annual student trip.
           </p>
         </div>
 
@@ -209,11 +221,11 @@ export default function AnnualTripPage() {
           <div className="flex items-center justify-between mb-4 px-1">
             <div>
               <span className="text-[10px] font-bold tracking-[0.25em] uppercase text-[#FFD700]/80">The Visual Story</span>
-              <h2 className="text-white text-xl md:text-2xl font-display tracking-wide mt-1">Manali Trip</h2>
+              <h2 className="text-white text-xl md:text-2xl font-display tracking-wide mt-1">Annual Trip Highlights</h2>
             </div>
             <button
               onClick={() => openLightbox()}
-              className="hidden md:flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors border border-white/15 hover:border-white/30 px-4 h-9 rounded-full"
+              className="hidden md:flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors border border-white/10 hover:border-white/20 px-4 h-9 rounded-full"
             >
               <span>Open Full Gallery</span>
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -225,7 +237,7 @@ export default function AnnualTripPage() {
           {/* The Big Slideshow Viewer */}
           <div
             ref={mainViewerRef}
-            className="group relative w-full rounded-3xl overflow-hidden glass-card border border-white/10 shadow-2xl bg-[#0A0A0A]"
+            className="group relative w-full rounded-3xl overflow-hidden glass-card border border-white/5 shadow-2xl bg-[#0A0A0A]"
             style={{ aspectRatio: '16/9' }}
           >
             {/* Main Image with smooth swap */}
@@ -243,7 +255,7 @@ export default function AnnualTripPage() {
             </div>
 
             {/* Subtle gradient for text legibility at bottom */}
-            <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 via-black/50 to-transparent pointer-events-none" />
+            <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/60 via-black/35 to-transparent pointer-events-none" />
 
             {/* Top-right controls */}
             <div className="absolute top-4 right-4 z-30 flex items-center gap-2">
@@ -311,7 +323,7 @@ export default function AnnualTripPage() {
                       onClick={() => goToSlide(idx)}
                       className={`group relative flex-shrink-0 w-24 h-16 md:w-28 md:h-20 rounded-xl overflow-hidden border-2 transition-all duration-200 snap-start outline-none focus-visible:ring-2 focus-visible:ring-[#FFD700]/70 ${isActive
                           ? "border-[#FFD700] scale-[1.03] shadow-lg shadow-black/50 z-10"
-                          : "border-white/10 hover:border-white/30 opacity-80 hover:opacity-100"
+                          : "border-white/5 hover:border-white/20 opacity-80 hover:opacity-100"
                         }`}
                       aria-label={`Go to ${img.title}`}
                       aria-current={isActive ? "true" : "false"}
@@ -346,7 +358,7 @@ export default function AnnualTripPage() {
               onClick={() => openLightbox()}
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full border border-white/15 hover:border-[#FFD700]/40 px-6 h-11 text-white/90 hover:text-white transition-all active:scale-[0.985]"
             >
-              View all 25 images in fullscreen gallery
+              View all images in fullscreen gallery
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" /></svg>
             </button>
 
