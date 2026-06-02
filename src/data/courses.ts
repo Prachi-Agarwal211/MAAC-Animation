@@ -47,7 +47,7 @@ export const coursesData: Course[] = [
       { question: "Is placement assistance provided?", answer: "Yes, we have a dedicated placement cell with a 95% placement rate. We provide showreel review, mock interviews, and connections with 500+ partner companies including DNEG, MPC, and Technicolor." },
       { question: "Is this course NSDC certified?", answer: "Yes, the program is NSDC certified and offers a B.Voc degree option, recognized by UGC and valued by employers across the industry." },
     ],
-    ogImage: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/06/3.jpg",
+    ogImage: "/courses_images/ed_animation.png",
     category: "animation",
     priority: 1,
     eligibility: "10+2 or Equivalent",
@@ -76,7 +76,7 @@ export const coursesData: Course[] = [
       { question: "What is the difference between AD3D Edge and the regular 3D Animation course?", answer: "AD3D Edge is an advanced, intensive 12-month program focused on specialized character animation and studio pipeline skills. It's designed for students who want deeper expertise and faster industry entry." },
       { question: "What are the prerequisites for this course?", answer: "Basic understanding of 3D fundamentals is preferred. If you're a complete beginner, we recommend starting with our foundation 3D Animation program first." },
     ],
-    ogImage: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/06/AD3D-Edge.jpg",
+    ogImage: "/courses_images/ad3d.jpeg",
     category: "animation",
     priority: 2,
     eligibility: "10+2 or Equivalent + Basic 3D Knowledge",
@@ -104,7 +104,7 @@ export const coursesData: Course[] = [
     faq: [
       { question: "Is this course suitable for beginners?", answer: "Absolutely. D3D is designed as a comprehensive beginner-to-intermediate program that builds your skills from the ground up." },
     ],
-    ogImage: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/06/3.jpg",
+    ogImage: "/courses_images/d3d.png",
     category: "animation",
     priority: 3,
     eligibility: "10+2 or Equivalent",
@@ -132,7 +132,7 @@ export const coursesData: Course[] = [
     faq: [
       { question: "Do I need my own camera for this course?", answer: "No, the institute provides cameras and equipment for practical sessions. However, having a smartphone with a good camera is helpful for practice." },
     ],
-    ogImage: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/06/DAFM.jpg",
+    ogImage: "/courses_images/dafm.jpeg",
     category: "filmmaking",
     priority: 4,
     eligibility: "10+2 or Equivalent",
@@ -160,7 +160,7 @@ export const coursesData: Course[] = [
     faq: [
       { question: "What is the duration of the Graphic Design course?", answer: "The course offers flexible tracks: a 6-month certificate program and a 12-month diploma program with deeper specialization." },
     ],
-    ogImage: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/06/Graphic-Design-Course.jpg",
+    ogImage: "/courses_images/graphic_design.jpeg",
     category: "design",
     priority: 5,
     eligibility: "10+2 or Equivalent",
@@ -189,7 +189,7 @@ export const coursesData: Course[] = [
     faq: [
       { question: "Is this course suitable for someone with no design background?", answer: "Yes, APDMD starts from foundations and progressively builds advanced skills. No prior design experience is required." },
     ],
-    ogImage: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/06/APDMD-300x300.jpg",
+    ogImage: "/courses_images/apdmd.jpeg",
     category: "media",
     priority: 6,
     eligibility: "10+2 or Equivalent",
@@ -217,7 +217,7 @@ export const coursesData: Course[] = [
     faq: [
       { question: "Do I need architecture background for this course?", answer: "No, the course starts from basics. However, an interest in architecture and spatial design is helpful." },
     ],
-    ogImage: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/06/DAFM.jpg",
+    ogImage: "/courses_images/architecture_design.jpeg",
     category: "design",
     priority: 7,
     eligibility: "10+2 or Equivalent",
@@ -245,7 +245,7 @@ export const coursesData: Course[] = [
     faq: [
       { question: "What makes Design Viz Pro different from Graphic Design?", answer: "Design Viz Pro combines 2D graphic design with 3D visualization and motion graphics, giving you a broader skill set for visual communication across multiple mediums." },
     ],
-    ogImage: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/06/Design-Viz-Pro-Course-400x225.jpg",
+    ogImage: "/courses_images/viz_pro.png",
     category: "design",
     priority: 8,
     eligibility: "10+2 or Equivalent",
@@ -275,7 +275,7 @@ export const coursesData: Course[] = [
       { question: "Do I need programming skills for this course?", answer: "No, this course focuses on game art and design. Basic scripting is covered but deep programming knowledge is not required." },
       { question: "Which game engines will I learn?", answer: "You'll learn both Unity and Unreal Engine, the two most widely used engines in the gaming industry." },
     ],
-    ogImage: "/courses/gaming-design.jpg",
+    ogImage: "/courses_images/game_design.jpeg",
     category: "gaming",
     priority: 9,
     eligibility: "10+2 or Equivalent",
@@ -303,7 +303,7 @@ export const coursesData: Course[] = [
     faq: [
       { question: "How is DGDI different from the Gaming Design course?", answer: "DGDI is a focused 12-month program covering core game design and integration skills, while the Gaming Design course is a more comprehensive 18-24 month program with deeper specialization." },
     ],
-    ogImage: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/06/2020-07-05_23-03-12-500x498-1.jpg",
+    ogImage: "/courses_images/dgdi.jpeg",
     category: "gaming",
     priority: 10,
     eligibility: "10+2 or Equivalent",
@@ -332,7 +332,7 @@ export const coursesData: Course[] = [
       { question: "What is the scope of VFX in India?", answer: "The Indian VFX industry is booming with OTT platforms, Bollywood, and regional cinema driving massive demand. Skilled VFX artists are recruited by studios like DNEG, MPC, Technicolor, and Redchillies VFX." },
       { question: "Do I need to know 3D for VFX?", answer: "Basic 3D knowledge is helpful but not mandatory. The course covers necessary 3D fundamentals for CG integration. However, advanced 3D work is handled by the 3D team in most studios." },
     ],
-    ogImage: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/07/Screenshot-2025-07-05-210336.png",
+    ogImage: "/courses_images/vfx.jpeg",
     category: "vfx",
     priority: 11,
     eligibility: "10+2 or Equivalent",
@@ -360,7 +360,7 @@ export const coursesData: Course[] = [
     faq: [
       { question: "What are the prerequisites for ADVFX?", answer: "Basic understanding of VFX fundamentals is recommended. If you're new to VFX, consider starting with our foundation VFX program first." },
     ],
-    ogImage: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/07/Screenshot-2025-07-05-210336.png",
+    ogImage: "/courses_images/advfx.jpeg",
     category: "vfx",
     priority: 12,
     eligibility: "10+2 or Equivalent + VFX Basics",
@@ -387,7 +387,7 @@ export const coursesData: Course[] = [
     faq: [
       { question: "Is 6 months enough to learn VFX?", answer: "VFX Plus gives you solid foundations and practical skills for entry-level positions. For advanced specialization, consider our 18-24 month comprehensive VFX program." },
     ],
-    ogImage: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/07/Screenshot-2025-07-05-210336.png",
+    ogImage: "/courses_images/vfx_plus.jpeg",
     category: "vfx",
     priority: 13,
     eligibility: "10+2 or Equivalent",
@@ -415,7 +415,7 @@ export const coursesData: Course[] = [
     faq: [
       { question: "Is this course good for aspiring YouTubers?", answer: "Absolutely. The course covers content strategy, video production, editing, and YouTube optimization — everything you need to start a professional YouTube channel." },
     ],
-    ogImage: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/06/DAFM.jpg",
+    ogImage: "/courses_images/media.jpeg",
     category: "media",
     priority: 14,
     eligibility: "10+2 or Equivalent",
@@ -444,7 +444,7 @@ export const coursesData: Course[] = [
     faq: [
       { question: "Is IPVAD suitable for someone unsure about their creative specialization?", answer: "Yes, IPVAD is perfect for students who want exposure to multiple creative fields before choosing a specialization. The broad curriculum helps you discover your strengths and interests." },
     ],
-    ogImage: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/06/APDMD-300x300.jpg",
+    ogImage: "/courses_images/ipvad.jpeg",
     category: "media",
     priority: 15,
     eligibility: "10+2 or Equivalent",
@@ -472,7 +472,7 @@ export const coursesData: Course[] = [
       { question: "Who should take skill enhancement courses?", answer: "These courses are ideal for working professionals looking to learn new software, students wanting to strengthen specific skills, or anyone needing a quick skill upgrade." },
       { question: "Can I combine multiple skill enhancement courses?", answer: "Yes, many students take multiple short courses to build a comprehensive skill set. Our counselors can help you plan the right combination." },
     ],
-    ogImage: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/06/Graphic-Design-Course.jpg",
+    ogImage: "/courses_images/skill_enhance.jpeg",
     category: "design",
     priority: 16,
     eligibility: "Varies by Course",
@@ -500,7 +500,7 @@ export const coursesData: Course[] = [
     faq: [
       { question: "Do I need creative experience for CE Pro?", answer: "Basic creative skills are helpful but not mandatory. The course includes creative skill training alongside business education." },
     ],
-    ogImage: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/06/Graphic-Design-Course.jpg",
+    ogImage: "/courses_images/ce6_pro.jpeg",
     category: "design",
     priority: 17,
     eligibility: "10+2 or Equivalent",
@@ -528,7 +528,7 @@ export const coursesData: Course[] = [
     faq: [
       { question: "Will I get hands-on camera experience?", answer: "Yes, the course includes extensive hands-on training with DSLR cameras, lighting equipment, and professional audio gear." },
     ],
-    ogImage: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/06/Graphic-Design-Course.jpg",
+    ogImage: "/courses_images/dfm.jpeg",
     category: "filmmaking",
     priority: 18,
     eligibility: "10+2 or Equivalent",
@@ -557,7 +557,7 @@ export const coursesData: Course[] = [
       { question: "Is Maya difficult to learn?", answer: "Maya has a learning curve, but our structured curriculum breaks it into manageable modules. Starting from fundamentals, you'll progressively build to advanced techniques with hands-on practice at every step." },
       { question: "Is Maya used in the industry?", answer: "Absolutely. Maya is the industry-standard 3D software used by major studios worldwide including DNEG, MPC, Technicolor, ILM, and Pixar for animation, VFX, and game development." },
     ],
-    ogImage: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/06/Max-pro.jpg",
+    ogImage: "/courses_images/maya_pro.jpeg",
     category: "animation",
     priority: 20,
     eligibility: "10+2 or Equivalent",
@@ -585,7 +585,7 @@ export const coursesData: Course[] = [
     faq: [
       { question: "Is 3ds Max still relevant in the industry?", answer: "Absolutely. 3ds Max remains one of the most widely used 3D software in architecture visualization, game development, and advertising. It's especially dominant in the ArchViz industry." },
     ],
-    ogImage: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/06/Max-pro.jpg",
+    ogImage: "/courses_images/max_pro.jpeg",
     category: "animation",
     priority: 19,
     eligibility: "10+2 or Equivalent",
@@ -608,10 +608,10 @@ export function getAllCourseSlugs(): string[] {
 }
 
 export const courseCategories = [
-  { id: "animation", title: "Animation", count: coursesData.filter((c) => c.category === "animation").length, image: "/courses_images/image-4.png" },
-  { id: "vfx", title: "Visual Effects", count: coursesData.filter((c) => c.category === "vfx").length, image: "/courses_images/image-1.png" },
-  { id: "gaming", title: "Game Design", count: coursesData.filter((c) => c.category === "gaming").length, image: "/courses_images/game.png" },
-  { id: "filmmaking", title: "Filmmaking", count: coursesData.filter((c) => c.category === "filmmaking").length, image: "/courses_images/image-3.png" },
-  { id: "design", title: "Design", count: coursesData.filter((c) => c.category === "design").length, image: "/courses_images/image-5.png" },
-  { id: "media", title: "Digital Media", count: coursesData.filter((c) => c.category === "media").length, image: "/courses_images/image-2.png" },
+  { id: "animation", title: "Animation", count: coursesData.filter((c) => c.category === "animation").length, image: "/courses_images/ed_animation.png" },
+  { id: "vfx", title: "Visual Effects", count: coursesData.filter((c) => c.category === "vfx").length, image: "/courses_images/vfx.jpeg" },
+  { id: "gaming", title: "Game Design", count: coursesData.filter((c) => c.category === "gaming").length, image: "/courses_images/game_design.jpeg" },
+  { id: "filmmaking", title: "Filmmaking", count: coursesData.filter((c) => c.category === "filmmaking").length, image: "/courses_images/dafm.jpeg" },
+  { id: "design", title: "Design", count: coursesData.filter((c) => c.category === "design").length, image: "/courses_images/graphic_design.jpeg" },
+  { id: "media", title: "Digital Media", count: coursesData.filter((c) => c.category === "media").length, image: "/courses_images/media.jpeg" },
 ];

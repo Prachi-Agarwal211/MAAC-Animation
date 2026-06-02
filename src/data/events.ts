@@ -6,53 +6,56 @@ export type EventPhoto = {
   title?: string;
 };
 
-export const EVENT_PHOTOS: EventPhoto[] = [
-  { src: "/events/event-001.jpeg", category: 'lecture', title: "Digital Creators Revolution Seminar" },
-  { src: "/events/event-026.jpeg", category: 'other', title: "Cricket League Promo" },
-  { src: "/events/event-038.jpeg", category: 'lecture', title: "Industry Talk" },
-  { src: "/events/event-039.jpeg", category: 'lecture', title: "Student Session" },
-  { src: "/events/event-041.jpeg", category: 'group', title: "Group Moment" },
-  { src: "/events/event-042.jpeg", category: 'group', title: "Group Moment" },
-  { src: "/events/event-043.jpeg", category: 'group', title: "Group Moment" },
-  { src: "/events/event-044.jpeg", category: 'highlight', title: "Cinema Screening Experience" },
-  { src: "/events/event-045.jpeg", category: 'group', title: "Group Moment" },
-  { src: "/events/event-046.jpeg", category: 'group', title: "Group Moment" },
-  { src: "/events/event-047.jpeg", category: 'group', title: "Group Moment" },
-  { src: "/events/event-048.jpeg", category: 'group', title: "Group Moment" },
-  { src: "/events/event-049.jpeg", category: 'group', title: "Group Moment" },
-  { src: "/events/event-050.jpeg", category: 'press', title: "Animation Sector Growth - Business Report" },
-  { src: "/events/event-051.jpeg", category: 'group', title: "RAMA Zen Signing" },
-  { src: "/events/event-052.jpeg", category: 'group', title: "Group Moment" },
-  { src: "/events/event-053.jpeg", category: 'group', title: "Group Moment" },
-  { src: "/events/event-054.jpeg", category: 'group', title: "Group Moment" },
-  { src: "/events/event-055.jpeg", category: 'group', title: "Faculty & Industry Meet" },
-  { src: "/events/event-056.jpeg", category: 'group', title: "Group Moment" },
-  { src: "/events/event-057.jpeg", category: 'highlight', title: "24FPS Stage with Guests" },
-  { src: "/events/event-058.jpeg", category: 'portrait', title: "Traditional Attire at Event" },
-  { src: "/events/event-059.jpeg", category: 'group', title: "Group Moment" },
-  { src: "/events/event-060.jpeg", category: 'press', title: "RAMA Summit - First India Coverage" },
-  { src: "/events/event-061.jpeg", category: 'group', title: "Group Moment" },
-  { src: "/events/event-062.jpeg", category: 'group', title: "Group Moment" },
-  { src: "/events/event-063.jpeg", category: 'group', title: "Group Moment" },
-  { src: "/events/event-064.jpeg", category: 'group', title: "Group Moment" },
-  { src: "/events/event-066.jpeg", category: 'group', title: "Group Moment" },
-  { src: "/events/event-067.jpeg", category: 'group', title: "Group Moment" },
-  { src: "/events/event-068.jpeg", category: 'group', title: "Group Moment" },
-  { src: "/events/event-069.jpeg", category: 'group', title: "Group Moment" },
-  { src: "/events/event-070.jpeg", category: 'group', title: "Large Group in Auditorium" },
-  { src: "/events/event-071.jpeg", category: 'group', title: "Group Moment" },
-  { src: "/events/event-072.jpeg", category: 'group', title: "Group Moment" },
-  { src: "/events/event-073.jpeg", category: 'group', title: "Group Moment" },
-  { src: "/events/event-074.jpeg", category: 'group', title: "Group Moment" },
-  { src: "/events/event-075.jpeg", category: 'group', title: "Group Moment" },
+// Landscape Photos for Laptop
+export const LANDSCAPE_PHOTOS: EventPhoto[] = [
+  { src: "/events/landscape/event-001.jpeg", category: 'lecture', title: "Digital Creators Revolution Seminar" },
+  { src: "/events/landscape/event-038.jpeg", category: 'lecture', title: "Industry Talk" },
+  { src: "/events/landscape/event-039.jpeg", category: 'lecture', title: "Student Session" },
+  { src: "/events/landscape/event-041.jpeg", category: 'group', title: "Group Moment" },
+  { src: "/events/landscape/event-042.jpeg", category: 'group', title: "Group Moment" },
+  { src: "/events/landscape/event-043.jpeg", category: 'group', title: "Group Moment" },
+  { src: "/events/landscape/event-044.jpeg", category: 'highlight', title: "Cinema Screening Experience" },
+  { src: "/events/landscape/event-045.jpeg", category: 'group', title: "Group Moment" },
+  { src: "/events/landscape/event-046.jpeg", category: 'group', title: "Group Moment" },
+  { src: "/events/landscape/event-047.jpeg", category: 'group', title: "Group Moment" },
+  { src: "/events/landscape/event-051.jpeg", category: 'group', title: "RAMA Zen Signing" },
+  { src: "/events/landscape/event-054.jpeg", category: 'group', title: "Group Moment" },
+  { src: "/events/landscape/event-055.jpeg", category: 'group', title: "Faculty & Industry Meet" },
+  { src: "/events/landscape/event-056.jpeg", category: 'group', title: "Group Moment" },
+  { src: "/events/landscape/event-057.jpeg", category: 'highlight', title: "24FPS Stage with Guests" },
+  { src: "/events/landscape/event-062.jpeg", category: 'group', title: "Group Moment" },
+  { src: "/events/landscape/event-063.jpeg", category: 'group', title: "Group Moment" },
+  { src: "/events/landscape/event-064.jpeg", category: 'group', title: "Group Moment" },
+  { src: "/events/landscape/event-066.jpeg", category: 'group', title: "Group Moment" },
+  { src: "/events/landscape/event-067.jpeg", category: 'group', title: "Group Moment" },
+  { src: "/events/landscape/event-069.jpeg", category: 'group', title: "Group Moment" },
+  { src: "/events/landscape/event-070.jpeg", category: 'group', title: "Large Group in Auditorium" },
+  { src: "/events/landscape/event-071.jpeg", category: 'group', title: "Group Moment" },
+  { src: "/events/landscape/event-075.jpeg", category: 'group', title: "Group Moment" },
 ];
 
-// Helper to get srcs by category
-export const getPhotosByCategory = (category?: EventPhoto['category']) => 
-  category ? EVENT_PHOTOS.filter(p => p.category === category) : EVENT_PHOTOS;
+// Portrait Photos for Mobile
+export const PORTRAIT_PHOTOS: EventPhoto[] = [
+  { src: "/events/portrait/event-026.jpeg", category: 'other', title: "Cricket League Promo" },
+  { src: "/events/portrait/event-048.jpeg", category: 'group', title: "Group Moment" },
+  { src: "/events/portrait/event-049.jpeg", category: 'group', title: "Group Moment" },
+  { src: "/events/portrait/event-050.jpeg", category: 'press', title: "Animation Sector Growth - Business Report" },
+  { src: "/events/portrait/event-052.jpeg", category: 'group', title: "Group Moment" },
+  { src: "/events/portrait/event-053.jpeg", category: 'group', title: "Group Moment" },
+  { src: "/events/portrait/event-058.jpeg", category: 'portrait', title: "Traditional Attire at Event" },
+  { src: "/events/portrait/event-059.jpeg", category: 'group', title: "Group Moment" },
+  { src: "/events/portrait/event-060.jpeg", category: 'press', title: "RAMA Summit - First India Coverage" },
+  { src: "/events/portrait/event-061.jpeg", category: 'group', title: "Group Moment" },
+  { src: "/events/portrait/event-068.jpeg", category: 'group', title: "Group Moment" },
+  { src: "/events/portrait/event-072.jpeg", category: 'group', title: "Group Moment" },
+  { src: "/events/portrait/event-073.jpeg", category: 'group', title: "Group Moment" },
+  { src: "/events/portrait/event-074.jpeg", category: 'group', title: "Group Moment" },
+];
 
-export const PRESS_PHOTOS = getPhotosByCategory('press');
-export const PORTRAIT_PHOTOS = getPhotosByCategory('portrait');
+// Keep original array for other sections or legacy use, but updated paths
+export const EVENT_PHOTOS: EventPhoto[] = [...LANDSCAPE_PHOTOS, ...PORTRAIT_PHOTOS];
+
+export const PRESS_PHOTOS = EVENT_PHOTOS.filter(p => p.category === 'press');
 
 export interface SignatureEvent {
   id: string;

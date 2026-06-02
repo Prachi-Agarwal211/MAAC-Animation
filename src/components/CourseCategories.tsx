@@ -106,27 +106,27 @@ function SlideUpCard({ course }: { course: CourseCardItem }) {
             src={course.image}
             alt={course.title}
             fill
-            className="object-cover transition-transform duration-1000 group-hover:scale-110 opacity-40 group-hover:opacity-60"
+            className="object-cover transition-transform duration-700 group-hover:scale-105 opacity-60 group-hover:opacity-80"
           />
         ) : (
           <div className="absolute inset-0 bg-gradient-to-br from-[#1c1c1c] to-[#0c0c0c]" />
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0C0C0C] via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0C0C0C] via-[#0C0C0C]/20 to-transparent" />
       </div>
 
       {/* Content Layer */}
       <div className="relative z-10 h-full flex flex-col justify-end p-8 md:p-10">
         <div className="mb-6 transform transition-transform duration-500 group-hover:-translate-y-4">
-          <div className="text-[#FFD700] mb-6">
+          <div className="text-[#FFD700] mb-6 drop-shadow-md">
             <CategoryIcon type={course.icon} />
           </div>
-          <h3 className="text-[#F0EBE1] font-display text-sm md:text-sm mb-2 font-medium uppercase leading-none tracking-tight">{course.title}</h3>
-          <p className="text-[#A8A29C] text-sm md:text-white/80 line-clamp-2">{course.description}</p>
+          <h3 className="text-white font-display text-sm md:text-sm mb-2 font-bold uppercase leading-none tracking-tight drop-shadow-lg">{course.title}</h3>
+          <p className="text-white/90 text-sm md:text-white/90 font-medium line-clamp-2 drop-shadow-md">{course.description}</p>
         </div>
 
-        {/* Hover Details */}
+        {/* Hover Details — lightened overlay to keep image visible */}
         <div
-          className={`absolute inset-0 bg-[#0C0C0C]/95 p-8 md:p-10 flex flex-col transition-all duration-1000 ease-expo-out overflow-y-auto`}
+          className={`absolute inset-0 bg-[#0C0C0C]/80 backdrop-blur-[2px] p-8 md:p-10 flex flex-col transition-all duration-700 ease-out overflow-y-auto`}
           style={{
             clipPath: isHovered ? "circle(150% at 100% 100%)" : "circle(0% at 100% 100%)",
           }}
@@ -198,7 +198,8 @@ export default function CourseCategories({ mode = "home" }: CourseCategoriesProp
           description: course.shortDescription,
           fullDescription: course.fullDescription,
           icon: getIconForCourseCategory(course.category),
-          image: courseCategoryImageMap[course.category] || "/courses_images/image-4.png",
+          // Prioritize specific course image if it's a local path
+          image: course.ogImage.startsWith('/') ? course.ogImage : (courseCategoryImageMap[course.category] || "/courses_images/image-4.png"),
           careers: course.career,
           href: `/courses/${course.slug}`,
         }));

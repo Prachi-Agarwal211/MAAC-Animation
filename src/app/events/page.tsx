@@ -9,7 +9,7 @@ import gsap, { ScrollTrigger } from "@/lib/gsap";
 import VideoFacade from "@/components/ui/VideoFacade";
 import Image from "next/image";
 import ImageLightbox from "@/components/ui/ImageLightbox";
-import { EVENT_PHOTOS, PRESS_PHOTOS } from "@/data/events";
+import { EVENT_PHOTOS, PRESS_PHOTOS, LANDSCAPE_PHOTOS, PORTRAIT_PHOTOS } from "@/data/events";
 
 export default function EventsPage() {
   const video24FPSRef = useRef<HTMLDivElement>(null);
@@ -20,18 +20,30 @@ export default function EventsPage() {
   const videoKlickRef = useRef<HTMLDivElement>(null);
   const videoBTSRef = useRef<HTMLDivElement>(null);
 
-  // === Minimal Slideshow for the new event photos (user requested) ===
+  // === Responsive Slideshow logic (Landscape for Laptop, Portrait for Mobile) ===
+  const [photos, setPhotos] = useState(LANDSCAPE_PHOTOS);
   const [slideIndex, setSlideIndex] = useState(0);
   const [isSlidePlaying, setIsSlidePlaying] = useState(true);
   const [showLightbox, setShowLightbox] = useState(false);
   const [lightboxStart, setLightboxStart] = useState(0);
   const slideTimer = useRef<NodeJS.Timeout | null>(null);
   const prefersReduced = useRef(false);
-  const thumbRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       prefersReduced.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      
+      const updatePhotos = () => {
+        const isMobile = window.innerWidth < 768;
+        const newPhotos = isMobile ? PORTRAIT_PHOTOS : LANDSCAPE_PHOTOS;
+        setPhotos(newPhotos);
+        // Reset index if it exceeds the new array length
+        setSlideIndex((prev) => (prev >= newPhotos.length ? 0 : prev));
+      };
+
+      updatePhotos();
+      window.addEventListener("resize", updatePhotos);
+      return () => window.removeEventListener("resize", updatePhotos);
     }
   }, []);
 
@@ -39,9 +51,9 @@ export default function EventsPage() {
     if (slideTimer.current) clearTimeout(slideTimer.current);
     if (prefersReduced.current) return;
     slideTimer.current = setTimeout(() => {
-      setSlideIndex((i) => (i + 1) % EVENT_PHOTOS.length);
+      setSlideIndex((i) => (i + 1) % photos.length);
     }, 3800);
-  }, []);
+  }, [photos.length]);
 
   const stopSlide = useCallback(() => {
     if (slideTimer.current) {
@@ -54,12 +66,10 @@ export default function EventsPage() {
     if (isSlidePlaying && !prefersReduced.current) runSlide();
     else stopSlide();
     return stopSlide;
-  }, [isSlidePlaying, slideIndex, runSlide, stopSlide]);
+  }, [isSlidePlaying, slideIndex, photos, runSlide, stopSlide]);
 
   const goToPhoto = (i: number) => {
-    const next = (i + EVENT_PHOTOS.length) % EVENT_PHOTOS.length;
-    setSlideIndex(next);
-    thumbRefs.current[next]?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+    setSlideIndex((i + photos.length) % photos.length);
   };
   const nextPhoto = () => goToPhoto(slideIndex + 1);
   const prevPhoto = () => goToPhoto(slideIndex - 1);
@@ -75,7 +85,7 @@ export default function EventsPage() {
   const closePhotosLightbox = () => {
     setShowLightbox(false);
     document.body.style.overflow = "";
-    setSlideIndex(lightboxStart);
+    // Note: Lightbox uses the full EVENT_PHOTOS array for completeness
     setIsSlidePlaying(true);
   };
 
@@ -85,12 +95,11 @@ export default function EventsPage() {
       if (showLightbox) return;
       if (e.key === "ArrowRight" || e.key === " ") { e.preventDefault(); nextPhoto(); }
       if (e.key === "ArrowLeft") { e.preventDefault(); prevPhoto(); }
-      if (e.key.toLowerCase() === "f") openPhotosLightbox();
       if (e.key.toLowerCase() === "p") toggleSlidePlay();
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [showLightbox, slideIndex]);
+  }, [showLightbox, slideIndex, photos]);
 
   useEffect(() => {
     const videoRefs = [
@@ -189,72 +198,70 @@ export default function EventsPage() {
         </div>
       </section>
 
-      {/* ========== SLIDESHOW: Event Photos (from the separated collection) ========== */}
-      <section id="moments" className="relative py-12 md:py-16 border-t border-white/10 bg-transparent">
-        <div className="max-w-[1280px] mx-auto px-5 md:px-8">
-          <div className="flex items-end justify-between mb-5 px-1">
-            <div>
-              <span className="metallic-gold-text text-[10px] font-bold tracking-[0.3em] uppercase">CAPTURED ON CAMPUS</span>
-              <h3 className="font-display text-3xl md:text-4xl text-white font-bold tracking-tight mt-1">Recent Event Moments</h3>
-            </div>
-            <button
-              onClick={() => openPhotosLightbox()}
-              className="hidden md:block text-xs tracking-[0.2em] uppercase text-[#A8A29C] hover:text-white border-b border-white/20 hover:border-[#FFD700] pb-px transition"
-            >
-              VIEW ALL IN FULLSCREEN
-            </button>
+      {/* ========== CENTERED SLIDESHOW: Event Photos ========== */}
+      <section id="moments" className="relative py-14 md:py-24 bg-transparent border-t border-white/5">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-10">
+            <p className="metallic-gold-text text-[10px] md:text-xs font-bold tracking-[0.5em] uppercase opacity-80 mb-2">MAAC GALLERY</p>
+            <h3 className="font-display text-3xl md:text-5xl text-white font-bold tracking-tight drop-shadow-lg">Campus Moments</h3>
           </div>
 
-          {/* Clean main viewer — flexible container so both landscape and portrait photos fit the screen well */}
-          <div className="relative rounded-2xl overflow-hidden bg-[#0a0a0a] shadow-xl" style={{ maxHeight: '72vh', minHeight: '320px' }}>
+          {/* The centered "Card" — Ratio matches the Landscape (16:9) on laptop and Portrait (3:4) on mobile */}
+          <div className="relative mx-auto rounded-[1.5rem] md:rounded-[2rem] overflow-hidden bg-black shadow-2xl border border-white/5 aspect-[3/4] md:aspect-video w-full group">
+            
+            {/* Background Atmosphere Glow — Lightened and simplified */}
+            <div className="absolute inset-0 z-0">
+              <Image
+                key={`glow-${slideIndex}-${photos[slideIndex].src}`}
+                src={photos[slideIndex].src}
+                alt=""
+                fill
+                className="object-cover blur-2xl opacity-20 transition-opacity duration-1000"
+                unoptimized
+              />
+            </div>
+
+            {/* Main Sharp Image — Fills the card perfectly with NO black gaps */}
             <Image
-              key={slideIndex}
-              src={EVENT_PHOTOS[slideIndex].src}
+              key={`${slideIndex}-${photos[slideIndex].src}`}
+              src={photos[slideIndex].src}
               alt={`Event moment ${slideIndex + 1}`}
               fill
-              className="object-contain bg-black"
+              className="object-cover z-10 transition-transform duration-700 group-hover:scale-[1.02]"
               sizes="(max-width: 768px) 100vw, 1200px"
               unoptimized
+              priority
             />
 
-            {/* Very light controls so background photo stays prominent */}
-            <div className="absolute top-3 right-3 z-30 flex gap-2">
-              <button onClick={toggleSlidePlay} className="px-3 py-1.5 text-[10px] tracking-widest rounded-full bg-black/50 border border-white/15 text-white/80 hover:bg-white/10 hover:text-white transition">
+            {/* Navigation Overlays — Lightened gradients */}
+            <div className="absolute inset-0 z-30 pointer-events-none bg-gradient-to-b from-black/10 via-transparent to-black/20" />
+
+            {/* Play/Pause Button */}
+            <div className="absolute top-6 right-6 z-40">
+              <button onClick={toggleSlidePlay} className="px-5 py-2 text-[10px] font-bold tracking-widest rounded-full bg-black/40 backdrop-blur-xl border border-white/20 text-white hover:bg-[#FFD700] hover:text-black transition-all duration-300">
                 {isSlidePlaying ? "PAUSE" : "PLAY"}
               </button>
-              <button onClick={() => openPhotosLightbox()} className="px-3 py-1.5 text-[10px] tracking-widest rounded-full bg-black/50 border border-white/15 text-white/80 hover:bg-white/10 hover:text-white transition">
-                ALL PHOTOS
-              </button>
             </div>
 
-            <button onClick={prevPhoto} className="absolute left-3 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full bg-black/40 border border-white/20 text-white/70 hover:text-white flex items-center justify-center">←</button>
-            <button onClick={nextPhoto} className="absolute right-3 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full bg-black/40 border border-white/20 text-white/70 hover:text-white flex items-center justify-center">→</button>
+            {/* Side Controls */}
+            <button 
+              onClick={prevPhoto} 
+              className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-40 w-12 h-12 md:w-16 md:h-16 rounded-full bg-black/20 backdrop-blur-md border border-white/10 text-white/50 hover:text-white hover:bg-black/40 flex items-center justify-center transition-all opacity-0 group-hover:opacity-100"
+            >
+              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 19l-7-7 7-7" /></svg>
+            </button>
+            <button 
+              onClick={nextPhoto} 
+              className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-40 w-12 h-12 md:w-16 md:h-16 rounded-full bg-black/20 backdrop-blur-md border border-white/10 text-white/50 hover:text-white hover:bg-black/40 flex items-center justify-center transition-all opacity-0 group-hover:opacity-100"
+            >
+              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" /></svg>
+            </button>
 
-            <div className="absolute bottom-3 right-4 text-[10px] font-mono text-white/50 z-30">
-              {slideIndex + 1} / {EVENT_PHOTOS.length}
-            </div>
-          </div>
-
-          {/* Filmstrip — photos front and center, very little chrome */}
-          <div className="mt-3 relative">
-            <div className="flex gap-2 overflow-x-auto pb-3 snap-x no-scrollbar px-1">
-              {EVENT_PHOTOS.map((photo, i) => {
-                const active = i === slideIndex;
-                return (
-                  <button
-                    key={i}
-                    ref={(el) => { thumbRefs.current[i] = el; }}
-                    onClick={() => goToPhoto(i)}
-                    className={`flex-shrink-0 rounded-xl overflow-hidden border transition snap-start ${active ? "border-[#FFD700] scale-[1.02]" : "border-white/10 hover:border-white/30"}`}
-                    style={{ width: 78, height: 52 }}
-                  >
-                    <Image src={photo.src} alt="" fill className="object-contain bg-black/30" unoptimized loading={i < 6 ? "eager" : "lazy"} />
-                  </button>
-                );
-              })}
+            {/* Progress Label */}
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 px-5 py-1.5 rounded-full bg-black/40 backdrop-blur-xl border border-white/10 text-[10px] md:text-xs font-mono text-white/70 z-40 tracking-[0.4em]">
+              <span className="text-[#FFD700] font-bold">{slideIndex + 1}</span> / {photos.length}
             </div>
           </div>
-          <p className="text-center text-[10px] text-[#A8A29C]/60 tracking-widest mt-1">Photos from our latest campus celebration • Click any frame or use arrows / F</p>
         </div>
       </section>
 
@@ -385,7 +392,7 @@ export default function EventsPage() {
             Signature MAAC Events You Can Be a Part Of!
           </h2>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-12 items-center">
             {/* Left side: 24FPS International Animation Awards content */}
             <div className="text-left">
               <div className="mb-6">
@@ -405,14 +412,14 @@ export default function EventsPage() {
             </div>
 
             {/* Right side: Arrow and Video Card */}
-            <div className="flex flex-col items-center justify-center lg:flex-row lg:justify-end gap-8">
+            <div className="flex flex-col items-center justify-center lg:flex-row lg:justify-end gap-3 md:gap-5">
               {/* Large metallic gold arrow */}
-              <svg className="w-20 h-20 metallic-gold-text transform rotate-90 lg:rotate-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
+              <svg className="w-16 h-16 md:w-20 md:h-20 metallic-gold-text transform rotate-90 lg:rotate-0 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
               </svg>
 
               {/* Video Card */}
-              <div ref={video24FPSRef} className="rounded-2xl shadow-lg overflow-hidden w-full max-w-md h-64 border border-white/10">
+              <div ref={video24FPSRef} className="rounded-2xl shadow-lg overflow-hidden w-full max-w-xl h-64 md:h-72 border border-white/10">
                 <VideoFacade youtubeId="C2ix6uKTaAQ" title="24FPS International Animation Awards" />
               </div>
             </div>
@@ -426,7 +433,7 @@ export default function EventsPage() {
           {/* Top white line */}
           <div className="border-t border-white/10 mb-12"></div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-12 items-center">
             {/* Left side: Logo, Heading, Description, Button */}
             <div className="text-left">
               {/* 100 Race Against Time Logo */}
@@ -447,14 +454,14 @@ export default function EventsPage() {
             </div>
 
             {/* Right side: Arrow and Image Card */}
-            <div className="flex flex-col items-center justify-center lg:flex-row lg:justify-end gap-8">
+            <div className="flex flex-col items-center justify-center lg:flex-row lg:justify-end gap-3 md:gap-5">
               {/* Large yellow arrow */}
-              <svg className="w-20 h-20 metallic-gold-text transform rotate-90 lg:rotate-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
+              <svg className="w-16 h-16 md:w-20 md:h-20 metallic-gold-text transform rotate-90 lg:rotate-0 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
               </svg>
 
               {/* Video Card */}
-              <div ref={video100HoursRef} className="relative w-full max-w-md rounded-2xl shadow-lg overflow-hidden h-64 border border-white/10">
+              <div ref={video100HoursRef} className="relative w-full max-w-xl rounded-2xl shadow-lg overflow-hidden h-64 md:h-72 border border-white/10">
                 <VideoFacade youtubeId="3BuVrYHjIq4" title="100 Hours - The Ultimate Creative Marathon" />
               </div>
             </div>
@@ -468,7 +475,7 @@ export default function EventsPage() {
           {/* Top white line */}
           <div className="border-t border-white/10 mb-12"></div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-12 items-center">
             {/* Left side: Logo, Heading, Description, Button */}
             <div className="text-left">
               {/* Logo placeholder */}
@@ -489,14 +496,14 @@ export default function EventsPage() {
             </div>
 
             {/* Right side: Arrow and Video Card */}
-            <div className="flex flex-col items-center justify-center lg:flex-row lg:justify-end gap-8">
+            <div className="flex flex-col items-center justify-center lg:flex-row lg:justify-end gap-3 md:gap-5">
               {/* Large yellow arrow */}
-              <svg className="w-20 h-20 metallic-gold-text transform rotate-90 lg:rotate-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
+              <svg className="w-16 h-16 md:w-20 md:h-20 metallic-gold-text transform rotate-90 lg:rotate-0 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
               </svg>
 
               {/* Video Card */}
-              <div ref={videoManifestRef} className="rounded-2xl shadow-lg overflow-hidden w-full max-w-md h-64 border border-white/10">
+              <div ref={videoManifestRef} className="rounded-2xl shadow-lg overflow-hidden w-full max-w-xl h-64 md:h-72 border border-white/10">
                 <VideoFacade youtubeId="RaQivBSoEak" title="MAAC Manifest" />
               </div>
             </div>
@@ -510,9 +517,9 @@ export default function EventsPage() {
           {/* Top white line */}
           <div className="border-t border-white/10 mb-8"></div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-[auto_1fr_1fr] gap-8 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-12 items-center">
             {/* Left side: NSM Logo, Title, Description, Button */}
-            <div className="text-left lg:pr-4 max-w-md">
+            <div className="text-left">
               {/* NSM Logo */}
               <div className="mb-6">
                 <div className="flex items-center gap-2">
@@ -524,7 +531,7 @@ export default function EventsPage() {
               </div>
               
               <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight">
-National Students&apos; Meet (NSM)
+                National Students&apos; Meet (NSM)
               </h3>
               
               <p className="text-sm md:text-base text-white/90 leading-relaxed mb-8 max-w-md">
@@ -536,19 +543,16 @@ National Students&apos; Meet (NSM)
               </a>
             </div>
 
-            {/* Center: Large Golden Arrow */}
-            <div className="flex justify-center">
-              <svg className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 metallic-gold-text" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
+            {/* Right side: Arrow and Video Card */}
+            <div className="flex flex-col items-center justify-center lg:flex-row lg:justify-end gap-3 md:gap-5">
+              {/* Large metallic gold arrow */}
+              <svg className="w-16 h-16 md:w-20 md:h-20 metallic-gold-text transform rotate-90 lg:rotate-0 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
               </svg>
-            </div>
 
-            {/* Right side: Video Card */}
-            <div className="flex justify-center lg:justify-end">
-              <div className="relative w-full max-w-sm">
-                <div ref={videoNSMRef} className="rounded-2xl shadow-lg overflow-hidden h-56 border border-white/10">
-                  <VideoFacade youtubeId="F0WMuSpXMK0" title="National Students' Meet (NSM)" />
-                </div>
+              {/* Video Card */}
+              <div ref={videoNSMRef} className="relative w-full max-w-xl rounded-2xl shadow-lg overflow-hidden h-64 md:h-72 border border-white/10">
+                <VideoFacade youtubeId="F0WMuSpXMK0" title="National Students' Meet (NSM)" />
               </div>
             </div>
           </div>
@@ -561,9 +565,9 @@ National Students&apos; Meet (NSM)
           {/* Top white line */}
           <div className="border-t border-white/10 mb-8"></div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-[auto_1fr_1fr] gap-8 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-12 items-center">
             {/* Left side: MCL Logo, Title, Description, Button */}
-            <div className="text-left lg:pr-4 max-w-md">
+            <div className="text-left">
               {/* MCL Logo */}
               <div className="mb-6">
                 <div className="flex items-center gap-2">
@@ -587,20 +591,17 @@ National Students&apos; Meet (NSM)
               </a>
             </div>
 
-            {/* Center: Large Golden Arrow */}
-            <div className="flex justify-center">
-              <svg className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 metallic-gold-text" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
+            {/* Right side: Arrow and Video Card */}
+            <div className="flex flex-col items-center justify-center lg:flex-row lg:justify-end gap-3 md:gap-5">
+              {/* Large metallic gold arrow */}
+              <svg className="w-16 h-16 md:w-20 md:h-20 metallic-gold-text transform rotate-90 lg:rotate-0 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
               </svg>
-            </div>
 
-            {/* Right side: Video Card */}
-            <div className="flex justify-center lg:justify-end">
-<div className="relative w-full max-w-sm">
-                 <div ref={videoMCLRef} className="rounded-2xl shadow-lg overflow-hidden h-56 border border-white/10">
-                   <VideoFacade youtubeId="FPgueLMvlMI" title="MAAC Creative League (MCL)" />
-                 </div>
-               </div>
+              {/* Video Card */}
+              <div ref={videoMCLRef} className="relative w-full max-w-xl rounded-2xl shadow-lg overflow-hidden h-64 md:h-72 border border-white/10">
+                <VideoFacade youtubeId="FPgueLMvlMI" title="MAAC Creative League (MCL)" />
+              </div>
             </div>
           </div>
         </div>
@@ -612,9 +613,9 @@ National Students&apos; Meet (NSM)
           {/* Top white line */}
           <div className="border-t border-white/10 mb-8"></div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-[auto_1fr_1fr] gap-8 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-12 items-center">
             {/* Left side: MAAC Klick Logo, Title, Description, Button */}
-            <div className="text-left lg:pr-4 max-w-md">
+            <div className="text-left">
               {/* MAAC Klick Logo */}
               <div className="mb-6">
                 <div className="flex items-center gap-2">
@@ -638,19 +639,16 @@ National Students&apos; Meet (NSM)
               </a>
             </div>
 
-            {/* Center: Large Golden Arrow */}
-            <div className="flex justify-center">
-              <svg className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 metallic-gold-text" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
+            {/* Right side: Arrow and Video Card */}
+            <div className="flex flex-col items-center justify-center lg:flex-row lg:justify-end gap-3 md:gap-5">
+              {/* Large metallic gold arrow */}
+              <svg className="w-16 h-16 md:w-20 md:h-20 metallic-gold-text transform rotate-90 lg:rotate-0 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
               </svg>
-            </div>
 
-            {/* Right side: Video Card */}
-            <div className="flex justify-center lg:justify-end">
-              <div className="relative w-full max-w-sm">
-                <div ref={videoKlickRef} className="rounded-2xl shadow-lg overflow-hidden h-56 border border-white/10">
-                  <VideoFacade youtubeId="ao5k9ZTVbS0" title="MAAC Klick - Nature & Wildlife Photography Expeditions" />
-                </div>
+              {/* Video Card */}
+              <div ref={videoKlickRef} className="relative w-full max-w-xl rounded-2xl shadow-lg overflow-hidden h-64 md:h-72 border border-white/10">
+                <VideoFacade youtubeId="ao5k9ZTVbS0" title="MAAC Klick - Nature & Wildlife Photography Expeditions" />
               </div>
             </div>
           </div>
@@ -663,9 +661,9 @@ National Students&apos; Meet (NSM)
           {/* Top white line */}
           <div className="border-t border-white/10 mb-8"></div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-[auto_1fr_1fr] gap-8 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-12 items-center">
             {/* Left side: Logo, Title, Description, Button */}
-            <div className="text-left lg:pr-4 max-w-md">
+            <div className="text-left">
               {/* BTS Logo */}
               <div className="mb-6">
                 <div className="flex items-center gap-2">
@@ -689,19 +687,16 @@ National Students&apos; Meet (NSM)
               </a>
             </div>
 
-            {/* Center: Large Golden Arrow */}
-            <div className="flex justify-center">
-              <svg className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 metallic-gold-text" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
+            {/* Right side: Arrow and Video Card */}
+            <div className="flex flex-col items-center justify-center lg:flex-row lg:justify-end gap-3 md:gap-5">
+              {/* Large metallic gold arrow */}
+              <svg className="w-16 h-16 md:w-20 md:h-20 metallic-gold-text transform rotate-90 lg:rotate-0 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
               </svg>
-            </div>
 
-            {/* Right side: Video Card */}
-            <div className="flex justify-center lg:justify-end">
-              <div className="relative w-full max-w-sm">
-                <div ref={videoBTSRef} className="rounded-2xl shadow-lg overflow-hidden h-56 border border-white/10">
-                  <VideoFacade youtubeId="Fs6YutaEejc" title="BTS: Behind the Screen" />
-                </div>
+              {/* Video Card */}
+              <div ref={videoBTSRef} className="relative w-full max-w-xl rounded-2xl shadow-lg overflow-hidden h-64 md:h-72 border border-white/10">
+                <VideoFacade youtubeId="Fs6YutaEejc" title="BTS: Behind the Screen" />
               </div>
             </div>
           </div>
