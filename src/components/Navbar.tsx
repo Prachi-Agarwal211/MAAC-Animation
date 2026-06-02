@@ -75,7 +75,7 @@ export default function Navbar() {
             <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
           </div>
         )}
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 flex items-center h-16 sm:h-20">
+        <div className="max-w-content mx-auto px-6 sm:px-8 flex items-center h-16 sm:h-20">
           <div className="flex-shrink-0 mr-16">
             <Link href="/" className="flex items-center group" aria-label="MAAC Jaipur - Home">
               <Image
@@ -83,7 +83,7 @@ export default function Navbar() {
                 alt="MAAC Animation Jaipur Logo"
                 width={240}
                 height={240}
-                className={`transition-all duration-500 group-hover:scale-[1.02] object-contain ${scrolled ? 'w-24 h-24 sm:w-48 sm:h-48' : 'w-28 h-28 sm:w-56 sm:h-56'}`}
+                className={`transition-all duration-500 group-hover:scale-[1.02] object-contain ${scrolled ? 'w-24 h-auto sm:w-32 xl:w-36' : 'w-28 h-auto sm:w-40 xl:w-44'}`}
                 priority
               />
             </Link>

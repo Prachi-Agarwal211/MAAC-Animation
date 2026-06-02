@@ -49,6 +49,9 @@ const config: Config = {
         navbar: "80px",
         "demo-bar": "36px",
       },
+      maxWidth: {
+        content: "var(--content-max-width, 1600px)",
+      },
       keyframes: {
         marqueeLeft: {
           "0%": { transform: "translateX(0%)" },

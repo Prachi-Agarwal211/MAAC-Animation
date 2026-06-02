@@ -83,7 +83,14 @@ type CourseCategoriesProps = {
 
 function SlideUpCard({ course }: { course: CourseCardItem }) {
   const [isHovered, setIsHovered] = useState(false);
-  const isTouchDevice = typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches;
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+
+  React.useEffect(() => {
+    const checkTouch = () => setIsTouchDevice(window.matchMedia("(pointer: coarse)").matches);
+    checkTouch();
+    window.addEventListener("resize", checkTouch);
+    return () => window.removeEventListener("resize", checkTouch);
+  }, []);
 
   return (
     <div
@@ -213,7 +220,7 @@ export default function CourseCategories({ mode = "home" }: CourseCategoriesProp
     <section ref={containerRef} id={isHome ? "courses" : undefined} className="relative py-24 md:py-32 overflow-hidden bg-transparent">
       <div className="atmosphere-blob blob-orange bottom-0 -left-20 opacity-5" />
 
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-8 z-10">
+      <div className="relative max-w-content mx-auto px-6 lg:px-8 z-10">
         <div className="categories-heading text-center mb-16 md:mb-24">
           <p className="metallic-gold-text text-[10px] font-bold tracking-[0.3em] uppercase mb-4 flex items-center justify-center gap-3">
             <span className="w-8 h-[1px] metallic-gold-accent" />

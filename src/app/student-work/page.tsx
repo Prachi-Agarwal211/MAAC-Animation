@@ -81,7 +81,7 @@ export default function StudentWorkPage() {
         {/* Gallery Section */}
         <section className="py-24 md:py-32 bg-transparent relative">
           <div className="atmosphere-blob blob-orange top-0 left-0 opacity-5" />
-          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="max-w-content mx-auto px-6 lg:px-8">
             <StudentWorkGallery />
           </div>
         </section>

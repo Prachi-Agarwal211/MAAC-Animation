@@ -5,7 +5,7 @@ import FadeIn from "@/components/animations/FadeIn";
 export default function CareerCreatorComparison() {
   return (
     <div className="relative overflow-hidden bg-transparent py-24 md:py-32">
-      <div className="max-w-7xl mx-auto px-6 mb-16 md:mb-24 text-center">
+      <div className="max-w-content mx-auto px-6 mb-16 md:mb-24 text-center">
         <FadeIn>
           <p className="metallic-gold-text text-[10px] font-bold tracking-[0.3em] uppercase mb-4 flex items-center justify-center gap-3">
             <span className="w-8 h-[1px] metallic-gold-accent" />

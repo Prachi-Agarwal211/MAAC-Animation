@@ -199,7 +199,7 @@ mm.add("(min-width: 1024px)", () => {
 
   return (
     <section ref={containerRef} className="relative bg-transparent min-h-[100vh] z-10 pb-20 lg:pb-0">
-      <div className="relative z-10 max-w-[1700px] mx-auto px-6 lg:px-12 py-12 lg:py-16">
+      <div className="relative z-10 max-w-content mx-auto px-6 lg:px-12 py-12 lg:py-16">
         
         {/* Section Header */}
         <div className="text-center mb-16 lg:mb-12 xl:mb-20">
@@ -211,11 +211,11 @@ mm.add("(min-width: 1024px)", () => {
           </h2>
         </div>
 
-        <div className="flex flex-col lg:flex-row gap-8 lg:gap-10 xl:gap-16 items-start">
+        <div className="flex flex-col lg:flex-row justify-between items-start gap-y-12">
           
           {/* LEFT / TOP (mobile): Creative Evolution Circle / Pie - now hidden on mobile */}
           {/* Desktop: sticky side-by-side with pinned scroll. */}
-          <div className="hidden lg:flex w-full lg:w-[48%] xl:w-[50%] flex-shrink-0 sticky top-[70px] lg:top-16 z-30 flex-col items-center lg:items-start lg:pl-4 xl:pl-16 bg-[#0C0C0C]/90 lg:bg-transparent backdrop-blur-md lg:backdrop-blur-none py-6 lg:py-0 border-b border-white/5 lg:border-none shadow-2xl lg:shadow-none">
+          <div className="hidden lg:flex w-full lg:w-[45%] xl:w-[48%] flex-shrink-0 sticky top-[70px] lg:top-16 z-30 flex-col items-center lg:items-start lg:pl-4 xl:pl-16 bg-[#0C0C0C]/90 lg:bg-transparent backdrop-blur-md lg:backdrop-blur-none py-6 lg:py-0 border-b border-white/5 lg:border-none shadow-2xl lg:shadow-none">
             
             {/* Mobile-only label for the interactive circle (top) */}
             <div className="lg:hidden text-center mb-4">
@@ -223,8 +223,8 @@ mm.add("(min-width: 1024px)", () => {
             </div>
 
             {/* The SVG Pie Chart - now visible + animated on mobile too */}
-            <div className="relative w-full max-w-[280px] sm:max-w-[320px] lg:max-w-[min(380px,45vh)] xl:max-w-[480px] mx-auto lg:mx-0">
-              <svg viewBox="0 0 512 512" className="w-full h-full relative z-10 scale-[0.85] lg:scale-[0.9] xl:scale-100 overflow-visible">
+            <div className="relative w-[85%] sm:w-[320px] lg:w-[90%] xl:w-full max-w-[480px] mx-auto lg:mx-0">
+              <svg viewBox="0 0 512 512" className="w-full h-full relative z-10 overflow-visible">
                 <defs>
                   {featureCards.map((_, i) => (
                     <clipPath key={`clip-${i}`} id={`segClip-${i}`}>
@@ -342,10 +342,9 @@ mm.add("(min-width: 1024px)", () => {
             
           </div>
 
-          {/* RIGHT: Scrolling Cards (images) — on mobile flows naturally BELOW the circle at top */}
           <div
             ref={rightViewportRef}
-            className="w-full lg:w-[55%] xl:w-[50%] lg:h-[calc(100vh-8rem)] lg:overflow-hidden px-4 sm:px-8 lg:px-0 pt-2 lg:pt-0"
+            className="w-full lg:w-[50%] xl:w-[48%] lg:h-[calc(100vh-8rem)] lg:overflow-hidden px-4 sm:px-8 lg:px-0 pt-2 lg:pt-0"
           >
             <div ref={rightTrackRef} className="space-y-16 lg:space-y-24 lg:pb-[25vh]">
               {featureCards.map((card, index) => (

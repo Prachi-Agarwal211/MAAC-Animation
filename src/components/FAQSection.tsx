@@ -10,7 +10,7 @@ export default function FAQSection() {
     <section className="relative py-16 md:py-24 overflow-hidden bg-transparent">
       <div className="atmosphere-blob blob-orange bottom-0 right-0 opacity-5" />
       
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-20 grid lg:grid-cols-12 gap-16 md:gap-24">
+      <div className="max-w-content mx-auto px-6 lg:px-20 grid lg:grid-cols-12 gap-16 md:gap-24">
         
         {/* Left: Content */}
         <div className="lg:col-span-5 space-y-8">

@@ -21,7 +21,7 @@ const defaultCurriculum = [
   { module: "Industry Readiness", topics: ["Showreel creation", "Interview preparation", "Industry exposure"] },
 ];
 
-export default function CourseCurriculum({ course }: { course: Course }) {
+export default function CourseCurriculum({ course: _course }: { course: Course }) {
   return (
     <section className="py-20 md:py-28 bg-transparent" style={{ background: "linear-gradient(180deg, rgba(5, 0, 0, 0.8) 0%, rgba(23, 17, 12, 0.9) 50%, rgba(5, 0, 0, 1) 100%)" }}>
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">

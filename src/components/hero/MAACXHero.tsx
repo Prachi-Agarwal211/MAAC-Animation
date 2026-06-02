@@ -89,7 +89,7 @@ export default function MAACXHero({ onIntroReveal }: Props) {
       {/* Foreground content */}
       <div
         ref={contentRef}
-        className="relative z-10 mx-auto flex min-h-[100svh] w-full max-w-[1800px] flex-col justify-end px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-[calc(5rem+env(safe-area-inset-top))] sm:px-8 sm:pb-10 sm:pt-[calc(5.5rem+env(safe-area-inset-top))] lg:px-16 lg:pb-12 xl:px-24 xl:pb-14 opacity-0"
+        className="relative z-10 mx-auto flex min-h-[100svh] w-full max-w-content flex-col justify-end px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-[calc(5rem+env(safe-area-inset-top))] sm:px-8 sm:pb-10 sm:pt-[calc(5.5rem+env(safe-area-inset-top))] lg:px-16 lg:pb-12 xl:px-24 xl:pb-14 opacity-0"
       >
         <div className="flex w-full flex-col gap-16 lg:flex-row lg:items-end lg:justify-between lg:gap-12">
           <div className="maacx-content min-w-0 max-w-3xl flex-1">

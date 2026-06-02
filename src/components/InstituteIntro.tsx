@@ -5,7 +5,7 @@ import CountUpStat from "@/components/ui/CountUpStat";
 export default function InstituteIntro() {
   return (
     <div className="relative z-20 bg-transparent py-16 md:py-24">
-      <div className="max-w-[1400px] mx-auto px-5 md:px-12 lg:px-20">
+      <div className="max-w-content mx-auto px-5 md:px-12 lg:px-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-16 lg:gap-24 items-center">
           
           {/* Left: Video */}

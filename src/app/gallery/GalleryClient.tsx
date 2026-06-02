@@ -90,7 +90,7 @@ export default function GalleryClient() {
       {/* Hero */}
       <section className="relative pt-20 md:pt-32 pb-16 md:pb-20 overflow-hidden">
         <div className="absolute inset-0 bg-hero-pattern" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 gallery-hero">
+        <div className="relative max-w-content mx-auto px-4 sm:px-6 lg:px-8 gallery-hero">
           <p className="text-[#FFD700] text-xs font-inter font-semibold tracking-[0.2em] uppercase mb-4">
             Showcase
           </p>
@@ -107,7 +107,7 @@ export default function GalleryClient() {
       {/* Gallery Grid */}
       <section className="relative py-16">
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
           <div className="gallery-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {galleryImages.map((item) => (
               <div

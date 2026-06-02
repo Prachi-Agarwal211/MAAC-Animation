@@ -131,7 +131,7 @@ function Placements() {
       ref={containerRef}
       className="relative bg-transparent py-16 md:py-24 overflow-hidden"
     >
-      <div className="relative z-10 max-w-6xl mx-auto px-6">
+      <div className="relative z-10 max-w-content mx-auto px-6">
         {/* Header */}
         <div className="pl-header text-center mb-16">
           <p className="metallic-gold-text text-[10px] font-bold tracking-[0.4em] uppercase mb-4 flex items-center justify-center gap-3">
@@ -144,15 +144,11 @@ function Placements() {
           </h2>
         </div>
 
-        {/* Alumni Network Logo Rows (like reference screenshot) */}
-        <div className="max-w-6xl mx-auto">
+        {/* Alumni Network Logo Rows */}
+        <div className="max-w-content mx-auto">
           <div className="border-t-2 border-b-2 border-red-600/40 pt-10 pb-10">
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4 md:gap-5">
-              {placementCompanies.slice(0, 7).map((company, i) => renderCompany(company, i))}
-            </div>
-
-            <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4 md:gap-5 lg:max-w-[1100px] lg:mx-auto">
-              {placementCompanies.slice(7).map((company, i) => renderCompany(company, i + 7))}
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7 gap-4 md:gap-5">
+              {placementCompanies.map((company, i) => renderCompany(company, i))}
             </div>
           </div>
         </div>

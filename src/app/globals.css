@@ -19,6 +19,7 @@ html, body {
   --gold: #FFD700;
   --gold-glow: rgba(255, 215, 0, 0.25);
   --sand: #F0EBE1;
+  --content-max-width: 1600px;
   
   /* ── Z-Index Scale ── */
   --z-base: 1;

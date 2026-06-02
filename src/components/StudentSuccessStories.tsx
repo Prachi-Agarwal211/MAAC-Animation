@@ -58,7 +58,7 @@ export default function StudentSuccessStories() {
       {/* Background Accent */}
       <div className="atmosphere-blob blob-purple bottom-0 -left-40 opacity-5" />
 
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-8 z-10">
+      <div className="relative max-w-content mx-auto px-6 lg:px-8 z-10">
         {/* Heading */}
         <FadeIn className="text-center mb-16 md:mb-24">
           <p className="metallic-gold-text text-[10px] font-bold tracking-[0.3em] uppercase mb-4 flex items-center justify-center gap-3">
@@ -75,7 +75,7 @@ export default function StudentSuccessStories() {
         </FadeIn>
 
         {/* Stats Bar */}
-        <FadeIn delay={0.2} className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16 p-8 rounded-[24px] glass-card border border-white/5">
+        <FadeIn delay={0.2} className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16 p-8 rounded-[24px] glass-card border border-white/5">
           {[
             { label: "Average Starting Salary", value: "6-9 LPA", icon: TrendingUp },
             { label: "Highest Package", value: "12+ LPA", icon: Star },

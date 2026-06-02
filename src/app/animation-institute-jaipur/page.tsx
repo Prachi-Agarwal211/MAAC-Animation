@@ -74,7 +74,7 @@ export default function AnimationInstituteJaipurPage() {
         {/* Why MAAC Jaipur */}
         <section className="py-24 md:py-32 bg-transparent relative border-b border-white/5">
           <div className="atmosphere-blob blob-orange top-0 left-0 opacity-5" />
-          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="max-w-content mx-auto px-6 lg:px-8">
             <FadeIn>
               <h2 className="font-display text-3xl md:text-5xl text-[#F0EBE1] mb-12 font-bold uppercase leading-[1.1] tracking-[0.1em]">Why Choose MAAC in Jaipur?</h2>
               <div className="prose prose-lg text-[#A8A29C] max-w-none prose-invert">
@@ -106,7 +106,7 @@ export default function AnimationInstituteJaipurPage() {
 
         {/* Comparison Table */}
         <section className="py-24 md:py-32 bg-transparent relative border-b border-white/5">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="max-w-content mx-auto px-6 lg:px-8">
             <FadeIn>
               <h2 className="font-display text-3xl md:text-5xl text-[#F0EBE1] mb-16 text-center font-bold uppercase leading-[1.1] tracking-[0.1em]">
                 The MAAC <span className="metallic-gold-text italic">Advantage</span>

@@ -9,7 +9,7 @@ import gsap, { ScrollTrigger } from "@/lib/gsap";
 import VideoFacade from "@/components/ui/VideoFacade";
 import Image from "next/image";
 import ImageLightbox from "@/components/ui/ImageLightbox";
-import { EVENT_PHOTOS } from "@/data/events";
+import { EVENT_PHOTOS, PRESS_PHOTOS } from "@/data/events";
 
 export default function EventsPage() {
   const video24FPSRef = useRef<HTMLDivElement>(null);
@@ -209,7 +209,7 @@ export default function EventsPage() {
           <div className="relative rounded-2xl overflow-hidden bg-[#0a0a0a] shadow-xl" style={{ maxHeight: '72vh', minHeight: '320px' }}>
             <Image
               key={slideIndex}
-              src={EVENT_PHOTOS[slideIndex]}
+              src={EVENT_PHOTOS[slideIndex].src}
               alt={`Event moment ${slideIndex + 1}`}
               fill
               className="object-contain bg-black"
@@ -238,7 +238,7 @@ export default function EventsPage() {
           {/* Filmstrip — photos front and center, very little chrome */}
           <div className="mt-3 relative">
             <div className="flex gap-2 overflow-x-auto pb-3 snap-x no-scrollbar px-1">
-              {EVENT_PHOTOS.map((src, i) => {
+              {EVENT_PHOTOS.map((photo, i) => {
                 const active = i === slideIndex;
                 return (
                   <button
@@ -248,7 +248,7 @@ export default function EventsPage() {
                     className={`flex-shrink-0 rounded-xl overflow-hidden border transition snap-start ${active ? "border-[#FFD700] scale-[1.02]" : "border-white/10 hover:border-white/30"}`}
                     style={{ width: 78, height: 52 }}
                   >
-                    <Image src={src} alt="" fill className="object-contain bg-black/30" unoptimized loading={i < 6 ? "eager" : "lazy"} />
+                    <Image src={photo.src} alt="" fill className="object-contain bg-black/30" unoptimized loading={i < 6 ? "eager" : "lazy"} />
                   </button>
                 );
               })}
@@ -301,7 +301,7 @@ export default function EventsPage() {
 
       {/* Why Attend MAAC Events Section — lighter treatment so video/photo backgrounds stay prominent */}
       <section className="relative py-8 md:py-12 overflow-hidden bg-transparent border-t border-white/10">
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative max-w-content mx-auto px-4 sm:px-6 lg:px-8">
           {/* Two column layout: Left heading, Right cards */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             {/* Left side: Heading and description */}
@@ -380,7 +380,7 @@ export default function EventsPage() {
 
       {/* Signature MAAC Events Section */}
       <section className="relative py-8 md:py-12 overflow-hidden bg-transparent">
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative max-w-content mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold metallic-gold-text mb-16 leading-tight text-center">
             Signature MAAC Events You Can Be a Part Of!
           </h2>
@@ -422,7 +422,7 @@ export default function EventsPage() {
 
       {/* 100 Hours - The Ultimate Creative Marathon Section */}
       <section className="relative py-8 md:py-12 overflow-hidden bg-transparent">
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative max-w-content mx-auto px-4 sm:px-6 lg:px-8">
           {/* Top white line */}
           <div className="border-t border-white/10 mb-12"></div>
 
@@ -464,7 +464,7 @@ export default function EventsPage() {
 
       {/* New Event Section - Same Layout */}
       <section className="relative py-8 md:py-12 overflow-hidden bg-transparent">
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative max-w-content mx-auto px-4 sm:px-6 lg:px-8">
           {/* Top white line */}
           <div className="border-t border-white/10 mb-12"></div>
 
@@ -506,7 +506,7 @@ export default function EventsPage() {
 
       {/* NSM - National Students' Meet Section */}
       <section className="relative py-8 md:py-12 overflow-hidden bg-transparent">
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative max-w-content mx-auto px-4 sm:px-6 lg:px-8">
           {/* Top white line */}
           <div className="border-t border-white/10 mb-8"></div>
 
@@ -557,7 +557,7 @@ National Students&apos; Meet (NSM)
 
       {/* MCL - MAAC Creative League Section */}
       <section className="relative py-8 md:py-12 overflow-hidden bg-transparent">
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative max-w-content mx-auto px-4 sm:px-6 lg:px-8">
           {/* Top white line */}
           <div className="border-t border-white/10 mb-8"></div>
 
@@ -608,7 +608,7 @@ National Students&apos; Meet (NSM)
 
       {/* MAAC Klick - Nature & Wildlife Photography Expeditions Section */}
       <section className="relative py-8 md:py-12 overflow-hidden bg-transparent">
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative max-w-content mx-auto px-4 sm:px-6 lg:px-8">
           {/* Top white line */}
           <div className="border-t border-white/10 mb-8"></div>
 
@@ -659,7 +659,7 @@ National Students&apos; Meet (NSM)
 
       {/* New Section - Same Layout */}
       <section className="relative py-8 md:py-12 overflow-hidden bg-transparent">
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative max-w-content mx-auto px-4 sm:px-6 lg:px-8">
           {/* Top white line */}
           <div className="border-t border-white/10 mb-8"></div>
 
@@ -725,7 +725,7 @@ National Students&apos; Meet (NSM)
           </svg>
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
+        <div className="relative max-w-content mx-auto px-4 sm:px-6 lg:px-8 z-10">
           <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight text-left metallic-gold-text">
             Who Can Attend MAAC Events?
           </h2>
@@ -815,7 +815,7 @@ National Students&apos; Meet (NSM)
 
       {/* The professional lightbox for the event photos */}
       <ImageLightbox
-        images={EVENT_PHOTOS}
+        images={EVENT_PHOTOS.map(p => p.src)}
         alt="MAAC Jaipur Event Moments"
         initialIndex={lightboxStart}
         isOpen={showLightbox}

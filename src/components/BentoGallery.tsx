@@ -13,38 +13,38 @@ const bentoItems = [
     title: "Cinematic Lighting",
     category: "Lighting & Lookdev",
     image: "/portfolio/featured/nancy-verma-page1.jpg",
-    span: "md:col-span-1 md:row-span-1",
+    span: "col-span-1 row-span-1",
   },
   {
     title: "VFX Simulation",
     category: "Dynamics",
     image: "/portfolio/matte-painting/akshat-asolkar.jpg",
-    span: "md:col-span-1 md:row-span-1",
+    span: "col-span-1 row-span-1",
   },
   {
     title: "Digital Painting",
     category: "Concept Art",
     image: "/portfolio/digital-painting/deshna-shah.jpg",
-    span: "md:col-span-1 md:row-span-2",
+    span: "md:col-span-2 lg:col-span-1 md:row-span-1 lg:row-span-2",
   },
   {
     title: "Character Design",
     category: "Sculpting",
     image: "/portfolio/character-modeling/aarush-kumar-page1.jpg",
-    span: "md:col-span-1 md:row-span-1",
+    span: "col-span-1 row-span-1",
   },
   {
     title: "Feature Production",
     category: "Full Production",
     image: "/portfolio/featured/prerit-mehan-page1.jpg",
-    span: "md:col-span-2 md:row-span-1",
+    span: "md:col-span-1 lg:col-span-2 row-span-1",
   },
 ];
 
 export default function BentoGallery() {
   return (
     <section className="bg-transparent py-24 md:py-40 px-6 lg:px-20 overflow-hidden">
-      <div className="max-w-[1600px] mx-auto">
+      <div className="max-w-content mx-auto">
         <FadeIn className="text-center mb-20">
           <span className="inline-block metallic-gold-text text-xs font-bold tracking-[0.4em] uppercase mb-6">Our</span>
           <h2 className="font-display text-[clamp(1.5rem,5vw,3rem)] text-white leading-[0.9] font-bold uppercase leading-[1.1] tracking-[0.1em]">
@@ -61,7 +61,7 @@ export default function BentoGallery() {
           </Link>
         </FadeIn>
 
-        <FadeIn stagger={0.1} className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6 auto-rows-[250px] md:auto-rows-[300px]">
+        <FadeIn stagger={0.1} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 auto-rows-[250px] md:auto-rows-[300px]">
           {bentoItems.map((item, i) => (
             <div
               key={i}
