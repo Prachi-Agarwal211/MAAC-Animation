@@ -49,8 +49,8 @@ export default function IndustryPartners() {
           <div className="flex items-center gap-8 w-max animate-marquee">
             {extendedPartners.map((partner, i) => (
               <div key={`${partner}-${i}`} className="shrink-0 group">
-                <div className="w-48 h-20 md:w-56 md:h-24 glass-card border border-white/10 flex items-center justify-center px-6 transition-all duration-300 hover:border-[#BF953F]/50 hover:bg-white/[0.08] hover:scale-105">
-                  <span className="text-xs md:text-sm text-white font-bold uppercase tracking-wider text-center">
+                <div className="w-48 h-20 md:w-56 md:h-24 glass-card border border-white/10 flex items-center justify-center px-6 transition-all duration-300 hover:border-[#FFD700]/50 hover:bg-[#FFD700]/5 hover:scale-105 hover:shadow-[0_0_25px_rgba(255,215,0,0.1)]">
+                  <span className="text-xs md:text-sm text-white font-bold uppercase tracking-wider text-center group-hover:text-[#FFD700] transition-colors">
                     {partner}
                   </span>
                 </div>
@@ -62,8 +62,8 @@ export default function IndustryPartners() {
           <div className="flex items-center gap-8 w-max animate-marquee-reverse">
             {reversedPartners.map((partner, i) => (
               <div key={`${partner}-${i}`} className="shrink-0 group">
-                <div className="w-48 h-20 md:w-56 md:h-24 glass-card border border-white/10 flex items-center justify-center px-6 transition-all duration-300 hover:border-[#BF953F]/50 hover:bg-white/[0.08] hover:scale-105">
-                  <span className="text-xs md:text-sm text-white font-bold uppercase tracking-wider text-center">
+                <div className="w-48 h-20 md:w-56 md:h-24 glass-card border border-white/10 flex items-center justify-center px-6 transition-all duration-300 hover:border-[#FFD700]/50 hover:bg-[#FFD700]/5 hover:scale-105 hover:shadow-[0_0_25px_rgba(255,215,0,0.1)]">
+                  <span className="text-xs md:text-sm text-white font-bold uppercase tracking-wider text-center group-hover:text-[#FFD700] transition-colors">
                     {partner}
                   </span>
                 </div>
