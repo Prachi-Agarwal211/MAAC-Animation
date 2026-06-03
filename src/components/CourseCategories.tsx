@@ -106,12 +106,12 @@ function SlideUpCard({ course }: { course: CourseCardItem }) {
             src={course.image}
             alt={course.title}
             fill
-            className="object-cover transition-transform duration-700 group-hover:scale-105 opacity-60 group-hover:opacity-80"
+            className="object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
           />
         ) : (
           <div className="absolute inset-0 bg-gradient-to-br from-[#1c1c1c] to-[#0c0c0c]" />
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0C0C0C] via-[#0C0C0C]/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0C0C0C]/80 via-[#0C0C0C]/10 to-transparent" />
       </div>
 
       {/* Content Layer */}
@@ -219,8 +219,6 @@ export default function CourseCategories({ mode = "home" }: CourseCategoriesProp
 
   return (
     <section ref={containerRef} id={isHome ? "courses" : undefined} className="relative py-24 md:py-32 overflow-hidden bg-transparent">
-      <div className="atmosphere-blob blob-orange bottom-0 -left-20 opacity-5" />
-
       <div className="relative max-w-content mx-auto px-6 lg:px-8 z-10">
         <div className="categories-heading text-center mb-16 md:mb-24">
           <p className="metallic-gold-text text-[10px] font-bold tracking-[0.3em] uppercase mb-4 flex items-center justify-center gap-3">
