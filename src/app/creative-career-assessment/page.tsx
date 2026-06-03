@@ -1,513 +1,385 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { ArrowRight, RotateCcw, Award, Users, Clock, Target } from 'lucide-react';
+import React, { useState, useMemo } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronRight, RotateCcw, Award, CheckCircle2, Sparkles } from 'lucide-react';
+import Link from 'next/link';
 
-// Type definitions
-interface Question {
-  id: number;
-  question: string;
-  options: string[];
-}
-
-interface Role {
-  name: string;
-  match: number;
-  description: string;
-  whyFits: string;
-  skills: string[];
-  maacCourse: string;
-  cta: string;
-}
-
-// 10 carefully designed questions for Creative Career Assessment (Animation/VFX/Game/Motion)
-const questions: Question[] = [
+// --- Quiz Data ---
+const QUIZ_QUESTIONS = [
   {
     id: 1,
-    question: "When watching a big animated or VFX-heavy movie, what grabs your attention the most?",
+    question: "When watching a blockbuster like 'RRR' or 'Avatar', what's the first thing that grabs your attention?",
     options: [
-      "The way characters move, act, and show emotion through animation",
-      "The magical effects, creatures, explosions, and impossible visuals",
-      "The detailed environments, props, textures, lighting, and world-building",
-      "The overall style, color, composition, titles, and motion graphics feel"
+      { text: "The way the characters express emotion through their faces and eyes.", role: "animator" },
+      { text: "The massive explosions and how digital magic blends with real footage.", role: "vfx" },
+      { text: "The incredible detail in the environments, weapons, and costumes.", role: "modeler" },
+      { text: "The cool title sequences and how the logos move on screen.", role: "mograph" }
     ]
   },
   {
     id: 2,
-    question: "In your free time or personal projects, you enjoy most:",
+    question: "If you had a free weekend to start a creative project, you'd most likely:",
     options: [
-      "Sketching or acting out character performances and emotions",
-      "Experimenting with particle effects, simulations, or compositing tricks",
-      "Building 3D models, sculpting details, or creating environments",
-      "Making stylish animated graphics, logos, or short motion videos"
+      { text: "Record a funny acting skit or a stop-motion dance video.", role: "animator" },
+      { text: "Film a 'magic trick' and try to edit it to look impossible.", role: "vfx" },
+      { text: "Build a highly detailed LEGO set or a DIY architectural model.", role: "modeler" },
+      { text: "Design a stylish social media poster or a YouTube channel intro.", role: "mograph" }
     ]
   },
   {
     id: 3,
-    question: "When approaching a creative challenge, your natural strength is:",
+    question: "What is your 'Creative Superpower'?",
     options: [
-      "Bringing stories and characters to life with believable movement and feeling",
-      "Solving complex technical problems to create spectacular or seamless visuals",
-      "Paying close attention to every small detail and crafting high-quality assets",
-      "Making things look visually striking, modern, and communicate clearly"
+      { text: "Observation—I notice how people walk and express feelings.", role: "animator" },
+      { text: "Problem Solving—I love figuring out how visual tricks are done.", role: "vfx" },
+      { text: "Patience—I can spend hours perfecting one intricate 3D object.", role: "modeler" },
+      { text: "Sense of Rhythm—I have a natural feel for timing and music beats.", role: "mograph" }
     ]
   },
   {
     id: 4,
-    question: "Your ideal creative workday would involve:",
+    question: "Which workplace environment sounds most exciting to you?",
     options: [
-      "Animating characters and performances based on storyboards and direction",
-      "Creating VFX shots, tracking, rotoscoping, or building effects pipelines",
-      "Modeling, texturing, lighting, and refining 3D assets from concept to render",
-      "Designing and animating motion graphics for ads, explainers, or branding"
+      { text: "A Pixar-style studio where storytelling and performance are everything.", role: "animator" },
+      { text: "A high-tech VFX house working on the next Marvel or Bollywood epic.", role: "vfx" },
+      { text: "A game studio building massive open worlds like GTA or Elden Ring.", role: "game" },
+      { text: "A trendy design agency creating premium ads and brand videos.", role: "mograph" }
     ]
   },
   {
     id: 5,
-    question: "How do you feel about detailed, precise, or repetitive creative work?",
+    question: "When walking through a busy market, what catches your eye?",
     options: [
-      "I can do it when it serves the emotional story or performance",
-      "I enjoy the technical challenge of getting complex effects perfect",
-      "I genuinely love refining details until everything feels just right",
-      "I prefer variety and faster creative iterations with quick visual impact"
+      { text: "The unique gestures and personalities of the people around.", role: "animator" },
+      { text: "How the light creates shadows and reflections on different surfaces.", role: "vfx" },
+      { text: "The structure and textures of the old buildings and carvings.", role: "modeler" },
+      { text: "The bold colors and typography of the shop signs.", role: "mograph" }
     ]
   },
   {
     id: 6,
-    question: "In a team project, you naturally tend to:",
+    question: "In a group project, what is your preferred role?",
     options: [
-      "Collaborate closely on performances, timing, and storytelling with the director",
-      "Be the person who makes the 'magic' or invisible effects happen in post-production",
-      "Work independently for long stretches perfecting models and assets",
-      "Handle quick-turnaround creative work with fast feedback from clients or team"
+      { text: "The 'Actor'—Bringing the main characters to life.", role: "animator" },
+      { text: "The 'Scientist'—Fixing glitches and adding the final polish.", role: "vfx" },
+      { text: "The 'Architect'—Building the world and the props from scratch.", role: "modeler" },
+      { text: "The 'Stylist'—Making sure everything looks modern and visually balanced.", role: "mograph" }
     ]
   },
   {
     id: 7,
-    question: "What kind of portfolio piece would make you most proud?",
+    question: "Which software capability would you be most excited to master?",
     options: [
-      "A character animation reel showing strong acting, timing, and emotion",
-      "A VFX breakdown reel with complex compositing or spectacular effects",
-      "Highly detailed 3D models or environments with beautiful texturing and lighting",
-      "A polished motion graphics reel or animated branding/explainer project"
+      { text: "A tool that controls the realistic movement of a digital human.", role: "animator" },
+      { text: "A system that simulates realistic fire, water, and debris.", role: "vfx" },
+      { text: "Digital clay that lets you sculpt creatures and characters.", role: "modeler" },
+      { text: "Dynamic text and shapes that move perfectly to a music track.", role: "mograph" }
     ]
   },
   {
     id: 8,
-    question: "Your biggest creative strength right now is:",
+    question: "What would make you most proud of your finished work?",
     options: [
-      "Understanding emotion, timing, performance, and storytelling through movement",
-      "Technical problem-solving and making impossible things look real",
-      "Patience, precision, and a strong eye for form, detail, and craftsmanship",
-      "Visual design sense — color, typography, composition, and stylish communication"
+      { text: "When the audience feels a deep emotional connection to my character.", role: "animator" },
+      { text: "When people can't tell what is real and what is computer-generated.", role: "vfx" },
+      { text: "When someone is stunned by the sheer realism of my 3D assets.", role: "modeler" },
+      { text: "When my work is described as 'cool', 'trendy', and 'visually iconic'.", role: "mograph" }
     ]
   },
   {
     id: 9,
-    question: "When learning new creative software or tools, you focus first on:",
+    question: "Pick your favorite visual style:",
     options: [
-      "Animation principles, rigging, and performance tools (Maya, Blender animation)",
-      "Tracking, compositing, simulation, and effects tools (Nuke, After Effects, Houdini)",
-      "Modeling, sculpting, UVs, texturing, and look development tools",
-      "Motion graphics, typography, 2.5D, and design/animation tools"
+      { text: "Disney/Pixar style characters with big, expressive personalities.", role: "animator" },
+      { text: "Cinematic, hyper-realistic scenes like Avatar or Baahubali.", role: "vfx" },
+      { text: "Detailed environment art from games like Cyberpunk 2077.", role: "game" },
+      { text: "Sleek, minimalist motion graphics with bold colors.", role: "mograph" }
     ]
   },
   {
     id: 10,
-    question: "In 3-5 years, which description excites you the most for your career?",
+    question: "What kind of challenge excites you more?",
     options: [
-      "Bringing lead characters to life in films, series, or high-end games as an animator",
-      "Working on big VFX shots for movies, OTT, or ads as a skilled VFX artist",
-      "Creating stunning worlds, characters, and assets as a senior 3D modeler or environment artist",
-      "Running creative motion design projects or working in advertising/branding with motion graphics"
+      { text: "Perfecting a subtle facial expression for a dramatic scene.", role: "animator" },
+      { text: "Blending a CG spaceship perfectly into a real city video.", role: "vfx" },
+      { text: "Modeling a complex futuristic vehicle from the inside out.", role: "modeler" },
+      { text: "Creating a high-energy intro for a global sports event.", role: "mograph" }
+    ]
+  },
+  {
+    id: 11,
+    question: "How do you handle details?",
+    options: [
+      { text: "I focus on the 'flow' and 'energy' of a movement.", role: "animator" },
+      { text: "I look for technical perfection and pixel-perfect blending.", role: "vfx" },
+      { text: "I am obsessive about textures, scratches, and micro-details.", role: "modeler" },
+      { text: "I focus on the composition, layout, and visual impact.", role: "mograph" }
+    ]
+  },
+  {
+    id: 12,
+    question: "Your dream career achievement would be:",
+    options: [
+      { text: "Winning an award for 'Best Animated Character'.", role: "animator" },
+      { text: "Leading the VFX team on a billion-dollar superhero movie.", role: "vfx" },
+      { text: "Seeing my 3D environments in a Game of the Year title.", role: "game" },
+      { text: "Creating a visual brand identity that goes viral globally.", role: "mograph" }
     ]
   }
 ];
 
-// Simple scoring: Each option adds points to relevant roles
-// Roles: animator, vfx, modeler, motion, game (concept falls under modeler/animator for simplicity)
-function calculateResults(answers: number[]): Role[] {
-  const scores = {
-    animator: 0,
-    vfx: 0,
-    modeler: 0,
-    motion: 0,
-    game: 0
-  };
+// --- Results Data ---
+const RESULTS_MAP = {
+  animator: {
+    title: "3D Character Animator",
+    description: "You are a digital actor! Your passion lies in bringing characters to life through movement, expression, and performance.",
+    whyFits: "Your keen observation of human behavior and sense of timing makes you perfect for breathe life into digital puppets.",
+    strengths: ["Acting & Performance", "Timing & Rhythm", "Storytelling", "Anatomy Awareness"],
+    course: "AD3D Edge Plus (Advanced Animation Track)",
+    courseReason: "This flagship program focuses on the 12 principles of animation and advanced character performance.",
+    gradient: "from-orange-500 to-red-600"
+  },
+  vfx: {
+    title: "VFX Artist / Compositor",
+    description: "You are a digital magician! You love the intersection of science and art, creating effects that seem impossible yet look real.",
+    whyFits: "Your problem-solving nature and eye for technical detail allow you to blend digital elements seamlessly with reality.",
+    strengths: ["Technical Logic", "Lighting & Composition", "Simulation", "Attention to Detail"],
+    course: "ADVFX Plus (Advanced Visual Effects Program)",
+    courseReason: "The industry-standard program for mastering compositing, dynamics, and high-end cinematic effects.",
+    gradient: "from-blue-500 to-indigo-600"
+  },
+  modeler: {
+    title: "3D Modeler & Environment Artist",
+    description: "You are a digital architect! You enjoy building assets, characters, and worlds from the ground up with incredible precision.",
+    whyFits: "Your patience and appreciation for structure and texture make you the perfect creator of high-end 3D assets.",
+    strengths: ["Spatial Awareness", "Sculpting & Anatomy", "Texturing", "Structural Precision"],
+    course: "AD3D Edge Plus (Modeling & Texturing Track)",
+    courseReason: "This course masters the pipeline for creating everything from realistic humans to complex environments.",
+    gradient: "from-emerald-500 to-teal-600"
+  },
+  mograph: {
+    title: "Motion Graphics Designer",
+    description: "You are a visual communicator! You excel at making graphics, typography, and shapes move in a stylish, rhythmic way.",
+    whyFits: "Your eye for modern design and 'cool' aesthetics makes you ideal for the high-energy world of advertising and branding.",
+    strengths: ["Typography", "Color Theory", "Composition", "Rhythmic Animation"],
+    course: "DGWA / Motion Graphics Specialty",
+    courseReason: "Specifically designed for artists who want to dominate the advertising, broadcast, and digital media industries.",
+    gradient: "from-purple-500 to-pink-600"
+  },
+  game: {
+    title: "Game Artist / Real-time 3D",
+    description: "You are a world builder! You thrive in creating interactive experiences where players can live and explore.",
+    whyFits: "Your interest in immersive worlds and interactive technology aligns perfectly with the booming global gaming industry.",
+    strengths: ["Level Design", "Interactive Logic", "Optimization", "Asset Creation"],
+    course: "Game Design & Real-time 3D",
+    courseReason: "Learn the specific workflows for Unreal Engine and Unity to build assets for modern gaming consoles and PC.",
+    gradient: "from-amber-500 to-orange-600"
+  }
+};
 
-  // Question 1
-  if (answers[0] === 0) scores.animator += 3;
-  if (answers[0] === 1) scores.vfx += 3;
-  if (answers[0] === 2) scores.modeler += 3;
-  if (answers[0] === 3) scores.motion += 3;
-
-  // Question 2
-  if (answers[1] === 0) scores.animator += 3;
-  if (answers[1] === 1) { scores.vfx += 2; scores.game += 1; }
-  if (answers[1] === 2) scores.modeler += 3;
-  if (answers[1] === 3) scores.motion += 3;
-
-  // Question 3
-  if (answers[2] === 0) scores.animator += 3;
-  if (answers[2] === 1) scores.vfx += 3;
-  if (answers[2] === 2) scores.modeler += 3;
-  if (answers[2] === 3) scores.motion += 3;
-
-  // Question 4
-  if (answers[3] === 0) scores.animator += 3;
-  if (answers[3] === 1) scores.vfx += 3;
-  if (answers[3] === 2) scores.modeler += 3;
-  if (answers[3] === 3) scores.motion += 3;
-
-  // Question 5
-  if (answers[4] === 0) scores.animator += 2;
-  if (answers[4] === 1) scores.vfx += 3;
-  if (answers[4] === 2) scores.modeler += 3;
-  if (answers[4] === 3) scores.motion += 2;
-
-  // Question 6
-  if (answers[5] === 0) scores.animator += 2;
-  if (answers[5] === 1) scores.vfx += 3;
-  if (answers[5] === 2) scores.modeler += 3;
-  if (answers[5] === 3) scores.motion += 2;
-
-  // Question 7
-  if (answers[6] === 0) scores.animator += 3;
-  if (answers[6] === 1) scores.vfx += 3;
-  if (answers[6] === 2) scores.modeler += 3;
-  if (answers[6] === 3) scores.motion += 3;
-
-  // Question 8
-  if (answers[7] === 0) scores.animator += 3;
-  if (answers[7] === 1) scores.vfx += 3;
-  if (answers[7] === 2) scores.modeler += 3;
-  if (answers[7] === 3) scores.motion += 3;
-
-  // Question 9
-  if (answers[8] === 0) scores.animator += 3;
-  if (answers[8] === 1) scores.vfx += 3;
-  if (answers[8] === 2) scores.modeler += 3;
-  if (answers[8] === 3) scores.motion += 3;
-
-  // Question 10
-  if (answers[9] === 0) scores.animator += 3;
-  if (answers[9] === 1) scores.vfx += 3;
-  if (answers[9] === 2) scores.modeler += 3;
-  if (answers[9] === 3) scores.motion += 3;
-
-  // Add some game bias for certain combinations (tech + fast creative)
-  if (answers[1] === 1 || answers[5] === 3) scores.game += 2;
-
-  const totalPossible = 30; // rough max per role
-  const roles: Role[] = [
-    {
-      name: "3D Character Animator",
-      match: Math.round((scores.animator / totalPossible) * 100),
-      description: "You have a natural talent for bringing characters to life with emotion, timing, and performance. Animators are the actors of the digital world.",
-      whyFits: "Your answers show strong interest in movement, storytelling, and emotional expression through animation.",
-      skills: ["Animation principles", "Timing & spacing", "Acting & performance", "Maya / Blender", "Storytelling"],
-      maacCourse: "AD3D Edge Plus (Advanced Program in 3D Animation)",
-      cta: "Perfect foundation for character animation careers in film, OTT, and games."
-    },
-    {
-      name: "VFX Artist (Compositing / FX)",
-      match: Math.round((scores.vfx / totalPossible) * 100),
-      description: "You love creating the impossible — seamless effects, spectacular sequences, and making magic look real on screen.",
-      whyFits: "You are drawn to technical creativity, problem-solving, and the 'wow' factor of visual effects.",
-      skills: ["Compositing", "Tracking & rotoscoping", "Particle/FX simulation", "Nuke / After Effects / Houdini", "Problem solving"],
-      maacCourse: "ADVFX Plus (Advanced Program in Visual Effects)",
-      cta: "High demand role in films, ads, and OTT. Great for those who enjoy both art and tech."
-    },
-    {
-      name: "3D Modeler / Environment Artist",
-      match: Math.round((scores.modeler / totalPossible) * 100),
-      description: "You excel at crafting detailed worlds, characters, props, and environments with precision and artistic quality.",
-      whyFits: "Your responses highlight patience for detail, love of form, and building things from the ground up.",
-      skills: ["3D Modeling", "Sculpting (ZBrush)", "Texturing & UVs", "Lighting & Look Dev", "Attention to detail"],
-      maacCourse: "AD3D Edge Plus (with strong modeling focus) or 3D & Real-time Design",
-      cta: "Essential role in animation, VFX, and especially game development."
-    },
-    {
-      name: "Motion Graphics Designer",
-      match: Math.round((scores.motion / totalPossible) * 100),
-      description: "You have an eye for stylish visuals, typography, and creating engaging animated content that communicates powerfully.",
-      whyFits: "You prefer fast, impactful creative work with strong design sensibility and quick results.",
-      skills: ["After Effects", "Typography & Design", "2.5D / Cinema 4D", "Branding & explainer animation", "Client communication"],
-      maacCourse: "Motion Graphics Program or ADVFX Plus (Motion Graphics track)",
-      cta: "Excellent for advertising, social media, explainer videos, and broadcast design. High freelance potential."
-    }
-  ];
-
-  // Sort by match descending and return top 3
-  return roles.sort((a, b) => b.match - a.match).slice(0, 3);
-}
-
-export default function CreativeCareerAssessment() {
-  const [step, setStep] = useState<'landing' | 'quiz' | 'results'>('landing');
+export default function CareerAssessment() {
+  const [step, setStep] = useState<'intro' | 'quiz' | 'results'>('intro');
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [answers, setAnswers] = useState<number[]>([]);
-  const [results, setResults] = useState<Role[]>([]);
-  const [selectedOption, setSelectedOption] = useState<number | null>(null);
+  const [scores, setScores] = useState<Record<string, number>>({
+    animator: 0, vfx: 0, modeler: 0, mograph: 0, game: 0
+  });
 
-  const progress = ((currentQuestion) / questions.length) * 100;
+  const handleStart = () => setStep('quiz');
 
-  const handleStart = () => {
-    setStep('quiz');
-    setCurrentQuestion(0);
-    setAnswers([]);
-    setSelectedOption(null);
-  };
-
-  const handleAnswer = (optionIndex: number) => {
-    setSelectedOption(optionIndex);
+  const handleOptionSelect = (role: string) => {
+    setScores(prev => ({ ...prev, [role]: (prev[role] || 0) + 1 }));
     
-    // Auto-advance after short delay for better UX
-    setTimeout(() => {
-      const newAnswers = [...answers, optionIndex];
-      setAnswers(newAnswers);
-      setSelectedOption(null);
-
-      if (currentQuestion < questions.length - 1) {
-        setCurrentQuestion(currentQuestion + 1);
-      } else {
-        // Calculate results
-        const calculatedResults = calculateResults(newAnswers);
-        setResults(calculatedResults);
-        setStep('results');
-      }
-    }, 350);
-  };
-
-  const handlePrevious = () => {
-    if (currentQuestion > 0) {
-      const newAnswers = answers.slice(0, -1);
-      setAnswers(newAnswers);
-      setCurrentQuestion(currentQuestion - 1);
-      setSelectedOption(null);
+    if (currentQuestion < QUIZ_QUESTIONS.length - 1) {
+      setCurrentQuestion(prev => prev + 1);
+    } else {
+      setStep('results');
     }
   };
 
-  const handleRestart = () => {
-    setStep('landing');
-    setCurrentQuestion(0);
-    setAnswers([]);
-    setResults([]);
-    setSelectedOption(null);
-  };
+  const finalResult = useMemo(() => {
+    return Object.entries(scores).reduce((a, b) => (a[1] > b[1] ? a : b))[0];
+  }, [scores]);
 
-  const currentQ = questions[currentQuestion];
+  const resultData = RESULTS_MAP[finalResult as keyof typeof RESULTS_MAP] || RESULTS_MAP.animator;
+  const progress = ((currentQuestion + 1) / QUIZ_QUESTIONS.length) * 100;
+
+  const resetQuiz = () => {
+    setScores({ animator: 0, vfx: 0, modeler: 0, mograph: 0, game: 0 });
+    setCurrentQuestion(0);
+    setStep('intro');
+  };
 
   return (
-    <div className="min-h-screen bg-black text-white overflow-hidden">
-      {/* Hero / Landing Section */}
-      {step === 'landing' && (
-        <div className="relative min-h-screen flex items-center justify-center px-6">
-          <div className="absolute inset-0 bg-[radial-gradient(#ffffff10_1px,transparent_1px)] bg-[length:4px_4px]" />
-          
-          <div className="relative z-10 max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-sm mb-6 border border-white/20">
-              <Award className="w-4 h-4" />
-              <span className="text-sm font-medium tracking-widest">FREE • 5 MINUTES • PERSONALIZED</span>
-            </div>
-
-            <h1 className="text-6xl md:text-7xl font-bold tracking-tighter mb-6">
-              Discover Your Ideal<br />
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#00f0ff] via-[#a855f7] to-[#ff00aa]">Creative Career</span><br />
-              in Animation & VFX
-            </h1>
-
-            <p className="text-xl md:text-2xl text-white/70 max-w-2xl mx-auto mb-10">
-              A simple, insightful assessment to find which role in animation, VFX, game art, or motion graphics fits you best — and the exact MAAC course to get you there.
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+    <main className="min-h-screen bg-transparent text-white pt-32 pb-24 px-6">
+      <div className="max-w-4xl mx-auto">
+        <AnimatePresence mode="wait">
+          {step === 'intro' && (
+            <motion.div
+              key="intro"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="text-center space-y-12 py-12"
+            >
+              <div className="inline-block p-4 rounded-full bg-white/5 border border-white/10 mb-4 glass-card">
+                <Sparkles className="text-[#FFD700] w-10 h-10" />
+              </div>
+              <div className="space-y-4">
+                <p className="metallic-gold-text text-[10px] font-bold tracking-[0.4em] uppercase">
+                  Vocational Excellence
+                </p>
+                <h1 className="text-4xl md:text-7xl font-display font-bold uppercase tracking-tight leading-none">
+                  Discover Your <br />
+                  <span className="metallic-gold-text italic">Creative DNA</span>
+                </h1>
+              </div>
+              <p className="text-xl text-[#A8A29C] max-w-2xl mx-auto leading-relaxed font-medium">
+                Find your path in the $200B global entertainment industry. Our AI-driven assessment matches your personality to high-growth roles in Animation, VFX, and Gaming.
+              </p>
               <button
                 onClick={handleStart}
-                className="group inline-flex items-center justify-center gap-3 px-10 py-4 bg-white text-black font-semibold text-lg rounded-2xl hover:bg-white/90 transition-all active:scale-[0.985]"
+                className="group relative inline-flex items-center gap-4 px-12 py-6 bg-white text-black font-bold uppercase tracking-[0.2em] text-xs overflow-hidden transition-all hover:pr-14"
               >
-                Start Free Assessment
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition" />
+                <span className="relative z-10">Launch Assessment</span>
+                <ChevronRight className="relative z-10 group-hover:translate-x-1 transition-transform" />
+                <div className="absolute inset-0 bg-[#FFD700] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-expo" />
               </button>
-              
-              <button
-                onClick={() => window.location.href = '/contact'}
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 border border-white/30 hover:bg-white/5 rounded-2xl text-lg font-medium transition"
-              >
-                Talk to a Counselor
-              </button>
-            </div>
+            </motion.div>
+          )}
 
-            {/* Trust signals */}
-            <div className="flex flex-wrap justify-center gap-x-8 gap-y-4 text-sm text-white/60">
-              <div className="flex items-center gap-2">
-                <Clock className="w-4 h-4" /> Takes ~5 minutes
-              </div>
-              <div className="flex items-center gap-2">
-                <Target className="w-4 h-4" /> Personalized career match
-              </div>
-              <div className="flex items-center gap-2">
-                <Users className="w-4 h-4" /> 1000+ students guided
-              </div>
-            </div>
-
-            <p className="mt-12 text-xs text-white/40 max-w-md mx-auto">
-              Created by MAAC Animation • Powered by industry insights from Animation, VFX & Game professionals
-            </p>
-          </div>
-        </div>
-      )}
-
-      {/* Quiz Section */}
-      {step === 'quiz' && (
-        <div className="min-h-screen flex flex-col">
-          {/* Progress Bar */}
-          <div className="fixed top-0 left-0 right-0 z-50 h-1 bg-white/10">
-            <div 
-              className="h-1 bg-gradient-to-r from-[#00f0ff] to-[#a855f7] transition-all duration-300"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
-
-          <div className="flex-1 flex items-center justify-center px-6 py-12">
-            <div className="w-full max-w-3xl">
-              {/* Header */}
-              <div className="flex justify-between items-center mb-8">
-                <div>
-                  <div className="text-sm tracking-[3px] text-white/50 mb-1">CREATIVE CAREER ASSESSMENT</div>
-                  <div className="text-2xl font-semibold">Question {currentQuestion + 1} of {questions.length}</div>
+          {step === 'quiz' && (
+            <motion.div
+              key="quiz"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              className="space-y-12"
+            >
+              <div className="space-y-6">
+                <div className="flex justify-between items-end">
+                  <div className="space-y-1">
+                    <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#FFD700]">Module Progress</p>
+                    <h3 className="text-sm font-bold text-white/60">
+                      Question {currentQuestion + 1} of {QUIZ_QUESTIONS.length}
+                    </h3>
+                  </div>
+                  <span className="text-xs font-mono text-[#FFD700]">{Math.round(progress)}%</span>
                 </div>
-                <button 
-                  onClick={handlePrevious}
-                  disabled={currentQuestion === 0}
-                  className="text-sm px-4 py-2 rounded-xl border border-white/20 hover:bg-white/5 disabled:opacity-40 transition"
-                >
-                  Back
-                </button>
+                <div className="h-[2px] w-full bg-white/5 rounded-full overflow-hidden">
+                  <motion.div 
+                    className="h-full bg-gradient-to-r from-[#FFD700] to-[#FFA500]" 
+                    initial={{ width: 0 }}
+                    animate={{ width: `${progress}%` }}
+                    transition={{ duration: 0.5, ease: "circOut" }}
+                  />
+                </div>
               </div>
 
-              {/* Question Card */}
-              <div className="bg-white/5 border border-white/10 rounded-3xl p-8 md:p-12 mb-8">
-                <h2 className="text-3xl md:text-4xl font-semibold tracking-tight leading-tight mb-10">
-                  {currentQ.question}
+              <div className="space-y-10">
+                <h2 className="text-2xl md:text-4xl font-display font-bold leading-[1.1] text-white">
+                  {QUIZ_QUESTIONS[currentQuestion].question}
                 </h2>
-
-                <div className="space-y-3">
-                  {currentQ.options.map((option, index) => (
+                <div className="grid grid-cols-1 gap-4">
+                  {QUIZ_QUESTIONS[currentQuestion].options.map((option, idx) => (
                     <button
-                      key={index}
-                      onClick={() => handleAnswer(index)}
-                      disabled={selectedOption !== null}
-                      className={`w-full text-left p-6 rounded-2xl border transition-all duration-200 flex items-start gap-4 group
-                        ${selectedOption === index 
-                          ? 'bg-white/10 border-[#00f0ff] scale-[1.01]' 
-                          : 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/30 active:bg-white/10'}
-                      `}
+                      key={idx}
+                      onClick={() => handleOptionSelect(option.role)}
+                      className="group flex items-center justify-between p-6 md:p-8 bg-white/5 border border-white/10 hover:border-[#FFD700]/40 transition-all text-left glass-card hover:bg-white/[0.08]"
                     >
-                      <div className={`mt-1 flex-shrink-0 w-6 h-6 rounded-full border flex items-center justify-center text-xs font-mono transition
-                        ${selectedOption === index ? 'border-[#00f0ff] text-[#00f0ff]' : 'border-white/40 group-hover:border-white/70'}
-                      `}>
-                        {String.fromCharCode(65 + index)}
+                      <span className="text-lg md:text-xl text-white/70 group-hover:text-white transition-colors duration-300">
+                        {option.text}
+                      </span>
+                      <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center group-hover:border-[#FFD700]/50 transition-colors shrink-0 ml-4">
+                        <div className="w-2.5 h-2.5 bg-[#FFD700] scale-0 group-hover:scale-100 transition-transform rounded-full shadow-[0_0_15px_rgba(255,215,0,0.4)]" />
                       </div>
-                      <span className="text-lg leading-snug pr-2">{option}</span>
                     </button>
                   ))}
                 </div>
               </div>
+            </motion.div>
+          )}
 
-              <p className="text-center text-white/40 text-sm">
-                Choose the option that feels most natural to you. There are no wrong answers.
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Results Section */}
-      {step === 'results' && results.length > 0 && (
-        <div className="min-h-screen py-16 px-6">
-          <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-12">
-              <div className="inline-block px-4 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-sm tracking-widest mb-4">YOUR RESULTS ARE READY</div>
-              <h1 className="text-5xl md:text-6xl font-bold tracking-tighter mb-4">Your Creative Career Matches</h1>
-              <p className="text-xl text-white/70 max-w-md mx-auto">
-                Based on your answers, here are the roles where you are most likely to thrive.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-6 mb-12">
-              {results.map((role, index) => (
-                <div 
-                  key={index}
-                  className={`bg-white/5 border border-white/10 rounded-3xl p-8 flex flex-col ${index === 0 ? 'md:scale-[1.02] ring-1 ring-white/20' : ''}`}
-                >
-                  <div className="flex items-baseline justify-between mb-6">
-                    <div>
-                      <div className="text-sm text-white/50 tracking-widest">#{index + 1} MATCH</div>
-                      <h3 className="text-2xl font-semibold tracking-tight mt-1 leading-none">{role.name}</h3>
-                    </div>
-                    <div className="text-right">
-                      <div className="text-5xl font-bold tabular-nums tracking-tighter text-[#00f0ff]">{role.match}</div>
-                      <div className="text-xs text-white/50 -mt-1">% MATCH</div>
-                    </div>
+          {step === 'results' && (
+            <motion.div
+              key="results"
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="space-y-12"
+            >
+              <div className={`p-10 md:p-16 rounded-[2rem] bg-gradient-to-br ${resultData.gradient} relative overflow-hidden shadow-2xl`}>
+                <div className="absolute top-0 right-0 p-12 opacity-10 rotate-12 pointer-events-none">
+                  <Award size={240} />
+                </div>
+                <div className="relative z-10 space-y-8">
+                  <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-black/20 backdrop-blur-xl border border-white/10 text-[10px] font-bold uppercase tracking-[0.2em]">
+                    <CheckCircle2 size={16} className="text-white" /> Career Blueprint Analysis Complete
                   </div>
-
-                  <p className="text-white/80 mb-6 flex-1">{role.description}</p>
-
-                  <div className="mb-6">
-                    <div className="text-xs tracking-widest text-white/50 mb-2">WHY THIS FITS YOU</div>
-                    <p className="text-sm text-white/90">{role.whyFits}</p>
-                  </div>
-
-                  <div className="mb-6">
-                    <div className="text-xs tracking-widest text-white/50 mb-3">KEY STRENGTHS YOU SHOW</div>
-                    <div className="flex flex-wrap gap-2">
-                      {role.skills.map((skill, i) => (
-                        <span key={i} className="text-xs px-3 py-1 rounded-full bg-white/10 border border-white/10">{skill}</span>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="mt-auto pt-6 border-t border-white/10">
-                    <div className="text-xs tracking-widest text-white/50 mb-2">RECOMMENDED MAAC COURSE</div>
-                    <div className="font-semibold text-lg leading-tight mb-3">{role.maacCourse}</div>
-                    <p className="text-sm text-white/70 mb-4">{role.cta}</p>
-                    
-                    <a 
-                      href="/contact" 
-                      className="inline-flex w-full items-center justify-center gap-2 px-6 py-3.5 bg-white text-black font-semibold rounded-2xl hover:bg-white/90 active:scale-[0.985] transition text-sm"
-                    >
-                      Apply or Get Counseling
-                      <ArrowRight className="w-4 h-4" />
-                    </a>
+                  <div className="space-y-4">
+                    <h1 className="text-5xl md:text-8xl font-display font-bold uppercase leading-[0.85] tracking-tighter">
+                      {resultData.title}
+                    </h1>
+                    <p className="text-xl md:text-3xl text-white/90 font-medium max-w-2xl leading-tight">
+                      {resultData.description}
+                    </p>
                   </div>
                 </div>
-              ))}
-            </div>
-
-            <div className="text-center space-y-4">
-              <p className="text-white/60 max-w-md mx-auto text-sm">
-                This is a starting point based on your natural inclinations. Passion + consistent practice + great training (like at MAAC) is what truly builds world-class careers.
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-                <button 
-                  onClick={handleRestart}
-                  className="inline-flex items-center justify-center gap-2 px-8 py-3 border border-white/30 hover:bg-white/5 rounded-2xl font-medium transition"
-                >
-                  <RotateCcw className="w-4 h-4" /> Retake Assessment
-                </button>
-                
-                <a 
-                  href="/courses" 
-                  className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-white/10 hover:bg-white/20 border border-white/20 rounded-2xl font-medium transition"
-                >
-                  Explore All MAAC Courses
-                </a>
               </div>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div className="p-10 bg-white/5 border border-white/10 rounded-[2rem] space-y-6 glass-card">
+                  <h3 className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#FFD700]">Aptitude Profile</h3>
+                  <p className="text-lg text-[#A8A29C] leading-relaxed">
+                    {resultData.whyFits}
+                  </p>
+                  <div className="pt-6 flex flex-wrap gap-3">
+                    {resultData.strengths.map((s, i) => (
+                      <span key={i} className="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-[10px] font-bold uppercase tracking-[0.15em] text-white/80">
+                        {s}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="p-10 bg-white/5 border border-white/10 rounded-[2rem] space-y-8 glass-card border-t-[#FFD700]/20">
+                  <div className="space-y-4">
+                    <h3 className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#FFD700]">Strategic Pathway</h3>
+                    <p className="text-2xl font-display font-bold text-white uppercase tracking-tight">{resultData.course}</p>
+                    <p className="text-[#A8A29C] leading-relaxed">
+                      {resultData.courseReason}
+                    </p>
+                  </div>
+                  <Link 
+                    href="/courses"
+                    className="group inline-flex items-center gap-4 text-[#FFD700] font-bold uppercase text-[10px] tracking-[0.3em] hover:text-white transition-all"
+                  >
+                    Explore Curriculum 
+                    <div className="w-10 h-10 rounded-full bg-[#FFD700]/10 border border-[#FFD700]/20 flex items-center justify-center group-hover:bg-[#FFD700] group-hover:text-black transition-all">
+                      <ChevronRight size={18} />
+                    </div>
+                  </Link>
+                </div>
+              </div>
+
+              <div className="flex flex-col md:flex-row gap-6 justify-center items-center py-12">
+                <Link
+                  href="/contact"
+                  className="w-full md:w-auto px-12 py-6 bg-white text-black font-bold uppercase tracking-[0.2em] text-xs text-center hover:bg-[#FFD700] transition-all hover:scale-105"
+                >
+                  Book 1-on-1 Counseling
+                </Link>
+                <button
+                  onClick={resetQuiz}
+                  className="w-full md:w-auto px-12 py-6 bg-white/5 border border-white/10 text-white font-bold uppercase tracking-[0.2em] text-xs inline-flex items-center justify-center gap-3 hover:bg-white/10 transition-all glass-card"
+                >
+                  <RotateCcw size={16} /> Reset Assessment
+                </button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </main>
   );
 }
+

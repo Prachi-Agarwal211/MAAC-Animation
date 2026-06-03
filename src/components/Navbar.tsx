@@ -7,7 +7,7 @@ import Image from "next/image";
 
 import { navLinks, contactInfo, type NavLinkItem } from "@/data/siteData";
 import { useUIStore } from "@/lib/store";
-import { MessageSquare, ChevronDown, X, Menu, ArrowRight } from "lucide-react";
+import { MessageSquare, ChevronDown, X, Menu, ArrowRight, Sparkles } from "lucide-react";
 import ScrollIndicator from "./SideScroller";
 
 export default function Navbar() {
@@ -186,7 +186,16 @@ export default function Navbar() {
             ))}
           </ul>
 
-          <div className="hidden lg:block flex-shrink-0">
+          <div className="hidden lg:flex items-center gap-4 flex-shrink-0">
+            <Link
+              href="/creative-career-assessment"
+              className="group flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#FFD700]/10 border border-[#FFD700]/30 hover:bg-[#FFD700] transition-all duration-500 ease-out"
+            >
+              <Sparkles size={14} className="text-[#FFD700] group-hover:text-black transition-colors" />
+              <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#FFD700] group-hover:text-black transition-colors">
+                Free Assessment
+              </span>
+            </Link>
             <Link
               href="/contact"
               className="group flex items-center gap-3 px-6 py-2.5 rounded-full border border-white/20 hover:border-white transition-all duration-500 ease-out"
@@ -296,6 +305,16 @@ export default function Navbar() {
           </ul>
 
           <div className="mt-8 flex flex-col gap-3 max-w-md mx-auto w-full">
+            <Link
+              href="/creative-career-assessment"
+              onClick={toggleMobileMenu}
+              className="group flex w-full items-center justify-center gap-3 px-6 py-4 rounded-full bg-[#FFD700]/10 border border-[#FFD700]/30 hover:bg-[#FFD700] transition-all duration-500 ease-out"
+            >
+              <Sparkles size={18} className="text-[#FFD700] group-hover:text-black transition-colors" />
+              <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-[#FFD700] group-hover:text-black transition-colors">
+                Free Career Assessment
+              </span>
+            </Link>
             <Link
               href="/contact"
               onClick={toggleMobileMenu}
