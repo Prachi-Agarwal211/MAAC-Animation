@@ -7,7 +7,6 @@ import ApplyNow from "@/components/ApplyNow";
 import StudentWorkGallery from "./StudentWorkGallery";
 import { useEffect, useRef } from "react";
 import gsap from "@/lib/gsap";
-import { studentFilms } from "@/data/portfolio";
 
 export default function StudentWorkPage() {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -79,77 +78,11 @@ export default function StudentWorkPage() {
           </div>
         </section>
 
-        {/* Gallery Section (still image portfolios) */}
+        {/* Gallery Section */}
         <section className="py-24 md:py-32 bg-transparent relative">
           <div className="atmosphere-blob blob-orange top-0 left-0 opacity-5" />
           <div className="max-w-content mx-auto px-6 lg:px-8">
             <StudentWorkGallery />
-          </div>
-        </section>
-
-        {/* Video / Motion Reels Section — the 4 student films from public/student-work/ (compressed versions).
-          Previously, these were ONLY on the homepage teaser (StudentShowcase) and completely absent
-          from the /student-work page (which was image-only). Now the dedicated student work section
-          properly features "all these 4 things" with playable videos.
-        */}
-        <section className="py-16 md:py-24 border-t border-white/5 bg-[#0C0C0C] relative">
-          <div className="atmosphere-blob blob-red top-1/3 right-0 opacity-10" />
-          <div className="max-w-content mx-auto px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <p className="metallic-gold-text text-[10px] font-bold tracking-[0.3em] uppercase mb-4 flex items-center justify-center gap-3">
-                <span className="w-8 h-[1px] metallic-gold-accent" />
-                In Motion
-                <span className="w-8 h-[1px] metallic-gold-accent" />
-              </p>
-              <h2 className="font-display text-[clamp(1.75rem,5vw,2.75rem)] text-white font-bold uppercase tracking-wide">
-                Featured Student <span className="metallic-gold-text italic">Films</span>
-              </h2>
-              <p className="text-[#A8A29C] mt-4 max-w-xl mx-auto">
-                Full student-produced short films and VFX/animation reels. Click play to watch the compressed masters.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-              {studentFilms.map((film, idx) => (
-                <div
-                  key={idx}
-                  className="group relative bg-[#111111] rounded-3xl overflow-hidden border border-white/5 shadow-xl"
-                >
-                  <div className="relative aspect-video bg-black">
-                    <video
-                      src={film.video}
-                      poster={film.poster}
-                      className="w-full h-full object-cover"
-                      controls
-                      muted
-                      playsInline
-                      loop
-                    />
-                    {/* Subtle label overlay */}
-                    <div className="absolute top-3 right-3 px-3 py-1 rounded-full bg-black/70 text-[10px] font-bold tracking-widest text-[#FFD700] border border-white/10">
-                      {film.duration}
-                    </div>
-                  </div>
-                  <div className="p-5">
-                    <div className="flex items-start justify-between gap-4">
-                      <div>
-                        <h3 className="font-display text-white text-lg font-bold uppercase tracking-tight group-hover:text-[#FFD700] transition-colors">
-                          {film.title}
-                        </h3>
-                        <p className="text-[#6B6560] text-xs mt-0.5">{film.category}</p>
-                      </div>
-                    </div>
-                    <p className="text-[#A8A29C] text-sm mt-3 leading-relaxed line-clamp-2">
-                      {film.description}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="text-center mt-10 text-[#6B6560] text-xs">
-              All reels are student work produced during the program. Use the controls to play, scrub, or unmute.
-            </div>
           </div>
         </section>
 

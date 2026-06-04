@@ -106,7 +106,7 @@ export const maacStandardFeatures = [
   {
     title: "Future-Proof Courses",
     desc: "Curriculum updated regularly with emerging technologies like AI, VR, AR, and real-time rendering",
-    image: "/portfolio/3d-game-asset/archita-roy-page1.jpg",
+    image: "/portfolio/3d-game-asset/bijoy-mech-page1.jpg",
   },
   {
     title: "Creative Careers",

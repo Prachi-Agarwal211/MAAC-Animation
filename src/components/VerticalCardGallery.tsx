@@ -203,7 +203,7 @@ mm.add("(min-width: 1024px)", () => {
               Has its own subtle dark backing so the (now properly defined) feature images 
               inside the pie + labels have consistent contrast and don't fight the global 
               page background or scrolling right cards. Clean separation for the creative evolution visuals. */}
-          <div className="hidden lg:flex w-full lg:w-[45%] xl:w-[48%] flex-shrink-0 sticky top-[70px] lg:top-16 z-30 flex-col items-center lg:items-start lg:pl-4 xl:pl-16 bg-bg-primary/95 backdrop-blur-sm py-6 lg:py-0 border-b border-white/5 lg:border-none shadow-2xl lg:shadow-none">
+          <div className="hidden lg:flex w-full lg:w-[45%] xl:w-[48%] flex-shrink-0 sticky top-[70px] lg:top-16 z-30 flex-col items-center lg:items-start lg:pl-4 xl:pl-16 bg-transparent py-6 lg:py-0 lg:border-none">
             
             <div className="relative w-[85%] sm:w-[320px] lg:w-[90%] xl:w-full max-w-[480px] mx-auto lg:mx-0">
               <svg viewBox="0 0 512 512" className="w-full h-full relative z-10 overflow-visible">

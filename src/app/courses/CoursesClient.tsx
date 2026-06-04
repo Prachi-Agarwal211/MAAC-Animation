@@ -22,7 +22,7 @@ export default function CoursesClient() {
   }, []);
 
   return (
-    <main className="bg-bg-primary min-h-screen">
+    <main className="bg-transparent min-h-screen">
       {/* Hero Section for Courses */}
       <section 
         ref={heroRef}

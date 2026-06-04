@@ -124,7 +124,7 @@ export default function Navbar() {
                     className="absolute right-0 top-full z-50 pt-1.5 opacity-0 invisible pointer-events-none translate-y-0.5 transition-[opacity,visibility,transform] duration-150 group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto group-hover:translate-y-0 xl:left-0 xl:right-auto"
                     role="menu"
                   >
-                    <div className="rounded-xl border border-white/10 bg-black shadow-2xl w-[min(100vw-1.5rem,24rem)] flex flex-col">
+                    <div className="rounded-xl border border-white/10 bg-black/80 backdrop-blur-xl shadow-2xl w-[min(100vw-1.5rem,24rem)] flex flex-col">
                       <div className="p-5">
                         <div className="space-y-1">
                           {link.megaGroups.map((group) => (
@@ -141,7 +141,7 @@ export default function Navbar() {
                               </Link>
                               {group.links && group.links.length > 0 && (
                                 <div className="absolute left-full top-0 ml-1 opacity-0 invisible pointer-events-none translate-x-[-4px] transition-[opacity,visibility,transform] duration-150 group-hover/submenu:opacity-100 group-hover/submenu:visible group-hover/submenu:pointer-events-auto group-hover/submenu:translate-x-0 z-50">
-                                  <div className="rounded-lg border border-white/10 bg-black py-2 min-w-[240px] shadow-xl">
+                                  <div className="rounded-lg border border-white/10 bg-black/90 backdrop-blur-xl py-2 min-w-[240px] shadow-xl">
                                     {group.links.map((child) => (
                                       <Link
                                         key={child.label}
@@ -168,7 +168,7 @@ export default function Navbar() {
                     className="absolute left-0 top-full z-50 pt-1.5 opacity-0 invisible pointer-events-none translate-y-0.5 transition-[opacity,visibility,transform] duration-150 group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto group-hover:translate-y-0"
                     role="menu"
                   >
-                    <div className="rounded-lg border border-white/10 bg-[#141414] py-2 min-w-[240px] shadow-xl">
+                    <div className="rounded-lg border border-white/10 bg-black/80 backdrop-blur-xl py-2 min-w-[240px] shadow-xl">
                       {link.children.map((child) => (
                         <Link
                           key={child.label}

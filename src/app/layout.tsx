@@ -266,7 +266,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.variable} ${syne.variable} font-body antialiased text-[#F0EBE1] bg-bg-primary`}
+        className={`${inter.variable} ${syne.variable} font-body antialiased text-[#F0EBE1] bg-transparent`}
       >
         {/* Google Tag Manager noscript fallback (for users with JS disabled) */}
         {process.env.NEXT_PUBLIC_GTM_ID && (
