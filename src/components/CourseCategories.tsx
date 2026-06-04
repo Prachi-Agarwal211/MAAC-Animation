@@ -199,7 +199,7 @@ export default function CourseCategories({ mode = "home" }: CourseCategoriesProp
           fullDescription: course.fullDescription,
           icon: getIconForCourseCategory(course.category),
           // Prioritize specific course image if it's a local path
-          image: course.ogImage.startsWith('/') ? course.ogImage : (courseCategoryImageMap[course.category] || "/courses_images/image-4.png"),
+          image: course.ogImage.startsWith('/') ? course.ogImage : (courseCategoryImageMap[course.category] || "/courses_images/ed_animation.png"),
           careers: course.career,
           href: `/courses/${course.slug}`,
         }));

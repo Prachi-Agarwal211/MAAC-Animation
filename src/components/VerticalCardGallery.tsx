@@ -16,30 +16,16 @@ import {
   Rocket, 
   Briefcase 
 } from "lucide-react";
-
-const cardImages: Record<number, string> = {
-  0: "/portfolio/featured/nancy-verma-page1.jpg",
-  1: "/portfolio/character-modeling/aarush-kumar-page1.jpg",
-  2: "/portfolio/matte-painting/akshat-asolkar.jpg",
-  3: "/portfolio/digital-painting/deshna-shah.jpg",
-  4: "/portfolio/environment-modeling/raghav-gupta-page1.jpg",
-  5: "/portfolio/3d-game-asset/archita-roy-page1.jpg",
-  6: "/portfolio/architectural-design/sharanjit-kaur-page1.jpg",
-};
+import { maacStandardFeatures } from "@/data/siteData";
 
 const featureIcons = [
   Calendar, Folder, TrendingUp, Users, Building2, Rocket, Briefcase
 ];
 
-const featureCards = [
-  { title: "Educational Events", desc: "Industry workshops, masterclasses, and live projects that bridge classroom learning with real-world experience" },
-  { title: "Portfolio Mastery", desc: "Build a professional portfolio with live projects, animations, and visual effects work that showcases your skills" },
-  { title: "Industry Exposure", desc: "Studio visits, live briefs, and internship opportunities with top animation and VFX companies" },
-  { title: "Premier Placements", desc: "Graduate with a professional showreel and portfolio that showcases your skills to potential employers" },
-  { title: "Pro Facilities", desc: "State-of-the-art labs, rendering farms, and production suites equipped with latest software and hardware" },
-  { title: "Future-Proof Courses", desc: "Curriculum updated regularly with emerging technologies like AI, VR, AR, and real-time rendering" },
-  { title: "Creative Careers", desc: "Placement support, career counseling, and alumni network that helps you land your dream job" },
-];
+// Source of truth for Creative Evolution / MAAC Standard section images + copy.
+// Uses real campus + event photos for facilities/events/ exposure features (instead of mismatched portfolio work).
+// Portfolio shots kept only where they directly illustrate "portfolio", "future tech", "careers".
+const featureCards = maacStandardFeatures;
 
 const CX = 256, CY = 256, OUTER_R = 190, INNER_R = 75;
 const SEGMENTS = featureCards.length;
@@ -213,16 +199,12 @@ mm.add("(min-width: 1024px)", () => {
 
         <div className="flex flex-col lg:flex-row justify-between items-start gap-y-12">
           
-          {/* LEFT / TOP (mobile): Creative Evolution Circle / Pie - now hidden on mobile */}
-          {/* Desktop: sticky side-by-side with pinned scroll. */}
-          <div className="hidden lg:flex w-full lg:w-[45%] xl:w-[48%] flex-shrink-0 sticky top-[70px] lg:top-16 z-30 flex-col items-center lg:items-start lg:pl-4 xl:pl-16 bg-[#0C0C0C]/90 lg:bg-transparent backdrop-blur-md lg:backdrop-blur-none py-6 lg:py-0 border-b border-white/5 lg:border-none shadow-2xl lg:shadow-none">
+          {/* Desktop: sticky left "MAAC Standard" panel with pie. 
+              Has its own subtle dark backing so the (now properly defined) feature images 
+              inside the pie + labels have consistent contrast and don't fight the global 
+              page background or scrolling right cards. Clean separation for the creative evolution visuals. */}
+          <div className="hidden lg:flex w-full lg:w-[45%] xl:w-[48%] flex-shrink-0 sticky top-[70px] lg:top-16 z-30 flex-col items-center lg:items-start lg:pl-4 xl:pl-16 bg-bg-primary/95 backdrop-blur-sm py-6 lg:py-0 border-b border-white/5 lg:border-none shadow-2xl lg:shadow-none">
             
-            {/* Mobile-only label for the interactive circle (top) */}
-            <div className="lg:hidden text-center mb-4">
-              <p className="text-[10px] font-bold tracking-[0.3em] uppercase text-[#C19A5B] opacity-70">Scroll to explore</p>
-            </div>
-
-            {/* The SVG Pie Chart - now visible + animated on mobile too */}
             <div className="relative w-[85%] sm:w-[320px] lg:w-[90%] xl:w-full max-w-[480px] mx-auto lg:mx-0">
               <svg viewBox="0 0 512 512" className="w-full h-full relative z-10 overflow-visible">
                 <defs>
@@ -266,7 +248,7 @@ mm.add("(min-width: 1024px)", () => {
                       
                       <g clipPath={`url(#segClip-${i})`}>
                         <image
-                          href={cardImages[i] || "/placeholder.jpg"}
+                          href={featureCards[i]?.image || "/placeholder.jpg"}
                           x={CX - OUTER_R}
                           y={CY - OUTER_R}
                           width={OUTER_R * 2}
@@ -356,7 +338,7 @@ mm.add("(min-width: 1024px)", () => {
                   {/* Card Left Image Container */}
                   <div className="w-full md:w-[45%] aspect-[4/5] relative bg-black rounded-[1.5rem] md:rounded-[2rem] overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.4)]">
                      <Image
-                      src={cardImages[index] || "/placeholder.jpg"}
+                      src={featureCards[index]?.image || "/placeholder.jpg"}
                       alt={card.title}
                       fill
                       className="object-cover opacity-90 transition-transform duration-700 group-hover:scale-105"

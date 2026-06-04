@@ -1,15 +1,37 @@
-import { siteCoursesData } from "@/data/siteData";
+import { coursesData } from "@/data/courses";
 import FadeIn from "@/components/animations/FadeIn";
 import PopularCoursesScroll from "@/components/ui/PopularCoursesScroll";
 
-const coursePortfolioImages: Record<string, string> = {
-  "ADVFX": "/portfolio/matte-painting/akshat-asolkar.jpg",
-  "AD3D": "/portfolio/character-modeling/aarush-kumar-page1.jpg",
-  "DGDI": "/portfolio/3d-game-asset/archita-roy-page1.jpg",
-  "APDMD": "/portfolio/digital-painting/deshna-shah.jpg",
-  "D3D": "/portfolio/character-modeling/abhay-suryavanshi.jpg",
-  "VFXP": "/portfolio/matte-painting/biswabrata-dutta-page1.jpg",
-};
+// Central source of truth: use the same ogImages defined for courses in /courses page
+// This ensures landing page popular courses show the proper defined course images, not old portfolio ones.
+const popularCodes = ["ADVFX", "AD3D", "DGDI", "APDMD", "D3D", "VFXP"];
+
+const displayCourses = popularCodes
+  .map((code) => {
+    const course = coursesData.find((c) => c.code === code);
+    if (!course) return null;
+    return {
+      name: course.name,
+      fullName: course.fullName,
+      duration: course.duration,
+      description: course.shortDescription,
+      code: course.code,
+    };
+  })
+  .filter(Boolean) as Array<{
+    name: string;
+    fullName: string;
+    duration: string;
+    description: string;
+    code: string;
+  }>;
+
+const courseImages: Record<string, string> = Object.fromEntries(
+  popularCodes.map((code) => {
+    const course = coursesData.find((c) => c.code === code);
+    return [code, course?.ogImage || ""];
+  })
+);
 
 export default function PopularCourses() {
   return (
@@ -33,8 +55,8 @@ export default function PopularCourses() {
         
         {/* Track (Client Island for scroll buttons + swipe) */}
         <PopularCoursesScroll 
-          courses={siteCoursesData.popularCourses} 
-          coursePortfolioImages={coursePortfolioImages} 
+          courses={displayCourses} 
+          courseImages={courseImages} 
         />
       </div>
     </section>

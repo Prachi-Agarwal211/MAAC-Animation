@@ -5,13 +5,17 @@ import Image from "next/image";
 import { useGSAP } from "@gsap/react";
 import gsap from "@/lib/gsap";
 import { VolumeX, Volume2, ArrowRight, Play, Pause } from "lucide-react";
+import { studentFilms } from "@/data/portfolio";
 
-const showcaseVideos = [
-  { title: "ANANDI", category: "Animation", video: "/student-work/ANANDI-compressed.mp4", duration: "2:34", fallbackImage: "/portfolio/featured/nancy-verma-page1.jpg" },
-  { title: "FAST LIFE", category: "Short Film", video: "/student-work/FAST%20LIFE-compressed.mp4", duration: "3:12", fallbackImage: "/portfolio/environment-modeling/sayan-chowdhury-page1.jpg" },
-  { title: "KARMA", category: "Visual Effects", video: "/student-work/KARMA-compressed.mp4", duration: "4:05", fallbackImage: "/portfolio/matte-painting/akshat-asolkar.jpg" },
-  { title: "THE PLASTIC PLAGUE", category: "Documentary", video: "/student-work/THE%20PLASTIC%20PLAGUE-compressed.mp4", duration: "5:20", fallbackImage: "/portfolio/digital-painting/deshna-shah.jpg" },
-];
+// Use the centralized student film data (ensures the 4 videos from public/student-work are consistent
+// between homepage showcase and the /student-work page).
+const showcaseVideos = studentFilms.map((f) => ({
+  title: f.title,
+  category: f.category,
+  video: f.video,
+  duration: f.duration,
+  fallbackImage: f.poster,
+}));
 
 export default function StudentShowcase() {
   const containerRef = useRef<HTMLElement>(null);

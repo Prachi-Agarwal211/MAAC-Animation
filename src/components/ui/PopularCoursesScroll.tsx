@@ -14,10 +14,10 @@ interface Course {
 
 interface PopularCoursesScrollProps {
   courses: Course[];
-  coursePortfolioImages: Record<string, string>;
+  courseImages: Record<string, string>;
 }
 
-export default function PopularCoursesScroll({ courses, coursePortfolioImages }: PopularCoursesScrollProps) {
+export default function PopularCoursesScroll({ courses, courseImages }: PopularCoursesScrollProps) {
   const trackRef = useRef<HTMLDivElement>(null);
 
   const scroll = (dir: 'left' | 'right') => {
@@ -51,9 +51,9 @@ export default function PopularCoursesScroll({ courses, coursePortfolioImages }:
               <div className="group glass-card relative overflow-hidden transition-all duration-500 hover:border-[#FFD700]/30 shadow-2xl">
                 {/* Image */}
                 <div className="h-[240px] relative overflow-hidden">
-                  {coursePortfolioImages[course.code] ? (
+                  {courseImages[course.code] ? (
                     <Image
-                      src={coursePortfolioImages[course.code]}
+                      src={courseImages[course.code]}
                       alt={course.name}
                       fill
                       className="object-cover transition-transform duration-1000 group-hover:scale-110"

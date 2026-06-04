@@ -266,7 +266,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.variable} ${syne.variable} font-body antialiased text-[#F0EBE1] bg-[#0C0C0C]`}
+        className={`${inter.variable} ${syne.variable} font-body antialiased text-[#F0EBE1] bg-bg-primary`}
       >
         {/* Google Tag Manager noscript fallback (for users with JS disabled) */}
         {process.env.NEXT_PUBLIC_GTM_ID && (
@@ -280,7 +280,7 @@ export default function RootLayout({
           </noscript>
         )}
 
-        <Suspense fallback={<div className="fixed inset-0 bg-[#0C0C0C]" />}>
+        <Suspense fallback={<div className="fixed inset-0 bg-bg-primary" />}>
           <DynamicBackground />
         </Suspense>
 

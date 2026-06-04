@@ -317,3 +317,52 @@ export function getAllTags(): string[] {
   portfolioEntries.forEach((entry) => entry.tags.forEach((tag) => tags.add(tag)));
   return Array.from(tags).sort();
 }
+
+/** Student motion / film work from the /public/student-work compressed videos.
+ * These 4 projects are featured in the homepage StudentShowcase theatre but were
+ * completely missing from the dedicated /student-work page (which only showed still-image portfolios).
+ * Now integrated so the student work section properly displays "all these 4 things".
+ */
+export interface StudentFilm {
+  title: string;
+  category: string;
+  video: string; // path to compressed mp4 in /student-work
+  duration: string;
+  poster: string; // fallback/poster image
+  description: string;
+}
+
+export const studentFilms: StudentFilm[] = [
+  {
+    title: "ANANDI",
+    category: "Animation",
+    video: "/student-work/ANANDI-compressed.mp4",
+    duration: "2:34",
+    poster: "/portfolio/featured/nancy-verma-page1.jpg",
+    description: "A compelling animated short showcasing character performance and storytelling.",
+  },
+  {
+    title: "FAST LIFE",
+    category: "Short Film",
+    video: "/student-work/fast-life-compressed.mp4",
+    duration: "3:12",
+    poster: "/portfolio/environment-modeling/sayan-chowdhury-page1.jpg",
+    description: "Dynamic short film exploring pace, editing, and cinematic techniques.",
+  },
+  {
+    title: "KARMA",
+    category: "Visual Effects",
+    video: "/student-work/KARMA-compressed.mp4",
+    duration: "4:05",
+    poster: "/portfolio/matte-painting/akshat-asolkar.jpg",
+    description: "VFX-heavy piece demonstrating compositing, effects, and integration.",
+  },
+  {
+    title: "THE PLASTIC PLAGUE",
+    category: "Documentary",
+    video: "/student-work/the-plastic-plague-compressed.mp4",
+    duration: "5:20",
+    poster: "/portfolio/digital-painting/deshna-shah.jpg",
+    description: "Documentary short with strong narrative, editing, and social message.",
+  },
+];

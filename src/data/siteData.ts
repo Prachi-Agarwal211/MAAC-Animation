@@ -7,7 +7,7 @@ export const siteCoursesData = {
       description: "Master high-quality 3D animation with industry-standard techniques, character rigging, and real studio workflows",
       fullDescription: "Become a 3D Animator, Character Designer, Storyboard Artist, Rigging Artist, Lighting Artist, or Game Asset Artist. Learn Autodesk Maya, 3ds Max, ZBrush, and industry-standard tools used in major studios worldwide.",
       icon: "animation",
-      image: "/courses_images/image-4.png",
+      image: "/courses_images/ed_animation.png",
       careers: ["3D Animator", "Character Designer", "Storyboard Artist", "Rigging Artist", "Lighting Artist", "Game Asset Artist"],
     },
     {
@@ -17,7 +17,7 @@ export const siteCoursesData = {
       description: "Create content for social media, YouTube, and OTT platforms with professional production skills",
       fullDescription: "Create engaging content for YouTube, Instagram, and digital platforms. Master video editing, content strategy, audience engagement, and become a Graphic Designer, Video Producer, Social Media Designer, UI/UX Designer, Motion Graphics Artist, or Content Strategist.",
       icon: "digital",
-      image: "/courses_images/image-2.png",
+      image: "/courses_images/apdmd.jpeg",
       careers: ["Graphic Designer", "Video Producer", "Social Media Designer", "UI/UX Designer", "Motion Graphics Artist", "Content Strategist"],
     },
     {
@@ -27,7 +27,7 @@ export const siteCoursesData = {
       description: "Design games, build assets, and master real-time rendering for mobile, PC, and console",
       fullDescription: "Design and develop games for multiple platforms. Learn game mechanics, level design, character creation, and game engine integration. Become a Game Developer, Level Designer, 3D Artist, Virtual Reality Artist, or Game Animator.",
       icon: "gaming",
-      image: "/courses_images/game.png",
+      image: "/courses_images/game_design.jpeg",
       careers: ["Game Developer", "Level Designer", "3D Artist", "Virtual Reality Artist", "Game Animator"],
     },
     {
@@ -37,7 +37,7 @@ export const siteCoursesData = {
       description: "Create stunning VFX for film, television, and OTT using industry-standard compositing tools",
       fullDescription: "Create stunning visual effects for movies, TV shows, and OTT content. Master compositing, motion tracking, and CG integration. Become a VFX Compositor, Motion Graphics Artist, FX Artist, Matte Painter, or Pre-visualization Artist.",
       icon: "vfx",
-      image: "/courses_images/image-1.png",
+      image: "/courses_images/vfx.jpeg",
       careers: ["VFX Compositor", "Motion Graphics Artist", "FX Artist", "Matte Painter", "Pre-visualization Artist"],
     },
     {
@@ -47,7 +47,7 @@ export const siteCoursesData = {
       description: "Produce dynamic motion graphics for TV, advertising, streaming, and digital media production",
       fullDescription: "Create dynamic motion graphics for broadcast, TV, advertising, and digital media. Learn After Effects, Cinema 4D, and broadcast design principles. Become a Motion Graphics Artist, Broadcast Designer, UI Designer, or Video Editor.",
       icon: "motion",
-      image: "/courses_images/image-3.png",
+      image: "/courses_images/vfx_plus.jpeg",
       careers: ["Motion Graphics Artist", "Broadcast Designer", "UI Designer", "Video Editor"],
     },
     {
@@ -57,7 +57,7 @@ export const siteCoursesData = {
       description: "Learn cinematic filmmaking, photography, editing, and post-production for film and digital media",
       fullDescription: "Master the complete filmmaking pipeline — from scriptwriting and storyboarding to shooting, VFX, editing, and final delivery. Become a Video Editor, Cinematographer, Film Director, or Content Creator.",
       icon: "filmmaking",
-      image: "/courses_images/image-5.png",
+      image: "/courses_images/dafm.jpeg",
       careers: ["Video Editor", "Cinematographer", "Film Director", "Content Creator"],
     },
     {
@@ -67,55 +67,53 @@ export const siteCoursesData = {
       description: "Short-term specialized courses to upskill in specific areas of animation, VFX, game design, and more",
       fullDescription: "Upgrade your skills with focused short-term programs. Perfect for working professionals looking to specialize or upskill. Become a Motion Graphics Artist, Broadcast Designer, UI Designer, or Video Editor.",
       icon: "skill",
-      image: "/courses_images/image-5.png",
+      image: "/courses_images/skill_enhance.jpeg",
       careers: ["Motion Graphics Artist", "Broadcast Designer", "UI Designer", "Video Editor"],
     },
   ],
-  popularCourses: [
-    {
-      name: "ADVFX",
-      fullName: "Advanced Program in Visual Effects",
-      duration: "12 Months",
-      description: "Master compositing, rotoscopy, paint prep, matchmoving, and CG integration with real-world studio projects.",
-      code: "ADVFX",
-    },
-    {
-      name: "AD3D Edge",
-      fullName: "Advanced Program in 3D Animation",
-      duration: "12 Months",
-      description: "Comprehensive training in modeling, texturing, rigging, lighting, and character animation using Autodesk Maya.",
-      code: "AD3D",
-    },
-    {
-      name: "DGDI",
-      fullName: "Program in Game Design & Integration",
-      duration: "12 Months",
-      description: "Learn game art, game design, level design, and game engine integration for next-gen gaming platforms.",
-      code: "DGDI",
-    },
-    {
-      name: "APDMD",
-      fullName: "Advanced Program in Digital Media & Design",
-      duration: "24 Months",
-      description: "Master graphic design, web design, UI/UX, motion graphics, and digital marketing for the modern creative industry.",
-      code: "APDMD",
-    },
-    {
-      name: "D3D",
-      fullName: "Program in 3D Animation",
-      duration: "12 Months",
-      description: "Foundation to intermediate training in 3D animation, covering all aspects of the 3D production pipeline.",
-      code: "D3D",
-    },
-    {
-      name: "VFX Plus",
-      fullName: "Program in Visual Effects",
-      duration: "6 Months",
-      description: "Comprehensive VFX training covering compositing, motion graphics, and visual effects for films and television.",
-      code: "VFXP",
-    },
-  ],
 };
+
+/** Images + copy for the "Creative Evolution" / "The MAAC Standard" section on the homepage.
+ * Uses real institute photos (campus, events) for facilities/events features and curated portfolio for creation/portfolio features.
+ * This centralizes the "proper" images instead of hardcoding mismatched portfolio shots in the component (parallel to how coursesData.ogImage works).
+ */
+export const maacStandardFeatures = [
+  {
+    title: "Educational Events",
+    desc: "Industry workshops, masterclasses, and live projects that bridge classroom learning with real-world experience",
+    image: "/annual-trip/event-002.jpeg",
+  },
+  {
+    title: "Portfolio Mastery",
+    desc: "Build a professional portfolio with live projects, animations, and visual effects work that showcases your skills",
+    image: "/portfolio/character-modeling/aarush-kumar-page1.jpg",
+  },
+  {
+    title: "Industry Exposure",
+    desc: "Studio visits, live briefs, and internship opportunities with top animation and VFX companies",
+    image: "/events/landscape/event-001.jpeg",
+  },
+  {
+    title: "Premier Placements",
+    desc: "Graduate with a professional showreel and portfolio that showcases your skills to potential employers",
+    image: "/portfolio/featured/prerit-mehan-page1.jpg",
+  },
+  {
+    title: "Pro Facilities",
+    desc: "State-of-the-art labs, rendering farms, and production suites equipped with latest software and hardware",
+    image: "/campus-image.jpg",
+  },
+  {
+    title: "Future-Proof Courses",
+    desc: "Curriculum updated regularly with emerging technologies like AI, VR, AR, and real-time rendering",
+    image: "/portfolio/3d-game-asset/archita-roy-page1.jpg",
+  },
+  {
+    title: "Creative Careers",
+    desc: "Placement support, career counseling, and alumni network that helps you land your dream job",
+    image: "/portfolio/architectural-design/sharanjit-kaur-page1.jpg",
+  },
+];
 
 export const testimonialsData = [
   {
