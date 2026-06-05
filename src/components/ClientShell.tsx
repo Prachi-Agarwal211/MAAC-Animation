@@ -36,6 +36,14 @@ export default function ClientShell({ children }: { children: React.ReactNode })
     };
   }, []);
 
+  useEffect(() => {
+    const openModal = () => setShowModal(true);
+    window.addEventListener("maac:open_contact_modal", openModal);
+    return () => {
+      window.removeEventListener("maac:open_contact_modal", openModal);
+    };
+  }, []);
+
   return (
     <>
       {children}

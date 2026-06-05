@@ -200,6 +200,12 @@ export default function AnnualTripPage() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
 
+        {/* Preload first critical images for the Annual Trip slideshow only on this page */}
+        <link rel="preload" as="image" href="/annual-trip/event-002.jpeg" />
+        <link rel="preload" as="image" href="/annual-trip/event-003.jpeg" />
+        <link rel="preload" as="image" href="/annual-trip/event-004.jpeg" />
+        <link rel="preload" as="image" href="/annual-trip/event-005.jpeg" />
+
         {/* Hero Header */}
         <div className="text-center mb-10 md:mb-14 relative z-10 px-6">
           <p className="metallic-gold-text text-[10px] font-bold tracking-[0.3em] uppercase mb-4 flex items-center justify-center gap-3">

@@ -43,6 +43,7 @@ export default function Home() {
           }),
         }}
       />
+      <link rel="preload" as="video" href="/intro.mp4" type="video/mp4" />
       
       {/* 
         The Hero handles its own intro overlay. 

@@ -362,12 +362,12 @@ export default function CareerAssessment() {
               </div>
 
               <div className="flex flex-col md:flex-row gap-6 justify-center items-center py-12">
-                <Link
-                  href="/contact"
+                <button
+                  onClick={() => window.dispatchEvent(new Event("maac:open_contact_modal"))}
                   className="w-full md:w-auto px-12 py-6 bg-white text-black font-bold uppercase tracking-[0.2em] text-xs text-center hover:bg-[#FFD700] transition-all hover:scale-105"
                 >
                   Book 1-on-1 Counseling
-                </Link>
+                </button>
                 <button
                   onClick={resetQuiz}
                   className="w-full md:w-auto px-12 py-6 bg-white/5 border border-white/10 text-white font-bold uppercase tracking-[0.2em] text-xs inline-flex items-center justify-center gap-3 hover:bg-white/10 transition-all glass-card"

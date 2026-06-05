@@ -81,22 +81,22 @@ export const maacStandardFeatures = [
   {
     title: "Educational Events",
     desc: "Industry workshops, masterclasses, and live projects that bridge classroom learning with real-world experience",
-    image: "/annual-trip/event-002.jpeg",
+    image: "/events/landscape/event-051.jpeg",
   },
   {
     title: "Portfolio Mastery",
     desc: "Build a professional portfolio with live projects, animations, and visual effects work that showcases your skills",
-    image: "/portfolio/character-modeling/aarush-kumar-page1.jpg",
+    image: "/courses_images/ad3d.jpeg",
   },
   {
     title: "Industry Exposure",
     desc: "Studio visits, live briefs, and internship opportunities with top animation and VFX companies",
-    image: "/events/landscape/event-001.jpeg",
+    image: "/events/landscape/event-064.jpeg",
   },
   {
     title: "Premier Placements",
     desc: "Graduate with a professional showreel and portfolio that showcases your skills to potential employers",
-    image: "/portfolio/featured/prerit-mehan-page1.jpg",
+    image: "/portfolio/featured/nancy-verma-page1.jpg",
   },
   {
     title: "Pro Facilities",
@@ -106,12 +106,12 @@ export const maacStandardFeatures = [
   {
     title: "Future-Proof Courses",
     desc: "Curriculum updated regularly with emerging technologies like AI, VR, AR, and real-time rendering",
-    image: "/portfolio/3d-game-asset/bijoy-mech-page1.jpg",
+    image: "/courses_images/dgdi.jpeg",
   },
   {
     title: "Creative Careers",
     desc: "Placement support, career counseling, and alumni network that helps you land your dream job",
-    image: "/portfolio/architectural-design/sharanjit-kaur-page1.jpg",
+    image: "/courses_images/apdmd.jpeg",
   },
 ];
 
