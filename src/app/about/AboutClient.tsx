@@ -122,7 +122,7 @@ export default function AboutClient() {
               <div key={i} className="milestone-card p-10 md:p-12 border-b md:border-b-0 md:border-r border-white/5 hover:bg-[#FFD700]/5 transition-colors duration-700 group">
                 <div className="text-[#FFD700] font-display text-5xl mb-8 group-hover:scale-110 group-hover:-translate-y-2 transition-transform duration-500 font-light uppercase leading-[1.1] tracking-[0.1em]">{m.year}</div>
                 <h3 className="text-white text-xl font-display mb-4 tracking-widest font-light uppercase leading-[1.1] tracking-[0.1em]">{m.title}</h3>
-                <p className="text-[#6B6560] text-sm leading-relaxed group-hover:text-white transition-colors">{m.description}</p>
+                <p className="text-[#A8A29C] text-sm leading-relaxed group-hover:text-white transition-colors">{m.description}</p>
               </div>
             ))}
           </div>
@@ -145,7 +145,7 @@ export default function AboutClient() {
               <div className="absolute bottom-0 left-0 right-0 p-10 translate-y-4 group-hover:translate-y-0 transition-transform duration-700">
                 <span className="text-[#FFD700] text-[10px] font-bold uppercase tracking-[0.3em] mb-2 block">{f.role}</span>
                 <h3 className="text-white text-2xl font-display mb-2 font-light uppercase leading-[1.1] tracking-[0.1em]">{f.name}</h3>
-                <p className="text-[#6B6560] text-xs font-bold uppercase tracking-widest mb-6">{f.exp} EXPERIENCE</p>
+                <p className="text-[#A8A29C] text-xs font-bold uppercase tracking-widest mb-6">{f.exp} EXPERIENCE</p>
                 <p className="text-white/40 text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-100">
                   {f.bio}
                 </p>

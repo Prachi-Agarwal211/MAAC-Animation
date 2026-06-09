@@ -94,7 +94,7 @@ export default function BlogIndexPage() {
 
                   {/* Content */}
                   <div className="p-8 md:p-10">
-                    <div className="flex items-center gap-4 text-[11px] font-bold uppercase tracking-widest text-[#6B6560] mb-6">
+                    <div className="flex items-center gap-4 text-[11px] font-bold uppercase tracking-widest text-[#A8A29C] mb-6">
                       <time dateTime={post.date}>
                         {new Date(post.date).toLocaleDateString("en-IN", {
                           year: "numeric",

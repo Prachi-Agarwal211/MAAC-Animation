@@ -36,7 +36,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-transparent pt-24 md:pt-40 overflow-hidden">
+    <footer className="relative bg-transparent pt-24 md:pt-40 overflow-hidden" style={{ paddingBottom: "max(0px, env(safe-area-inset-bottom))" }}>
       {/* Background video */}
       <div className="absolute inset-0 z-0 opacity-45">
         <video
@@ -73,7 +73,7 @@ export default function Footer() {
             <div className="relative z-10 flex flex-col sm:flex-row gap-6">
               <Link
                 href="/contact"
-                className="inline-flex min-h-[60px] min-w-[240px] items-center justify-center text-[12px] font-bold tracking-[0.25em] uppercase border border-white/20 hover:border-white hover:bg-white text-white hover:text-black rounded-full transition-all duration-500"
+                className="inline-flex min-h-[60px] w-full sm:w-auto items-center justify-center text-[12px] font-bold tracking-[0.25em] uppercase border border-white/20 hover:border-white hover:bg-white text-white hover:text-black rounded-full transition-all duration-500 px-8"
               >
                 Book Free Demo
               </Link>
@@ -95,26 +95,27 @@ export default function Footer() {
 
         {/* Brand Col */}
         <div className="lg:col-span-4 space-y-10">
-          <Link href="/" className="flex items-center group" aria-label="MAAC Jaipur - Home">
-            <Image
-              src="/maac%20logo.png"
-              alt="MAAC Animation Jaipur Logo"
-              width={240}
-              height={240}
-              className="w-32 h-32 md:w-64 md:h-64 transition-transform duration-200 group-hover:scale-[1.02] object-contain"
-            />
+              <Link href="/" className="flex items-center group" aria-label="MAAC Jaipur - Home">
+               <Image
+                 src="/maac%20logo.png"
+                 alt="MAAC Animation Jaipur Logo"
+                 width={240}
+                 height={240}
+                 className="transition-all duration-500 group-hover:scale-[1.02] object-contain w-28 h-auto sm:w-40 xl:w-44"
+                 loading="lazy"
+               />
           </Link>
           <p className="text-[#A8A29C] text-lg leading-relaxed max-w-sm">
             Empowering the next generation of 3D artists and VFX masters with 30+ years of educational excellence.
           </p>
           <div className="flex gap-4">
             {[
-              { Icon: SocialIcons.Facebook, url: contactInfo.social.facebook },
-              { Icon: SocialIcons.Instagram, url: contactInfo.social.instagram },
-              { Icon: SocialIcons.Youtube, url: contactInfo.social.youtube },
-              { Icon: SocialIcons.Linkedin, url: contactInfo.social.linkedin }
+              { Icon: SocialIcons.Facebook, url: contactInfo.social.facebook, label: "Facebook" },
+              { Icon: SocialIcons.Instagram, url: contactInfo.social.instagram, label: "Instagram" },
+              { Icon: SocialIcons.Youtube, url: contactInfo.social.youtube, label: "YouTube" },
+              { Icon: SocialIcons.Linkedin, url: contactInfo.social.linkedin, label: "LinkedIn" }
             ].map((social, i) => (
-              <a key={i} href={social.url} className="w-12 h-12 rounded-full glass border border-white/20 flex items-center justify-center text-white hover:text-[#FFD700] hover:border-[#FFD700]/50 transition-all duration-500 shadow-lg">
+              <a key={i} href={social.url} className="w-12 h-12 rounded-full glass border border-white/20 flex items-center justify-center text-white hover:text-[#FFD700] hover:border-[#FFD700]/50 transition-all duration-500 shadow-lg" aria-label={social.label} target="_blank" rel="noopener noreferrer">
                 <social.Icon />
               </a>
             ))}
@@ -134,7 +135,7 @@ export default function Footer() {
               { label: "Gallery", href: "/gallery" },
             ].map(link => (
               <li key={link.label}>
-                <Link href={link.href} className="text-[#6B6560] hover:text-white transition-colors flex items-center justify-between group">
+                <Link href={link.href} className="text-[#A8A29C] hover:text-white transition-colors flex items-center justify-between group">
                   {link.label}
                   <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />
                 </Link>
@@ -154,7 +155,7 @@ export default function Footer() {
               { label: "Sitemap", href: "/sitemap.xml" },
             ].map(link => (
               <li key={link.label}>
-                <Link href={link.href} className="text-[#6B6560] hover:text-white transition-colors flex items-center justify-between group">
+                <Link href={link.href} className="text-[#A8A29C] hover:text-white transition-colors flex items-center justify-between group">
                   {link.label}
                   <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />
                 </Link>
@@ -172,7 +173,7 @@ export default function Footer() {
               { label: "Terms & Conditions", href: "/terms-of-service" },
             ].map(link => (
               <li key={link.label}>
-                <Link href={link.href} className="text-[#6B6560] hover:text-white transition-colors flex items-center justify-between group">
+                <Link href={link.href} className="text-[#A8A29C] hover:text-white transition-colors flex items-center justify-between group">
                   {link.label}
                   <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />
                 </Link>
@@ -190,7 +191,7 @@ export default function Footer() {
               <Phone size={20} className="text-[#FFD700] shrink-0" />
               <div className="space-y-1">
                 <a href={`tel:${contactInfo.phone}`} className="block text-white font-bold">{contactInfo.phone}</a>
-                <a href={`tel:${contactInfo.phoneSecondary}`} className="block text-[#6B6560] text-sm">{contactInfo.phoneSecondary}</a>
+                <a href={`tel:${contactInfo.phoneSecondary}`} className="block text-[#A8A29C] text-sm">{contactInfo.phoneSecondary}</a>
               </div>
             </div>
             <div className="flex gap-4">
@@ -204,16 +205,16 @@ export default function Footer() {
       {/* ── BOTTOM BAR ── */}
       <div className="relative z-10 border-t border-white/5 py-10 px-6 md:px-12">
         <div className="max-w-content mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
-          <p className="text-[#6B6560] text-[10px] font-bold uppercase tracking-[0.3em]">
-            © {currentYear} MAAC India · Crafting Digital Futures
-          </p>
-          <div className="flex flex-wrap gap-6 md:gap-8">
-            {[
-              { label: "Privacy", href: "/privacy-policy" },
-              { label: "Terms", href: "/terms-of-service" },
-              { label: "Sitemap", href: "/sitemap.xml" },
-            ].map(link => (
-              <Link key={link.label} href={link.href} className="text-[#6B6560] hover:text-white text-[10px] font-bold uppercase tracking-[0.3em] transition-colors">{link.label}</Link>
+          <p className="text-[#A8A29C] text-[10px] font-bold uppercase tracking-[0.3em]">
+             © {currentYear} MAAC India · Crafting Digital Futures
+           </p>
+           <div className="flex flex-wrap gap-6 md:gap-8">
+             {[
+               { label: "Privacy", href: "/privacy-policy" },
+               { label: "Terms", href: "/terms-of-service" },
+               { label: "Sitemap", href: "/sitemap.xml" },
+             ].map(link => (
+               <Link key={link.label} href={link.href} className="text-[#A8A29C] hover:text-white text-[10px] font-bold uppercase tracking-[0.3em] transition-colors">{link.label}</Link>
             ))}
           </div>
         </div>

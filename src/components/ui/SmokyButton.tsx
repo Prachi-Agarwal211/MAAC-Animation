@@ -117,16 +117,35 @@ function createShader(gl: WebGLRenderingContext, type: number, source: string) {
   return shader;
 }
 
+function canRunWebGL(): boolean {
+  if (typeof window === "undefined") return false;
+  // Skip WebGL on low-end mobile: touch device with low RAM or few cores
+  const isTouch = window.matchMedia("(pointer: coarse)").matches;
+  if (isTouch) {
+    const nav = navigator as Navigator & { deviceMemory?: number; hardwareConcurrency?: number };
+    const ram = nav.deviceMemory ?? 8;
+    const cores = nav.hardwareConcurrency ?? 8;
+    if (ram < 4 || cores < 4) return false;
+  }
+  // Check WebGL availability
+  const testCanvas = document.createElement("canvas");
+  const gl = testCanvas.getContext("webgl") || testCanvas.getContext("experimental-webgl");
+  return Boolean(gl);
+}
+
 export default function SmokyButton({ href, onClick, className, children, ...props }: SmokyButtonProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const webglSupported = useRef(false);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     
-    // Only fetch context if browser supports it
+    if (!canRunWebGL()) return;
+
     const gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl") as WebGLRenderingContext | null;
     if (!gl) return;
+    webglSupported.current = true;
 
     const vertexShader = createShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
     const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);

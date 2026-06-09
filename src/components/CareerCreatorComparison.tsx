@@ -98,7 +98,7 @@ export default function CareerCreatorComparison() {
             </div>
 
             <div className="space-y-4">
-              <p className="text-[#6B6560] text-[9px] font-bold uppercase tracking-[0.2em]">Ideal for Independent Creators & Freelancers</p>
+              <p className="text-[#A8A29C] text-[9px] font-bold uppercase tracking-[0.2em]">Ideal for Independent Creators & Freelancers</p>
               <Link href="/courses" className="inline-flex items-center justify-center gap-3 px-8 py-4 border border-[#FF6B35]/40 hover:bg-[#FF6B35] hover:text-white transition-colors duration-500 rounded-full text-white bg-transparent text-xs font-bold tracking-[0.3em] uppercase group/btn">
                 Launch Creator X
                 <ArrowRight size={14} className="transition-transform group-hover/btn:translate-x-1" />

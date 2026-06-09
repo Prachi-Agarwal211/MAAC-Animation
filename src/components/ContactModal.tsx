@@ -199,7 +199,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
         {/* Close button */}
         <button
           onClick={handleClose}
-          className="absolute top-4 right-4 w-9 h-9 rounded-xl border border-white/10 flex items-center justify-center text-white hover:text-white hover:bg-white/10 hover:border-white/20 transition-all duration-200 z-10"
+          className="absolute top-4 right-4 w-11 h-11 min-w-[44px] min-h-[44px] rounded-xl border border-white/10 flex items-center justify-center text-white hover:text-white hover:bg-white/10 hover:border-white/20 transition-all duration-200 z-10"
           aria-label="Close"
         >
           <svg
@@ -287,7 +287,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                 <div>
                   <div className="flex">
                     <span
-                      className="flex items-center px-3 rounded-l-xl text-[#6B6560] text-sm"
+                      className="flex items-center px-3 rounded-l-xl text-[#A8A29C] text-sm"
                       style={{
                         background: "rgba(255,255,255,0.04)",
                         border: "1px solid rgba(255,255,255,0.08)",
@@ -373,7 +373,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                   </button>
                 </div>
 
-                <p className="text-center text-[#6B6560] text-[11px]">
+                <p className="text-center text-[#A8A29C] text-[11px]">
                   🔒 Your information is secure and private.
                 </p>
               </form>

@@ -25,11 +25,12 @@ export default function FAQAccordion({ faqs }: { faqs: FAQItem[] }) {
             <button
               onClick={() => setOpenIndex(isOpen ? null : index)}
               className="w-full px-8 py-8 flex items-center justify-between gap-6 text-left"
+              aria-expanded={isOpen}
             >
               <span className={`font-display text-lg md:text-xl transition-colors duration-300 ${isOpen ? 'font-bold uppercase leading-[1.1] tracking-[0.1em] text-white' : 'text-[#A8A29C] group-hover:text-white'}`}>
                 {faq.name}
               </span>
-              <div className={`w-10 h-10 rounded-full border flex items-center justify-center transition-all duration-500 ${isOpen ? 'bg-[#FFD700] border-[#FFD700] text-white rotate-180' : 'bg-white/5 border-white/10 text-[#6B6560]'}`}>
+              <div className={`w-10 h-10 rounded-full border flex items-center justify-center transition-all duration-500 ${isOpen ? 'bg-[#FFD700] border-[#FFD700] text-white rotate-180' : 'bg-white/5 border-white/10 text-[#A8A29C]'}`}>
                 {isOpen ? <Minus size={18} /> : <Plus size={18} />}
               </div>
             </button>

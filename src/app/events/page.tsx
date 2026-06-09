@@ -238,22 +238,22 @@ export default function EventsPage() {
 
             {/* Play/Pause Button */}
             <div className="absolute top-6 right-6 z-40">
-              <button onClick={toggleSlidePlay} className="px-5 py-2 text-[10px] font-bold tracking-widest rounded-full bg-black/40 backdrop-blur-xl border border-white/20 text-white hover:bg-[#FFD700] hover:text-black transition-all duration-300">
+              <button onClick={toggleSlidePlay} className="px-5 py-3 min-h-[44px] text-[10px] font-bold tracking-widest rounded-full bg-black/40 backdrop-blur-xl border border-white/20 text-white hover:bg-[#FFD700] hover:text-black transition-all duration-300">
                 {isSlidePlaying ? "PAUSE" : "PLAY"}
               </button>
             </div>
 
             {/* Side Controls */}
             <button 
-              onClick={prevPhoto} 
-              className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-40 w-12 h-12 md:w-16 md:h-16 rounded-full bg-black/20 backdrop-blur-md border border-white/10 text-white/50 hover:text-white hover:bg-black/40 flex items-center justify-center transition-all opacity-0 group-hover:opacity-100"
-            >
-              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 19l-7-7 7-7" /></svg>
-            </button>
-            <button 
-              onClick={nextPhoto} 
-              className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-40 w-12 h-12 md:w-16 md:h-16 rounded-full bg-black/20 backdrop-blur-md border border-white/10 text-white/50 hover:text-white hover:bg-black/40 flex items-center justify-center transition-all opacity-0 group-hover:opacity-100"
-            >
+               onClick={prevPhoto} 
+               className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-40 w-12 h-12 md:w-16 md:h-16 min-w-[44px] min-h-[44px] rounded-full bg-black/20 backdrop-blur-md border border-white/10 text-white/50 hover:text-white hover:bg-black/40 flex items-center justify-center transition-all opacity-100 md:opacity-0 md:group-hover:opacity-100"
+             >
+               <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 19l-7-7 7-7" /></svg>
+             </button>
+             <button 
+               onClick={nextPhoto} 
+               className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-40 w-12 h-12 md:w-16 md:h-16 min-w-[44px] min-h-[44px] rounded-full bg-black/20 backdrop-blur-md border border-white/10 text-white/50 hover:text-white hover:bg-black/40 flex items-center justify-center transition-all opacity-100 md:opacity-0 md:group-hover:opacity-100"
+             >
               <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" /></svg>
             </button>
 

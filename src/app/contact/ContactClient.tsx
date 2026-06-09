@@ -134,11 +134,11 @@ export default function ContactClient() {
 
               <div className="space-y-5">
                 <div className="grid md:grid-cols-2 gap-5">
-                  <input type="text" name="name" placeholder="FULL NAME" required className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-xs font-bold tracking-wider text-white focus:outline-none focus:border-[#FFD700]/50 transition-all uppercase placeholder:text-white/10" />
-                  <input type="email" name="email" placeholder="EMAIL ADDRESS" required className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-xs font-bold tracking-wider text-white focus:outline-none focus:border-[#FFD700]/50 transition-all uppercase placeholder:text-white/10" />
+                  <input type="text" name="name" placeholder="FULL NAME" required className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-xs font-bold tracking-wider text-white focus:outline-none focus:ring-2 focus:ring-[#FFD700]/50 focus:border-[#FFD700]/50 transition-all uppercase placeholder:text-white/10" />
+                   <input type="email" name="email" placeholder="EMAIL ADDRESS" required className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-xs font-bold tracking-wider text-white focus:outline-none focus:ring-2 focus:ring-[#FFD700]/50 focus:border-[#FFD700]/50 transition-all uppercase placeholder:text-white/10" />
                 </div>
-                <input type="tel" name="phone" placeholder="MOBILE NUMBER" required className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-xs font-bold tracking-wider text-white focus:outline-none focus:border-[#FFD700]/50 transition-all uppercase placeholder:text-white/10" />
-                <textarea name="message" placeholder="ADDITIONAL MESSAGE OR NOTE" rows={4} className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-xs font-bold tracking-wider text-white focus:outline-none focus:border-[#FFD700]/50 transition-all uppercase placeholder:text-white/10 resize-none" />
+                <input type="tel" name="phone" placeholder="MOBILE NUMBER" required className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-xs font-bold tracking-wider text-white focus:outline-none focus:ring-2 focus:ring-[#FFD700]/50 focus:border-[#FFD700]/50 transition-all uppercase placeholder:text-white/10" />
+                 <textarea name="message" placeholder="ADDITIONAL MESSAGE OR NOTE" rows={4} className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-xs font-bold tracking-wider text-white focus:outline-none focus:ring-2 focus:ring-[#FFD700]/50 focus:border-[#FFD700]/50 transition-all uppercase placeholder:text-white/10 resize-none" />
               </div>
 
               <div className="mt-10 flex flex-col sm:flex-row items-center justify-between gap-6">
@@ -147,8 +147,8 @@ export default function ContactClient() {
                     {isSubmitting ? "TRANSMITTING..." : "SEND MESSAGE"} <Send size={14} />
                   </button>
                 </MagneticButton>
-                <p className="flex items-center gap-2 text-[#6B6560] text-[9px] font-bold uppercase tracking-wider">
-                  <ShieldCheck size={12} className="text-[#25D366]" /> Secure Data Transmission
+                <p className="flex items-center gap-2 text-[#A8A29C] text-[10px] font-bold uppercase tracking-wider">
+                   <ShieldCheck size={12} className="text-[#25D366]" /> Secure Data Transmission
                 </p>
               </div>
 

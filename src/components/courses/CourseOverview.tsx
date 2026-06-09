@@ -53,15 +53,15 @@ export default function CourseOverview({ course }: { course: Course }) {
               <h3 className="font-display text-[#F0EBE1] mb-4 font-black uppercase leading-[1.1] tracking-[0.1em]">Course Details</h3>
               <dl className="space-y-4">
                 <div>
-                  <dt className="text-[#6B6560] text-xs uppercase tracking-wider mb-1">Course Code</dt>
+                  <dt className="text-[#A8A29C] text-xs uppercase tracking-wider mb-1">Course Code</dt>
                   <dd className="text-[#F0EBE1] font-mono">{course.code}</dd>
                 </div>
                 <div>
-                  <dt className="text-[#6B6560] text-xs uppercase tracking-wider mb-1">Duration</dt>
+                  <dt className="text-[#A8A29C] text-xs uppercase tracking-wider mb-1">Duration</dt>
                   <dd className="text-[#F0EBE1]">{course.duration}</dd>
                 </div>
                 <div>
-                  <dt className="text-[#6B6560] text-xs uppercase tracking-wider mb-1">Eligibility</dt>
+                  <dt className="text-[#A8A29C] text-xs uppercase tracking-wider mb-1">Eligibility</dt>
                   <dd className="text-[#F0EBE1]">{course.eligibility}</dd>
                 </div>
               </dl>

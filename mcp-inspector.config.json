@@ -1,0 +1,12 @@
+{
+    "mcpServers": {
+        "github.com/smithery-ai/mcp-obsidian": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "mcp-obsidian",
+                "./mcp-obsidian-vault"
+            ]
+        }
+    }
+}

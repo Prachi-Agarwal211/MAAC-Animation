@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
@@ -16,6 +16,12 @@ export default function Navbar() {
   const { mobileMenuOpen, toggleMobileMenu } = useUIStore();
   const [scrolled, setScrolled] = useState(false);
   const [revealNav, setRevealNav] = useState(() => !isHome);
+  const [openMega, setOpenMega] = useState<string | null>(null);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+
+  useEffect(() => {
+    setIsTouchDevice(window.matchMedia("(pointer: coarse)").matches);
+  }, []);
 
   useEffect(() => {
     if (!isHome) {
@@ -75,7 +81,7 @@ export default function Navbar() {
             <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
           </div>
         )}
-        <div className="max-w-content mx-auto px-6 sm:px-8 flex items-center h-16 sm:h-20">
+        <div className="max-w-content mx-auto px-6 sm:px-8 flex items-center h-16 sm:h-20" style={{ paddingTop: "env(safe-area-inset-top)" }}>
           <div className="flex-shrink-0 mr-16">
             <Link href="/" className="flex items-center group" aria-label="MAAC Jaipur - Home">
               <Image
@@ -98,8 +104,15 @@ export default function Navbar() {
                 Home
               </Link>
             </li>
-            {desktopLinks.map((link) => (
-              <li key={link.label} className="relative group">
+            {desktopLinks.map((link) => {
+              const isOpen = openMega === link.label;
+              return (
+              <li
+                key={link.label}
+                className="relative group"
+                onMouseEnter={() => { if (hasSubmenu(link)) setOpenMega(link.label); }}
+                onMouseLeave={() => setOpenMega(null)}
+              >
                 {link.external ? (
                   <a
                     href={link.href}
@@ -112,16 +125,26 @@ export default function Navbar() {
                 ) : (
                   <Link
                     href={link.href}
+                    onClick={(e) => {
+                      if (hasSubmenu(link) && isTouchDevice) {
+                        e.preventDefault();
+                        setOpenMega(isOpen ? null : link.label);
+                      }
+                    }}
                     className="flex items-center gap-1.5 px-3 py-2 text-[13px] font-bold text-white/70 hover:text-white transition-all duration-300 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]"
                   >
                     {link.label}
-                    {hasSubmenu(link) && <ChevronDown size={12} className="opacity-40 shrink-0 transition-transform group-hover:rotate-180" aria-hidden />}
+                    {hasSubmenu(link) && <ChevronDown size={12} className={`opacity-40 shrink-0 transition-transform ${isOpen ? 'rotate-180' : 'group-hover:rotate-180'}`} aria-hidden />}
                   </Link>
                 )}
 
                 {link.megaGroups && link.megaGroups.length > 0 && (
                   <div
-                    className="absolute right-0 top-full z-50 pt-1.5 opacity-0 invisible pointer-events-none translate-y-0.5 transition-[opacity,visibility,transform] duration-150 group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto group-hover:translate-y-0 xl:left-0 xl:right-auto"
+                    className={`absolute right-0 top-full z-50 pt-1.5 translate-y-0.5 transition-[opacity,visibility,transform] duration-150 xl:left-0 xl:right-auto ${
+                      isOpen
+                        ? "opacity-100 visible pointer-events-auto translate-y-0"
+                        : "opacity-0 invisible pointer-events-none group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto group-hover:translate-y-0"
+                    }`}
                     role="menu"
                   >
                     <div className="rounded-xl border border-white/10 bg-black/80 backdrop-blur-xl shadow-2xl w-[min(100vw-1.5rem,24rem)] flex flex-col">
@@ -165,7 +188,11 @@ export default function Navbar() {
 
                 {link.children && link.children.length > 0 && !link.megaGroups && (
                   <div
-                    className="absolute left-0 top-full z-50 pt-1.5 opacity-0 invisible pointer-events-none translate-y-0.5 transition-[opacity,visibility,transform] duration-150 group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto group-hover:translate-y-0"
+                    className={`absolute left-0 top-full z-50 pt-1.5 translate-y-0.5 transition-[opacity,visibility,transform] duration-150 ${
+                      isOpen
+                        ? "opacity-100 visible pointer-events-auto translate-y-0"
+                        : "opacity-0 invisible pointer-events-none group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto group-hover:translate-y-0"
+                    }`}
                     role="menu"
                   >
                     <div className="rounded-lg border border-white/10 bg-black/80 backdrop-blur-xl py-2 min-w-[240px] shadow-xl">
@@ -183,7 +210,7 @@ export default function Navbar() {
                   </div>
                 )}
               </li>
-            ))}
+            );})}
           </ul>
 
           <div className="hidden lg:flex items-center gap-4 flex-shrink-0">
@@ -271,9 +298,9 @@ export default function Navbar() {
                               >
                                 {child.label}
                               </Link>
-                            </li>
-                          ))}
-                        </ul>
+              </li>
+            ))}
+          </ul>
                       </div>
                     ))}
                     <Link
@@ -296,9 +323,9 @@ export default function Navbar() {
                         >
                           {child.label}
                         </Link>
-                      </li>
-                    ))}
-                  </ul>
+              </li>
+            ))}
+          </ul>
                 )}
               </li>
             ))}

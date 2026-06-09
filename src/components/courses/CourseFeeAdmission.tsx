@@ -43,19 +43,19 @@ export default function CourseFeeAdmission({ course }: { course: Course }) {
             <h3 className="font-display text-xl text-[#F0EBE1] mb-4 font-black uppercase leading-[1.1] tracking-[0.1em]">Course Fees in Jaipur</h3>
             <dl className="space-y-4">
               <div>
-                <dt className="text-[#6B6560] text-sm">Course Fee Range</dt>
+                <dt className="text-[#A8A29C] text-sm">Course Fee Range</dt>
                 <dd className="text-[#F0EBE1] font-bold text-lg">{fees.min} – {fees.max}</dd>
               </div>
               <div>
-                <dt className="text-[#6B6560] text-sm">Easy EMI Option</dt>
+                <dt className="text-[#A8A29C] text-sm">Easy EMI Option</dt>
                 <dd className="text-[#FFD700] font-black">Starting {fees.emi}</dd>
               </div>
               <div>
-                <dt className="text-[#6B6560] text-sm">Education Loan</dt>
+                <dt className="text-[#A8A29C] text-sm">Education Loan</dt>
                 <dd className="text-[#F0EBE1]">Available via partner banks</dd>
               </div>
               <div>
-                <dt className="text-[#6B6560] text-sm">Scholarship</dt>
+                <dt className="text-[#A8A29C] text-sm">Scholarship</dt>
                 <dd className="text-[#F0EBE1]">Up to 25% for merit students</dd>
               </div>
             </dl>

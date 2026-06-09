@@ -74,7 +74,7 @@ export default function PopularCoursesScroll({ courses, courseImages }: PopularC
                 {/* Content */}
                 <div className="p-8 md:p-10">
                   <h3 className="font-display text-[#F0EBE1] text-sm md:text-base mb-2 group-hover:text-[#FFD700] transition-colors font-bold uppercase leading-none tracking-tight">{course.name}</h3>
-                  <p className="text-[#6B6560] text-xs font-bold uppercase tracking-wider mb-6">{course.fullName}</p>
+                  <p className="text-[#A8A29C] text-xs font-bold uppercase tracking-wider mb-6">{course.fullName}</p>
                   <p className="text-[#A8A29C] text-sm leading-relaxed line-clamp-3 mb-8">{course.description}</p>
                   
                   <a href="/courses" className="inline-flex items-center gap-3 text-white text-xs font-bold tracking-[0.2em] uppercase group/btn">

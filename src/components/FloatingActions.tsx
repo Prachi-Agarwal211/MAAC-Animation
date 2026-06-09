@@ -94,7 +94,7 @@ function MobileBottomNav() {
   return (
     <div
       ref={containerRef}
-      className={`fixed left-4 right-4 z-[1000] lg:hidden transition-all duration-500 ease-expo-out ${
+      className={`fixed left-4 right-4 z-[900] lg:hidden transition-all duration-500 ease-expo-out ${
         visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10 pointer-events-none"
       }`}
       style={{ bottom: "max(24px, calc(24px + env(safe-area-inset-bottom)))" }}

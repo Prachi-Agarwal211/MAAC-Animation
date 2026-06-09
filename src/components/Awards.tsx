@@ -28,7 +28,7 @@ export default function Awards() {
               <div>
                 <div className="text-[10px] font-bold metallic-gold-text uppercase tracking-[0.2em] mb-2">{award.year}</div>
                 <h3 className="text-white text-xl font-display mb-1 font-bold uppercase leading-[1.1] tracking-[0.1em]">{award.name}</h3>
-                <p className="text-[#6B6560] text-xs font-bold uppercase tracking-widest">{award.org}</p>
+                <p className="text-[#A8A29C] text-xs font-bold uppercase tracking-widest">{award.org}</p>
               </div>
               <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center metallic-gold-text">
                 <Trophy size={18} />

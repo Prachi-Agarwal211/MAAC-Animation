@@ -39,7 +39,7 @@ export default function ApplyNow() {
             </FadeIn>
 
             <FadeIn delay={0.4} className="space-y-6 pt-6 border-t border-white/5">
-              <p className="text-[#6B6560] text-xs font-bold uppercase tracking-[0.2em]">Contact Us Directly</p>
+              <p className="text-[#A8A29C] text-xs font-bold uppercase tracking-[0.2em]">Contact Us Directly</p>
               <div className="flex flex-wrap gap-4">
                 <MagneticButton>
                   <a href={contactInfo.whatsapp ? `https://wa.me/${contactInfo.whatsapp.replace(/[^0-9]/g, "")}` : "#"} className="flex items-center gap-3 px-6 py-3 rounded-full bg-[#25D366]/10 border border-[#25D366]/20 text-[#25D366] text-xs font-bold uppercase tracking-widest hover:bg-[#25D366]/20 transition-all">

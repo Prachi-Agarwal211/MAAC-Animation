@@ -53,7 +53,7 @@ export default function PortfolioGallery() {
               }`}
             >
               {cat.label}
-              <span className={`ml-1.5 text-xs ${activeFilter === cat.id ? "text-[#FFD700]/70" : "text-[#6B6560]"}`}>
+              <span className={`ml-1.5 text-xs ${activeFilter === cat.id ? "text-[#FFD700]/70" : "text-[#A8A29C]"}`}>
                 ({count})
               </span>
             </button>
@@ -63,7 +63,7 @@ export default function PortfolioGallery() {
 
       {/* Student Count */}
       <div className="text-center mb-8">
-        <p className="text-[#6B6560] text-sm">
+        <p className="text-[#A8A29C] text-sm">
           Showing <span className="text-[#F0EBE1] font-black">{filteredEntries.length}</span> student {filteredEntries.length === 1 ? "portfolio" : "portfolios"}
         </p>
       </div>
@@ -168,7 +168,7 @@ function PortfolioCard({
         <h3 className="font-display text-[#F0EBE1] text-white/80 mb-1.5 group-hover:text-[#FFD700] transition-colors line-clamp-1 font-black uppercase leading-[1.1] tracking-[0.1em]">
           {entry.studentName}
         </h3>
-        <p className="text-[#6B6560] text-xs mb-2">
+        <p className="text-[#A8A29C] text-xs mb-2">
           {entry.course}
         </p>
         <p className="text-[#A8A29C] text-sm leading-relaxed mb-3 line-clamp-2">
@@ -180,13 +180,13 @@ function PortfolioCard({
           {entry.tags.slice(0, 3).map((tag, i) => (
             <span
               key={i}
-              className="text-[10px] bg-white/5 text-[#6B6560] px-2 py-0.5 rounded"
+              className="text-[10px] bg-white/5 text-[#A8A29C] px-2 py-0.5 rounded"
             >
               {tag}
             </span>
           ))}
           {entry.tags.length > 3 && (
-            <span className="text-[10px] text-[#6B6560]">+{entry.tags.length - 3}</span>
+            <span className="text-[10px] text-[#A8A29C]">+{entry.tags.length - 3}</span>
           )}
         </div>
       </div>

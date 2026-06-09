@@ -31,7 +31,7 @@ export default function FAQSection() {
           </FadeIn>
 
           <FadeIn delay={0.4} className="pt-8 border-t border-white/5 space-y-6">
-            <p className="text-[#6B6560] text-xs font-bold uppercase tracking-[0.2em]">Still have questions?</p>
+            <p className="text-[#A8A29C] text-xs font-bold uppercase tracking-[0.2em]">Still have questions?</p>
             <a href="/contact" className="inline-flex items-center gap-4 group">
               <div className="w-12 h-12 rounded-full bg-[#FFD700]/10 flex items-center justify-center border border-white/20 group-hover:bg-[#FFD700] group-hover:border-[#FFD700] transition-all duration-500 shadow-lg">
                 <MessageSquare size={20} className="text-[#FFD700] group-hover:text-white" />

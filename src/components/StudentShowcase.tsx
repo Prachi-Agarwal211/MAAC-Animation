@@ -179,7 +179,7 @@ export default function StudentShowcase() {
                     { label: "Pipeline", val: "USD / Solaris" }
                    ].map((stat, i) => (
                      <div key={i} className="flex flex-col">
-                        <span className="text-[10px] text-white/30 font-bold uppercase tracking-widest">{stat.label}</span>
+                         <span className="text-[10px] text-white/50 font-bold uppercase tracking-widest">{stat.label}</span>
                         <span className="text-white text-xs font-mono tabular-nums">{stat.val}</span>
                      </div>
                    ))}
@@ -200,15 +200,20 @@ export default function StudentShowcase() {
 
         {/* ── THUMBNAILS ── */}
         <div className="mt-12 flex gap-4 md:gap-6 overflow-x-auto no-scrollbar pb-4">
-          {showcaseVideos.map((item, i) => (
+          {showcaseVideos.map((item, i) => {
+            const isTouchDevice = typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches;
+            return (
             <button 
               key={i} 
               onClick={() => setActive(i)}
               onMouseEnter={(e) => {
+                // Skip hover preview on touch devices
+                if (isTouchDevice) return;
                 const vid = e.currentTarget.querySelector("video");
                 if (vid) vid.play().catch(() => {});
               }}
               onMouseLeave={(e) => {
+                if (isTouchDevice) return;
                 const vid = e.currentTarget.querySelector("video");
                 if (vid) {
                   vid.pause();
@@ -227,8 +232,9 @@ export default function StudentShowcase() {
               <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
                 <Play size={20} className="text-white" fill="white" />
               </div>
-            </button>
-          ))}
+              </button>
+            );
+          })}
         </div>
       </div>
 

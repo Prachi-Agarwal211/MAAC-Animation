@@ -67,6 +67,25 @@ export default function ImageLightbox({
     setCurrentIndex((prev) => (prev + 1) % images.length);
   }, [images.length]);
 
+  // Touch swipe gesture support for mobile gallery navigation
+  const touchStartX = useRef<number>(0);
+  const touchStartY = useRef<number>(0);
+
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+  }, []);
+
+  const handleTouchEnd = useCallback((e: React.TouchEvent) => {
+    const deltaX = e.changedTouches[0].clientX - touchStartX.current;
+    const deltaY = e.changedTouches[0].clientY - touchStartY.current;
+    // Only trigger swipe if horizontal movement is dominant (>40px) and > vertical
+    if (Math.abs(deltaX) > 40 && Math.abs(deltaX) > Math.abs(deltaY) * 1.5) {
+      if (deltaX < 0) goToNext();
+      else goToPrevious();
+    }
+  }, [goToNext, goToPrevious]);
+
   // Handle overlay click to close
   const handleOverlayClick = useCallback(
     (e: React.MouseEvent) => {
@@ -83,6 +102,8 @@ export default function ImageLightbox({
     <div
       ref={overlayRef}
       onClick={handleOverlayClick}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
       className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/95 backdrop-blur-sm"
       role="dialog"
       aria-modal="true"
@@ -106,11 +127,11 @@ export default function ImageLightbox({
         </div>
       )}
 
-      {/* Previous button */}
+      {/* Previous button - hidden on mobile where swipe handles navigation */}
       {images.length > 1 && (
         <button
           onClick={goToPrevious}
-          className="absolute left-4 z-[10000] p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+          className="absolute left-4 z-[10000] p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors hidden md:flex"
           aria-label="Previous image"
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -119,11 +140,11 @@ export default function ImageLightbox({
         </button>
       )}
 
-      {/* Next button */}
+      {/* Next button - hidden on mobile where swipe handles navigation */}
       {images.length > 1 && (
         <button
           onClick={goToNext}
-          className="absolute right-4 z-[10000] p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+          className="absolute right-4 z-[10000] p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors hidden md:flex"
           aria-label="Next image"
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

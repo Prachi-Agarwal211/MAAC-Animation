@@ -122,11 +122,13 @@ function Testimonials() {
               <button
                 key={index}
                 onClick={() => setActive(index)}
-                className={`transition-all duration-700 rounded-full h-1 ${
-                  index === active ? "w-16 metallic-gold-accent" : "w-2 bg-white/10 hover:bg-white/20"
-                }`}
+                className="min-w-[44px] min-h-[44px] flex items-center justify-center"
                 aria-label={`Testimonial ${index + 1}`}
-              />
+              >
+                <span className={`block rounded-full transition-all duration-700 ${
+                  index === active ? "w-16 h-1 metallic-gold-accent" : "w-2 h-1 bg-white/10 hover:bg-white/20"
+                }`} />
+              </button>
             ))}
           </div>
         </div>

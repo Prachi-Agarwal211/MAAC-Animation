@@ -93,8 +93,8 @@ export default function NotFound() {
                 >
                   <div className="flex items-center gap-2 mb-2">
                     <span className="text-[#FFD700] text-xs font-semibold uppercase">{course.code}</span>
-                    <span className="text-[#6B6560] text-xs">&middot;</span>
-                    <span className="text-[#6B6560] text-xs">{course.duration}</span>
+                    <span className="text-[#A8A29C] text-xs">&middot;</span>
+                    <span className="text-[#A8A29C] text-xs">{course.duration}</span>
                   </div>
                   <h3 className="text-[#F0EBE1] font-medium text-sm group-hover:text-[#FFD700] transition-colors">
                     {course.fullName}

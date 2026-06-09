@@ -265,8 +265,8 @@ mm.add("(min-width: 1024px)", () => {
                 {/* Center Circle */}
                 <circle cx={CX} cy={CY} r={INNER_R} fill="rgba(10,10,10,0.9)" stroke="#FFD700" strokeWidth="3" className="drop-shadow-[0_0_20px_rgba(255,215,0,0.4)]" />
                 
-                <text ref={pieCenterTextRef} x={CX} y={CY + 5} textAnchor="middle" className="fill-white font-display font-bold uppercase leading-[1.1] tracking-[0.1em]" style={{ fontSize: "64px" }}>01</text>
-                <text x={CX} y={CY + 38} textAnchor="middle" className="fill-[#FFD700] font-black uppercase tracking-[0.3em]" style={{ fontSize: "16px" }}>OF {String(SEGMENTS).padStart(2,'0')}</text>
+                <text ref={pieCenterTextRef} x={CX} y={CY + 5} textAnchor="middle" className="fill-white font-display font-bold uppercase leading-[1.1] tracking-[0.1em]" style={{ fontSize: "clamp(40px, 8vw, 64px)" }}>01</text>
+                <text x={CX} y={CY + 38} textAnchor="middle" className="fill-[#FFD700] font-black uppercase tracking-[0.3em]" style={{ fontSize: "clamp(10px, 2vw, 16px)" }}>OF {String(SEGMENTS).padStart(2,'0')}</text>
               </svg>
 
               {/* DOM Labels mounted over the SVG — desktop only (too cramped + absolute positioning on mobile) */}

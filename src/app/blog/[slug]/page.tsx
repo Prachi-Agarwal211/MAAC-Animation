@@ -222,7 +222,7 @@ export default function BlogPostPage({
               {post.title}
             </h1>
             
-            <div className="animate-in flex items-center justify-center gap-6 text-[11px] font-bold uppercase tracking-[0.2em] text-[#6B6560]">
+            <div className="animate-in flex items-center justify-center gap-6 text-[11px] font-bold uppercase tracking-[0.2em] text-[#A8A29C]">
               <div className="flex items-center gap-2">
                 <span className="text-white/40">By</span>
                 <span className="text-white">{post.author}</span>
@@ -263,7 +263,7 @@ export default function BlogPostPage({
 
             {/* Tags */}
             <div className="mt-20 pt-10 border-t border-white/5">
-              <h3 className="text-[10px] font-bold text-[#6B6560] uppercase tracking-[0.3em] mb-6">Topics Covered</h3>
+              <h3 className="text-[10px] font-bold text-[#A8A29C] uppercase tracking-[0.3em] mb-6">Topics Covered</h3>
               <div className="flex flex-wrap gap-3">
                 {post.tags.map((tag, i) => (
                   <span

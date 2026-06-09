@@ -60,10 +60,11 @@ export default function CourseFAQ({ course }: { course: Course }) {
               <button
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
                 className="w-full flex items-center justify-between p-6 text-left hover:bg-white/[0.02] transition-colors"
+                aria-expanded={openIndex === i}
               >
                 <span className="text-[#F0EBE1] font-bold pr-4">{faq.q}</span>
                 <svg
-                  className={`w-5 h-5 text-[#6B6560] flex-shrink-0 transition-transform duration-300 ${openIndex === i ? "rotate-180" : ""}`}
+                  className={`w-5 h-5 text-[#A8A29C] flex-shrink-0 transition-transform duration-300 ${openIndex === i ? "rotate-180" : ""}`}
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"

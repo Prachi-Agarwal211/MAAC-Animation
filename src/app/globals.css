@@ -42,7 +42,7 @@ html, body {
   /* ── Typography ── */
   --text-main: #F0EBE1;
   --text-dim: #A8A29C;
-  --text-muted: #6B6560;
+  --text-muted: #8A847E;
 
   /* ── Animation Easings ── */
   --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -482,6 +482,7 @@ body.demo-bar-visible .page-wrapper {
 .hscroll-container {
   overflow-x: auto;
   scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
 }
@@ -578,6 +579,29 @@ body.demo-bar-visible .page-wrapper {
 .splitting .word { white-space: pre; }
 [data-splitting], [data-splitting] .word { overflow: hidden; display: inline-block; }
 [data-splitting] .char { display: inline-block; }
+
+/* ═══════════════════════════════════════════════════════
+   FOCUS STYLES — Accessibility for keyboard navigation
+   ═══════════════════════════════════════════════════════ */
+:focus-visible {
+  outline: 2px solid #FFD700;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid #FFD700;
+  outline-offset: 2px;
+}
+
+/* Remove default outline for mouse users */
+:focus:not(:focus-visible) {
+  outline: none;
+}
 
 /* ═══════════════════════════════════════════════════════
    CURSOR
@@ -754,6 +778,7 @@ body.demo-bar-visible .page-wrapper {
   display: flex;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   gap: 16px;

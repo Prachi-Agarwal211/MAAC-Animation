@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Star, TrendingUp } from "lucide-react";
 import FadeIn from "@/components/animations/FadeIn";
 
@@ -7,7 +8,7 @@ const successStories = [
     role: "3D Animator",
     company: "DNEG",
     salary: "8.5",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=face",
+    image: "/students/priya-sharma.jpg",
     quote: "MAAC transformed my passion for animation into a rewarding career at DNEG. The industry-ready curriculum made all the difference.",
   },
   {
@@ -15,7 +16,7 @@ const successStories = [
     role: "VFX Compositor",
     company: "MPC",
     salary: "7.2",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
+    image: "/students/rahul-verma.jpg",
     quote: "The hands-on VFX training and mentorship at MAAC prepared me for real studio environments from day one.",
   },
   {
@@ -23,7 +24,7 @@ const successStories = [
     role: "Game Artist",
     company: "Ubisoft",
     salary: "9.0",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face",
+    image: "/students/ananya-patel.jpg",
     quote: "From learning game art fundamentals to landing my dream role at Ubisoft — MAAC was the catalyst for everything.",
   },
   {
@@ -31,7 +32,7 @@ const successStories = [
     role: "Motion Graphics Artist",
     company: "Redchillies VFX",
     salary: "6.8",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face",
+    image: "/students/karan-mehta.jpg",
     quote: "MAAC's broadcast design program gave me the skills to thrive in the fast-paced world of motion graphics.",
   },
   {
@@ -39,7 +40,7 @@ const successStories = [
     role: "UI/UX Designer",
     company: "Google",
     salary: "12.0",
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop&crop=face",
+    image: "/students/sneha-kapoor.jpg",
     quote: "The digital content creation course at MAAC opened doors I never imagined. Now I design experiences at Google.",
   },
   {
@@ -47,7 +48,7 @@ const successStories = [
     role: "Film Editor",
     company: "Freelance",
     salary: "10.5",
-    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop&crop=face",
+    image: "/students/aarav-singh.jpg",
     quote: "MAAC's filmmaking program taught me the complete post-production workflow. I now work with top OTT platforms.",
   },
 ];
@@ -109,10 +110,13 @@ export default function StudentSuccessStories() {
                 {/* Avatar & Info */}
                 <div className="flex items-center gap-4 mb-6">
                   <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-[#BF953F]/30 flex-shrink-0 relative">
-                    <img
+                    <Image
                       src={story.image}
                       alt={story.name}
+                      width={64}
+                      height={64}
                       className="w-full h-full object-cover"
+                      loading="lazy"
                     />
                   </div>
                   <div>
@@ -129,11 +133,11 @@ export default function StudentSuccessStories() {
                 {/* Company & Salary */}
                 <div className="flex items-center justify-between pt-6 border-t border-white/5">
                   <div>
-                    <div className="text-[#6B6560] text-[10px] uppercase tracking-[0.2em] mb-1">Company</div>
+                    <div className="text-[#A8A29C] text-[10px] uppercase tracking-[0.2em] mb-1">Company</div>
                     <div className="text-white font-bold text-sm">{story.company}</div>
                   </div>
                   <div className="text-right">
-                    <div className="text-[#6B6560] text-[10px] uppercase tracking-[0.2em] mb-1">Package</div>
+                    <div className="text-[#A8A29C] text-[10px] uppercase tracking-[0.2em] mb-1">Package</div>
                     <div className="text-[#BF953F] font-bold text-lg">{story.salary} LPA</div>
                   </div>
                 </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, memo } from "react";
+import Image from "next/image";
 import { useGSAP } from "@gsap/react";
 import gsap from "@/lib/gsap";
 
@@ -106,10 +107,13 @@ function Placements() {
         style={{ backgroundColor: company.bgColor }}
       >
         {/* Company Logo Image */}
-        <img
+        <Image
           src={company.logo}
           alt={`${company.name} logo`}
+          width={120}
+          height={80}
           className="h-full w-auto object-contain object-center opacity-90 group-hover:opacity-100 transition-opacity duration-300"
+          loading="lazy"
           onError={(e) => {
             const target = e.target as HTMLImageElement;
             target.style.display = "none";
