@@ -16,21 +16,57 @@ export default function MAACXHero({ onIntroReveal }: Props) {
 
   const [isMuted, setIsMuted] = useState(true);
   const [loaded, setLoaded] = useState(false);
+  const [isReducedMotion, setIsReducedMotion] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const mediaReduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => {
+      setIsReducedMotion(mediaReduced.matches);
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    update();
+
+    // Safari-compatible listeners
+    if (typeof mediaReduced.addEventListener === "function") {
+      mediaReduced.addEventListener("change", update);
+      window.addEventListener("resize", update, { passive: true });
+      return () => {
+        mediaReduced.removeEventListener("change", update);
+        window.removeEventListener("resize", update);
+      };
+    }
+
+    // Fallback
+    mediaReduced.addListener(update);
+    window.addEventListener("resize", update, { passive: true });
+    return () => {
+      mediaReduced.removeListener(update);
+      window.removeEventListener("resize", update);
+    };
+  }, []);
 
   const playVideo = useCallback(() => {
     const v = heroVideoRef.current;
     if (!v) return;
+    if (isReducedMotion) {
+      v.pause();
+      return;
+    }
     v.muted = isMuted;
     v.play().catch(() => {
       v.muted = true;
       setIsMuted(true);
-      v.play().catch(() => {});
+      v.play().catch(() => { });
     });
-  }, [isMuted]);
+  }, [isMuted, isReducedMotion]);
 
   useEffect(() => {
     if (!loaded || !contentRef.current) return;
-    
+
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
         onComplete: () => {
@@ -40,8 +76,8 @@ export default function MAACXHero({ onIntroReveal }: Props) {
       });
 
       tl.to(contentRef.current, { opacity: 1, duration: 0.1 })
-        .fromTo(".maacx-element", 
-          { opacity: 0, y: 40 }, 
+        .fromTo(".maacx-element",
+          { opacity: 0, y: 40 },
           {
             opacity: 1,
             y: 0,
@@ -54,6 +90,28 @@ export default function MAACXHero({ onIntroReveal }: Props) {
 
     return () => ctx.revert();
   }, [loaded, onIntroReveal]);
+
+  useEffect(() => {
+    const v = heroVideoRef.current;
+    if (!v) return;
+
+    if (isReducedMotion) {
+      v.pause();
+      return;
+    }
+
+    // On mobile: avoid continuous decoding heat by not looping.
+    // (We keep the video visible, but let it play once.)
+    if (isMobile) {
+      v.loop = false;
+      // best-effort: start playing after load
+      if (loaded) playVideo();
+      return;
+    }
+
+    // Desktop: keep loop behavior as-is
+    v.loop = true;
+  }, [isMobile, isReducedMotion, loaded, playVideo]);
 
   const toggleMute = () => {
     const next = !isMuted;
@@ -68,16 +126,17 @@ export default function MAACXHero({ onIntroReveal }: Props) {
         <video
           ref={heroVideoRef}
           className="absolute inset-0 h-full w-full object-cover object-center"
-          autoPlay
+          autoPlay={!isMobile}
           muted={isMuted}
-          loop
+          loop={!isMobile}
           playsInline
-          preload="auto"
+          preload={isMobile ? "metadata" : "auto"}
+          poster="/hero-poster.jpg"
           onLoadedData={() => {
             setLoaded(true);
             playVideo();
           }}
-          >
+        >
           <source src={HERO_VIDEO_MP4} type="video/mp4" />
           <source src={HERO_VIDEO_WEBM} type="video/webm" />
         </video>

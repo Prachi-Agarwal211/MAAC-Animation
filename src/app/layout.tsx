@@ -189,7 +189,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`scroll-smooth ${inter.variable} ${syne.variable}`}>
+    <html lang="en" className={`${inter.variable} ${syne.variable}`}>
       <head>
         <script
           dangerouslySetInnerHTML={{
@@ -302,7 +302,7 @@ export default function RootLayout({
               <Suspense fallback={null}>
                 <CustomCursor />
               </Suspense>
-                  <Suspense fallback={null}>
+              <Suspense fallback={null}>
                 <MetaPixel />
               </Suspense>
               <Analytics />
@@ -312,5 +312,5 @@ export default function RootLayout({
         </Providers>
       </body>
     </html>
-   );
+  );
 }

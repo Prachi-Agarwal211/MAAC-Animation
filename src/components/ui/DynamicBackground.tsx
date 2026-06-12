@@ -135,10 +135,11 @@ export default function DynamicBackground() {
             depth: false,
             stencil: false,
             powerPreference: "high-performance",
-            alpha: true
+            alpha: true,
           }}
           dpr={1}
-          frameloop="always"
+          // performance: do not render every frame; reduce battery drain/jank
+          frameloop="demand"
         >
           <FluidMesh />
         </Canvas>

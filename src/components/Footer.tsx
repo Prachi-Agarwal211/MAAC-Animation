@@ -3,6 +3,7 @@ import Image from "next/image";
 import { contactInfo } from "@/data/siteData";
 import { ArrowUpRight, MapPin, Phone, Mail, MessageSquare } from "lucide-react";
 import FadeIn from "@/components/animations/FadeIn";
+import { useEffect, useState } from "react";
 
 const SocialIcons = {
   Facebook: () => (
@@ -34,24 +35,39 @@ const SocialIcons = {
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const update = () => setIsMobile(window.innerWidth < 768);
+    update();
+    window.addEventListener("resize", update, { passive: true });
+    return () => window.removeEventListener("resize", update);
+  }, []);
 
   return (
     <footer className="relative bg-transparent pt-24 md:pt-40 overflow-hidden" style={{ paddingBottom: "max(0px, env(safe-area-inset-bottom))" }}>
-      {/* Background video */}
-      <div className="absolute inset-0 z-0 opacity-45">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="none"
-          className="absolute inset-0 h-full w-full object-cover"
-        >
-          <source src="/hero-video-compressed.mp4" type="video/mp4" />
-          <source src="/hero-video.webm" type="video/webm" />
-        </video>
-        <div className="absolute inset-0 bg-black/40" />
-      </div>
+      {/* Background (video on desktop only to reduce iPhone heating) */}
+      {!isMobile ? (
+        <div className="absolute inset-0 z-0 opacity-45">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="none"
+            className="absolute inset-0 h-full w-full object-cover"
+          >
+            <source src="/hero-video-compressed.mp4" type="video/mp4" />
+            <source src="/hero-video.webm" type="video/webm" />
+          </video>
+          <div className="absolute inset-0 bg-black/40" />
+        </div>
+      ) : (
+        <div className="absolute inset-0 z-0 opacity-60">
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/70" />
+        </div>
+      )}
 
       <div className="atmosphere-blob blob-red -bottom-20 -right-20 opacity-10" />
 
@@ -95,15 +111,15 @@ export default function Footer() {
 
         {/* Brand Col */}
         <div className="lg:col-span-4 space-y-10">
-              <Link href="/" className="flex items-center group" aria-label="MAAC Jaipur - Home">
-               <Image
-                 src="/maac%20logo.png"
-                 alt="MAAC Animation Jaipur Logo"
-                 width={240}
-                 height={240}
-                 className="transition-all duration-500 group-hover:scale-[1.02] object-contain w-28 h-auto sm:w-40 xl:w-44"
-                 loading="lazy"
-               />
+          <Link href="/" className="flex items-center group" aria-label="MAAC Jaipur - Home">
+            <Image
+              src="/maac%20logo.png"
+              alt="MAAC Animation Jaipur Logo"
+              width={240}
+              height={240}
+              className="transition-all duration-500 group-hover:scale-[1.02] object-contain w-28 h-auto sm:w-40 xl:w-44"
+              loading="lazy"
+            />
           </Link>
           <p className="text-[#A8A29C] text-lg leading-relaxed max-w-sm">
             Empowering the next generation of 3D artists and VFX masters with 30+ years of educational excellence.
@@ -180,7 +196,7 @@ export default function Footer() {
               </li>
             ))}
           </ul>
-          
+
           <h4 className="text-white text-xs font-bold uppercase tracking-[0.2em] pt-8">Locate Us</h4>
           <div className="space-y-6">
             <div className="flex gap-4">
@@ -206,15 +222,15 @@ export default function Footer() {
       <div className="relative z-10 border-t border-white/5 py-10 px-6 md:px-12">
         <div className="max-w-content mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
           <p className="text-[#A8A29C] text-[10px] font-bold uppercase tracking-[0.3em]">
-             © {currentYear} MAAC India · Crafting Digital Futures
-           </p>
-           <div className="flex flex-wrap gap-6 md:gap-8">
-             {[
-               { label: "Privacy", href: "/privacy-policy" },
-               { label: "Terms", href: "/terms-of-service" },
-               { label: "Sitemap", href: "/sitemap.xml" },
-             ].map(link => (
-               <Link key={link.label} href={link.href} className="text-[#A8A29C] hover:text-white text-[10px] font-bold uppercase tracking-[0.3em] transition-colors">{link.label}</Link>
+            © {currentYear} MAAC India · Crafting Digital Futures
+          </p>
+          <div className="flex flex-wrap gap-6 md:gap-8">
+            {[
+              { label: "Privacy", href: "/privacy-policy" },
+              { label: "Terms", href: "/terms-of-service" },
+              { label: "Sitemap", href: "/sitemap.xml" },
+            ].map(link => (
+              <Link key={link.label} href={link.href} className="text-[#A8A29C] hover:text-white text-[10px] font-bold uppercase tracking-[0.3em] transition-colors">{link.label}</Link>
             ))}
           </div>
         </div>
