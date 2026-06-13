@@ -26,6 +26,7 @@ export const metadata: Metadata = {
     title: "Events & Campus Life | MAAC Animation Jaipur",
     description:
       "National competitions, masterclasses, 100hr challenges & unforgettable moments from MAAC Jaipur's vibrant campus life.",
+    images: ["https://www.maacanimationjaipur.com/events/event-015.jpeg"],
   },
   alternates: {
     canonical: "https://www.maacanimationjaipur.com/events",

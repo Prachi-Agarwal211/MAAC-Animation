@@ -1,8 +1,58 @@
+import type { Metadata } from "next";
 import Script from "next/script";
 import Footer from "@/components/Footer";
 import IndustryPartners from "@/components/IndustryPartners";
 import ApplyNow from "@/components/ApplyNow";
 import FadeIn from "@/components/animations/FadeIn";
+
+export const metadata: Metadata = {
+  title: "Best Animation Institute in Jaipur | MAAC Animation Jaipur",
+  description:
+    "MAAC Animation Institute Jaipur — Rajasthan's #1 animation & VFX institute. B.Voc Degree, NSDC certified, 95% placements. AD3D, ADVFX, Game Design courses. Call +91-7300001589.",
+  keywords: [
+    "animation institute jaipur",
+    "best animation institute in jaipur",
+    "animation course jaipur",
+    "vfx institute jaipur",
+    "maac jaipur",
+    "animation classes jaipur",
+    "3d animation course jaipur",
+    "game design institute jaipur",
+    "animation training jaipur",
+    "maac animation jaipur fees",
+  ],
+  openGraph: {
+    title: "Best Animation Institute in Jaipur | MAAC Animation Jaipur",
+    description:
+      "MAAC Animation Institute Jaipur — Rajasthan's #1 animation & VFX institute. B.Voc Degree, NSDC certified, 95% placements.",
+    url: "https://www.maacanimationjaipur.com/animation-institute-jaipur",
+    type: "website",
+    siteName: "maacanimationjaipur.com",
+    locale: "en_US",
+    images: [
+      {
+        url: "https://www.maacanimationjaipur.com/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "MAAC Animation Institute Jaipur",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Best Animation Institute in Jaipur | MAAC Animation Jaipur",
+    description:
+      "MAAC Animation Institute Jaipur — Rajasthan's #1 animation & VFX institute. B.Voc Degree, NSDC certified, 95% placements.",
+    images: ["https://www.maacanimationjaipur.com/og-image.jpg"],
+  },
+  alternates: {
+    canonical: "https://www.maacanimationjaipur.com/animation-institute-jaipur",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
 
 export default function AnimationInstituteJaipurPage() {
   return (

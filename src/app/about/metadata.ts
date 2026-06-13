@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     description:
       "Learn about MAAC Jaipur — Rajasthan's leading animation institute with 30+ years of excellence. Expert faculty, NSDC certified courses, 95% placement record.",
     url: "https://www.maacanimationjaipur.com/about",
-    type: "article",
+    type: "website",
     siteName: "maacanimationjaipur.com",
     locale: "en_US",
     images: [
@@ -33,10 +33,11 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
-    card: "summary_large_image",
-    title: "About MAAC Animation Institute Jaipur | 30+ Years Excellence",
+    card: "summary_large_image" as const,
+    title: "About MAAC Jaipur | Best Animation Institute in Rajasthan",
     description:
-      "Learn about MAAC Jaipur — Rajasthan's leading animation institute with 30+ years of excellence.",
+      "Discover MAAC Jaipur – Rajasthan's #1 animation, VFX & digital filmmaking institute with 17+ years of legacy, 5000+ alumni, and placement assistance.",
+    images: ["https://www.maacanimationjaipur.com/og-image.jpg"],
   },
   alternates: {
     canonical: "https://www.maacanimationjaipur.com/about",

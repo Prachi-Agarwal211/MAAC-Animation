@@ -190,64 +190,64 @@ export const courseMegaMenuJaipur: NavMegaGroup[] = [
   {
     title: "Animation",
     links: [
-      { label: "AD3D Edge Plus — Powered by CareerX | CreatorX", href: "/courses#3d-animation" },
-      { label: "3D & Real-time Design", href: "/courses#3d-animation" },
-      { label: "D3D", href: "/courses#3d-animation" },
-      { label: "DAFM", href: "/courses#3d-animation" },
+      { label: "AD3D Edge Plus — Powered by CareerX | CreatorX", href: "/courses/3d-animation" },
+      { label: "3D & Real-time Design", href: "/courses/3d-animation" },
+      { label: "D3D", href: "/courses/3d-animation" },
+      { label: "DAFM", href: "/courses/3d-animation" },
     ],
   },
   {
     title: "VFX",
     links: [
-      { label: "ADVFX Plus — Powered by CareerX | CreatorX", href: "/courses#vfx" },
-      { label: "VFX PLUS", href: "/courses#vfx" },
-      { label: "Compositing & Editing Plus", href: "/courses#vfx" },
+      { label: "ADVFX Plus — Powered by CareerX | CreatorX", href: "/courses/vfx" },
+      { label: "VFX PLUS", href: "/courses/vfx" },
+      { label: "Compositing & Editing Plus", href: "/courses/vfx" },
     ],
   },
   {
     title: "Digital Content Creation",
     links: [
-      { label: "APDMC Plus — Powered by CareerX | CreatorX", href: "/courses#digital-content" },
-      { label: "DGWA Plus", href: "/courses#digital-content" },
-      { label: "APDMD", href: "/courses#digital-content" },
-      { label: "UI/UX DESIGN PRO", href: "/courses#digital-content" },
+      { label: "APDMC Plus — Powered by CareerX | CreatorX", href: "/courses/digital-content" },
+      { label: "DGWA Plus", href: "/courses/digital-content" },
+      { label: "APDMD", href: "/courses/digital-content" },
+      { label: "UI/UX DESIGN PRO", href: "/courses/digital-content" },
     ],
   },
   {
     title: "Game Design",
     links: [
-      { label: "3DGAI", href: "/courses#game-design" },
-      { label: "APGDI", href: "/courses#game-design" },
-      { label: "PMGDI", href: "/courses#game-design" },
-      { label: "ADIDG Plus — Powered by CareerX | CreatorX NEW", href: "/courses#game-design" },
+      { label: "3DGAI", href: "/courses/game-design" },
+      { label: "APGDI", href: "/courses/game-design" },
+      { label: "PMGDI", href: "/courses/game-design" },
+      { label: "ADIDG Plus — Powered by CareerX | CreatorX NEW", href: "/courses/game-design" },
     ],
   },
   {
     title: "Motion Graphics & Broadcast",
     links: [
-      { label: "APMG", href: "/courses#broadcast-motion" },
-      { label: "BROADCAST PLUS", href: "/courses#broadcast-motion" },
+      { label: "APMG", href: "/courses/broadcast-motion" },
+      { label: "BROADCAST PLUS", href: "/courses/broadcast-motion" },
     ],
   },
   {
     title: "Skill Enhancement Courses",
     links: [
-      { label: "Blender Pro", href: "/courses#specialized-bootcamp" },
-      { label: "Cinema 4D Pro", href: "/courses#specialized-bootcamp" },
-      { label: "Max Pro", href: "/courses#specialized-bootcamp" },
-      { label: "Maya Pro", href: "/courses#specialized-bootcamp" },
-      { label: "Design Viz Pro", href: "/courses#specialized-bootcamp" },
-      { label: "Digital Photography", href: "/courses#filmmaking-photography" },
-      { label: "Advance Compositing", href: "/courses#vfx" },
-      { label: "Compositing Plus", href: "/courses#vfx" },
-      { label: "GenAI for Digital Content Creators", href: "/courses#digital-content" },
+      { label: "Blender Pro", href: "/courses/specialized-bootcamp" },
+      { label: "Cinema 4D Pro", href: "/courses/specialized-bootcamp" },
+      { label: "Max Pro", href: "/courses/specialized-bootcamp" },
+      { label: "Maya Pro", href: "/courses/specialized-bootcamp" },
+      { label: "Design Viz Pro", href: "/courses/specialized-bootcamp" },
+      { label: "Digital Photography", href: "/courses/specialized-bootcamp" },
+      { label: "Advance Compositing", href: "/courses/vfx" },
+      { label: "Compositing Plus", href: "/courses/vfx" },
+      { label: "GenAI for Digital Content Creators", href: "/courses/digital-content" },
     ],
   },
   {
     title: "Filmmaking",
     links: [
-      { label: "Digital Film Making", href: "/courses#filmmaking-photography" },
-      { label: "PPVP", href: "/courses#filmmaking-photography" },
+      { label: "Digital Film Making", href: "/courses/filmmaking-photography" },
+      { label: "PPVP", href: "/courses/filmmaking-photography" },
     ],
   },
   {
@@ -257,7 +257,7 @@ export const courseMegaMenuJaipur: NavMegaGroup[] = [
   {
     title: "Visual Arts & Design",
     links: [
-      { label: "IPVAD - XR — Powered by CareerX | CreatorX", href: "/courses#digital-content" },
+      { label: "IPVAD - XR — Powered by CareerX | CreatorX", href: "/courses/digital-content" },
     ],
   },
 ];

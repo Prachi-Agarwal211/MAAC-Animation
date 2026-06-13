@@ -1,8 +1,24 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Terms & Conditions - MAAC Animation Jaipur",
-  description: "Terms and conditions for using MAAC Jaipur website.",
+  title: "Terms & Conditions — MAAC Animation Jaipur",
+  description:
+    "Terms and conditions for using MAAC Animation Jaipur website. Read our policies regarding content, intellectual property, and user responsibilities.",
+  robots: {
+    index: true,
+    follow: true,
+  },
+  alternates: {
+    canonical: "https://www.maacanimationjaipur.com/terms-of-service",
+  },
+  openGraph: {
+    title: "Terms & Conditions — MAAC Animation Jaipur",
+    description: "Terms and conditions for using MAAC Animation Jaipur website.",
+    url: "https://www.maacanimationjaipur.com/terms-of-service",
+    type: "website",
+    siteName: "maacanimationjaipur.com",
+    locale: "en_US",
+  },
 };
 
 export default function TermsPage() {

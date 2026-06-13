@@ -57,12 +57,12 @@ const nextConfig = {
       },
       {
         source: "/apply-for-demo-class/",
-        destination: "/demo-class",
+        destination: "/contact",
         permanent: true,
       },
       {
         source: "/apply-now-for-demo-class/",
-        destination: "/demo-class",
+        destination: "/contact",
         permanent: true,
       },
       {

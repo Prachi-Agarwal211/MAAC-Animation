@@ -1,5 +1,6 @@
 import { MetadataRoute } from "next";
 import { blogPosts } from "@/data/blog";
+import { siteCoursesData } from "@/data/siteData";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://www.maacanimationjaipur.com";
@@ -13,8 +14,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
+  // Auto-generate individual course category pages
+  const courseUrls = siteCoursesData.categories.map(cat => ({
+    url: `${base}/courses/${cat.id}`,
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  }));
+
   return [
-    // Core Pages (Next.js routes, not WordPress URLs)
+    // Core Pages
     {
       url: base,
       lastModified: now,
@@ -27,6 +36,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.9,
     },
+    // Individual course category pages
+    ...courseUrls,
     {
       url: `${base}/contact`,
       lastModified: now,
@@ -45,33 +56,56 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.6,
     },
-     {
-       url: `${base}/gallery`,
-       lastModified: now,
-       changeFrequency: "monthly",
-       priority: 0.6,
-     },
-     {
-       url: `${base}/annual-trip`,
-       lastModified: now,
-       changeFrequency: "monthly",
-       priority: 0.6,
-     },
+    {
+      url: `${base}/gallery`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    {
+      url: `${base}/annual-trip`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    {
+      url: `${base}/events`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${base}/animation-institute-jaipur`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: `${base}/creative-career-assessment`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.5,
+    },
+    {
+      url: `${base}/privacy-policy`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.2,
+    },
     {
       url: `${base}/terms-of-service`,
       lastModified: now,
       changeFrequency: "yearly",
-      priority: 0.3,
+      priority: 0.2,
     },
 
-    // Blog Pages (manual entries)
+    // Blog Pages
     {
       url: `${base}/blog`,
       lastModified: now,
       changeFrequency: "weekly",
       priority: 0.8,
     },
-    // Auto-generated blog posts (from blogPosts)
     ...blogUrls,
   ];
 }

@@ -20,12 +20,12 @@ export const metadata: Metadata = {
     description:
       "Contact MAAC Animation Jaipur. Visit us at Subhash Marg or call +91-7300001589. Book a free demo class.",
     url: "https://www.maacanimationjaipur.com/contact",
-    type: "article",
+    type: "website",
     siteName: "maacanimationjaipur.com",
     locale: "en_US",
     images: [
       {
-        url: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/06/3.jpg",
+        url: "https://www.maacanimationjaipur.com/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Contact MAAC Animation Jaipur",
@@ -37,6 +37,7 @@ export const metadata: Metadata = {
     title: "Contact MAAC Animation Jaipur | Free Demo Class | +91-7300001589",
     description:
       "Contact MAAC Animation Jaipur. Visit us at Subhash Marg or call +91-7300001589.",
+    images: ["https://www.maacanimationjaipur.com/og-image.jpg"],
   },
   alternates: {
     canonical: "https://www.maacanimationjaipur.com/contact",

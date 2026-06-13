@@ -337,12 +337,11 @@ export const videoSchema = {
   "name": "MAAC Jaipur Student Showreel 2024",
   "description": "Explore the incredible work created by MAAC Jaipur students across 3D Animation, VFX, Game Design, and Digital Filmmaking programs",
   "thumbnailUrl": [
-    "https://www.maacanimationjaipur.com/wp-content/uploads/2021/09/v-toy-sl-3.png"
+    "https://www.maacanimationjaipur.com/og-image.jpg"
   ],
   "uploadDate": "2024-01-15",
   "duration": "PT3M45S",
-  "contentUrl": "/intro.mp4",
-  "embedUrl": "https://www.maacanimationjaipur.com/embed/showreel",
+  "contentUrl": "https://www.maacanimationjaipur.com/intro.mp4",
   "interactionCount": "15000",
   "publisher": {
     "@type": "EducationalOrganization",
