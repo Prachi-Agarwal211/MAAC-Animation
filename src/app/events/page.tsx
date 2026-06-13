@@ -171,6 +171,7 @@ export default function EventsPage() {
           loop
           playsInline
           preload="auto"
+          poster="/hero-poster.jpg"
         >
           <source src="/event-compressed.mp4" type="video/mp4" />
         </video>
@@ -216,8 +217,8 @@ export default function EventsPage() {
                 src={photos[slideIndex].src}
                 alt=""
                 fill
+                sizes="(max-width: 768px) 100vw, 1200px"
                 className="object-cover blur-2xl opacity-20 transition-opacity duration-1000"
-                unoptimized
               />
             </div>
 
@@ -229,7 +230,6 @@ export default function EventsPage() {
               fill
               className="object-cover z-10 transition-transform duration-700 group-hover:scale-[1.02]"
               sizes="(max-width: 768px) 100vw, 1200px"
-              unoptimized
               priority
             />
 
@@ -289,6 +289,8 @@ export default function EventsPage() {
                       alt={photo.title || "Newspaper clipping from MAAC event"} 
                       width={720} 
                       height={920} 
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      loading="lazy"
                       className="w-full h-auto object-contain" 
                     />
                   </div>

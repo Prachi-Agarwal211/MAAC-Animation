@@ -57,6 +57,7 @@ export default function Footer() {
             loop
             playsInline
             preload="none"
+            poster="/hero-poster.jpg"
             className="absolute inset-0 h-full w-full object-cover"
           >
             <source src="/hero-video-compressed.mp4" type="video/mp4" />

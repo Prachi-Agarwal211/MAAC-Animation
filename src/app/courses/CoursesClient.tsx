@@ -35,6 +35,7 @@ export default function CoursesClient() {
             muted
             loop
             playsInline
+            poster="/hero-poster.jpg"
             className="w-full h-full object-cover opacity-40"
           >
             <source src="/hero-video-compressed.mp4" type="video/mp4" />

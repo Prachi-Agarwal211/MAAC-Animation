@@ -248,7 +248,7 @@ mm.add("(min-width: 1024px)", () => {
                       
                       <g clipPath={`url(#segClip-${i})`}>
                         <image
-                          href={featureCards[i]?.image || "/placeholder.jpg"}
+                          href={featureCards[i]?.image || "/campus-image.jpg"}
                           x={CX - OUTER_R}
                           y={CY - OUTER_R}
                           width={OUTER_R * 2}
@@ -338,7 +338,7 @@ mm.add("(min-width: 1024px)", () => {
                   {/* Card Left Image Container */}
                   <div className="w-full md:w-[45%] aspect-[4/5] relative bg-black rounded-[1.5rem] md:rounded-[2rem] overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.4)]">
                      <Image
-                      src={featureCards[index]?.image || "/placeholder.jpg"}
+                      src={featureCards[index]?.image || "/campus-image.jpg"}
                       alt={card.title}
                       fill
                       className="object-cover opacity-90 transition-transform duration-700 group-hover:scale-105"

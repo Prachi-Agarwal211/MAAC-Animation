@@ -48,6 +48,7 @@ export default function TrustBadgesScroll({ certifications }: { certifications: 
                  src={cert.logo}
                  alt={cert.name}
                  fill
+                 sizes="280px"
                  className="object-contain p-6 mix-blend-multiply opacity-100"
               />
             </div>

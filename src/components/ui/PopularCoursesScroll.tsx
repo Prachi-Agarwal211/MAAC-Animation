@@ -56,6 +56,7 @@ export default function PopularCoursesScroll({ courses, courseImages }: PopularC
                       src={courseImages[course.code]}
                       alt={course.name}
                       fill
+                      sizes="(max-width: 768px) 100vw, 400px"
                       className="object-cover transition-transform duration-1000 group-hover:scale-110"
                     />
                   ) : (
