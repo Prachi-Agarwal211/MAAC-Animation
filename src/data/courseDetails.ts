@@ -1,3 +1,5 @@
+import { coursesData, type Course } from './courses';
+
 export interface CourseDetail {
   slug: string;
   title: string;
@@ -15,7 +17,49 @@ export interface CourseDetail {
   keywords: string[];
 }
 
-export const courseDetails: CourseDetail[] = [
+const feeByDuration: Record<string, string> = {
+  "18-24 Months": "₹80,000 - ₹2,11,000",
+  "12 Months": "₹60,000 - ₹1,50,000",
+  "6-12 Months": "₹50,000 - ₹1,20,000",
+  "6 Months": "₹40,000 - ₹80,000",
+  "3-6 Months": "₹30,000 - ₹80,000",
+  "24 Months": "₹1,00,000 - ₹3,11,000",
+  "12-36 months": "₹80,000 - ₹3,11,000",
+  "12-24 months": "₹60,000 - ₹2,11,000",
+  "6-24 months": "₹50,000 - ₹1,80,000",
+  "6-18 months": "₹50,000 - ₹1,50,000",
+  "3-6 months": "₹30,000 - ₹80,000",
+};
+
+function estimateFee(duration: string): string {
+  return feeByDuration[duration] || "₹50,000 - ₹1,50,000";
+}
+
+function courseToDetail(c: Course): CourseDetail {
+  return {
+    slug: c.slug,
+    title: c.name + " Course in Jaipur",
+    shortTitle: c.name,
+    description: c.shortDescription,
+    longDescription: c.fullDescription,
+    duration: c.duration,
+    fee: estimateFee(c.duration),
+    eligibility: c.eligibility,
+    image: c.ogImage,
+    careers: c.career,
+    software: c.tools,
+    highlights: c.highlights,
+    curriculum: c.curriculum.map(m => m.module),
+    keywords: [
+      c.name.toLowerCase() + " course jaipur",
+      c.name.toLowerCase() + " training jaipur",
+      c.code.toLowerCase() + " course",
+      ...c.career.map(j => j.toLowerCase() + " course"),
+    ],
+  };
+}
+
+const manualEntries: CourseDetail[] = [
   {
     slug: "3d-animation",
     title: "3D Animation Courses in Jaipur",
@@ -393,6 +437,13 @@ export const courseDetails: CourseDetail[] = [
     ],
   },
 ];
+
+const manualSlugs = new Set(manualEntries.map(e => e.slug));
+const autoEntries = coursesData
+  .filter(c => !manualSlugs.has(c.slug))
+  .map(courseToDetail);
+
+export const courseDetails: CourseDetail[] = [...manualEntries, ...autoEntries];
 
 export function getCourseBySlug(slug: string): CourseDetail | undefined {
   return courseDetails.find((c) => c.slug === slug);

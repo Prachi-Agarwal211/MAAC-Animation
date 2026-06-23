@@ -1,6 +1,6 @@
 import { MetadataRoute } from "next";
 import { blogPosts } from "@/data/blog";
-import { siteCoursesData } from "@/data/siteData";
+import { getAllCourseSlugs } from "@/data/courseDetails";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://www.maacanimationjaipur.com";
@@ -14,9 +14,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  // Auto-generate individual course category pages
-  const courseUrls = siteCoursesData.categories.map(cat => ({
-    url: `${base}/courses/${cat.id}`,
+  // Auto-generate individual course detail page URLs
+  const courseUrls = getAllCourseSlugs().map(slug => ({
+    url: `${base}/courses/${slug}`,
     lastModified: now,
     changeFrequency: "monthly" as const,
     priority: 0.8,

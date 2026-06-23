@@ -1,7 +1,43 @@
 "use server";
 
-import { google } from "googleapis";
+import crypto from "crypto";
 import { sendMetaCapiLead } from "@/lib/meta-capi";
+
+async function getGoogleAccessToken() {
+  const privateKey = process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n");
+  const clientEmail = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
+  
+  if (!privateKey || !clientEmail) {
+    throw new Error("Missing Google Service Account credentials");
+  }
+  
+  const header = { alg: "RS256", typ: "JWT" };
+  const now = Math.floor(Date.now() / 1000);
+  const claim = {
+    iss: clientEmail,
+    scope: "https://www.googleapis.com/auth/spreadsheets",
+    aud: "https://oauth2.googleapis.com/token",
+    exp: now + 3600,
+    iat: now,
+  };
+  
+  const encodeBase64Url = (obj: Record<string, unknown>) => Buffer.from(JSON.stringify(obj)).toString("base64url");
+  const signatureInput = `${encodeBase64Url(header)}.${encodeBase64Url(claim)}`;
+  
+  const sign = crypto.createSign("RSA-SHA256");
+  sign.update(signatureInput);
+  const signature = sign.sign(privateKey, "base64url");
+  const jwt = `${signatureInput}.${signature}`;
+  
+  const res = await fetch("https://oauth2.googleapis.com/token", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: `grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer&assertion=${jwt}`,
+  });
+  
+  const data = await res.json();
+  return data.access_token;
+}
 
 const sanitize = (text: string | null | undefined): string => {
   if (!text) return "";
@@ -28,15 +64,7 @@ export async function submitContactForm(formData: FormData) {
   }
 
   try {
-    const auth = new google.auth.GoogleAuth({
-      credentials: {
-        client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-        private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
-      },
-      scopes: ["https://www.googleapis.com/auth/spreadsheets"],
-    });
-
-    const sheets = google.sheets({ version: "v4", auth });
+    const accessToken = await getGoogleAccessToken();
     const spreadsheetId = process.env.GOOGLE_SHEET_ID || "1IE4nXFxIzhBRXULvWNuKg5neaMJvq7jW5-Bg6bdqHCA";
     const range = "A:E"; // Date, Name, Phone, Email, Message
 
@@ -55,14 +83,18 @@ export async function submitContactForm(formData: FormData) {
       ],
     ];
 
-    await sheets.spreadsheets.values.append({
-      spreadsheetId,
-      range,
-      valueInputOption: "USER_ENTERED",
-      requestBody: {
-        values,
+    const response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}:append?valueInputOption=USER_ENTERED`, {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
       },
+      body: JSON.stringify({ values }),
     });
+
+    if (!response.ok) {
+      throw new Error(`Google Sheets API error: ${response.statusText}`);
+    }
 
     // Fire Meta CAPI server-side event (doesn't block response)
     if (email && phone) {

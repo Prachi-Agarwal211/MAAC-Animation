@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
@@ -15,9 +15,11 @@ export default function Navbar() {
   const isHome = pathname === "/";
   const { mobileMenuOpen, toggleMobileMenu } = useUIStore();
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const [revealNav, setRevealNav] = useState(() => !isHome);
   const [openMega, setOpenMega] = useState<string | null>(null);
   const [isTouchDevice, setIsTouchDevice] = useState(false);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
     setIsTouchDevice(window.matchMedia("(pointer: coarse)").matches);
@@ -39,11 +41,24 @@ export default function Navbar() {
   }, [isHome]);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 24);
+      // Hide on scroll down past 100px, show on scroll up.
+      // Never hide when at top or mobile menu open.
+      if (mobileMenuOpen) {
+        setHidden(false);
+      } else if (y > 100) {
+        setHidden(y > lastScrollY.current);
+      } else {
+        setHidden(false);
+      }
+      lastScrollY.current = y;
+    };
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [mobileMenuOpen]);
 
   const whatsappUrl = `https://wa.me/${contactInfo.whatsapp.replace(/[^0-9]/g, "")}?text=Hi%20MAAC%20Jaipur`;
 
@@ -65,8 +80,8 @@ export default function Navbar() {
   return (
     <div className="contents" aria-hidden={!revealNav}>
       <nav
-        className={`fixed left-0 right-0 z-50 transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-          !revealNav ? "opacity-0 -translate-y-full pointer-events-none" : "opacity-100 translate-y-0 pointer-events-auto"
+        className={`fixed left-0 right-0 z-50 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          !revealNav || hidden ? "opacity-0 -translate-y-full pointer-events-none" : "opacity-100 translate-y-0 pointer-events-auto"
         } ${
           scrolled || mobileMenuOpen
             ? "top-4 mx-auto max-w-[95%] rounded-[24px] bg-[#0A0000]/70 backdrop-blur-3xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] py-1"
@@ -292,7 +307,7 @@ export default function Navbar() {
                           {group.links.map((child) => (
                             <li key={child.label}>
                               <Link
-                                href="/courses"
+                                href={child.href}
                                 onClick={toggleMobileMenu}
                                 className="block py-2 text-[13px] leading-snug text-white/55 hover:text-white"
                               >

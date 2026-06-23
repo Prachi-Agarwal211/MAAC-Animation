@@ -1,14 +1,6 @@
-import ErrorBoundary from "@/components/ErrorBoundary";
-import AnnualTripPage from "../../../annual_trip_page";
-
+import AnnualTripClient from "./client-page";
 export { metadata } from "./metadata";
 
-function AnnualTripPageWithErrorBoundary() {
-  return (
-    <ErrorBoundary>
-      <AnnualTripPage />
-    </ErrorBoundary>
-  );
+export default function AnnualTripPage() {
+  return <AnnualTripClient />;
 }
-
-export default AnnualTripPageWithErrorBoundary;

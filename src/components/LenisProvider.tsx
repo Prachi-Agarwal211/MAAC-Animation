@@ -23,13 +23,12 @@ export default function LenisProvider({
     // CRITICAL: Refresh all ScrollTriggers after initial layout
     // Single refresh point - no duplication
     const refresh = () => ScrollTrigger.refresh();
-    const timer = setTimeout(refresh, 300);
+    const timer = setTimeout(refresh, 500);
     
-    // Debounced resize handler
     let resizeTimer: NodeJS.Timeout;
     const handleResize = () => {
       clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(refresh, 200);
+      resizeTimer = setTimeout(refresh, 500);
     };
     
     window.addEventListener("resize", handleResize);

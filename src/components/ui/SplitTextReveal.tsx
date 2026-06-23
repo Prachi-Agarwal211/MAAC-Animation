@@ -79,7 +79,7 @@ export default function SplitTextReveal({
     return children.split(" ").map((word, i) => (
       <span key={i} className="inline-block whitespace-nowrap overflow-hidden align-bottom mr-[0.2em] last:mr-0">
         {word.split("").map((char, j) => (
-          <span key={j} className="char inline-block will-change-transform origin-bottom">
+          <span key={j} className="char inline-block origin-bottom">
             {char}
           </span>
         ))}

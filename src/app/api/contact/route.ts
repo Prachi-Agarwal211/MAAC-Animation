@@ -4,16 +4,8 @@ import { sendMetaCapiLead } from "@/lib/meta-capi";
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { name, phone, email, course, message, source } = body;
+    const { name, phone, email, course, message, source, utm_source, utm_campaign } = body;
 
-    // Capture UTM params passed from client
-    const utm_source = body.utm_source || "";
-    const utm_medium = body.utm_medium || "";
-    const utm_campaign = body.utm_campaign || "";
-    const utm_content = body.utm_content || "";
-    const fbclid = body.fbclid || "";
-
-    // Validate required fields
     if (!name || !phone || !email) {
       return NextResponse.json(
         { error: "Missing required fields" },
@@ -21,10 +13,8 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Fire Meta CAPI (server-side, doesn't block)
     sendMetaCapiLead({ email, phone, url: "https://www.maacanimationjaipur.com/contact" });
 
-    // Only send email if API key is configured
     const resendApiKey = process.env.RESEND_API_KEY;
     if (resendApiKey) {
       const { Resend } = await import("resend");

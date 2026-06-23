@@ -1,26 +1,12 @@
-"use client";
-
 import Script from "next/script";
 import Footer from "@/components/Footer";
 import IndustryPartners from "@/components/IndustryPartners";
 import ApplyNow from "@/components/ApplyNow";
 import StudentWorkGallery from "./StudentWorkGallery";
-import { useEffect, useRef } from "react";
-import gsap from "@/lib/gsap";
+import StudentWorkHeroClient from "./StudentWorkHeroClient";
+import ErrorBoundary from "@/components/ErrorBoundary";
 
 export default function StudentWorkPage() {
-  const heroRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (heroRef.current) {
-      gsap.fromTo(
-        heroRef.current.querySelectorAll(".animate-in"),
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 1, stagger: 0.2, ease: "power3.out" }
-      );
-    }
-  }, []);
-
   return (
     <>
       {/* JSON-LD Structured Data */}
@@ -46,10 +32,7 @@ export default function StudentWorkPage() {
 
       <main className="bg-transparent min-h-screen">
         {/* Hero Section */}
-        <section 
-          ref={heroRef}
-          className="relative min-h-[60vh] flex items-center justify-center overflow-hidden border-b border-white/5"
-        >
+        <StudentWorkHeroClient>
           <div className="absolute inset-0 z-0">
             <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-[#080808] z-10" />
             <video
@@ -77,13 +60,15 @@ export default function StudentWorkPage() {
               At MAAC Animation Institute, we&apos;re committed to empowering aspiring artists to unleash their creative potential and build professional portfolios.
             </p>
           </div>
-        </section>
+        </StudentWorkHeroClient>
 
         {/* Gallery Section */}
         <section className="py-24 md:py-32 bg-transparent relative">
           <div className="atmosphere-blob blob-orange top-0 left-0 opacity-5" />
           <div className="max-w-content mx-auto px-6 lg:px-8">
-            <StudentWorkGallery />
+            <ErrorBoundary>
+              <StudentWorkGallery />
+            </ErrorBoundary>
           </div>
         </section>
 

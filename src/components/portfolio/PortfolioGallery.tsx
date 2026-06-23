@@ -107,13 +107,9 @@ function PortfolioCard({
   entry: PortfolioEntry;
   onClick: (imageIndex: number) => void;
 }) {
-  const [hovered, setHovered] = useState(false);
-
   return (
     <article
       className="group relative bg-[#161616] rounded-xl overflow-hidden border border-white/5 hover:border-[#FFD700]/30 transition-all duration-300 hover:shadow-[0_8px_32px_rgba(227,24,55,0.15)] cursor-pointer"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
       onClick={() => onClick(0)}
       role="button"
       tabIndex={0}

@@ -1,3 +1,4 @@
+import React from "react";
 import { Trophy, Users, Film, Camera, Award, Star, Mic, Monitor } from "lucide-react";
 
 export type EventPhoto = {
@@ -61,7 +62,7 @@ export interface SignatureEvent {
   id: string;
   name: string;
   description: string;
-  icon: React.ComponentType<any>;
+  icon: React.ComponentType<{ className?: string }>;
   color: string;
   highlight?: string;
 }

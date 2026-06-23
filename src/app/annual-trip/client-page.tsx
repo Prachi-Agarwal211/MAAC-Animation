@@ -4,8 +4,8 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 import Footer from "@/components/Footer";
 import ImageLightbox from "@/components/ui/ImageLightbox";
+import ErrorBoundary from "@/components/ErrorBoundary";
 
-// Images for the Annual Trip page — using exactly the files the user manually placed in public/annual-trip/
 const tripImages = [
   { title: "Annual Trip Moment 01", src: "/annual-trip/event-002.jpeg" },
   { title: "Annual Trip Moment 02", src: "/annual-trip/event-003.jpeg" },
@@ -46,7 +46,7 @@ const tripImages = [
   { title: "Annual Trip Moment 37", src: "/annual-trip/event-065.jpeg" },
 ];
 
-export default function AnnualTripPage() {
+function AnnualTripPage() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -59,14 +59,12 @@ export default function AnnualTripPage() {
 
   const currentImage = tripImages[currentIndex];
 
-  // Detect reduced motion preference (run once)
   useEffect(() => {
     if (typeof window !== "undefined") {
       reducedMotionRef.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     }
   }, []);
 
-  // Auto-advance slideshow timer
   const startAutoPlay = useCallback(() => {
     if (timerRef.current) clearTimeout(timerRef.current);
     if (reducedMotionRef.current) return;
@@ -83,7 +81,6 @@ export default function AnnualTripPage() {
     }
   }, []);
 
-  // Manage autoplay when isPlaying changes or index changes
   useEffect(() => {
     if (isPlaying && !reducedMotionRef.current) {
       startAutoPlay();
@@ -93,7 +90,6 @@ export default function AnnualTripPage() {
     return stopAutoPlay;
   }, [isPlaying, currentIndex, startAutoPlay, stopAutoPlay]);
 
-  // Scroll active thumbnail into view (centered)
   const scrollActiveThumbnail = useCallback((index: number) => {
     const thumb = thumbnailRefs.current[index];
     if (thumb) {
@@ -119,34 +115,23 @@ export default function AnnualTripPage() {
     goToSlide(currentIndex - 1);
   }, [currentIndex, goToSlide]);
 
-  // Toggle autoplay
-  const togglePlay = useCallback(() => {
-    if (reducedMotionRef.current) return;
-    setIsPlaying((prev) => !prev);
-  }, []);
-
-  // Open the professional shared lightbox (at current slide)
   const openLightbox = useCallback((index?: number) => {
     const target = index ?? currentIndex;
     setLightboxIndex(target);
     setLightboxOpen(true);
     document.body.style.overflow = "hidden";
-    // Pause our own slideshow while lightbox is open
     setIsPlaying(false);
   }, [currentIndex]);
 
   const closeLightbox = useCallback(() => {
     setLightboxOpen(false);
     document.body.style.overflow = "auto";
-    // Sync our slideshow position to where user left the lightbox
     setCurrentIndex(lightboxIndex);
-    setIsPlaying(true); // Resume autoplay when closing lightbox
+    setIsPlaying(true);
   }, [lightboxIndex]);
 
-  // Keyboard support for the page slideshow + lightbox handoff
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // If lightbox is open, let the shared component handle keys
       if (lightboxOpen) return;
 
       switch (e.key) {
@@ -164,8 +149,6 @@ export default function AnnualTripPage() {
         case "F":
           openLightbox();
           break;
-        case "Escape":
-          break;
       }
     };
 
@@ -173,10 +156,8 @@ export default function AnnualTripPage() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [lightboxOpen, goToNext, goToPrev, openLightbox]);
 
-  // Prepare images array for the shared lightbox
   const lightboxImages = tripImages.map((img) => img.src);
 
-  // Structured data for SEO (ImageGallery)
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "ImageGallery",
@@ -192,21 +173,19 @@ export default function AnnualTripPage() {
   };
 
   return (
+    <ErrorBoundary>
     <div className="bg-transparent min-h-screen pt-24 sm:pt-32 relative flex flex-col">
       <div className="w-full flex-grow">
-        {/* Structured Data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
 
-        {/* Preload first critical images for the Annual Trip slideshow only on this page */}
         <link rel="preload" as="image" href="/annual-trip/event-002.jpeg" />
         <link rel="preload" as="image" href="/annual-trip/event-003.jpeg" />
         <link rel="preload" as="image" href="/annual-trip/event-004.jpeg" />
         <link rel="preload" as="image" href="/annual-trip/event-005.jpeg" />
 
-        {/* Hero Header */}
         <div className="text-center mb-10 md:mb-14 relative z-10 px-6">
           <p className="metallic-gold-text text-[10px] font-bold tracking-[0.3em] uppercase mb-4 flex items-center justify-center gap-3">
             <span className="w-8 h-[1px] metallic-gold-accent" />
@@ -221,9 +200,7 @@ export default function AnnualTripPage() {
           </p>
         </div>
 
-        {/* Main Premium Slideshow */}
         <div className="max-w-6xl mx-auto px-5 md:px-8 pb-16">
-          {/* Section label */}
           <div className="flex items-center justify-between mb-4 px-1">
             <div>
               <span className="text-[10px] font-bold tracking-[0.25em] uppercase text-[#FFD700]/80">The Visual Story</span>
@@ -240,13 +217,11 @@ export default function AnnualTripPage() {
             </button>
           </div>
 
-          {/* The Big Slideshow Viewer */}
           <div
             ref={mainViewerRef}
             className="group relative w-full rounded-3xl overflow-hidden glass-card border border-white/5 shadow-2xl bg-[#0A0A0A]"
             style={{ aspectRatio: '16/9' }}
           >
-            {/* Main Image with smooth swap */}
             <div className="absolute inset-0">
               <Image
                 key={currentIndex}
@@ -260,12 +235,9 @@ export default function AnnualTripPage() {
               />
             </div>
 
-            {/* Subtle gradient for text legibility at bottom */}
             <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/60 via-black/35 to-transparent pointer-events-none" />
 
-            {/* Top-right controls */}
             <div className="absolute top-4 right-4 z-30 flex items-center gap-2">
-              {/* Fullscreen / Lightbox trigger */}
               <button
                 onClick={() => openLightbox()}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium tracking-widest bg-black/60 text-white/90 border border-white/20 hover:bg-white/10 hover:text-white backdrop-blur-md transition-all"
@@ -278,7 +250,6 @@ export default function AnnualTripPage() {
               </button>
             </div>
 
-            {/* Large elegant Prev / Next arrows */}
             <button
               onClick={goToPrev}
               className="absolute left-3 md:left-5 top-1/2 -translate-y-1/2 z-30 w-11 h-11 md:w-12 md:h-12 rounded-full glass border border-white/25 flex items-center justify-center text-white/70 hover:text-white hover:border-[#FFD700]/60 hover:bg-white/5 active:scale-95 transition-all"
@@ -298,16 +269,13 @@ export default function AnnualTripPage() {
               </svg>
             </button>
 
-            {/* Bottom info bar — Counter only */}
             <div className="absolute bottom-0 left-0 right-0 z-20 p-5 md:p-7 flex justify-end">
               <div className="text-right text-white/60 text-sm font-mono tracking-widest tabular-nums shrink-0 drop-shadow-md">
                 {currentIndex + 1} <span className="text-white/40">/ {tripImages.length}</span>
               </div>
             </div>
-
           </div>
 
-          {/* Interactive Filmstrip Thumbnails */}
           <div className="mt-5">
             <div className="flex items-center justify-between px-1 mb-2.5">
               <p className="text-[#A8A29C] text-xs tracking-widest uppercase">Browse the full story</p>
@@ -315,7 +283,6 @@ export default function AnnualTripPage() {
             </div>
 
             <div className="relative">
-              {/* Edge fades for the filmstrip */}
               <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-[#0C0C0C] to-transparent z-10 rounded-l-2xl" />
               <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-[#0C0C0C] to-transparent z-10 rounded-r-2xl" />
 
@@ -343,14 +310,12 @@ export default function AnnualTripPage() {
                         loading={idx < 6 ? "eager" : "lazy"}
                         unoptimized
                       />
-                      {/* Active indicator + title hint on hover */}
                       <div className={`absolute inset-0 transition-opacity ${isActive ? "bg-black/10" : "bg-black/40 group-hover:bg-black/20"}`} />
                       {isActive && (
                         <div className="absolute bottom-1.5 right-1.5 px-1.5 py-px text-[9px] font-bold tracking-wider bg-black/70 text-[#FFD700] rounded">
                           NOW
                         </div>
                       )}
-                      {/* Removed title on hover to keep it clean */}
                     </button>
                   );
                 })}
@@ -358,7 +323,6 @@ export default function AnnualTripPage() {
             </div>
           </div>
 
-          {/* Bottom actions row */}
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3 mt-6 px-1 text-sm">
             <button
               onClick={() => openLightbox()}
@@ -373,16 +337,12 @@ export default function AnnualTripPage() {
             </div>
           </div>
         </div>
-
-        {/* Grid and poetic lines removed as requested */}
       </div>
 
-      {/* Footer */}
       <div className="relative z-10 mt-auto w-full">
         <Footer />
       </div>
 
-      {/* Professional Shared Lightbox (used for the immersive fullscreen experience) */}
       <ImageLightbox
         images={lightboxImages}
         alt="MAAC Annual Trip — Dalhousie & Khajjiar"
@@ -391,5 +351,14 @@ export default function AnnualTripPage() {
         onClose={closeLightbox}
       />
     </div>
+    </ErrorBoundary>
+  );
+}
+
+export default function AnnualTripPageWithErrorBoundary() {
+  return (
+    <ErrorBoundary>
+      <AnnualTripPage />
+    </ErrorBoundary>
   );
 }

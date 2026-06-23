@@ -25,15 +25,12 @@ export const initLenis = () => {
     infinite: false,
   });
 
-  lenis.on('scroll', ScrollTrigger.update);
-
-  // Store ticker callback reference for cleanup
+  // ponytail: removed lenis.on('scroll', ScrollTrigger.update) — GSAP ticker already calls it, double-pump caused stutter
   tickerCallback = (time: number) => {
     lenis!.raf(time * 1000);
   };
 
   gsap.ticker.add(tickerCallback);
-  gsap.ticker.lagSmoothing(0);
 
   window.addEventListener('resize', () => ScrollTrigger.refresh());
   if (typeof document !== 'undefined' && document.fonts?.ready) {

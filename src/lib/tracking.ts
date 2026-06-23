@@ -6,7 +6,7 @@
  */
 
 import { firePixelEvent } from "@/components/MetaPixel";
-import { getUtmParams, type UtmParams } from "@/lib/utm";
+import { getUtmParams } from "@/lib/utm";
 
 export interface LeadEventParams {
   content_name?: string;
@@ -48,7 +48,7 @@ export function trackLead(params: LeadEventParams = {}) {
     const adsLabel = process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL;
 
     if (adsId) {
-      const gtag = (window as any).gtag;
+      const gtag = window.gtag;
       if (typeof gtag === "function") {
         gtag("event", "conversion", {
           send_to: adsLabel ? `${adsId}/${adsLabel}` : adsId,
