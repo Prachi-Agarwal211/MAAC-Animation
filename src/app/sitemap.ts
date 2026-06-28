@@ -4,7 +4,7 @@ import { getAllCourseSlugs } from "@/data/courseDetails";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://www.maacanimationjaipur.com";
-  const now = new Date();
+  const now = new Date('2024-06-01');
 
   // Auto-generate blog post URLs
   const blogUrls = blogPosts.map(post => ({

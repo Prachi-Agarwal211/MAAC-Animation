@@ -11,6 +11,7 @@ import { contactInfo } from "@/data/siteData";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import Navbar from "@/components/Navbar";
 import MetaPixel from "@/components/MetaPixel";
+import Footer from "@/components/Footer";
 
 // Heavy Client Components - Lazy loaded
 const DynamicBackground = dynamic(() => import("@/components/ui/DynamicBackground"), { ssr: false });
@@ -294,6 +295,7 @@ export default function RootLayout({
                   <main id="main-content" tabIndex={-1} className="page-wrapper relative z-10">
                     {children}
                   </main>
+                  <Footer />
                 </ClientShell>
               </ErrorBoundary>
               <Suspense fallback={null}>
