@@ -68,7 +68,7 @@ export default function ApplyNowForm() {
 
   if (submitted) {
     return (
-      <div className="glass rounded-[2.5rem] p-8 md:p-12 text-center flex flex-col items-center justify-center min-h-[500px]">
+      <div role="status" aria-live="polite" className="glass rounded-[2.5rem] p-8 md:p-12 text-center flex flex-col items-center justify-center min-h-[500px]">
         <div className="w-20 h-20 rounded-full bg-[#25D366]/10 border border-[#25D366]/30 flex items-center justify-center mx-auto mb-8">
           <Send size={32} className="text-[#25D366]" />
         </div>
@@ -78,8 +78,12 @@ export default function ApplyNowForm() {
     );
   }
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
   const inputClass = (field: string) =>
-    `w-full px-6 py-4 rounded-2xl bg-white/[0.03] border ${errors[field] ? "border-[#FFD700]" : "border-white/5"} text-white placeholder-[#555] focus:outline-none focus:border-[#FFD700]/30 transition-all duration-300 focus:ring-1 focus:ring-[#FFD700]/20`;
+    `w-full px-6 py-4 rounded-2xl bg-white/[0.03] border ${errors[field] ? "border-[#FFD700]" : "border-white/5"} text-white placeholder-[#888] focus:outline-none focus:border-[#FFD700]/30 transition-all duration-300 focus:ring-1 focus:ring-[#FFD700]/20`;
 
   return (
     <form
@@ -92,24 +96,28 @@ export default function ApplyNowForm() {
 
       <div className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <input type="text" placeholder="Full Name *" required value={formData.name}
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+          <input type="text" name="name" placeholder="Full Name *" required value={formData.name}
+            onChange={handleChange}
+            aria-label="Full Name"
             className={inputClass("name")} />
-          <input type="email" placeholder="Email Address *" required value={formData.email}
-            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+          <input type="email" name="email" placeholder="Email Address *" required value={formData.email}
+            onChange={handleChange}
+            aria-label="Email Address"
             className={inputClass("email")} />
         </div>
 
         <div className="flex gap-4">
           <div className="flex-1">
-            <input type="tel" placeholder="Phone Number *" required value={formData.phone}
-              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+            <input type="tel" name="phone" placeholder="Phone Number *" required value={formData.phone}
+              onChange={handleChange}
+              aria-label="Phone Number"
               className={inputClass("phone")} />
           </div>
         </div>
 
-        <textarea placeholder="Additional Message or Note" rows={3} value={formData.message}
-          onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+        <textarea name="message" placeholder="Additional Message or Note" rows={3} value={formData.message}
+          onChange={handleChange}
+          aria-label="Additional Message or Note"
           className={`${inputClass("message")} resize-none`} />
       </div>
 
@@ -117,6 +125,7 @@ export default function ApplyNowForm() {
         <button 
           type="submit" 
           disabled={isSubmitting}
+          aria-busy={isSubmitting}
           className="w-full min-h-[56px] flex items-center justify-center gap-3 disabled:opacity-50 border border-white/20 hover:bg-white hover:text-black transition-colors duration-500 rounded-full text-white bg-transparent group"
         >
           <span className="text-[12px] font-bold tracking-[0.2em] group-hover:text-black">
@@ -127,7 +136,7 @@ export default function ApplyNowForm() {
       </div>
       
       {submitError && (
-        <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm text-center">
+        <div role="alert" className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm text-center">
           {submitError}
         </div>
       )}

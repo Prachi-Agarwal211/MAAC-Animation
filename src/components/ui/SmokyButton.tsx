@@ -117,20 +117,21 @@ function createShader(gl: WebGLRenderingContext, type: number, source: string) {
   return shader;
 }
 
+let _webglSupported: boolean | null = null;
 function canRunWebGL(): boolean {
-  if (typeof window === "undefined") return false;
-  // Skip WebGL on low-end mobile: touch device with low RAM or few cores
+  if (_webglSupported !== null) return _webglSupported;
+  if (typeof window === "undefined") { _webglSupported = false; return false; }
   const isTouch = window.matchMedia("(pointer: coarse)").matches;
   if (isTouch) {
     const nav = navigator as Navigator & { deviceMemory?: number; hardwareConcurrency?: number };
     const ram = nav.deviceMemory ?? 8;
     const cores = nav.hardwareConcurrency ?? 8;
-    if (ram < 4 || cores < 4) return false;
+    if (ram < 4 || cores < 4) { _webglSupported = false; return false; }
   }
-  // Check WebGL availability
   const testCanvas = document.createElement("canvas");
   const gl = testCanvas.getContext("webgl") || testCanvas.getContext("experimental-webgl");
-  return Boolean(gl);
+  _webglSupported = Boolean(gl);
+  return _webglSupported;
 }
 
 export default function SmokyButton({ href, onClick, className, children, ...props }: SmokyButtonProps) {
@@ -184,12 +185,12 @@ export default function SmokyButton({ href, onClick, className, children, ...pro
     const resolutionLocation = gl.getUniformLocation(program, "iResolution");
 
     let animationFrameId: number;
+    let running = false;
     const startTime = Date.now();
 
     const resize = () => {
       if (!canvas || !canvas.parentElement) return;
-      // High-precision DPR for maximum crispness on 4K/retina screens
-      const dpr = Math.min(window.devicePixelRatio || 1, 3);
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
       const rect = canvas.parentElement.getBoundingClientRect();
       if (rect.width === 0 || rect.height === 0) return;
 
@@ -209,6 +210,7 @@ export default function SmokyButton({ href, onClick, className, children, ...pro
     resize();
 
     const render = () => {
+      if (!running) return;
       animationFrameId = requestAnimationFrame(render);
       const time = (Date.now() - startTime) * 0.001;
       gl.uniform1f(timeLocation, time);
@@ -216,11 +218,20 @@ export default function SmokyButton({ href, onClick, className, children, ...pro
       gl.drawArrays(gl.TRIANGLES, 0, 6);
     };
 
-    animationFrameId = requestAnimationFrame(render);
+    // ponytail: start WebGL loop only on hover, stop on leave
+    const container = canvas.closest('.group');
+    const startRender = () => { running = true; animationFrameId = requestAnimationFrame(render); };
+    const stopRender = () => { running = false; cancelAnimationFrame(animationFrameId); };
+
+    container?.addEventListener('mouseenter', startRender);
+    container?.addEventListener('mouseleave', stopRender);
 
     return () => {
-      resizeObserver.disconnect();
+      running = false;
       cancelAnimationFrame(animationFrameId);
+      container?.removeEventListener('mouseenter', startRender);
+      container?.removeEventListener('mouseleave', stopRender);
+      resizeObserver.disconnect();
       gl.deleteProgram(program);
       gl.deleteShader(vertexShader);
       gl.deleteShader(fragmentShader);

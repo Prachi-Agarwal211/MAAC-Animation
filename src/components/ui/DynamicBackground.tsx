@@ -56,20 +56,21 @@ const fragmentShader = `
 function FluidMesh() {
   const meshRef = useRef<THREE.Mesh>(null!);
   const { viewport, size } = useThree();
-  const [mouse, setMouse] = useState(new THREE.Vector2(0.5, 0.5));
+  const mouseRef = useRef(new THREE.Vector2(0.5, 0.5));
 
   const uniforms = useMemo(() => ({
     uTime: { value: 0 },
     uResolution: { value: new THREE.Vector2(size.width, size.height) },
     uMouse: { value: new THREE.Vector2(0.5, 0.5) },
-  }), [size]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }), []);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      setMouse(new THREE.Vector2(
+      mouseRef.current.set(
         e.clientX / window.innerWidth,
         1.0 - e.clientY / window.innerHeight
-      ));
+      );
     };
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
     return () => window.removeEventListener('mousemove', handleMouseMove);
@@ -78,7 +79,7 @@ function FluidMesh() {
   useFrame((state) => {
     uniforms.uTime.value = state.clock.getElapsedTime();
     uniforms.uResolution.value.set(state.size.width, state.size.height);
-    uniforms.uMouse.value.lerp(mouse, 0.03);
+    uniforms.uMouse.value.lerp(mouseRef.current, 0.03);
   });
 
   return (
@@ -93,17 +94,8 @@ function FluidMesh() {
   );
 }
 
-export default function DynamicBackground() {
-  const [isMobile, setIsMobile] = useState<boolean | null>(null);
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
-    checkMobile();
-    window.addEventListener('resize', checkMobile, { passive: true });
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  const BaseBackground = () => (
+function BaseBackground() {
+  return (
     <div
       className="fixed inset-0 z-[-20] pointer-events-none"
       style={{
@@ -112,6 +104,18 @@ export default function DynamicBackground() {
       }}
     />
   );
+}
+
+export default function DynamicBackground() {
+  const [isMobile, setIsMobile] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 1024px)');
+    setIsMobile(!mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(!e.matches);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, []);
 
   if (isMobile === null) return <BaseBackground />;
 
@@ -138,8 +142,7 @@ export default function DynamicBackground() {
             alpha: true,
           }}
           dpr={1}
-          // performance: do not render every frame; reduce battery drain/jank
-          frameloop="demand"
+          frameloop="always"
         >
           <FluidMesh />
         </Canvas>

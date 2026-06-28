@@ -3,6 +3,9 @@
 import withBundleAnalyzer from '@next/bundle-analyzer';
 
 const nextConfig = {
+  experimental: {
+    optimizePackageImports: ['lucide-react'],
+  },
   // Enforce no trailing slashes everywhere (canonical URL consistency)
   trailingSlash: false,
   // Image optimization configuration

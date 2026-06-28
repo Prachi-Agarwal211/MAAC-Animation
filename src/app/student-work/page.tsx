@@ -1,5 +1,4 @@
 import Script from "next/script";
-import Footer from "@/components/Footer";
 import IndustryPartners from "@/components/IndustryPartners";
 import ApplyNow from "@/components/ApplyNow";
 import StudentWorkGallery from "./StudentWorkGallery";
@@ -79,8 +78,6 @@ export default function StudentWorkPage() {
         <div className="border-t border-white/5">
           <ApplyNow />
         </div>
-
-        <Footer />
       </main>
     </>
   );

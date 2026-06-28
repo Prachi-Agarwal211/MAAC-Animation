@@ -1,7 +1,4 @@
-"use client";
-
 import Script from "next/script";
-import Footer from "@/components/Footer";
 import IndustryPartners from "@/components/IndustryPartners";
 import ApplyNow from "@/components/ApplyNow";
 import EventsInteractive from "./EventsInteractive";
@@ -70,8 +67,6 @@ export default function EventsPage() {
       <div className="border-t border-white/5">
         <ApplyNow />
       </div>
-
-      <Footer />
     </>
   );
 }

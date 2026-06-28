@@ -13,13 +13,16 @@ import ScrollIndicator from "./SideScroller";
 export default function Navbar() {
   const pathname = usePathname();
   const isHome = pathname === "/";
-  const { mobileMenuOpen, toggleMobileMenu } = useUIStore();
+  const mobileMenuOpen = useUIStore((s) => s.mobileMenuOpen);
+  const toggleMobileMenu = useUIStore((s) => s.toggleMobileMenu);
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [revealNav, setRevealNav] = useState(() => !isHome);
   const [openMega, setOpenMega] = useState<string | null>(null);
   const [isTouchDevice, setIsTouchDevice] = useState(false);
   const lastScrollY = useRef(0);
+  const mobileMenuOpenRef = useRef(mobileMenuOpen);
+  mobileMenuOpenRef.current = mobileMenuOpen;
 
   useEffect(() => {
     setIsTouchDevice(window.matchMedia("(pointer: coarse)").matches);
@@ -44,9 +47,7 @@ export default function Navbar() {
     const onScroll = () => {
       const y = window.scrollY;
       setScrolled(y > 24);
-      // Hide on scroll down past 100px, show on scroll up.
-      // Never hide when at top or mobile menu open.
-      if (mobileMenuOpen) {
+      if (mobileMenuOpenRef.current) {
         setHidden(false);
       } else if (y > 100) {
         setHidden(y > lastScrollY.current);
@@ -58,7 +59,7 @@ export default function Navbar() {
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
     return () => window.removeEventListener("scroll", onScroll);
-  }, [mobileMenuOpen]);
+  }, []);
 
   const whatsappUrl = `https://wa.me/${contactInfo.whatsapp.replace(/[^0-9]/g, "")}?text=Hi%20MAAC%20Jaipur`;
 
@@ -274,7 +275,7 @@ export default function Navbar() {
         aria-hidden={!mobileMenuOpen}
       >
         <nav className="flex-1 overflow-y-auto px-5 py-6 overscroll-contain">
-          <p className="text-[10px] uppercase tracking-[0.2em] text-white/35 mb-3 px-0.5">MAAC Jaipur · C-Scheme</p>
+          <p className="text-[10px] uppercase tracking-[0.2em] text-white/50 mb-3 px-0.5">MAAC Jaipur · C-Scheme</p>
           <ul className="border-t border-white/10">
             {navLinks.map((link) => (
               <li key={link.label} className="border-b border-white/10">
@@ -309,7 +310,7 @@ export default function Navbar() {
                               <Link
                                 href={child.href}
                                 onClick={toggleMobileMenu}
-                                className="block py-2 text-[13px] leading-snug text-white/55 hover:text-white"
+                                className="block py-2 text-[13px] leading-snug text-white/70 hover:text-white"
                               >
                                 {child.label}
                               </Link>
@@ -334,7 +335,7 @@ export default function Navbar() {
                         <Link
                           href={child.href}
                           onClick={toggleMobileMenu}
-                          className="block py-2.5 text-[15px] text-white/55 hover:text-white"
+                          className="block py-2.5 text-[15px] text-white/70 hover:text-white"
                         >
                           {child.label}
                         </Link>

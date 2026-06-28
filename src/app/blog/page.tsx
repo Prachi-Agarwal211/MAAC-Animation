@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
-import Footer from "@/components/Footer";
 import IndustryPartners from "@/components/IndustryPartners";
 import ApplyNow from "@/components/ApplyNow";
 import { blogPosts } from "@/data/blog";
@@ -142,8 +141,6 @@ export default function BlogIndexPage() {
         <div className="border-t border-white/5">
           <ApplyNow />
         </div>
-
-        <Footer />
       </main>
     </>
   );

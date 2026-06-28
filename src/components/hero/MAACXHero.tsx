@@ -23,30 +23,12 @@ export default function MAACXHero({ onIntroReveal }: Props) {
     if (typeof window === "undefined") return;
 
     const mediaReduced = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const update = () => {
-      setIsReducedMotion(mediaReduced.matches);
-      setIsMobile(window.innerWidth < 768);
-    };
+    setIsReducedMotion(mediaReduced.matches);
+    setIsMobile(window.innerWidth < 768);
 
-    update();
-
-    // Safari-compatible listeners
-    if (typeof mediaReduced.addEventListener === "function") {
-      mediaReduced.addEventListener("change", update);
-      window.addEventListener("resize", update, { passive: true });
-      return () => {
-        mediaReduced.removeEventListener("change", update);
-        window.removeEventListener("resize", update);
-      };
-    }
-
-    // Fallback
-    mediaReduced.addListener(update);
-    window.addEventListener("resize", update, { passive: true });
-    return () => {
-      mediaReduced.removeListener(update);
-      window.removeEventListener("resize", update);
-    };
+    const handler = (e: MediaQueryListEvent) => setIsReducedMotion(e.matches);
+    mediaReduced.addEventListener("change", handler);
+    return () => mediaReduced.removeEventListener("change", handler);
   }, []);
 
   const playVideo = useCallback(() => {
@@ -113,11 +95,11 @@ export default function MAACXHero({ onIntroReveal }: Props) {
     v.loop = true;
   }, [isMobile, isReducedMotion, loaded, playVideo]);
 
-  const toggleMute = () => {
+  const toggleMute = useCallback(() => {
     const next = !isMuted;
     setIsMuted(next);
     if (heroVideoRef.current) heroVideoRef.current.muted = next;
-  };
+  }, [isMuted]);
 
   return (
     <section className="relative isolate min-h-[100svh] w-full overflow-x-hidden">
@@ -130,7 +112,7 @@ export default function MAACXHero({ onIntroReveal }: Props) {
           muted={isMuted}
           loop={!isMobile}
           playsInline
-          preload={isMobile ? "metadata" : "auto"}
+          preload="metadata"
           poster="/hero-poster.jpg"
           onLoadedData={() => {
             setLoaded(true);

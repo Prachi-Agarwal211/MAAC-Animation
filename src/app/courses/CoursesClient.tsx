@@ -1,7 +1,6 @@
 "use client";
 
 import CourseCategories from "@/components/CourseCategories";
-import Footer from "@/components/Footer";
 import FAQSection from "@/components/FAQSection";
 import ApplyNow from "@/components/ApplyNow";
 import IndustryPartners from "@/components/IndustryPartners";
@@ -70,8 +69,6 @@ export default function CoursesClient() {
       <div className="border-t border-white/5">
         <FAQSection />
       </div>
-
-      <Footer />
     </main>
   );
 }

@@ -3,7 +3,6 @@
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "@/lib/gsap";
-import Footer from "@/components/Footer";
 import IndustryPartners from "@/components/IndustryPartners";
 import ApplyNow from "@/components/ApplyNow";
 import { localBusinessSchema, breadcrumbSchema } from "@/lib/structured-data";
@@ -162,8 +161,6 @@ export default function AboutClient() {
       <div className="border-t border-white/5">
         <ApplyNow />
       </div>
-
-      <Footer />
     </main>
   );
 }

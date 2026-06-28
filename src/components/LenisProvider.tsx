@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { useGSAP } from "@gsap/react";
 import { initLenis, destroyLenis } from "@/lib/lenis";
 import { ScrollTrigger } from "@/lib/gsap";
@@ -10,6 +11,8 @@ export default function LenisProvider({
 }: {
   children: React.ReactNode;
 }) {
+  const pathname = usePathname();
+
   // Initialize Lenis ONCE - let lenis.ts handle all setup
   useEffect(() => {
     initLenis();
@@ -18,6 +21,11 @@ export default function LenisProvider({
       destroyLenis();
     };
   }, []);
+
+  // Scroll to top on route change
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, [pathname]);
 
   useGSAP(() => {
     // CRITICAL: Refresh all ScrollTriggers after initial layout

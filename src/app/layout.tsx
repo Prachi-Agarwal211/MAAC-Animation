@@ -6,7 +6,6 @@ import { Suspense } from "react";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Providers } from "./providers";
 import { contactInfo } from "@/data/siteData";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import Navbar from "@/components/Navbar";
@@ -22,14 +21,14 @@ const ClientShell = dynamic(() => import("@/components/ClientShell"), { ssr: tru
 
 const inter = Inter({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "700"],
   variable: "--font-inter",
   display: "swap",
 });
 
 const syne = Syne({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["400", "600", "700"],
   variable: "--font-syne",
   display: "swap",
 });
@@ -206,6 +205,8 @@ export default function RootLayout({
             `,
           }}
         />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preload" as="image" href="/hero-poster.jpg" />
 
         {/* =====================================================================
@@ -277,41 +278,39 @@ export default function RootLayout({
           <DynamicBackground />
         </Suspense>
 
-        <Providers>
-          <a
-            href="#main-content"
-            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-[9999] bg-[#FFD700] text-white px-4 py-2 rounded"
-          >
-            Skip to main content
-          </a>
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-[9999] bg-[#FFD700] text-white px-4 py-2 rounded"
+        >
+          Skip to main content
+        </a>
 
-          <div className="grain-overlay" aria-hidden="true" />
+        <div className="grain-overlay" aria-hidden="true" />
 
-          <Suspense fallback={null}>
-            <LenisProvider>
-              <Navbar />
-              <ErrorBoundary>
-                <ClientShell>
-                  <main id="main-content" tabIndex={-1} className="page-wrapper relative z-10">
-                    {children}
-                  </main>
-                  <Footer />
-                </ClientShell>
-              </ErrorBoundary>
-              <Suspense fallback={null}>
-                <FloatingActions />
-              </Suspense>
-              <Suspense fallback={null}>
-                <CustomCursor />
-              </Suspense>
-              <Suspense fallback={null}>
-                <MetaPixel />
-              </Suspense>
-              <Analytics />
-              <SpeedInsights />
-            </LenisProvider>
-          </Suspense>
-        </Providers>
+        <Suspense fallback={null}>
+          <LenisProvider>
+            <Navbar />
+            <ErrorBoundary>
+              <ClientShell>
+                <main id="main-content" tabIndex={-1} className="page-wrapper relative z-10">
+                  {children}
+                </main>
+                <Footer />
+              </ClientShell>
+            </ErrorBoundary>
+            <Suspense fallback={null}>
+              <FloatingActions />
+            </Suspense>
+            <Suspense fallback={null}>
+              <CustomCursor />
+            </Suspense>
+            <Suspense fallback={null}>
+              <MetaPixel />
+            </Suspense>
+            <Analytics />
+            <SpeedInsights />
+          </LenisProvider>
+        </Suspense>
       </body>
     </html>
   );

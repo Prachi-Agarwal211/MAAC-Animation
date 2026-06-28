@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
 import { type BlogPost } from "@/data/blog";
-import Footer from "@/components/Footer";
 import IndustryPartners from "@/components/IndustryPartners";
 import ApplyNow from "@/components/ApplyNow";
 import { useEffect, useRef } from "react";
@@ -270,8 +269,6 @@ export default function BlogPostClient({ post }: { post: BlogPost }) {
         <div className="border-t border-white/5">
           <ApplyNow />
         </div>
-
-        <Footer />
       </main>
     </>
   );

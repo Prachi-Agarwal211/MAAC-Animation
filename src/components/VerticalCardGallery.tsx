@@ -209,6 +209,9 @@ export default function VerticalCardGallery() {
                         fill
                         className="object-cover opacity-90 transition-transform duration-700 group-hover:scale-105"
                         sizes="(max-width: 1024px) 100vw, 30vw"
+                        priority={index === 0}
+                        placeholder="blur"
+                        blurDataURL="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI0OCI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iIzBhMGEwYSIvPjwvc3ZnPg=="
                       />
                     </div>
                     <div className="w-full md:w-[55%] flex flex-col justify-center py-4 md:pl-6">

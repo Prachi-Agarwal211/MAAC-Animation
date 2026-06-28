@@ -3,7 +3,6 @@
 import { useRef, useState, useEffect } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "@/lib/gsap";
-import Footer from "@/components/Footer";
 import { MapPin, Phone, Mail, Send, ShieldCheck, Globe } from "lucide-react";
 import MagneticButton from "@/components/ui/MagneticButton";
 import { submitContactForm } from "@/app/actions";
@@ -134,11 +133,11 @@ export default function ContactClient() {
 
               <div className="space-y-5">
                 <div className="grid md:grid-cols-2 gap-5">
-                  <input type="text" name="name" placeholder="FULL NAME" required className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-xs font-bold tracking-wider text-white focus:outline-none focus:ring-2 focus:ring-[#FFD700]/50 focus:border-[#FFD700]/50 transition-all uppercase placeholder:text-white/10" />
-                   <input type="email" name="email" placeholder="EMAIL ADDRESS" required className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-xs font-bold tracking-wider text-white focus:outline-none focus:ring-2 focus:ring-[#FFD700]/50 focus:border-[#FFD700]/50 transition-all uppercase placeholder:text-white/10" />
+                  <input type="text" name="name" placeholder="FULL NAME" required aria-label="Full Name" className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-xs font-bold tracking-wider text-white focus:outline-none focus:ring-2 focus:ring-[#FFD700]/50 focus:border-[#FFD700]/50 transition-all uppercase placeholder:text-white/10" />
+                   <input type="email" name="email" placeholder="EMAIL ADDRESS" required aria-label="Email Address" className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-xs font-bold tracking-wider text-white focus:outline-none focus:ring-2 focus:ring-[#FFD700]/50 focus:border-[#FFD700]/50 transition-all uppercase placeholder:text-white/10" />
                 </div>
-                <input type="tel" name="phone" placeholder="MOBILE NUMBER" required className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-xs font-bold tracking-wider text-white focus:outline-none focus:ring-2 focus:ring-[#FFD700]/50 focus:border-[#FFD700]/50 transition-all uppercase placeholder:text-white/10" />
-                 <textarea name="message" placeholder="ADDITIONAL MESSAGE OR NOTE" rows={4} className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-xs font-bold tracking-wider text-white focus:outline-none focus:ring-2 focus:ring-[#FFD700]/50 focus:border-[#FFD700]/50 transition-all uppercase placeholder:text-white/10 resize-none" />
+                <input type="tel" name="phone" placeholder="MOBILE NUMBER" required aria-label="Mobile Number" className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-xs font-bold tracking-wider text-white focus:outline-none focus:ring-2 focus:ring-[#FFD700]/50 focus:border-[#FFD700]/50 transition-all uppercase placeholder:text-white/10" />
+                 <textarea name="message" placeholder="ADDITIONAL MESSAGE OR NOTE" rows={4} aria-label="Additional Message or Note" className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-xs font-bold tracking-wider text-white focus:outline-none focus:ring-2 focus:ring-[#FFD700]/50 focus:border-[#FFD700]/50 transition-all uppercase placeholder:text-white/10 resize-none" />
               </div>
 
               <div className="mt-10 flex flex-col sm:flex-row items-center justify-between gap-6">
@@ -153,7 +152,7 @@ export default function ContactClient() {
               </div>
 
               {submitSuccess && (
-                <div className="mt-6 p-5 rounded-xl bg-[#25D366]/10 border border-[#25D366]/30 text-[#25D366] text-[10px] font-bold uppercase tracking-wider text-center animate-pulse">
+                <div role="status" aria-live="polite" className="mt-6 p-5 rounded-xl bg-[#25D366]/10 border border-[#25D366]/30 text-[#25D366] text-[10px] font-bold uppercase tracking-wider text-center animate-pulse">
                   Transmission Successful. Our team will contact you.
                 </div>
               )}
@@ -161,8 +160,6 @@ export default function ContactClient() {
           </div>
         </div>
       </section>
-
-      <Footer />
     </main>
   );
 }

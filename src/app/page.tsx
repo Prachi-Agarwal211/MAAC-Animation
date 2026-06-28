@@ -11,7 +11,6 @@ import IndustryPartners from "@/components/IndustryPartners";
 import StudentSuccessStories from "@/components/StudentSuccessStories";
 import ApplyNow from "@/components/ApplyNow";
 import FAQSection from "@/components/FAQSection";
-import Footer from "@/components/Footer";
 import ErrorBoundary from "@/components/ErrorBoundary";
 
 // Client Components (Complex animations/state)
@@ -19,7 +18,7 @@ import MAACXHero from "@/components/hero/MAACXHero";
 
 const VerticalCardGallery = dynamic(() => import("@/components/VerticalCardGallery"), { ssr: true });
 const StudentShowcase = dynamic(() => import("@/components/StudentShowcase"), { ssr: true });
-const DynamicBackground = dynamic(() => import("@/components/ui/DynamicBackground"), { ssr: false, loading: () => null });
+
 
 export const revalidate = 3600;
 
@@ -53,10 +52,6 @@ export default function Home() {
       <ErrorBoundary>
         <MAACXHero />
       </ErrorBoundary>
-
-      <Suspense fallback={null}>
-        <DynamicBackground />
-      </Suspense>
 
       <main className="relative z-10 bg-transparent">
         <ErrorBoundary>
@@ -101,8 +96,6 @@ export default function Home() {
           <div id="faq" className="relative z-20 bg-transparent">
             <FAQSection />
           </div>
-
-          <Footer />
         </ErrorBoundary>
       </main>
     </div>

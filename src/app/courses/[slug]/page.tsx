@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Script from "next/script";
-import Footer from "@/components/Footer";
 import IndustryPartners from "@/components/IndustryPartners";
 import ApplyNow from "@/components/ApplyNow";
 import FadeIn from "@/components/animations/FadeIn";
@@ -249,7 +248,6 @@ export default async function CourseDetailPage({ params }: Props) {
 
         <IndustryPartners />
         <ApplyNow />
-        <Footer />
       </main>
     </>
   );

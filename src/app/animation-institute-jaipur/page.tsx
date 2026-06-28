@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import Footer from "@/components/Footer";
 import IndustryPartners from "@/components/IndustryPartners";
 import ApplyNow from "@/components/ApplyNow";
 import FadeIn from "@/components/animations/FadeIn";
@@ -200,8 +199,6 @@ export default function AnimationInstituteJaipurPage() {
         <div className="border-b border-white/5">
           <ApplyNow />
         </div>
-
-        <Footer />
       </main>
     </>
   );

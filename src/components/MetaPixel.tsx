@@ -4,9 +4,8 @@ import Script from "next/script";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
-// Use env var in production. Fallback to current production Pixel ID.
-const PIXEL_ID =
-  process.env.NEXT_PUBLIC_META_PIXEL_ID || "406621323063792";
+// Only load if env var is set — no hardcoded fallback
+const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID;
 
 // fbq types are declared in src/types/tracking.d.ts
 
@@ -34,11 +33,12 @@ export default function MetaPixel() {
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    // Track PageView on every route change
     if (typeof window !== "undefined" && typeof window.fbq === "function") {
       window.fbq("track", "PageView");
     }
   }, [pathname, searchParams]);
+
+  if (!PIXEL_ID) return null;
 
   return (
     <>
@@ -60,9 +60,6 @@ export default function MetaPixel() {
           `,
         }}
       />
-      {/* Official Meta noscript fallback for users with JavaScript disabled.
-          This is required for complete ad attribution. */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
       <noscript>
         <img
           height="1"

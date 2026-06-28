@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   },
 };
 
-const popularCourses = coursesData
+const popularCourses = [...coursesData]
   .sort((a, b) => a.priority - b.priority)
   .slice(0, 6);
 

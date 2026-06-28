@@ -1,10 +1,10 @@
-"use client";
 import Link from "next/link";
 import Image from "next/image";
 import { contactInfo } from "@/data/siteData";
 import { ArrowUpRight, MapPin, Phone, Mail, MessageSquare } from "lucide-react";
-import FadeIn from "@/components/animations/FadeIn";
-import { useEffect, useState } from "react";
+import FooterBackground from "@/components/FooterBackground";
+
+const currentYear = new Date().getFullYear();
 
 const SocialIcons = {
   Facebook: () => (
@@ -35,81 +35,47 @@ const SocialIcons = {
 };
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const update = () => setIsMobile(window.innerWidth < 768);
-    update();
-    window.addEventListener("resize", update, { passive: true });
-    return () => window.removeEventListener("resize", update);
-  }, []);
-
   return (
     <footer className="relative bg-transparent pt-24 md:pt-40 overflow-hidden" style={{ paddingBottom: "max(0px, env(safe-area-inset-bottom))" }}>
-      {/* Background (video on desktop only to reduce iPhone heating) */}
-      {!isMobile ? (
-        <div className="absolute inset-0 z-0 opacity-45">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="none"
-            poster="/hero-poster.jpg"
-            className="absolute inset-0 h-full w-full object-cover"
-          >
-            <source src="/hero-video-compressed.mp4" type="video/mp4" />
-            <source src="/hero-video.webm" type="video/webm" />
-          </video>
-          <div className="absolute inset-0 bg-black/40" />
-        </div>
-      ) : (
-        <div className="absolute inset-0 z-0 opacity-60">
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/70" />
-        </div>
-      )}
+      <FooterBackground />
 
       <div className="atmosphere-blob blob-red -bottom-20 -right-20 opacity-10" />
 
       {/* ── TOP BANNER ── */}
       <div className="relative z-10 max-w-content mx-auto px-6 md:px-12 mb-24">
-        <FadeIn>
-          <div className="relative rounded-[40px] overflow-hidden glass border border-white/10 p-6 md:p-12 lg:p-20 flex flex-col lg:flex-row items-center justify-between gap-12 group shadow-[0_40px_100px_-20px_rgba(0,0,0,0.7)]">
-            <div className="absolute inset-0 bg-[#FFD700]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+        <div className="relative rounded-[40px] overflow-hidden glass border border-white/10 p-6 md:p-12 lg:p-20 flex flex-col lg:flex-row items-center justify-between gap-12 group shadow-[0_40px_100px_-20px_rgba(0,0,0,0.7)]">
+          <div className="absolute inset-0 bg-[#FFD700]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
 
-            <div className="relative z-10 max-w-2xl text-center lg:text-left">
-              <h2 className="font-display text-[clamp(1.5rem,5vw,3rem)] text-white leading-[0.9] mb-8 font-bold uppercase leading-[1.1] tracking-[0.1em]">
-                Start Your <span className="metallic-gold-text">Creative Legacy</span>
-              </h2>
-              <p className="text-[#A8A29C] text-lg md:text-xl font-bold leading-relaxed">
-                Book a free counseling session or demo class with our industry experts today.
-              </p>
-            </div>
-
-            <div className="relative z-10 flex flex-col sm:flex-row gap-6">
-              <Link
-                href="/contact"
-                className="inline-flex min-h-[60px] w-full sm:w-auto items-center justify-center text-[12px] font-bold tracking-[0.25em] uppercase border border-white/20 hover:border-white hover:bg-white text-white hover:text-black rounded-full transition-all duration-500 px-8"
-              >
-                Book Free Demo
-              </Link>
-              <a
-                href="https://wa.me/917300001589"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group/wa flex items-center justify-center gap-3 px-10 py-5 rounded-full border border-white/20 text-white font-bold tracking-[0.2em] text-[11px] uppercase hover:bg-white/5 hover:border-[#BF953F]/40 transition-all duration-300"
-              >
-                <MessageSquare size={18} className="text-white group-hover/wa:text-[#25D366] transition-colors" /> WhatsApp Us
-              </a>
-            </div>
+          <div className="relative z-10 max-w-2xl text-center lg:text-left">
+            <h2 className="font-display text-[clamp(1.5rem,5vw,3rem)] text-white leading-[0.9] mb-8 font-bold uppercase leading-[1.1] tracking-[0.1em]">
+              Start Your <span className="metallic-gold-text">Creative Legacy</span>
+            </h2>
+            <p className="text-[#A8A29C] text-lg md:text-xl font-bold leading-relaxed">
+              Book a free counseling session or demo class with our industry experts today.
+            </p>
           </div>
-        </FadeIn>
+
+          <div className="relative z-10 flex flex-col sm:flex-row gap-6">
+            <Link
+              href="/contact"
+              className="inline-flex min-h-[60px] w-full sm:w-auto items-center justify-center text-[12px] font-bold tracking-[0.25em] uppercase border border-white/20 hover:border-white hover:bg-white text-white hover:text-black rounded-full transition-all duration-500 px-8"
+            >
+              Book Free Demo
+            </Link>
+            <a
+              href="https://wa.me/917300001589"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group/wa flex items-center justify-center gap-3 px-10 py-5 rounded-full border border-white/20 text-white font-bold tracking-[0.2em] text-[11px] uppercase hover:bg-white/5 hover:border-[#BF953F]/40 transition-all duration-300"
+            >
+              <MessageSquare size={18} className="text-white group-hover/wa:text-[#25D366] transition-colors" /> WhatsApp Us
+            </a>
+          </div>
+        </div>
       </div>
 
       {/* ── MAIN CONTENT ── */}
-      <FadeIn stagger={0.1} className="relative z-10 max-w-content mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 pb-20">
+      <div className="relative z-10 max-w-content mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 pb-20">
 
         {/* Brand Col */}
         <div className="lg:col-span-4 space-y-10">
@@ -142,7 +108,7 @@ export default function Footer() {
 
         {/* Links Col 1 */}
         <div className="lg:col-span-2 space-y-8">
-          <h4 className="text-white text-xs font-bold uppercase tracking-[0.2em]">Explore</h4>
+          <h3 className="text-white text-xs font-bold uppercase tracking-[0.2em]">Explore</h3>
           <ul className="space-y-4">
             {[
               { label: "Home", href: "/" },
@@ -164,7 +130,7 @@ export default function Footer() {
 
         {/* Links Col 2 - Resources */}
         <div className="lg:col-span-3 space-y-8">
-          <h4 className="text-white text-xs font-bold uppercase tracking-[0.2em]">Resources</h4>
+          <h3 className="text-white text-xs font-bold uppercase tracking-[0.2em]">Resources</h3>
           <ul className="space-y-4">
             {[
               { label: "Blog", href: "/blog" },
@@ -184,7 +150,7 @@ export default function Footer() {
 
         {/* Links Col 3 - Policies & Locate Us */}
         <div className="lg:col-span-3 space-y-8">
-          <h4 className="text-white text-xs font-bold uppercase tracking-[0.2em]">Policies</h4>
+          <h3 className="text-white text-xs font-bold uppercase tracking-[0.2em]">Policies</h3>
           <ul className="space-y-4">
             {[
               { label: "Privacy Policy", href: "/privacy-policy" },
@@ -199,7 +165,7 @@ export default function Footer() {
             ))}
           </ul>
 
-          <h4 className="text-white text-xs font-bold uppercase tracking-[0.2em] pt-8">Locate Us</h4>
+          <h3 className="text-white text-xs font-bold uppercase tracking-[0.2em] pt-8">Locate Us</h3>
           <div className="space-y-6">
             <div className="flex gap-4">
               <MapPin size={20} className="text-[#FFD700] shrink-0" />
@@ -218,7 +184,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
-      </FadeIn>
+      </div>
 
       {/* ── BOTTOM BAR ── */}
       <div className="relative z-10 border-t border-white/5 py-10 px-6 md:px-12">

@@ -6,7 +6,7 @@ import gsap from "@/lib/gsap";
 import { testimonialsData } from "@/data/siteData";
 import { ChevronLeft, ChevronRight, Play, Volume2 } from "lucide-react";
 
-function Waveform() {
+const Waveform = memo(function Waveform() {
   // Memoize waveform heights to prevent jitter on re-renders
   const heights = useMemo(() => 
     Array.from({ length: 12 }, () => Math.random() * 100),
@@ -28,7 +28,7 @@ function Waveform() {
       ))}
     </div>
   );
-}
+});
 
 function Testimonials() {
   const sectionRef = useRef<HTMLDivElement>(null);
