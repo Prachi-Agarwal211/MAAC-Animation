@@ -42,11 +42,11 @@ export default function KineticAwardsRows({ awards }: { awards: Award[] }) {
           {awards.map((award, i) => (
             <div key={i} className="group relative flex-shrink-0">
               <div className="flex items-end gap-6 cursor-none">
-                <span className="text-[clamp(2.5rem,6vw,6rem)] font-display text-white/5 transition-colors group-hover:text-white group-hover:skew-x-[-10deg] duration-700 font-bold uppercase leading-[1.1] tracking-[0.1em]">
+                <span className="text-[clamp(2.5rem,6vw,6rem)] font-display text-white/35 transition-colors group-hover:text-white group-hover:skew-x-[-10deg] duration-700 font-bold uppercase leading-[1.1] tracking-[0.1em]">
                   {award.name.split(' ')[0]}
                 </span>
                 <div className="mb-4">
-                  <Trophy size={48} className="metallic-gold-text opacity-0 group-hover:opacity-100 transition-all duration-700 translate-y-4 group-hover:translate-y-0" />
+                  <Trophy size={48} className="metallic-gold-text opacity-40 group-hover:opacity-100 transition-all duration-700 translate-y-1 group-hover:translate-y-0" />
                 </div>
               </div>
 

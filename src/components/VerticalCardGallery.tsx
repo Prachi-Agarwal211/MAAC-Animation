@@ -10,7 +10,7 @@ import { maacStandardFeatures } from "@/data/siteData";
 
 const featureCards = maacStandardFeatures;
 
-const CX = 256, CY = 256, OUTER_R = 190, INNER_R = 75;
+const CX = 256, CY = 256, OUTER_R = 190, INNER_R = 55;
 const SEGMENTS = featureCards.length;
 const ANGLE_PER_SEG = 360 / SEGMENTS;
 const GAP = 1.2; // degrees gap between segments
@@ -232,8 +232,8 @@ export default function VerticalCardGallery() {
                           x={CX - OUTER_R} y={CY - OUTER_R}
                           width={OUTER_R * 2} height={OUTER_R * 2}
                           preserveAspectRatio="xMidYMid slice"
-                          opacity={activeIndex === i ? "1" : "0.12"}
-                          className="transition-opacity duration-500 group-hover:opacity-40"
+                          opacity={activeIndex === i ? "1" : "0.38"}
+                          className={`transition-opacity duration-500 group-hover:opacity-60 ${activeIndex === i ? "" : "saturate-50"}`}
                         />
                       </g>
                       {/* Base segment path (drawn on top for clear strokes and shadow) */}

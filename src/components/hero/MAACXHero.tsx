@@ -4,8 +4,6 @@ import { useRef, useState, useEffect, useCallback } from "react";
 import gsap from "@/lib/gsap";
 import { getLenis } from "@/lib/lenis";
 
-import { useGSAP } from "@gsap/react";
-
 type Props = {
   onIntroReveal?: () => void;
 };
@@ -18,52 +16,22 @@ export default function MAACXHero({ onIntroReveal }: Props) {
 
   const [isMuted, setIsMuted] = useState(true);
   const [loaded, setLoaded] = useState(false);
-  const [videoReady, setVideoReady] = useState(false);
   const [isReducedMotion, setIsReducedMotion] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
 
     const mediaReduced = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const mobileQuery = window.matchMedia("(max-width: 1023px)");
-
     setIsReducedMotion(mediaReduced.matches);
-    setIsMobile(mobileQuery.matches);
 
     const reducedHandler = (e: MediaQueryListEvent) => setIsReducedMotion(e.matches);
-    const mobileHandler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
     mediaReduced.addEventListener("change", reducedHandler);
-    mobileQuery.addEventListener("change", mobileHandler);
     return () => {
       mediaReduced.removeEventListener("change", reducedHandler);
-      mobileQuery.removeEventListener("change", mobileHandler);
     };
   }, []);
 
-  // Lazy-load video after poster is visible and page is idle
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const v = heroVideoRef.current;
-    if (!v) return;
-
-    const loadVideo = () => {
-      const sources = v.querySelectorAll("source");
-      sources.forEach((s) => {
-        if (s.dataset.src) {
-          s.src = s.dataset.src;
-        }
-      });
-      v.load();
-    };
-
-    if ("requestIdleCallback" in window) {
-      const id = (window as unknown as { requestIdleCallback: (cb: () => void, opts?: { timeout: number }) => number }).requestIdleCallback(loadVideo, { timeout: 3000 });
-      return () => (window as unknown as { cancelIdleCallback: (id: number) => void }).cancelIdleCallback(id);
-    }
-    const timer = setTimeout(loadVideo, 1500);
-    return () => clearTimeout(timer);
-  }, []);
+  // Video loads eagerly via src attributes — no lazy loading needed
 
   const playVideo = useCallback(() => {
     const v = heroVideoRef.current;
@@ -80,21 +48,11 @@ export default function MAACXHero({ onIntroReveal }: Props) {
     });
   }, [isMuted, isReducedMotion]);
 
-  // Content reveal animation
+  // Content reveal — show immediately after mount
   useEffect(() => {
-    if (!contentRef.current) return;
-
-    const showContent = () => setLoaded(true);
-
-    const img = new Image();
-    img.src = "/hero-poster.jpg";
-    if (img.complete) {
-      showContent();
-    } else {
-      img.onload = showContent;
-      const timer = setTimeout(showContent, 500);
-      return () => clearTimeout(timer);
-    }
+    if (typeof window === "undefined") return;
+    const timer = setTimeout(() => setLoaded(true), 100);
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
@@ -127,14 +85,11 @@ export default function MAACXHero({ onIntroReveal }: Props) {
 
   // ── Video dissolve + content exit handled by parent wrapper ──
 
-  // Play video when ready
+  // Ensure video plays (autoPlay may be blocked by browser)
   useEffect(() => {
-    if (!videoReady) return;
     if (isReducedMotion) return;
-
-    heroVideoRef.current!.loop = true;
     playVideo();
-  }, [videoReady, isReducedMotion, playVideo]);
+  }, [isReducedMotion, playVideo]);
 
   // Kinetic typography — weight drops on fast scroll, settles at rest
   useEffect(() => {
@@ -162,29 +117,21 @@ export default function MAACXHero({ onIntroReveal }: Props) {
 
   return (
     <section ref={sectionRef} className="relative isolate min-h-[100svh] w-full overflow-x-hidden">
-      {/* Background — poster-first, video loads lazily */}
+      {/* Background — video loads and plays immediately */}
       <div ref={bgRef} className="hero-bg-container absolute inset-0 z-0 overflow-hidden will-change-transform origin-top">
-        {/* Poster image shows instantly */}
-        <img
-          src="/hero-poster.jpg"
-          alt=""
-          aria-hidden="true"
-          className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-1000 ${videoReady ? "opacity-0" : "opacity-100"}`}
-          decoding="async"
-        />
 
-        {/* Video element — sources loaded via data-src for lazy loading */}
+        {/* Video element — loads immediately, plays when ready */}
         <video
           ref={heroVideoRef}
           className="absolute inset-0 h-full w-full object-cover object-center"
           muted={isMuted}
           playsInline
-          preload="none"
-          onLoadedData={() => setVideoReady(true)}
-          poster="/hero-poster.jpg"
+          loop
+          autoPlay
+          preload="auto"
         >
-          <source data-src="/intro.mp4" type="video/mp4" />
-          <source data-src="/intro.webm" type="video/webm" />
+          <source src="/intro.mp4" type="video/mp4" />
+          <source src="/intro.webm" type="video/webm" />
         </video>
 
       </div>

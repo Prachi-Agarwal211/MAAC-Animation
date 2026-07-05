@@ -3,7 +3,6 @@ import dynamic from "next/dynamic";
 import { localBusinessSchema, videoSchema, faqSchema, breadcrumbSchema } from "@/lib/structured-data";
 
 // Server Components
-import TrustBadges from "@/components/TrustBadges";
 import PopularCourses from "@/components/PopularCourses";
 import InstituteIntro from "@/components/InstituteIntro";
 import CareerCreatorComparison from "@/components/CareerCreatorComparison";
@@ -18,7 +17,6 @@ import Placements from "@/components/Placements";
 // Client Components (Complex animations/state)
 import MAACXHero from "@/components/hero/MAACXHero";
 import HeroTrustTransition from "@/components/HeroTrustTransition";
-import StatsPieReveal from "@/components/ui/StatsPieReveal";
 
 const VerticalCardGallery = dynamic(() => import("@/components/VerticalCardGallery"), { ssr: true });
 const StudentShowcase = dynamic(() => import("@/components/StudentShowcase"), { ssr: true });
@@ -32,7 +30,7 @@ export default function Home() {
   ]);
 
   return (
-    <div className="overflow-hidden relative">
+    <div className="relative">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -49,11 +47,7 @@ export default function Home() {
       />
       {/* Hero video morph transition to TrustBadges */}
       <ErrorBoundary>
-        <HeroTrustTransition 
-          hero={<MAACXHero />}
-          badges={<TrustBadges />}
-          stats={<StatsPieReveal />}
-        />
+        <HeroTrustTransition hero={<MAACXHero />} />
       </ErrorBoundary>
 
       <div className="relative z-10 bg-transparent">
@@ -63,6 +57,14 @@ export default function Home() {
             <Suspense fallback={<div className="h-[100vh] bg-black/20 animate-pulse" />}>
               <VerticalCardGallery />
             </Suspense>
+          </div>
+
+          <div className="bg-transparent">
+            <Placements />
+          </div>
+
+          <div className="bg-transparent">
+            <Awards />
           </div>
 
           <div className="bg-transparent">
@@ -79,14 +81,6 @@ export default function Home() {
 
           <div className="bg-transparent">
             <IndustryPartners />
-          </div>
-
-          <div className="bg-transparent">
-            <Placements />
-          </div>
-
-          <div className="bg-transparent">
-            <Awards />
           </div>
 
           <div className="bg-transparent">

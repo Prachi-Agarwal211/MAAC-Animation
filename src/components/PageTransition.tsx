@@ -28,14 +28,14 @@ export default function PageTransition({ children }: { children: React.ReactNode
         gsap.fromTo(
           el,
           { opacity: 0, scale: 0.97, y: 30 },
-          { opacity: 1, scale: 1, y: 0, duration: 0.7, ease: "expo.out" }
+          { opacity: 1, scale: 1, y: 0, duration: 0.7, ease: "expo.out", clearProps: "all" }
         );
       });
     } else {
       gsap.fromTo(
         el,
         { opacity: 0, scale: 0.97, y: 30 },
-        { opacity: 1, scale: 1, y: 0, duration: 0.7, ease: "expo.out" }
+        { opacity: 1, scale: 1, y: 0, duration: 0.7, ease: "expo.out", clearProps: "all" }
       );
     }
   }, [pathname]);

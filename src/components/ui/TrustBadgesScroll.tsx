@@ -29,7 +29,7 @@ export default function TrustBadgesScroll({ certifications }: { certifications: 
     <div id="trust-badges-logo-row" className="w-full lg:w-[55%] relative flex flex-col gap-6">
       <div 
         ref={containerRef}
-        className="flex gap-4 md:gap-5 overflow-x-auto hide-scrollbar snap-x snap-mandatory mask-gradient-right pb-2"
+        className="flex gap-4 md:gap-5 overflow-x-auto hide-scrollbar snap-x snap-mandatory pb-2"
         style={{
           scrollbarWidth: "none",
           msOverflowStyle: "none",
