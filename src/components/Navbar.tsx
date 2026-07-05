@@ -101,7 +101,7 @@ export default function Navbar() {
         {/* Subtle rim light effect for scrolled state */}
         {(scrolled || mobileMenuOpen) && (
           <div className="absolute inset-0 rounded-[24px] pointer-events-none overflow-hidden" aria-hidden="true">
-            <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+            <div className="absolute top-0 left-0 right-0 h-[1px] bg-white/15 shadow-[0_0_6px_rgba(191,149,63,0.1)]" />
           </div>
         )}
         <div className="max-w-content mx-auto px-6 sm:px-8 flex items-center h-16 sm:h-20" style={{ paddingTop: "env(safe-area-inset-top)" }}>

@@ -65,7 +65,7 @@ export default function BentoGallery() {
           {bentoItems.map((item, i) => (
             <div
               key={i}
-              className={`group relative overflow-hidden rounded-[32px] glass-card border border-white/10 transition-all duration-700 hover:border-[#BF953F]/50 ${item.span}`}
+              className={`group relative overflow-hidden rounded-[32px] glass-card maac-liquid-card maac-film-card border border-white/10 transition-all duration-700 hover:border-[#BF953F]/50 ${item.span}`}
             >
               <Image
                 src={item.image}

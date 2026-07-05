@@ -8,6 +8,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { contactInfo } from "@/data/siteData";
 import ErrorBoundary from "@/components/ErrorBoundary";
+import PageTransition from "@/components/PageTransition";
 import Navbar from "@/components/Navbar";
 import MetaPixel from "@/components/MetaPixel";
 import Footer from "@/components/Footer";
@@ -292,7 +293,7 @@ export default function RootLayout({
             <ErrorBoundary>
               <ClientShell>
                 <main id="main-content" tabIndex={-1} className="page-wrapper relative z-10">
-                  {children}
+                  <PageTransition>{children}</PageTransition>
                 </main>
                 <Footer />
               </ClientShell>

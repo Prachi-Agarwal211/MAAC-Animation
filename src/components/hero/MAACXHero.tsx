@@ -117,55 +117,7 @@ export default function MAACXHero({ onIntroReveal }: Props) {
     return () => ctx.revert();
   }, [loaded, onIntroReveal]);
 
-  // ── Video dissolve + content exit ──
-  useGSAP(() => {
-    if (!sectionRef.current || !bgRef.current || !contentRef.current) return;
-    if (isReducedMotion) return;
-
-    const mm = gsap.matchMedia();
-
-    mm.add("(min-width: 768px)", () => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: 1,
-          invalidateOnRefresh: true,
-        },
-      });
-
-      // Video: desaturate + darken + blur + fade → dissolves into dark WebGL bg
-      tl.to(bgRef.current, {
-        filter: "blur(8px) saturate(0) brightness(0.2)",
-        opacity: 0,
-        ease: "none",
-      }, 0);
-
-      // Content: slide left + fade out
-      tl.to(contentRef.current, {
-        xPercent: -20,
-        opacity: 0,
-        ease: "none",
-      }, 0);
-    });
-
-    mm.add("(max-width: 767px)", () => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top top",
-          end: "60% top",
-          scrub: 1,
-          invalidateOnRefresh: true,
-        },
-      });
-
-      tl.to(contentRef.current, { opacity: 0, y: -40, ease: "none" }, 0);
-    });
-
-    return () => mm.revert();
-  }, { scope: sectionRef, dependencies: [isReducedMotion] });
+  // ── Video dissolve + content exit handled by parent wrapper ──
 
   // Play video when ready
   useEffect(() => {
@@ -189,7 +141,7 @@ export default function MAACXHero({ onIntroReveal }: Props) {
   return (
     <section ref={sectionRef} className="relative isolate min-h-[100svh] w-full overflow-x-hidden">
       {/* Background — poster-first, video loads lazily */}
-      <div ref={bgRef} className="absolute inset-0 z-0 will-change-transform">
+      <div ref={bgRef} className="hero-bg-container absolute inset-0 z-0 will-change-transform origin-top">
         {/* Poster image shows instantly */}
         <img
           src="/hero-poster.jpg"
@@ -218,7 +170,7 @@ export default function MAACXHero({ onIntroReveal }: Props) {
       {/* Foreground content */}
       <div
         ref={contentRef}
-        className="relative z-10 mx-auto flex min-h-[100svh] w-full max-w-content flex-col justify-end px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-[calc(5rem+env(safe-area-inset-top))] sm:px-8 sm:pb-10 sm:pt-[calc(5.5rem+env(safe-area-inset-top))] lg:px-16 lg:pb-12 xl:px-24 xl:pb-14 opacity-0 will-change-transform"
+        className="hero-content relative z-10 mx-auto flex min-h-[100svh] w-full max-w-content flex-col justify-end px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-[calc(5rem+env(safe-area-inset-top))] sm:px-8 sm:pb-10 sm:pt-[calc(5.5rem+env(safe-area-inset-top))] lg:px-16 lg:pb-12 xl:px-24 xl:pb-14 opacity-0 will-change-transform"
       >
         <div className="flex w-full flex-col gap-16 lg:flex-row lg:items-end lg:justify-between lg:gap-12">
           <div className="maacx-content min-w-0 max-w-3xl flex-1">

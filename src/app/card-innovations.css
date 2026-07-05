@@ -1,0 +1,171 @@
+/* ═══════════════════════════════════════════════════════
+   MAAC CARD INNOVATIONS — Kinetic Typography
+   Type-driven, cinematic, red-gold energy
+   ═══════════════════════════════════════════════════════ */
+
+/* ─── 1. CINEMATIC WIPE CARD ───
+   Content reveals with a left-to-right wipe using clip-path.
+   Film-editorial aesthetic. */
+
+@keyframes maac-wipe-reveal {
+  from {
+    clip-path: inset(0 100% 0 0);
+    opacity: 0;
+  }
+  to {
+    clip-path: inset(0 0% 0 0);
+    opacity: 1;
+  }
+}
+
+.maac-wipe-card {
+  animation: maac-wipe-reveal linear both;
+  animation-timeline: view();
+  animation-range: entry 5% entry 75%;
+}
+
+/* ─── 2. DEPTH PARALLAX CARD ───
+   Image and text layers move at different speeds.
+   Creates cinematic depth. */
+
+.maac-depth-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.maac-depth-card .maac-depth-bg {
+  position: absolute;
+  inset: -20px;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+  z-index: 0;
+}
+
+.maac-depth-card .maac-depth-fg {
+  position: relative;
+  z-index: 2;
+}
+
+.maac-depth-card:hover .maac-depth-bg {
+  transform: scale(1.05) translateY(-5px);
+}
+
+/* JS for mouse-tracking depth:
+   element.addEventListener('mousemove', (e) => {
+     const rect = element.getBoundingClientRect();
+     const x = (e.clientX - rect.left - rect.width / 2) * 0.02;
+     const y = (e.clientY - rect.top - rect.height / 2) * 0.02;
+     bg.style.transform = `translate(${x}px, ${y}px) scale(1.05)`;
+   }); */
+
+/* ─── 3. LIQUID GLOW CARD ───
+   Red-tinted glow pulses from the card center.
+   Uses @property for smooth intensity animation. */
+
+@property --maac-liquid-intensity {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0;
+}
+
+@keyframes maac-liquid-pulse {
+  0%, 100% { --maac-liquid-intensity: 0; }
+  50% { --maac-liquid-intensity: 1; }
+}
+
+.maac-liquid-card {
+  position: relative;
+}
+
+.maac-liquid-card::after {
+  content: '';
+  position: absolute;
+  inset: -40px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(227,24,55,0.15) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.maac-liquid-card:hover::after {
+  opacity: 1;
+  animation: maac-liquid-pulse 2s ease-in-out infinite;
+}
+
+/* ─── 4. FILM STRIP HOVER ───
+   Clip-path creates a film sprocket effect on hover. */
+
+.maac-film-card {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  transition: clip-path 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.maac-film-card:hover {
+  clip-path: polygon(
+    0 0, 3% 0, 3% 4%, 5% 4%, 5% 0, 100% 0,
+    100% 100%, 5% 100%, 5% 96%, 3% 96%, 3% 100%, 0 100%
+  );
+}
+
+/* ─── 5. CONTAINER QUERY TYPE CARD ───
+   Text scales based on card width, not viewport. */
+
+.maac-type-container {
+  container-type: inline-size;
+}
+
+@container (min-width: 250px) {
+  .maac-responsive-type {
+    font-size: clamp(0.875rem, 0.7rem + 0.4cqi, 1rem);
+  }
+}
+
+@container (min-width: 400px) {
+  .maac-responsive-type {
+    font-size: clamp(1rem, 0.8rem + 0.5cqi, 1.2rem);
+  }
+}
+
+@container (min-width: 600px) {
+  .maac-responsive-type {
+    font-size: clamp(1.25rem, 0.9rem + 0.6cqi, 1.5rem);
+  }
+}
+
+/* ─── 6. SCROLL-REVEAL CARD ─── */
+
+@keyframes maac-card-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(50px) scale(0.92);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+.maac-scroll-card {
+  animation: maac-card-reveal linear both;
+  animation-timeline: view();
+  animation-range: entry 5% entry 80%;
+}
+
+/* ─── 7. REDUCED MOTION ─── */
+
+@media (prefers-reduced-motion: reduce) {
+  .maac-wipe-card,
+  .maac-scroll-card,
+  .maac-film-card {
+    animation: none !important;
+    transform: none !important;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%) !important;
+  }
+  .maac-liquid-card::after {
+    display: none;
+  }
+}

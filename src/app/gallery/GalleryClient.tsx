@@ -105,7 +105,7 @@ export default function GalleryClient() {
 
       {/* Gallery Grid */}
       <section className="relative py-16">
-        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+        <div className="absolute top-0 left-0 w-full h-px bg-[#BF953F]/25 shadow-[0_0_8px_rgba(191,149,63,0.15)]" />
         <div className="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
           <div className="gallery-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {galleryImages.map((item) => (

@@ -15,6 +15,7 @@ import ErrorBoundary from "@/components/ErrorBoundary";
 
 // Client Components (Complex animations/state)
 import MAACXHero from "@/components/hero/MAACXHero";
+import HeroTrustTransition from "@/components/HeroTrustTransition";
 
 const VerticalCardGallery = dynamic(() => import("@/components/VerticalCardGallery"), { ssr: true });
 const StudentShowcase = dynamic(() => import("@/components/StudentShowcase"), { ssr: true });
@@ -43,14 +44,16 @@ export default function Home() {
           }),
         }}
       />
-      {/* Hero video loads lazily via poster-first strategy */}
+      {/* Hero video morph transition to TrustBadges */}
       <ErrorBoundary>
-        <MAACXHero />
+        <HeroTrustTransition 
+          hero={<MAACXHero />}
+          badges={<TrustBadges />}
+        />
       </ErrorBoundary>
 
       <div className="relative z-10 bg-transparent">
         <ErrorBoundary>
-          <TrustBadges />
 
           <div id="features" className="relative z-10 bg-transparent">
             <Suspense fallback={<div className="h-[100vh] bg-black/20 animate-pulse" />}>

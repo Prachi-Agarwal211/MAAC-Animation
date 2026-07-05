@@ -228,7 +228,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
         }}
       >
         {/* Top accent bar */}
-        <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-[#FFD700] to-transparent" />
+        <div className="h-[2px] w-full bg-[#FFD700]/40 shadow-[0_0_12px_rgba(255,215,0,0.25)]" />
 
         {/* Close button */}
         <button

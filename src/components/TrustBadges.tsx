@@ -38,36 +38,15 @@ const certifications = [
 export default function TrustBadges() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
-  useGSAP(() => {
-    if (!sectionRef.current) return;
-
-    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReduced) return;
-
-    gsap.fromTo(
-      sectionRef.current,
-      { clipPath: "inset(0 100% 0 0)" },
-      {
-        clipPath: "inset(0 0% 0 0)",
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 85%",
-          end: "top 30%",
-          scrub: 0.5,
-          invalidateOnRefresh: true,
-        },
-      }
-    );
-  }, { scope: sectionRef });
+  // ── Scroll animation handled by parent wrapper ──
 
   return (
-    <section ref={sectionRef} className="relative py-10 md:py-16 bg-transparent border-t border-white/5 overflow-hidden" style={{ clipPath: "inset(0 100% 0 0)" }}>
+    <section ref={sectionRef} className="trust-badges-section relative py-10 md:py-16 bg-transparent border-t border-white/5 overflow-hidden">
       <div className="max-w-[1800px] mx-auto px-5 md:px-12 lg:px-20">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12 mt-4">
           
           {/* Left Content */}
-          <FadeIn className="w-full lg:w-[45%] flex flex-col items-start z-10 shrink-0">
+          <FadeIn className="trust-badges-content w-full lg:w-[45%] flex flex-col items-start z-10 shrink-0 opacity-0">
             <div className="flex items-center gap-4 mb-6">
               <div className="w-6 h-[1px] metallic-gold-accent" />
               <span className="metallic-gold-text text-[11px] font-bold tracking-[0.25em] uppercase">

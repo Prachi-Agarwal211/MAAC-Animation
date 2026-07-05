@@ -1,0 +1,248 @@
+/* ═══════════════════════════════════════════════════════
+   MAAC ORIGINAL INNOVATIONS — Kinetic Typography
+   Type-driven, cinematic, red-gold energy
+   ═══════════════════════════════════════════════════════ */
+
+/* ─── 1. MUSICAL INTERVAL COLOR SYSTEM ───
+   Colors derived from the circle of fifths (72° apart).
+   In music, perfect fifths create the most consonant harmony.
+   Applied to hue wheel: each color is exactly 72° apart.
+   Result: colors that feel naturally "in tune" with each other. */
+
+:root {
+  /* Circle of fifths: 0°, 72°, 144°, 216°, 288° */
+  --maac-fifth-0: 350;  /* red (brand) */
+  --maac-fifth-1: 62;   /* 350+72 = 422 mod 360 = 62 → warm gold */
+  --maac-fifth-2: 134;  /* 62+72 = 134 → emerald */
+  --maac-fifth-3: 206;  /* 134+72 = 206 → ocean blue */
+  --maac-fifth-4: 278;  /* 206+72 = 278 → violet */
+
+  /* Brand red system */
+  --maac-red-50: oklch(0.95 0.04 var(--maac-fifth-0));
+  --maac-red-100: oklch(0.85 0.08 var(--maac-fifth-0));
+  --maac-red-200: oklch(0.72 0.14 var(--maac-fifth-0));
+  --maac-red-300: oklch(0.62 0.18 var(--maac-fifth-0));
+  --maac-red-400: oklch(0.55 0.22 var(--maac-fifth-0));
+  --maac-red-500: oklch(0.48 0.25 var(--maac-fifth-0));
+
+  /* Cinematic accent palette */
+  --maac-gold: oklch(0.72 0.14 var(--maac-fifth-1));
+  --maac-emerald: oklch(0.55 0.10 var(--maac-fifth-2));
+  --maac-ocean: oklch(0.50 0.08 var(--maac-fifth-3));
+  --maac-violet: oklch(0.45 0.12 var(--maac-fifth-4));
+
+  /* Dynamic red glow — the signature MAAC effect */
+  --maac-glow-soft: 0 0 60px rgba(227, 24, 55, 0.08);
+  --maac-glow-mid: 0 0 100px rgba(227, 24, 55, 0.15);
+  --maac-glow-strong: 0 0 140px rgba(227, 24, 55, 0.25), 0 0 60px rgba(227, 24, 55, 0.15);
+}
+
+/* ─── 2. VARIABLE FONT AXIS ANIMATION ───
+   Animates the weight and optical size axes of a variable font
+   using @property. Creates a "breathing" type effect that
+   no static font can achieve. */
+
+@property --maac-font-weight {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 400;
+}
+
+@keyframes maac-type-breathe {
+  0%, 100% { --maac-font-weight: 400; }
+  50% { --maac-font-weight: 700; }
+}
+
+.maac-type-breathe {
+  font-variation-settings: 'wght' var(--maac-font-weight);
+  animation: maac-type-breathe 4s ease-in-out infinite;
+}
+
+/* ─── 3. CINEMATIC SCROLL-REVEAL (CSS-only) ───
+   Text that reveals with a "wipe" effect using clip-path
+   driven by scroll position. Film-editorial aesthetic. */
+
+@keyframes maac-cinema-wipe {
+  from {
+    clip-path: inset(0 100% 0 0);
+    opacity: 0;
+  }
+  to {
+    clip-path: inset(0 0% 0 0);
+    opacity: 1;
+  }
+}
+
+@keyframes maac-cinema-rise {
+  from {
+    clip-path: inset(100% 0 0 0);
+    opacity: 0;
+    filter: blur(4px);
+  }
+  to {
+    clip-path: inset(0% 0 0 0);
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+.maac-cinema-wipe {
+  animation: maac-cinema-wipe linear both;
+  animation-timeline: view();
+  animation-range: entry 5% entry 70%;
+}
+
+.maac-cinema-rise {
+  animation: maac-cinema-rise linear both;
+  animation-timeline: view();
+  animation-range: entry 10% entry 80%;
+}
+
+/* ─── 4. MODULAR TYPE SCALE (perfect fifth 1.5) ───
+   Each step multiplies by 1.5 (perfect fifth in music).
+   Creates dramatic, cinematic hierarchy. */
+
+.maac-type-xs:  { font-size: clamp(0.667rem, 0.6rem + 0.15vw, 0.75rem); }
+.maac-type-sm:  { font-size: clamp(0.889rem, 0.8rem + 0.2vw, 1rem); }
+.maac-type-base:{ font-size: clamp(1rem, 0.95rem + 0.2vw, 1.125rem); }
+.maac-type-md:  { font-size: clamp(1.5rem, 1.3rem + 0.5vw, 1.688rem); }
+.maac-type-lg:  { font-size: clamp(2.25rem, 1.8rem + 1vw, 2.5rem); }
+.maac-type-xl:  { font-size: clamp(3.375rem, 2.5rem + 2vw, 3.75rem); }
+.maac-type-2xl: { font-size: clamp(5rem, 3.5rem + 3vw, 5.5rem); }
+
+/* ─── 5. COLOR-MIX() DYNAMIC SYSTEM ───
+   Colors that shift based on context without JavaScript.
+   Uses CSS color-mix() to blend brand colors dynamically. */
+
+.maac-hover-glow {
+  transition: background-color 0.3s ease;
+}
+
+.maac-hover-glow:hover {
+  background-color: color-mix(in oklch, var(--maac-red-400) 15%, transparent);
+}
+
+.maac-card-glass {
+  background: color-mix(in oklch, white 5%, rgba(0,0,0,0.6));
+  border: 1px solid color-mix(in oklch, var(--maac-red-400) 20%, transparent);
+}
+
+.maac-card-glass:hover {
+  background: color-mix(in oklch, white 8%, rgba(0,0,0,0.6));
+  border-color: color-mix(in oklch, var(--maac-red-400) 40%, transparent);
+  box-shadow: var(--maac-glow-mid);
+}
+
+/* ─── 6. FILM STRIP CLIP-PATH ───
+   Animated clip-path that mimics a film strip transition.
+   Pure CSS, impossible with libraries. */
+
+@keyframes maac-film-advance {
+  0%   { clip-path: polygon(0 0, 100% 0, 100% 15%, 95% 15%, 95% 20%, 100% 20%, 100% 100%, 0 100%); }
+  25%  { clip-path: polygon(0 0, 100% 0, 100% 40%, 95% 40%, 95% 45%, 100% 45%, 100% 100%, 0 100%); }
+  50%  { clip-path: polygon(0 0, 100% 0, 100% 65%, 95% 65%, 95% 70%, 100% 70%, 100% 100%, 0 100%); }
+  75%  { clip-path: polygon(0 0, 100% 0, 100% 90%, 95% 90%, 95% 95%, 100% 95%, 100% 100%, 0 100%); }
+  100% { clip-path: polygon(0 0, 100% 0, 100% 0, 95% 0, 95% 5%, 100% 5%, 100% 100%, 0 100%); }
+}
+
+.maac-film-strip {
+  animation: maac-film-advance 8s steps(4) infinite;
+}
+
+/* ─── 7. @property CINEMATIC GLOW PULSE ─── */
+
+@property --maac-glow-intensity {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0;
+}
+
+@keyframes maac-glow-pulse {
+  0%, 100% { --maac-glow-intensity: 0; }
+  50% { --maac-glow-intensity: 1; }
+}
+
+.maac-glow-pulse {
+  animation: maac-glow-pulse 3s ease-in-out infinite;
+  box-shadow: 
+    0 0 80px color-mix(in oklch, rgba(227, 24, 55, 1) calc(var(--maac-glow-intensity) * 100%), transparent),
+    0 0 40px color-mix(in oklch, rgba(227, 24, 55, 1) calc(var(--maac-glow-intensity) * 50%), transparent);
+}
+
+/* ─── 8. CONTAINER QUERY RESPONSIVE TYPE ───
+   Type scales based on container width, not viewport.
+   Cards of different sizes get proportionally different text. */
+
+.maac-type-container {
+  container-type: inline-size;
+}
+
+@container (min-width: 300px) {
+  .maac-responsive-type {
+    font-size: clamp(1rem, 0.8rem + 0.4cqi, 1.2rem);
+  }
+}
+
+@container (min-width: 500px) {
+  .maac-responsive-type {
+    font-size: clamp(1.2rem, 0.9rem + 0.5cqi, 1.5rem);
+  }
+}
+
+@container (min-width: 800px) {
+  .maac-responsive-type {
+    font-size: clamp(1.5rem, 1rem + 0.6cqi, 2rem);
+  }
+}
+
+/* ─── 9. DRAMATIC CARD DEPTH ───
+   Red-tinted shadows that create a "stage lighting" effect. */
+
+.maac-depth-1 {
+  box-shadow: 0 4px 16px rgba(227, 24, 55, 0.06), 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.maac-depth-2 {
+  box-shadow: 0 8px 32px rgba(227, 24, 55, 0.10), 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.maac-depth-3 {
+  box-shadow: 0 16px 64px rgba(227, 24, 55, 0.15), 0 8px 16px rgba(0,0,0,0.3);
+}
+
+.maac-depth-4 {
+  box-shadow: 0 24px 80px rgba(227, 24, 55, 0.20), 0 12px 24px rgba(0,0,0,0.3);
+}
+
+/* ─── 10. SPRING PHYSICS EASING ─── */
+
+:root {
+  --maac-spring: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@supports (transition-timing-function: linear(0, 1)) {
+  :root {
+    --maac-spring: linear(
+      0, 0.002, 0.01, 0.024, 0.044, 0.07, 0.102, 0.14,
+      0.184, 0.234, 0.29, 0.352, 0.42, 0.494, 0.574,
+      0.66, 0.752, 0.85, 0.954, 1.02, 1.035, 1.02,
+      0.99, 0.975, 0.995, 1.008, 1.003, 1
+    );
+  }
+}
+
+/* ─── 11. REDUCED MOTION ─── */
+
+@media (prefers-reduced-motion: reduce) {
+  .maac-cinema-wipe,
+  .maac-cinema-rise,
+  .maac-type-breathe,
+  .maac-glow-pulse,
+  .maac-film-strip {
+    animation: none !important;
+  }
+  
+  .maac-type-breathe {
+    font-variation-settings: 'wght' 400 !important;
+  }
+}

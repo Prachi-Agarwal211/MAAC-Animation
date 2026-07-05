@@ -38,7 +38,6 @@ export default function VerticalCardGallery() {
   const rightViewportRef = useRef<HTMLDivElement>(null);
   const rightTrackRef = useRef<HTMLDivElement>(null);
   const segmentRefs = useRef<(SVGPathElement | null)[]>([]);
-  const inkFillRefs = useRef<(SVGPathElement | null)[]>([]);
   const pieCenterTextRef = useRef<SVGTextElement | null>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -57,24 +56,12 @@ export default function VerticalCardGallery() {
       if (!seg) return;
       const isActive = i === index;
       gsap.to(seg, {
-        strokeWidth: isActive ? 2 : 0.3,
+        strokeWidth: isActive ? 3 : 0.3,
         stroke: isActive ? "#E5D7B3" : "rgba(255,255,255,0.08)",
+        filter: isActive ? "url(#premiumShadow)" : "none",
         duration: 0.4,
         ease: "power2.out",
       });
-    });
-    // Ink fill: fade in active, fade out others
-    inkFillRefs.current.forEach((fill, i) => {
-      if (!fill) return;
-      if (i === index) {
-        if (prefersReduced) {
-          gsap.set(fill, { opacity: 0.55 });
-        } else {
-          gsap.fromTo(fill, { opacity: 0 }, { opacity: 0.55, duration: 1.2, ease: "power2.out" });
-        }
-      } else {
-        gsap.to(fill, { opacity: 0, duration: 0.4, ease: "power2.in" });
-      }
     });
   };
 
@@ -177,22 +164,10 @@ export default function VerticalCardGallery() {
                       </clipPath>
                     ))}
 
-                    {/* Ink bleed filter — organic spreading edges */}
-                    <filter id="inkBleed" x="-15%" y="-15%" width="130%" height="130%">
-                      <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
-                      <feComponentTransfer in="blur" result="threshold">
-                        <feFuncA type="discrete" tableValues="0 0 1 1 1" />
-                      </feComponentTransfer>
-                      <feTurbulence type="fractalNoise" baseFrequency="0.012 0.02" numOctaves="3" seed="5" result="noise" />
-                      <feDisplacementMap in="threshold" in2="noise" scale="18" xChannelSelector="R" yChannelSelector="G" />
+                    {/* Premium Gold Glow Filter */}
+                    <filter id="premiumShadow" x="-20%" y="-20%" width="140%" height="140%">
+                      <feDropShadow dx="0" dy="0" stdDeviation="6" floodColor="#E5D7B3" floodOpacity="0.6" />
                     </filter>
-
-                    {/* Ink fill gradient — MAAC red watercolor */}
-                    <radialGradient id="inkFill" cx="50%" cy="50%" r="50%">
-                      <stop offset="0%" stopColor="#E31837" stopOpacity="1" />
-                      <stop offset="50%" stopColor="#B91C30" stopOpacity="0.8" />
-                      <stop offset="100%" stopColor="#7F1020" stopOpacity="0.4" />
-                    </radialGradient>
 
                     {/* Center circle gradient */}
                     <radialGradient id="centerGrad" cx="50%" cy="50%" r="50%">
@@ -217,31 +192,39 @@ export default function VerticalCardGallery() {
                     </filter>
                   </defs>
 
-                  {/* Ink splatter dots — scattered around outer edge */}
-                  <circle cx={CX - 165} cy={CY - 140} r="2.5" fill="#E31837" opacity="0.35" filter="url(#dotGlow)" />
-                  <circle cx={CX + 175} cy={CY - 100} r="1.8" fill="#E31837" opacity="0.25" filter="url(#dotGlow)" />
-                  <circle cx={CX + 140} cy={CY + 155} r="3" fill="#E31837" opacity="0.2" filter="url(#dotGlow)" />
-                  <circle cx={CX - 180} cy={CY + 80} r="2" fill="#FFD700" opacity="0.2" filter="url(#dotGlow)" />
-                  <circle cx={CX + 50} cy={CY - 185} r="1.5" fill="#E31837" opacity="0.3" filter="url(#dotGlow)" />
-                  <circle cx={CX - 90} cy={CY + 178} r="2.2" fill="#FFD700" opacity="0.15" filter="url(#dotGlow)" />
-
                   {/* Outer decorative tick ring */}
                   <circle cx={CX} cy={CY} r={OUTER_R + 10} fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="0.8" strokeDasharray="1.5 7" />
 
                   {/* Background circle behind segments */}
                   <circle cx={CX} cy={CY} r={OUTER_R} fill="rgba(15,15,15,0.3)" stroke="rgba(255,255,255,0.08)" strokeWidth="1" />
 
-                  {/* Segment paths + clipped images + ink fills */}
+                  {/* Segment paths + clipped images */}
                   {featureCards.map((card, i) => (
-                    <g key={i}>
-                      {/* Base segment path */}
-                      <path
-                        ref={el => { segmentRefs.current[i] = el; }}
-                        d={getSegmentPath(i, OUTER_R, INNER_R)}
-                        fill="rgba(255,255,255,0.02)"
-                        stroke="rgba(255,255,255,0.08)"
-                        strokeWidth="0.3"
-                      />
+                    <g key={i} 
+                       className="cursor-pointer group" 
+                       onClick={() => {
+                         const el = cardRefs.current[i];
+                         if (el) {
+                            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                         }
+                       }}
+                       onMouseEnter={() => {
+                         if (i !== activeIndex) {
+                           const seg = segmentRefs.current[i];
+                           if (seg) {
+                             gsap.to(seg, { stroke: "rgba(229, 215, 179, 0.4)", duration: 0.3 });
+                           }
+                         }
+                       }}
+                       onMouseLeave={() => {
+                         if (i !== activeIndex) {
+                           const seg = segmentRefs.current[i];
+                           if (seg) {
+                             gsap.to(seg, { stroke: "rgba(255,255,255,0.08)", duration: 0.3 });
+                           }
+                         }
+                       }}
+                    >
                       {/* Clipped image */}
                       <g clipPath={`url(#segClip-${i})`}>
                         <image
@@ -249,18 +232,17 @@ export default function VerticalCardGallery() {
                           x={CX - OUTER_R} y={CY - OUTER_R}
                           width={OUTER_R * 2} height={OUTER_R * 2}
                           preserveAspectRatio="xMidYMid slice"
-                          opacity={activeIndex === i ? "0.85" : "0.12"}
-                          className="transition-opacity duration-500"
+                          opacity={activeIndex === i ? "1" : "0.12"}
+                          className="transition-opacity duration-500 group-hover:opacity-40"
                         />
                       </g>
-                      {/* Ink fill — bleeds in when active */}
+                      {/* Base segment path (drawn on top for clear strokes and shadow) */}
                       <path
-                        ref={el => { inkFillRefs.current[i] = el; }}
+                        ref={el => { segmentRefs.current[i] = el; }}
                         d={getSegmentPath(i, OUTER_R, INNER_R)}
-                        fill="url(#inkFill)"
-                        opacity="0"
-                        filter="url(#inkBleed)"
-                        style={{ pointerEvents: "none" }}
+                        fill="transparent"
+                        stroke="rgba(255,255,255,0.08)"
+                        strokeWidth="0.3"
                       />
                     </g>
                   ))}

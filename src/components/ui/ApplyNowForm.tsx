@@ -94,7 +94,7 @@ export default function ApplyNowForm() {
       onSubmit={handleSubmit}
       className="glass rounded-[2.5rem] p-8 md:p-12 space-y-6 border border-white/5 relative overflow-hidden shadow-2xl"
     >
-      <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#BF953F] to-transparent" />
+      <div className="absolute top-0 left-0 w-full h-[2px] bg-[#BF953F]/40 shadow-[0_0_10px_rgba(191,149,63,0.2)]" />
       <h3 className="font-display text-xl text-white mb-4 font-bold uppercase leading-[1.1] tracking-[0.1em]">Express Interest</h3>
 
       <div className="space-y-4">

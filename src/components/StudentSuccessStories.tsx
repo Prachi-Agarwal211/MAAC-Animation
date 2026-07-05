@@ -104,7 +104,7 @@ export default function StudentSuccessStories() {
               className="success-card glass-card group relative overflow-hidden transition-all duration-700"
             >
               {/* Top Gradient Line */}
-              <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#BF953F] to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="absolute top-0 left-0 right-0 h-[2px] bg-[#BF953F]/50 shadow-[0_0_10px_rgba(191,149,63,0.3)] opacity-0 group-hover:opacity-100 transition-opacity" />
 
               <div className="p-8">
                 {/* Avatar & Info */}

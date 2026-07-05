@@ -72,7 +72,7 @@ const EventCard = ({ event }: { event: typeof eventsData[0] }) => {
   return (
     <div
       ref={cardRef}
-      className="event-card glass-card group relative overflow-hidden transition-all duration-700 cursor-pointer"
+      className="event-card glass-card maac-liquid-card maac-wipe-card group relative overflow-hidden transition-all duration-700 cursor-pointer"
     >
       {/* Icon & Color Accent */}
       <div className="absolute top-0 right-0 w-32 h-32 rounded-bl-full opacity-10 transition-opacity group-hover:opacity-20" style={{ backgroundColor: event.color }} />
