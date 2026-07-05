@@ -88,8 +88,6 @@ export default function VerticalCardGallery() {
           end: () => `+=${getMaxTranslate()}`,
           scrub: true,
           pin: true,
-          pinReparent: true,
-          anticipatePin: 1,
           invalidateOnRefresh: true,
           onUpdate: (self) => {
             const max = getMaxTranslate();

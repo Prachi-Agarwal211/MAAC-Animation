@@ -147,7 +147,7 @@ export default function HeroTrustTransition({ hero }: Props) {
   }, { scope: containerRef });
 
   return (
-    <div ref={containerRef} className="relative w-full h-[100vh] overflow-hidden bg-[#080808]">
+    <div ref={containerRef} className="relative w-full h-[100vh] overflow-hidden bg-transparent">
       {/* Hero layer — video + hero text */}
       <div className="absolute inset-0 z-0">
         {hero}
@@ -187,15 +187,14 @@ export default function HeroTrustTransition({ hero }: Props) {
               {[...certifications, ...certifications, ...certifications, ...certifications].map((cert, i) => (
                 <div
                   key={`${cert.id}-${i}`}
-                  className="shrink-0 flex items-center justify-center w-[80px] h-[80px] md:w-[100px] md:h-[100px] grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300"
+                  className="shrink-0 flex items-center justify-center w-[160px] h-[90px] md:w-[220px] md:h-[110px] bg-white rounded-2xl p-4 shadow-xl hover:scale-105 transition-transform duration-300"
                 >
                   <Image
                     src={cert.logo}
                     alt={cert.name}
-                    width={100}
-                    height={100}
-                    className="object-contain w-full h-full mix-blend-screen"
-                    style={{ filter: "grayscale(1) invert(1) brightness(2)" }}
+                    width={180}
+                    height={80}
+                    className="object-contain w-full h-full mix-blend-multiply"
                   />
                 </div>
               ))}
