@@ -118,7 +118,7 @@ export default function GalleryClient() {
                     src={item.src}
                     alt={item.alt}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="object-cover group-hover:-translate-y-1 transition-transform duration-500"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     loading="lazy"
                     placeholder="blur"

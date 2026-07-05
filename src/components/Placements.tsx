@@ -103,7 +103,7 @@ function Placements() {
   const renderCompany = (company: typeof placementCompanies[0], i: number) => (
     <div key={`${company.name}-${i}`} className="group">
       <div
-        className="h-20 sm:h-24 md:h-28 w-full rounded-xl border border-white/10 bg-white flex items-center justify-center px-4 sm:px-6 transition-transform duration-300 hover:scale-[1.02] overflow-hidden"
+        className="h-20 sm:h-24 md:h-28 w-full rounded-xl border border-white/10 bg-white flex items-center justify-center px-4 sm:px-6 transition-transform duration-300 hover:-translate-y-0.5 overflow-hidden"
         style={{ backgroundColor: company.bgColor }}
       >
         {/* Company Logo Image */}

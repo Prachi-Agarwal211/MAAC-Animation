@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Syne } from "next/font/google";
+import { Manrope, Syne } from "next/font/google";
 import "./globals.css";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
@@ -20,16 +20,16 @@ const FloatingActions = dynamic(() => import("@/components/FloatingActions"), { 
 const LenisProvider = dynamic(() => import("@/components/LenisProvider"), { ssr: false });
 const ClientShell = dynamic(() => import("@/components/ClientShell"), { ssr: true });
 
-const inter = Inter({
+const manrope = Manrope({
   subsets: ["latin"],
-  weight: ["400", "500", "700"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-inter",
   display: "swap",
 });
 
 const syne = Syne({
   subsets: ["latin"],
-  weight: ["400", "600", "700"],
+  weight: ["400", "500", "600", "700", "800"],
   variable: "--font-syne",
   display: "swap",
 });
@@ -190,7 +190,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${syne.variable}`}>
+    <html lang="en" className={`${manrope.variable} ${syne.variable}`}>
       <head>
         <script
           dangerouslySetInnerHTML={{
@@ -260,7 +260,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.variable} ${syne.variable} font-body antialiased text-[#F0EBE1] bg-transparent`}
+        className={`${manrope.variable} ${syne.variable} font-body antialiased text-[#F0EBE1] bg-transparent`}
       >
         {/* Google Tag Manager noscript fallback (for users with JS disabled) */}
         {process.env.NEXT_PUBLIC_GTM_ID && (

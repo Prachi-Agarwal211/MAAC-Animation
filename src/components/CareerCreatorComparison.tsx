@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Sparkles, Rocket } from "lucide-react";
+import { ArrowRight, Rocket, Pen } from "lucide-react";
 import FadeIn from "@/components/animations/FadeIn";
 
 export default function CareerCreatorComparison() {
@@ -74,7 +74,7 @@ export default function CareerCreatorComparison() {
             <div>
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-10 h-10 rounded-xl bg-[#FF6B35]/10 flex items-center justify-center border border-[#FF6B35]/30">
-                  <Sparkles size={18} className="text-[#FF6B35]" />
+                  <Pen size={18} className="text-[#FF6B35]" />
                 </div>
                 <span className="text-[#FF6B35] text-[10px] font-bold tracking-[0.3em] uppercase">Pathway 02</span>
               </div>

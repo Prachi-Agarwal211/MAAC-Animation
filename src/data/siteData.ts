@@ -173,6 +173,12 @@ export const tickerStats = [
   "B.Voc Degree Available",
 ];
 
+export const statSegments = [
+  { label: "Placement Rate", value: 95, color: "#E31837" },
+  { label: "Partner Companies", value: 3, color: "#FF6B35" },
+  { label: "Years of Excellence", value: 2, color: "#FFD700" },
+];
+
 export type NavChildLink = { label: string; href: string; external?: boolean };
 /** Same taxonomy as maacindia.com Courses menu; links point to Jaipur site sections where possible. */
 export type NavMegaGroup = { title: string; links: NavChildLink[] };

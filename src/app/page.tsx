@@ -12,10 +12,13 @@ import StudentSuccessStories from "@/components/StudentSuccessStories";
 import ApplyNow from "@/components/ApplyNow";
 import FAQSection from "@/components/FAQSection";
 import ErrorBoundary from "@/components/ErrorBoundary";
+import Awards from "@/components/Awards";
+import Placements from "@/components/Placements";
 
 // Client Components (Complex animations/state)
 import MAACXHero from "@/components/hero/MAACXHero";
 import HeroTrustTransition from "@/components/HeroTrustTransition";
+import StatsPieReveal from "@/components/ui/StatsPieReveal";
 
 const VerticalCardGallery = dynamic(() => import("@/components/VerticalCardGallery"), { ssr: true });
 const StudentShowcase = dynamic(() => import("@/components/StudentShowcase"), { ssr: true });
@@ -49,6 +52,7 @@ export default function Home() {
         <HeroTrustTransition 
           hero={<MAACXHero />}
           badges={<TrustBadges />}
+          stats={<StatsPieReveal />}
         />
       </ErrorBoundary>
 
@@ -75,6 +79,14 @@ export default function Home() {
 
           <div className="bg-transparent">
             <IndustryPartners />
+          </div>
+
+          <div className="bg-transparent">
+            <Placements />
+          </div>
+
+          <div className="bg-transparent">
+            <Awards />
           </div>
 
           <div className="bg-transparent">

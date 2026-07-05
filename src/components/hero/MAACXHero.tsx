@@ -2,6 +2,7 @@
 
 import { useRef, useState, useEffect, useCallback } from "react";
 import gsap from "@/lib/gsap";
+import { getLenis } from "@/lib/lenis";
 
 import { useGSAP } from "@gsap/react";
 
@@ -25,12 +26,19 @@ export default function MAACXHero({ onIntroReveal }: Props) {
     if (typeof window === "undefined") return;
 
     const mediaReduced = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setIsReducedMotion(mediaReduced.matches);
-    setIsMobile(window.innerWidth < 768);
+    const mobileQuery = window.matchMedia("(max-width: 1023px)");
 
-    const handler = (e: MediaQueryListEvent) => setIsReducedMotion(e.matches);
-    mediaReduced.addEventListener("change", handler);
-    return () => mediaReduced.removeEventListener("change", handler);
+    setIsReducedMotion(mediaReduced.matches);
+    setIsMobile(mobileQuery.matches);
+
+    const reducedHandler = (e: MediaQueryListEvent) => setIsReducedMotion(e.matches);
+    const mobileHandler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mediaReduced.addEventListener("change", reducedHandler);
+    mobileQuery.addEventListener("change", mobileHandler);
+    return () => {
+      mediaReduced.removeEventListener("change", reducedHandler);
+      mobileQuery.removeEventListener("change", mobileHandler);
+    };
   }, []);
 
   // Lazy-load video after poster is visible and page is idle
@@ -124,13 +132,27 @@ export default function MAACXHero({ onIntroReveal }: Props) {
     if (!videoReady) return;
     if (isReducedMotion) return;
 
-    if (isMobile) {
-      heroVideoRef.current!.loop = false;
-    } else {
-      heroVideoRef.current!.loop = true;
-    }
+    heroVideoRef.current!.loop = true;
     playVideo();
-  }, [videoReady, isMobile, isReducedMotion, playVideo]);
+  }, [videoReady, isReducedMotion, playVideo]);
+
+  // Kinetic typography — weight drops on fast scroll, settles at rest
+  useEffect(() => {
+    const h1 = sectionRef.current?.querySelector("h1");
+    if (!h1 || isReducedMotion) return;
+
+    let raf: number;
+    const update = () => {
+      const lenis = getLenis();
+      const v = lenis?.velocity ?? 0;
+      const clamped = Math.min(Math.abs(v), 1200);
+      const wght = 800 - (clamped / 1200) * 400;
+      h1.style.setProperty("--wght", String(wght));
+      raf = requestAnimationFrame(update);
+    };
+    raf = requestAnimationFrame(update);
+    return () => cancelAnimationFrame(raf);
+  }, [isReducedMotion]);
 
   const toggleMute = useCallback(() => {
     const next = !isMuted;
@@ -141,7 +163,7 @@ export default function MAACXHero({ onIntroReveal }: Props) {
   return (
     <section ref={sectionRef} className="relative isolate min-h-[100svh] w-full overflow-x-hidden">
       {/* Background — poster-first, video loads lazily */}
-      <div ref={bgRef} className="hero-bg-container absolute inset-0 z-0 will-change-transform origin-top">
+      <div ref={bgRef} className="hero-bg-container absolute inset-0 z-0 overflow-hidden will-change-transform origin-top">
         {/* Poster image shows instantly */}
         <img
           src="/hero-poster.jpg"
@@ -174,7 +196,7 @@ export default function MAACXHero({ onIntroReveal }: Props) {
       >
         <div className="flex w-full flex-col gap-16 lg:flex-row lg:items-end lg:justify-between lg:gap-12">
           <div className="maacx-content min-w-0 max-w-3xl flex-1">
-            <h1 className="mb-10 sm:mb-12 maacx-element" style={{ textShadow: "0 2px 20px rgba(0,0,0,0.8), 0 4px 40px rgba(0,0,0,0.5)" }}>
+            <h1 className="mb-10 sm:mb-12 maacx-element kinetic-weight" style={{ textShadow: "0 2px 20px rgba(0,0,0,0.8), 0 4px 40px rgba(0,0,0,0.5)" }}>
               <span className="block font-display text-[clamp(1.8rem,4.5vw,3.2rem)] font-bold uppercase leading-[0.9] tracking-[0.1em] text-white">
                 FROM BASICS
               </span>

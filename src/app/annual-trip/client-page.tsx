@@ -305,7 +305,7 @@ function AnnualTripPage() {
                         src={img.src}
                         alt={img.title}
                         fill
-                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                        className="object-cover transition-transform duration-300 group-hover:-translate-y-1"
                         sizes="110px"
                         loading={idx < 6 ? "eager" : "lazy"}
                       />

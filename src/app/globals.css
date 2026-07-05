@@ -49,6 +49,10 @@ body {
   /* ── Animation Easings ── */
   --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ── Brand Shadows ── */
+  --shadow-brand: 0 20px 40px -10px rgba(227, 24, 55, 0.25), 0 8px 16px -8px rgba(0,0,0,0.4);
+  --shadow-brand-gold: 0 20px 40px -10px rgba(255, 215, 0, 0.15), 0 8px 16px -8px rgba(0,0,0,0.4);
 }
 
 /* ── Luxury Utilities ── */
@@ -995,9 +999,31 @@ select:focus-visible {
   animation: fadeInUp 0.7s ease forwards;
 }
 
+/* ═══════════════════════════════════════════════════════
+   KINETIC TYPOGRAPHY — scroll-velocity driven weight
+   ═══════════════════════════════════════════════════════ */
+.kinetic-weight {
+  font-variation-settings: "wght" var(--wght, 700);
+  transition: font-variation-settings 0.3s var(--ease-expo);
+}
+
 /* Desktop-only smooth scrolling to avoid iOS jank/heating */
 @media (min-width: 768px) {
   html {
     scroll-behavior: smooth;
   }
+}
+
+/* ═══════════════════════════════════════════════════════
+   VIEW TRANSITIONS — disable browser default cross-fade
+   so GSAP page transition owns the visual entirely
+   ═══════════════════════════════════════════════════════ */
+::view-transition-old(root) {
+  animation: none;
+  opacity: 1;
+}
+
+::view-transition-new(root) {
+  animation: none;
+  opacity: 1;
 }

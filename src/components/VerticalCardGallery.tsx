@@ -283,7 +283,7 @@ export default function VerticalCardGallery() {
                         src={featureCards[index]?.image || "/campus-image.jpg"}
                         alt={card.title}
                         fill
-                        className="object-cover opacity-90 transition-transform duration-700 group-hover:scale-105"
+                        className="object-cover opacity-90 transition-transform duration-700 group-hover:-translate-y-1"
                         sizes="(max-width: 1024px) 100vw, 30vw"
                         priority={index === 0}
                         placeholder="blur"

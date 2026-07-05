@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useMemo } from 'react';
-import { ChevronRight, RotateCcw, Award, CheckCircle2, Sparkles } from 'lucide-react';
+import { ChevronRight, RotateCcw, Award, CheckCircle2 } from 'lucide-react';
 import Link from 'next/link';
 
 // --- Quiz Data ---
@@ -241,7 +241,7 @@ export default function CareerAssessment() {
         <div className={`${getTransitionClass('intro')}`}>
           <div className="text-center space-y-12 py-12">
             <div className="inline-block p-4 rounded-full bg-white/5 border border-white/10 mb-4 glass-card">
-              <Sparkles className="text-[#FFD700] w-10 h-10" />
+              <Award className="text-[#FFD700] w-10 h-10" />
             </div>
             <div className="space-y-4">
               <p className="metallic-gold-text text-[10px] font-bold tracking-[0.4em] uppercase">
@@ -371,7 +371,7 @@ export default function CareerAssessment() {
             <div className="flex flex-col md:flex-row gap-6 justify-center items-center py-12">
               <button
                 onClick={() => window.dispatchEvent(new Event("maac:open_contact_modal"))}
-                className="w-full md:w-auto px-12 py-6 bg-white text-black font-bold uppercase tracking-[0.2em] text-xs text-center hover:bg-[#FFD700] transition-all hover:scale-105"
+                className="w-full md:w-auto px-12 py-6 bg-white text-black font-bold uppercase tracking-[0.2em] text-xs text-center hover:bg-[#FFD700] transition-all hover:-translate-y-1 hover:brightness-110"
               >
                 Book 1-on-1 Counseling
               </button>

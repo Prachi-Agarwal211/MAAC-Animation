@@ -4,14 +4,14 @@ import { useState, useRef, useCallback, memo, useMemo } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "@/lib/gsap";
 import { testimonialsData } from "@/data/siteData";
-import { ChevronLeft, ChevronRight, Play, Volume2 } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const Waveform = memo(function Waveform() {
-  const heights = useMemo(() => 
+  const heights = useMemo(() =>
     Array.from({ length: 12 }, () => Math.random() * 100),
     []
   );
-  
+
   return (
     <div className="flex items-center gap-1 h-8">
       {heights.map((height, i) => (
@@ -65,20 +65,11 @@ function Testimonials() {
           <div
             className="glass rounded-[48px] p-6 md:p-12 lg:p-20 relative overflow-hidden group border-white/5"
           >
-            {/* Header: Audio UI */}
-            <div className="flex items-center justify-between mb-16 border-b border-white/5 pb-8">
-               <div className="flex items-center gap-6">
-                  <div className="w-12 h-12 rounded-full metallic-gold-accent flex items-center justify-center text-white">
-                    <Play size={20} fill="currentColor" />
-                  </div>
-                  <div>
-                    <span className="block text-[10px] font-bold metallic-gold-text uppercase tracking-[0.3em] mb-1">Live Playback</span>
-                    <Waveform />
-                  </div>
-               </div>
-               <div className="hidden sm:flex items-center gap-3 text-white/20">
-                  <Volume2 size={18} />
-                  <span className="text-[10px] font-bold uppercase tracking-widest tabular-nums">00:4{active} / 03:12</span>
+            {/* Header: Waveform decoration (ambient, not interactive) */}
+            <div className="flex items-center gap-6 mb-16 border-b border-white/5 pb-8">
+               <div>
+                 <span className="block text-[10px] font-bold metallic-gold-text uppercase tracking-[0.3em] mb-1">Alumni Voices</span>
+                 <Waveform />
                </div>
             </div>
 

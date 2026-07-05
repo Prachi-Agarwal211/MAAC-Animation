@@ -1,3 +1,5 @@
+import FadeIn from "@/components/animations/FadeIn";
+
 interface Course {
   slug: string;
   fullName: string;
@@ -34,9 +36,12 @@ export default function CourseFeeAdmission({ course }: { course: Course }) {
   return (
     <section className="py-20 bg-[#0f0f0f]">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="font-display text-3xl text-[#F0EBE1] mb-8 text-center font-black uppercase leading-[1.1] tracking-[0.1em]">
-          {course.fullName} — Fee Structure & Admission
-        </h2>
+        <FadeIn>
+          <h2 className="font-display text-3xl text-[#F0EBE1] mb-8 text-center font-black uppercase leading-[1.1] tracking-[0.1em]">
+            {course.fullName} — Fee Structure & Admission
+          </h2>
+        </FadeIn>
+        <FadeIn stagger={0.15}>
         <div className="grid md:grid-cols-2 gap-8">
           {/* Fee Card */}
           <div className="bg-[#161616] rounded-xl p-8 border border-white/5">
@@ -92,8 +97,10 @@ export default function CourseFeeAdmission({ course }: { course: Course }) {
             </div>
           </div>
         </div>
+        </FadeIn>
 
         {/* Location-specific paragraph */}
+        <FadeIn>
         <div className="mt-8 p-6 bg-[#161616] rounded-xl border border-white/5">
           <h3 className="font-display text-lg text-[#F0EBE1] mb-2 font-black uppercase leading-[1.1] tracking-[0.1em]">
             {course.fullName} in Jaipur — Why MAAC?
@@ -102,6 +109,7 @@ export default function CourseFeeAdmission({ course }: { course: Course }) {
             MAAC Jaipur offers the {course.fullName} program at our centrally-located C-Scheme campus on Subhash Marg, easily accessible from Malviya Nagar, Vaishali Nagar, Mansarovar, Bani Park, and across Jaipur city. Our {course.fullName} course in Jaipur features industry-standard labs, 95% placement assistance, and faculty with hands-on studio experience. Students from all over Rajasthan — including Ajmer, Jodhpur, Kota, and Udaipur — join our programs and often relocate to Jaipur for the quality of training we provide. Batch timings are available morning, afternoon, and weekends to suit working professionals and college students.
           </p>
         </div>
+        </FadeIn>
       </div>
     </section>
   );
