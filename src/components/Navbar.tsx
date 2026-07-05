@@ -44,17 +44,24 @@ export default function Navbar() {
   }, [isHome]);
 
   useEffect(() => {
+    let ticking = false;
     const onScroll = () => {
-      const y = window.scrollY;
-      setScrolled(y > 24);
-      if (mobileMenuOpenRef.current) {
-        setHidden(false);
-      } else if (y > 100) {
-        setHidden(y > lastScrollY.current);
-      } else {
-        setHidden(false);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const y = window.scrollY;
+          setScrolled(y > 24);
+          if (mobileMenuOpenRef.current) {
+            setHidden(false);
+          } else if (y > 100) {
+            setHidden(y > lastScrollY.current);
+          } else {
+            setHidden(false);
+          }
+          lastScrollY.current = y;
+          ticking = false;
+        });
+        ticking = true;
       }
-      lastScrollY.current = y;
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();

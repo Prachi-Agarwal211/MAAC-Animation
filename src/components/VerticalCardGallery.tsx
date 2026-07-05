@@ -4,8 +4,7 @@ import { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useGSAP } from "@gsap/react";
-import gsap from "@/lib/gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import gsap, { ScrollTrigger } from "@/lib/gsap";
 import { ArrowRight } from "lucide-react";
 import { maacStandardFeatures } from "@/data/siteData";
 
@@ -14,10 +13,11 @@ const featureCards = maacStandardFeatures;
 const CX = 256, CY = 256, OUTER_R = 190, INNER_R = 75;
 const SEGMENTS = featureCards.length;
 const ANGLE_PER_SEG = 360 / SEGMENTS;
+const GAP = 1.2; // degrees gap between segments
 
 function getSegmentPath(index: number, outerR: number, innerR: number) {
-  const startDeg = index * ANGLE_PER_SEG - 90;
-  const endDeg = (index + 1) * ANGLE_PER_SEG - 90;
+  const startDeg = index * ANGLE_PER_SEG - 90 + GAP;
+  const endDeg = (index + 1) * ANGLE_PER_SEG - 90 - GAP;
   const start = startDeg * (Math.PI / 180);
   const end = endDeg * (Math.PI / 180);
   const x1o = CX + outerR * Math.cos(start);
@@ -38,10 +38,14 @@ export default function VerticalCardGallery() {
   const rightViewportRef = useRef<HTMLDivElement>(null);
   const rightTrackRef = useRef<HTMLDivElement>(null);
   const segmentRefs = useRef<(SVGPathElement | null)[]>([]);
+  const inkFillRefs = useRef<(SVGPathElement | null)[]>([]);
   const pieCenterTextRef = useRef<SVGTextElement | null>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const [activeIndex, setActiveIndex] = useState(0);
+
+  const prefersReduced = typeof window !== "undefined"
+    && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   const updateActiveSegment = (index: number) => {
     if (index < 0 || index >= SEGMENTS) return;
@@ -51,12 +55,26 @@ export default function VerticalCardGallery() {
     }
     segmentRefs.current.forEach((seg, i) => {
       if (!seg) return;
+      const isActive = i === index;
       gsap.to(seg, {
-        strokeWidth: i === index ? 3 : 1,
-        stroke: i === index ? "#E5D7B3" : "rgba(255,255,255,0.2)",
-        filter: i === index ? "drop-shadow(0px 0px 8px rgba(229,215,179,0.3))" : "none",
-        duration: 0.3
+        strokeWidth: isActive ? 2 : 0.3,
+        stroke: isActive ? "#E5D7B3" : "rgba(255,255,255,0.08)",
+        duration: 0.4,
+        ease: "power2.out",
       });
+    });
+    // Ink fill: fade in active, fade out others
+    inkFillRefs.current.forEach((fill, i) => {
+      if (!fill) return;
+      if (i === index) {
+        if (prefersReduced) {
+          gsap.set(fill, { opacity: 0.55 });
+        } else {
+          gsap.fromTo(fill, { opacity: 0 }, { opacity: 0.55, duration: 1.2, ease: "power2.out" });
+        }
+      } else {
+        gsap.to(fill, { opacity: 0, duration: 0.4, ease: "power2.in" });
+      }
     });
   };
 
@@ -148,42 +166,118 @@ export default function VerticalCardGallery() {
           <div className="flex flex-col lg:flex-row justify-between gap-y-12 lg:h-full">
 
             {/* Left: pie — fills full height, centers pie vertically */}
-            <div className="hidden lg:flex w-full lg:w-[45%] xl:w-[48%] flex-shrink-0 items-center justify-center lg:pl-4 xl:pl-16">
-              <div className="w-full max-w-[480px]">
+            <div className="hidden lg:flex w-full lg:w-[50%] xl:w-[52%] flex-shrink-0 items-center justify-center lg:pl-4 xl:pl-8">
+              <div className="w-full max-w-[600px]">
                 <svg viewBox="0 0 512 512" className="w-full h-full overflow-visible">
                   <defs>
+                    {/* Clip paths for segment images */}
                     {featureCards.map((_, i) => (
                       <clipPath key={`clip-${i}`} id={`segClip-${i}`}>
                         <path d={getSegmentPath(i, OUTER_R, INNER_R)} />
                       </clipPath>
                     ))}
+
+                    {/* Ink bleed filter — organic spreading edges */}
+                    <filter id="inkBleed" x="-15%" y="-15%" width="130%" height="130%">
+                      <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
+                      <feComponentTransfer in="blur" result="threshold">
+                        <feFuncA type="discrete" tableValues="0 0 1 1 1" />
+                      </feComponentTransfer>
+                      <feTurbulence type="fractalNoise" baseFrequency="0.012 0.02" numOctaves="3" seed="5" result="noise" />
+                      <feDisplacementMap in="threshold" in2="noise" scale="18" xChannelSelector="R" yChannelSelector="G" />
+                    </filter>
+
+                    {/* Ink fill gradient — MAAC red watercolor */}
+                    <radialGradient id="inkFill" cx="50%" cy="50%" r="50%">
+                      <stop offset="0%" stopColor="#E31837" stopOpacity="1" />
+                      <stop offset="50%" stopColor="#B91C30" stopOpacity="0.8" />
+                      <stop offset="100%" stopColor="#7F1020" stopOpacity="0.4" />
+                    </radialGradient>
+
+                    {/* Center circle gradient */}
+                    <radialGradient id="centerGrad" cx="50%" cy="50%" r="50%">
+                      <stop offset="0%" stopColor="#1a1a1a" />
+                      <stop offset="100%" stopColor="#0a0a0a" />
+                    </radialGradient>
+
+                    {/* Gold ring gradient */}
+                    <linearGradient id="goldRing" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#FFD700" />
+                      <stop offset="50%" stopColor="#E5D7B3" />
+                      <stop offset="100%" stopColor="#FFD700" />
+                    </linearGradient>
+
+                    {/* Dot glow filter */}
+                    <filter id="dotGlow" x="-100%" y="-100%" width="300%" height="300%">
+                      <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur" />
+                      <feMerge>
+                        <feMergeNode in="blur" />
+                        <feMergeNode in="SourceGraphic" />
+                      </feMerge>
+                    </filter>
                   </defs>
 
-                  <circle cx={CX} cy={CY} r={OUTER_R} fill="rgba(20,20,20,0.2)" stroke="rgba(255,255,255,0.2)" strokeWidth="2" />
+                  {/* Ink splatter dots — scattered around outer edge */}
+                  <circle cx={CX - 165} cy={CY - 140} r="2.5" fill="#E31837" opacity="0.35" filter="url(#dotGlow)" />
+                  <circle cx={CX + 175} cy={CY - 100} r="1.8" fill="#E31837" opacity="0.25" filter="url(#dotGlow)" />
+                  <circle cx={CX + 140} cy={CY + 155} r="3" fill="#E31837" opacity="0.2" filter="url(#dotGlow)" />
+                  <circle cx={CX - 180} cy={CY + 80} r="2" fill="#FFD700" opacity="0.2" filter="url(#dotGlow)" />
+                  <circle cx={CX + 50} cy={CY - 185} r="1.5" fill="#E31837" opacity="0.3" filter="url(#dotGlow)" />
+                  <circle cx={CX - 90} cy={CY + 178} r="2.2" fill="#FFD700" opacity="0.15" filter="url(#dotGlow)" />
 
+                  {/* Outer decorative tick ring */}
+                  <circle cx={CX} cy={CY} r={OUTER_R + 10} fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="0.8" strokeDasharray="1.5 7" />
+
+                  {/* Background circle behind segments */}
+                  <circle cx={CX} cy={CY} r={OUTER_R} fill="rgba(15,15,15,0.3)" stroke="rgba(255,255,255,0.08)" strokeWidth="1" />
+
+                  {/* Segment paths + clipped images + ink fills */}
                   {featureCards.map((card, i) => (
                     <g key={i}>
+                      {/* Base segment path */}
                       <path
                         ref={el => { segmentRefs.current[i] = el; }}
                         d={getSegmentPath(i, OUTER_R, INNER_R)}
-                        fill="rgba(255,255,255,0.03)"
-                        stroke="rgba(255,255,255,0.2)"
-                        strokeWidth="1.5"
+                        fill="rgba(255,255,255,0.02)"
+                        stroke="rgba(255,255,255,0.08)"
+                        strokeWidth="0.3"
                       />
+                      {/* Clipped image */}
                       <g clipPath={`url(#segClip-${i})`}>
                         <image
                           href={featureCards[i]?.image || "/campus-image.jpg"}
                           x={CX - OUTER_R} y={CY - OUTER_R}
                           width={OUTER_R * 2} height={OUTER_R * 2}
                           preserveAspectRatio="xMidYMid slice"
-                          opacity={activeIndex === i ? "0.8" : "0.2"}
+                          opacity={activeIndex === i ? "0.85" : "0.12"}
                           className="transition-opacity duration-500"
                         />
                       </g>
+                      {/* Ink fill — bleeds in when active */}
+                      <path
+                        ref={el => { inkFillRefs.current[i] = el; }}
+                        d={getSegmentPath(i, OUTER_R, INNER_R)}
+                        fill="url(#inkFill)"
+                        opacity="0"
+                        filter="url(#inkBleed)"
+                        style={{ pointerEvents: "none" }}
+                      />
                     </g>
                   ))}
 
-                  <circle cx={CX} cy={CY} r={INNER_R} fill="rgba(10,10,10,0.9)" stroke="#FFD700" strokeWidth="3" className="drop-shadow-[0_0_20px_rgba(255,215,0,0.4)]" />
+                  {/* Inner decorative ring */}
+                  <circle cx={CX} cy={CY} r={INNER_R + 8} fill="none" stroke="rgba(255,215,0,0.1)" strokeWidth="0.5" />
+
+                  {/* Center: outer frame ring */}
+                  <circle cx={CX} cy={CY} r={INNER_R + 3} fill="none" stroke="rgba(255,215,0,0.15)" strokeWidth="0.5" />
+
+                  {/* Center: main circle */}
+                  <circle cx={CX} cy={CY} r={INNER_R} fill="url(#centerGrad)" stroke="url(#goldRing)" strokeWidth="2.5" />
+
+                  {/* Center: inner pulse ring */}
+                  <circle cx={CX} cy={CY} r={INNER_R - 5} fill="none" stroke="rgba(255,215,0,0.15)" strokeWidth="0.5" className="animate-[pulse-ring_2.5s_ease-out_infinite]" />
+
+                  {/* Center: counter text */}
                   <text ref={pieCenterTextRef} x={CX} y={CY + 5} textAnchor="middle" className="fill-white font-display font-bold uppercase leading-[1.1] tracking-[0.1em]" style={{ fontSize: "clamp(40px, 8vw, 64px)" }}>01</text>
                   <text x={CX} y={CY + 38} textAnchor="middle" className="fill-[#FFD700] font-black uppercase tracking-[0.3em]" style={{ fontSize: "clamp(10px, 2vw, 16px)" }}>OF {String(SEGMENTS).padStart(2,'0')}</text>
                 </svg>
@@ -193,7 +287,7 @@ export default function VerticalCardGallery() {
             {/* Right: scrolling cards */}
             <div
               ref={rightViewportRef}
-              className="w-full lg:w-[50%] xl:w-[48%] lg:h-full lg:overflow-hidden px-4 sm:px-8 lg:px-0 pt-2 lg:pt-0"
+              className="w-full lg:w-[46%] xl:w-[44%] lg:h-full lg:overflow-hidden px-4 sm:px-8 lg:px-0 pt-2 lg:pt-0"
             >
               <div ref={rightTrackRef} className="space-y-16 lg:space-y-24 lg:pb-[25vh]">
                 {featureCards.map((card, index) => (

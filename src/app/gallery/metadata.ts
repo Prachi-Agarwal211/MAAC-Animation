@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Student Work Gallery | MAAC Animation Jaipur",
+  title: "Photo Gallery | MAAC Animation Jaipur",
   description:
     "Explore MAAC Jaipur's campus photos, student projects, events, and workshops. See our animation labs, VFX studios, and creative work in action.",
   robots: {
@@ -9,7 +9,8 @@ export const metadata: Metadata = {
     follow: true,
   },
   openGraph: {
-    title: "Student Work Gallery | MAAC Animation Jaipur",
+    title: "Photo Gallery | MAAC Animation Jaipur",
+    description: "Explore MAAC Jaipur's campus photos, student projects, events, and workshops.",
     url: "https://www.maacanimationjaipur.com/gallery",
     type: "website",
     siteName: "maacanimationjaipur.com",
@@ -19,13 +20,14 @@ export const metadata: Metadata = {
         url: "https://www.maacanimationjaipur.com/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Student Work Gallery | MAAC Animation Jaipur",
+        alt: "Photo Gallery | MAAC Animation Jaipur",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Student Work Gallery | MAAC Animation Jaipur",
+    title: "Photo Gallery | MAAC Animation Jaipur",
+    description: "Explore MAAC Jaipur's campus photos, student projects, events, and workshops.",
     images: ["https://www.maacanimationjaipur.com/og-image.jpg"],
   },
   alternates: {

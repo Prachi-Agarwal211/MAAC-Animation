@@ -108,13 +108,22 @@ function BaseBackground() {
 
 export default function DynamicBackground() {
   const [isMobile, setIsMobile] = useState<boolean | null>(null);
+  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     const mq = window.matchMedia('(min-width: 1024px)');
     setIsMobile(!mq.matches);
     const handler = (e: MediaQueryListEvent) => setIsMobile(!e.matches);
     mq.addEventListener('change', handler);
-    return () => mq.removeEventListener('change', handler);
+
+    // Pause WebGL when tab is hidden to save GPU/battery
+    const onVisibility = () => setIsVisible(!document.hidden);
+    document.addEventListener('visibilitychange', onVisibility);
+
+    return () => {
+      mq.removeEventListener('change', handler);
+      document.removeEventListener('visibilitychange', onVisibility);
+    };
   }, []);
 
   if (isMobile === null) return <BaseBackground />;
@@ -142,7 +151,7 @@ export default function DynamicBackground() {
             alpha: true,
           }}
           dpr={1}
-          frameloop="always"
+          frameloop={isVisible ? "always" : "never"}
         >
           <FluidMesh />
         </Canvas>

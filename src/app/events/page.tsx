@@ -32,6 +32,7 @@ export default function EventsPage() {
           muted
           loop
           playsInline
+          aria-hidden="true"
           preload="auto"
           poster="/hero-poster.jpg"
         >

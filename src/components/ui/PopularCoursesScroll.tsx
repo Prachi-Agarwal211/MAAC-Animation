@@ -30,10 +30,10 @@ export default function PopularCoursesScroll({ courses, courseImages }: PopularC
   return (
     <>
       <div className="hidden md:flex gap-4 absolute top-0 right-6 z-20">
-        <button onClick={() => scroll('left')} className="w-14 h-14 rounded-full glass border border-white/20 flex items-center justify-center text-white hover:text-white hover:border-[#FFD700]/40 transition-all group/arrow">
+        <button onClick={() => scroll('left')} aria-label="Scroll courses left" className="w-14 h-14 rounded-full glass border border-white/20 flex items-center justify-center text-white hover:text-white hover:border-[#FFD700]/40 transition-all group/arrow">
           <ChevronLeft size={24} className="group-hover/arrow:scale-110 transition-transform" />
         </button>
-        <button onClick={() => scroll('right')} className="w-14 h-14 rounded-full glass border border-white/20 flex items-center justify-center text-white hover:text-white hover:border-[#FFD700]/40 transition-all group/arrow">
+        <button onClick={() => scroll('right')} aria-label="Scroll courses right" className="w-14 h-14 rounded-full glass border border-white/20 flex items-center justify-center text-white hover:text-white hover:border-[#FFD700]/40 transition-all group/arrow">
           <ChevronRight size={24} className="group-hover/arrow:scale-110 transition-transform" />
         </button>
       </div>

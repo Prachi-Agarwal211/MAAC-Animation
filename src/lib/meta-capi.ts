@@ -13,7 +13,9 @@ function getAccessToken(): string | undefined {
   return cachedToken;
 }
 
-const PIXEL_ID = "406621323063792";
+function getPixelId(): string | undefined {
+  return process.env.NEXT_PUBLIC_META_PIXEL_ID;
+}
 
 /**
  * Compute SHA-256 hash using Web Crypto API (Node 18+).
@@ -40,8 +42,9 @@ export interface MetaCapiLeadParams {
  */
 export async function sendMetaCapiLead(params: MetaCapiLeadParams) {
   const accessToken = getAccessToken();
-  if (!accessToken) {
-    console.warn("META_ACCESS_TOKEN not configured — CAPI event skipped.");
+  const pixelId = getPixelId();
+  if (!accessToken || !pixelId) {
+    console.warn("META_ACCESS_TOKEN or NEXT_PUBLIC_META_PIXEL_ID not configured — CAPI event skipped.");
     return;
   }
 
@@ -75,7 +78,7 @@ export async function sendMetaCapiLead(params: MetaCapiLeadParams) {
     };
 
     const response = await fetch(
-      `https://graph.facebook.com/v18.0/${PIXEL_ID}/events?access_token=${accessToken}`,
+      `https://graph.facebook.com/v18.0/${pixelId}/events?access_token=${accessToken}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },

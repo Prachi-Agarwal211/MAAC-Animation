@@ -6,7 +6,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
   ScrollTrigger.config({ ignoreMobileResize: true, limitCallbacks: true });
-  // ponytail: lagSmoothing(0) removed — was causing burst-stutter when main thread blocked
+  // Required for proper Lenis integration to prevent desync
+  gsap.ticker.lagSmoothing(0);
 }
 
 export { gsap, ScrollTrigger };

@@ -1,26 +1,35 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { ArrowUp } from "lucide-react";
 
 export default function ScrollIndicator() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [showBackToTop, setShowBackToTop] = useState(false);
+  const rafRef = useRef<number>(0);
+
+  const updateScrollProgress = useCallback(() => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    setScrollProgress(progress);
+    setShowBackToTop(scrollTop > 400);
+  }, []);
 
   useEffect(() => {
-    const updateScrollProgress = () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-      setScrollProgress(progress);
-      setShowBackToTop(scrollTop > 400);
+    const onScroll = () => {
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = requestAnimationFrame(updateScrollProgress);
     };
 
-    window.addEventListener("scroll", updateScrollProgress);
+    window.addEventListener("scroll", onScroll, { passive: true });
     updateScrollProgress();
 
-    return () => window.removeEventListener("scroll", updateScrollProgress);
-  }, []);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(rafRef.current);
+    };
+  }, [updateScrollProgress]);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });

@@ -6,6 +6,18 @@ export const metadata: Metadata = {
   description: 'Privacy Policy for MAAC Animation Jaipur C-Scheme. Learn how we collect, use, and protect your personal information.',
   robots: { index: true, follow: true },
   alternates: { canonical: 'https://www.maacanimationjaipur.com/privacy-policy' },
+  openGraph: {
+    title: 'Privacy Policy | MAAC Jaipur',
+    description: 'Privacy Policy for MAAC Animation Jaipur C-Scheme. Learn how we collect, use, and protect your personal information.',
+    url: 'https://www.maacanimationjaipur.com/privacy-policy',
+    siteName: 'MAAC Animation Jaipur',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Privacy Policy | MAAC Jaipur',
+    description: 'Privacy Policy for MAAC Animation Jaipur C-Scheme. Learn how we collect, use, and protect your personal information.',
+  },
 };
 
 export default function PrivacyPolicy() {

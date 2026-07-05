@@ -3,6 +3,7 @@ import { gsap, ScrollTrigger } from './gsap';
 
 let lenis: Lenis | null = null;
 let tickerCallback: ((time: number) => void) | null = null;
+let resizeHandler: (() => void) | null = null;
 
 const isTouchDevice = (): boolean => {
   if (typeof window === 'undefined') return true;
@@ -25,14 +26,17 @@ export const initLenis = () => {
     infinite: false,
   });
 
-  // ponytail: removed lenis.on('scroll', ScrollTrigger.update) — GSAP ticker already calls it, double-pump caused stutter
+  // Hook ScrollTrigger to Lenis scroll event
+  lenis.on('scroll', ScrollTrigger.update);
+  
   tickerCallback = (time: number) => {
     lenis!.raf(time * 1000);
   };
+  resizeHandler = () => ScrollTrigger.refresh();
 
   gsap.ticker.add(tickerCallback);
 
-  window.addEventListener('resize', () => ScrollTrigger.refresh());
+  window.addEventListener('resize', resizeHandler);
   if (typeof document !== 'undefined' && document.fonts?.ready) {
     document.fonts.ready.then(() => ScrollTrigger.refresh());
   }
@@ -45,10 +49,15 @@ export const getLenis = () => lenis;
 // NEW: Proper destroy function that resets singleton
 export const destroyLenis = () => {
   if (lenis) {
+    lenis.off('scroll', ScrollTrigger.update);
     lenis.destroy();
     if (tickerCallback) {
       gsap.ticker.remove(tickerCallback);
       tickerCallback = null;
+    }
+    if (resizeHandler) {
+      window.removeEventListener('resize', resizeHandler);
+      resizeHandler = null;
     }
     lenis = null;
   }

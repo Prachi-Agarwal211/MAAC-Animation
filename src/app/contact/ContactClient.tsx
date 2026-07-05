@@ -15,9 +15,18 @@ export default function ContactClient() {
   const [submitSuccess, setSubmitSuccess] = useState(false);
   // Store UTM params on mount
   const utmRef = useRef<ReturnType<typeof getUtmParams>>({});
+  const loadTimeRef = useRef<number>(Date.now());
+  const successTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     utmRef.current = getUtmParams();
+  }, []);
+
+  // Cleanup success timer on unmount
+  useEffect(() => {
+    return () => {
+      if (successTimerRef.current) clearTimeout(successTimerRef.current);
+    };
   }, []);
 
   useGSAP(() => {
@@ -38,6 +47,8 @@ export default function ContactClient() {
     const form = e.currentTarget;
     const formData = new FormData(form);
     formData.set("source", "contact_page");
+    formData.set("_hp", "");
+    formData.set("_ts", String(loadTimeRef.current));
 
     const utm = utmRef.current;
     if (utm.utm_source) formData.set("utm_source", utm.utm_source);
@@ -58,7 +69,7 @@ export default function ContactClient() {
           currency: "INR",
         });
         form.reset();
-        setTimeout(() => setSubmitSuccess(false), 5000);
+        successTimerRef.current = setTimeout(() => setSubmitSuccess(false), 5000);
       }
     } catch (error) {
       console.error(error);
@@ -132,6 +143,10 @@ export default function ContactClient() {
               <h2 className="text-white font-display text-2xl md:text-3xl mb-8 font-light uppercase leading-[1.1] tracking-[0.1em]">Express <span className="text-[#FFD700]">Interest</span></h2>
 
               <div className="space-y-5">
+                {/* Honeypot + timestamp for bot protection */}
+                <input type="text" name="_hp" tabIndex={-1} autoComplete="off" aria-hidden="true"
+                  className="absolute opacity-0 pointer-events-none h-0 w-0" style={{ position: 'absolute', left: '-9999px' }} />
+                <input type="hidden" name="_ts" />
                 <div className="grid md:grid-cols-2 gap-5">
                   <input type="text" name="name" placeholder="FULL NAME" required aria-label="Full Name" className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-xs font-bold tracking-wider text-white focus:outline-none focus:ring-2 focus:ring-[#FFD700]/50 focus:border-[#FFD700]/50 transition-all uppercase placeholder:text-white/10" />
                    <input type="email" name="email" placeholder="EMAIL ADDRESS" required aria-label="Email Address" className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-xs font-bold tracking-wider text-white focus:outline-none focus:ring-2 focus:ring-[#FFD700]/50 focus:border-[#FFD700]/50 transition-all uppercase placeholder:text-white/10" />

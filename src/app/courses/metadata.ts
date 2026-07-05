@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     "maac course fees",
   ],
   openGraph: {
-    type: "article",
+    type: "website",
     title: "Animation & VFX Courses in Jaipur | MAAC Institute",
     description:
       "Explore MAAC Jaipur's courses: 3D Animation, VFX, Game Design, Filmmaking, Digital Media. B.Voc Degree + Diplomas. NSDC Certified.",
@@ -34,6 +34,9 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Animation & VFX Courses in Jaipur | MAAC Institute",
+    description:
+      "Explore MAAC Jaipur's courses: 3D Animation, VFX, Game Design, Filmmaking, Digital Media. B.Voc Degree + Diplomas. NSDC Certified.",
+    images: ["https://www.maacanimationjaipur.com/wp-content/uploads/2025/06/DAFM.jpg"],
   },
   robots: {
     index: true,

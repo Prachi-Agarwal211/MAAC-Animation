@@ -24,6 +24,8 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const utmRef = useRef<ReturnType<typeof getUtmParams>>({});
+  const loadTimeRef = useRef<number>(Date.now());
+  const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Capture UTM params on mount
   useEffect(() => {
@@ -86,15 +88,42 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
     document.body.style.overflow = "hidden";
 
+    // Focus trap: keep focus inside modal
+    const modal = modalRef.current;
+    const handleTabTrap = (e: KeyboardEvent) => {
+      if (e.key !== "Tab" || !modal) return;
+      const focusable = modal.querySelectorAll<HTMLElement>(
+        'input, textarea, button, [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === "Escape") handleClose();
     };
     document.addEventListener("keydown", handleEsc);
+    document.addEventListener("keydown", handleTabTrap);
+
+    // Focus first input
+    setTimeout(() => {
+      modal?.querySelector<HTMLElement>("input:not([type=hidden])")?.focus();
+    }, 100);
 
     return () => {
       ctx.revert();
       document.body.style.overflow = "";
       document.removeEventListener("keydown", handleEsc);
+      document.removeEventListener("keydown", handleTabTrap);
+      if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
     };
   }, [isOpen, handleClose]);
 
@@ -123,6 +152,8 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
       data.set("phone", formData.phone);
       data.set("email", formData.email);
       data.set("message", formData.message);
+      data.set("_hp", "");
+      data.set("_ts", String(loadTimeRef.current));
       if (utm.utm_source) data.set("utm_source", utm.utm_source);
       if (utm.utm_medium) data.set("utm_medium", utm.utm_medium);
       if (utm.utm_campaign) data.set("utm_campaign", utm.utm_campaign);
@@ -140,7 +171,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
           value: 1,
           currency: "INR",
         });
-        setTimeout(handleClose, 3000);
+        closeTimerRef.current = setTimeout(handleClose, 3000);
       } else {
         setErrors({ submit: result.message });
       }
@@ -181,6 +212,9 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
     >
       <div
         ref={modalRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Contact form"
         className="relative w-full max-w-md rounded-[2.5rem] overflow-hidden shadow-2xl"
         style={{
           background: "linear-gradient(135deg, rgba(20,20,20,0.95) 0%, rgba(10,10,10,0.98) 60%, rgba(30,5,5,0.95) 100%)",
@@ -252,18 +286,23 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
               </div>
 
               {errors.submit && (
-                <div className="mb-4 p-3 bg-red-500/10 border border-red-500/20 rounded-xl text-red-500 text-[10px] font-bold uppercase tracking-widest text-center">
+                <div role="alert" className="mb-4 p-3 bg-red-500/10 border border-red-500/20 rounded-xl text-red-500 text-[10px] font-bold uppercase tracking-widest text-center">
                   {errors.submit}
                 </div>
               )}
 
               <form onSubmit={handleSubmit} className="space-y-3">
+                {/* Honeypot + timestamp for bot protection */}
+                <input type="text" name="_hp" tabIndex={-1} autoComplete="off" aria-hidden="true"
+                  className="absolute opacity-0 pointer-events-none h-0 w-0" style={{ position: 'absolute', left: '-9999px' }} />
+                <input type="hidden" name="_ts" />
                 {/* Full Name */}
                 <div>
                   <input
                     type="text"
                     placeholder="Full Name *"
                     required
+                    aria-label="Full Name"
                     value={formData.name}
                     onChange={(e) =>
                       setFormData({ ...formData, name: e.target.value })
@@ -277,7 +316,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                     }}
                   />
                   {errors.name && (
-                    <p className="text-[#FFD700] text-[10px] mt-1">
+                    <p role="alert" className="text-[#FFD700] text-[10px] mt-1">
                       {errors.name}
                     </p>
                   )}
@@ -300,6 +339,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                       type="tel"
                       placeholder="Phone Number *"
                       required
+                      aria-label="Phone Number"
                       value={formData.phone}
                       onChange={(e) =>
                         setFormData({ ...formData, phone: e.target.value })
@@ -314,7 +354,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                     />
                   </div>
                   {errors.phone && (
-                    <p className="text-[#FFD700] text-[10px] mt-1">
+                    <p role="alert" className="text-[#FFD700] text-[10px] mt-1">
                       {errors.phone}
                     </p>
                   )}
@@ -326,6 +366,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                     type="email"
                     placeholder="Email Address *"
                     required
+                    aria-label="Email Address"
                     value={formData.email}
                     onChange={(e) =>
                       setFormData({ ...formData, email: e.target.value })
@@ -339,7 +380,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                     }}
                   />
                   {errors.email && (
-                    <p className="text-[#FFD700] text-[10px] mt-1">
+                    <p role="alert" className="text-[#FFD700] text-[10px] mt-1">
                       {errors.email}
                     </p>
                   )}
@@ -349,6 +390,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                 <div>
                   <textarea
                     placeholder="Additional Message or Note"
+                    aria-label="Additional Message or Note"
                     value={formData.message}
                     onChange={(e) =>
                       setFormData({ ...formData, message: e.target.value })

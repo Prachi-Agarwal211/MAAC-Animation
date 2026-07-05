@@ -47,8 +47,25 @@ export default function CourseFAQ({ course }: { course: Course }) {
     },
   ];
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.a,
+      },
+    })),
+  };
+
   return (
     <section className="py-20 md:py-28 bg-[#0C0C0C]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="font-display text-3xl md:text-4xl text-[#F0EBE1] mb-12 text-center font-black uppercase leading-[1.1] tracking-[0.1em]">
           Frequently Asked Questions

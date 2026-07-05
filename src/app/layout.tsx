@@ -143,8 +143,8 @@ const jsonLd = {
       },
       geo: {
         "@type": "GeoCoordinates",
-        latitude: 26.9124,
-        longitude: 75.7873,
+        latitude: 26.9139,
+        longitude: 75.7842,
       },
       openingHoursSpecification: [
         {
@@ -207,7 +207,6 @@ export default function RootLayout({
         />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preload" as="image" href="/hero-poster.jpg" />
 
         {/* =====================================================================
             ADVERTISING & ANALYTICS TAGS - Meta + Google Ads

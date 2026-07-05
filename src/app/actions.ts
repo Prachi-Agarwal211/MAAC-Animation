@@ -45,6 +45,18 @@ const sanitize = (text: string | null | undefined): string => {
 };
 
 export async function submitContactForm(formData: FormData) {
+  // Anti-spam: honeypot check
+  const honeypot = formData.get("_hp");
+  if (honeypot) {
+    return { success: false, message: "Submission rejected" };
+  }
+
+  // Anti-spam: timing check (reject if submitted in < 3 seconds)
+  const loadTime = Number(formData.get("_ts"));
+  if (loadTime && Date.now() - loadTime < 3000) {
+    return { success: false, message: "Please wait a moment before submitting" };
+  }
+
   const name = sanitize(formData.get("name") as string);
   const phone = sanitize(formData.get("phone") as string);
   const email = sanitize(formData.get("email") as string);
@@ -65,7 +77,10 @@ export async function submitContactForm(formData: FormData) {
 
   try {
     const accessToken = await getGoogleAccessToken();
-    const spreadsheetId = process.env.GOOGLE_SHEET_ID || "1IE4nXFxIzhBRXULvWNuKg5neaMJvq7jW5-Bg6bdqHCA";
+    const spreadsheetId = process.env.GOOGLE_SHEET_ID;
+    if (!spreadsheetId) {
+      throw new Error("GOOGLE_SHEET_ID environment variable is required");
+    }
     const range = "A:E"; // Date, Name, Phone, Email, Message
 
     const values = [
@@ -83,7 +98,7 @@ export async function submitContactForm(formData: FormData) {
       ],
     ];
 
-    const response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}:append?valueInputOption=USER_ENTERED`, {
+    const response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}:append?valueInputOption=RAW`, {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${accessToken}`,

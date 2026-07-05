@@ -22,17 +22,3 @@ export const useUIStore = create<UIState>((set) => ({
   setScroll: (y) => set({ scrollY: y, isScrolled: y > 100 }),
   closeAllMenus: () => set({ mobileMenuOpen: false, megaMenuOpen: null }),
 }));
-
-// Modal State - Video modal, image modal, etc.
-interface ModalState {
-  activeModal: 'video' | 'image' | null;
-  modalContent?: string;
-  openModal: (type: 'video' | 'image', content?: string) => void;
-  closeModal: () => void;
-}
-
-export const useModalStore = create<ModalState>((set) => ({
-  activeModal: null,
-  openModal: (type, content) => set({ activeModal: type, modalContent: content }),
-  closeModal: () => set({ activeModal: null, modalContent: undefined }),
-}));

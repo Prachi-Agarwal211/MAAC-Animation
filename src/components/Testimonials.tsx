@@ -1,13 +1,12 @@
 "use client";
 
-import { useRef, useState, memo, useMemo } from "react";
+import { useState, useRef, useCallback, memo, useMemo } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "@/lib/gsap";
 import { testimonialsData } from "@/data/siteData";
 import { ChevronLeft, ChevronRight, Play, Volume2 } from "lucide-react";
 
 const Waveform = memo(function Waveform() {
-  // Memoize waveform heights to prevent jitter on re-renders
   const heights = useMemo(() => 
     Array.from({ length: 12 }, () => Math.random() * 100),
     []
@@ -47,8 +46,8 @@ function Testimonials() {
       .fromTo(".tm-main", { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 1.2, ease: "expo.out" }, "-=0.8");
   }, { scope: sectionRef });
 
-  const next = () => setActive((prev) => (prev + 1) % testimonialsData.length);
-  const prev = () => setActive((prev) => (prev - 1 + testimonialsData.length) % testimonialsData.length);
+  const next = useCallback(() => setActive((prev) => (prev + 1) % testimonialsData.length), []);
+  const prev = useCallback(() => setActive((prev) => (prev - 1 + testimonialsData.length) % testimonialsData.length), []);
 
   return (
     <section ref={sectionRef} className="relative py-16 md:py-24 overflow-hidden bg-transparent">
@@ -105,12 +104,12 @@ function Testimonials() {
 
             {/* Navigation Arrows */}
             <div className="absolute inset-y-0 left-4 md:left-10 flex items-center">
-               <button onClick={prev} className="w-14 h-14 rounded-full glass border border-white/20 flex items-center justify-center text-white hover:text-white hover:border-[#BF953F]/40 transition-all active:scale-90 group/arrow">
+               <button onClick={prev} aria-label="Previous testimonial" className="w-14 h-14 rounded-full glass border border-white/20 flex items-center justify-center text-white hover:text-white hover:border-[#BF953F]/40 transition-all active:scale-90 group/arrow">
                  <ChevronLeft size={28} className="group-hover/arrow:scale-110 transition-transform" />
                </button>
             </div>
             <div className="absolute inset-y-0 right-4 md:right-10 flex items-center">
-               <button onClick={next} className="w-14 h-14 rounded-full glass border border-white/20 flex items-center justify-center text-white hover:text-white hover:border-[#BF953F]/40 transition-all active:scale-90 group/arrow">
+               <button onClick={next} aria-label="Next testimonial" className="w-14 h-14 rounded-full glass border border-white/20 flex items-center justify-center text-white hover:text-white hover:border-[#BF953F]/40 transition-all active:scale-90 group/arrow">
                  <ChevronRight size={28} className="group-hover/arrow:scale-110 transition-transform" />
                </button>
             </div>
@@ -138,6 +137,3 @@ function Testimonials() {
 }
 
 export default memo(Testimonials);
-
-
-

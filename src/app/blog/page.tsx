@@ -41,6 +41,7 @@ export default function BlogIndexPage() {
               muted
               loop
               playsInline
+              aria-hidden="true"
               poster="/hero-poster.jpg"
               className="w-full h-full object-cover opacity-40"
             >

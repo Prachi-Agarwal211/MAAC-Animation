@@ -295,6 +295,23 @@ const nextConfig = {
             key: "Permissions-Policy",
             value: "camera=(), microphone=(), geolocation=()",
           },
+          {
+            key: "Content-Security-Policy",
+            value: [
+              "default-src 'self'",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://connect.facebook.net https://www.google-analytics.com https://www.googleadservices.com",
+              "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+              "font-src 'self' https://fonts.gstatic.com",
+              "img-src 'self' data: blob: https://www.maacanimationjaipur.com https://img.youtube.com https://i.ytimg.com https://www.facebook.com",
+              "media-src 'self' blob:",
+              "connect-src 'self' https://www.google-analytics.com https://www.facebook.com https://graph.facebook.com",
+              "frame-src 'self' https://www.googletagmanager.com https://www.youtube.com https://player.vimeo.com",
+              "object-src 'none'",
+              "base-uri 'self'",
+              "form-action 'self'",
+              "frame-ancestors 'self'",
+            ].join("; "),
+          },
         ],
       },
       {

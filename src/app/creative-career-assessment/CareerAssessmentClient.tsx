@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight, RotateCcw, Award, CheckCircle2, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 
@@ -178,21 +177,26 @@ const RESULTS_MAP = {
   }
 };
 
+// ponytail: framer-motion removed — replaced with CSS transitions for -40KB bundle
+type Step = 'intro' | 'quiz' | 'results';
+
 export default function CareerAssessment() {
-  const [step, setStep] = useState<'intro' | 'quiz' | 'results'>('intro');
+  const [step, setStep] = useState<Step>('intro');
+  const [prevStep, setPrevStep] = useState<Step | null>(null);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [scores, setScores] = useState<Record<string, number>>({
     animator: 0, vfx: 0, modeler: 0, mograph: 0, game: 0
   });
 
-  const handleStart = () => setStep('quiz');
+  const handleStart = () => { setPrevStep(step); setStep('quiz'); };
 
   const handleOptionSelect = (role: string) => {
     setScores(prev => ({ ...prev, [role]: (prev[role] || 0) + 1 }));
-    
+
     if (currentQuestion < QUIZ_QUESTIONS.length - 1) {
       setCurrentQuestion(prev => prev + 1);
     } else {
+      setPrevStep(step);
       setStep('results');
     }
   };
@@ -207,179 +211,180 @@ export default function CareerAssessment() {
   const resetQuiz = () => {
     setScores({ animator: 0, vfx: 0, modeler: 0, mograph: 0, game: 0 });
     setCurrentQuestion(0);
+    setPrevStep(step);
     setStep('intro');
+  };
+
+  // CSS transition classes based on step changes
+  const getTransitionClass = (target: Step) => {
+    if (step !== target) return 'opacity-0 pointer-events-none absolute inset-0';
+    if (prevStep === null) return 'opacity-100 relative';
+    // Slide direction based on step order
+    const order: Step[] = ['intro', 'quiz', 'results'];
+    const fromIdx = order.indexOf(prevStep);
+    const toIdx = order.indexOf(target);
+    if (toIdx > fromIdx) {
+      return 'opacity-100 relative animate-[slideInRight_0.4s_cubic-bezier(0.16,1,0.3,1)]';
+    }
+    return 'opacity-100 relative animate-[slideInLeft_0.4s_cubic-bezier(0.16,1,0.3,1)]';
   };
 
   return (
     <main className="min-h-screen bg-transparent text-white pt-32 pb-24 px-6">
-      <div className="max-w-4xl mx-auto">
-        <AnimatePresence mode="wait">
-          {step === 'intro' && (
-            <motion.div
-              key="intro"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              className="text-center space-y-12 py-12"
-            >
-              <div className="inline-block p-4 rounded-full bg-white/5 border border-white/10 mb-4 glass-card">
-                <Sparkles className="text-[#FFD700] w-10 h-10" />
-              </div>
-              <div className="space-y-4">
-                <p className="metallic-gold-text text-[10px] font-bold tracking-[0.4em] uppercase">
-                  Vocational Excellence
-                </p>
-                <h1 className="text-4xl md:text-7xl font-display font-bold uppercase tracking-tight leading-none">
-                  Discover Your <br />
-                  <span className="metallic-gold-text italic">Creative DNA</span>
-                </h1>
-              </div>
-              <p className="text-xl text-[#A8A29C] max-w-2xl mx-auto leading-relaxed font-medium">
-                Find your path in the $200B global entertainment industry. Our AI-driven assessment matches your personality to high-growth roles in Animation, VFX, and Gaming.
+      <style>{`
+        @keyframes slideInRight { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes slideInLeft { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+      `}</style>
+      <div className="max-w-4xl mx-auto relative">
+        {/* Intro */}
+        <div className={`${getTransitionClass('intro')}`}>
+          <div className="text-center space-y-12 py-12">
+            <div className="inline-block p-4 rounded-full bg-white/5 border border-white/10 mb-4 glass-card">
+              <Sparkles className="text-[#FFD700] w-10 h-10" />
+            </div>
+            <div className="space-y-4">
+              <p className="metallic-gold-text text-[10px] font-bold tracking-[0.4em] uppercase">
+                Vocational Excellence
               </p>
-              <button
-                onClick={handleStart}
-                className="group relative inline-flex items-center gap-4 px-12 py-6 bg-white text-black font-bold uppercase tracking-[0.2em] text-xs overflow-hidden transition-all hover:pr-14"
-              >
-                <span className="relative z-10">Launch Assessment</span>
-                <ChevronRight className="relative z-10 group-hover:translate-x-1 transition-transform" />
-                <div className="absolute inset-0 bg-[#FFD700] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-expo" />
-              </button>
-            </motion.div>
-          )}
-
-          {step === 'quiz' && (
-            <motion.div
-              key="quiz"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              className="space-y-12"
+              <h1 className="text-4xl md:text-7xl font-display font-bold uppercase tracking-tight leading-none">
+                Discover Your <br />
+                <span className="metallic-gold-text italic">Creative DNA</span>
+              </h1>
+            </div>
+            <p className="text-xl text-[#A8A29C] max-w-2xl mx-auto leading-relaxed font-medium">
+              Find your path in the $200B global entertainment industry. Our AI-driven assessment matches your personality to high-growth roles in Animation, VFX, and Gaming.
+            </p>
+            <button
+              onClick={handleStart}
+              className="group relative inline-flex items-center gap-4 px-12 py-6 bg-white text-black font-bold uppercase tracking-[0.2em] text-xs overflow-hidden transition-all hover:pr-14"
             >
-              <div className="space-y-6">
-                <div className="flex justify-between items-end">
-                  <div className="space-y-1">
-                    <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#FFD700]">Module Progress</p>
-                    <h3 className="text-sm font-bold text-white/60">
-                      Question {currentQuestion + 1} of {QUIZ_QUESTIONS.length}
-                    </h3>
-                  </div>
-                  <span className="text-xs font-mono text-[#FFD700]">{Math.round(progress)}%</span>
+              <span className="relative z-10">Launch Assessment</span>
+              <ChevronRight className="relative z-10 group-hover:translate-x-1 transition-transform" />
+              <div className="absolute inset-0 bg-[#FFD700] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-expo" />
+            </button>
+          </div>
+        </div>
+
+        {/* Quiz */}
+        <div className={`${getTransitionClass('quiz')}`}>
+          <div className="space-y-12">
+            <div className="space-y-6">
+              <div className="flex justify-between items-end">
+                <div className="space-y-1">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#FFD700]">Module Progress</p>
+                  <h3 className="text-sm font-bold text-white/60">
+                    Question {currentQuestion + 1} of {QUIZ_QUESTIONS.length}
+                  </h3>
                 </div>
-                <div className="h-[2px] w-full bg-white/5 rounded-full overflow-hidden">
-                  <motion.div 
-                    className="h-full bg-gradient-to-r from-[#FFD700] to-[#FFA500]" 
-                    initial={{ width: 0 }}
-                    animate={{ width: `${progress}%` }}
-                    transition={{ duration: 0.5, ease: "circOut" }}
-                  />
+                <span className="text-xs font-mono text-[#FFD700]">{Math.round(progress)}%</span>
+              </div>
+              <div className="h-[2px] w-full bg-white/5 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-gradient-to-r from-[#FFD700] to-[#FFA500] transition-[width] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                  style={{ width: `${progress}%` }}
+                />
+              </div>
+            </div>
+
+            <div className="space-y-10">
+              <h2 className="text-2xl md:text-4xl font-display font-bold leading-[1.1] text-white">
+                {QUIZ_QUESTIONS[currentQuestion].question}
+              </h2>
+              <div className="grid grid-cols-1 gap-4">
+                {QUIZ_QUESTIONS[currentQuestion].options.map((option, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => handleOptionSelect(option.role)}
+                    className="group flex items-center justify-between p-6 md:p-8 bg-white/5 border border-white/10 hover:border-[#FFD700]/40 transition-all text-left glass-card hover:bg-white/[0.08]"
+                  >
+                    <span className="text-lg md:text-xl text-white/70 group-hover:text-white transition-colors duration-300">
+                      {option.text}
+                    </span>
+                    <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center group-hover:border-[#FFD700]/50 transition-colors shrink-0 ml-4">
+                      <div className="w-2.5 h-2.5 bg-[#FFD700] scale-0 group-hover:scale-100 transition-transform rounded-full shadow-[0_0_15px_rgba(255,215,0,0.4)]" />
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Results */}
+        <div className={`${getTransitionClass('results')}`}>
+          <div className="space-y-12">
+            <div className={`p-10 md:p-16 rounded-[2rem] bg-gradient-to-br ${resultData.gradient} relative overflow-hidden shadow-2xl`}>
+              <div className="absolute top-0 right-0 p-12 opacity-10 rotate-12 pointer-events-none">
+                <Award size={240} />
+              </div>
+              <div className="relative z-10 space-y-8">
+                <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-black/20 backdrop-blur-xl border border-white/10 text-[10px] font-bold uppercase tracking-[0.2em]">
+                  <CheckCircle2 size={16} className="text-white" /> Career Blueprint Analysis Complete
+                </div>
+                <div className="space-y-4">
+                  <h2 className="text-5xl md:text-8xl font-display font-bold uppercase leading-[0.85] tracking-tighter">
+                    {resultData.title}
+                  </h2>
+                  <p className="text-xl md:text-3xl text-white/90 font-medium max-w-2xl leading-tight">
+                    {resultData.description}
+                  </p>
                 </div>
               </div>
+            </div>
 
-              <div className="space-y-10">
-                <h2 className="text-2xl md:text-4xl font-display font-bold leading-[1.1] text-white">
-                  {QUIZ_QUESTIONS[currentQuestion].question}
-                </h2>
-                <div className="grid grid-cols-1 gap-4">
-                  {QUIZ_QUESTIONS[currentQuestion].options.map((option, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => handleOptionSelect(option.role)}
-                      className="group flex items-center justify-between p-6 md:p-8 bg-white/5 border border-white/10 hover:border-[#FFD700]/40 transition-all text-left glass-card hover:bg-white/[0.08]"
-                    >
-                      <span className="text-lg md:text-xl text-white/70 group-hover:text-white transition-colors duration-300">
-                        {option.text}
-                      </span>
-                      <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center group-hover:border-[#FFD700]/50 transition-colors shrink-0 ml-4">
-                        <div className="w-2.5 h-2.5 bg-[#FFD700] scale-0 group-hover:scale-100 transition-transform rounded-full shadow-[0_0_15px_rgba(255,215,0,0.4)]" />
-                      </div>
-                    </button>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div className="p-10 bg-white/5 border border-white/10 rounded-[2rem] space-y-6 glass-card">
+                <h3 className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#FFD700]">Aptitude Profile</h3>
+                <p className="text-lg text-[#A8A29C] leading-relaxed">
+                  {resultData.whyFits}
+                </p>
+                <div className="pt-6 flex flex-wrap gap-3">
+                  {resultData.strengths.map((s, i) => (
+                    <span key={i} className="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-[10px] font-bold uppercase tracking-[0.15em] text-white/80">
+                      {s}
+                    </span>
                   ))}
                 </div>
               </div>
-            </motion.div>
-          )}
 
-          {step === 'results' && (
-            <motion.div
-              key="results"
-              initial={{ opacity: 0, scale: 0.98 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="space-y-12"
-            >
-              <div className={`p-10 md:p-16 rounded-[2rem] bg-gradient-to-br ${resultData.gradient} relative overflow-hidden shadow-2xl`}>
-                <div className="absolute top-0 right-0 p-12 opacity-10 rotate-12 pointer-events-none">
-                  <Award size={240} />
-                </div>
-                <div className="relative z-10 space-y-8">
-                  <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-black/20 backdrop-blur-xl border border-white/10 text-[10px] font-bold uppercase tracking-[0.2em]">
-                    <CheckCircle2 size={16} className="text-white" /> Career Blueprint Analysis Complete
-                  </div>
-                  <div className="space-y-4">
-                    <h1 className="text-5xl md:text-8xl font-display font-bold uppercase leading-[0.85] tracking-tighter">
-                      {resultData.title}
-                    </h1>
-                    <p className="text-xl md:text-3xl text-white/90 font-medium max-w-2xl leading-tight">
-                      {resultData.description}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div className="p-10 bg-white/5 border border-white/10 rounded-[2rem] space-y-6 glass-card">
-                  <h3 className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#FFD700]">Aptitude Profile</h3>
-                  <p className="text-lg text-[#A8A29C] leading-relaxed">
-                    {resultData.whyFits}
+              <div className="p-10 bg-white/5 border border-white/10 rounded-[2rem] space-y-8 glass-card border-t-[#FFD700]/20">
+                <div className="space-y-4">
+                  <h3 className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#FFD700]">Strategic Pathway</h3>
+                  <p className="text-2xl font-display font-bold text-white uppercase tracking-tight">{resultData.course}</p>
+                  <p className="text-[#A8A29C] leading-relaxed">
+                    {resultData.courseReason}
                   </p>
-                  <div className="pt-6 flex flex-wrap gap-3">
-                    {resultData.strengths.map((s, i) => (
-                      <span key={i} className="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-[10px] font-bold uppercase tracking-[0.15em] text-white/80">
-                        {s}
-                      </span>
-                    ))}
-                  </div>
                 </div>
-
-                <div className="p-10 bg-white/5 border border-white/10 rounded-[2rem] space-y-8 glass-card border-t-[#FFD700]/20">
-                  <div className="space-y-4">
-                    <h3 className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#FFD700]">Strategic Pathway</h3>
-                    <p className="text-2xl font-display font-bold text-white uppercase tracking-tight">{resultData.course}</p>
-                    <p className="text-[#A8A29C] leading-relaxed">
-                      {resultData.courseReason}
-                    </p>
+                <Link
+                  href="/courses"
+                  className="group inline-flex items-center gap-4 text-[#FFD700] font-bold uppercase text-[10px] tracking-[0.3em] hover:text-white transition-all"
+                >
+                  Explore Curriculum
+                  <div className="w-10 h-10 rounded-full bg-[#FFD700]/10 border border-[#FFD700]/20 flex items-center justify-center group-hover:bg-[#FFD700] group-hover:text-black transition-all">
+                    <ChevronRight size={18} />
                   </div>
-                  <Link 
-                    href="/courses"
-                    className="group inline-flex items-center gap-4 text-[#FFD700] font-bold uppercase text-[10px] tracking-[0.3em] hover:text-white transition-all"
-                  >
-                    Explore Curriculum 
-                    <div className="w-10 h-10 rounded-full bg-[#FFD700]/10 border border-[#FFD700]/20 flex items-center justify-center group-hover:bg-[#FFD700] group-hover:text-black transition-all">
-                      <ChevronRight size={18} />
-                    </div>
-                  </Link>
-                </div>
+                </Link>
               </div>
+            </div>
 
-              <div className="flex flex-col md:flex-row gap-6 justify-center items-center py-12">
-                <button
-                  onClick={() => window.dispatchEvent(new Event("maac:open_contact_modal"))}
-                  className="w-full md:w-auto px-12 py-6 bg-white text-black font-bold uppercase tracking-[0.2em] text-xs text-center hover:bg-[#FFD700] transition-all hover:scale-105"
-                >
-                  Book 1-on-1 Counseling
-                </button>
-                <button
-                  onClick={resetQuiz}
-                  className="w-full md:w-auto px-12 py-6 bg-white/5 border border-white/10 text-white font-bold uppercase tracking-[0.2em] text-xs inline-flex items-center justify-center gap-3 hover:bg-white/10 transition-all glass-card"
-                >
-                  <RotateCcw size={16} /> Reset Assessment
-                </button>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+            <div className="flex flex-col md:flex-row gap-6 justify-center items-center py-12">
+              <button
+                onClick={() => window.dispatchEvent(new Event("maac:open_contact_modal"))}
+                className="w-full md:w-auto px-12 py-6 bg-white text-black font-bold uppercase tracking-[0.2em] text-xs text-center hover:bg-[#FFD700] transition-all hover:scale-105"
+              >
+                Book 1-on-1 Counseling
+              </button>
+              <button
+                onClick={resetQuiz}
+                className="w-full md:w-auto px-12 py-6 bg-white/5 border border-white/10 text-white font-bold uppercase tracking-[0.2em] text-xs inline-flex items-center justify-center gap-3 hover:bg-white/10 transition-all glass-card"
+              >
+                <RotateCcw size={16} /> Reset Assessment
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
   );
 }
-

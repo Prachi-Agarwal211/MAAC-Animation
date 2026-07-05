@@ -43,17 +43,12 @@ export default function Home() {
           }),
         }}
       />
-      <link rel="preload" as="video" href="/intro.mp4" type="video/mp4" />
-      
-      {/* 
-        The Hero handles its own intro overlay. 
-        The rest of the page renders as HTML immediately under it.
-      */}
+      {/* Hero video loads lazily via poster-first strategy */}
       <ErrorBoundary>
         <MAACXHero />
       </ErrorBoundary>
 
-      <main className="relative z-10 bg-transparent">
+      <div className="relative z-10 bg-transparent">
         <ErrorBoundary>
           <TrustBadges />
 
@@ -97,7 +92,7 @@ export default function Home() {
             <FAQSection />
           </div>
         </ErrorBoundary>
-      </main>
+      </div>
     </div>
   );
 }

@@ -1,10 +1,11 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import ContactModal from "@/components/ContactModal";
 import { useScroll } from "@/hooks/useScroll";
 
 export default function ClientShell({ children }: { children: React.ReactNode }) {
   const [showModal, setShowModal] = useState(false);
+  const modalTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   
   // Use centralized scroll hook
   useScroll();
@@ -19,7 +20,7 @@ export default function ClientShell({ children }: { children: React.ReactNode })
       if (triggered) return;
       triggered = true;
       const delay = window.innerWidth < 768 ? 1400 : 900;
-      setTimeout(() => {
+      modalTimerRef.current = setTimeout(() => {
         setShowModal(true);
         sessionStorage.setItem("maac_modal_shown", "1");
       }, delay);
@@ -33,6 +34,7 @@ export default function ClientShell({ children }: { children: React.ReactNode })
     return () => {
       window.removeEventListener("maac:intro_revealed", triggerModal);
       clearTimeout(fallbackTimer);
+      if (modalTimerRef.current) clearTimeout(modalTimerRef.current);
     };
   }, []);
 

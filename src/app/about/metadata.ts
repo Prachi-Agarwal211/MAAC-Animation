@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     card: "summary_large_image" as const,
     title: "About MAAC Jaipur | Best Animation Institute in Rajasthan",
     description:
-      "Discover MAAC Jaipur – Rajasthan's #1 animation, VFX & digital filmmaking institute with 17+ years of legacy, 5000+ alumni, and placement assistance.",
+      "Discover MAAC Jaipur – Rajasthan's #1 animation, VFX & digital filmmaking institute with 30+ years of legacy, 5000+ alumni, and placement assistance.",
     images: ["https://www.maacanimationjaipur.com/og-image.jpg"],
   },
   alternates: {

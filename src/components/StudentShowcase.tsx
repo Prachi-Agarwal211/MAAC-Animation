@@ -161,7 +161,7 @@ export default function StudentShowcase() {
           {/* Controls Overlay */}
           <div className="absolute inset-0 z-10 flex flex-col justify-between p-8 md:p-12 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
             <div className="flex justify-end">
-               <button onClick={toggleMute} className="w-14 h-14 rounded-full glass flex items-center justify-center text-white hover:scale-110 transition-transform">
+               <button onClick={toggleMute} aria-label={isMuted ? "Unmute video" : "Mute video"} className="w-14 h-14 rounded-full glass flex items-center justify-center text-white hover:scale-110 transition-transform">
                  {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
                </button>
             </div>
@@ -186,7 +186,7 @@ export default function StudentShowcase() {
                 </div>
               </div>
               
-              <button onClick={togglePlay} className="w-20 h-20 rounded-full bg-white text-black flex items-center justify-center hover:scale-110 transition-transform shadow-2xl">
+              <button onClick={togglePlay} aria-label={isPaused ? "Play video" : "Pause video"} className="w-20 h-20 rounded-full bg-white text-black flex items-center justify-center hover:scale-110 transition-transform shadow-2xl">
                 {isPaused ? <Play size={28} fill="currentColor" /> : <Pause size={28} fill="currentColor" />}
               </button>
             </div>
@@ -206,6 +206,7 @@ export default function StudentShowcase() {
             <button 
               key={i} 
               onClick={() => setActive(i)}
+              aria-label={`Play ${item.title}`}
               onMouseEnter={(e) => {
                 // Skip hover preview on touch devices
                 if (isTouchDevice) return;
@@ -227,7 +228,7 @@ export default function StudentShowcase() {
                 className="w-full h-full object-cover pointer-events-none"
                 muted
                 playsInline
-                preload="metadata"
+                preload="none"
               />
               <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
                 <Play size={20} className="text-white" fill="white" />

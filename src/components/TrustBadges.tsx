@@ -1,3 +1,9 @@
+"use client";
+
+import { useRef } from "react";
+import gsap from "@/lib/gsap";
+
+import { useGSAP } from "@gsap/react";
 import FadeIn from "@/components/animations/FadeIn";
 import TrustBadgesScroll from "@/components/ui/TrustBadgesScroll";
 
@@ -30,8 +36,33 @@ const certifications = [
 ];
 
 export default function TrustBadges() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    if (!sectionRef.current) return;
+
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced) return;
+
+    gsap.fromTo(
+      sectionRef.current,
+      { clipPath: "inset(0 100% 0 0)" },
+      {
+        clipPath: "inset(0 0% 0 0)",
+        ease: "none",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 85%",
+          end: "top 30%",
+          scrub: 0.5,
+          invalidateOnRefresh: true,
+        },
+      }
+    );
+  }, { scope: sectionRef });
+
   return (
-    <section className="relative py-10 md:py-16 bg-transparent border-t border-white/5 overflow-hidden">
+    <section ref={sectionRef} className="relative py-10 md:py-16 bg-transparent border-t border-white/5 overflow-hidden" style={{ clipPath: "inset(0 100% 0 0)" }}>
       <div className="max-w-[1800px] mx-auto px-5 md:px-12 lg:px-20">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12 mt-4">
           

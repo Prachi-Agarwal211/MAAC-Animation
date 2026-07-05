@@ -16,6 +16,7 @@ export default function ApplyNowForm() {
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const utmRef = useRef<ReturnType<typeof getUtmParams>>({});
+  const loadTimeRef = useRef<number>(Date.now());
 
   // Capture UTM params on mount
   useEffect(() => {
@@ -40,6 +41,8 @@ export default function ApplyNowForm() {
     try {
       const data = new FormData();
       Object.entries(formData).forEach(([k, v]) => data.set(k, v));
+      data.set("_hp", "");
+      data.set("_ts", String(loadTimeRef.current));
       const utm = utmRef.current;
       if (utm.utm_source) data.set("utm_source", utm.utm_source);
       if (utm.utm_medium) data.set("utm_medium", utm.utm_medium);
@@ -95,6 +98,10 @@ export default function ApplyNowForm() {
       <h3 className="font-display text-xl text-white mb-4 font-bold uppercase leading-[1.1] tracking-[0.1em]">Express Interest</h3>
 
       <div className="space-y-4">
+        {/* Honeypot + timestamp for bot protection */}
+        <input type="text" name="_hp" tabIndex={-1} autoComplete="off" aria-hidden="true"
+          className="absolute opacity-0 pointer-events-none h-0 w-0" style={{ position: 'absolute', left: '-9999px' }} />
+        <input type="hidden" name="_ts" />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <input type="text" name="name" placeholder="Full Name *" required value={formData.name}
             onChange={handleChange}

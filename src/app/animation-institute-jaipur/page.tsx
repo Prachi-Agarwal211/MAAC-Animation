@@ -77,8 +77,8 @@ export default function AnimationInstituteJaipurPage() {
             telephone: "+91-7300001589",
             aggregateRating: {
               "@type": "AggregateRating",
-              ratingValue: "4.8",
-              reviewCount: "487",
+              ratingValue: "4.9",
+              reviewCount: "422",
               bestRating: "5",
             },
           }),
@@ -97,6 +97,7 @@ export default function AnimationInstituteJaipurPage() {
               muted
               loop
               playsInline
+              aria-hidden="true"
               poster="/hero-poster.jpg"
               className="w-full h-full object-cover opacity-40"
             >
