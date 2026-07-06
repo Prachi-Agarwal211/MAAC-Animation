@@ -57,7 +57,7 @@ export default function FAQAccordion({ faqs }: { faqs: FAQItem[] }) {
               className={`overflow-hidden transition-all duration-500 ease-expo-out ${isOpen ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0'}`}
             >
               <div className="px-8 pb-8 pt-0">
-                <p className="text-[#A8A29C] text-white/80 md:text-lg leading-relaxed border-t border-white/5 pt-6">
+                <p className="text-white/70 md:text-lg leading-relaxed border-t border-white/5 pt-6">
                   {faq.acceptedAnswer.text}
                 </p>
               </div>
