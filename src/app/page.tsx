@@ -11,7 +11,6 @@ import StudentSuccessStories from "@/components/StudentSuccessStories";
 import ApplyNow from "@/components/ApplyNow";
 import FAQSection from "@/components/FAQSection";
 import ErrorBoundary from "@/components/ErrorBoundary";
-import Awards from "@/components/Awards";
 import Placements from "@/components/Placements";
 
 // Client Components (Complex animations/state)
@@ -61,10 +60,6 @@ export default function Home() {
 
           <div className="bg-transparent">
             <Placements />
-          </div>
-
-          <div className="bg-transparent">
-            <Awards />
           </div>
 
           <div className="bg-transparent">

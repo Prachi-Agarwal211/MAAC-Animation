@@ -94,6 +94,8 @@ function FluidMesh() {
   );
 }
 
+import Image from "next/image";
+
 function BaseBackground() {
   return (
     <div
@@ -130,10 +132,16 @@ export default function DynamicBackground() {
 
   if (isMobile) {
     return (
-      <>
-        <BaseBackground />
-        <div className="fixed inset-0 z-[-10] animated-bg opacity-30" />
-      </>
+      <div className="fixed inset-0 z-[-20] pointer-events-none overflow-hidden">
+        <Image
+          src="/download (6).jpg"
+          alt="Background"
+          fill
+          className="object-cover"
+          priority
+          quality={80}
+        />
+      </div>
     );
   }
 

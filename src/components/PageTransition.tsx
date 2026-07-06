@@ -3,6 +3,9 @@
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 /**
  * GSAP-powered page transition wrapper for MAAC.
@@ -28,14 +31,14 @@ export default function PageTransition({ children }: { children: React.ReactNode
         gsap.fromTo(
           el,
           { opacity: 0, scale: 0.97, y: 30 },
-          { opacity: 1, scale: 1, y: 0, duration: 0.7, ease: "expo.out", clearProps: "all" }
+          { opacity: 1, scale: 1, y: 0, duration: 0.7, ease: "expo.out", clearProps: "all", onComplete: () => ScrollTrigger.refresh() }
         );
       });
     } else {
       gsap.fromTo(
         el,
         { opacity: 0, scale: 0.97, y: 30 },
-        { opacity: 1, scale: 1, y: 0, duration: 0.7, ease: "expo.out", clearProps: "all" }
+        { opacity: 1, scale: 1, y: 0, duration: 0.7, ease: "expo.out", clearProps: "all", onComplete: () => ScrollTrigger.refresh() }
       );
     }
   }, [pathname]);
