@@ -4,27 +4,24 @@ import { useRef } from "react";
 import gsap from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
 import Image from "next/image";
-import { ArrowLeft, ArrowRight } from "lucide-react";
 
 type Props = {
   hero: React.ReactNode;
 };
 
 const certifications = [
-  { id: "cert-1", name: "SKILL INDIA", logo: "/govt/skillIndia.jpg" },
-  { id: "cert-2", name: "MESC", logo: "/govt/mesc.png" },
-  { id: "cert-3", name: "NSDC", logo: "/govt/nsdc.png" },
-  { id: "cert-4", name: "SKILL INDIA", logo: "/govt/skillIndia.jpg" },
-  { id: "cert-5", name: "MESC", logo: "/govt/mesc.png" },
+  { name: "SKILL INDIA", logo: "/govt/skillIndia.jpg" },
+  { name: "MESC", logo: "/govt/mesc.png" },
+  { name: "NSDC", logo: "/govt/nsdc.png" },
+];
+
+const extendedLogos = [
+  ...certifications, ...certifications,
+  ...certifications, ...certifications,
 ];
 
 export default function HeroTrustTransition({ hero }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const logosRef = useRef<HTMLDivElement>(null);
-
-  const scrollLogos = (dir: number) => {
-    logosRef.current?.scrollBy({ left: dir * 200, behavior: "smooth" });
-  };
 
   useGSAP(() => {
     if (!containerRef.current) return;
@@ -195,34 +192,27 @@ export default function HeroTrustTransition({ hero }: Props) {
           </div>
         </div>
 
-        {/* Logos */}
-        <div className="morph-logos absolute bottom-4 left-0 right-0 px-5 pointer-events-auto opacity-0 translate-y-2">
-          <div
-            ref={logosRef}
-            className="flex gap-3 overflow-x-auto hide-scrollbar snap-x snap-mandatory pb-2 max-w-[500px] mx-auto"
-          >
-            {certifications.map((cert, i) => (
+        {/* Logos — full-width marquee */}
+        <div className="morph-logos absolute bottom-0 left-0 right-0 pointer-events-auto opacity-0 translate-y-2 overflow-hidden">
+          {/* Edge fades */}
+          <div className="absolute left-0 top-0 bottom-0 w-16 md:w-24 bg-gradient-to-r from-[#080808] to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-16 md:w-24 bg-gradient-to-l from-[#080808] to-transparent z-10 pointer-events-none" />
+
+          <div className="flex items-center gap-6 md:gap-8 w-max animate-marquee py-4 md:py-6">
+            {extendedLogos.map((cert, i) => (
               <div
-                key={`${cert.id}-${i}`}
-                className="snap-start shrink-0 w-[120px] h-[68px] rounded-xl bg-white border border-white/10 flex items-center justify-center p-2 shadow-lg"
+                key={`${cert.name}-${i}`}
+                className="flex-shrink-0 w-[110px] h-[60px] md:w-[140px] md:h-[76px] rounded-xl bg-white border border-white/10 flex items-center justify-center p-2 shadow-lg"
               >
                 <Image
                   src={cert.logo}
                   alt={cert.name}
-                  width={90}
-                  height={50}
-                  className="object-contain mix-blend-multiply"
+                  width={100}
+                  height={54}
+                  className="w-full h-full object-contain mix-blend-multiply"
                 />
               </div>
             ))}
-          </div>
-          <div className="flex items-center justify-center gap-2 mt-2 lg:hidden">
-            <button onClick={() => scrollLogos(-1)} className="p-1.5 text-white/30 hover:text-white rounded-full transition-colors" aria-label="Previous">
-              <ArrowLeft className="w-3.5 h-3.5" />
-            </button>
-            <button onClick={() => scrollLogos(1)} className="p-1.5 text-white/30 hover:text-white rounded-full transition-colors" aria-label="Next">
-              <ArrowRight className="w-3.5 h-3.5" />
-            </button>
           </div>
         </div>
       </div>

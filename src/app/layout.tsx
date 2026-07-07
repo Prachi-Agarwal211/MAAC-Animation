@@ -51,10 +51,10 @@ export const metadata: Metadata = {
     "MAAC Jaipur C-Scheme — Rajasthan's #1 Animation Institute. B.Voc Degree in 3D Animation, VFX & Game Design. 95% Placements. NSDC Certified. Call " + contactInfo.phone + ".",
   icons: {
     icon: [
-      { url: '/image.png', type: 'image/png' },
+      { url: '/thumbnail.png', type: 'image/png' },
     ],
     apple: [
-      { url: '/image.png', sizes: '180x180', type: 'image/png' },
+      { url: '/thumbnail.png', sizes: '180x180', type: 'image/png' },
     ],
   },
   manifest: '/manifest.json',
@@ -89,7 +89,7 @@ export const metadata: Metadata = {
       "MAAC Jaipur C-Scheme — Rajasthan's #1 Animation Institute. B.Voc Degree in 3D Animation, VFX & Game Design. 95% Placements. NSDC Certified.",
     images: [
       {
-        url: "https://www.maacanimationjaipur.com/og-image.jpg",
+        url: "https://www.maacanimationjaipur.com/thumbnail.png",
         width: 1200,
         height: 630,
         alt: "MAAC Animation Jaipur C-Scheme - Best Animation Institute in Rajasthan",
@@ -101,7 +101,7 @@ export const metadata: Metadata = {
     title: "MAAC Animation Jaipur C-Scheme | Best Animation & VFX Courses",
     description:
       "MAAC Jaipur C-Scheme — Rajasthan's #1 Animation Institute. B.Voc Degree in 3D Animation, VFX & Game Design. 95% Placements.",
-    images: ["https://www.maacanimationjaipur.com/og-image.jpg"],
+    images: ["https://www.maacanimationjaipur.com/thumbnail.png"],
   },
   robots: {
     index: true,
@@ -129,7 +129,7 @@ const jsonLd = {
       alternateName: "MAAC Jaipur",
       url: "https://www.maacanimationjaipur.com",
       logo: "https://www.maacanimationjaipur.com/maac-logo.png",
-      image: "https://www.maacanimationjaipur.com/og-image.jpg",
+      image: "https://www.maacanimationjaipur.com/thumbnail.png",
       description:
         "MAAC Jaipur C-Scheme is Rajasthan's leading Animation, VFX and Game Design institute. Offering B.Voc, Diploma and short-term courses. NSDC & MESC certified with 95% placement support.",
       telephone: contactInfo.phone,
