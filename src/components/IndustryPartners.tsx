@@ -1,4 +1,4 @@
-import FadeIn from "@/components/animations/FadeIn";
+import SplitTextReveal from "@/components/ui/SplitTextReveal";
 
 const partners = [
   "NILEE GAMES",
@@ -25,16 +25,17 @@ export default function IndustryPartners() {
   return (
     <section className="relative bg-transparent py-12 md:py-20 overflow-hidden">
       <div className="relative z-10 max-w-[1800px] mx-auto">
-        <FadeIn className="text-center mb-12 md:mb-16">
+        <div className="text-center mb-12 md:mb-16">
           <p className="metallic-gold-text text-[10px] font-bold tracking-[0.3em] uppercase mb-4 flex items-center justify-center gap-3">
             <span className="w-8 h-[1px] metallic-gold-accent" />
             Powering the Studio Network
             <span className="w-8 h-[1px] metallic-gold-accent" />
           </p>
           <h2 className="font-display text-[clamp(2rem,5vw,3rem)] leading-[0.8] text-white font-bold uppercase leading-[1.1] tracking-[0.1em]">
-            HIRING <span className="metallic-gold-text italic">ECOSYSTEM</span>
+            <SplitTextReveal>HIRING</SplitTextReveal>{' '}
+            <SplitTextReveal delay={0.2} className="metallic-gold-text italic">ECOSYSTEM</SplitTextReveal>
           </h2>
-        </FadeIn>
+        </div>
 
         <div className="relative space-y-4 md:space-y-5">
           {/* Softer edge fades */}

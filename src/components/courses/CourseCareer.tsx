@@ -1,4 +1,4 @@
-import FadeIn from "@/components/animations/FadeIn";
+import SplitTextReveal from "@/components/ui/SplitTextReveal";
 
 interface Course {
   slug: string;
@@ -19,21 +19,21 @@ export default function CourseCareer({ course }: { course: Course }) {
   return (
     <section className="py-20 md:py-28 bg-transparent" style={{ background: "linear-gradient(180deg, rgba(5, 0, 0, 0.8) 0%, rgba(26, 5, 8, 0.9) 50%, rgba(5, 0, 0, 1) 100%)" }}>
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <FadeIn>
+        <div>
           <h2 className="font-display text-3xl md:text-4xl text-[#F0EBE1] mb-4 text-center font-black uppercase leading-[1.1] tracking-[0.1em]">
-            Career Options After Completion
+            <SplitTextReveal>Career Options After Completion</SplitTextReveal>
           </h2>
           <p className="text-[#A8A29C] text-lg text-center mb-12 max-w-2xl mx-auto">
             Open doors to exciting roles in the animation, VFX, and gaming industry
           </p>
-        </FadeIn>
+        </div>
 
-        <FadeIn stagger={0.08}>
+        <div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {course.careers.map((career, i) => (
               <div
                 key={i}
-                className="bg-[#161616] rounded-xl p-6 border border-white/5 hover:border-[#FFD700]/30 transition-all duration-300 group"
+                className="maac-scroll-card maac-depth-card bg-[#161616] rounded-xl p-6 border border-white/5 hover:border-[#FFD700]/30 transition-all duration-300 group"
               >
                 <div className="w-10 h-10 rounded-lg bg-[#FFD700]/10 flex items-center justify-center mb-4 group-hover:bg-[#FFD700]/20 transition-colors">
                   <svg className="w-5 h-5 text-[#FFD700]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -44,7 +44,7 @@ export default function CourseCareer({ course }: { course: Course }) {
               </div>
             ))}
           </div>
-        </FadeIn>
+        </div>
       </div>
     </section>
   );

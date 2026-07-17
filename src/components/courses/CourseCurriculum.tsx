@@ -1,5 +1,3 @@
-import FadeIn from "@/components/animations/FadeIn";
-
 interface Course {
   slug: string;
   curriculum: string[];
@@ -13,16 +11,16 @@ export default function CourseCurriculum({ course }: { course: Course }) {
           Course Curriculum
         </h2>
 
-        <FadeIn stagger={0.12} className="space-y-4">
+        <div className="space-y-4">
           {course.curriculum.map((item, i) => (
-            <div key={item} className="flex items-start gap-4 p-6 rounded-2xl bg-[#161616] border border-white/5 hover:border-white/10 transition-colors duration-300">
+            <div key={item} className="maac-scroll-card flex items-start gap-4 p-6 rounded-2xl bg-[#161616] border border-white/5 hover:border-white/10 transition-colors duration-300">
               <span className="metallic-gold-text font-display font-bold text-lg shrink-0">
                 {String(i + 1).padStart(2, "0")}
               </span>
               <span className="text-[#F0EBE1] font-medium">{item}</span>
             </div>
           ))}
-        </FadeIn>
+        </div>
       </div>
     </section>
   );

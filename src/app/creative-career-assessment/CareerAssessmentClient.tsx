@@ -261,7 +261,7 @@ export default function CareerAssessment() {
             >
               <span className="relative z-10">Launch Assessment</span>
               <ChevronRight className="relative z-10 group-hover:translate-x-1 transition-transform" />
-              <div className="absolute inset-0 bg-[#FFD700] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-expo" />
+               <div className="absolute inset-0 bg-[#FFD700] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]" />
             </button>
           </div>
         </div>
@@ -370,7 +370,7 @@ export default function CareerAssessment() {
 
             <div className="flex flex-col md:flex-row gap-6 justify-center items-center py-12">
               <button
-                onClick={() => window.dispatchEvent(new Event("maac:open_contact_modal"))}
+                onClick={() => window.open("https://wa.me/917300001589?text=Hi%20MAAC%20Jaipur%2C%20I%27d%20like%20to%20book%201-on-1%20counseling", "_blank")}
                 className="w-full md:w-auto px-12 py-6 bg-white text-black font-bold uppercase tracking-[0.2em] text-xs text-center hover:bg-[#FFD700] transition-all hover:-translate-y-1 hover:brightness-110"
               >
                 Book 1-on-1 Counseling

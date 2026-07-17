@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import FadeIn from "@/components/animations/FadeIn";
+import SplitTextReveal from "@/components/ui/SplitTextReveal";
 
 const bentoItems = [
   {
@@ -45,10 +45,11 @@ export default function BentoGallery() {
   return (
     <section className="bg-transparent py-24 md:py-40 px-6 lg:px-20 overflow-hidden">
       <div className="max-w-content mx-auto">
-        <FadeIn className="text-center mb-20">
+        <div className="text-center mb-20">
           <span className="inline-block metallic-gold-text text-xs font-bold tracking-[0.4em] uppercase mb-6">Our</span>
           <h2 className="font-display text-[clamp(1.5rem,5vw,3rem)] text-white leading-[0.9] font-bold uppercase leading-[1.1] tracking-[0.1em]">
-            Student <span className="metallic-gold-text">Work</span>
+            <SplitTextReveal>Student</SplitTextReveal>{' '}
+            <SplitTextReveal delay={0.2} className="metallic-gold-text">Work</SplitTextReveal>
           </h2>
           <Link 
             href="/student-work" 
@@ -59,9 +60,9 @@ export default function BentoGallery() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </Link>
-        </FadeIn>
+        </div>
 
-        <FadeIn stagger={0.1} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 auto-rows-[250px] md:auto-rows-[300px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 auto-rows-[250px] md:auto-rows-[300px]">
           {bentoItems.map((item, i) => (
             <div
               key={i}
@@ -84,7 +85,7 @@ export default function BentoGallery() {
               </div>
             </div>
           ))}
-        </FadeIn>
+        </div>
       </div>
     </section>
   );

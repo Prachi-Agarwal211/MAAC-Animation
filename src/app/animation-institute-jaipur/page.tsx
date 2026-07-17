@@ -112,7 +112,7 @@ export default function AnimationInstituteJaipurPage() {
                 Rajasthan&apos;s Number One
                 <span className="w-8 h-[1px] metallic-gold-accent" />
               </p>
-              <h1 className="font-display text-[clamp(2.5rem,8vw,5rem)] leading-[0.85] text-white mb-6 font-bold uppercase leading-[1.1] tracking-[0.1em]">
+              <h1 className="font-display text-[clamp(2.5rem,8vw,5rem)] leading-[0.85] text-white mb-6 font-bold uppercase tracking-[0.1em]">
                 Animation Institute <span className="metallic-gold-text italic text-[1.1em]">Jaipur</span>
               </h1>
               <p className="text-[#A8A29C] text-lg max-w-2xl mx-auto leading-relaxed">

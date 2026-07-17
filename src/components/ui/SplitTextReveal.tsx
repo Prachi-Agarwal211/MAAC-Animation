@@ -32,11 +32,10 @@ export default function SplitTextReveal({
 
     if (isMobile || prefersReduced) {
       gsap.fromTo(containerRef.current, 
-        { opacity: 0, y: 10, filter: "blur(4px)" },
+        { opacity: 0, y: 10 },
         {
           opacity: 1,
           y: 0,
-          filter: "blur(0px)",
           duration: 0.8,
           delay,
           ease: "power2.out",

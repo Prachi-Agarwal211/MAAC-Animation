@@ -96,7 +96,7 @@ export default function EventsInteractive() {
         gsap.fromTo(ref.current, { scale: 1.1, opacity: 0.8 }, { scale: 1, opacity: 1, duration: 1, ease: "power2.out", scrollTrigger: { trigger: ref.current, start: "top 80%", end: "top 50%", scrub: 1 } });
       }
     });
-    return () => { ScrollTrigger.getAll().forEach((trigger) => trigger.kill()); };
+    return () => { ScrollTrigger.getAll().forEach((t) => { if (t.vars.id !== 'events-interactive') t.kill(); }); };
   }, []);
 
   return (<>

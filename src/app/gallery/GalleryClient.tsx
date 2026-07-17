@@ -93,7 +93,7 @@ export default function GalleryClient() {
           <p className="text-[#FFD700] text-xs font-inter font-semibold tracking-[0.2em] uppercase mb-4">
             Showcase
           </p>
-          <h1 className="font-display text-[clamp(2.5rem,5vw,5rem)] text-[#f5f0e8] leading-[1.05] mb-6 font-light uppercase leading-[1.1] tracking-[0.1em]">
+          <h1 className="font-display text-[clamp(2.5rem,5vw,5rem)] text-[#f5f0e8] leading-[1.05] mb-6 font-light uppercase tracking-[0.1em]">
             Student <span className="metallic-gold-text">Gallery</span>
           </h1>
           <p className="text-[#6b6b6b] text-lg max-w-2xl">
@@ -132,7 +132,7 @@ export default function GalleryClient() {
                 </div>
 
                 {/* Hover overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-5">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-5">
                   <span className="text-[#FFD700] text-xs font-medium uppercase tracking-wider">
                     {item.category.replace(/-/g, " ")}
                   </span>

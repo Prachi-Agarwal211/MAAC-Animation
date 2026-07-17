@@ -172,7 +172,6 @@ function AnnualTripPage() {
   };
 
   return (
-    <ErrorBoundary>
     <div className="bg-transparent min-h-screen pt-24 sm:pt-32 relative flex flex-col">
       <div className="w-full flex-grow">
         <script
@@ -348,7 +347,6 @@ function AnnualTripPage() {
         onClose={closeLightbox}
       />
     </div>
-    </ErrorBoundary>
   );
 }
 

@@ -1,9 +1,8 @@
 "use client";
 
-import { useRef, memo } from "react";
+import { memo, useRef } from "react";
 import Image from "next/image";
-import { useGSAP } from "@gsap/react";
-import gsap from "@/lib/gsap";
+import SplitTextReveal from "@/components/ui/SplitTextReveal";
 
 const placementCompanies = [
   { 
@@ -81,24 +80,6 @@ const placementCompanies = [
 function Placements() {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  useGSAP(() => {
-    // Header animation
-    gsap.fromTo(".pl-header > *", 
-      { opacity: 0, y: 30 }, 
-      { 
-        opacity: 1, 
-        y: 0, 
-        duration: 1, 
-        stagger: 0.1, 
-        ease: "expo.out",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 95%",
-        }
-      }
-    );
-  }, { scope: containerRef });
-
   // Render company logo card with image
   const renderCompany = (company: typeof placementCompanies[0], i: number) => (
     <div key={`${company.name}-${i}`} className="group">
@@ -144,7 +125,8 @@ function Placements() {
             <div className="h-[1px] w-12 bg-gradient-to-r from-transparent via-[#BF953F]/50 to-transparent" />
           </div>
           <h2 className="font-display text-[clamp(2rem,6vw,4rem)] leading-[0.85] text-white font-bold uppercase tracking-[0.05em]">
-            STUDIOS THAT <span className="text-[#BF953F]">HIRE MAAC</span>
+            <SplitTextReveal>STUDIOS THAT</SplitTextReveal>{' '}
+            <SplitTextReveal delay={0.2} className="text-[#BF953F]">HIRE MAAC</SplitTextReveal>
           </h2>
         </div>
 

@@ -1,29 +1,31 @@
 import Link from "next/link";
 import { ArrowRight, Rocket, Pen } from "lucide-react";
-import FadeIn from "@/components/animations/FadeIn";
+import SplitTextReveal from "@/components/ui/SplitTextReveal";
 
 export default function CareerCreatorComparison() {
   return (
     <div className="relative overflow-hidden bg-transparent py-24 md:py-32">
       <div className="max-w-content mx-auto px-6 mb-16 md:mb-24">
-        <FadeIn>
+        <div>
           <div className="flex items-center gap-4 mb-6">
             <div className="w-12 h-[2px] bg-gradient-to-r from-[#BF953F] to-transparent" />
             <span className="text-white/40 text-xs font-bold uppercase tracking-[0.25em]">Two paths. One goal.</span>
           </div>
           <h2 className="font-display text-[clamp(2rem,5vw,3.5rem)] leading-[0.85] text-white font-bold uppercase">
-            NOT SURE WHICH <span className="metallic-gold-text italic">TRACK</span> FITS YOU?
+            <SplitTextReveal>NOT SURE WHICH</SplitTextReveal>{' '}
+            <SplitTextReveal delay={0.15} className="metallic-gold-text italic">TRACK</SplitTextReveal>{' '}
+            <SplitTextReveal delay={0.3}>FITS YOU?</SplitTextReveal>
           </h2>
           <p className="text-[#A8A29C] text-lg max-w-2xl leading-relaxed mt-4">
             Career X for studio careers. Creator X for independent artists. Both lead to the same place: a creative future.
           </p>
-        </FadeIn>
+        </div>
       </div>
 
-      <FadeIn stagger={0.2} y={50} className="flex flex-col lg:flex-row min-h-[50svh] lg:min-h-[70svh]">
+      <div className="flex flex-col lg:flex-row min-h-[50svh] lg:min-h-[70svh]">
 
         {/* LEFT: CAREER X */}
-        <div className="ccc-panel group relative flex-1 overflow-hidden transition-all duration-700 ease-expo-out lg:hover:flex-[1.5]">
+        <div className="ccc-panel maac-wipe-card group relative flex-1 overflow-hidden transition-all duration-700 ease-expo-out lg:hover:flex-[1.5]">
           <div className="absolute inset-0 bg-gradient-to-br from-[#1a0000]/80 to-transparent" />
           <div className="absolute inset-0 bg-[#FFD700]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
@@ -68,7 +70,7 @@ export default function CareerCreatorComparison() {
         </div>
 
         {/* RIGHT: CREATOR X */}
-        <div className="ccc-panel group relative flex-1 overflow-hidden transition-all duration-700 ease-expo-out lg:hover:flex-[1.5] border-t lg:border-t-0 lg:border-l border-white/5">
+        <div className="ccc-panel maac-wipe-card group relative flex-1 overflow-hidden transition-all duration-700 ease-expo-out lg:hover:flex-[1.5] border-t lg:border-t-0 lg:border-l border-white/5">
           <div className="absolute inset-0 bg-gradient-to-br from-[#0c0805]/80 to-transparent" />
           <div className="absolute inset-0 bg-[#FF6B35]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
@@ -109,7 +111,7 @@ export default function CareerCreatorComparison() {
           </div>
         </div>
 
-      </FadeIn>
+      </div>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import { faqSchema } from "@/lib/structured-data";
 import { MessageSquare } from "lucide-react";
 import FadeIn from "@/components/animations/FadeIn";
+import SplitTextReveal from "@/components/ui/SplitTextReveal";
 import FAQAccordion from "@/components/ui/FAQAccordion";
 
 const faqs = faqSchema.mainEntity.slice(0, 6);
@@ -14,15 +15,16 @@ export default function FAQSection() {
         
         {/* Left: Content */}
         <div className="lg:col-span-5 space-y-8">
-          <FadeIn>
+          <div>
             <p className="metallic-gold-text text-[10px] font-bold tracking-[0.3em] uppercase mb-4 flex items-center gap-3">
               <span className="w-8 h-[1px] metallic-gold-accent" />
               Support Hub
             </p>
             <h2 className="font-display text-[clamp(1.8rem,6vw,3.5rem)] leading-[0.8] text-white font-bold uppercase leading-[1.1] tracking-[0.1em]">
-              ANSWERING YOUR <span className="metallic-gold-text italic">AMBITIONS</span>
+              <SplitTextReveal>ANSWERING YOUR</SplitTextReveal>{' '}
+              <SplitTextReveal delay={0.2} className="metallic-gold-text italic">AMBITIONS</SplitTextReveal>
             </h2>
-          </FadeIn>
+          </div>
           
           <FadeIn delay={0.2}>
             <p className="text-[#A8A29C] text-lg md:text-xl leading-relaxed max-w-md">

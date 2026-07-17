@@ -1,9 +1,22 @@
+import type { Metadata } from "next";
 import Script from "next/script";
 import IndustryPartners from "@/components/IndustryPartners";
 import ApplyNow from "@/components/ApplyNow";
 import StudentWorkGallery from "./StudentWorkGallery";
 import StudentWorkHeroClient from "./StudentWorkHeroClient";
 import ErrorBoundary from "@/components/ErrorBoundary";
+
+export const metadata: Metadata = {
+  title: "Student Work",
+  description:
+    "Explore incredible projects from MAAC Jaipur students. Portfolio-ready work in 3D Animation, VFX, and Game Design.",
+  openGraph: {
+    title: "Student Work - MAAC Animation Jaipur",
+    description:
+      "Explore incredible projects from MAAC Jaipur students. Portfolio-ready work in 3D Animation, VFX, and Game Design.",
+    images: ["/thumbnail.png"],
+  },
+};
 
 export default function StudentWorkPage() {
   return (
@@ -53,7 +66,7 @@ export default function StudentWorkPage() {
               Excellence in Motion
               <span className="w-8 h-[1px] metallic-gold-accent" />
             </p>
-            <h1 className="animate-in font-display text-[clamp(2.5rem,8vw,5rem)] leading-[0.85] text-white mb-6 font-light uppercase leading-[1.1] tracking-[0.1em]">
+            <h1 className="animate-in font-display text-[clamp(2.5rem,8vw,5rem)] leading-[0.85] text-white mb-6 font-light uppercase tracking-[0.1em]">
               Student <span className="metallic-gold-text italic text-[1.1em]">Work</span>
             </h1>
             <p className="animate-in text-[#A8A29C] text-lg max-w-2xl mx-auto leading-relaxed">

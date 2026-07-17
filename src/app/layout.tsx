@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Manrope, Syne } from "next/font/google";
 import "./globals.css";
+import "./card-innovations.css";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 import Script from "next/script";

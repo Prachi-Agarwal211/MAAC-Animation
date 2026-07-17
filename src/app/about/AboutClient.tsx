@@ -85,10 +85,10 @@ export default function AboutClient() {
             Established 1986
           </span>
           <h1 className="mb-10">
-            <span className="block text-white font-display text-[clamp(3.5rem,10vw,8.5rem)] leading-[0.85] font-light uppercase leading-[1.1] tracking-[0.1em]">
+            <span className="block text-white font-display text-[clamp(3.5rem,10vw,8.5rem)] leading-[0.85] font-light uppercase tracking-[0.1em]">
               <SplitTextReveal>Crafting the</SplitTextReveal>
             </span>
-            <span className="block metallic-gold-text font-display text-[clamp(3rem,8vw,7rem)] leading-[0.85] mt-4 font-light uppercase leading-[1.1] tracking-[0.1em]">
+            <span className="block metallic-gold-text font-display text-[clamp(3rem,8vw,7rem)] leading-[0.85] mt-4 font-light uppercase tracking-[0.1em]">
               <SplitTextReveal delay={0.2}>Digital Future</SplitTextReveal>
             </span>
           </h1>
@@ -133,7 +133,7 @@ export default function AboutClient() {
             {milestones.map((m, i) => (
               <div key={i} className="milestone-card p-10 md:p-12 border-b md:border-b-0 md:border-r border-white/5 hover:bg-[#FFD700]/5 transition-colors duration-700 group">
                 <div className="text-[#FFD700] font-display text-5xl mb-8 group-hover:scale-110 group-hover:-translate-y-2 transition-transform duration-500 font-light uppercase leading-[1.1] tracking-[0.1em]">{m.year}</div>
-                <h3 className="text-white text-xl font-display mb-4 tracking-widest font-light uppercase leading-[1.1] tracking-[0.1em]">{m.title}</h3>
+                <h3 className="text-white text-xl font-display mb-4 tracking-widest font-light uppercase leading-[1.1]">{m.title}</h3>
                 <p className="text-[#A8A29C] text-sm leading-relaxed group-hover:text-white transition-colors">{m.description}</p>
               </div>
             ))}

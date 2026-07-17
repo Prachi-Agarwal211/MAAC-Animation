@@ -1,6 +1,8 @@
 import VideoFacade from "@/components/ui/VideoFacade";
 import FadeIn from "@/components/animations/FadeIn";
 import CountUpStat from "@/components/ui/CountUpStat";
+import LiquidReveal from "@/components/ui/LiquidReveal";
+import SplitTextReveal from "@/components/ui/SplitTextReveal";
 
 export default function InstituteIntro() {
   return (
@@ -9,24 +11,22 @@ export default function InstituteIntro() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-16 lg:gap-24 items-center">
           
           {/* Left: Video */}
-          <FadeIn className="lg:col-span-7 institute-video-container">
+          <LiquidReveal className="lg:col-span-7 institute-video-container">
             <VideoFacade youtubeId="jO4xZJe_ql8" title="MAAC Animation Showreel" className="aspect-video" />
-          </FadeIn>
+          </LiquidReveal>
 
           {/* Right: Text */}
           <div className="lg:col-span-5">
-            <FadeIn>
-              <div className="mb-10">
-                <div className="flex items-center gap-4 mb-5">
-                  <div className="w-10 h-[2px] bg-gradient-to-r from-[#BF953F] to-transparent" />
-                  <span className="text-white/40 text-[9px] font-bold tracking-[0.3em] uppercase">Since 1986</span>
-                </div>
-                <h2 className="font-display text-[clamp(1.6rem,4.5vw,3rem)] leading-[0.9] text-white font-bold uppercase tracking-[0.02em]">
-                  JAIPUR&apos;S PREMIER<br />
-                  <span className="metallic-gold-text">ANIMATION INSTITUTE</span>
-                </h2>
+            <div className="mb-10">
+              <div className="flex items-center gap-4 mb-5">
+                <div className="w-10 h-[2px] bg-gradient-to-r from-[#BF953F] to-transparent" />
+                <span className="text-white/40 text-[9px] font-bold tracking-[0.3em] uppercase">Since 1986</span>
               </div>
-            </FadeIn>
+              <h2 className="font-display text-[clamp(1.6rem,4.5vw,3rem)] leading-[0.9] text-white font-bold uppercase tracking-[0.02em]">
+                <SplitTextReveal>JAIPUR&apos;S PREMIER</SplitTextReveal><br />
+                <SplitTextReveal delay={0.2} className="metallic-gold-text">ANIMATION INSTITUTE</SplitTextReveal>
+              </h2>
+            </div>
 
             <FadeIn delay={0.2}>
               <div className="institute-description text-[#A8A29C] md:text-lg leading-relaxed mb-10">

@@ -1,5 +1,6 @@
 import { Star, TrendingUp } from "lucide-react";
 import FadeIn from "@/components/animations/FadeIn";
+import SplitTextReveal from "@/components/ui/SplitTextReveal";
 
 const successStories = [
   {
@@ -60,19 +61,21 @@ export default function StudentSuccessStories() {
 
       <div className="relative max-w-content mx-auto px-6 lg:px-8 z-10">
         {/* Heading */}
-        <FadeIn className="text-center mb-16 md:mb-24">
+        <div className="text-center mb-16 md:mb-24">
           <p className="metallic-gold-text text-[10px] font-bold tracking-[0.3em] uppercase mb-4 flex items-center justify-center gap-3">
             <span className="w-8 h-[1px] metallic-gold-accent" />
             Inspiring Journeys
             <span className="w-8 h-[1px] metallic-gold-accent" />
           </p>
           <h2 className="font-display text-[clamp(1.6rem,6vw,3.5rem)] leading-[0.85] text-white font-bold uppercase leading-[1.1] tracking-[0.1em]">
-            REAL <span className="metallic-gold-text italic">PLACEMENTS</span>, REAL SALARIES
+            <SplitTextReveal>REAL</SplitTextReveal>{' '}
+            <SplitTextReveal delay={0.15} className="metallic-gold-text italic">PLACEMENTS</SplitTextReveal>
+            <SplitTextReveal delay={0.3}>, REAL SALARIES</SplitTextReveal>
           </h2>
           <p className="text-[#A8A29C] text-sm md:text-white/80 mt-6 max-w-2xl mx-auto">
             Our students don&apos;t just learn — they launch thriving careers. Here&apos;s what MAAC alumni are earning and where they&apos;re working.
           </p>
-        </FadeIn>
+        </div>
 
         {/* Stats Bar */}
         <FadeIn delay={0.2} className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16 p-8 rounded-[24px] glass-card border border-white/5">
@@ -100,7 +103,7 @@ export default function StudentSuccessStories() {
           {successStories.map((story, index) => (
             <div
               key={index}
-              className="success-card glass-card group relative overflow-hidden transition-all duration-700"
+              className="maac-scroll-card success-card glass-card group relative overflow-hidden transition-all duration-700"
             >
               {/* Top Gradient Line */}
               <div className="absolute top-0 left-0 right-0 h-[2px] bg-[#BF953F]/50 shadow-[0_0_10px_rgba(191,149,63,0.3)] opacity-0 group-hover:opacity-100 transition-opacity" />

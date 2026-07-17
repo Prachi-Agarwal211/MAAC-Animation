@@ -1,5 +1,5 @@
 import { coursesData } from "@/data/courses";
-import FadeIn from "@/components/animations/FadeIn";
+import SplitTextReveal from "@/components/ui/SplitTextReveal";
 import PopularCoursesScroll from "@/components/ui/PopularCoursesScroll";
 
 // Central source of truth: use the same ogImages defined for courses in /courses page
@@ -41,16 +41,17 @@ export default function PopularCourses() {
       {/* Header */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 mb-20">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12 md:mb-16">
-          <FadeIn className="max-w-2xl">
+          <div className="max-w-2xl">
             <p className="metallic-gold-text text-[10px] font-bold tracking-[0.3em] uppercase mb-4 flex items-center gap-3">
               <span className="w-8 h-[1px] metallic-gold-accent" />
               The Academy Portfolio
             </p>
 
             <h2 className="font-display text-[clamp(1rem,4vw,1.75rem)] leading-[0.85] text-white font-bold uppercase tracking-wide">
-              EXPERTLY CRAFTED <span className="metallic-gold-text italic tracking-wider">CURRICULUM</span>
+              <SplitTextReveal>EXPERTLY CRAFTED</SplitTextReveal>{' '}
+              <SplitTextReveal delay={0.2} className="metallic-gold-text italic tracking-wider">CURRICULUM</SplitTextReveal>
             </h2>
-          </FadeIn>
+          </div>
         </div>
         
         {/* Track (Client Island for scroll buttons + swipe) */}

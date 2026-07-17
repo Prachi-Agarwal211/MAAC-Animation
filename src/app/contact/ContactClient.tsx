@@ -105,7 +105,7 @@ export default function ContactClient() {
                   <div className="w-12 h-12 rounded-xl bg-[#FFD700]/10 flex items-center justify-center text-[#FFD700]">
                     <MapPin size={20} />
                   </div>
-                  <h3 className="text-white font-display text-base tracking-wider font-light uppercase leading-[1.1] tracking-[0.1em]">HQ Location</h3>
+                  <h3 className="text-white font-display text-base tracking-wider font-light uppercase leading-[1.1]">HQ Location</h3>
                </div>
                <p className="text-[#A8A29C] leading-relaxed text-sm">
                  711-712, Ambition Tower, 7th Floor, Agrasain Circle, Subhash Marg, Jaipur, 302001
@@ -118,12 +118,12 @@ export default function ContactClient() {
             <div className="grid sm:grid-cols-2 gap-6">
                <div className="contact-card p-6 rounded-2xl glass border border-white/5 space-y-3 hover:border-[#FFD700]/30 transition-all">
                   <Phone size={16} className="text-[#FFD700]" />
-                  <h4 className="text-white font-display text-xs tracking-wider font-light uppercase leading-[1.1] tracking-[0.1em]">Phone</h4>
+                  <h4 className="text-white font-display text-xs tracking-wider font-light uppercase leading-[1.1]">Phone</h4>
                   <a href="tel:+917300001589" className="block text-[#A8A29C] text-xs hover:text-white transition-colors">+91 73000 01589</a>
                </div>
                <div className="contact-card p-6 rounded-2xl glass border border-white/5 space-y-3 hover:border-[#FFD700]/30 transition-all">
                   <Mail size={16} className="text-[#FFD700]" />
-                  <h4 className="text-white font-display text-xs tracking-wider font-light uppercase leading-[1.1] tracking-[0.1em]">Email</h4>
+                  <h4 className="text-white font-display text-xs tracking-wider font-light uppercase leading-[1.1]">Email</h4>
                   <a href="mailto:maacanimationjaipur@gmail.com" className="block text-[#A8A29C] text-xs hover:text-white transition-colors break-all">maacanimationjaipur@gmail.com</a>
                </div>
             </div>
