@@ -230,8 +230,7 @@ function AnnualTripPage() {
                 className="object-cover transition-all duration-700 ease-out opacity-100 scale-100"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1100px"
                 priority={currentIndex < 3}
-                placeholder="blur"
-                blurDataURL="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI0OCI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iIzBhMGEwYSIvPjwvc3ZnPg=="
+                placeholder="empty"
               />
             </div>
 

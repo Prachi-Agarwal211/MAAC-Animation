@@ -13,7 +13,7 @@ export default function ScrollIndicator() {
     const docHeight = document.documentElement.scrollHeight - window.innerHeight;
     const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
     setScrollProgress(progress);
-    setShowBackToTop(scrollTop > 400);
+    setShowBackToTop(scrollTop > window.innerHeight * 0.4);
   }, []);
 
   useEffect(() => {
@@ -49,7 +49,8 @@ export default function ScrollIndicator() {
       {showBackToTop && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 w-14 h-14 rounded-full glass border border-white/10 bg-[#0C0C0C]/90 backdrop-blur-md flex items-center justify-center text-white hover:text-white hover:border-[#BF953F]/30 hover:bg-[#BF953F]/10 transition-all duration-300 z-40"
+          className="fixed w-14 h-14 rounded-full glass border border-white/10 bg-[#0C0C0C]/90 backdrop-blur-md flex items-center justify-center text-white hover:text-white hover:border-[#BF953F]/30 hover:bg-[#BF953F]/10 transition-all duration-300 z-40"
+          style={{ bottom: "max(2rem, env(safe-area-inset-bottom))", right: "max(2rem, env(safe-area-inset-right))" }}
           aria-label="Scroll to top"
         >
           <ArrowUp size={24} />

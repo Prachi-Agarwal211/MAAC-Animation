@@ -29,10 +29,13 @@ export default function HeroTrustTransition({ hero }: Props) {
     if (isReduced) return;
 
     const ctx = gsap.context(() => {
-      const videoBg = document.querySelector(".hero-bg-container") as HTMLElement;
-      const heroText = document.querySelector(".maacx-content") as HTMLElement;
-
-      if (!videoBg) return;
+      let videoBg: HTMLElement | null;
+      let heroText: HTMLElement | null;
+      try {
+        videoBg = document.querySelector(".hero-bg-container") as HTMLElement;
+        heroText = document.querySelector(".maacx-content") as HTMLElement;
+        if (!videoBg) return;
+      } catch (_) { return; }
 
       gsap.set(videoBg, { transformOrigin: "top left" });
       gsap.set(".morph-badges-text", { opacity: 0, y: 30 });
@@ -93,10 +96,10 @@ export default function HeroTrustTransition({ hero }: Props) {
         const getMobileTarget = () => {
           const vw = window.innerWidth;
           const vh = window.innerHeight;
-          const cardW = vw * 0.88;
+          const cardW = vw * 0.88; // 88% viewport width — leaves 6% margin on each side
           return {
             x: (vw - cardW) / 2,
-            y: vh * 0.08,
+            y: vh * 0.08, // 8% from top — clear of notch/status bar on mobile
             scale: cardW / vw,
           };
         };
@@ -105,9 +108,11 @@ export default function HeroTrustTransition({ hero }: Props) {
           scrollTrigger: {
             trigger: containerRef.current,
             start: "top top",
-            end: "+=180%",
+            end: "+=120%",
             pin: true,
+            pinSpacing: true,
             scrub: 1,
+            invalidateOnRefresh: true,
           },
         });
 
@@ -137,7 +142,7 @@ export default function HeroTrustTransition({ hero }: Props) {
   }, { scope: containerRef });
 
   return (
-    <div ref={containerRef} className="relative w-full h-[100vh] overflow-hidden bg-transparent">
+      <div ref={containerRef} className="relative w-full h-[100dvh] overflow-hidden bg-transparent">
       {/* Hero layer */}
       <div className="absolute inset-0 z-0">
         {hero}
@@ -172,8 +177,7 @@ export default function HeroTrustTransition({ hero }: Props) {
         <div className="flex lg:hidden w-full h-full flex-col">
           {/* Spacer for video card area */}
           <div className="h-[55svh] shrink-0" />
-          {/* Gradient scrim for text readability over video */}
-          <div className="relative flex-1 flex flex-col justify-start px-5 pt-6 pb-20 bg-gradient-to-b from-[#080808]/90 via-[#080808]/95 to-[#080808]">
+          <div className="relative flex-1 flex flex-col justify-start px-5 pt-6 pb-20 pointer-events-none">
             <div className="morph-badges-text pointer-events-auto">
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-5 h-[1px] metallic-gold-accent" />
@@ -209,7 +213,7 @@ export default function HeroTrustTransition({ hero }: Props) {
                   alt={cert.name}
                   width={100}
                   height={54}
-                  className="w-full h-full object-contain mix-blend-multiply"
+                  className="w-full h-full object-contain"
                 />
               </div>
             ))}

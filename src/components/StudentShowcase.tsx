@@ -10,6 +10,10 @@ const showcaseVideos = [
   { title: "FAST LIFE", category: "Short Film", video: "/student-work/fast-life-compressed.mp4", duration: "3:12", fallbackImage: "/portfolio/environment-modeling/sayan-chowdhury-page1.jpg" },
   { title: "KARMA", category: "Visual Effects", video: "/student-work/KARMA-compressed.mp4", duration: "4:05", fallbackImage: "/portfolio/matte-painting/akshat-asolkar.jpg" },
   { title: "THE PLASTIC PLAGUE", category: "Documentary", video: "/student-work/the-plastic-plague-compressed.mp4", duration: "5:20", fallbackImage: "/portfolio/digital-painting/deshna-shah.jpg" },
+  { title: "CHARACTER REEL 1", category: "Character Animation", video: "/student-work/char-anim-1.mp4", duration: "0:30", fallbackImage: "" },
+  { title: "CHARACTER REEL 2", category: "Character Animation", video: "/student-work/char-anim-2.mp4", duration: "0:30", fallbackImage: "" },
+  { title: "CHARACTER REEL 3", category: "Character Animation", video: "/student-work/char-anim-3.mp4", duration: "0:30", fallbackImage: "" },
+  { title: "CHARACTER REEL 4", category: "Character Animation", video: "/student-work/char-anim-4.mp4", duration: "0:30", fallbackImage: "" },
 ];
 
 export default function StudentShowcase() {

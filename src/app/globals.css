@@ -194,6 +194,8 @@ body {
   overflow-x: clip;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
   line-height: 1.6;
   letter-spacing: -0.01em;
 }
@@ -272,6 +274,7 @@ body.demo-bar-visible .page-wrapper {
   align-items: center;
   gap: 0.75rem;
   padding: 14px 36px;
+  min-height: 48px;
   font-family: var(--font-inter), sans-serif;
   font-weight: 600;
   font-size: 0.875rem;
@@ -882,7 +885,7 @@ select:focus-visible {
   box-shadow: 0 -30px 100px rgba(0, 0, 0, 0.8);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1023px) {
   .section-float-over {
     margin-top: -40px;
     border-radius: 30px 30px 0 0;
@@ -906,6 +909,10 @@ select:focus-visible {
   .animated-bg,
   .animated-mesh-bg {
     animation-duration: 35s;
+  }
+
+  .atmosphere-blob {
+    display: none;
   }
 }
 

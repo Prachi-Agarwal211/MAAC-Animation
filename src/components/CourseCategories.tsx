@@ -8,6 +8,7 @@ import Link from "next/link";
 import { siteCoursesData } from "@/data/siteData";
 import { courseCategories, coursesData } from "@/data/courses";
 import { ArrowUpRight } from "lucide-react";
+import { isTouchDevice as checkTouch } from "@/lib/constants";
 
 const CategoryIcon = ({ type }: { type: string }) => {
   const icons: Record<string, React.ReactElement> = {
@@ -83,21 +84,18 @@ type CourseCategoriesProps = {
 
 function SlideUpCard({ course }: { course: CourseCardItem }) {
   const [isHovered, setIsHovered] = useState(false);
-  const [isTouchDevice, setIsTouchDevice] = useState(false);
+  const [isTouch, setIsTouch] = useState(false);
 
   React.useEffect(() => {
-    const checkTouch = () => setIsTouchDevice(window.matchMedia("(pointer: coarse)").matches);
-    checkTouch();
-    window.addEventListener("resize", checkTouch);
-    return () => window.removeEventListener("resize", checkTouch);
+    setIsTouch(checkTouch());
   }, []);
 
   return (
     <div
       className="category-card glass-card relative aspect-[2/3] overflow-hidden cursor-pointer group transition-all duration-500 hover:border-[#FFD700]/30"
-      onMouseEnter={() => !isTouchDevice && setIsHovered(true)}
-      onMouseLeave={() => !isTouchDevice && setIsHovered(false)}
-      onClick={() => isTouchDevice && setIsHovered(!isHovered)}
+      onMouseEnter={() => !isTouch && setIsHovered(true)}
+      onMouseLeave={() => !isTouch && setIsHovered(false)}
+      onClick={() => isTouch && setIsHovered(!isHovered)}
     >
       {/* Media Layer */}
       <div className="absolute inset-0 z-0">
@@ -108,8 +106,7 @@ function SlideUpCard({ course }: { course: CourseCardItem }) {
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-cover transition-transform duration-700 group-hover:-translate-y-1"
-            placeholder="blur"
-            blurDataURL="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI0OCI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iIzBhMGEwYSIvPjwvc3ZnPg=="
+            placeholder="empty"
           />
         ) : (
           <div className="absolute inset-0 bg-gradient-to-br from-[#1c1c1c] to-[#0c0c0c]" />

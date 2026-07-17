@@ -138,19 +138,19 @@ function Placements() {
       <div className="relative z-10 max-w-content mx-auto px-6">
         {/* Header */}
         <div className="pl-header text-center mb-16">
-          <p className="metallic-gold-text text-[10px] font-bold tracking-[0.4em] uppercase mb-4 flex items-center justify-center gap-3">
-            <span className="w-8 h-[1px] metallic-gold-accent" />
-            Career Trajectory
-            <span className="w-8 h-[1px] metallic-gold-accent" />
-          </p>
-          <h2 className="font-display text-[clamp(1.8rem,6vw,3.5rem)] leading-[0.85] text-white font-bold uppercase leading-[1.1] tracking-[0.1em]">
-            The Alumni <span className="metallic-gold-text italic">Network</span>
+          <div className="flex items-center justify-center gap-4 mb-5">
+            <div className="h-[1px] w-12 bg-gradient-to-r from-transparent via-[#BF953F]/50 to-transparent" />
+            <span className="text-white/30 text-[9px] font-bold tracking-[0.35em] uppercase">WHERE OUR GRADUATES WORK</span>
+            <div className="h-[1px] w-12 bg-gradient-to-r from-transparent via-[#BF953F]/50 to-transparent" />
+          </div>
+          <h2 className="font-display text-[clamp(2rem,6vw,4rem)] leading-[0.85] text-white font-bold uppercase tracking-[0.05em]">
+            STUDIOS THAT <span className="text-[#BF953F]">HIRE MAAC</span>
           </h2>
         </div>
 
         {/* Alumni Network Logo Rows */}
         <div className="max-w-content mx-auto">
-          <div className="border-t-2 border-b-2 border-red-600/40 pt-10 pb-10">
+          <div className="border-t-2 border-b-2 border-[#BF953F]/20 pt-10 pb-10">
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7 gap-4 md:gap-5">
               {placementCompanies.map((company, i) => renderCompany(company, i))}
             </div>

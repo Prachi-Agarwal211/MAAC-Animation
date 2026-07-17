@@ -33,8 +33,7 @@ export default function VideoFacade({ youtubeId, title = "Video player", classNa
             sizes="(max-width: 1024px) 100vw, 60vw"
             alt={`${title} Cover`}
             className="object-cover opacity-80 group-hover:opacity-100 transition-all duration-700 group-hover:-translate-y-1"
-            placeholder="blur"
-            blurDataURL="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI0OCI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iIzBhMGEwYSIvPjwvc3ZnPg=="
+            placeholder="empty"
           />
           <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500" />
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">

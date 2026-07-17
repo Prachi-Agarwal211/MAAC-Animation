@@ -17,26 +17,39 @@ const milestones = [
 ];
 
 const faculty = [
-  { name: "Rajesh Kumar", role: "Head of Animation", exp: "15+ Years", bio: "Former Lead Animator at Prime Focus" },
-  { name: "Priya Menon", role: "VFX Lead", exp: "12+ Years", bio: "Ex-Compositor at Redchillies VFX" },
-  { name: "Amit Sharma", role: "Game Design", exp: "10+ Years", bio: "Expert in Unreal Engine 5" },
-  { name: "Sneha Patel", role: "Digital Media", exp: "8+ Years", bio: "Motion Graphics specialist" },
+  { name: "Anurag Tiwari", role: "Head of Department", exp: "12+ Years", bio: "Leads the academic vision and curriculum with industry-aligned training." },
+  { name: "Yogesh Sharma", role: "VFX Lead", exp: "10+ Years", bio: "VFX compositing and CG integration expert with studio production experience." },
+  { name: "Sameer Khan", role: "Graphics & Animation", exp: "10+ Years", bio: "Specialist in 3D animation, motion graphics, and visual storytelling." },
+  { name: "Mehul Patel", role: "Game Design Lead", exp: "8+ Years", bio: "Game art, level design and real-time engine expert — Unity & Unreal." },
+  { name: "Shivani Gupta", role: "Pre-Production", exp: "8+ Years", bio: "Storyboarding, scriptwriting and pre-visualization specialist." },
+  { name: "P. Dixit", role: "Communication Design", exp: "10+ Years", bio: "Visual communication, typography and brand design expert." },
+  { name: "Kaushal Kumar", role: "UI/UX Design", exp: "9+ Years", bio: "User experience design, interface design and design thinking mentor." },
 ];
 
 export default function AboutClient() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
-    const tl = gsap.timeline();
-    tl.fromTo(".about-hero-media", { scale: 1.2, opacity: 0 }, { scale: 1, opacity: 1, duration: 1.5, ease: "expo.out" });
-
-    gsap.fromTo(".milestone-card", 
-      { opacity: 0, x: (i) => i % 2 === 0 ? -50 : 50 },
-      { 
-        opacity: 1, x: 0, duration: 1, stagger: 0.2, ease: "expo.out",
-        scrollTrigger: { trigger: ".timeline-section", start: "top 70%" }
+    try {
+      const heroMedia = document.querySelector(".about-hero-media");
+      if (heroMedia) {
+        const tl = gsap.timeline();
+        tl.fromTo(heroMedia, { scale: 1.2, opacity: 0 }, { scale: 1, opacity: 1, duration: 1.5, ease: "expo.out" });
       }
-    );
+
+      const cards = document.querySelectorAll(".milestone-card");
+      if (cards.length) {
+        gsap.fromTo(cards, 
+          { opacity: 0, x: (i) => i % 2 === 0 ? -50 : 50 },
+          { 
+            opacity: 1, x: 0, duration: 1, stagger: 0.2, ease: "expo.out",
+            scrollTrigger: { trigger: ".timeline-section", start: "top 70%" }
+          }
+        );
+      }
+    } catch (e) {
+      console.warn("GSAP animations skipped:", e);
+    }
   }, { scope: containerRef });
 
   return (
@@ -135,17 +148,21 @@ export default function AboutClient() {
           <h2 className="text-white font-display text-5xl md:text-8xl font-light uppercase leading-[1.1] tracking-[0.1em]">EXPERIENCED <span className="gradient-text">FACULTY</span></h2>
         </div>
 
-        <div className="max-w-[1600px] mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="max-w-[1600px] mx-auto px-6 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 md:gap-8">
           {faculty.map((f, i) => (
-            <div key={i} className="group relative aspect-[3/4] rounded-[40px] overflow-hidden bg-[#111111] border border-white/5">
+            <div key={i} className="group relative aspect-[3/4] rounded-[40px] overflow-hidden bg-[#111111] border border-white/5 hover:border-[#BF953F]/40 transition-colors duration-700">
               <div className="absolute inset-0 bg-gradient-to-br from-[#FFD700]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-              <div className="absolute inset-0 flex items-center justify-center text-[15rem] font-display text-white/[0.02] group-hover:text-white/[0.05] transition-colors font-light uppercase leading-[1.1] tracking-[0.1em]">{f.name[0]}</div>
-              
-              <div className="absolute bottom-0 left-0 right-0 p-10 translate-y-4 group-hover:translate-y-0 transition-transform duration-700">
-                <span className="text-[#FFD700] text-[10px] font-bold uppercase tracking-[0.3em] mb-2 block">{f.role}</span>
-                <h3 className="text-white text-2xl font-display mb-2 font-light uppercase leading-[1.1] tracking-[0.1em]">{f.name}</h3>
-                <p className="text-[#A8A29C] text-xs font-bold uppercase tracking-widest mb-6">{f.exp} EXPERIENCE</p>
-                <p className="text-white/40 text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-100">
+              <div className={`absolute inset-0 opacity-[0.03] bg-gradient-to-br ${
+                ['from-[#FFD700]', 'from-[#E31837]', 'from-[#FF6B35]', 'from-[#BF953F]', 'from-[#FFD700]', 'from-[#E31837]', 'from-[#FF6B35]'][i]
+              } to-transparent`} />
+              <div className="absolute inset-0 flex items-center justify-center text-[12rem] md:text-[15rem] font-display text-white/[0.03] group-hover:text-white/[0.06] transition-all duration-700 font-black uppercase leading-[1] tracking-[0.1em] select-none">{f.name[0]}</div>
+              <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#BF953F]/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+              <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10 translate-y-4 group-hover:translate-y-0 transition-transform duration-700">
+                <div className="w-8 h-[2px] bg-[#BF953F]/50 mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <span className="text-[#BF953F] text-[9px] font-bold uppercase tracking-[0.3em] mb-2 block opacity-80 group-hover:opacity-100 transition-opacity">{f.role}</span>
+                <h3 className="text-white text-xl md:text-2xl font-display mb-1 font-bold leading-[1.1]">{f.name}</h3>
+                <p className="text-[#A8A29C] text-[10px] font-bold uppercase tracking-widest mb-4 md:mb-6">{f.exp} EXPERIENCE</p>
+                <p className="text-white/40 text-xs md:text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-100 line-clamp-3">
                   {f.bio}
                 </p>
               </div>

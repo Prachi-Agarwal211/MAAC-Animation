@@ -66,7 +66,6 @@ export default function VerticalCardGallery() {
   };
 
   useGSAP(() => {
-    gsap.registerPlugin(ScrollTrigger);
     updateActiveSegment(0);
 
     const mm = gsap.matchMedia();
@@ -85,8 +84,9 @@ export default function VerticalCardGallery() {
         scrollTrigger: {
           trigger: pinSection,
           start: "top top",
-          end: () => `+=${getMaxTranslate()}`,
-          scrub: true,
+                end: () => `+=${getMaxTranslate()}`,
+                scrub: true,
+                pinSpacing: true,
           pin: true,
           invalidateOnRefresh: true,
           onUpdate: (self) => {
@@ -112,19 +112,19 @@ export default function VerticalCardGallery() {
 
     mm.add("(max-width: 1023px)", () => {
       const cards = cardRefs.current.filter(Boolean) as HTMLDivElement[];
-      const triggers: ScrollTrigger[] = [];
-      cards.forEach((card, index) => {
-        triggers.push(
-          ScrollTrigger.create({
-            trigger: card,
-            start: "top 65%",
-            end: "bottom 35%",
-            onEnter: () => updateActiveSegment(index),
-            onEnterBack: () => updateActiveSegment(index),
-          })
-        );
-      });
-      return () => { triggers.forEach((t) => t.kill()); };
+      let observer: IntersectionObserver | null = null;
+      try {
+        observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const idx = cards.indexOf(entry.target as HTMLDivElement);
+              if (idx >= 0) updateActiveSegment(idx);
+            }
+          });
+        }, { threshold: 0.4 });
+        cards.forEach((card) => observer?.observe(card));
+      } catch (_) {}
+      return () => { observer?.disconnect(); };
     });
 
     return () => mm.revert();
@@ -133,12 +133,12 @@ export default function VerticalCardGallery() {
   return (
     <>
       {/* Header — scrolls away naturally, not pinned */}
-      <div ref={headerRef} className="relative z-10 max-w-content mx-auto px-6 lg:px-12 py-12 lg:py-16">
-        <div className="text-center mb-16 lg:mb-12 xl:mb-20">
+        <div ref={headerRef} className="relative z-10 max-w-content mx-auto px-6 lg:px-12 py-8 lg:py-16">
+        <div className="text-center mb-12 lg:mb-12 xl:mb-20">
           <p className="text-[9px] font-bold tracking-[0.4em] uppercase mb-4 text-[#C19A5B] opacity-60">
             The MAAC Standard
           </p>
-          <h2 className="font-display font-bold text-[clamp(1.5rem,5.5vw,4rem)] text-white/90 uppercase leading-[1.1] tracking-[0.15em] px-4">
+          <h2 className="font-display font-bold text-[clamp(1.8rem,5.5vw,4rem)] text-white/90 uppercase leading-[1.1] tracking-[0.15em] px-4">
             CREATIVE <span className="metallic-gold-text italic tracking-normal">EVOLUTION</span>
           </h2>
         </div>
@@ -269,12 +269,12 @@ export default function VerticalCardGallery() {
               ref={rightViewportRef}
               className="w-full lg:w-[46%] xl:w-[44%] lg:h-full lg:overflow-hidden px-4 sm:px-8 lg:px-0 pt-2 lg:pt-0"
             >
-              <div ref={rightTrackRef} className="space-y-16 lg:space-y-24 lg:pb-[25vh]">
+              <div ref={rightTrackRef} className="space-y-12 md:space-y-16 lg:space-y-24 lg:pb-[25vh]">
                 {featureCards.map((card, index) => (
                   <div
                     key={index}
                     ref={el => { cardRefs.current[index] = el; }}
-                    className="w-full flex-shrink-0 group flex flex-col md:flex-row items-center gap-8 md:gap-12 transition-all duration-500"
+                    className="w-full flex-shrink-0 group flex flex-col md:flex-row items-center gap-6 md:gap-12 transition-all duration-500"
                   >
                     <div className="w-full md:w-[45%] aspect-[4/5] relative bg-black rounded-[1.5rem] md:rounded-[2rem] overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.4)]">
                       <Image
@@ -284,8 +284,7 @@ export default function VerticalCardGallery() {
                         className="object-cover opacity-90 transition-transform duration-700 group-hover:-translate-y-1"
                         sizes="(max-width: 1024px) 100vw, 30vw"
                         priority={index === 0}
-                        placeholder="blur"
-                        blurDataURL="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI0OCI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iIzBhMGEwYSIvPjwvc3ZnPg=="
+                        placeholder="empty"
                       />
                     </div>
                     <div className="w-full md:w-[55%] flex flex-col justify-center py-4 md:pl-6">

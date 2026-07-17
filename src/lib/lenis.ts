@@ -1,18 +1,10 @@
 import Lenis from 'lenis';
 import { gsap, ScrollTrigger } from './gsap';
+import { isTouchDevice } from './constants';
 
 let lenis: Lenis | null = null;
 let tickerCallback: ((time: number) => void) | null = null;
 let resizeHandler: (() => void) | null = null;
-
-const isTouchDevice = (): boolean => {
-  if (typeof window === 'undefined') return true;
-  return (
-    'ontouchstart' in window ||
-    navigator.maxTouchPoints > 0 ||
-    window.matchMedia('(pointer: coarse)').matches
-  );
-};
 
 export const initLenis = () => {
   // DISABLE on touch devices (mobile/tablet)

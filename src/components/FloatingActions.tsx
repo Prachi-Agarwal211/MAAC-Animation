@@ -116,7 +116,7 @@ function MobileBottomNav() {
     const handleScroll = () => {
       if (!tickingRef.current) {
         requestAnimationFrame(() => {
-          setVisible(window.scrollY > 420);
+          setVisible(window.scrollY > window.innerHeight * 0.6);
           tickingRef.current = false;
         });
         tickingRef.current = true;

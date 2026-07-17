@@ -8,6 +8,7 @@ import Image from "next/image";
 import { navLinks, contactInfo, type NavLinkItem } from "@/data/siteData";
 import { useUIStore } from "@/lib/store";
 import { MessageSquare, ChevronDown, X, Menu, ArrowRight, ArrowUpRight } from "lucide-react";
+import { isTouchDevice as checkTouch } from "@/lib/constants";
 import ScrollIndicator from "./SideScroller";
 
 export default function Navbar() {
@@ -25,7 +26,7 @@ export default function Navbar() {
   mobileMenuOpenRef.current = mobileMenuOpen;
 
   useEffect(() => {
-    setIsTouchDevice(window.matchMedia("(pointer: coarse)").matches);
+    setIsTouchDevice(checkTouch());
   }, []);
 
   useEffect(() => {

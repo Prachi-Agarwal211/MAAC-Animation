@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Star, TrendingUp } from "lucide-react";
 import FadeIn from "@/components/animations/FadeIn";
 
@@ -109,15 +108,8 @@ export default function StudentSuccessStories() {
               <div className="p-8">
                 {/* Avatar & Info */}
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-[#BF953F]/30 flex-shrink-0 relative">
-                    <Image
-                      src={story.image}
-                      alt={story.name}
-                      width={64}
-                      height={64}
-                      className="w-full h-full object-cover"
-                      loading="lazy"
-                    />
+                  <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-[#BF953F]/30 flex-shrink-0 relative bg-[#1a1a1a] flex items-center justify-center">
+                    <span className="text-[#BF953F] font-display font-bold text-lg uppercase">{story.name.split(" ").map(n => n[0]).join("")}</span>
                   </div>
                   <div>
                     <h3 className="text-white font-bold text-lg">{story.name}</h3>

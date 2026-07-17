@@ -3,6 +3,7 @@
 import React, { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "@/lib/gsap";
+import { MOBILE_BREAKPOINT } from "@/lib/constants";
 
 interface SplitTextRevealProps {
   children: React.ReactNode;
@@ -26,7 +27,7 @@ export default function SplitTextReveal({
   useGSAP(() => {
     if (!containerRef.current) return;
 
-    const isMobile = window.innerWidth < 768;
+    const isMobile = window.innerWidth < MOBILE_BREAKPOINT;
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     if (isMobile || prefersReduced) {

@@ -51,10 +51,10 @@ export const metadata: Metadata = {
     "MAAC Jaipur C-Scheme — Rajasthan's #1 Animation Institute. B.Voc Degree in 3D Animation, VFX & Game Design. 95% Placements. NSDC Certified. Call " + contactInfo.phone + ".",
   icons: {
     icon: [
-      { url: '/thumbnail.png', type: 'image/png' },
+      { url: '/maac-logo.png', type: 'image/png' },
     ],
     apple: [
-      { url: '/thumbnail.png', sizes: '180x180', type: 'image/png' },
+      { url: '/maac-logo.png', sizes: '180x180', type: 'image/png' },
     ],
   },
   manifest: '/manifest.json',
@@ -260,7 +260,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${manrope.variable} ${syne.variable} font-body antialiased text-[#F0EBE1] bg-transparent`}
+        className={`${manrope.variable} ${syne.variable} font-body antialiased text-[#F0EBE1] bg-[#0C0C0C]`}
       >
         {/* Google Tag Manager noscript fallback (for users with JS disabled) */}
         {process.env.NEXT_PUBLIC_GTM_ID && (
@@ -289,8 +289,8 @@ export default function RootLayout({
 
         <Suspense fallback={null}>
           <LenisProvider>
-            <Navbar />
             <ErrorBoundary>
+              <Navbar />
               <ClientShell>
                 <main id="main-content" tabIndex={-1} className="page-wrapper relative z-10">
                   <PageTransition>{children}</PageTransition>

@@ -33,11 +33,11 @@ export default function CountUpStat({ number, suffix, label }: CountUpStatProps)
 
   return (
     <div className="text-center px-4 group">
-      <div className="font-display text-[clamp(1.5rem,3.5vw,2.5rem)] text-white tabular-nums flex items-center justify-center font-bold uppercase leading-[1.1] tracking-[0.1em]">
+      <div className="font-display text-[clamp(2rem,4.5vw,3rem)] text-white tabular-nums flex items-center justify-center font-bold uppercase leading-[1.1] tracking-[0.1em]">
         <span ref={countRef}>0</span>
         <span className="metallic-gold-text ml-1">{suffix}</span>
       </div>
-      <div className="text-[#A8A29C] text-[9px] mt-3 font-bold tracking-[0.3em] uppercase transition-colors group-hover:text-white">{label}</div>
+      <div className="text-[#A8A29C] text-[10px] sm:text-[9px] mt-3 font-bold tracking-[0.3em] uppercase transition-colors group-hover:text-white">{label}</div>
     </div>
   );
 }

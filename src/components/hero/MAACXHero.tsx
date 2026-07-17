@@ -139,11 +139,11 @@ export default function MAACXHero({ onIntroReveal }: Props) {
       {/* Foreground content */}
       <div
         ref={contentRef}
-        className="hero-content relative z-10 mx-auto flex min-h-[100svh] w-full max-w-content flex-col justify-end px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-[calc(5rem+env(safe-area-inset-top))] sm:px-8 sm:pb-10 sm:pt-[calc(5.5rem+env(safe-area-inset-top))] lg:px-16 lg:pb-12 xl:px-24 xl:pb-14 opacity-0 will-change-transform"
+        className="hero-content relative z-10 mx-auto flex min-h-[100svh] w-full max-w-content flex-col justify-end px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-[calc(4rem+env(safe-area-inset-top))] sm:px-8 sm:pb-10 sm:pt-[calc(5.5rem+env(safe-area-inset-top))] lg:px-16 lg:pb-12 xl:px-24 xl:pb-14 opacity-0 will-change-transform"
       >
-        <div className="flex w-full flex-col gap-16 lg:flex-row lg:items-end lg:justify-between lg:gap-12">
+        <div className="flex w-full flex-col gap-8 md:gap-16 lg:flex-row lg:items-end lg:justify-between lg:gap-12">
           <div className="maacx-content min-w-0 max-w-3xl flex-1">
-            <h1 className="mb-10 sm:mb-12 maacx-element kinetic-weight" style={{ textShadow: "0 2px 20px rgba(0,0,0,0.8), 0 4px 40px rgba(0,0,0,0.5)" }}>
+              <h1 className="mb-6 sm:mb-12 maacx-element kinetic-weight" style={{ textShadow: "0 2px 20px rgba(0,0,0,0.8), 0 4px 40px rgba(0,0,0,0.5)" }}>
               <span className="block font-display text-[clamp(1.8rem,4.5vw,3.2rem)] font-bold uppercase leading-[0.9] tracking-[0.1em] text-white">
                 FROM BASICS
               </span>
@@ -181,7 +181,7 @@ export default function MAACXHero({ onIntroReveal }: Props) {
                 onClick={toggleMute}
                 aria-label={isMuted ? "Unmute video" : "Mute video"}
                 aria-pressed={!isMuted}
-                className="group inline-flex items-center gap-3.5 self-start mt-4 sm:mt-10 maacx-element"
+                className="group inline-flex items-center gap-3.5 self-start mt-2 sm:mt-10 maacx-element"
               >
                 <div className="flex h-4 items-center gap-0.5 opacity-70 transition-opacity group-hover:opacity-100">
                   <div
@@ -204,7 +204,6 @@ export default function MAACXHero({ onIntroReveal }: Props) {
             </div>
           </div>
 
-          <div className="maacx-hero-stats opacity-0 flex flex-row gap-12 sm:gap-16 pb-2 lg:pb-0 justify-start lg:justify-end" />
         </div>
       </div>
     </section>

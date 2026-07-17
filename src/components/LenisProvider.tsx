@@ -24,28 +24,12 @@ export default function LenisProvider({
 
   // Scroll to top on route change
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "instant" });
+    window.scrollTo({ top: 0, behavior: "auto" });
   }, [pathname]);
 
   useGSAP(() => {
-    // CRITICAL: Refresh all ScrollTriggers after initial layout
-    // Single refresh point - no duplication
-    const refresh = () => ScrollTrigger.refresh();
-    const timer = setTimeout(refresh, 500);
-    
-    let resizeTimer: NodeJS.Timeout;
-    const handleResize = () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(refresh, 500);
-    };
-    
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      clearTimeout(timer);
-      clearTimeout(resizeTimer);
-      window.removeEventListener("resize", handleResize);
-    };
+    const timer = setTimeout(() => ScrollTrigger.refresh(), 500);
+    return () => clearTimeout(timer);
   }, []);
 
   // Don't wrap in a div - just render children directly in the document flow

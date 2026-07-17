@@ -1,4 +1,5 @@
 import { gsap } from './gsap';
+import { MOBILE_BREAKPOINT, isTouchDevice } from './constants';
 
 /**
  * Centralized GSAP animation configuration
@@ -11,7 +12,7 @@ export const isLowEndDevice = () => {
   
   const memory = (navigator as Navigator & { deviceMemory?: number }).deviceMemory;
   const cores = navigator.hardwareConcurrency;
-  const isTouch = window.matchMedia('(pointer: coarse)').matches;
+  const isTouch = isTouchDevice();
   
   // Low-end if: less than 4GB RAM OR less than 4 cores AND touch device
   return (memory && memory < 4) || (cores && cores < 4) || (isTouch && cores && cores < 6);
@@ -19,7 +20,7 @@ export const isLowEndDevice = () => {
 
 export const isMobileDevice = () => {
   if (typeof window === 'undefined') return false;
-  return window.matchMedia('(max-width: 768px)').matches;
+  return window.innerWidth < MOBILE_BREAKPOINT;
 };
 
 export const prefersReducedMotion = () => {

@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import ContactModal from "@/components/ContactModal";
 import { useScroll } from "@/hooks/useScroll";
+import { MOBILE_BREAKPOINT } from "@/lib/constants";
 
 export default function ClientShell({ children }: { children: React.ReactNode }) {
   const [showModal, setShowModal] = useState(false);
@@ -19,7 +20,7 @@ export default function ClientShell({ children }: { children: React.ReactNode })
     const triggerModal = () => {
       if (triggered) return;
       triggered = true;
-      const delay = window.innerWidth < 768 ? 1400 : 900;
+      const delay = window.innerWidth < MOBILE_BREAKPOINT ? 1400 : 900;
       modalTimerRef.current = setTimeout(() => {
         setShowModal(true);
         sessionStorage.setItem("maac_modal_shown", "1");

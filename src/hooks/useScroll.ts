@@ -14,10 +14,8 @@ export const useScroll = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Use requestAnimationFrame throttling for performance
       if (!tickingRef.current) {
         animationFrameRef.current = requestAnimationFrame(() => {
-          // Get scroll position from Lenis if available, otherwise window.scrollY
           const lenis = getLenis();
           const scrollY = lenis ? lenis.scroll : window.scrollY;
           setScroll(scrollY);
@@ -26,28 +24,18 @@ export const useScroll = () => {
         tickingRef.current = true;
       }
     };
-
-    // Listen to both native scroll and Lenis scroll events
     window.addEventListener('scroll', handleScroll, { passive: true });
-    
-    const lenis = getLenis();
-    if (lenis) {
-      lenis.on('scroll', handleScroll);
-    }
 
-    // Initial call to set correct state
+    const lenis = getLenis();
+    if (lenis) lenis.on('scroll', handleScroll);
+
     handleScroll();
 
     return () => {
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current);
-      }
+      if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
       window.removeEventListener('scroll', handleScroll);
-      
-      const lenisCleanup = getLenis();
-      if (lenisCleanup) {
-        lenisCleanup.off('scroll', handleScroll);
-      }
+      const l = getLenis();
+      if (l) l.off('scroll', handleScroll);
     };
   }, [setScroll]);
 

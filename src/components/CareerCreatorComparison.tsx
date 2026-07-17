@@ -5,20 +5,22 @@ import FadeIn from "@/components/animations/FadeIn";
 export default function CareerCreatorComparison() {
   return (
     <div className="relative overflow-hidden bg-transparent py-24 md:py-32">
-      <div className="max-w-content mx-auto px-6 mb-16 md:mb-24 text-center">
+      <div className="max-w-content mx-auto px-6 mb-16 md:mb-24">
         <FadeIn>
-          <p className="metallic-gold-text text-[10px] font-bold tracking-[0.3em] uppercase mb-4 flex items-center justify-center gap-3">
-            <span className="w-8 h-[1px] metallic-gold-accent" />
-            Custom Engineered Career Tracks
-            <span className="w-8 h-[1px] metallic-gold-accent" />
-          </p>
-          <h2 className="font-display text-[clamp(2rem,5vw,3.5rem)] leading-[0.8] text-white font-bold uppercase leading-[1.1] tracking-[0.1em]">
-            CHOOSE YOUR <span className="metallic-gold-text italic">PATHWAY</span>
+          <div className="flex items-center gap-4 mb-6">
+            <div className="w-12 h-[2px] bg-gradient-to-r from-[#BF953F] to-transparent" />
+            <span className="text-white/40 text-xs font-bold uppercase tracking-[0.25em]">Two paths. One goal.</span>
+          </div>
+          <h2 className="font-display text-[clamp(2rem,5vw,3.5rem)] leading-[0.85] text-white font-bold uppercase">
+            NOT SURE WHICH <span className="metallic-gold-text italic">TRACK</span> FITS YOU?
           </h2>
+          <p className="text-[#A8A29C] text-lg max-w-2xl leading-relaxed mt-4">
+            Career X for studio careers. Creator X for independent artists. Both lead to the same place: a creative future.
+          </p>
         </FadeIn>
       </div>
 
-      <FadeIn stagger={0.2} y={50} className="flex flex-col lg:flex-row min-h-[70svh]">
+      <FadeIn stagger={0.2} y={50} className="flex flex-col lg:flex-row min-h-[50svh] lg:min-h-[70svh]">
 
         {/* LEFT: CAREER X */}
         <div className="ccc-panel group relative flex-1 overflow-hidden transition-all duration-700 ease-expo-out lg:hover:flex-[1.5]">

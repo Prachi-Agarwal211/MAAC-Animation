@@ -17,12 +17,13 @@ export default function InstituteIntro() {
           <div className="lg:col-span-5">
             <FadeIn>
               <div className="mb-10">
-                <p className="metallic-gold-text text-[10px] font-bold tracking-[0.3em] uppercase mb-4 flex items-center gap-3">
-                  <span className="w-8 h-[1px] metallic-gold-accent" />
-                  Jaipur&apos;s Creative Authority
-                </p>
-                <h2 className="font-display text-[clamp(1.4rem,4.5vw,2.8rem)] leading-[0.9] text-white font-bold uppercase leading-[1.1] tracking-[0.1em]">
-                  ELITE <span className="metallic-gold-text italic">POWERHOUSE</span>
+                <div className="flex items-center gap-4 mb-5">
+                  <div className="w-10 h-[2px] bg-gradient-to-r from-[#BF953F] to-transparent" />
+                  <span className="text-white/40 text-[9px] font-bold tracking-[0.3em] uppercase">Since 1986</span>
+                </div>
+                <h2 className="font-display text-[clamp(1.6rem,4.5vw,3rem)] leading-[0.9] text-white font-bold uppercase tracking-[0.02em]">
+                  JAIPUR&apos;S PREMIER<br />
+                  <span className="metallic-gold-text">ANIMATION INSTITUTE</span>
                 </h2>
               </div>
             </FadeIn>

@@ -2,7 +2,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { contactInfo } from "@/data/siteData";
 import { ArrowUpRight, MapPin, Phone, Mail, MessageSquare } from "lucide-react";
-import FooterBackground from "@/components/FooterBackground";
 
 const currentYear = new Date().getFullYear();
 
@@ -37,8 +36,6 @@ const SocialIcons = {
 export default function Footer() {
   return (
     <footer className="relative bg-transparent pt-20 md:pt-32 overflow-hidden" style={{ paddingBottom: "max(0px, env(safe-area-inset-bottom))" }}>
-      <FooterBackground />
-
       {/* ── TOP BANNER ── */}
       <div className="relative z-10 max-w-content mx-auto px-5 md:px-12 mb-16 md:mb-24">
         <div className="relative rounded-3xl md:rounded-[40px] overflow-hidden bg-white/[0.04] border border-white/10 p-6 md:p-12 lg:p-16 flex flex-col lg:flex-row items-center justify-between gap-10">
@@ -69,10 +66,9 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* ── MAIN CONTENT — 2 columns on mobile ── */}
+      {/* ── MAIN CONTENT — 2 columns on mobile, 4 on laptop ── */}
       <div className="relative z-10 max-w-content mx-auto px-5 md:px-12 pb-16">
-        {/* Mobile: 2-col grid */}
-        <div className="grid grid-cols-2 gap-x-8 gap-y-12 md:gap-x-12 lg:grid-cols-12 lg:gap-8">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-12 md:gap-x-10 lg:grid-cols-12 lg:gap-8">
           {/* Brand — full width on mobile */}
           <div className="col-span-2 lg:col-span-4 space-y-6">
             <Link href="/" className="inline-flex" aria-label="MAAC Jaipur - Home">
@@ -103,7 +99,7 @@ export default function Footer() {
           </div>
 
           {/* Explore */}
-          <div className="space-y-5">
+          <div className="col-span-1 lg:col-span-2 space-y-5">
             <h3 className="text-white text-[11px] font-bold uppercase tracking-[0.2em]">Explore</h3>
             <ul className="space-y-3">
               {[
@@ -125,7 +121,7 @@ export default function Footer() {
           </div>
 
           {/* Resources + Policies */}
-          <div className="space-y-5">
+          <div className="col-span-1 lg:col-span-2 space-y-5">
             <h3 className="text-white text-[11px] font-bold uppercase tracking-[0.2em]">Resources</h3>
             <ul className="space-y-3">
               {[
@@ -146,7 +142,7 @@ export default function Footer() {
           </div>
 
           {/* Locate Us */}
-          <div className="space-y-5">
+          <div className="col-span-2 lg:col-span-4 space-y-5">
             <h3 className="text-white text-[11px] font-bold uppercase tracking-[0.2em]">Locate Us</h3>
             <div className="space-y-4">
               <div className="flex gap-3">
@@ -170,7 +166,7 @@ export default function Footer() {
       </div>
 
       {/* ── BOTTOM BAR ── */}
-      <div className="relative z-10 border-t border-white/5 py-6 px-5 md:px-12">
+      <div className="relative z-10 border-t border-white/5 pt-6 pb-28 lg:pb-6 px-5 md:px-12">
         <div className="max-w-content mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-white/40 text-[10px] font-medium tracking-wide text-center md:text-left">
             &copy; {currentYear} MAAC Jaipur C-Scheme. All rights reserved.
