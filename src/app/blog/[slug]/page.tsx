@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Script from "next/script";
 import { getPostBySlug, getAllPostSlugs } from "@/data/blog";
 import BlogPostClient from "./BlogPostClient";
 
@@ -60,5 +61,27 @@ export default async function BlogPostPage({ params }: Props) {
   const post = getPostBySlug(slug);
   if (!post) notFound();
 
-  return <BlogPostClient post={post} />;
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": post.title,
+    "description": post.excerpt,
+    "datePublished": post.date,
+    "author": { "@type": "Person", "name": post.author },
+    "publisher": {
+      "@type": "EducationalOrganization",
+      "name": "MAAC Animation Jaipur",
+      "sameAs": "https://www.maacanimationjaipur.com"
+    },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": `https://www.maacanimationjaipur.com/blog/${post.slug}` },
+    "image": post.ogImage.startsWith("http") ? post.ogImage : `https://www.maacanimationjaipur.com${post.ogImage}`,
+  };
+
+  return (
+    <>
+      <h1 className="sr-only">{post.title}</h1>
+      <Script id="blogpost-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+      <BlogPostClient post={post} />
+    </>
+  );
 }

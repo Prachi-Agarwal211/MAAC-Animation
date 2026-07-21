@@ -57,7 +57,18 @@ function Testimonials() {
         <div className="tm-header text-center mb-24">
           <p className="metallic-gold-text text-sm font-bold tracking-[0.3em] uppercase mb-6">Success Stories</p>
           <h2 className="font-display text-[clamp(1.5rem,5vw,3rem)] text-white leading-[0.9] font-bold uppercase leading-[1.1] tracking-[0.1em]">
-            The Alumni <span className="metallic-gold-text">Voices</span>
+            <span className="title-layer">
+              <span className="title-layer-glow" aria-hidden="true">The</span>
+              <span className="relative z-10">The</span>
+            </span>{' '}
+            <span className="title-layer">
+              <span className="title-layer-glow" aria-hidden="true">Alumni</span>
+              <span className="relative z-10">Alumni</span>
+            </span>{' '}
+            <span className="title-layer">
+              <span className="title-layer-glow" aria-hidden="true">Voices</span>
+              <span className="relative z-10 metallic-gold-text">Voices</span>
+            </span>
           </h2>
         </div>
 
@@ -75,7 +86,7 @@ function Testimonials() {
 
             <div className="relative z-10 flex flex-col items-center text-center">
               <p 
-                className="text-[#A8A29C] text-xl md:text-3xl leading-relaxed mb-16 font-bold italic min-h-[180px] flex items-center justify-center transition-all duration-700"
+                className="text-white/85 text-xl md:text-3xl leading-relaxed mb-16 font-bold italic min-h-[180px] flex items-center justify-center transition-all duration-700"
               >
                 &ldquo;{testimonialsData[active].text}&rdquo;
               </p>

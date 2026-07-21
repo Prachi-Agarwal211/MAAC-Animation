@@ -34,6 +34,21 @@ export const metadata: Metadata = {
   },
 };
 
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.maacanimationjaipur.com" },
+    { "@type": "ListItem", "position": 2, "name": "Creative Career Assessment", "item": "https://www.maacanimationjaipur.com/creative-career-assessment" },
+  ],
+}
+
 export default function CareerAssessmentPage() {
-  return <CareerAssessmentClient />;
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <h1 className="sr-only">Creative Career Assessment - MAAC Animation Jaipur Quiz</h1>
+      <CareerAssessmentClient />
+    </>
+  );
 }

@@ -2,8 +2,13 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
+import gsap from "@/lib/gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ImageLightbox from "@/components/ui/ImageLightbox";
 import ErrorBoundary from "@/components/ErrorBoundary";
+import ApplyNow from "@/components/ApplyNow";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const tripImages = [
   { title: "Annual Trip Moment 01", src: "/annual-trip/event-002.jpeg" },
@@ -45,7 +50,10 @@ const tripImages = [
   { title: "Annual Trip Moment 37", src: "/annual-trip/event-065.jpeg" },
 ];
 
+const heroImage = tripImages[0].src;
+
 function AnnualTripPage() {
+  const mainRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -54,20 +62,128 @@ function AnnualTripPage() {
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const reducedMotionRef = useRef(false);
   const thumbnailRefs = useRef<(HTMLButtonElement | null)[]>([]);
-  const mainViewerRef = useRef<HTMLDivElement>(null);
 
   const currentImage = tripImages[currentIndex];
 
+  /* ── GSAP scroll animations ── */
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      reducedMotionRef.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    }
+    if (typeof window === "undefined") return;
+    reducedMotionRef.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reducedMotionRef.current) return;
+
+    const ctx = gsap.context(() => {
+      const container = mainRef.current;
+      if (!container) return;
+
+      // Hero parallax: image moves slower than scroll
+      const heroBg = container.querySelector(".parallax-bg");
+      if (heroBg) {
+        gsap.to(heroBg, {
+          y: "15%",
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".parallax-section",
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+      }
+
+      // Story content reveals
+      const reveals = container.querySelectorAll(".story-reveal");
+      reveals.forEach((el) => {
+        gsap.fromTo(el,
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1, y: 0, duration: 1, ease: "expo.out",
+            scrollTrigger: {
+              trigger: el,
+              start: "top 88%",
+              once: true,
+            },
+          }
+        );
+      });
+
+      const leftReveals = container.querySelectorAll(".story-reveal-left");
+      leftReveals.forEach((el) => {
+        gsap.fromTo(el,
+          { opacity: 0, x: -30 },
+          {
+            opacity: 1, x: 0, duration: 1, ease: "expo.out",
+            scrollTrigger: { trigger: el, start: "top 88%", once: true },
+          }
+        );
+      });
+
+      const rightReveals = container.querySelectorAll(".story-reveal-right");
+      rightReveals.forEach((el) => {
+        gsap.fromTo(el,
+          { opacity: 0, x: 30 },
+          {
+            opacity: 1, x: 0, duration: 1, ease: "expo.out",
+            scrollTrigger: { trigger: el, start: "top 88%", once: true },
+          }
+        );
+      });
+
+      // Parallax mid-sections
+      container.querySelectorAll(".parallax-section-mid").forEach((section) => {
+        const bg = section.querySelector(".parallax-bg");
+        if (bg) {
+          gsap.to(bg, {
+            y: "20%",
+            ease: "none",
+            scrollTrigger: {
+              trigger: section,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          });
+        }
+        // Content fades in on scroll
+        const content = section.querySelector(".parallax-content");
+        if (content) {
+          gsap.fromTo(content,
+            { opacity: 0, y: 40 },
+            {
+              opacity: 1, y: 0, duration: 1.2, ease: "expo.out",
+              scrollTrigger: {
+                trigger: section,
+                start: "top 75%",
+                toggleActions: "play none none none",
+              },
+            }
+          );
+        }
+      });
+
+      // Gallery section reveal
+      const gallerySection = container.querySelector(".gallery-section-reveal");
+      if (gallerySection) {
+        gsap.fromTo(gallerySection,
+          { opacity: 0, y: 40 },
+          {
+            opacity: 1, y: 0, duration: 1, ease: "expo.out",
+            scrollTrigger: {
+              trigger: gallerySection,
+              start: "top 88%",
+              once: true,
+            },
+          }
+        );
+      }
+    }, mainRef);
+
+    return () => ctx.revert();
   }, []);
 
+  /* ── Auto-advance timer ── */
   const startAutoPlay = useCallback(() => {
     if (timerRef.current) clearTimeout(timerRef.current);
     if (reducedMotionRef.current) return;
-
     timerRef.current = setTimeout(() => {
       setCurrentIndex((prev) => (prev + 1) % tripImages.length);
     }, 4200);
@@ -81,14 +197,12 @@ function AnnualTripPage() {
   }, []);
 
   useEffect(() => {
-    if (isPlaying && !reducedMotionRef.current) {
-      startAutoPlay();
-    } else {
-      stopAutoPlay();
-    }
+    if (isPlaying && !reducedMotionRef.current) startAutoPlay();
+    else stopAutoPlay();
     return stopAutoPlay;
   }, [isPlaying, currentIndex, startAutoPlay, stopAutoPlay]);
 
+  /* ── Navigation ── */
   const scrollActiveThumbnail = useCallback((index: number) => {
     const thumb = thumbnailRefs.current[index];
     if (thumb) {
@@ -106,13 +220,8 @@ function AnnualTripPage() {
     scrollActiveThumbnail(newIndex);
   }, [scrollActiveThumbnail]);
 
-  const goToNext = useCallback(() => {
-    goToSlide(currentIndex + 1);
-  }, [currentIndex, goToSlide]);
-
-  const goToPrev = useCallback(() => {
-    goToSlide(currentIndex - 1);
-  }, [currentIndex, goToSlide]);
+  const goToNext = useCallback(() => goToSlide(currentIndex + 1), [currentIndex, goToSlide]);
+  const goToPrev = useCallback(() => goToSlide(currentIndex - 1), [currentIndex, goToSlide]);
 
   const openLightbox = useCallback((index?: number) => {
     const target = index ?? currentIndex;
@@ -132,93 +241,240 @@ function AnnualTripPage() {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (lightboxOpen) return;
-
       switch (e.key) {
-        case "ArrowRight":
-        case " ":
-          e.preventDefault();
-          goToNext();
-          break;
-        case "ArrowLeft":
-          e.preventDefault();
-          goToPrev();
-          break;
-        case "Enter":
-        case "f":
-        case "F":
-          openLightbox();
-          break;
+        case "ArrowRight": case " ": e.preventDefault(); goToNext(); break;
+        case "ArrowLeft": e.preventDefault(); goToPrev(); break;
+        case "Enter": case "f": case "F": openLightbox(); break;
       }
     };
-
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [lightboxOpen, goToNext, goToPrev, openLightbox]);
 
   const lightboxImages = tripImages.map((img) => img.src);
 
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "ImageGallery",
-    name: "MAAC Annual Trip",
-    description: "Moments from MAAC Animation Jaipur's annual student trip — creativity, adventure, and camaraderie captured on the road.",
-    url: "https://www.maacanimationjaipur.com/annual-trip",
-    image: tripImages.map((img) => `https://www.maacanimationjaipur.com${img.src}`),
-    author: {
-      "@type": "Organization",
-      name: "MAAC Animation Jaipur",
-    },
-    numberOfItems: tripImages.length,
-  };
-
   return (
-    <div className="bg-transparent min-h-screen pt-24 sm:pt-32 relative flex flex-col">
-      <div className="w-full flex-grow">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-        />
+    <main ref={mainRef} className="bg-transparent min-h-screen overflow-hidden">
+      {/* JSON-LD */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ImageGallery",
+            name: "MAAC Annual Trip",
+            description: "Moments from MAAC Animation Jaipur's annual student trip — Dalhousie & Khajjiar.",
+            url: "https://www.maacanimationjaipur.com/annual-trip",
+            image: tripImages.map((img) => `https://www.maacanimationjaipur.com${img.src}`),
+            author: { "@type": "Organization", name: "MAAC Animation Jaipur" },
+            numberOfItems: tripImages.length,
+          }),
+        }}
+      />
 
-        <link rel="preload" as="image" href="/annual-trip/event-002.jpeg" />
-        <link rel="preload" as="image" href="/annual-trip/event-003.jpeg" />
-        <link rel="preload" as="image" href="/annual-trip/event-004.jpeg" />
-        <link rel="preload" as="image" href="/annual-trip/event-005.jpeg" />
+      {/* ════════════════════════════════════════════
+          SECTION 1: PARALLAX HERO
+          ════════════════════════════════════════════ */}
+      <section className="parallax-section">
+        <div className="parallax-bg">
+          <Image
+            src={heroImage}
+            alt="MAAC Annual Trip"
+            fill
+            className="object-cover"
+            priority
+            sizes="100vw"
+          />
+        </div>
+        <div className="parallax-overlay-dark" />
 
-        <div className="text-center mb-10 md:mb-14 relative z-10 px-6">
-          <p className="metallic-gold-text text-[10px] font-bold tracking-[0.3em] uppercase mb-4 flex items-center justify-center gap-3">
-            <span className="w-8 h-[1px] metallic-gold-accent" />
+        <div className="parallax-content">
+          <p className="metallic-gold-text text-[10px] font-bold tracking-[0.35em] uppercase mb-6">
             Dalhousie &amp; Khajjiar
-            <span className="w-8 h-[1px] metallic-gold-accent" />
           </p>
-          <h1 className="font-display text-[clamp(2.25rem,6vw,4.75rem)] leading-[0.82] text-white font-bold uppercase tracking-wide">
-            ANNUAL <span className="metallic-gold-text italic tracking-wider">TRIP</span>
+          <h1 className="font-display text-[clamp(3rem,10vw,7rem)] leading-[0.82] text-white font-bold uppercase tracking-[0.02em] mb-6">
+            ANNUAL{" "}
+            <span className="metallic-gold-text italic">TRIP</span>
           </h1>
-          <p className="text-[#A8A29C] text-sm md:text-base mt-5 max-w-xl mx-auto">
-            A journey of creativity and camaraderie.<br className="hidden sm:block" /> Moments from our annual student trip.
+          <p className="text-white/70 text-base md:text-lg max-w-xl mx-auto leading-relaxed font-light">
+            A journey of creativity and camaraderie through the Himalayan landscapes.
           </p>
         </div>
 
-        <div className="max-w-6xl mx-auto px-5 md:px-8 pb-16">
-          <div className="flex items-center justify-between mb-4 px-1">
+        {/* Scroll indicator */}
+        <div className="parallax-scroll-indicator">
+          <span>Scroll</span>
+          <div className="scroll-line" />
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════════
+          SECTION 2: STORY INTRO
+          ════════════════════════════════════════════ */}
+      <section className="story-section">
+        <div className="chapter-watermark">01</div>
+        <div className="story-content max-w-6xl mx-auto px-6 relative z-10">
+          <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-center mb-20">
             <div>
-              <span className="text-[10px] font-bold tracking-[0.25em] uppercase text-[#FFD700]/80">The Visual Story</span>
-              <h2 className="text-white text-xl md:text-2xl font-display tracking-wide mt-1">Annual Trip Highlights</h2>
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-10 h-[2px] bg-gradient-to-r from-[#BF953F] to-transparent" />
+                <span className="text-white/40 text-[9px] font-bold tracking-[0.3em] uppercase">Chapter 01</span>
+              </div>
+              <h2 className="story-reveal font-display text-[clamp(1.8rem,3.5vw,2.8rem)] text-white font-bold uppercase leading-[1.1] tracking-[0.02em] mb-6">
+                The Mountains{" "}
+                <span className="metallic-gold-text italic">Called</span>
+              </h2>
+              <p className="story-reveal text-white/70 text-base leading-relaxed">
+                Every year, our students trade the studio for the summit. The annual trip is more than a getaway — it&apos;s where bonds are forged beyond the classroom, where creativity finds new horizons, and where memories are captured that last a lifetime.
+              </p>
             </div>
-            <button
-              onClick={() => openLightbox()}
-              className="hidden md:flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors border border-white/10 hover:border-white/20 px-4 h-9 rounded-full"
-            >
-              <span>Open Full Gallery</span>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
-              </svg>
-            </button>
+            <div className="story-reveal">
+              <div className="story-stats">
+                <div className="stat-item">
+                  <div className="stat-number">85+</div>
+                  <div className="stat-label">Students</div>
+                </div>
+                <div className="stat-item">
+                  <div className="stat-number">5</div>
+                  <div className="stat-label">Days</div>
+                </div>
+                <div className="stat-item">
+                  <div className="stat-number">37</div>
+                  <div className="stat-label">Memories</div>
+                </div>
+              </div>
+            </div>
           </div>
 
+          <div className="story-divider" />
+
+          <div className="grid md:grid-cols-2 gap-12 md:gap-20 mt-20">
+            <p className="story-reveal-left text-white/60 text-sm leading-relaxed italic border-l-2 border-[#BF953F]/30 pl-6">
+              &ldquo;The best classroom has no walls. The annual trip is where theory meets the real world — and where friendships become family.&rdquo;
+            </p>
+            <div className="story-reveal-right space-y-4">
+              {[
+                { label: "Destination", value: "Dalhousie & Khajjiar" },
+                { label: "Elevation", value: "1,970m / 6,463ft" },
+                { label: "Season", value: "Peak Autumn" },
+              ].map((item) => (
+                <div key={item.label} className="flex justify-between border-b border-white/5 pb-3">
+                  <span className="text-white/40 text-xs font-bold uppercase tracking-[0.15em]">{item.label}</span>
+                  <span className="text-white/80 text-sm font-medium">{item.value}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════════
+          SECTION 3: PARALLAX MOMENT 1
+          ════════════════════════════════════════════ */}
+      <section className="parallax-section parallax-section-mid">
+        <div className="parallax-bg">
+          <Image
+            src={tripImages[Math.floor(tripImages.length * 0.3)].src}
+            alt="Campus on the road"
+            fill
+            className="object-cover"
+            sizes="100vw"
+            loading="lazy"
+          />
+        </div>
+        <div className="parallax-overlay" />
+        <div className="parallax-content">
+          <p className="text-[#C4A882] text-[10px] font-bold tracking-[0.3em] uppercase mb-4">02 · The Journey</p>
+          <h2 className="font-display text-[clamp(2rem,6vw,4rem)] text-white font-bold uppercase leading-[1] tracking-[0.02em]">
+            Roads Less<br />
+            <span className="metallic-gold-text italic">Traveled</span>
+          </h2>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════════
+          SECTION 4: STORY CONTINUED
+          ════════════════════════════════════════════ */}
+      <section className="story-section">
+        <div className="chapter-watermark">02</div>
+        <div className="story-content max-w-4xl mx-auto px-6 relative z-10 text-center">
+          <p className="story-reveal text-white/60 text-xs font-bold tracking-[0.3em] uppercase mb-6">
+            Beyond the Frame
+          </p>
+          <h2 className="story-reveal font-display text-[clamp(1.5rem,4vw,3rem)] text-white font-bold uppercase leading-[1.1] mb-8">
+            Every Frame Tells a{" "}
+            <span className="metallic-gold-text italic">Story</span>
+          </h2>
+          <p className="story-reveal text-white/60 text-base leading-relaxed max-w-2xl mx-auto">
+            From sunrise hikes to campfire stories, from sketching in the valleys to dancing under the stars — each photograph captures a moment that words cannot describe.
+          </p>
+
+          <div className="story-reveal mt-16 grid grid-cols-2 md:grid-cols-4 gap-4">
+            {tripImages.slice(1, 5).map((img, i) => (
+              <div
+                key={i}
+                className="relative aspect-square rounded-2xl overflow-hidden border border-white/5 cursor-pointer hover:border-[#C4A882]/40 transition-all duration-500 group"
+                onClick={() => openLightbox(i + 1)}
+              >
+                <Image
+                  src={img.src}
+                  alt={img.title}
+                  fill
+                  className="object-cover group-hover:scale-110 transition-transform duration-700"
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════════
+          SECTION 5: PARALLAX MOMENT 2
+          ════════════════════════════════════════════ */}
+      <section className="parallax-section parallax-section-mid">
+        <div className="parallax-bg">
+          <Image
+            src={tripImages[Math.floor(tripImages.length * 0.6)].src}
+            alt="Memories made"
+            fill
+            className="object-cover"
+            sizes="100vw"
+            loading="lazy"
+          />
+        </div>
+        <div className="parallax-overlay" />
+        <div className="parallax-content">
+          <p className="text-[#C4A882] text-[10px] font-bold tracking-[0.3em] uppercase mb-4">03 · The Bond</p>
+          <h2 className="font-display text-[clamp(2rem,6vw,4rem)] text-white font-bold uppercase leading-[1] tracking-[0.02em]">
+            Friendships{" "}
+            <span className="metallic-gold-text italic">Forged</span>
+          </h2>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════════
+          SECTION 6: GALLERY VIEWER
+          ════════════════════════════════════════════ */}
+      <section className="story-section gallery-section-reveal">
+        <div className="chapter-watermark">—</div>
+        <div className="story-content max-w-6xl mx-auto px-6 relative z-10">
+          <div className="text-center mb-12">
+            <p className="text-white/40 text-[9px] font-bold tracking-[0.3em] uppercase mb-4">
+              The Full Gallery
+            </p>
+            <h2 className="font-display text-[clamp(1.8rem,4vw,2.8rem)] text-white font-bold uppercase leading-[1.1]">
+              All{" "}
+              <span className="metallic-gold-text italic">{tripImages.length} Moments</span>
+            </h2>
+          </div>
+
+          {/* Main Viewer */}
           <div
-            ref={mainViewerRef}
             className="group relative w-full rounded-3xl overflow-hidden glass-card border border-white/5 shadow-2xl bg-[#0A0A0A]"
-            style={{ aspectRatio: '16/9' }}
+            style={{ aspectRatio: "16/9" }}
           >
             <div className="absolute inset-0">
               <Image
@@ -226,15 +482,15 @@ function AnnualTripPage() {
                 src={currentImage.src}
                 alt={currentImage.title}
                 fill
-                className="object-cover transition-all duration-700 ease-out opacity-100 scale-100"
+                className="object-cover transition-all duration-700 ease-out"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1100px"
                 priority={currentIndex < 3}
-                placeholder="empty"
               />
             </div>
 
             <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/60 via-black/35 to-transparent pointer-events-none" />
 
+            {/* Fullscreen button */}
             <div className="absolute top-4 right-4 z-30 flex items-center gap-2">
               <button
                 onClick={() => openLightbox()}
@@ -248,9 +504,10 @@ function AnnualTripPage() {
               </button>
             </div>
 
+            {/* Prev/Next */}
             <button
               onClick={goToPrev}
-              className="absolute left-3 md:left-5 top-1/2 -translate-y-1/2 z-30 w-11 h-11 md:w-12 md:h-12 rounded-full glass border border-white/25 flex items-center justify-center text-white/70 hover:text-white hover:border-[#FFD700]/60 hover:bg-white/5 active:scale-95 transition-all"
+              className="absolute left-3 md:left-5 top-1/2 -translate-y-1/2 z-30 w-11 h-11 md:w-12 md:h-12 rounded-full glass border border-white/25 flex items-center justify-center text-white/70 hover:text-white hover:border-[#C4A882]/60 hover:bg-white/5 active:scale-95 transition-all"
               aria-label="Previous photo"
             >
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -259,7 +516,7 @@ function AnnualTripPage() {
             </button>
             <button
               onClick={goToNext}
-              className="absolute right-3 md:right-5 top-1/2 -translate-y-1/2 z-30 w-11 h-11 md:w-12 md:h-12 rounded-full glass border border-white/25 flex items-center justify-center text-white/70 hover:text-white hover:border-[#FFD700]/60 hover:bg-white/5 active:scale-95 transition-all"
+              className="absolute right-3 md:right-5 top-1/2 -translate-y-1/2 z-30 w-11 h-11 md:w-12 md:h-12 rounded-full glass border border-white/25 flex items-center justify-center text-white/70 hover:text-white hover:border-[#C4A882]/60 hover:bg-white/5 active:scale-95 transition-all"
               aria-label="Next photo"
             >
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -267,17 +524,19 @@ function AnnualTripPage() {
               </svg>
             </button>
 
-            <div className="absolute bottom-0 left-0 right-0 z-20 p-5 md:p-7 flex justify-end">
-              <div className="text-right text-white/60 text-sm font-mono tracking-widest tabular-nums shrink-0 drop-shadow-md">
+            {/* Counter */}
+            <div className="absolute bottom-0 left-0 right-0 z-20 p-5 md:p-7 flex justify-end pointer-events-none">
+              <div className="text-right text-white/60 text-sm font-mono tracking-widest tabular-nums drop-shadow-md">
                 {currentIndex + 1} <span className="text-white/40">/ {tripImages.length}</span>
               </div>
             </div>
           </div>
 
+          {/* Thumbnails */}
           <div className="mt-5">
             <div className="flex items-center justify-between px-1 mb-2.5">
-              <p className="text-[#A8A29C] text-xs tracking-widest uppercase">Browse the full story</p>
-              <p className="text-[#A8A29C] text-[10px] hidden md:block">Click any frame • Use ← → keys • Press F for fullscreen</p>
+              <p className="text-white/50 text-xs tracking-widest uppercase">Browse the full story</p>
+              <p className="text-white/40 text-[10px] hidden md:block">Click any frame · Use ← → keys · Press F for fullscreen</p>
             </div>
 
             <div className="relative">
@@ -292,10 +551,11 @@ function AnnualTripPage() {
                       key={idx}
                       ref={(el) => { thumbnailRefs.current[idx] = el; }}
                       onClick={() => goToSlide(idx)}
-                      className={`group relative flex-shrink-0 w-24 h-16 md:w-28 md:h-20 rounded-xl overflow-hidden border-2 transition-all duration-200 snap-start outline-none focus-visible:ring-2 focus-visible:ring-[#FFD700]/70 ${isActive
-                          ? "border-[#FFD700] scale-[1.03] shadow-lg shadow-black/50 z-10"
+                      className={`group relative flex-shrink-0 w-24 h-16 md:w-28 md:h-20 rounded-xl overflow-hidden border-2 transition-all duration-200 snap-start outline-none focus-visible:ring-2 focus-visible:ring-[#C4A882]/70 ${
+                        isActive
+                          ? "border-[#C4A882] scale-[1.03] shadow-lg shadow-black/50 z-10"
                           : "border-white/5 hover:border-white/20 opacity-80 hover:opacity-100"
-                        }`}
+                      }`}
                       aria-label={`Go to ${img.title}`}
                       aria-current={isActive ? "true" : "false"}
                     >
@@ -309,7 +569,7 @@ function AnnualTripPage() {
                       />
                       <div className={`absolute inset-0 transition-opacity ${isActive ? "bg-black/10" : "bg-black/40 group-hover:bg-black/20"}`} />
                       {isActive && (
-                        <div className="absolute bottom-1.5 right-1.5 px-1.5 py-px text-[9px] font-bold tracking-wider bg-black/70 text-[#FFD700] rounded">
+                        <div className="absolute bottom-1.5 right-1.5 px-1.5 py-px text-[9px] font-bold tracking-wider bg-black/70 text-[#C4A882] rounded">
                           NOW
                         </div>
                       )}
@@ -320,25 +580,27 @@ function AnnualTripPage() {
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 mt-6 px-1 text-sm">
+          {/* Fullscreen CTA */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
             <button
               onClick={() => openLightbox()}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full border border-white/15 hover:border-[#FFD700]/40 px-6 h-11 text-white/90 hover:text-white transition-all active:scale-[0.985]"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 hover:border-[#C4A882]/40 px-6 h-11 text-white/80 hover:text-white transition-all active:scale-[0.985] text-xs font-bold tracking-[0.15em] uppercase"
             >
-              View all images in fullscreen gallery
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" /></svg>
+              View All {tripImages.length} Photos
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+              </svg>
             </button>
-
-            <div className="text-[#A8A29C] text-xs text-center sm:text-right max-w-[260px]">
-              Use ← → keys to navigate
-            </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div className="relative z-10 mt-auto w-full">
-      </div>
+      {/* ════════════════════════════════════════════
+          SECTION 7: CTA
+          ════════════════════════════════════════════ */}
+      <ApplyNow />
 
+      {/* Lightbox */}
       <ImageLightbox
         images={lightboxImages}
         alt="MAAC Annual Trip — Dalhousie & Khajjiar"
@@ -346,7 +608,7 @@ function AnnualTripPage() {
         isOpen={lightboxOpen}
         onClose={closeLightbox}
       />
-    </div>
+    </main>
   );
 }
 

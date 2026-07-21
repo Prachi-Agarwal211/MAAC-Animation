@@ -13,10 +13,10 @@ export default function CareerCreatorComparison() {
           </div>
           <h2 className="font-display text-[clamp(2rem,5vw,3.5rem)] leading-[0.85] text-white font-bold uppercase">
             <SplitTextReveal>NOT SURE WHICH</SplitTextReveal>{' '}
-            <SplitTextReveal delay={0.15} className="metallic-gold-text italic">TRACK</SplitTextReveal>{' '}
+            <SplitTextReveal delay={0.15} className="metallic-gold-text font-bold italic">TRACK</SplitTextReveal>{' '}
             <SplitTextReveal delay={0.3}>FITS YOU?</SplitTextReveal>
           </h2>
-          <p className="text-[#A8A29C] text-lg max-w-2xl leading-relaxed mt-4">
+          <p className="text-white/85 text-lg max-w-2xl leading-relaxed mt-4">
             Career X for studio careers. Creator X for independent artists. Both lead to the same place: a creative future.
           </p>
         </div>
@@ -27,22 +27,22 @@ export default function CareerCreatorComparison() {
         {/* LEFT: CAREER X */}
         <div className="ccc-panel maac-wipe-card group relative flex-1 overflow-hidden transition-all duration-700 ease-expo-out lg:hover:flex-[1.5]">
           <div className="absolute inset-0 bg-gradient-to-br from-[#1a0000]/80 to-transparent" />
-          <div className="absolute inset-0 bg-[#FFD700]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+          <div className="absolute inset-0 bg-[#BF953F]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
           <div className="relative z-10 p-6 md:p-10 h-full flex flex-col justify-between">
             <div>
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-[#FFD700]/10 flex items-center justify-center border border-[#FFD700]/30">
-                  <Rocket size={18} className="text-[#FFD700]" />
+                <div className="w-10 h-10 rounded-xl bg-[#BF953F]/10 flex items-center justify-center border border-[#BF953F]/30">
+                  <Rocket size={18} className="text-[#C4A882]" />
                 </div>
-                <span className="text-[#FFD700] text-[10px] font-bold tracking-[0.3em] uppercase">Pathway 01</span>
+                <span className="text-[#C4A882] text-[10px] font-bold tracking-[0.3em] uppercase">Pathway 01</span>
               </div>
 
               <h2 className="font-display text-[clamp(1.5rem,3.5vw,2.5rem)] text-white leading-[0.85] mb-6 font-bold uppercase leading-[1.1] tracking-[0.1em]">
-                CAREER <span className="metallic-gold-text italic">X</span>
+                CAREER <span className="metallic-gold-text font-bold italic">X</span>
               </h2>
 
-              <p className="text-[#A8A29C] md:text-lg font-bold max-w-md leading-relaxed mb-8 border-l-2 border-[#FFD700] pl-4">
+              <p className="text-white/85 md:text-lg font-bold max-w-md leading-relaxed mb-8 border-l-2 border-[#BF953F] pl-4">
                 Studio-aligned programs designed for those seeking high-impact careers in global production houses.
               </p>
 
@@ -70,7 +70,7 @@ export default function CareerCreatorComparison() {
         </div>
 
         {/* RIGHT: CREATOR X */}
-        <div className="ccc-panel maac-wipe-card group relative flex-1 overflow-hidden transition-all duration-700 ease-expo-out lg:hover:flex-[1.5] border-t lg:border-t-0 lg:border-l border-white/5">
+        <div className="ccc-panel maac-wipe-card group relative flex-1 overflow-hidden transition-all duration-700 ease-expo-out lg:hover:flex-[1.5]">
           <div className="absolute inset-0 bg-gradient-to-br from-[#0c0805]/80 to-transparent" />
           <div className="absolute inset-0 bg-[#FF6B35]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
@@ -87,7 +87,7 @@ export default function CareerCreatorComparison() {
                 CREATOR <span className="text-[#FF6B35] italic">X</span>
               </h2>
 
-              <p className="text-[#A8A29C] md:text-lg font-bold max-w-md leading-relaxed mb-8 border-l-2 border-[#FF6B35] pl-4">
+              <p className="text-white/85 md:text-lg font-bold max-w-md leading-relaxed mb-8 border-l-2 border-[#FF6B35] pl-4">
                 Empowering independent artists to build their own brand, manage clients, and master the gig economy.
               </p>
 
@@ -102,7 +102,7 @@ export default function CareerCreatorComparison() {
             </div>
 
             <div className="space-y-4">
-              <p className="text-[#A8A29C] text-[9px] font-bold uppercase tracking-[0.2em]">Ideal for Independent Creators & Freelancers</p>
+              <p className="text-white/85 text-[9px] font-bold uppercase tracking-[0.2em]">Ideal for Independent Creators & Freelancers</p>
               <Link href="/courses" className="inline-flex items-center justify-center gap-3 px-8 py-4 border border-[#FF6B35]/40 hover:bg-[#FF6B35] hover:text-white transition-colors duration-500 rounded-full text-white bg-transparent text-xs font-bold tracking-[0.3em] uppercase group/btn">
                 Launch Creator X
                 <ArrowRight size={14} className="transition-transform group-hover/btn:translate-x-1" />

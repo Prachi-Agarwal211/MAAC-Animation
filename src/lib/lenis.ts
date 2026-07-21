@@ -1,14 +1,14 @@
 import Lenis from 'lenis';
 import { gsap, ScrollTrigger } from './gsap';
-import { isTouchDevice } from './constants';
+import { isPhoneDevice } from './constants';
 
 let lenis: Lenis | null = null;
 let tickerCallback: ((time: number) => void) | null = null;
 let resizeHandler: (() => void) | null = null;
 
 export const initLenis = () => {
-  // DISABLE on touch devices (mobile/tablet)
-  if (isTouchDevice()) return null;
+  // DISABLE smooth scroll only on phones (< 768px touchscreens)
+  if (isPhoneDevice()) return null;
 
   if (lenis) return lenis;
 

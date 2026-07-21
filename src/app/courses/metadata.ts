@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     images: [
       {
-        url: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/06/DAFM.jpg",
+        url: "https://www.maacanimationjaipur.com/thumbnail.png",
         width: 1200,
         height: 630,
         alt: "Animation & VFX Courses in Jaipur | MAAC Institute",

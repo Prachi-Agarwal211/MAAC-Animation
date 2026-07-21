@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "@/lib/gsap";
+import { isTouchDevice } from "@/lib/constants";
 
 interface MagneticButtonProps {
   children: React.ReactNode;
@@ -19,7 +20,7 @@ export default function MagneticButton({
 
   useGSAP(() => {
     const wrapper = wrapperRef.current;
-    if (!wrapper || window.matchMedia("(pointer: coarse)").matches) return;
+    if (!wrapper || isTouchDevice()) return;
 
     const onMouseMove = (e: MouseEvent) => {
       const { clientX, clientY } = e;

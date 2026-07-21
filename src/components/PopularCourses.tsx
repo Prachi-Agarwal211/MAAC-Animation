@@ -49,7 +49,10 @@ export default function PopularCourses() {
 
             <h2 className="font-display text-[clamp(1rem,4vw,1.75rem)] leading-[0.85] text-white font-bold uppercase tracking-wide">
               <SplitTextReveal>EXPERTLY CRAFTED</SplitTextReveal>{' '}
-              <SplitTextReveal delay={0.2} className="metallic-gold-text italic tracking-wider">CURRICULUM</SplitTextReveal>
+              <span className="title-layer">
+                <span className="title-layer-glow" aria-hidden="true">CURRICULUM</span>
+                <SplitTextReveal delay={0.2} className="metallic-gold-text italic tracking-wider relative z-10">CURRICULUM</SplitTextReveal>
+              </span>
             </h2>
           </div>
         </div>

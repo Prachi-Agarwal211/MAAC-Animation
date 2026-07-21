@@ -3,6 +3,7 @@
 import { useRef, useEffect, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "@/lib/gsap";
+import { isTouchDevice } from "@/lib/constants";
 
 export default function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
@@ -11,7 +12,7 @@ export default function CustomCursor() {
   const cursorTweenRef = useRef<gsap.core.Tween | null>(null);
 
   useEffect(() => {
-    setIsMobile(window.matchMedia("(pointer: coarse)").matches);
+    setIsMobile(isTouchDevice());
   }, []);
 
   useGSAP(() => {
@@ -49,7 +50,7 @@ export default function CustomCursor() {
       gsap.to(cursor, {
         scale: 1,
         backgroundColor: "transparent",
-        borderColor: "#FFD700",
+        borderColor: "#C4A882",
         duration: 0.4,
         ease: "expo.out",
       });
@@ -89,11 +90,11 @@ export default function CustomCursor() {
     <>
       <div
         ref={cursorRef}
-        className="fixed top-0 left-0 w-10 h-10 rounded-full border border-[#FFD700] pointer-events-none z-[9999] mix-blend-difference -translate-x-1/2 -translate-y-1/2 flex items-center justify-center"
+        className="fixed top-0 left-0 w-10 h-10 rounded-full border border-[#C4A882] pointer-events-none z-[9999] mix-blend-difference -translate-x-1/2 -translate-y-1/2 flex items-center justify-center"
       />
       <div
         ref={dotRef}
-        className="fixed top-0 left-0 w-1.5 h-1.5 rounded-full bg-[#FFD700] pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2"
+        className="fixed top-0 left-0 w-1.5 h-1.5 rounded-full bg-[#C4A882] pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2"
       />
     </>
   );

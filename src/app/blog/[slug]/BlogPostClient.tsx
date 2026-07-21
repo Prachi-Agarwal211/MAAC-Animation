@@ -15,26 +15,79 @@ function renderContent(content: string) {
   let inCodeBlock = false;
   let codeContent = "";
 
-  function parseInlineMarkdown(text: string): React.ReactNode[] {
+  function parseInlineText(text: string): React.ReactNode[] {
     const parts: React.ReactNode[] = [];
-    const regex = /\*\*(.*?)\*\*/g;
-    let lastIndex = 0;
-    let match;
+    // Process images: ![alt](url)
+    const imgRegex = /!\[([^\]]*)\]\(([^)\s]+)\)/;
+    // Process links: [text](url)
+    const linkRegex = /\[([^\]]+)\]\(([^)\s]+)\)/;
+    // Process bold: **text**
+    const boldRegex = /\*\*(.*?)\*\*/;
 
-    while ((match = regex.exec(text)) !== null) {
-      if (match.index > lastIndex) {
-        parts.push(text.slice(lastIndex, match.index));
+    let remaining = text;
+
+    while (remaining.length > 0) {
+      // Check for image
+      const imgMatch = remaining.match(imgRegex);
+      // Check for link
+      const linkMatch = !imgMatch ? remaining.match(linkRegex) : null;
+      // Check for bold
+      const boldMatch = !imgMatch && !linkMatch ? remaining.match(boldRegex) : null;
+
+      // Find the earliest match
+      let match: RegExpMatchArray | null = null;
+      let matchType = '';
+      let matchIdx = -1;
+
+      if (imgMatch) { match = imgMatch; matchType = 'img'; matchIdx = match.index ?? -1; }
+      if (linkMatch && (linkMatch.index ?? -1) < (match?.index ?? Infinity)) { match = linkMatch; matchType = 'link'; matchIdx = match.index ?? -1; }
+      if (boldMatch && (boldMatch.index ?? -1) < (match?.index ?? Infinity)) { match = boldMatch; matchType = 'bold'; matchIdx = match.index ?? -1; }
+
+      if (!match) {
+        // No more matches — push remaining text as-is
+        parts.push(remaining);
+        break;
       }
-      parts.push(
-        <strong key={match.index} className="text-[#F0EBE1] font-semibold">
-          {match[1]}
-        </strong>
-      );
-      lastIndex = regex.lastIndex;
-    }
 
-    if (lastIndex < text.length) {
-      parts.push(text.slice(lastIndex));
+      // Text before match
+      if (matchIdx > 0) {
+        parts.push(remaining.slice(0, matchIdx));
+      }
+
+      if (matchType === 'img') {
+        const stableKey = `img-${match.index}-${match[2]}`;
+        parts.push(
+          <img
+            key={stableKey}
+            src={match[2]}
+            alt={match[1]}
+            className="w-full rounded-xl my-6 border border-white/10"
+            loading="lazy"
+          />
+        );
+      } else if (matchType === 'link') {
+        const stableKey = `link-${match.index}-${match[2]}`;
+        parts.push(
+          <a
+            key={stableKey}
+            href={match[2]}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#C4A882] underline underline-offset-4 decoration-[#C4A882]/30 hover:decoration-[#C4A882] transition-all hover:brightness-110"
+          >
+            {match[1]}
+          </a>
+        );
+      } else if (matchType === 'bold') {
+        const stableKey = `bold-${match.index}`;
+        parts.push(
+          <strong key={stableKey} className="text-[#F0EBE1] font-semibold">
+            {match[1]}
+          </strong>
+        );
+      }
+
+      remaining = remaining.slice((match.index ?? 0) + match[0].length);
     }
 
     return parts.length > 0 ? parts : [text];
@@ -45,7 +98,7 @@ function renderContent(content: string) {
       if (inCodeBlock) {
         elements.push(
           <pre key={index} className="bg-[#161616] rounded-lg p-4 my-4 overflow-x-auto border border-white/5">
-            <code className="text-sm text-[#A8A29C]">{codeContent.trim()}</code>
+            <code className="text-sm text-white/85">{codeContent.trim()}</code>
           </pre>
         );
         codeContent = "";
@@ -92,20 +145,12 @@ function renderContent(content: string) {
       return;
     }
 
-    const hasBold = line.includes("**");
-    if (hasBold) {
-      elements.push(
-        <p key={index} className="text-[#A8A29C] leading-relaxed my-3">
-          {parseInlineMarkdown(line)}
-        </p>
-      );
-    } else {
-      elements.push(
-        <p key={index} className="text-[#A8A29C] leading-relaxed my-3">
-          {line}
-        </p>
-      );
-    }
+    const parsed = parseInlineText(line);
+    elements.push(
+      <p key={index} className="text-white/85 leading-relaxed my-3">
+        {parsed}
+      </p>
+    );
   });
 
   return elements;
@@ -181,8 +226,8 @@ export default function BlogPostClient({ post }: { post: BlogPost }) {
               loop
               playsInline
               aria-hidden="true"
-              poster="/hero-poster.jpg"
-              className="w-full h-full object-cover opacity-30"
+              className="w-full h-full object-cover hero-video-fade"
+              style={{ '--video-target-opacity': '0.3' } as React.CSSProperties}
             >
               <source src="/hero-video-compressed.mp4" type="video/mp4" />
             </video>
@@ -192,19 +237,19 @@ export default function BlogPostClient({ post }: { post: BlogPost }) {
             <div className="animate-in inline-flex items-center gap-3 bg-white/5 border border-white/10 rounded-full px-5 py-2 mb-8">
               <span className="metallic-gold-text text-[10px] font-bold tracking-[0.2em] uppercase">{post.category}</span>
               <span className="w-1 h-1 bg-white/20 rounded-full" />
-              <span className="text-[#A8A29C] text-[10px] font-bold uppercase tracking-[0.2em]">{post.readTime}</span>
+              <span className="text-white/85 text-[10px] font-bold uppercase tracking-[0.2em]">{post.readTime}</span>
             </div>
 
             <h1 className="animate-in font-display text-[clamp(2rem,6vw,4rem)] leading-[1] text-white mb-8 font-light uppercase leading-[1.1] tracking-[0.1em]">
               {post.title}
             </h1>
 
-            <div className="animate-in flex items-center justify-center gap-6 text-[11px] font-bold uppercase tracking-[0.2em] text-[#A8A29C]">
+            <div className="animate-in flex items-center justify-center gap-6 text-[11px] font-bold uppercase tracking-[0.2em] text-white/85">
               <div className="flex items-center gap-2">
                 <span className="text-white/40">By</span>
                 <span className="text-white">{post.author}</span>
               </div>
-              <span className="w-1 h-1 bg-[#FFD700] rounded-full" />
+              <span className="w-1 h-1 bg-[#C4A882] rounded-full" />
               <time dateTime={post.date}>
                 {new Date(post.date).toLocaleDateString("en-IN", {
                   year: "numeric",
@@ -237,12 +282,12 @@ export default function BlogPostClient({ post }: { post: BlogPost }) {
             </div>
 
             <div className="mt-20 pt-10 border-t border-white/5">
-              <h3 className="text-[10px] font-bold text-[#A8A29C] uppercase tracking-[0.3em] mb-6">Topics Covered</h3>
+              <h3 className="text-[10px] font-bold text-white/85 uppercase tracking-[0.3em] mb-6">Topics Covered</h3>
               <div className="flex flex-wrap gap-3">
                 {post.tags.map((tag, i) => (
                   <span
                     key={i}
-                    className="bg-white/5 text-[#A8A29C] text-[10px] font-bold uppercase tracking-widest px-4 py-2 rounded-full border border-white/5 hover:border-[#FFD700]/30 transition-all cursor-default"
+                    className="bg-white/5 text-white/85 text-[10px] font-bold uppercase tracking-widest px-4 py-2 rounded-full border border-white/5 hover:border-[#C4A882]/30 transition-all cursor-default"
                   >
                     {tag}
                   </span>
@@ -263,13 +308,9 @@ export default function BlogPostClient({ post }: { post: BlogPost }) {
           </div>
         </article>
 
-        <div className="border-t border-white/5">
-          <IndustryPartners />
-        </div>
+        <IndustryPartners />
 
-        <div className="border-t border-white/5">
-          <ApplyNow />
-        </div>
+        <ApplyNow />
       </main>
     </>
   );

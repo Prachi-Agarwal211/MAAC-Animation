@@ -32,7 +32,7 @@ export default function FAQAccordion({ faqs }: { faqs: FAQItem[] }) {
         return (
           <div
             key={index}
-            className={`faq-item group rounded-3xl border transition-all duration-500 ${isOpen ? 'bg-white/[0.05] border-[#FFD700]/40 shadow-2xl backdrop-blur-xl' : 'bg-white/[0.02] border-white/20 hover:border-white/30 backdrop-blur-md'}`}
+            className={`faq-item group rounded-3xl border transition-all duration-500 ${isOpen ? 'bg-white/[0.05] border-[#C4A882]/40 shadow-2xl backdrop-blur-xl' : 'bg-white/[0.02] border-white/20 hover:border-white/30 backdrop-blur-md'}`}
           >
             <button
               id={`faq-btn-${index}`}
@@ -42,11 +42,11 @@ export default function FAQAccordion({ faqs }: { faqs: FAQItem[] }) {
               aria-expanded={isOpen}
               aria-controls={`faq-panel-${index}`}
             >
-              <span className={`font-display text-lg md:text-xl transition-colors duration-300 ${isOpen ? 'font-bold uppercase leading-[1.1] tracking-[0.1em] text-white' : 'text-[#A8A29C] group-hover:text-white'}`}>
+              <span className={`font-display text-lg md:text-xl transition-colors duration-300 ${isOpen ? 'font-bold uppercase leading-[1.1] tracking-[0.1em] text-white' : 'text-white/85 group-hover:text-white'}`}>
                 {faq.name}
               </span>
-              <div className={`w-10 h-10 rounded-full border flex items-center justify-center transition-all duration-500 ${isOpen ? 'bg-[#FFD700] border-[#FFD700] rotate-45' : 'bg-white/5 border-white/10'}`}>
-                <Plus size={18} aria-hidden="true" className={isOpen ? "text-white" : "text-[#A8A29C]"} />
+              <div className={`w-10 h-10 rounded-full border flex items-center justify-center transition-all duration-500 ${isOpen ? 'bg-[#C4A882] border-[#C4A882] rotate-45' : 'bg-white/5 border-white/10'}`}>
+                <Plus size={18} aria-hidden="true" className={isOpen ? "text-white" : "text-white/85"} />
               </div>
             </button>
 

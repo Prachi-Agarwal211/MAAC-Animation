@@ -118,7 +118,7 @@ export async function submitContactForm(formData: FormData) {
 
     return { success: true, message: "Application submitted successfully! We'll contact you soon." };
   } catch (error) {
-    console.error("Google Sheets submission error:", error);
+    console.error("Google Sheets submission error:", error instanceof Error ? error.message : error);
     return {
       success: false,
       message: "Failed to submit form. Please try again.",

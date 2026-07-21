@@ -69,10 +69,10 @@ export default function StudentSuccessStories() {
           </p>
           <h2 className="font-display text-[clamp(1.6rem,6vw,3.5rem)] leading-[0.85] text-white font-bold uppercase leading-[1.1] tracking-[0.1em]">
             <SplitTextReveal>REAL</SplitTextReveal>{' '}
-            <SplitTextReveal delay={0.15} className="metallic-gold-text italic">PLACEMENTS</SplitTextReveal>
+            <span className="title-layer"><span className="title-layer-glow" aria-hidden="true">PLACEMENTS</span><SplitTextReveal delay={0.15} className="metallic-gold-text italic relative z-10">PLACEMENTS</SplitTextReveal></span>
             <SplitTextReveal delay={0.3}>, REAL SALARIES</SplitTextReveal>
           </h2>
-          <p className="text-[#A8A29C] text-sm md:text-white/80 mt-6 max-w-2xl mx-auto">
+          <p className="text-white/85 text-sm md:text-white/80 mt-6 max-w-2xl mx-auto">
             Our students don&apos;t just learn — they launch thriving careers. Here&apos;s what MAAC alumni are earning and where they&apos;re working.
           </p>
         </div>
@@ -92,7 +92,7 @@ export default function StudentSuccessStories() {
                   <Icon size={20} className="metallic-gold-text" />
                 </div>
                 <div className="text-white font-bold text-xl md:text-3xl mb-1">{stat.value}</div>
-                <div className="text-[#A8A29C] text-xs uppercase tracking-[0.15em]">{stat.label}</div>
+                <div className="text-white/85 text-xs uppercase tracking-[0.15em]">{stat.label}</div>
               </div>
             );
           })}
@@ -121,18 +121,18 @@ export default function StudentSuccessStories() {
                 </div>
 
                 {/* Quote */}
-                <p className="text-[#A8A29C] text-sm leading-relaxed mb-6 italic">
+                <p className="text-white/85 text-sm leading-relaxed mb-6 italic">
                   &ldquo;{story.quote}&rdquo;
                 </p>
 
                 {/* Company & Salary */}
                 <div className="flex items-center justify-between pt-6 border-t border-white/5">
                   <div>
-                    <div className="text-[#A8A29C] text-[10px] uppercase tracking-[0.2em] mb-1">Company</div>
+                    <div className="text-white/85 text-[10px] uppercase tracking-[0.2em] mb-1">Company</div>
                     <div className="text-white font-bold text-sm">{story.company}</div>
                   </div>
                   <div className="text-right">
-                    <div className="text-[#A8A29C] text-[10px] uppercase tracking-[0.2em] mb-1">Package</div>
+                    <div className="text-white/85 text-[10px] uppercase tracking-[0.2em] mb-1">Package</div>
                     <div className="text-[#BF953F] font-bold text-lg">{story.salary} LPA</div>
                   </div>
                 </div>

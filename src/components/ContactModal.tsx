@@ -89,23 +89,37 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
     document.body.style.overflow = "hidden";
 
     // Focus trap: keep focus inside modal
+    // Handles mobile edge cases where document.activeElement returns body/null
     const modal = modalRef.current;
+    const overlay = overlayRef.current;
     const handleTabTrap = (e: KeyboardEvent) => {
       if (e.key !== "Tab" || !modal) return;
       const focusable = modal.querySelectorAll<HTMLElement>(
-        'input, textarea, button, [tabindex]:not([tabindex="-1"])'
+        'input:not([type=hidden]), textarea, button, [tabindex]:not([tabindex="-1"])'
       );
       if (focusable.length === 0) return;
       const first = focusable[0];
       const last = focusable[focusable.length - 1];
-      if (e.shiftKey && document.activeElement === first) {
+      const active = document.activeElement;
+
+      // Mobile fallback: if focus is outside modal (keyboard dismissed, etc.), bring it back
+      if (!modal.contains(active)) {
+        e.preventDefault();
+        (e.shiftKey ? last : first).focus();
+        return;
+      }
+
+      if (e.shiftKey && active === first) {
         e.preventDefault();
         last.focus();
-      } else if (!e.shiftKey && document.activeElement === last) {
+      } else if (!e.shiftKey && active === last) {
         e.preventDefault();
         first.focus();
       }
     };
+
+    // Trap focus away from browser chrome / address bar on initial open
+    if (overlay) overlay.focus();
 
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === "Escape") handleClose();
@@ -198,6 +212,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
     <div
       ref={overlayRef}
       className={`fixed inset-0 z-[8000] flex items-center justify-center p-4 ${isOpen ? 'pointer-events-auto' : 'pointer-events-none'}`}
+      tabIndex={-1}
       style={{ 
         background: "rgba(8,8,8,0.88)", 
         backdropFilter: isMobile ? 'none' : 'blur(12px)',
@@ -228,7 +243,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
         }}
       >
         {/* Top accent bar */}
-        <div className="h-[2px] w-full bg-[#FFD700]/40 shadow-[0_0_12px_rgba(255,215,0,0.25)]" />
+        <div className="h-[2px] w-full bg-[#C4A882]/40" />
 
         {/* Close button */}
         <button
@@ -251,7 +266,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
         <div className="p-7 pt-6">
           {submitted ? (
             <div className="text-center py-6">
-              <div className="w-14 h-14 rounded-full bg-[#FFD700]/15 border border-[#FFD700]/30 flex items-center justify-center mx-auto mb-4 text-[#FFD700]">
+              <div className="w-14 h-14 rounded-full bg-[#BF953F]/15 border border-[#C4A882]/30 flex items-center justify-center mx-auto mb-4 text-[#C4A882]">
                 <svg
                   width="24"
                   height="24"
@@ -266,7 +281,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
               <h3 className="font-display text-xl text-[#F0EBE1] mb-2 font-bold uppercase leading-[1.1] tracking-[0.1em]">
                 Transmission Successful!
               </h3>
-              <p className="text-[#A8A29C] text-sm">
+              <p className="text-white/85 text-sm">
                 Our career advisor will contact you within 24 hours.
               </p>
             </div>
@@ -274,13 +289,13 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
             <>
               {/* Header */}
               <div className="mb-6">
-                <span className="inline-block px-3 py-1 rounded-full bg-[#FFD700]/10 border border-[#FFD700]/20 text-[#FFD700] text-[10px] font-bold tracking-[0.15em] uppercase mb-3">
+                <span className="inline-block px-3 py-1 rounded-full bg-[#BF953F]/10 border border-[#BF953F]/20 text-[#C4A882] text-[10px] font-bold tracking-[0.15em] uppercase mb-3">
                   Free Demo Class
                 </span>
                 <h2 className="font-display text-[#F0EBE1] text-xl mb-1 font-bold uppercase leading-[1.1] tracking-[0.1em]">
                   Start Your Creative Journey
                 </h2>
-                <p className="text-[#A8A29C] text-sm">
+                <p className="text-white/85 text-sm">
                   Book a free demo. No commitment required.
                 </p>
               </div>
@@ -310,13 +325,13 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                     className="w-full px-5 py-4 rounded-xl text-sm text-white placeholder-[#888] focus:outline-none focus:ring-1 focus:ring-[#E31837]/50 transition-all"
                     style={{
                       background: "rgba(255,255,255,0.02)",
-                      border: `1px solid ${errors.name ? "#FFD700" : "rgba(255,255,255,0.1)"}`,
+                      border: `1px solid ${errors.name ? "#C4A882" : "rgba(255,255,255,0.1)"}`,
                       boxShadow: "inset 0 1px 2px rgba(0,0,0,0.5)",
                       fontSize: "16px",
                     }}
                   />
                   {errors.name && (
-                    <p role="alert" className="text-[#FFD700] text-[10px] mt-1">
+                    <p role="alert" className="text-[#C4A882] text-[10px] mt-1">
                       {errors.name}
                     </p>
                   )}
@@ -326,7 +341,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                 <div>
                   <div className="flex">
                     <span
-                      className="flex items-center px-3 rounded-l-xl text-[#A8A29C] text-sm"
+                      className="flex items-center px-3 rounded-l-xl text-white/85 text-sm"
                       style={{
                         background: "rgba(255,255,255,0.04)",
                         border: "1px solid rgba(255,255,255,0.08)",
@@ -347,14 +362,14 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                       className="flex-1 px-5 py-4 rounded-r-xl text-sm text-white placeholder-[#888] focus:outline-none focus:ring-1 focus:ring-[#E31837]/50 transition-all"
                       style={{
                         background: "rgba(255,255,255,0.02)",
-                        border: `1px solid ${errors.phone ? "#FFD700" : "rgba(255,255,255,0.1)"}`,
+                        border: `1px solid ${errors.phone ? "#C4A882" : "rgba(255,255,255,0.1)"}`,
                         boxShadow: "inset 0 1px 2px rgba(0,0,0,0.5)",
                         fontSize: "16px",
                       }}
                     />
                   </div>
                   {errors.phone && (
-                    <p role="alert" className="text-[#FFD700] text-[10px] mt-1">
+                    <p role="alert" className="text-[#C4A882] text-[10px] mt-1">
                       {errors.phone}
                     </p>
                   )}
@@ -373,14 +388,13 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                     }
                     className="w-full px-5 py-4 rounded-xl text-sm text-white placeholder-[#888] focus:outline-none focus:ring-1 focus:ring-[#E31837]/50 transition-all"
                     style={{
-                      background: "rgba(255,255,255,0.02)",
-                      border: `1px solid ${errors.email ? "#FFD700" : "rgba(255,255,255,0.1)"}`,
-                      boxShadow: "inset 0 1px 2px rgba(0,0,0,0.5)",
-                      fontSize: "16px",
-                    }}
-                  />
-                  {errors.email && (
-                    <p role="alert" className="text-[#FFD700] text-[10px] mt-1">
+                      background: "rgba(255,255,255,0.02)",                       border: `1px solid ${errors.email ? "#C4A882" : "rgba(255,255,255,0.1)"}`,
+                       boxShadow: "inset 0 1px 2px rgba(0,0,0,0.5)",
+                       fontSize: "16px",
+                     }}
+                   />
+                   {errors.email && (
+                     <p role="alert" className="text-[#C4A882] text-[10px] mt-1">
                       {errors.email}
                     </p>
                   )}
@@ -415,7 +429,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                   </button>
                 </div>
 
-                <p className="text-center text-[#A8A29C] text-[11px]">
+                <p className="text-center text-white/85 text-[11px]">
                   🔒 Your information is secure and private.
                 </p>
               </form>

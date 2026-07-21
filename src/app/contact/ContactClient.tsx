@@ -84,11 +84,11 @@ export default function ContactClient() {
       {/* ── HERO SECTION ── */}
       <section className="relative pt-32 pb-20 px-6 md:px-12 lg:px-24 border-b border-white/5">
         <div className="max-w-[1800px] mx-auto contact-hero-content">
-          <span className="inline-block text-[#FFD700] text-[10px] font-bold tracking-[0.4em] uppercase mb-6">Connect with Elite</span>
+          <span className="inline-block metallic-gold-text-sm text-[10px] font-bold tracking-[0.4em] uppercase mb-6">Connect with Elite</span>
           <h1 className="font-display text-[clamp(2.5rem,7vw,5rem)] text-white leading-[0.9] mb-8 font-light uppercase leading-[1.1] tracking-[0.1em]">
             START THE <br /> <span className="gradient-text">DIALOGUE</span>
           </h1>
-          <p className="text-[#A8A29C] text-base md:text-lg font-medium leading-relaxed max-w-2xl italic border-l-2 border-[#FFD700] pl-6">
+          <p className="text-white/85 text-base md:text-lg font-medium leading-relaxed max-w-2xl italic border-l-2 border-[#BF953F] pl-6">
             Have questions about our world-class curriculum? Our advisors are ready to guide your creative evolution.
           </p>
         </div>
@@ -100,35 +100,35 @@ export default function ContactClient() {
 
           {/* Left: Info */}
           <div className="lg:col-span-5 space-y-8">
-            <div className="contact-card p-8 rounded-3xl glass border border-white/5 space-y-6 group hover:border-[#FFD700]/30 transition-all duration-700">
+            <div className="contact-card p-8 rounded-3xl glass border border-white/5 space-y-6 group hover:border-[#C4A882]/30 transition-all duration-700">
                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-[#FFD700]/10 flex items-center justify-center text-[#FFD700]">
+                  <div className="w-12 h-12 rounded-xl bg-[#BF953F]/10 flex items-center justify-center text-[#C4A882]">
                     <MapPin size={20} />
                   </div>
                   <h3 className="text-white font-display text-base tracking-wider font-light uppercase leading-[1.1]">HQ Location</h3>
                </div>
-               <p className="text-[#A8A29C] leading-relaxed text-sm">
+               <p className="text-white/85 leading-relaxed text-sm">
                  711-712, Ambition Tower, 7th Floor, Agrasain Circle, Subhash Marg, Jaipur, 302001
                </p>
-               <a href="https://maps.google.com" className="inline-flex items-center gap-2 text-white text-[10px] font-bold uppercase tracking-wider group/link">
+               <a href="https://maps.google.com/maps?q=MAAC+Animation+Jaipur+711+Ambition+Tower+Subhash+Marg&ll=26.9139,75.7842" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-white text-[10px] font-bold uppercase tracking-wider group/link">
                  Get Directions <Globe size={12} className="group-hover/link:rotate-12 transition-transform" />
                </a>
             </div>
 
             <div className="grid sm:grid-cols-2 gap-6">
-               <div className="contact-card p-6 rounded-2xl glass border border-white/5 space-y-3 hover:border-[#FFD700]/30 transition-all">
-                  <Phone size={16} className="text-[#FFD700]" />
+               <div className="contact-card p-6 rounded-2xl glass border border-white/5 space-y-3 hover:border-[#C4A882]/30 transition-all">
+                  <Phone size={16} className="text-[#C4A882]" />
                   <h4 className="text-white font-display text-xs tracking-wider font-light uppercase leading-[1.1]">Phone</h4>
-                  <a href="tel:+917300001589" className="block text-[#A8A29C] text-xs hover:text-white transition-colors">+91 73000 01589</a>
+                  <a href="tel:+917300001589" className="block text-white/85 text-xs hover:text-white transition-colors">+91 73000 01589</a>
                </div>
-               <div className="contact-card p-6 rounded-2xl glass border border-white/5 space-y-3 hover:border-[#FFD700]/30 transition-all">
-                  <Mail size={16} className="text-[#FFD700]" />
+               <div className="contact-card p-6 rounded-2xl glass border border-white/5 space-y-3 hover:border-[#C4A882]/30 transition-all">
+                  <Mail size={16} className="text-[#C4A882]" />
                   <h4 className="text-white font-display text-xs tracking-wider font-light uppercase leading-[1.1]">Email</h4>
-                  <a href="mailto:maacanimationjaipur@gmail.com" className="block text-[#A8A29C] text-xs hover:text-white transition-colors break-all">maacanimationjaipur@gmail.com</a>
+                  <a href="mailto:maacanimationjaipur@gmail.com" className="block text-white/85 text-xs hover:text-white transition-colors break-all">maacanimationjaipur@gmail.com</a>
                </div>
             </div>
 
-            <div className="contact-card rounded-2xl overflow-hidden grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-1000 border border-white/5 h-64">
+            <div className="contact-card rounded-2xl overflow-hidden opacity-80 hover:opacity-100 transition-all duration-700 border border-white/5 h-64">
                <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3557.8442087935854!2d75.78418831488203!3d26.91389298309897!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396c4b8d7e0b5e07%3A0x5d2c1b9f8e5a4e3c!2sMAAC%20Animation%2C%20711-712%20Ambition%20Tower%2C%20Subhash%20Marg%2C%20Jaipur!5e0!3m2!1sen!2sin!4v1712000000000!5m2!1sen!2sin"
                   width="100%" height="100%" style={{ border: 0 }} allowFullScreen loading="lazy" title="Location"
@@ -139,20 +139,19 @@ export default function ContactClient() {
           {/* Right: Form */}
           <div className="lg:col-span-7">
             <form onSubmit={handleSubmit} className="contact-card p-8 md:p-12 rounded-3xl glass border border-white/5 relative overflow-hidden">
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#FFD700] to-[#FF6B35]" />
-              <h2 className="text-white font-display text-2xl md:text-3xl mb-8 font-light uppercase leading-[1.1] tracking-[0.1em]">Express <span className="text-[#FFD700]">Interest</span></h2>
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#BF953F] to-[#FF6B35]" />
+              <h2 className="text-white font-display text-2xl md:text-3xl mb-8 font-light uppercase leading-[1.1] tracking-[0.1em]">Express <span className="metallic-gold-text italic">Interest</span></h2>
 
               <div className="space-y-5">
                 {/* Honeypot + timestamp for bot protection */}
                 <input type="text" name="_hp" tabIndex={-1} autoComplete="off" aria-hidden="true"
                   className="absolute opacity-0 pointer-events-none h-0 w-0" style={{ position: 'absolute', left: '-9999px' }} />
                 <input type="hidden" name="_ts" />
-                <div className="grid md:grid-cols-2 gap-5">
-                  <input type="text" name="name" placeholder="FULL NAME" required aria-label="Full Name" className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-xs font-bold tracking-wider text-white focus:outline-none focus:ring-2 focus:ring-[#FFD700]/50 focus:border-[#FFD700]/50 transition-all uppercase placeholder:text-white/10" />
-                   <input type="email" name="email" placeholder="EMAIL ADDRESS" required aria-label="Email Address" className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-xs font-bold tracking-wider text-white focus:outline-none focus:ring-2 focus:ring-[#FFD700]/50 focus:border-[#FFD700]/50 transition-all uppercase placeholder:text-white/10" />
-                </div>
-                <input type="tel" name="phone" placeholder="MOBILE NUMBER" required aria-label="Mobile Number" className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-xs font-bold tracking-wider text-white focus:outline-none focus:ring-2 focus:ring-[#FFD700]/50 focus:border-[#FFD700]/50 transition-all uppercase placeholder:text-white/10" />
-                 <textarea name="message" placeholder="ADDITIONAL MESSAGE OR NOTE" rows={4} aria-label="Additional Message or Note" className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-xs font-bold tracking-wider text-white focus:outline-none focus:ring-2 focus:ring-[#FFD700]/50 focus:border-[#FFD700]/50 transition-all uppercase placeholder:text-white/10 resize-none" />
+                <div className="grid md:grid-cols-2 gap-5">                  <input type="text" name="name" placeholder="FULL NAME" required aria-label="Full Name" className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-xs font-bold tracking-wider text-white focus:outline-none focus:ring-2 focus:ring-[#C4A882]/50 focus:border-[#C4A882]/50 transition-all uppercase placeholder:text-white/10" />
+                   <input type="email" name="email" placeholder="EMAIL ADDRESS" required aria-label="Email Address" className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-xs font-bold tracking-wider text-white focus:outline-none focus:ring-2 focus:ring-[#C4A882]/50 focus:border-[#C4A882]/50 transition-all uppercase placeholder:text-white/10" />
+                 </div>
+                 <input type="tel" name="phone" placeholder="MOBILE NUMBER" required aria-label="Mobile Number" className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-xs font-bold tracking-wider text-white focus:outline-none focus:ring-2 focus:ring-[#C4A882]/50 focus:border-[#C4A882]/50 transition-all uppercase placeholder:text-white/10" />
+                  <textarea name="message" placeholder="ADDITIONAL MESSAGE OR NOTE" rows={4} aria-label="Additional Message or Note" className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-xs font-bold tracking-wider text-white focus:outline-none focus:ring-2 focus:ring-[#C4A882]/50 focus:border-[#C4A882]/50 transition-all uppercase placeholder:text-white/10 resize-none" />
               </div>
 
               <div className="mt-10 flex flex-col sm:flex-row items-center justify-between gap-6">
@@ -161,7 +160,7 @@ export default function ContactClient() {
                     {isSubmitting ? "TRANSMITTING..." : "SEND MESSAGE"} <Send size={14} />
                   </button>
                 </MagneticButton>
-                <p className="flex items-center gap-2 text-[#A8A29C] text-[10px] font-bold uppercase tracking-wider">
+                <p className="flex items-center gap-2 text-white/85 text-[10px] font-bold uppercase tracking-wider">
                    <ShieldCheck size={12} className="text-[#25D366]" /> Secure Data Transmission
                 </p>
               </div>

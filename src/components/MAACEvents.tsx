@@ -85,7 +85,7 @@ const EventCard = ({ event }: { event: typeof eventsData[0] }) => {
 
         {/* Content */}
         <h3 className="text-white font-display text-xl md:text-[#F0EBE1] mb-4 font-bold uppercase leading-[1.1] tracking-[0.1em]">{event.name}</h3>
-        <p className="text-[#A8A29C] text-sm leading-relaxed flex-grow mb-8">{event.description}</p>
+        <p className="text-white/85 text-sm leading-relaxed flex-grow mb-8">{event.description}</p>
 
         {/* CTA */}
         <Link
@@ -127,7 +127,7 @@ export default function MAACEvents() {
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8 z-10">
         {/* Heading */}
         <div className="events-heading text-center mb-20 md:mb-28">
-          <p className="metallic-gold-text text-sm font-bold tracking-[0.2em] uppercase mb-6 flex items-center justify-center gap-3">
+          <p className="metallic-gold-text-sm text-[11px] font-bold tracking-[0.2em] uppercase mb-6 flex items-center justify-center gap-3">
             <span className="w-6 h-[1px] metallic-gold-accent" />
             Events at MAAC
             <span className="w-6 h-[1px] metallic-gold-accent" />
@@ -135,7 +135,7 @@ export default function MAACEvents() {
           <h2 className="font-display text-[clamp(1.6rem,4vw,2.8rem)] text-[#F0EBE1] leading-[0.95] font-bold uppercase leading-[1.1] tracking-[0.1em]">
             Where <span className="gradient-text">Creativity Meets</span> Competition
           </h2>
-          <p className="text-[#A8A29C] text-lg mt-6 max-w-2xl mx-auto">
+          <p className="text-white/85 text-lg mt-6 max-w-2xl mx-auto">
             From national competitions to immersive masterclasses, MAAC events shape the next generation of creative professionals.
           </p>
         </div>

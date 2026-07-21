@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Manrope, Syne } from "next/font/google";
 import "./globals.css";
-import "./card-innovations.css";
+
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 import Script from "next/script";
@@ -20,6 +20,7 @@ const CustomCursor = dynamic(() => import("@/components/hero/CustomCursor"), { s
 const FloatingActions = dynamic(() => import("@/components/FloatingActions"), { ssr: false });
 const LenisProvider = dynamic(() => import("@/components/LenisProvider"), { ssr: false });
 const ClientShell = dynamic(() => import("@/components/ClientShell"), { ssr: true });
+const CookieConsent = dynamic(() => import("@/components/CookieConsent"), { ssr: false });
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -45,8 +46,8 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.maacanimationjaipur.com"),
   title: {
-    default: "MAAC Animation Institute Jaipur | Best Animation & VFX Courses",
-    template: "%s | MAAC Jaipur",
+    default: "MAAC Animation Institute Jaipur | Best Animation, VFX Courses",
+    template: "%s | MAAC Animation"
   },
   description:
     "MAAC Jaipur C-Scheme — Rajasthan's #1 Animation Institute. B.Voc Degree in 3D Animation, VFX & Game Design. 95% Placements. NSDC Certified. Call " + contactInfo.phone + ".",
@@ -80,12 +81,18 @@ export const metadata: Metadata = {
   verification: {
     google: "dK9O7oyQ38md-k2VNjfTZJ64trKyvyLqSxlVik7Ak3M",
   },
+  other: {
+    "ai-content-declaration": "public",
+    "geo-optimized": "true",
+    "geo.region": "IN-RJ",
+    "geo.placename": "Jaipur, Rajasthan",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://www.maacanimationjaipur.com",
     siteName: "MAAC Animation Jaipur",
-    title: "MAAC Animation Institute Jaipur C-Scheme | Best Animation & VFX Courses",
+    title: "MAAC Animation Institute Jaipur | Best Animation, VFX Courses",
     description:
       "MAAC Jaipur C-Scheme — Rajasthan's #1 Animation Institute. B.Voc Degree in 3D Animation, VFX & Game Design. 95% Placements. NSDC Certified.",
     images: [
@@ -99,10 +106,11 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "MAAC Animation Jaipur C-Scheme | Best Animation & VFX Courses",
+    title: "MAAC Animation Jaipur | Best Animation, VFX Courses",
     description:
       "MAAC Jaipur C-Scheme — Rajasthan's #1 Animation Institute. B.Voc Degree in 3D Animation, VFX & Game Design. 95% Placements.",
     images: ["https://www.maacanimationjaipur.com/thumbnail.png"],
+    site: "@maacjaipurcscheme",
   },
   robots: {
     index: true,
@@ -124,15 +132,35 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
     {
+      "@type": "WebSite",
+      "@id": "https://www.maacanimationjaipur.com/#website",
+      "url": "https://www.maacanimationjaipur.com",
+      "name": "MAAC Animation Institute Jaipur",
+      "description": "Rajasthan's leading animation, VFX and multimedia institute",
+      "inLanguage": "en-US",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [".speakable-headline", ".speakable-summary", ".metallic-gold-text-sm"]
+      },
+      "publisher": { "@id": "https://www.maacanimationjaipur.com" }
+    },
+    {
       "@type": ["EducationalOrganization", "LocalBusiness"],
       "@id": "https://www.maacanimationjaipur.com",
       name: "MAAC Animation Jaipur C-Scheme",
-      alternateName: "MAAC Jaipur",
+      alternateName: "MAAC Animation Institute Jaipur",
       url: "https://www.maacanimationjaipur.com",
-      logo: "https://www.maacanimationjaipur.com/maac-logo.png",
+      logo: { "@type": "ImageObject", url: "https://www.maacanimationjaipur.com/maac-logo.png", width: 512, height: 512 },
       image: "https://www.maacanimationjaipur.com/thumbnail.png",
       description:
         "MAAC Jaipur C-Scheme is Rajasthan's leading Animation, VFX and Game Design institute. Offering B.Voc, Diploma and short-term courses. NSDC & MESC certified with 95% placement support.",
+      foundingDate: "1998",
+      numberOfEmployees: { "@type": "QuantitativeValue", minValue: 20 },
+      paymentAccepted: "Cash, Credit Card, Debit Card, UPI, Education Loan",
+      aggregateRating: { "@type": "AggregateRating", ratingValue: "4.9", reviewCount: "422", bestRating: "5", worstRating: "1" },
+      award: "FICCI BAF Awards 2024 - Best Animation Institute",
+      department: { "@type": "EducationalOrganization", name: "Placement Cell", description: "Dedicated placement assistance with 95% success rate" },
+      alumni: { "@type": "AlumniOrganization", name: "MAAC Alumni Network", description: "50,000+ professionals working at top studios worldwide" },
       telephone: contactInfo.phone,
       email: contactInfo.email,
       address: {
@@ -157,10 +185,13 @@ const jsonLd = {
         },
       ],
       sameAs: [
-        contactInfo.social.facebook,
-        contactInfo.social.instagram,
-        contactInfo.social.youtube,
-        contactInfo.social.linkedin,
+        "https://www.facebook.com/maacjaipurcscheme",
+        "https://www.instagram.com/maacjaipurcscheme",
+        "https://www.youtube.com/@maac-jaipur-cscheme",
+        "https://www.linkedin.com/company/maac-jaipur-cscheme",
+        "https://maps.google.com/maps?q=MAAC+Animation+Jaipur+711+Ambition+Tower+Subhash+Marg&ll=26.9139,75.7842",
+        // Google Business Profile
+        "https://maps.google.com/?cid=10289291929379673702", // MAAC Animation GBP (4.9★, Ambition Tower Jaipur)
       ],
       hasOfferCatalog: {
         "@type": "OfferCatalog",
@@ -209,6 +240,10 @@ export default function RootLayout({
         />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+
+        {/* Preload hero videos — highest priority, loads before anything else */}
+        <link rel="preload" as="video" href="/hero-video-compressed.mp4" fetchPriority="high" />
+        <link rel="preload" as="video" href="/intro.mp4" fetchPriority="high" />
 
         {/* =====================================================================
             ADVERTISING & ANALYTICS TAGS - Meta + Google Ads
@@ -281,10 +316,32 @@ export default function RootLayout({
 
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-[9999] bg-[#FFD700] text-white px-4 py-2 rounded"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-[9999] bg-[#C4A882] text-black px-4 py-2 rounded"
         >
           Skip to main content
         </a>
+
+        {/* Server-rendered nav for search engine crawlability (visually hidden, semantic) */}
+        <nav aria-label="Site navigation" className="sr-only">
+          <a href="/">Home</a>
+          <a href="/about">About Us</a>
+          <a href="/courses">Courses</a>
+          <a href="/courses/3d-animation">3D Animation</a>
+          <a href="/courses/vfx">Visual Effects</a>
+          <a href="/courses/game-design">Game Design</a>
+          <a href="/courses/filmmaking-photo">Filmmaking</a>
+          <a href="/courses/specialized-boot">Bootcamp</a>
+          <a href="/student-work">Student Work</a>
+          <a href="/events">Events</a>
+          <a href="/gallery">Gallery</a>
+          <a href="/blog">Blog</a>
+          <a href="/contact">Contact Us</a>
+          <a href="/annual-trip">Annual Trip</a>
+          <a href="/animation-institute-jaipur">Animation Institute Jaipur</a>
+          <a href="/creative-career-assessment">Career Assessment</a>
+          <a href="/privacy-policy">Privacy Policy</a>
+          <a href="/terms-of-service">Terms of Service</a>
+        </nav>
 
         <div className="grain-overlay" aria-hidden="true" />
 
@@ -307,6 +364,9 @@ export default function RootLayout({
             </Suspense>
             <Suspense fallback={null}>
               <MetaPixel />
+            </Suspense>
+            <Suspense fallback={null}>
+              <CookieConsent />
             </Suspense>
             <Analytics />
             <SpeedInsights />

@@ -1,6 +1,6 @@
 import { MetadataRoute } from "next";
 import { blogPosts } from "@/data/blog";
-import { getAllCourseSlugs } from "@/data/courseDetails";
+import { getAllCourseSlugs } from "@/data/courses";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://www.maacanimationjaipur.com";

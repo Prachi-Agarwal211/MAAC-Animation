@@ -31,7 +31,7 @@ export default function DemoBar() {
   if (!isVisible) return null;
 
   return (
-    <div className="demo-bar relative z-[2000] bg-[#FFD700] overflow-hidden">
+    <div className="demo-bar relative z-[2000] bg-[#C4A882] overflow-hidden">
       <div className="demo-bar-content flex items-center justify-center px-6 py-2 gap-4">
         <CalendarClock size={14} className="text-white" />
         <p className="text-white text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase">

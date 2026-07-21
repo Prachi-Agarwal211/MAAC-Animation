@@ -35,6 +35,14 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# research / analysis / diff files
+*.diff
+DEEP-RESEARCH-ANALYSIS.md
+FULL-SITE-DEEP-RESEARCH.md
+DESIGN-TYPOGRAPHY-RESEARCH.md
+MOBILE-DEVICE-RESEARCH.md
+current-changes.diff
+
 # data exports
 /MAAC WEBSITE DATA-20260402T150538Z-1-001
 

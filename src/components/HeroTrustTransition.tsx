@@ -35,7 +35,7 @@ export default function HeroTrustTransition({ hero }: Props) {
         videoBg = document.querySelector(".hero-bg-container") as HTMLElement;
         heroText = document.querySelector(".maacx-content") as HTMLElement;
         if (!videoBg) return;
-      } catch (_) { return; }
+      } catch { return; }
 
       gsap.set(videoBg, { transformOrigin: "top left" });
       gsap.set(".morph-badges-text", { opacity: 0, y: 30 });
@@ -142,7 +142,7 @@ export default function HeroTrustTransition({ hero }: Props) {
   }, { scope: containerRef });
 
   return (
-      <div ref={containerRef} className="relative w-full h-[100dvh] overflow-hidden bg-transparent">
+      <div id="hero" ref={containerRef} className="relative w-full h-[100dvh] overflow-hidden bg-transparent">
       {/* Hero layer */}
       <div className="absolute inset-0 z-0">
         {hero}
@@ -155,7 +155,7 @@ export default function HeroTrustTransition({ hero }: Props) {
           <div className="morph-badges-text w-[35%] flex flex-col items-start shrink-0 pointer-events-auto">
             <div className="flex items-center gap-4 mb-5">
               <div className="w-6 h-[1px] metallic-gold-accent" />
-              <span className="metallic-gold-text text-[11px] font-bold tracking-[0.25em] uppercase">
+              <span className="metallic-gold-text-sm text-[11px] font-bold tracking-[0.25em] uppercase">
                 Govt Affiliated &amp; Recognized
               </span>
             </div>
@@ -181,7 +181,7 @@ export default function HeroTrustTransition({ hero }: Props) {
             <div className="morph-badges-text pointer-events-auto">
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-5 h-[1px] metallic-gold-accent" />
-                <span className="metallic-gold-text text-[10px] font-bold tracking-[0.25em] uppercase">
+                <span className="metallic-gold-text-sm text-[10px] font-bold tracking-[0.25em] uppercase">
                   Govt Affiliated &amp; Recognized
                 </span>
               </div>

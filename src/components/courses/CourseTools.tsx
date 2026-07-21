@@ -24,7 +24,7 @@ export default function CourseTools({ course }: { course: Course }) {
             <SplitTextReveal>Tools &amp; Software You&apos;ll</SplitTextReveal>{' '}
             <SplitTextReveal delay={0.2} className="metallic-gold-text">Master</SplitTextReveal>
           </h2>
-          <p className="text-[#A8A29C] text-lg text-center mb-12 max-w-2xl mx-auto">
+          <p className="text-white/85 text-lg text-center mb-12 max-w-2xl mx-auto">
             Industry-standard tools used in professional studios worldwide
           </p>
         </div>

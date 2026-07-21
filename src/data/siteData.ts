@@ -176,7 +176,7 @@ export const tickerStats = [
 export const statSegments = [
   { label: "Placement Rate", value: 95, color: "#E31837" },
   { label: "Partner Companies", value: 3, color: "#FF6B35" },
-  { label: "Years of Excellence", value: 2, color: "#FFD700" },
+  { label: "Years of Excellence", value: 2, color: "#C4A882" },
 ];
 
 export type NavChildLink = { label: string; href: string; external?: boolean };
@@ -303,7 +303,7 @@ export const contactInfo = {
   email: "maacanimationjaipur@gmail.com",
   address:
     "711-712, Ambition Tower, 7th Floor, D-46B, Malan Ka Chauraha, Agrasain Circle, Subhash Marg, C Scheme, Jaipur, Rajasthan 302001",
-  googleMapsUrl: "https://maps.google.com/?q=MAAC+Jaipur+C+Scheme+711+Ambition+Tower",
+  googleMapsUrl: "https://maps.google.com/?cid=10289291929379673702",
   hours: "Mon–Sat 9:00 AM – 7:00 PM",
   social: {
     instagram:

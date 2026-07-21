@@ -6,10 +6,19 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { navLinks, contactInfo, type NavLinkItem } from "@/data/siteData";
+import { courseCategories } from "@/data/courses";
 import { useUIStore } from "@/lib/store";
 import { MessageSquare, ChevronDown, X, Menu, ArrowRight, ArrowUpRight } from "lucide-react";
 import { isTouchDevice as checkTouch } from "@/lib/constants";
 import ScrollIndicator from "./SideScroller";
+
+const categoryImageMap: Record<string, string> = {};
+courseCategories.forEach((c) => { categoryImageMap[c.title] = c.image; });
+categoryImageMap["Motion Graphics & Broadcast"] = "/courses_images/vfx_plus.jpeg";
+categoryImageMap["Skill Enhancement Courses"] = "/courses_images/skill_enhance.jpeg";
+categoryImageMap["Filmmaking"] = "/courses_images/dafm.jpeg";
+categoryImageMap["Blended Model of Learning"] = "/courses_images/dgdi.jpeg";
+categoryImageMap["Visual Arts & Design"] = "/courses_images/graphic_design.jpeg";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -123,7 +132,7 @@ export default function Navbar() {
             <li className="relative group">
               <Link
                 href="/"
-                className="flex items-center gap-1.5 px-3 py-2 text-[13px] font-bold text-white/70 hover:text-white transition-all duration-300 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]"
+                className="flex items-center gap-1.5 px-3 py-2 text-[13px] font-bold text-white/90 hover:text-white transition-all duration-300 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]"
               >
                 Home
               </Link>
@@ -142,7 +151,7 @@ export default function Navbar() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1 px-2.5 py-2 text-[13px] text-white/85 hover:text-white transition-colors"
+                    className="flex items-center gap-1 px-2.5 py-2 text-[13px] text-white/90 hover:text-white transition-colors"
                   >
                     {renderNavLabel(link)}
                   </a>
@@ -155,7 +164,7 @@ export default function Navbar() {
                         setOpenMega(isOpen ? null : link.label);
                       }
                     }}
-                    className="flex items-center gap-1.5 px-3 py-2 text-[13px] font-bold text-white/70 hover:text-white transition-all duration-300 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]"
+                    className="flex items-center gap-1.5 px-3 py-2 text-[13px] font-bold text-white/90 hover:text-white transition-all duration-300 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]"
                   >
                     {link.label}
                     {hasSubmenu(link) && <ChevronDown size={12} className={`opacity-40 shrink-0 transition-transform ${isOpen ? 'rotate-180' : 'group-hover:rotate-180'}`} aria-hidden />}
@@ -171,29 +180,50 @@ export default function Navbar() {
                     }`}
                     role="menu"
                   >
-                    <div className="rounded-xl border border-white/10 bg-black/80 backdrop-blur-xl shadow-2xl w-[min(100vw-1.5rem,24rem)] flex flex-col">
-                      <div className="p-5">
-                        <div className="space-y-1">
-                          {link.megaGroups.map((group) => (
+                    <div className="rounded-2xl border border-white/10 bg-black/80 backdrop-blur-2xl shadow-2xl w-[min(100vw-1.5rem,42rem)] flex flex-col p-5">
+                      <div className="grid grid-cols-2 gap-3">
+                        {link.megaGroups.map((group) => {
+                          const thumb = categoryImageMap[group.title];
+                          return (
                             <div key={group.title} className="relative group/submenu">
                               <Link
                                 href="/courses"
-                                className="flex items-center justify-between py-2 text-[15px] leading-snug text-white/75 hover:text-white hover:bg-white/5 rounded px-2 -mx-2 transition-colors"
+                                className="flex items-start gap-3 p-3 rounded-xl hover:bg-white/[0.04] border border-transparent hover:border-white/[0.08] transition-all duration-300"
                                 role="menuitem"
                               >
-                                {group.title}
-                                {group.links && group.links.length > 0 && (
-                                  <ChevronDown size={12} className="opacity-45 shrink-0 rotate-[-90deg]" />
+                                {thumb && (
+                                  <div className="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 bg-white/[0.04] border border-white/[0.06]">
+                                    <Image
+                                      src={thumb}
+                                      alt=""
+                                      width={48}
+                                      height={48}
+                                      className="w-full h-full object-cover opacity-70 group-hover/submenu:opacity-100 transition-opacity"
+                                    />
+                                  </div>
                                 )}
+                                <div className="flex-1 min-w-0">
+                                  <div className="flex items-center justify-between">
+                                    <span className="text-[13px] font-bold text-white/80 group-hover/submenu:text-white transition-colors">
+                                      {group.title}
+                                    </span>
+                                    {group.links && group.links.length > 0 && (
+                                      <ChevronDown size={10} className="opacity-45 shrink-0 rotate-[-90deg] ml-1" />
+                                    )}
+                                  </div>
+                                  {group.links && group.links.length > 0 && (
+                                    <span className="text-[10px] text-white/60 mt-0.5 block">{group.links.length} programs</span>
+                                  )}
+                                </div>
                               </Link>
                               {group.links && group.links.length > 0 && (
                                 <div className="absolute left-full top-0 ml-1 opacity-0 invisible pointer-events-none translate-x-[-4px] transition-[opacity,visibility,transform] duration-150 group-hover/submenu:opacity-100 group-hover/submenu:visible group-hover/submenu:pointer-events-auto group-hover/submenu:translate-x-0 z-50">
-                                  <div className="rounded-lg border border-white/10 bg-black/90 backdrop-blur-xl py-2 min-w-[240px] shadow-xl">
+                                  <div className="rounded-xl border border-white/10 bg-black/90 backdrop-blur-2xl py-2 min-w-[260px] shadow-xl">
                                     {group.links.map((child) => (
                                       <Link
                                         key={child.label}
                                         href={child.href}
-                                        className="block px-4 py-2 text-[15px] text-white hover:text-white hover:bg-white/5 transition-colors"
+                                        className="block px-4 py-2 text-[13px] text-white/85 hover:text-white hover:bg-white/[0.04] transition-colors"
                                         role="menuitem"
                                       >
                                         {child.label}
@@ -203,8 +233,8 @@ export default function Navbar() {
                                 </div>
                               )}
                             </div>
-                          ))}
-                        </div>
+                          );
+                        })}
                       </div>
                     </div>
                   </div>
@@ -240,10 +270,10 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center gap-4 flex-shrink-0">
             <Link
               href="/creative-career-assessment"
-              className="group flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#FFD700]/10 border border-[#FFD700]/30 hover:bg-[#FFD700] transition-all duration-500 ease-out"
+              className="group flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#C4A882]/10 border border-[#C4A882]/30 hover:bg-[#C4A882] transition-all duration-500 ease-out"
             >
-              <ArrowUpRight size={14} className="text-[#FFD700] group-hover:text-black transition-colors" />
-              <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#FFD700] group-hover:text-black transition-colors">
+              <ArrowUpRight size={14} className="text-[#C4A882] group-hover:text-black transition-colors" />
+              <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#C4A882] group-hover:text-black transition-colors">
                 Free Assessment
               </span>
             </Link>
@@ -283,7 +313,7 @@ export default function Navbar() {
         aria-hidden={!mobileMenuOpen}
       >
         <nav className="flex-1 overflow-y-auto px-5 py-6 overscroll-contain">
-          <p className="text-[10px] uppercase tracking-[0.2em] text-white/50 mb-3 px-0.5">MAAC Jaipur · C-Scheme</p>
+          <p className="text-[10px] uppercase tracking-[0.2em] text-white/60 mb-3 px-0.5">MAAC Jaipur · C-Scheme</p>
           <ul className="border-t border-white/10">
             {navLinks.map((link) => (
               <li key={link.label} className="border-b border-white/10">
@@ -309,7 +339,7 @@ export default function Navbar() {
                   <div className="pb-4 space-y-5">
                     {link.megaGroups.map((group) => (
                       <div key={group.title}>
-                        <p className="text-[10px] uppercase tracking-widest metallic-gold-text font-black mb-2 pl-3">
+                        <p className="text-[10px] uppercase tracking-widest metallic-gold-text-sm font-black mb-2 pl-3">
                           {group.title}
                         </p>
                         <ul className="pl-3 space-y-0">
@@ -318,7 +348,7 @@ export default function Navbar() {
                               <Link
                                 href={child.href}
                                 onClick={toggleMobileMenu}
-                                className="block py-2 text-[13px] leading-snug text-white/70 hover:text-white"
+                                className="block py-2 text-[13px] leading-snug text-white/85 hover:text-white"
                               >
                                 {child.label}
                               </Link>
@@ -330,7 +360,7 @@ export default function Navbar() {
                     <Link
                       href="/contact"
                       onClick={toggleMobileMenu}
-                      className="block ml-3 py-2 text-[13px] text-[#FFD700] font-bold"
+                      className="block ml-3 py-2 text-[13px] text-[#C4A882] font-bold"
                     >
                       View e-brochure / enquire — Jaipur
                     </Link>
@@ -343,7 +373,7 @@ export default function Navbar() {
                         <Link
                           href={child.href}
                           onClick={toggleMobileMenu}
-                          className="block py-2.5 text-[15px] text-white/70 hover:text-white"
+                          className="block py-2.5 text-[15px] text-white/85 hover:text-white"
                         >
                           {child.label}
                         </Link>
@@ -359,10 +389,10 @@ export default function Navbar() {
             <Link
               href="/creative-career-assessment"
               onClick={toggleMobileMenu}
-              className="group flex w-full items-center justify-center gap-3 px-6 py-4 rounded-full bg-[#FFD700]/10 border border-[#FFD700]/30 hover:bg-[#FFD700] transition-all duration-500 ease-out"
+              className="group flex w-full items-center justify-center gap-3 px-6 py-4 rounded-full bg-[#C4A882]/10 border border-[#C4A882]/30 hover:bg-[#C4A882] transition-all duration-500 ease-out"
             >
-              <ArrowUpRight size={18} className="text-[#FFD700] group-hover:text-black transition-colors" />
-              <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-[#FFD700] group-hover:text-black transition-colors">
+              <ArrowUpRight size={18} className="text-[#C4A882] group-hover:text-black transition-colors" />
+              <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-[#C4A882] group-hover:text-black transition-colors">
                 Free Career Assessment
               </span>
             </Link>

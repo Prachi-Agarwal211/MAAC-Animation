@@ -4,7 +4,7 @@ import Link from 'next/link';
 export const metadata: Metadata = {
   title: 'Privacy Policy | MAAC Jaipur',
   description: 'Privacy Policy for MAAC Animation Jaipur C-Scheme. Learn how we collect, use, and protect your personal information.',
-  robots: { index: true, follow: true },
+  robots: { index: false, follow: false },
   alternates: { canonical: 'https://www.maacanimationjaipur.com/privacy-policy' },
   openGraph: {
     title: 'Privacy Policy | MAAC Jaipur',
@@ -24,11 +24,11 @@ export default function PrivacyPolicy() {
   return (
     <main className="min-h-screen bg-[#0C0C0C] text-white pt-24 pb-16 px-6 md:px-12">
       <div className="max-w-3xl mx-auto">
-        <p className="text-[#FFD700] text-xs tracking-[0.2em] uppercase mb-3 font-display">Legal</p>
+        <p className="text-[#C4A882] text-xs tracking-[0.2em] uppercase mb-3 font-display">Legal</p>
         <h1 className="text-3xl md:text-4xl mb-2 gradient-text">Privacy Policy</h1>
-        <p className="text-white/40 text-sm mb-10">Last updated: April 2026</p>
+        <p className="text-white/70 text-sm mb-10">Last updated: April 2026</p>
 
-        <div className="space-y-8 text-white/70 leading-relaxed">
+        <div className="space-y-8 text-white/85 leading-relaxed">
           <section className="glass-card p-6 md:p-8">
             <h2 className="text-white font-display font-semibold text-xl mb-3">1. Information We Collect</h2>
             <p>When you use our website or submit an enquiry, we may collect personal information including your name, email address, phone number, and course interests. This information is collected only when voluntarily provided by you through our forms.</p>
@@ -62,7 +62,7 @@ export default function PrivacyPolicy() {
           <section className="glass-card p-6 md:p-8">
             <h2 className="text-white font-display font-semibold text-xl mb-3">7. Contact Us</h2>
             <p>If you have any questions about this Privacy Policy, please contact:</p>
-            <address className="not-italic mt-3 text-white/60">
+            <address className="not-italic mt-3 text-white/80">
               <strong className="text-white">MAAC Animation Jaipur C-Scheme</strong><br />
               711-712, Ambition Tower, 7th Floor, Subhash Marg, C Scheme, Jaipur, Rajasthan 302001<br />
               Email: maacanimationjaipur@gmail.com<br />
@@ -72,7 +72,7 @@ export default function PrivacyPolicy() {
         </div>
 
         <div className="mt-12 pt-8 border-t border-white/10">
-          <Link href="/" className="text-[#FFD700] hover:text-[#FFD700]/80 text-sm transition-colors">← Back to Home</Link>
+          <Link href="/" className="text-[#C4A882] hover:text-[#C4A882]/80 text-sm transition-colors">← Back to Home</Link>
         </div>
       </div>
     </main>

@@ -241,18 +241,18 @@ export default function CareerAssessment() {
         <div className={`${getTransitionClass('intro')}`}>
           <div className="text-center space-y-12 py-12">
             <div className="inline-block p-4 rounded-full bg-white/5 border border-white/10 mb-4 glass-card">
-              <Award className="text-[#FFD700] w-10 h-10" />
+              <Award className="text-[#C4A882] w-10 h-10" />
             </div>
             <div className="space-y-4">
-              <p className="metallic-gold-text text-[10px] font-bold tracking-[0.4em] uppercase">
+              <p className="metallic-gold-text-sm text-[10px] font-bold tracking-[0.4em] uppercase">
                 Vocational Excellence
               </p>
               <h1 className="text-4xl md:text-7xl font-display font-bold uppercase tracking-tight leading-none">
                 Discover Your <br />
-                <span className="metallic-gold-text italic">Creative DNA</span>
+                <span className="metallic-gold-text font-bold italic">Creative DNA</span>
               </h1>
             </div>
-            <p className="text-xl text-[#A8A29C] max-w-2xl mx-auto leading-relaxed font-medium">
+            <p className="text-xl text-white/85 max-w-2xl mx-auto leading-relaxed font-medium">
               Find your path in the $200B global entertainment industry. Our AI-driven assessment matches your personality to high-growth roles in Animation, VFX, and Gaming.
             </p>
             <button
@@ -261,7 +261,7 @@ export default function CareerAssessment() {
             >
               <span className="relative z-10">Launch Assessment</span>
               <ChevronRight className="relative z-10 group-hover:translate-x-1 transition-transform" />
-               <div className="absolute inset-0 bg-[#FFD700] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]" />
+               <div className="absolute inset-0 bg-[#C4A882] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]" />
             </button>
           </div>
         </div>
@@ -272,16 +272,16 @@ export default function CareerAssessment() {
             <div className="space-y-6">
               <div className="flex justify-between items-end">
                 <div className="space-y-1">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#FFD700]">Module Progress</p>
-                  <h3 className="text-sm font-bold text-white/60">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#C4A882]">Module Progress</p>
+                  <h3 className="text-sm font-bold text-white/80">
                     Question {currentQuestion + 1} of {QUIZ_QUESTIONS.length}
                   </h3>
                 </div>
-                <span className="text-xs font-mono text-[#FFD700]">{Math.round(progress)}%</span>
+                <span className="text-xs font-mono text-[#C4A882]">{Math.round(progress)}%</span>
               </div>
               <div className="h-[2px] w-full bg-white/5 rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-gradient-to-r from-[#FFD700] to-[#FFA500] transition-[width] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                  className="h-full bg-gradient-to-r from-[#C4A882] to-[#BF953F] transition-[width] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
                   style={{ width: `${progress}%` }}
                 />
               </div>
@@ -296,13 +296,13 @@ export default function CareerAssessment() {
                   <button
                     key={idx}
                     onClick={() => handleOptionSelect(option.role)}
-                    className="group flex items-center justify-between p-6 md:p-8 bg-white/5 border border-white/10 hover:border-[#FFD700]/40 transition-all text-left glass-card hover:bg-white/[0.08]"
+                    className="group flex items-center justify-between p-6 md:p-8 bg-white/5 border border-white/10 hover:border-[#C4A882]/40 transition-all text-left glass-card hover:bg-white/[0.08]"
                   >
                     <span className="text-lg md:text-xl text-white/70 group-hover:text-white transition-colors duration-300">
                       {option.text}
                     </span>
-                    <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center group-hover:border-[#FFD700]/50 transition-colors shrink-0 ml-4">
-                      <div className="w-2.5 h-2.5 bg-[#FFD700] scale-0 group-hover:scale-100 transition-transform rounded-full shadow-[0_0_15px_rgba(255,215,0,0.4)]" />
+                    <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center group-hover:border-[#C4A882]/50 transition-colors shrink-0 ml-4">
+                      <div className="w-2.5 h-2.5 bg-[#C4A882] scale-0 group-hover:scale-100 transition-transform rounded-full shadow-[0_0_15px_rgba(196,168,130,0.4)]" />
                     </div>
                   </button>
                 ))}
@@ -335,8 +335,8 @@ export default function CareerAssessment() {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <div className="p-10 bg-white/5 border border-white/10 rounded-[2rem] space-y-6 glass-card">
-                <h3 className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#FFD700]">Aptitude Profile</h3>
-                <p className="text-lg text-[#A8A29C] leading-relaxed">
+                <h3 className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#C4A882]">Aptitude Profile</h3>
+                <p className="text-lg text-white/85 leading-relaxed">
                   {resultData.whyFits}
                 </p>
                 <div className="pt-6 flex flex-wrap gap-3">
@@ -348,20 +348,20 @@ export default function CareerAssessment() {
                 </div>
               </div>
 
-              <div className="p-10 bg-white/5 border border-white/10 rounded-[2rem] space-y-8 glass-card border-t-[#FFD700]/20">
+              <div className="p-10 bg-white/5 border border-white/10 rounded-[2rem] space-y-8 glass-card border-t-[#C4A882]/20">
                 <div className="space-y-4">
-                  <h3 className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#FFD700]">Strategic Pathway</h3>
+                  <h3 className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#C4A882]">Strategic Pathway</h3>
                   <p className="text-2xl font-display font-bold text-white uppercase tracking-tight">{resultData.course}</p>
-                  <p className="text-[#A8A29C] leading-relaxed">
+                  <p className="text-white/85 leading-relaxed">
                     {resultData.courseReason}
                   </p>
                 </div>
                 <Link
                   href="/courses"
-                  className="group inline-flex items-center gap-4 text-[#FFD700] font-bold uppercase text-[10px] tracking-[0.3em] hover:text-white transition-all"
+                  className="group inline-flex items-center gap-4 text-[#C4A882] font-bold uppercase text-[10px] tracking-[0.3em] hover:text-white transition-all"
                 >
                   Explore Curriculum
-                  <div className="w-10 h-10 rounded-full bg-[#FFD700]/10 border border-[#FFD700]/20 flex items-center justify-center group-hover:bg-[#FFD700] group-hover:text-black transition-all">
+                  <div className="w-10 h-10 rounded-full bg-[#C4A882]/10 border border-[#C4A882]/20 flex items-center justify-center group-hover:bg-[#C4A882] group-hover:text-black transition-all">
                     <ChevronRight size={18} />
                   </div>
                 </Link>
@@ -371,7 +371,7 @@ export default function CareerAssessment() {
             <div className="flex flex-col md:flex-row gap-6 justify-center items-center py-12">
               <button
                 onClick={() => window.open("https://wa.me/917300001589?text=Hi%20MAAC%20Jaipur%2C%20I%27d%20like%20to%20book%201-on-1%20counseling", "_blank")}
-                className="w-full md:w-auto px-12 py-6 bg-white text-black font-bold uppercase tracking-[0.2em] text-xs text-center hover:bg-[#FFD700] transition-all hover:-translate-y-1 hover:brightness-110"
+                className="w-full md:w-auto px-12 py-6 bg-white text-black font-bold uppercase tracking-[0.2em] text-xs text-center hover:bg-[#C4A882] transition-all hover:-translate-y-1 hover:brightness-110"
               >
                 Book 1-on-1 Counseling
               </button>

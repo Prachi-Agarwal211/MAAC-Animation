@@ -54,7 +54,7 @@ export default function KineticAwardsRows({ awards }: { awards: Award[] }) {
               <div className="absolute top-1/2 left-full ml-12 -translate-y-1/2 w-80 p-8 glass-card rounded-[32px] opacity-0 group-hover:opacity-100 transition-all duration-700 pointer-events-none z-20">
                  <div className="text-[10px] font-bold metallic-gold-text uppercase tracking-[0.3em] mb-4">{award.year}</div>
                  <h3 className="text-white text-xl font-display mb-4 font-bold uppercase leading-[1.1] tracking-[0.1em]">{award.name}</h3>
-                 <p className="text-[#A8A29C] text-sm leading-relaxed border-t border-white/5 pt-4">{award.org}</p>
+                 <p className="text-white/85 text-sm leading-relaxed border-t border-white/5 pt-4">{award.org}</p>
               </div>
             </div>
           ))}

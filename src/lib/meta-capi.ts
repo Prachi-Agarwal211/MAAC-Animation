@@ -78,10 +78,13 @@ export async function sendMetaCapiLead(params: MetaCapiLeadParams) {
     };
 
     const response = await fetch(
-      `https://graph.facebook.com/v18.0/${pixelId}/events?access_token=${accessToken}`,
+      `https://graph.facebook.com/v18.0/${pixelId}/events`,
       {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${accessToken}`,
+        },
         body: JSON.stringify(eventData),
       },
     );

@@ -92,7 +92,7 @@ function SlideUpCard({ course }: { course: CourseCardItem }) {
 
   return (
     <div
-      className="category-card glass-card relative aspect-[2/3] overflow-hidden cursor-pointer group transition-all duration-500 hover:border-[#FFD700]/30"
+      className="category-card glass-card relative aspect-[2/3] overflow-hidden cursor-pointer group transition-all duration-500 hover:border-[#C4A882]/30"
       onMouseEnter={() => !isTouch && setIsHovered(true)}
       onMouseLeave={() => !isTouch && setIsHovered(false)}
       onClick={() => isTouch && setIsHovered(!isHovered)}
@@ -117,7 +117,7 @@ function SlideUpCard({ course }: { course: CourseCardItem }) {
       {/* Content Layer */}
       <div className="relative z-10 h-full flex flex-col justify-end p-8 md:p-10">
         <div className="mb-6 transform transition-transform duration-500 group-hover:-translate-y-4">
-          <div className="text-[#FFD700] mb-6 drop-shadow-md">
+          <div className="text-[#C4A882] mb-6 drop-shadow-md">
             <CategoryIcon type={course.icon} />
           </div>
           <h3 className="text-white font-display text-sm md:text-sm mb-2 font-bold uppercase leading-none tracking-tight drop-shadow-lg">{course.title}</h3>
@@ -132,7 +132,7 @@ function SlideUpCard({ course }: { course: CourseCardItem }) {
           }}
         >
           <div className="flex-1 flex flex-col justify-center min-h-0">
-            <p className="text-white text-sm md:text-white/80 leading-relaxed mb-6 border-l-2 border-[#FFD700] pl-6">
+            <p className="text-white text-sm md:text-white/80 leading-relaxed mb-6 border-l-2 border-[#C4A882] pl-6">
               {course.fullDescription}
             </p>
             <div className="mb-8">
@@ -148,7 +148,7 @@ function SlideUpCard({ course }: { course: CourseCardItem }) {
             <div className="mt-auto">
               <Link href="/contact" className="inline-flex items-center gap-4 text-white text-[10px] font-bold tracking-[0.3em] uppercase group/link">
                 Read More
-                <div className="w-10 h-10 rounded-full bg-[#FFD700] flex items-center justify-center transition-transform group-hover/link:scale-110">
+                <div className="w-10 h-10 rounded-full bg-[#C4A882] flex items-center justify-center transition-transform group-hover/link:scale-110">
                   <ArrowUpRight size={16} />
                 </div>
               </Link>
@@ -221,7 +221,7 @@ export default function CourseCategories({ mode = "home" }: CourseCategoriesProp
     <section ref={containerRef} id={isHome ? "courses" : undefined} className="relative py-24 md:py-32 overflow-hidden bg-transparent">
       <div className="relative max-w-content mx-auto px-6 lg:px-8 z-10">
         <div className="categories-heading text-center mb-16 md:mb-24">
-          <p className="metallic-gold-text text-[10px] font-bold tracking-[0.3em] uppercase mb-4 flex items-center justify-center gap-3">
+          <p className="metallic-gold-text-sm text-[10px] font-bold tracking-[0.3em] uppercase mb-4 flex items-center justify-center gap-3">
             <span className="w-8 h-[1px] metallic-gold-accent" />
             {isHome ? "The Academy Portfolio" : "All Programs"}
             <span className="w-8 h-[1px] metallic-gold-accent" />
@@ -229,16 +229,16 @@ export default function CourseCategories({ mode = "home" }: CourseCategoriesProp
           <h2 className="font-display text-[clamp(0.875rem,3vw,1.5rem)] leading-[0.85] text-white font-bold uppercase tracking-wide">
             {isHome ? (
               <>
-                Expertly Crafted <span className="metallic-gold-text italic tracking-wider">Curriculum</span>
+                Expertly Crafted <span className="metallic-gold-text font-bold italic tracking-wider">Curriculum</span>
               </>
             ) : (
               <>
-                Explore All <span className="metallic-gold-text italic tracking-wider">Programs</span>
+                Explore All <span className="metallic-gold-text font-bold italic tracking-wider">Programs</span>
               </>
             )}
           </h2>
           {isHome && (
-            <p className="text-[#A8A29C] text-sm md:text-white/80 mt-4">
+            <p className="text-white/85 text-sm md:text-white/80 mt-4">
               Swipe left-right to explore all categories
             </p>
           )}

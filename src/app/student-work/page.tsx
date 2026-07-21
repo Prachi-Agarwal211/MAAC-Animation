@@ -7,20 +7,34 @@ import StudentWorkHeroClient from "./StudentWorkHeroClient";
 import ErrorBoundary from "@/components/ErrorBoundary";
 
 export const metadata: Metadata = {
-  title: "Student Work",
+  title: "Student Work Gallery | MAAC Animation Jaipur",
   description:
-    "Explore incredible projects from MAAC Jaipur students. Portfolio-ready work in 3D Animation, VFX, and Game Design.",
+    "Explore outstanding student projects from MAAC Jaipur — 3D animations, VFX breakdowns, game art, motion graphics, and short films.",
   openGraph: {
-    title: "Student Work - MAAC Animation Jaipur",
+    title: "Student Work Gallery | MAAC Animation Jaipur",
     description:
-      "Explore incredible projects from MAAC Jaipur students. Portfolio-ready work in 3D Animation, VFX, and Game Design.",
-    images: ["/thumbnail.png"],
+      "Explore outstanding student projects from MAAC Jaipur — 3D animations, VFX breakdowns, game art, motion graphics, and short films.",
+    url: "https://www.maacanimationjaipur.com/student-work",
+    images: [{ url: "https://www.maacanimationjaipur.com/og-image.jpg", width: 1200, height: 630 }],
   },
+  twitter: { card: "summary_large_image", title: "Student Work Gallery | MAAC Animation Jaipur" },
+  alternates: { canonical: "https://www.maacanimationjaipur.com/student-work" },
+  robots: { index: true, follow: true },
 };
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.maacanimationjaipur.com" },
+    { "@type": "ListItem", "position": 2, "name": "Student Work", "item": "https://www.maacanimationjaipur.com/student-work" },
+  ],
+}
 
 export default function StudentWorkPage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       {/* JSON-LD Structured Data */}
       <Script
         id="student-work-schema"
@@ -53,23 +67,30 @@ export default function StudentWorkPage() {
               loop
               playsInline
               aria-hidden="true"
-              poster="/hero-poster.jpg"
-              className="w-full h-full object-cover opacity-40"
+              className="w-full h-full object-cover hero-video-fade"
+              style={{ '--video-target-opacity': '0.4' } as React.CSSProperties}
             >
               <source src="/hero-video-compressed.mp4" type="video/mp4" />
             </video>
           </div>
 
           <div className="relative z-20 text-center px-6 pt-20">
-            <p className="animate-in metallic-gold-text text-[10px] font-bold tracking-[0.3em] uppercase mb-4 flex items-center justify-center gap-3">
+            <p className="animate-in metallic-gold-text-sm text-[10px] font-bold tracking-[0.3em] uppercase mb-4 flex items-center justify-center gap-3">
               <span className="w-8 h-[1px] metallic-gold-accent" />
               Excellence in Motion
               <span className="w-8 h-[1px] metallic-gold-accent" />
             </p>
             <h1 className="animate-in font-display text-[clamp(2.5rem,8vw,5rem)] leading-[0.85] text-white mb-6 font-light uppercase tracking-[0.1em]">
-              Student <span className="metallic-gold-text italic text-[1.1em]">Work</span>
+              <span className="title-layer">
+                <span className="title-layer-glow" aria-hidden="true">Student</span>
+                <span className="relative z-10">Student</span>
+              </span>{' '}
+              <span className="title-layer">
+                <span className="title-layer-glow" aria-hidden="true">Work</span>
+                <span className="relative z-10 metallic-gold-text font-bold italic text-[1.1em]">Work</span>
+              </span>
             </h1>
-            <p className="animate-in text-[#A8A29C] text-lg max-w-2xl mx-auto leading-relaxed">
+            <p className="animate-in text-white/85 text-lg max-w-2xl mx-auto leading-relaxed">
               At MAAC Animation Institute, we&apos;re committed to empowering aspiring artists to unleash their creative potential and build professional portfolios.
             </p>
           </div>
@@ -85,13 +106,9 @@ export default function StudentWorkPage() {
           </div>
         </section>
 
-        <div className="border-t border-white/5">
-          <IndustryPartners />
-        </div>
+        <IndustryPartners />
 
-        <div className="border-t border-white/5">
-          <ApplyNow />
-        </div>
+        <ApplyNow />
       </main>
     </>
   );

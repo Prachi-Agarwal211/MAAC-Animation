@@ -75,20 +75,20 @@ export default function CourseHero({ course }: { course: Course }) {
         <div className="max-w-3xl">
           {/* Breadcrumb */}
           <nav className="mb-8" aria-label="Breadcrumb">
-            <ol className="flex items-center gap-2 text-sm text-[#A8A29C]">
+            <ol className="flex items-center gap-2 text-sm text-white/85">
               <li><Link href="/" className="hover:metallic-gold-text transition-colors">Home</Link></li>
               <li>/</li>
               <li><Link href="/courses" className="hover:metallic-gold-text transition-colors">Courses</Link></li>
               <li>/</li>
-              <li className="text-[#A8A29C]">{course.title}</li>
+              <li className="text-white/85">{course.title}</li>
             </ol>
           </nav>
 
           {/* Course badge */}
           <div className="inline-flex items-center gap-2 bg-[#BF953F]/10 border border-[#BF953F]/30 rounded-full px-4 py-2 mb-6">
             <span className="metallic-gold-text text-xs font-black tracking-wider uppercase">{course.code}</span>
-            <span className="text-[#A8A29C]">•</span>
-            <span className="text-[#A8A29C] text-sm">{course.duration}</span>
+            <span className="text-white/85">•</span>
+            <span className="text-white/85 text-sm">{course.duration}</span>
           </div>
 
           {/* Title */}
@@ -97,7 +97,7 @@ export default function CourseHero({ course }: { course: Course }) {
           </h1>
 
           {/* Description */}
-          <p className="text-[#A8A29C] text-lg md:text-xl leading-relaxed mb-8 max-w-2xl">
+          <p className="text-white/85 text-lg md:text-xl leading-relaxed mb-8 max-w-2xl">
             {course.fullDescription}
           </p>
 
@@ -122,15 +122,15 @@ export default function CourseHero({ course }: { course: Course }) {
           {/* Quick info */}
           <div className="mt-12 grid grid-cols-2 md:grid-cols-3 gap-6">
             <div>
-              <p className="text-[#A8A29C] text-xs uppercase tracking-wider mb-1">Duration</p>
+              <p className="text-white/85 text-xs uppercase tracking-wider mb-1">Duration</p>
               <p className="text-[#F0EBE1] font-black">{course.duration}</p>
             </div>
             <div>
-              <p className="text-[#A8A29C] text-xs uppercase tracking-wider mb-1">Eligibility</p>
+              <p className="text-white/85 text-xs uppercase tracking-wider mb-1">Eligibility</p>
               <p className="text-[#F0EBE1] font-black">{course.eligibility}</p>
             </div>
             <div className="col-span-2 md:col-span-1">
-              <p className="text-[#A8A29C] text-xs uppercase tracking-wider mb-1">Tools You&apos;ll Learn</p>
+              <p className="text-white/85 text-xs uppercase tracking-wider mb-1">Tools You&apos;ll Learn</p>
               <p className="text-[#F0EBE1] font-black text-sm">{course.tools.slice(0, 3).join(", ")}</p>
             </div>
           </div>

@@ -27,6 +27,7 @@ export default function SplitTextReveal({
   useGSAP(() => {
     if (!containerRef.current) return;
 
+    const triggerElement = containerRef.current.closest('h1, h2, h3, h4, h5, h6, .split-parent') || containerRef.current;
     const isMobile = window.innerWidth < MOBILE_BREAKPOINT;
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -40,7 +41,7 @@ export default function SplitTextReveal({
           delay,
           ease: "power2.out",
           scrollTrigger: {
-            trigger: containerRef.current,
+            trigger: triggerElement,
             start: "top 90%",
           }
         }
@@ -66,9 +67,12 @@ export default function SplitTextReveal({
         delay,
         ease: "expo.out",
         scrollTrigger: {
-          trigger: containerRef.current,
+          trigger: triggerElement,
           start: "top 85%",
         },
+        onComplete: () => {
+          gsap.set(chars, { clearProps: "transform,opacity" });
+        }
       }
     );
   }, { dependencies: [delay, duration, stagger], scope: containerRef });
@@ -77,7 +81,7 @@ export default function SplitTextReveal({
     if (typeof children !== "string") return children;
 
     return children.split(" ").map((word, i) => (
-      <span key={i} className="inline-block whitespace-nowrap overflow-hidden align-bottom mr-[0.2em] last:mr-0">
+      <span key={i} className="inline-block whitespace-nowrap overflow-hidden align-bottom mr-[0.2em] last:mr-0 pb-[0.2em] -mb-[0.2em] pt-[0.2em] -mt-[0.2em] pl-[0.1em] -ml-[0.1em] pr-[0.1em] -mr-[0.1em]">
         {word.split("").map((char, j) => (
           <span key={j} className="char inline-block origin-bottom">
             {char}

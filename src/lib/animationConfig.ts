@@ -10,9 +10,17 @@ import { MOBILE_BREAKPOINT, isTouchDevice } from './constants';
 export const isLowEndDevice = () => {
   if (typeof window === 'undefined') return false;
   
-  const memory = (navigator as Navigator & { deviceMemory?: number }).deviceMemory;
+  const nav = navigator as Navigator & { deviceMemory?: number; connection?: { saveData?: boolean; effectiveType?: string } };
+  const memory = nav.deviceMemory;
   const cores = navigator.hardwareConcurrency;
   const isTouch = isTouchDevice();
+  const connection = nav.connection;
+  
+  // Data saver mode — most restrictive
+  if (connection?.saveData) return true;
+  
+  // Slow connection (2G/3G)
+  if (connection?.effectiveType && ['slow-2g', '2g', '3g'].includes(connection.effectiveType)) return true;
   
   // Low-end if: less than 4GB RAM OR less than 4 cores AND touch device
   return (memory && memory < 4) || (cores && cores < 4) || (isTouch && cores && cores < 6);
@@ -29,15 +37,42 @@ export const prefersReducedMotion = () => {
 };
 
 /**
+ * Check if data saver mode is enabled in browser
+ */
+export const prefersDataSaver = () => {
+  if (typeof window === 'undefined') return false;
+  const conn = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
+  return conn?.saveData === true;
+};
+
+/**
+ * Get comprehensive device performance profile
+ */
+export const getPerformanceProfile = () => {
+  return {
+    isLowEnd: isLowEndDevice(),
+    isMobile: isMobileDevice(),
+    reducedMotion: prefersReducedMotion(),
+    dataSaver: prefersDataSaver(),
+  };
+};
+
+/**
+ * Should we skip heavy animations/videos?
+ */
+export const shouldSimplify = () => {
+  const profile = getPerformanceProfile();
+  return profile.isLowEnd || profile.reducedMotion || profile.dataSaver;
+};
+
+/**
  * Animation preset manager
  * Returns appropriate animation settings based on device
  */
 export const getAnimationPreset = () => {
-  const isLowEnd = isLowEndDevice();
-  const isMobile = isMobileDevice();
-  const reducedMotion = prefersReducedMotion();
+  const profile = getPerformanceProfile();
   
-  if (reducedMotion) {
+  if (profile.reducedMotion || profile.dataSaver) {
     return {
       duration: 0.01,
       ease: 'none',
@@ -45,7 +80,7 @@ export const getAnimationPreset = () => {
     };
   }
   
-  if (isLowEnd || isMobile) {
+  if (profile.isLowEnd || profile.isMobile) {
     return {
       duration: 0.6,
       ease: 'power2.out',
@@ -67,9 +102,8 @@ export const getAnimationPreset = () => {
 export const applyGlobalSettings = () => {
   const preset = getAnimationPreset();
   
-  // Set default tween duration
   gsap.config({
-    force3D: !prefersReducedMotion(),
+    force3D: !shouldSimplify(),
   });
   
   return preset;

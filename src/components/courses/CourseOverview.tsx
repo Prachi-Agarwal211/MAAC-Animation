@@ -43,7 +43,7 @@ export default function CourseOverview({ course }: { course: Course }) {
 
           <div className="grid md:grid-cols-3 gap-8 mb-12">
             <div className="md:col-span-2">
-              <p className="text-[#A8A29C] text-lg leading-relaxed mb-6">
+              <p className="text-white/85 text-lg leading-relaxed mb-6">
                 {course.fullDescription}
               </p>
             </div>
@@ -53,15 +53,15 @@ export default function CourseOverview({ course }: { course: Course }) {
               <h3 className="font-display text-[#F0EBE1] mb-4 font-black uppercase leading-[1.1] tracking-[0.1em]">Course Details</h3>
               <dl className="space-y-4">
                 <div>
-                  <dt className="text-[#A8A29C] text-xs uppercase tracking-wider mb-1">Course Code</dt>
+                  <dt className="text-white/85 text-xs uppercase tracking-wider mb-1">Course Code</dt>
                   <dd className="text-[#F0EBE1] font-mono">{course.code}</dd>
                 </div>
                 <div>
-                  <dt className="text-[#A8A29C] text-xs uppercase tracking-wider mb-1">Duration</dt>
+                  <dt className="text-white/85 text-xs uppercase tracking-wider mb-1">Duration</dt>
                   <dd className="text-[#F0EBE1]">{course.duration}</dd>
                 </div>
                 <div>
-                  <dt className="text-[#A8A29C] text-xs uppercase tracking-wider mb-1">Eligibility</dt>
+                  <dt className="text-white/85 text-xs uppercase tracking-wider mb-1">Eligibility</dt>
                   <dd className="text-[#F0EBE1]">{course.eligibility}</dd>
                 </div>
               </dl>
@@ -74,10 +74,10 @@ export default function CourseOverview({ course }: { course: Course }) {
             <ul className="grid md:grid-cols-2 gap-4">
               {course.highlights.map((highlight, i) => (
                 <li key={i} className="flex items-start gap-3">
-                  <svg className="w-5 h-5 text-[#FFD700] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-5 h-5 text-[#C4A882] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
-                  <span className="text-[#A8A29C]">{highlight}</span>
+                  <span className="text-white/85">{highlight}</span>
                 </li>
               ))}
             </ul>

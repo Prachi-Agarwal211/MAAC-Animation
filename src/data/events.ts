@@ -121,7 +121,7 @@ export const signatureEvents: SignatureEvent[] = [
     name: "MAAC Manifest",
     description: "Our annual celebration honoring student & alumni excellence. Awards, screenings, and the spirit of MAAC.",
     icon: Star,
-    color: "#FFD700",
+    color: "#C4A882",
     highlight: "Our Flagship Night",
   },
   {

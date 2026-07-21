@@ -8,7 +8,7 @@ export default function CourseCTA() {
         <h2 className="font-display text-3xl md:text-4xl text-[#F0EBE1] mb-6 font-black uppercase leading-[1.1] tracking-[0.1em]">
           Ready to Start Your Journey?
         </h2>
-        <p className="text-[#A8A29C] text-lg mb-10 max-w-2xl mx-auto">
+        <p className="text-white/85 text-lg mb-10 max-w-2xl mx-auto">
           Book a free demo class and experience our teaching methodology firsthand. No commitment required.
         </p>
 
@@ -16,7 +16,7 @@ export default function CourseCTA() {
           <MagneticButton>
             <Link
               href="/contact"
-              className="btn bg-gradient-to-r from-[#FFD700] to-[#C4132D] text-white hover:opacity-90 border border-[#FFD700]/50 px-8 py-4 rounded-lg font-black shadow-[0_0_20px_rgba(227,24,55,0.3)]"
+              className="btn bg-gradient-to-r from-[#C4A882] to-[#C4132D] text-white hover:opacity-90 border border-[#C4A882]/50 px-8 py-4 rounded-lg font-black shadow-[0_0_20px_rgba(227,24,55,0.3)]"
             >
               Book Free Demo Class
             </Link>

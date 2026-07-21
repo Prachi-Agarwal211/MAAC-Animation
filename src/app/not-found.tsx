@@ -24,7 +24,7 @@ export default function NotFound() {
           className="absolute inset-0"
           style={{ background: "linear-gradient(135deg, #1A0508 0%, #0C0C0C 50%, #0C0C0C 100%)" }}
         />
-        <div className="absolute top-20 right-10 w-64 h-64 rounded-full opacity-10" style={{ background: "radial-gradient(circle, #FFD700 0%, transparent 70%)" }} />
+        <div className="absolute top-20 right-10 w-64 h-64 rounded-full opacity-10" style={{ background: "radial-gradient(circle, #C4A882 0%, transparent 70%)" }} />
         <div className="absolute bottom-10 left-10 w-48 h-48 rounded-full opacity-5" style={{ background: "radial-gradient(circle, #C4A882 0%, transparent 70%)" }} />
 
         <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
@@ -33,7 +33,7 @@ export default function NotFound() {
             <span
               className="font-display text-[10rem] md:text-[14rem] font-light uppercase leading-[1.1] tracking-[0.1em]"
               style={{
-                background: "linear-gradient(135deg, #FFD700 0%, #C4A882 100%)",
+                background: "linear-gradient(135deg, #C4A882 0%, #BF953F 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
               }}
@@ -46,7 +46,7 @@ export default function NotFound() {
           <h1 className="font-display text-3xl md:text-4xl text-[#F0EBE1] mb-4 font-light uppercase leading-[1.1] tracking-[0.1em]">
             Oops! Page Not Found
           </h1>
-          <p className="text-[#A8A29C] text-lg md:text-xl leading-relaxed mb-10 max-w-xl mx-auto">
+          <p className="text-white/85 text-lg md:text-xl leading-relaxed mb-10 max-w-xl mx-auto">
             The page you&apos;re looking for might have been moved, deleted, or never existed. Let&apos;s get you back on track.
           </p>
 
@@ -54,7 +54,7 @@ export default function NotFound() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
             <Link
               href="/"
-              className="btn bg-gradient-to-r from-[#FFD700] to-[#C4132D] text-white hover:opacity-90 border border-[#FFD700]/50 px-8 py-4 rounded-lg font-semibold shadow-[0_0_20px_rgba(227,24,55,0.3)]"
+              className="btn bg-gradient-to-r from-[#BF953F] to-[#C4132D] text-white hover:opacity-90 border border-[#C4A882]/50 px-8 py-4 rounded-lg font-semibold shadow-[0_0_20px_rgba(227,24,55,0.3)]"
             >
               Go to Homepage
             </Link>
@@ -68,13 +68,13 @@ export default function NotFound() {
 
           {/* Quick Links */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto mb-16">
-            <Link href="/courses" className="bg-[#161616] rounded-lg p-4 border border-white/5 hover:border-[#FFD700]/30 transition-colors text-center">
+            <Link href="/courses" className="bg-[#161616] rounded-lg p-4 border border-white/5 hover:border-[#C4A882]/30 transition-colors text-center">
               <span className="text-[#F0EBE1] font-medium text-sm">All Courses</span>
             </Link>
-            <Link href="/student-work" className="bg-[#161616] rounded-lg p-4 border border-white/5 hover:border-[#FFD700]/30 transition-colors text-center">
+            <Link href="/student-work" className="bg-[#161616] rounded-lg p-4 border border-white/5 hover:border-[#C4A882]/30 transition-colors text-center">
               <span className="text-[#F0EBE1] font-medium text-sm">Student Work</span>
             </Link>
-            <Link href="/contact" className="bg-[#161616] rounded-lg p-4 border border-white/5 hover:border-[#FFD700]/30 transition-colors text-center">
+            <Link href="/contact" className="bg-[#161616] rounded-lg p-4 border border-white/5 hover:border-[#C4A882]/30 transition-colors text-center">
               <span className="text-[#F0EBE1] font-medium text-sm">Free Demo</span>
             </Link>
           </div>
@@ -89,14 +89,14 @@ export default function NotFound() {
                 <Link
                   key={course.slug}
                   href={`/courses/${course.slug}`}
-                  className="group bg-[#161616] rounded-lg p-4 border border-white/5 hover:border-[#FFD700]/30 transition-all duration-300"
+                  className="group bg-[#161616] rounded-lg p-4 border border-white/5 hover:border-[#C4A882]/30 transition-all duration-300"
                 >
                   <div className="flex items-center gap-2 mb-2">
-                    <span className="text-[#FFD700] text-xs font-semibold uppercase">{course.code}</span>
-                    <span className="text-[#A8A29C] text-xs">&middot;</span>
-                    <span className="text-[#A8A29C] text-xs">{course.duration}</span>
+                    <span className="text-[#C4A882] text-xs font-semibold uppercase">{course.code}</span>
+                    <span className="text-white/85 text-xs">&middot;</span>
+                    <span className="text-white/85 text-xs">{course.duration}</span>
                   </div>
-                  <h3 className="text-[#F0EBE1] font-medium text-sm group-hover:text-[#FFD700] transition-colors">
+                  <h3 className="text-[#F0EBE1] font-medium text-sm group-hover:text-[#C4A882] transition-colors">
                     {course.fullName}
                   </h3>
                 </Link>

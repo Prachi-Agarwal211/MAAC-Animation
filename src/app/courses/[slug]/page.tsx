@@ -5,7 +5,8 @@ import Script from "next/script";
 import IndustryPartners from "@/components/IndustryPartners";
 import ApplyNow from "@/components/ApplyNow";
 import FadeIn from "@/components/animations/FadeIn";
-import { getCourseBySlug, getAllCourseSlugs } from "@/data/courseDetails";
+import CourseFAQ from "@/components/courses/CourseFAQ";
+import { getCourseBySlug, getAllCourseSlugs } from "@/data/courses";
 import { getCourseSchema, breadcrumbSchema } from "@/lib/structured-data";
 
 type Props = {
@@ -22,29 +23,29 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!course) return { title: "Course Not Found" };
 
   return {
-    title: `${course.title} | MAAC Animation Jaipur`,
-    description: course.description,
-    keywords: course.keywords,
+    title: `${course.name} | MAAC Jaipur`,
+    description: course.shortDescription,
+
     openGraph: {
-      title: `${course.title} | MAAC Animation Jaipur`,
-      description: course.description,
+      title: `${course.name} | MAAC Jaipur`,
+      description: course.shortDescription,
       url: `https://www.maacanimationjaipur.com/courses/${course.slug}`,
       type: "website",
       siteName: "maacanimationjaipur.com",
       locale: "en_US",
       images: [
         {
-          url: `https://www.maacanimationjaipur.com${course.image}`,
+          url: `https://www.maacanimationjaipur.com${course.ogImage}`,
           width: 1200,
           height: 630,
-          alt: course.title,
+          alt: `${course.name} Course in Jaipur`,
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: `${course.title} | MAAC Animation Jaipur`,
-      description: course.description,
+      title: `${course.name} | MAAC Jaipur`,
+      description: course.shortDescription,
     },
     alternates: {
       canonical: `https://www.maacanimationjaipur.com/courses/${course.slug}`,
@@ -62,15 +63,15 @@ export default async function CourseDetailPage({ params }: Props) {
   if (!course) notFound();
 
   const schema = getCourseSchema(
-    course.title,
-    course.description,
+    `${course.name} Course in Jaipur`,
+    course.shortDescription,
     course.duration
   );
   const breadcrumbs = breadcrumbSchema([
     { name: "Home", url: "https://www.maacanimationjaipur.com" },
     { name: "Courses", url: "https://www.maacanimationjaipur.com/courses" },
     {
-      name: course.shortTitle,
+      name: course.name,
       url: `https://www.maacanimationjaipur.com/courses/${course.slug}`,
     },
   ]);
@@ -96,28 +97,28 @@ export default async function CourseDetailPage({ params }: Props) {
           </div>
           <div className="relative z-20 text-center px-6 pt-20 max-w-4xl mx-auto">
             <FadeIn>
-              <nav className="text-[10px] font-bold tracking-[0.3em] uppercase mb-6 text-[#A8A29C]">
-                <Link href="/" className="hover:text-[#FFD700] transition-colors">
+              <nav className="text-[10px] font-bold tracking-[0.3em] uppercase mb-6 text-white/85">
+                <Link href="/" className="hover:text-[#C4A882] transition-colors">
                   Home
                 </Link>
                 <span className="mx-3">/</span>
-                <Link href="/courses" className="hover:text-[#FFD700] transition-colors">
+                <Link href="/courses" className="hover:text-[#C4A882] transition-colors">
                   Courses
                 </Link>
                 <span className="mx-3">/</span>
-                <span className="text-[#FFD700]">{course.shortTitle}</span>
+                <span className="text-[#C4A882]">{course.name}</span>
               </nav>
-              <p className="metallic-gold-text text-[10px] font-bold tracking-[0.3em] uppercase mb-4">
-                {course.duration} • {course.fee}
+              <p className="metallic-gold-text-sm text-[10px] font-bold tracking-[0.3em] uppercase mb-4">
+                {course.duration}
               </p>
               <h1 className="font-display text-[clamp(2rem,6vw,4rem)] leading-[0.9] text-white mb-6 font-bold uppercase tracking-[0.05em]">
-                {course.title.split(" in ")[0]}{" "}
-                <span className="metallic-gold-text italic text-[1.1em]">
-                  {course.title.split(" in ")[1] || ""}
+                {`${course.name} Course`.split(" in ")[0]}{" "}
+                <span className="metallic-gold-text font-bold italic text-[1.1em]">
+                  Jaipur
                 </span>
               </h1>
-              <p className="text-[#A8A29C] text-lg max-w-2xl mx-auto leading-relaxed">
-                {course.description}
+              <p className="text-white/85 text-lg max-w-2xl mx-auto leading-relaxed">
+                {course.shortDescription}
               </p>
             </FadeIn>
           </div>
@@ -132,8 +133,8 @@ export default async function CourseDetailPage({ params }: Props) {
                   <h2 className="font-display text-3xl md:text-4xl text-[#F0EBE1] mb-6 font-bold uppercase tracking-[0.05em]">
                     About the <span className="metallic-gold-text italic">Program</span>
                   </h2>
-                  <p className="text-[#A8A29C] text-lg leading-relaxed">
-                    {course.longDescription}
+                  <p className="text-white/85 text-lg leading-relaxed">
+                    {course.fullDescription}
                   </p>
                 </div>
                 <div className="space-y-6">
@@ -142,8 +143,8 @@ export default async function CourseDetailPage({ params }: Props) {
                   </h3>
                   <ul className="space-y-3">
                     {course.highlights.map((h, i) => (
-                      <li key={i} className="flex items-start gap-3 text-[#A8A29C]">
-                        <span className="text-[#FFD700] mt-1">✓</span>
+                      <li key={i} className="flex items-start gap-3 text-white/85">
+                        <span className="text-[#C4A882] mt-1">✓</span>
                         {h}
                       </li>
                     ))}
@@ -164,10 +165,10 @@ export default async function CourseDetailPage({ params }: Props) {
                     Software You&apos;ll Master
                   </h3>
                   <div className="flex flex-wrap gap-3">
-                    {course.software.map((sw, i) => (
+                    {course.tools.map((sw, i) => (
                       <span
                         key={i}
-                        className="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm text-[#FFD700] font-medium"
+                        className="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm text-[#C4A882] font-medium"
                       >
                         {sw}
                       </span>
@@ -179,10 +180,10 @@ export default async function CourseDetailPage({ params }: Props) {
                     Career Opportunities
                   </h3>
                   <div className="flex flex-wrap gap-3">
-                    {course.careers.map((career, i) => (
+                    {course.career.map((career, i) => (
                       <span
                         key={i}
-                        className="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm text-[#A8A29C]"
+                        className="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm text-white/85"
                       >
                         {career}
                       </span>
@@ -202,15 +203,15 @@ export default async function CourseDetailPage({ params }: Props) {
                 Curriculum <span className="metallic-gold-text italic">Overview</span>
               </h2>
               <div className="grid md:grid-cols-2 gap-6">
-                {course.curriculum.map((item, i) => (
+                {course.curriculum.map((m, i) => (
                   <div
                     key={i}
                     className="flex items-center gap-4 p-5 bg-white/5 border border-white/10 rounded-xl"
                   >
-                    <span className="text-[#FFD700] font-display text-2xl font-bold">
+                    <span className="text-[#C4A882] font-display text-2xl font-bold">
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <span className="text-[#A8A29C] text-lg">{item}</span>
+                    <span className="text-white/85 text-lg">{m.module}</span>
                   </div>
                 ))}
               </div>
@@ -218,25 +219,44 @@ export default async function CourseDetailPage({ params }: Props) {
           </div>
         </section>
 
-        {/* Eligibility & Fees */}
+        {/* Enrollment Process */}
         <section className="py-24 border-b border-white/5">
           <div className="max-w-content mx-auto px-6 lg:px-8">
             <FadeIn>
-              <div className="grid md:grid-cols-3 gap-8">
+              <h2 className="font-display text-3xl md:text-4xl text-[#F0EBE1] mb-12 font-bold uppercase tracking-[0.05em]">
+                How to <span className="metallic-gold-text italic">Enroll</span>
+              </h2>
+              <div className="grid md:grid-cols-4 gap-6">
+                {[
+                  { step: "01", title: "Free Demo Class", desc: "Visit our C-Scheme campus for a free demo class. Experience our teaching methodology, labs, and software before deciding." },
+                  { step: "02", title: "Career Counseling", desc: "Meet our academic counselors who will assess your interests, recommend the right course, and explain fee structure and financing options." },
+                  { step: "03", title: "Enrollment & Payment", desc: "Complete the enrollment form, submit required documents (10+2 marksheet, ID proof), and choose from EMI, education loan, or upfront payment options." },
+                  { step: "04", title: "Start Learning", desc: "Begin classes with our expert faculty. Access industry-standard software, labs, and get assigned a mentor for your learning journey." },
+                ].map((item, i) => (
+                  <div key={i} className="p-6 bg-white/5 border border-white/10 rounded-xl text-center">
+                    <span className="text-[#C4A882] font-display text-3xl font-bold block mb-3">{item.step}</span>
+                    <h3 className="text-[#F0EBE1] font-bold text-lg mb-2">{item.title}</h3>
+                    <p className="text-white/70 text-sm leading-relaxed">{item.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </FadeIn>
+          </div>
+        </section>
+
+        {/* Duration & Eligibility */}
+        <section className="py-24 border-b border-white/5">
+          <div className="max-w-content mx-auto px-6 lg:px-8">
+            <FadeIn>
+              <div className="grid md:grid-cols-2 gap-8 max-w-2xl mx-auto">
                 <div className="p-8 bg-white/5 border border-white/10 rounded-2xl text-center">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#FFD700] mb-3">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#C4A882] mb-3">
                     Duration
                   </p>
                   <p className="text-2xl font-display font-bold text-white">{course.duration}</p>
                 </div>
                 <div className="p-8 bg-white/5 border border-white/10 rounded-2xl text-center">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#FFD700] mb-3">
-                    Course Fee
-                  </p>
-                  <p className="text-2xl font-display font-bold text-white">{course.fee}</p>
-                </div>
-                <div className="p-8 bg-white/5 border border-white/10 rounded-2xl text-center">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#FFD700] mb-3">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#C4A882] mb-3">
                     Eligibility
                   </p>
                   <p className="text-2xl font-display font-bold text-white">{course.eligibility}</p>
@@ -246,6 +266,7 @@ export default async function CourseDetailPage({ params }: Props) {
           </div>
         </section>
 
+        <CourseFAQ course={course} />
         <IndustryPartners />
         <ApplyNow />
       </main>

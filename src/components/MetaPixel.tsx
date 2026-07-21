@@ -2,43 +2,42 @@
 
 import Script from "next/script";
 import { usePathname, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
+import { hasMarketingConsent } from "@/lib/cookie-consent";
 
-// Only load if env var is set — no hardcoded fallback
 const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID;
 
-// fbq types are declared in src/types/tracking.d.ts
-
-/**
- * Fires a Facebook Pixel event. Safe to call anywhere — gracefully
- * handles cases where the pixel hasn't loaded yet.
- */
 export function firePixelEvent(
   event: string,
   params?: Record<string, unknown>,
 ) {
   if (typeof window !== "undefined" && typeof window.fbq === "function") {
+    if (!hasMarketingConsent()) return;
     window.fbq("track", event, params);
   }
 }
 
-/**
- * Meta Pixel component — loads the pixel script and tracks PageViews
- * on initial load and route changes.
- *
- * Must be wrapped in <Suspense> because it uses useSearchParams().
- */
 export default function MetaPixel() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const [ready, setReady] = useState(false);
+  const initDone = useRef(false);
 
   useEffect(() => {
-    if (typeof window !== "undefined" && typeof window.fbq === "function") {
-      window.fbq("track", "PageView");
-    }
-  }, [pathname, searchParams]);
+    if (!PIXEL_ID) return;
+    if (initDone.current) return;
+    if (!hasMarketingConsent()) return;
+    initDone.current = true;
+    setReady(true);
+  }, []);
 
-  if (!PIXEL_ID) return null;
+  useEffect(() => {
+    if (!ready) return;
+    if (typeof window.fbq !== "function") return;
+    window.fbq("track", "PageView");
+  }, [pathname, searchParams, ready]);
+
+  if (!PIXEL_ID || !ready) return null;
 
   return (
     <>
@@ -61,6 +60,7 @@ export default function MetaPixel() {
         }}
       />
       <noscript>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           height="1"
           width="1"

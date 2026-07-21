@@ -76,7 +76,7 @@ export default function ApplyNowForm() {
           <Send size={32} className="text-[#25D366]" />
         </div>
         <h2 className="font-display text-3xl text-white mb-6 font-bold uppercase leading-[1.1] tracking-[0.1em]">Success!</h2>
-        <p className="text-[#A8A29C] text-lg leading-relaxed">Our admissions team will contact you within 24 hours to guide you through the process.</p>
+        <p className="text-white/85 text-lg leading-relaxed">Our admissions team will contact you within 24 hours to guide you through the process.</p>
       </div>
     );
   }
@@ -86,7 +86,7 @@ export default function ApplyNowForm() {
   };
 
   const inputClass = (field: string) =>
-    `w-full px-6 py-4 rounded-2xl bg-white/[0.03] border ${errors[field] ? "border-[#FFD700]" : "border-white/5"} text-white placeholder-[#888] focus:outline-none focus:border-[#FFD700]/30 transition-all duration-300 focus:ring-1 focus:ring-[#FFD700]/20`;
+    `w-full px-6 py-4 rounded-2xl bg-white/[0.03] border ${errors[field] ? "border-[#C4A882]" : "border-white/5"} text-white placeholder-[#888] focus:outline-none focus:border-[#C4A882]/30 transition-all duration-300 focus:ring-1 focus:ring-[#C4A882]/20`;
 
   return (
     <form
@@ -148,7 +148,7 @@ export default function ApplyNowForm() {
         </div>
       )}
 
-      <p className="text-[#A8A29C] text-[12px] text-center uppercase tracking-widest flex items-center justify-center gap-2">
+      <p className="text-white/85 text-[12px] text-center uppercase tracking-widest flex items-center justify-center gap-2">
         <ShieldCheck size={12} className="text-[#25D366]" />
         Strict Privacy Policy • No Spam Guaranteed
       </p>

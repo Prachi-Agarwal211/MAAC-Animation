@@ -4,14 +4,14 @@ import { useState } from "react";
 
 interface Course {
   slug: string;
-  title: string;
+  name: string;
   fullName: string;
-  description: string;
+  shortDescription: string;
   fullDescription: string;
   duration: string;
   code: string;
   tools: string[];
-  careers: string[];
+  career: string[];
   eligibility: string;
   highlights: string[];
   oldUrls: string[];
@@ -31,7 +31,7 @@ export default function CourseFAQ({ course }: { course: Course }) {
     },
     {
       q: `What career options are available after completing this course?`,
-      a: `After completing this course, you can pursue careers as ${course.careers.join(", ")}.`,
+      a: `After completing this course, you can pursue careers as ${course.career.join(", ")}.`,
     },
     {
       q: `Which tools will I learn in this course?`,
@@ -81,7 +81,7 @@ export default function CourseFAQ({ course }: { course: Course }) {
               >
                 <span className="text-[#F0EBE1] font-bold pr-4">{faq.q}</span>
                 <svg
-                  className={`w-5 h-5 text-[#A8A29C] flex-shrink-0 transition-transform duration-300 ${openIndex === i ? "rotate-180" : ""}`}
+                  className={`w-5 h-5 text-white/85 flex-shrink-0 transition-transform duration-300 ${openIndex === i ? "rotate-180" : ""}`}
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -95,7 +95,7 @@ export default function CourseFAQ({ course }: { course: Course }) {
                 }`}
               >
                 <div className="px-6 pb-6">
-                  <p className="text-[#A8A29C] leading-relaxed">{faq.a}</p>
+                  <p className="text-white/85 leading-relaxed">{faq.a}</p>
                 </div>
               </div>
             </div>

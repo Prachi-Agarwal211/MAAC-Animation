@@ -91,7 +91,7 @@ export default function VideoModal({
         <button
           ref={closeButtonRef}
           onClick={onClose}
-          className="absolute top-2 right-2 sm:top-4 sm:right-4 md:-top-12 md:right-0 w-11 h-11 min-w-[44px] min-h-[44px] rounded-full bg-white/10 border border-white/20 hover:bg-white/20 hover:border-[#FFD700]/40 flex items-center justify-center text-white transition-all duration-300 shadow-2xl z-[10001]"
+          className="absolute top-2 right-2 sm:top-4 sm:right-4 md:-top-12 md:right-0 w-11 h-11 min-w-[44px] min-h-[44px] rounded-full bg-white/10 border border-white/20 hover:bg-white/20 hover:border-[#C4A882]/40 flex items-center justify-center text-white transition-all duration-300 shadow-2xl z-[10001]"
           aria-label="Close video"
         >
           <X size={20} />

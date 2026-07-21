@@ -56,7 +56,7 @@ function DesktopCTA() {
 
   return (
     <div
-      className="fixed right-6 md:right-10 z-[60] hidden lg:flex flex-col gap-3"
+      className="fixed right-6 md:right-10 z-[100] hidden lg:flex flex-col gap-3"
       style={{
         bottom: "max(32px, calc(32px + env(safe-area-inset-bottom)))",
       }}
@@ -83,7 +83,7 @@ function DesktopCTA() {
         aria-label="Enquire now"
         className="group flex items-center justify-end gap-3"
       >
-        <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-[#FFD700] opacity-0 translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 whitespace-nowrap">
+        <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-[#C4A882] opacity-0 translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 whitespace-nowrap">
           Enquire
         </span>
         <div className="relative flex items-center justify-center w-14 h-14 rounded-2xl bg-[#E31837] text-white shadow-[0_4px_20px_rgba(227,24,55,0.3)] transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_8px_30px_rgba(227,24,55,0.45)] group-hover:rounded-xl">
@@ -135,7 +135,7 @@ function MobileBottomNav() {
   return (
     <div
       ref={containerRef}
-      className={`fixed left-4 right-4 z-[900] lg:hidden transition-all duration-500 ease-expo-out ${
+      className={`fixed left-4 right-4 z-[1000] lg:hidden transition-all duration-500 ease-expo-out ${
         visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10 pointer-events-none"
       }`}
       style={{ bottom: "max(24px, calc(24px + env(safe-area-inset-bottom)))" }}
@@ -152,7 +152,7 @@ function MobileBottomNav() {
         </a>
         <Link
           href="/contact"
-          className="flex-[1.6] flex flex-col items-center justify-center py-4 bg-[#FFD700] text-black rounded-[24px] gap-1 shadow-lg shadow-[#FFD700]/20 active:scale-[0.95] transition-all border border-white/10"
+          className="flex-[1.6] flex flex-col items-center justify-center py-4 bg-[#C4A882] text-black rounded-[24px] gap-1 shadow-lg shadow-[#BF953F]/20 active:scale-[0.95] transition-all border border-white/10"
         >
           <EnquiryIcon size={18} />
           <span className="text-[11px] md:text-[12px] font-black uppercase tracking-wider">Enquire Now</span>

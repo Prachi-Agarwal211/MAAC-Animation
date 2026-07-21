@@ -41,9 +41,9 @@ export default function Footer() {
         <div className="relative rounded-3xl md:rounded-[40px] overflow-hidden bg-white/[0.04] border border-white/10 p-6 md:p-12 lg:p-16 flex flex-col lg:flex-row items-center justify-between gap-10">
           <div className="relative z-10 max-w-2xl text-center lg:text-left">
             <h2 className="font-display text-[clamp(1.4rem,4vw,2.5rem)] text-white leading-[1] mb-5 font-bold uppercase tracking-[0.05em]">
-              Start Your <span className="metallic-gold-text">Creative Legacy</span>
+              Start Your <span className="metallic-gold-text font-bold">Creative Legacy</span>
             </h2>
-            <p className="text-white/60 text-base md:text-lg font-medium leading-relaxed">
+            <p className="text-white/85 text-base md:text-lg font-medium leading-relaxed">
               Book a free counseling session or demo class with our industry experts today.
             </p>
           </div>
@@ -81,7 +81,7 @@ export default function Footer() {
                 loading="lazy"
               />
             </Link>
-            <p className="text-white/60 text-sm leading-relaxed max-w-xs">
+            <p className="text-white/95 text-sm leading-relaxed max-w-xs">
               Empowering the next generation of 3D artists and VFX masters with 30+ years of educational excellence.
             </p>
             <div className="flex gap-3">
@@ -90,8 +90,7 @@ export default function Footer() {
                 { Icon: SocialIcons.Instagram, url: contactInfo.social.instagram, label: "Instagram" },
                 { Icon: SocialIcons.Youtube, url: contactInfo.social.youtube, label: "YouTube" },
                 { Icon: SocialIcons.Linkedin, url: contactInfo.social.linkedin, label: "LinkedIn" },
-              ].map((social, i) => (
-                <a key={i} href={social.url} className="w-10 h-10 rounded-full bg-white/[0.06] border border-white/10 flex items-center justify-center text-white/60 hover:text-[#FFD700] hover:border-[#FFD700]/40 transition-all duration-300" aria-label={social.label} target="_blank" rel="noopener noreferrer">
+              ].map((social, i) => (                 <a key={i} href={social.url} className="w-10 h-10 rounded-full bg-white/[0.06] border border-white/10 flex items-center justify-center text-white/85 hover:text-[#C4A882] hover:border-[#C4A882]/40 transition-all duration-300" aria-label={social.label} target="_blank" rel="noopener noreferrer">
                   <social.Icon />
                 </a>
               ))}
@@ -111,7 +110,7 @@ export default function Footer() {
                 { label: "Gallery", href: "/gallery" },
               ].map((link) => (
                 <li key={link.label}>
-                  <Link href={link.href} className="text-white/50 hover:text-white text-sm transition-colors flex items-center gap-2 group">
+                  <Link href={link.href} className="text-white/90 hover:text-white text-sm transition-colors flex items-center gap-2 group">
                     {link.label}
                     <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-opacity" />
                   </Link>
@@ -132,7 +131,7 @@ export default function Footer() {
                 { label: "Terms & Conditions", href: "/terms-of-service" },
               ].map((link) => (
                 <li key={link.label}>
-                  <Link href={link.href} className="text-white/50 hover:text-white text-sm transition-colors flex items-center gap-2 group">
+                  <Link href={link.href} className="text-white/90 hover:text-white text-sm transition-colors flex items-center gap-2 group">
                     {link.label}
                     <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-opacity" />
                   </Link>
@@ -146,19 +145,19 @@ export default function Footer() {
             <h3 className="text-white text-[11px] font-bold uppercase tracking-[0.2em]">Locate Us</h3>
             <div className="space-y-4">
               <div className="flex gap-3">
-                <MapPin size={16} className="text-[#FFD700] shrink-0 mt-0.5" />
-                <p className="text-white/60 text-xs leading-relaxed">{contactInfo.address}</p>
+                <MapPin size={16} className="text-[#C4A882] shrink-0 mt-0.5" />
+                <p className="text-white/85 text-xs leading-relaxed">{contactInfo.address}</p>
               </div>
               <div className="flex gap-3">
-                <Phone size={16} className="text-[#FFD700] shrink-0 mt-0.5" />
+                <Phone size={16} className="text-[#C4A882] shrink-0 mt-0.5" />
                 <div className="space-y-0.5">
                   <a href={`tel:${contactInfo.phone}`} className="block text-white text-xs font-bold">{contactInfo.phone}</a>
-                  <a href={`tel:${contactInfo.phoneSecondary}`} className="block text-white/50 text-xs">{contactInfo.phoneSecondary}</a>
+                  <a href={`tel:${contactInfo.phoneSecondary}`} className="block text-white/85 text-xs">{contactInfo.phoneSecondary}</a>
                 </div>
               </div>
               <div className="flex gap-3">
-                <Mail size={16} className="text-[#FFD700] shrink-0 mt-0.5" />
-                <a href={`mailto:${contactInfo.email}`} className="text-white/60 text-xs break-all">{contactInfo.email}</a>
+                <Mail size={16} className="text-[#C4A882] shrink-0 mt-0.5" />
+                <a href={`mailto:${contactInfo.email}`} className="text-white/85 text-xs break-all">{contactInfo.email}</a>
               </div>
             </div>
           </div>
@@ -168,16 +167,16 @@ export default function Footer() {
       {/* ── BOTTOM BAR ── */}
       <div className="relative z-10 border-t border-white/5 pt-6 pb-28 lg:pb-6 px-5 md:px-12">
         <div className="max-w-content mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-white/40 text-[10px] font-medium tracking-wide text-center md:text-left">
+          <p className="text-white/85 text-[10px] font-medium tracking-wide text-center md:text-left">
             &copy; {currentYear} MAAC Jaipur C-Scheme. All rights reserved.
           </p>
           <div className="flex items-center gap-4 md:gap-6 flex-wrap justify-center">
-            <Link href="/privacy-policy" className="text-white/40 hover:text-white/70 text-[10px] font-medium tracking-wide transition-colors">Privacy</Link>
-            <Link href="/terms-of-service" className="text-white/40 hover:text-white/70 text-[10px] font-medium tracking-wide transition-colors">Terms</Link>
-            <Link href="/sitemap.xml" className="text-white/40 hover:text-white/70 text-[10px] font-medium tracking-wide transition-colors">Sitemap</Link>
+            <Link href="/privacy-policy" className="text-white/85 hover:text-white text-[10px] font-medium tracking-wide transition-colors">Privacy</Link>
+            <Link href="/terms-of-service" className="text-white/85 hover:text-white text-[10px] font-medium tracking-wide transition-colors">Terms</Link>
+            <Link href="/sitemap.xml" className="text-white/85 hover:text-white text-[10px] font-medium tracking-wide transition-colors">Sitemap</Link>
           </div>
-          <p className="text-white/30 text-[10px] font-medium tracking-wide">
-            Made by <a href="https://reverbex.in" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white/70 transition-colors">Reverbex.in</a>
+          <p className="text-white/85 text-[10px] font-medium tracking-wide">
+            Made by <a href="https://reverbex.in" target="_blank" rel="noopener noreferrer" className="text-white/85 hover:text-white transition-colors">Reverbex.in</a>
           </p>
         </div>
       </div>

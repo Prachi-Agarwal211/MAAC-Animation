@@ -159,7 +159,7 @@ export const localBusinessSchema = {
     "latitude": 26.9139,
     "longitude": 75.7842
   },
-  "telephone": ["+919829294037", "+919929059559", "+917300001589"],
+  "telephone": ["+917300001589", "+919829294037", "+919929059559"],
   "email": "maacanimationjaipur@gmail.com",
   "openingHours": "Mo-Sa 09:00-19:00",
   "priceRange": "₹₹",
@@ -283,12 +283,11 @@ export const localBusinessSchema = {
     ]
   },
   "sameAs": [
-    "https://www.facebook.com/MAAClndia",
+    "https://www.facebook.com/maacjaipurcscheme",
     "https://www.instagram.com/maacjaipurcscheme",
     "https://www.youtube.com/@maac-jaipur-cscheme",
     "https://www.linkedin.com/company/maac-jaipur-cscheme",
-    "https://twitter.com/MAAClndia",
-    "https://g.co/kgs/maacjaipur"
+    "https://www.wikidata.org/wiki/Q140635643",
   ],
   "aggregateRating": {
     "@type": "AggregateRating",

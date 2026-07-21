@@ -10,7 +10,7 @@ export default function Awards() {
       
       <div className="relative z-10 max-w-content mx-auto px-6 mb-32">
         <div className="aw-header text-left">
-          <p className="metallic-gold-text text-sm font-bold tracking-[0.3em] uppercase mb-6">Excellence Recognized</p>
+          <p className="metallic-gold-text-sm text-[11px] font-bold tracking-[0.3em] uppercase mb-6">Excellence Recognized</p>
           <h2 className="font-display text-[clamp(1.5rem,5vw,3rem)] text-white leading-[0.9] font-bold uppercase leading-[1.1] tracking-[0.1em]">
             <SplitTextReveal>Our Legacy of</SplitTextReveal><br />
             <SplitTextReveal delay={0.2} className="metallic-gold-text">Winning</SplitTextReveal>
@@ -27,9 +27,9 @@ export default function Awards() {
           {awardsData.map((award, i) => (
             <div key={i} className="maac-scroll-card p-8 rounded-[32px] glass border border-white/5 flex items-start justify-between group">
               <div>
-                <div className="text-[10px] font-bold metallic-gold-text uppercase tracking-[0.2em] mb-2">{award.year}</div>
+                <div className="text-[10px] font-bold metallic-gold-text-sm uppercase tracking-[0.2em] mb-2">{award.year}</div>
                 <h3 className="text-white text-xl font-display mb-1 font-bold uppercase leading-[1.1] tracking-[0.1em]">{award.name}</h3>
-                <p className="text-[#A8A29C] text-xs font-bold uppercase tracking-widest">{award.org}</p>
+                <p className="text-white/85 text-xs font-bold uppercase tracking-widest">{award.org}</p>
               </div>
               <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center metallic-gold-text">
                 <Trophy size={18} />

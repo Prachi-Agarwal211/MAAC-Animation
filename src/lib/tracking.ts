@@ -1,91 +1,94 @@
 /**
- * Unified Tracking Utility for Meta Ads + Google Ads
- *
- * This centralizes event firing so you only call one function
- * and it handles both platforms + UTM enrichment.
+ * Unified tracking utility for MAAC Jaipur.
+ * Always checks cookie consent before firing events.
  */
+import { hasAnalyticsConsent, hasMarketingConsent } from "./cookie-consent";
 
-import { firePixelEvent } from "@/components/MetaPixel";
-import { getUtmParams } from "@/lib/utm";
+type WindowWithTracking = Window & {
+  fbq?: (command: string, event: string, params?: Record<string, unknown>) => void;
+  gtag?: (command: string, action: string, params?: Record<string, unknown>) => void;
+  dataLayer?: unknown[];
+};
 
-export interface LeadEventParams {
-  content_name?: string;
-  content_category?: string;
+interface TrackEvent {
+  content_name: string;
+  content_category: string;
   value?: number;
   currency?: string;
-  email?: string;
-  phone?: string;
   [key: string]: unknown;
 }
 
+const w = typeof window !== "undefined" ? (window as WindowWithTracking) : null;
+
 /**
- * Fire a "Lead" conversion event to all connected ad platforms.
- * Call this after a successful form submission.
+ * Track a conversion/lead event.
+ * Only fires if marketing consent has been given.
  */
-export function trackLead(params: LeadEventParams = {}) {
-  const utm = getUtmParams();
+export function trackLead(event: TrackEvent): void {
+  if (typeof window === "undefined") return;
+  if (!hasMarketingConsent()) {
+    return;
+  }
 
-  const enrichedParams = {
-    ...params,
-    // UTM & click ID enrichment (very important for ad attribution)
-    ...utm,
-    // Add page context
-    page_path: typeof window !== "undefined" ? window.location.pathname : "",
-  };
-
-  // 1. Meta Pixel (client-side)
-  firePixelEvent("Lead", enrichedParams);
-
-  // 2. Google Ads / GA4 via GTM dataLayer (if GTM is present)
-  if (typeof window !== "undefined" && window.dataLayer) {
-    window.dataLayer.push({
-      event: "generate_lead",
-      ...enrichedParams,
-    });
-
-    // Direct Google Ads conversion (if you configured a conversion ID without GTM)
-    const adsId = process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_ID;
-    const adsLabel = process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL;
-
-    if (adsId) {
-      const gtag = window.gtag;
-      if (typeof gtag === "function") {
-        gtag("event", "conversion", {
-          send_to: adsLabel ? `${adsId}/${adsLabel}` : adsId,
-          value: params.value || 1,
-          currency: params.currency || "INR",
-        });
-      }
+  try {
+    // Meta Pixel (fbq)
+    if (typeof w?.fbq === "function") {
+      w.fbq("track", "Lead", event);
     }
-  }
 
-  // Note: Server-side Meta CAPI is already called from the form actions.ts / API route.
-  // Do NOT call CAPI from client for security (access token must stay server-only).
+    // Google Ads gtag - only allow whitelisted params
+    if (typeof w?.gtag === "function") {
+      const allowedParams: Record<string, unknown> = {
+        content_name: event.content_name,
+        content_category: event.content_category,
+      };
+      if (event.value !== undefined) allowedParams.value = event.value;
+      if (event.currency !== undefined) allowedParams.currency = event.currency;
+      w.gtag("event", "conversion", {
+        send_to: process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_ID,
+        ...allowedParams,
+      });
+    }
+  } catch (e) {
+    console.error("trackLead error:", e instanceof Error ? e.message : e);
+  }
 }
 
 /**
- * Generic event tracker (for future use: ViewContent, AddToCart, Contact, etc.)
+ * Track a page view / visit.
+ * Only fires if analytics consent has been given.
  */
-export function trackEvent(eventName: string, params: Record<string, unknown> = {}) {
-  const utm = getUtmParams();
+export function trackPageView(_path: string): void {
+  if (typeof window === "undefined") return;
+  if (!hasAnalyticsConsent()) {
+    return;
+  }
 
-  // Meta
-  firePixelEvent(eventName, { ...params, ...utm });
-
-  // Google / GTM
-  if (typeof window !== "undefined" && window.dataLayer) {
-    window.dataLayer.push({
-      event: eventName.toLowerCase().replace(/\s+/g, "_"),
-      ...params,
-      ...utm,
-    });
+  try {
+    if (typeof w?.fbq === "function") {
+      w.fbq("track", "PageView");
+    }
+  } catch (e) {
+    console.error("trackPageView error:", e instanceof Error ? e.message : e);
   }
 }
 
-// Extend Window for TypeScript
-declare global {
-  interface Window {
-    dataLayer: Record<string, unknown>[];
-    gtag?: (...args: unknown[]) => void;
+/**
+ * Track a custom event (e.g., form start, video play).
+ * Only fires if marketing consent has been given.
+ */
+export function trackCustomEvent(eventName: string, params?: Record<string, unknown>): void {
+  if (typeof window === "undefined") return;
+  if (!hasMarketingConsent()) return;
+
+  try {
+    if (typeof w?.fbq === "function") {
+      w.fbq("trackCustom", eventName, params);
+    }
+    if (typeof w?.gtag === "function") {
+      w.gtag("event", eventName, params);
+    }
+  } catch (e) {
+    console.error("trackCustomEvent error:", e instanceof Error ? e.message : e);
   }
 }

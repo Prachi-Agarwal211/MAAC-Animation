@@ -37,7 +37,7 @@ export default function CountUpStat({ number, suffix, label }: CountUpStatProps)
         <span ref={countRef}>0</span>
         <span className="metallic-gold-text ml-1">{suffix}</span>
       </div>
-      <div className="text-[#A8A29C] text-[10px] sm:text-[9px] mt-3 font-bold tracking-[0.3em] uppercase transition-colors group-hover:text-white">{label}</div>
+      <div className="text-white/85 text-[10px] sm:text-[9px] mt-3 font-bold tracking-[0.3em] uppercase transition-colors group-hover:text-white">{label}</div>
     </div>
   );
 }

@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     images: [
       {
-        url: "https://www.maacanimationjaipur.com/wp-content/uploads/2025/06/3.jpg",
+        url: "https://www.maacanimationjaipur.com/thumbnail.png",
         width: 1200,
         height: 630,
         alt: "About MAAC Animation Institute Jaipur",

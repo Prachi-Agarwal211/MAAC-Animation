@@ -4,15 +4,12 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { ArrowUp } from "lucide-react";
 
 export default function ScrollIndicator() {
-  const [scrollProgress, setScrollProgress] = useState(0);
+
   const [showBackToTop, setShowBackToTop] = useState(false);
   const rafRef = useRef<number>(0);
 
   const updateScrollProgress = useCallback(() => {
     const scrollTop = window.scrollY;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-    setScrollProgress(progress);
     setShowBackToTop(scrollTop > window.innerHeight * 0.4);
   }, []);
 
@@ -37,14 +34,6 @@ export default function ScrollIndicator() {
 
   return (
     <>
-      {/* Top Scroll Progress Bar */}
-      <div className="fixed top-0 left-0 w-full h-1 bg-white/10 z-50">
-        <div
-          className="h-full metallic-gold-accent transition-all duration-300 ease-out"
-          style={{ width: `${scrollProgress}%` }}
-        />
-      </div>
-
       {/* Back to Top Button */}
       {showBackToTop && (
         <button

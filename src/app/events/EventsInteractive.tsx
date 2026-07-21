@@ -1,20 +1,94 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
-import gsap, { ScrollTrigger } from "@/lib/gsap";
+import { ScrollTrigger } from "@/lib/gsap";
 import VideoFacade from "@/components/ui/VideoFacade";
 import Image from "next/image";
 import ImageLightbox from "@/components/ui/ImageLightbox";
 import { EVENT_PHOTOS, PRESS_PHOTOS, LANDSCAPE_PHOTOS, PORTRAIT_PHOTOS } from "@/data/events";
 
+/* ── Timeline Event Sections — with dates, status, and countdown ── */
+
+type RegStatus = 'open' | 'full' | 'ended';
+
+interface TimelineEvent {
+  id: string;
+  title: string;
+  description: string;
+  day: number;
+  month: string;
+  year: number;
+  status: RegStatus;
+  countdownStart?: string;
+  youtubeId: string;
+  videoTitle: string;
+  tags: string[];
+}
+
+const TIMELINE_EVENTS: TimelineEvent[] = [
+  {
+    id: "24fps",
+    title: "24FPS International Animation Awards",
+    description: "A globally recognized event where students compete with the best in the animation and VFX industry. This is your chance to impress industry leaders and make a mark in the creative world!",
+    day: 15, month: 'MAR', year: 2026, status: 'ended',
+    youtubeId: 'C2ix6uKTaAQ', videoTitle: '24FPS International Animation Awards',
+    tags: ['Competition', 'Awards', 'International'],
+  },
+  {
+    id: "100hours",
+    title: "100 Hours — The Ultimate Creative Marathon",
+    description: "Push your limits! Create a 3D-animated short film or a 1-minute mobile film in just 100 hours! Work non-stop, collaborate with teammates, and experience the thrill of filmmaking under real-world deadlines.",
+    day: 10, month: 'MAY', year: 2026, status: 'ended',
+    youtubeId: '3BuVrYHjIq4', videoTitle: '100 Hours — The Ultimate Creative Marathon',
+    tags: ['Marathon', 'Film', 'Challenge'],
+  },
+  {
+    id: "manifest",
+    title: "MAAC Manifest",
+    description: "We celebrate YOU! MAAC Manifest is where we honor our students and alumni for their outstanding contributions to the animation and VFX industry. Get recognized for your talent and be inspired by industry leaders.",
+    day: 22, month: 'JUN', year: 2026, status: 'full',
+    youtubeId: 'RaQivBSoEak', videoTitle: 'MAAC Manifest',
+    tags: ['Celebration', 'Awards', 'Alumni'],
+  },
+  {
+    id: "nsm",
+    title: "National Students' Meet (NSM)",
+    description: "A dream event for every MAAC student! Meet like-minded artists from across India, participate in creative workshops, panel discussions, and exclusive hands-on training sessions with industry pros.",
+    day: 5, month: 'AUG', year: 2026, status: 'open',
+    countdownStart: '2026-08-05T09:00:00+05:30',
+    youtubeId: 'F0WMuSpXMK0', videoTitle: "National Students' Meet (NSM)",
+    tags: ['Meetup', 'Workshops', 'Networking'],
+  },
+  {
+    id: "mcl",
+    title: "MAAC Creative League (MCL)",
+    description: "Compete in one of the most exciting design and animation challenges at MAAC! Unleash your creativity, showcase your talent, and win exciting prizes as you go head-to-head with the best in the field.",
+    day: 18, month: 'SEP', year: 2026, status: 'open',
+    countdownStart: '2026-09-18T10:00:00+05:30',
+    youtubeId: 'FPgueLMvlMI', videoTitle: 'MAAC Creative League (MCL)',
+    tags: ['Competition', 'Design', 'Gaming'],
+  },
+  {
+    id: "klick",
+    title: "MAAC Klick — Nature & Wildlife Photography Expeditions",
+    description: "Step outside the classroom and capture breathtaking moments! Travel to stunning locations like Coorg, Ranthambore, and Sariska National Park, and learn the art of professional photography in real-world environments.",
+    day: 12, month: 'NOV', year: 2026, status: 'open',
+    countdownStart: '2026-11-12T06:00:00+05:30',
+    youtubeId: 'ao5k9ZTVbS0', videoTitle: 'MAAC Klick — Nature & Wildlife Photography Expeditions',
+    tags: ['Photography', 'Expedition', 'Nature'],
+  },
+  {
+    id: "bts",
+    title: "BTS: Behind the Screen — Industry Webinars",
+    description: "Gain exclusive insights from industry legends through our webinars and Masterclasses. Learn about cutting-edge tools, techniques, and career opportunities straight from professionals & our Alumni who have worked on blockbuster movies and AAA games.",
+    day: 3, month: 'DEC', year: 2026, status: 'open',
+    countdownStart: '2026-12-03T15:00:00+05:30',
+    youtubeId: 'Fs6YutaEejc', videoTitle: 'BTS: Behind the Screen',
+    tags: ['Webinar', 'Masterclass', 'Industry'],
+  },
+];
+
 export default function EventsInteractive() {
-  const video24FPSRef = useRef<HTMLDivElement>(null);
-  const video100HoursRef = useRef<HTMLDivElement>(null);
-  const videoManifestRef = useRef<HTMLDivElement>(null);
-  const videoNSMRef = useRef<HTMLDivElement>(null);
-  const videoMCLRef = useRef<HTMLDivElement>(null);
-  const videoKlickRef = useRef<HTMLDivElement>(null);
-  const videoBTSRef = useRef<HTMLDivElement>(null);
 
   const [photos, setPhotos] = useState(LANDSCAPE_PHOTOS);
   const [slideIndex, setSlideIndex] = useState(0);
@@ -23,6 +97,7 @@ export default function EventsInteractive() {
   const [lightboxStart, setLightboxStart] = useState(0);
   const slideTimer = useRef<NodeJS.Timeout | null>(null);
   const prefersReduced = useRef(false);
+  const timelineRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -89,29 +164,77 @@ export default function EventsInteractive() {
     return () => window.removeEventListener("keydown", onKey);
   }, [showLightbox, photos.length]);
 
+  // ── Timeline scroll-triggered reveals (DesignxHand inspired) ──
   useEffect(() => {
-    const videoRefs = [video24FPSRef, video100HoursRef, videoManifestRef, videoNSMRef, videoMCLRef, videoKlickRef, videoBTSRef];
-    videoRefs.forEach((ref) => {
-      if (ref.current) {
-        gsap.fromTo(ref.current, { scale: 1.1, opacity: 0.8 }, { scale: 1, opacity: 1, duration: 1, ease: "power2.out", scrollTrigger: { trigger: ref.current, start: "top 80%", end: "top 50%", scrub: 1 } });
-      }
+    const triggers: ScrollTrigger[] = [];
+
+    timelineRefs.current.forEach((el, i) => {
+      if (!el) return;
+      const st = ScrollTrigger.create({
+        trigger: el,
+        start: "top 85%",
+        end: "top 55%",
+        id: `timeline-item-${i}`,
+        onEnter: () => {
+          el.querySelector('.timeline-dot')?.classList.add('revealed');
+          el.querySelector('.timeline-date')?.classList.add('revealed');
+          el.querySelector('.timeline-card')?.classList.add('revealed');
+          el.querySelector('.timeline-connector')?.classList.add('revealed');
+        },
+        once: true,
+      });
+      triggers.push(st);
     });
-    return () => { ScrollTrigger.getAll().forEach((t) => { if (t.vars.id !== 'events-interactive') t.kill(); }); };
+
+    return () => {
+      triggers.forEach(st => st.kill());
+    };
   }, []);
+
+  // ── Countdown timer for upcoming events ──
+  const [countdowns, setCountdowns] = useState<Record<string, string>>({});
+
+  useEffect(() => {
+    const updateCountdowns = () => {
+      const now = new Date().getTime();
+      const next: Record<string, string> = {};
+      TIMELINE_EVENTS.forEach((ev) => {
+        if (ev.countdownStart && ev.status === 'open') {
+          const target = new Date(ev.countdownStart).getTime();
+          const diff = target - now;
+          if (diff > 0) {
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            next[ev.id] = `${days}d ${hours}h`;
+          } else {
+            next[ev.id] = 'Happening now!';
+          }
+        }
+      });
+      setCountdowns(next);
+    };
+
+    updateCountdowns();
+    const interval = setInterval(updateCountdowns, 60000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const statusConfig: Record<RegStatus, { label: string; className: string }> = {
+    open: { label: 'Open for Registration', className: 'timeline-status open' },
+    full: { label: 'Fully Booked', className: 'timeline-status full' },
+    ended: { label: 'Ended', className: 'timeline-status ended' },
+  };
 
   return (<>
       {/* ========== CENTERED SLIDESHOW: Event Photos ========== */}
-      <section id="moments" className="relative py-14 md:py-24 bg-transparent border-t border-white/5">
+      <section id="moments" className="relative py-14 md:py-24 bg-transparent">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-10">
-            <p className="metallic-gold-text text-[10px] md:text-xs font-bold tracking-[0.5em] uppercase opacity-80 mb-2">MAAC GALLERY</p>
+            <p className="metallic-gold-text-sm text-[10px] md:text-xs font-bold tracking-[0.5em] uppercase mb-2">MAAC GALLERY</p>
             <h3 className="font-display text-3xl md:text-5xl text-white font-bold tracking-tight drop-shadow-lg">Campus Moments</h3>
           </div>
 
-          {/* The centered "Card" — Ratio matches the Landscape (16:9) on laptop and Portrait (3:4) on mobile */}
           <div className="relative mx-auto rounded-[1.5rem] md:rounded-[2rem] overflow-hidden bg-black shadow-2xl border border-white/5 aspect-[3/4] md:aspect-video w-full group">
-            
-            {/* Background Atmosphere Glow — Lightened and simplified */}
             <div className="absolute inset-0 z-0">
               <Image
                 key={`glow-${slideIndex}-${photos[slideIndex].src}`}
@@ -123,7 +246,6 @@ export default function EventsInteractive() {
               />
             </div>
 
-            {/* Main Sharp Image — Fills the card perfectly with NO black gaps */}
             <Image
               key={`${slideIndex}-${photos[slideIndex].src}`}
               src={photos[slideIndex].src}
@@ -134,17 +256,14 @@ export default function EventsInteractive() {
               priority
             />
 
-            {/* Navigation Overlays — Lightened gradients */}
             <div className="absolute inset-0 z-30 pointer-events-none bg-gradient-to-b from-black/10 via-transparent to-black/20" />
 
-            {/* Play/Pause Button */}
             <div className="absolute top-6 right-6 z-40">
-              <button onClick={toggleSlidePlay} aria-label={isSlidePlaying ? "Pause slideshow" : "Play slideshow"} className="px-5 py-3 min-h-[44px] text-[10px] font-bold tracking-widest rounded-full bg-black/40 backdrop-blur-xl border border-white/20 text-white hover:bg-[#FFD700] hover:text-black transition-all duration-300">
+              <button onClick={toggleSlidePlay} aria-label={isSlidePlaying ? "Pause slideshow" : "Play slideshow"} className="px-5 py-3 min-h-[44px] text-[10px] font-bold tracking-widest rounded-full bg-black/40 backdrop-blur-xl border border-white/20 text-white hover:bg-[#C4A882] hover:text-black transition-all duration-300">
                 {isSlidePlaying ? "PAUSE" : "PLAY"}
               </button>
             </div>
 
-            {/* Side Controls */}
             <button 
                onClick={prevPhoto} 
                aria-label="Previous photo"
@@ -160,21 +279,20 @@ export default function EventsInteractive() {
               <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" /></svg>
             </button>
 
-            {/* Progress Label */}
             <div className="absolute bottom-6 left-1/2 -translate-x-1/2 px-5 py-1.5 rounded-full bg-black/40 backdrop-blur-xl border border-white/10 text-[10px] md:text-xs font-mono text-white/70 z-40 tracking-[0.4em]">
-              <span className="text-[#FFD700] font-bold">{slideIndex + 1}</span> / {photos.length}
+              <span className="text-[#C4A882] font-bold">{slideIndex + 1}</span> / {photos.length}
             </div>
           </div>
         </div>
       </section>
 
-      {/* ========== NEW: In the Press — Newspaper & Media Cutouts ========== */}
+      {/* ========== IN THE PRESS ========== */}
       <section className="relative py-14 md:py-20 border-t border-white/10 bg-transparent">
         <div className="max-w-6xl mx-auto px-6 lg:px-10">
           <div className="text-center mb-8">
-            <p className="metallic-gold-text text-[10px] font-bold tracking-[0.3em] mb-2">MAKING HEADLINES</p>
+            <p className="metallic-gold-text-sm text-[10px] font-bold tracking-[0.3em] mb-2">MAKING HEADLINES</p>
             <h2 className="font-display text-3xl md:text-[2.6rem] leading-none text-white font-bold tracking-tight">In the Press</h2>
-            <p className="text-[#A8A29C] mt-3 max-w-lg mx-auto">Our events and community making the news.</p>
+            <p className="text-white/85 mt-3 max-w-lg mx-auto">Our events and community making the news.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -184,20 +302,19 @@ export default function EventsInteractive() {
                 <div 
                   key={idx}
                   onClick={() => openPhotosLightbox(globalIdx >= 0 ? globalIdx : 0)}
-                  className="group glass-card overflow-hidden cursor-pointer border border-white/10 hover:border-[#FFD700]/40 transition-all"
+                  className="group glass-card overflow-hidden cursor-pointer border border-white/10 hover:border-[#C4A882]/40 transition-all"
                 >
-                  <div className="bg-[#f8f1e3] p-3"> {/* warm paper-like bg for authentic newspaper feel */}
+                  <div className="bg-[#f8f1e3] p-3">
                     <Image 
                       src={photo.src} 
                       alt={photo.title || "Newspaper clipping from MAAC event"} 
-                      width={720} 
-                      height={920} 
+                      width={720} height={920} 
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       loading="lazy"
                       className="w-full h-auto object-contain" 
                     />
                   </div>
-                  <div className="px-4 py-3 text-xs text-[#A8A29C]">
+                  <div className="px-4 py-3 text-xs text-white/85">
                     <span className="font-medium text-white">{photo.title}</span>
                   </div>
                 </div>
@@ -205,417 +322,139 @@ export default function EventsInteractive() {
             })}
           </div>
 
-          <p className="text-center text-[10px] tracking-widest text-[#A8A29C]/50 mt-5">
-            More clippings from the collection • Tap to view full
+          <p className="text-center text-[10px] tracking-widest text-white/85/50 mt-5">
+            More clippings from the collection &bull; Tap to view full
           </p>
         </div>
       </section>
 
-      {/* Why Attend MAAC Events Section — lighter treatment so video/photo backgrounds stay prominent */}
-      <section className="relative py-8 md:py-12 overflow-hidden bg-transparent border-t border-white/10">
-        <div className="relative max-w-content mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Two column layout: Left heading, Right cards */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-            {/* Left side: Heading and description */}
-            <div className="text-left">
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold metallic-gold-text mb-6 leading-tight">
-                Why Attend<br />MAAC Events?
-              </h2>
-              <p className="text-sm md:text-base text-white leading-relaxed max-w-lg">
-                At MAAC, we don&apos;t just teach - we transform careers. Whether you aspire to be an animator, VFX artist, game designer, filmmaker, or digital creator, we equip you with the skills, tools, and global opportunities to succeed.
-              </p>
-              <a href="/contact" className="mt-6 inline-flex items-center gap-2 metallic-gold-text hover:text-yellow-300 transition-colors">
-                <span className="font-semibold text-sm">Learn More</span>
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                </svg>
-              </a>
-            </div>
-
-            {/* Right side: Four feature cards in 2x2 grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-              {/* Card 1: Hands-on Learning */}
-              <div className="text-center">
-                <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                  <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
-                  </svg>
-                </div>
-                <h3 className="text-xl font-bold metallic-gold-text mb-3">Hands-on Learning</h3>
-                <p className="text-white text-sm leading-relaxed">
-                  Gain industry insights through live projects, competitions, and expert-led sessions.
-                </p>
-              </div>
-
-              {/* Card 2: Showcase Your Talent */}
-              <div className="text-center">
-                <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                  <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
-                  </svg>
-                </div>
-                <h3 className="text-xl font-bold metallic-gold-text mb-3">Showcase Your Talent</h3>
-                <p className="text-white text-sm leading-relaxed">
-                  Showcase your talent in national competitions and get noticed by top studios.
-                </p>
-              </div>
-
-              {/* Card 3: Network with the Best */}
-              <div className="text-center">
-                <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                  <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                  </svg>
-                </div>
-                <h3 className="text-xl font-bold metallic-gold-text mb-3">Network with the Best</h3>
-                <p className="text-white text-sm leading-relaxed">
-                  Connect with alumni, faculty, and industry professionals worldwide.
-                </p>
-              </div>
-
-              {/* Card 4: Get Job-Ready */}
-              <div className="text-center">
-                <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                  <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                  </svg>
-                </div>
-                <h3 className="text-xl font-bold metallic-gold-text mb-3">Get Job-Ready</h3>
-                <p className="text-white text-sm leading-relaxed">
-                  Access job placements and internships with leading animation studios.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Signature MAAC Events Section */}
-      <section className="relative py-8 md:py-12 overflow-hidden bg-transparent">
-        <div className="relative max-w-content mx-auto px-4 sm:px-6 lg:px-8">
+      {/* ═══════════════════════════════════════════════
+          TIMELINE — DesignxHand inspired event timeline
+          with glowing dots, date badges, scroll reveals
+          ═══════════════════════════════════════════════ */}
+      <section className="relative py-16 md:py-24 overflow-hidden bg-transparent">
+        <div className="relative max-w-5xl mx-auto px-6">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold metallic-gold-text mb-16 leading-tight text-center">
-            Signature MAAC Events You Can Be a Part Of!
+            Our Event Timeline
           </h2>
 
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-12 items-center">
-            {/* Left side: 24FPS International Animation Awards content */}
-            <div className="text-left">
-              <div className="mb-6">
-                <div className="w-32 h-32 metallic-gold-accent rounded-lg flex items-center justify-center">
-                  <span className="text-2xl font-bold text-gray-900">24FPS</span>
-                </div>
-              </div>
-              <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                24FPS International Animation Awards
-              </h3>
-              <p className="text-lg text-white/90 leading-relaxed mb-8">
-                A globally recognized event where students compete with the best in the animation and VFX industry. This is your chance to impress industry leaders and make a mark in the creative world!
-              </p>
-              <a href="/contact" className="px-6 py-2 bg-yellow-400 text-gray-900 font-semibold rounded-full hover:bg-yellow-300 transition-colors text-sm">
-                Read More
-              </a>
-            </div>
+          {/* Timezone note */}
+          <p className="text-center text-[10px] font-bold uppercase tracking-[0.25em] text-white/30 mb-12">
+            All times in IST (UTC+5:30)
+          </p>
 
-            {/* Right side: Arrow and Video Card */}
-            <div className="flex flex-col items-center justify-center lg:flex-row lg:justify-end gap-3 md:gap-5">
-              {/* Large metallic gold arrow */}
-              <svg className="w-16 h-16 md:w-20 md:h-20 metallic-gold-text transform rotate-90 lg:rotate-0 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-              </svg>
+          <div className="event-timeline">
+            {TIMELINE_EVENTS.map((event, idx) => {
+              const config = statusConfig[event.status];
+              return (
+                <div
+                  key={event.id}
+                  ref={(el) => { timelineRefs.current[idx] = el; }}
+                  className="timeline-item"
+                >
+                  {/* Glowing dot */}
+                  <div className="timeline-dot" />
 
-              {/* Video Card */}
-              <div ref={video24FPSRef} className="rounded-2xl shadow-lg overflow-hidden w-full max-w-xl h-64 md:h-72 border border-white/10">
-                <VideoFacade youtubeId="C2ix6uKTaAQ" title="24FPS International Animation Awards" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 100 Hours - The Ultimate Creative Marathon Section */}
-      <section className="relative py-8 md:py-12 overflow-hidden bg-transparent">
-        <div className="relative max-w-content mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Top white line */}
-          <div className="border-t border-white/10 mb-12"></div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-12 items-center">
-            {/* Left side: Logo, Heading, Description, Button */}
-            <div className="text-left">
-              {/* 100 Race Against Time Logo */}
-              <div className="mb-6">
-                <div className="w-32 h-16 metallic-gold-accent rounded-lg flex items-center justify-center">
-                  <span className="text-xl font-bold text-black">100 RACE</span>
-                </div>
-              </div>
-              <h3 className="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
-                100 Hours - The Ultimate<br />Creative Marathon
-              </h3>
-              <p className="text-base text-white/90 leading-relaxed mb-8 max-w-lg">
-                Push your limits! Create a 3D-animated short film or a 1-minute mobile film in just 100 hours! Work non-stop, collaborate with teammates, and experience the thrill of filmmaking under real-world deadlines.
-              </p>
-              <a href="/contact" className="px-6 py-2 border border-yellow-400 text-yellow-400 font-semibold rounded-full hover:bg-yellow-400 hover:text-black transition-colors text-sm">
-                Read More
-              </a>
-            </div>
-
-            {/* Right side: Arrow and Image Card */}
-            <div className="flex flex-col items-center justify-center lg:flex-row lg:justify-end gap-3 md:gap-5">
-              {/* Large yellow arrow */}
-              <svg className="w-16 h-16 md:w-20 md:h-20 metallic-gold-text transform rotate-90 lg:rotate-0 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-              </svg>
-
-              {/* Video Card */}
-              <div ref={video100HoursRef} className="relative w-full max-w-xl rounded-2xl shadow-lg overflow-hidden h-64 md:h-72 border border-white/10">
-                <VideoFacade youtubeId="3BuVrYHjIq4" title="100 Hours - The Ultimate Creative Marathon" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* New Event Section - Same Layout */}
-      <section className="relative py-8 md:py-12 overflow-hidden bg-transparent">
-        <div className="relative max-w-content mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Top white line */}
-          <div className="border-t border-white/10 mb-12"></div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-12 items-center">
-            {/* Left side: Logo, Heading, Description, Button */}
-            <div className="text-left">
-              {/* Logo placeholder */}
-              <div className="mb-6">
-                <div className="w-32 h-16 metallic-gold-accent rounded-lg flex items-center justify-center">
-                  <span className="text-xl font-bold text-black">MAAC</span>
-                </div>
-              </div>
-              <h3 className="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
-                MAAC Manifest
-              </h3>
-              <p className="text-base text-white/90 leading-relaxed mb-8 max-w-lg">
-                We celebrate YOU! MAAC Manifest is where we honor our students and alumni for their outstanding contributions to the animation and VFX industry. Get recognized for your talent and be inspired by industry leaders.
-              </p>
-              <a href="/contact" className="px-6 py-2 border border-yellow-400 text-yellow-400 font-semibold rounded-full hover:bg-yellow-400 hover:text-black transition-colors text-sm">
-                Read More
-              </a>
-            </div>
-
-            {/* Right side: Arrow and Video Card */}
-            <div className="flex flex-col items-center justify-center lg:flex-row lg:justify-end gap-3 md:gap-5">
-              {/* Large yellow arrow */}
-              <svg className="w-16 h-16 md:w-20 md:h-20 metallic-gold-text transform rotate-90 lg:rotate-0 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-              </svg>
-
-              {/* Video Card */}
-              <div ref={videoManifestRef} className="rounded-2xl shadow-lg overflow-hidden w-full max-w-xl h-64 md:h-72 border border-white/10">
-                <VideoFacade youtubeId="RaQivBSoEak" title="MAAC Manifest" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* NSM - National Students' Meet Section */}
-      <section className="relative py-8 md:py-12 overflow-hidden bg-transparent">
-        <div className="relative max-w-content mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Top white line */}
-          <div className="border-t border-white/10 mb-8"></div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-12 items-center">
-            {/* Left side: NSM Logo, Title, Description, Button */}
-            <div className="text-left">
-              {/* NSM Logo */}
-              <div className="mb-6">
-                <div className="flex items-center gap-2">
-                  <div className="w-12 h-12 metallic-gold-accent rounded-full flex items-center justify-center">
-                    <span className="text-black font-bold text-sm">NSM</span>
+                  {/* Van Morrison inspired date badge */}
+                  <div className="timeline-date">
+                    <span className="date-day">{event.day}</span>
+                    <span className="date-month">{event.month} {String(event.year).slice(2)}</span>
                   </div>
-                  <span className="metallic-gold-text font-bold text-sm">National Students&apos; Meet</span>
-                </div>
-              </div>
-              
-              <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight">
-                National Students&apos; Meet (NSM)
-              </h3>
-              
-              <p className="text-sm md:text-base text-white/90 leading-relaxed mb-8 max-w-md">
-                A dream event for every MAAC student! Meet like-minded artists from across India, participate in creative workshops, panel discussions, and exclusive hands-on training sessions with industry pros.
-              </p>
-              
-              <a href="/contact" className="px-6 py-2 border border-yellow-400 text-yellow-400 font-semibold rounded-full hover:bg-yellow-400 hover:text-black transition-colors text-sm">
-                Read More
-              </a>
-            </div>
 
-            {/* Right side: Arrow and Video Card */}
-            <div className="flex flex-col items-center justify-center lg:flex-row lg:justify-end gap-3 md:gap-5">
-              {/* Large metallic gold arrow */}
-              <svg className="w-16 h-16 md:w-20 md:h-20 metallic-gold-text transform rotate-90 lg:rotate-0 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-              </svg>
+                  {/* Connector line */}
+                  <div className="timeline-connector" />
 
-              {/* Video Card */}
-              <div ref={videoNSMRef} className="relative w-full max-w-xl rounded-2xl shadow-lg overflow-hidden h-64 md:h-72 border border-white/10">
-                <VideoFacade youtubeId="F0WMuSpXMK0" title="National Students' Meet (NSM)" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+                  {/* Content Card */}
+                  <div className="timeline-card">
+                    <div className="flex items-start justify-between gap-4 mb-4">
+                      <div className="flex-1 min-w-0">
+                        <h3 className="font-display text-xl md:text-2xl text-white font-bold uppercase leading-[1.2] tracking-[0.05em] mb-2">
+                          {event.title}
+                        </h3>
+                        {/* Tags */}
+                        <div className="flex flex-wrap gap-2 mb-3">
+                          {event.tags.map((tag) => (
+                            <span key={tag} className="text-[8px] font-bold uppercase tracking-[0.15em] px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-white/50">
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                      {/* Status badge */}
+                      <span className={config.className}>
+                        {config.label}
+                      </span>
+                    </div>
 
-      {/* MCL - MAAC Creative League Section */}
-      <section className="relative py-8 md:py-12 overflow-hidden bg-transparent">
-        <div className="relative max-w-content mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Top white line */}
-          <div className="border-t border-white/10 mb-8"></div>
+                    <p className="text-white/85 text-sm md:text-base leading-relaxed mb-6">
+                      {event.description}
+                    </p>
 
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-12 items-center">
-            {/* Left side: MCL Logo, Title, Description, Button */}
-            <div className="text-left">
-              {/* MCL Logo */}
-              <div className="mb-6">
-                <div className="flex items-center gap-2">
-                  <div className="w-12 h-12 metallic-gold-accent rounded-full flex items-center justify-center">
-                    <span className="text-black font-bold text-sm">MCL</span>
+                    <div className="flex flex-wrap items-center justify-between gap-4">
+                      {/* Countdown */}
+                      {event.status === 'open' && countdowns[event.id] && (
+                        <div className="flex items-center gap-2">
+                          <svg className="w-3.5 h-3.5 text-[#C4A882]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6l4 2" />
+                            <circle cx="12" cy="12" r="10" />
+                          </svg>
+                          <span className="timeline-countdown">{countdowns[event.id]}</span>
+                        </div>
+                      )}
+
+                      {event.status === 'full' && (
+                        <div className="flex items-center gap-2 text-white/40 text-[10px] font-bold uppercase tracking-[0.15em]">
+                          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m0 0v2m0-2h2m-2 0H10" />
+                          </svg>
+                          Join the waitlist
+                        </div>
+                      )}
+
+                      {/* CTA */}
+                      <a
+                        href="/contact"
+                        className={`inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.15em] transition-all duration-300 px-5 py-2 rounded-full ${
+                          event.status === 'ended'
+                            ? 'border border-white/10 text-white/40 cursor-not-allowed'
+                            : event.status === 'full'
+                              ? 'border border-orange-500/40 text-orange-400 hover:bg-orange-500/10'
+                              : 'bg-[#C4A882] text-black hover:bg-[#BF953F]'
+                        }`}
+                        {...(event.status === 'ended' ? { onClick: (e) => e.preventDefault() } : {})}
+                      >
+                        {event.status === 'ended' ? 'Event Ended' : event.status === 'full' ? 'Join Waitlist' : 'Register Now'}
+                        {event.status !== 'ended' && (
+                          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                          </svg>
+                        )}
+                      </a>
+                    </div>
+
+                    {/* Video preview */}
+                    {event.youtubeId && (
+                      <div className="mt-5 pt-5 border-t border-white/5">
+                        <div className="rounded-xl overflow-hidden border border-white/5 w-full max-w-md">
+                          <VideoFacade youtubeId={event.youtubeId} title={event.videoTitle} />
+                        </div>
+                      </div>
+                    )}
                   </div>
-                  <span className="metallic-gold-text font-bold text-sm">MAAC Creative League</span>
                 </div>
-              </div>
-              
-              <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight">
-                MAAC Creative League (MCL)
-              </h3>
-              
-              <p className="text-sm md:text-base text-white/90 leading-relaxed mb-8 max-w-md">
-                Compete in one of the most exciting design and animation challenges at MAAC! Unleash your creativity, showcase your talent, and win exciting prizes as you go head-to-head with the best in the field.
-              </p>
-              
-              <a href="/contact" className="px-6 py-2 border border-yellow-400 text-yellow-400 font-semibold rounded-full hover:bg-yellow-400 hover:text-black transition-colors text-sm">
-                Read More
-              </a>
-            </div>
-
-            {/* Right side: Arrow and Video Card */}
-            <div className="flex flex-col items-center justify-center lg:flex-row lg:justify-end gap-3 md:gap-5">
-              {/* Large metallic gold arrow */}
-              <svg className="w-16 h-16 md:w-20 md:h-20 metallic-gold-text transform rotate-90 lg:rotate-0 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-              </svg>
-
-              {/* Video Card */}
-              <div ref={videoMCLRef} className="relative w-full max-w-xl rounded-2xl shadow-lg overflow-hidden h-64 md:h-72 border border-white/10">
-                <VideoFacade youtubeId="FPgueLMvlMI" title="MAAC Creative League (MCL)" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* MAAC Klick - Nature & Wildlife Photography Expeditions Section */}
-      <section className="relative py-8 md:py-12 overflow-hidden bg-transparent">
-        <div className="relative max-w-content mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Top white line */}
-          <div className="border-t border-white/10 mb-8"></div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-12 items-center">
-            {/* Left side: MAAC Klick Logo, Title, Description, Button */}
-            <div className="text-left">
-              {/* MAAC Klick Logo */}
-              <div className="mb-6">
-                <div className="flex items-center gap-2">
-                  <div className="w-12 h-12 metallic-gold-accent rounded-full flex items-center justify-center">
-                    <span className="text-black font-bold text-sm">Klick</span>
-                  </div>
-                  <span className="metallic-gold-text font-bold text-sm">MAAC Klick</span>
-                </div>
-              </div>
-              
-              <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight">
-                MAAC Klick - Nature & Wildlife Photography Expeditions
-              </h3>
-              
-              <p className="text-sm md:text-base text-white/90 leading-relaxed mb-8 max-w-md">
-                Step outside the classroom and capture breathtaking moments! Travel to stunning locations like Coorg, Ranthambore, and Sariska National Park, and learn the art of professional photography in real-world environments.
-              </p>
-              
-              <a href="/contact" className="px-6 py-2 border border-yellow-400 text-yellow-400 font-semibold rounded-full hover:bg-yellow-400 hover:text-black transition-colors text-sm">
-                Read More
-              </a>
-            </div>
-
-            {/* Right side: Arrow and Video Card */}
-            <div className="flex flex-col items-center justify-center lg:flex-row lg:justify-end gap-3 md:gap-5">
-              {/* Large metallic gold arrow */}
-              <svg className="w-16 h-16 md:w-20 md:h-20 metallic-gold-text transform rotate-90 lg:rotate-0 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-              </svg>
-
-              {/* Video Card */}
-              <div ref={videoKlickRef} className="relative w-full max-w-xl rounded-2xl shadow-lg overflow-hidden h-64 md:h-72 border border-white/10">
-                <VideoFacade youtubeId="ao5k9ZTVbS0" title="MAAC Klick - Nature & Wildlife Photography Expeditions" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* New Section - Same Layout */}
-      <section className="relative py-8 md:py-12 overflow-hidden bg-transparent">
-        <div className="relative max-w-content mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Top white line */}
-          <div className="border-t border-white/10 mb-8"></div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-12 items-center">
-            {/* Left side: Logo, Title, Description, Button */}
-            <div className="text-left">
-              {/* BTS Logo */}
-              <div className="mb-6">
-                <div className="flex items-center gap-2">
-                  <div className="w-12 h-12 metallic-gold-accent rounded-full flex items-center justify-center">
-                    <span className="text-black font-bold text-sm">BTS</span>
-                  </div>
-                  <span className="metallic-gold-text font-bold text-sm">Behind the Screen</span>
-                </div>
-              </div>
-              
-              <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight">
-                BTS: Behind the Screen
-              </h3>
-              
-              <p className="text-sm md:text-base text-white/90 leading-relaxed mb-8 max-w-md">
-                Gain exclusive insights from industry legends through our webinars and Masterclasses. Learn about cutting-edge tools, techniques, and career opportunities straight from professionals & our Alumni who have worked on blockbuster movies and AAA games.
-              </p>
-              
-              <a href="/contact" className="px-6 py-2 border border-yellow-400 text-yellow-400 font-semibold rounded-full hover:bg-yellow-400 hover:text-black transition-colors text-sm">
-                Read More
-              </a>
-            </div>
-
-            {/* Right side: Arrow and Video Card */}
-            <div className="flex flex-col items-center justify-center lg:flex-row lg:justify-end gap-3 md:gap-5">
-              {/* Large metallic gold arrow */}
-              <svg className="w-16 h-16 md:w-20 md:h-20 metallic-gold-text transform rotate-90 lg:rotate-0 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-              </svg>
-
-              {/* Video Card */}
-              <div ref={videoBTSRef} className="relative w-full max-w-xl rounded-2xl shadow-lg overflow-hidden h-64 md:h-72 border border-white/10">
-                <VideoFacade youtubeId="Fs6YutaEejc" title="BTS: Behind the Screen" />
-              </div>
-            </div>
+              );
+            })}
           </div>
         </div>
       </section>
 
       {/* Who Can Attend MAAC Events Section */}
       <section className="relative py-8 md:py-12 overflow-hidden bg-transparent">
-        {/* Subtle wavy pattern background */}
         <div className="absolute inset-0 opacity-5">
           <svg className="w-full h-full" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
             <defs>
               <linearGradient id="wave-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" style={{ stopColor: "#FFD700", stopOpacity: 0.3 }} />
+                <stop offset="0%" style={{ stopColor: "#C4A882", stopOpacity: 0.3 }} />
                 <stop offset="100%" style={{ stopColor: "#8B2635", stopOpacity: 0.1 }} />
               </linearGradient>
             </defs>
@@ -635,75 +474,29 @@ export default function EventsInteractive() {
           </p>
 
           <div className="max-w-4xl mx-auto space-y-12">
-            {/* Item 1 */}
-            <div className="relative">
-              <div className="flex items-center justify-center gap-8">
-                <div className="flex items-center gap-8 w-full max-w-3xl">
-                  {/* Simple number without circle - fixed width for alignment */}
-                  <div className="flex-shrink-0 w-12 flex justify-center items-center">
-                    <span className="text-4xl md:text-5xl font-bold metallic-gold-text">1</span>
+            {[
+              { num: 1, text: "Animation, VFX and multimedia students - both MAAC students and others." },
+              { num: 2, text: "Studios and industry professionals, from India and overseas." },
+              { num: 3, text: "Anyone with talent and passion for animation, gaming, VFX, web & graphic designing and media and entertainment." },
+            ].map((item) => (
+              <div key={item.num} className="relative">
+                <div className="flex items-center justify-center gap-8">
+                  <div className="flex items-center gap-8 w-full max-w-3xl">
+                    <div className="flex-shrink-0 w-12 flex justify-center items-center">
+                      <span className="text-4xl md:text-5xl font-bold metallic-gold-text">{item.num}</span>
+                    </div>
+                    <p className="text-xl md:text-2xl text-white leading-relaxed font-medium flex-grow">{item.text}</p>
+                    <svg className="w-12 h-12 md:w-16 md:h-16 flex-shrink-0 metallic-gold-text" viewBox="0 0 24 24">
+                      <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+                    </svg>
                   </div>
-                  
-                  <p className="text-xl md:text-2xl text-white leading-relaxed font-medium flex-grow">
-                    Animation, VFX and multimedia students - both MAAC students and others.
-                  </p>
-
-                  {/* Red checkmark on right */}
-                  <svg className="w-12 h-12 md:w-16 md:h-16 flex-shrink-0 metallic-gold-text" viewBox="0 0 24 24">
-                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
-                  </svg>
                 </div>
               </div>
-            </div>
-
-            {/* Item 2 */}
-            <div className="relative">
-              <div className="flex items-center justify-center gap-8">
-                <div className="flex items-center gap-8 w-full max-w-3xl">
-                  {/* Simple number without circle - fixed width for alignment */}
-                  <div className="flex-shrink-0 w-12 flex justify-center items-center">
-                    <span className="text-4xl md:text-5xl font-bold metallic-gold-text">2</span>
-                  </div>
-                  
-                  <p className="text-xl md:text-2xl text-white leading-relaxed font-medium flex-grow">
-                    Studios and industry professionals, from India and overseas.
-                  </p>
-
-                  {/* Red checkmark on right */}
-                  <svg className="w-12 h-12 md:w-16 md:h-16 flex-shrink-0 metallic-gold-text" viewBox="0 0 24 24">
-                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
-                  </svg>
-                </div>
-              </div>
-            </div>
-
-            {/* Item 3 */}
-            <div className="relative">
-              <div className="flex items-center justify-center gap-8">
-                <div className="flex items-center gap-8 w-full max-w-3xl">
-                  {/* Simple number without circle - fixed width for alignment */}
-                  <div className="flex-shrink-0 w-12 flex justify-center items-center">
-                    <span className="text-4xl md:text-5xl font-bold metallic-gold-text">3</span>
-                  </div>
-                  
-                  <p className="text-xl md:text-2xl text-white leading-relaxed font-medium flex-grow">
-                    Anyone with talent and passion for animation, gaming, VFX, web & graphic designing and media and entertainment.
-                  </p>
-
-                  {/* Red checkmark on right */}
-                  <svg className="w-12 h-12 md:w-16 md:h-16 flex-shrink-0 metallic-gold-text" viewBox="0 0 24 24">
-                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
-                  </svg>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
-
-
       </section>
 
-      {/* The professional lightbox for the event photos */}
       <ImageLightbox
         images={EVENT_PHOTOS.map(p => p.src)}
         alt="MAAC Jaipur Event Moments"

@@ -5,8 +5,8 @@ export const metadata: Metadata = {
   description:
     "Terms and conditions for using MAAC Animation Jaipur website. Read our policies regarding content, intellectual property, and user responsibilities.",
   robots: {
-    index: true,
-    follow: true,
+    index: false,
+    follow: false,
   },
   alternates: {
     canonical: "https://www.maacanimationjaipur.com/terms-of-service",
@@ -25,7 +25,7 @@ export default function TermsPage() {
   return (
     <main className="min-h-screen bg-[#0C0C0C] text-white pt-24 pb-16 px-6 md:px-12">
       <div className="max-w-3xl mx-auto">
-        <p className="text-[#FFD700] text-xs tracking-[0.2em] uppercase mb-3 font-display">Legal</p>
+        <p className="text-[#C4A882] text-xs tracking-[0.2em] uppercase mb-3 font-display">Legal</p>
         <h1 className="text-3xl md:text-4xl mb-8 gradient-text">Terms &amp; Conditions</h1>
 
         <div className="space-y-6 text-white/70 leading-relaxed">

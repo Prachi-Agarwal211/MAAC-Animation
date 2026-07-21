@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useGSAP } from "@gsap/react";
-import gsap, { ScrollTrigger } from "@/lib/gsap";
+import gsap from "@/lib/gsap";
 import { ArrowRight } from "lucide-react";
 import { maacStandardFeatures } from "@/data/siteData";
 
@@ -42,9 +42,6 @@ export default function VerticalCardGallery() {
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const [activeIndex, setActiveIndex] = useState(0);
-
-  const prefersReduced = typeof window !== "undefined"
-    && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   const updateActiveSegment = (index: number) => {
     if (index < 0 || index >= SEGMENTS) return;
@@ -123,7 +120,9 @@ export default function VerticalCardGallery() {
           });
         }, { threshold: 0.4 });
         cards.forEach((card) => observer?.observe(card));
-      } catch (_) {}
+      } catch {
+        // Fallback for browsers that don't support IntersectionObserver
+      }
       return () => { observer?.disconnect(); };
     });
 
@@ -175,9 +174,9 @@ export default function VerticalCardGallery() {
 
                     {/* Gold ring gradient */}
                     <linearGradient id="goldRing" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#FFD700" />
+                      <stop offset="0%" stopColor="#C4A882" />
                       <stop offset="50%" stopColor="#E5D7B3" />
-                      <stop offset="100%" stopColor="#FFD700" />
+                      <stop offset="100%" stopColor="#C4A882" />
                     </linearGradient>
 
                     {/* Dot glow filter */}
@@ -259,7 +258,7 @@ export default function VerticalCardGallery() {
 
                   {/* Center: counter text */}
                   <text ref={pieCenterTextRef} x={CX} y={CY + 5} textAnchor="middle" className="fill-white font-display font-bold uppercase leading-[1.1] tracking-[0.1em]" style={{ fontSize: "clamp(40px, 8vw, 64px)" }}>01</text>
-                  <text x={CX} y={CY + 38} textAnchor="middle" className="fill-[#FFD700] font-black uppercase tracking-[0.3em]" style={{ fontSize: "clamp(10px, 2vw, 16px)" }}>OF {String(SEGMENTS).padStart(2,'0')}</text>
+                  <text x={CX} y={CY + 38} textAnchor="middle" className="fill-[#C4A882] font-black uppercase tracking-[0.3em]" style={{ fontSize: "clamp(10px, 2vw, 16px)" }}>OF {String(SEGMENTS).padStart(2,'0')}</text>
                 </svg>
               </div>
             </div>
@@ -294,7 +293,7 @@ export default function VerticalCardGallery() {
                       <h3 className="font-display font-bold text-[15px] md:text-[17px] text-white/90 mb-3 tracking-[0.25em] leading-snug uppercase">
                         {card.title}
                       </h3>
-                      <p className="text-white/70 text-[11px] md:text-[12px] leading-[1.8] mb-8 max-w-[300px]">
+                      <p className="text-white/85 text-[11px] md:text-[12px] leading-[1.8] mb-8 max-w-[300px]">
                         {card.desc}
                       </p>
                       <Link href="/contact" className="mt-auto group/link flex items-center justify-between w-[85%] border-t border-white/10 pt-5">

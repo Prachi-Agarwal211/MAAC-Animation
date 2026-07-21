@@ -35,8 +35,8 @@ export default function CoursesClient() {
             loop
             playsInline
             aria-hidden="true"
-            poster="/hero-poster.jpg"
-            className="w-full h-full object-cover opacity-40"
+            className="w-full h-full object-cover hero-video-fade"
+            style={{ '--video-target-opacity': '0.4' } as React.CSSProperties}
           >
             <source src="/hero-video-compressed.mp4" type="video/mp4" />
           </video>
@@ -49,9 +49,16 @@ export default function CoursesClient() {
             <span className="w-8 h-[1px] metallic-gold-accent" />
           </p>
           <h1 className="animate-in font-display text-[clamp(2.5rem,8vw,5rem)] leading-[0.85] text-white mb-6 font-light uppercase tracking-[0.1em]">
-            Our <span className="metallic-gold-text italic text-[1.1em]">Programs</span>
+            <span className="title-layer">
+              <span className="title-layer-glow" aria-hidden="true">Our</span>
+              <span className="relative z-10">Our</span>
+            </span>{' '}
+            <span className="title-layer">
+              <span className="title-layer-glow" aria-hidden="true">Programs</span>
+              <span className="relative z-10 metallic-gold-text font-bold italic text-[1.1em]">Programs</span>
+            </span>
           </h1>
-          <p className="animate-in text-[#A8A29C] text-lg max-w-2xl mx-auto leading-relaxed">
+          <p className="animate-in text-white/85 text-lg max-w-2xl mx-auto leading-relaxed">
             From foundation to advanced mastery, discover Rajasthan&apos;s most comprehensive curriculum in Animation, VFX, and Game Design.
           </p>
         </div>
@@ -59,17 +66,11 @@ export default function CoursesClient() {
 
       <CourseCategories mode="courses-page" />
       
-      <div className="border-t border-white/5">
-        <IndustryPartners />
-      </div>
+      <IndustryPartners />
 
-      <div className="border-t border-white/5">
-        <ApplyNow />
-      </div>
+      <ApplyNow />
 
-      <div className="border-t border-white/5">
-        <FAQSection />
-      </div>
+      <FAQSection />
     </main>
   );
 }

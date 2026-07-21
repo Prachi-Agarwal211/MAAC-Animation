@@ -35,6 +35,20 @@ const config: Config = {
         },
         cream: "#F5F0E8",
         whatsapp: "#25D366",
+        gold: {
+          DEFAULT: "#FFD700",
+          muted: "#A67C52",
+          metallic: "#BF953F",
+        },
+        sage: "#9CAF88",
+        "warm-white": "#F5F0E8",
+        phase: {
+          1: "#E31837",
+          2: "#FF6B35",
+          3: "#FFD700",
+          4: "#BF953F",
+          5: "#9CAF88",
+        },
       },
       fontFamily: {
         display: ["var(--font-syne)", "sans-serif"],
@@ -52,6 +66,11 @@ const config: Config = {
       maxWidth: {
         content: "var(--content-max-width, 1600px)",
       },
+      transitionTimingFunction: {
+        'expo': 'cubic-bezier(0.16, 1, 0.3, 1)',
+        'spring': 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+        'out-quad': 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+      },
       keyframes: {
         marqueeLeft: {
           "0%": { transform: "translateX(0%)" },
@@ -61,10 +80,25 @@ const config: Config = {
           "0%": { transform: "translateX(-50%)" },
           "100%": { transform: "translateX(0%)" },
         },
+        'enter-pulse': {
+          '0%': { transform: 'scale(1)', opacity: '0.6' },
+          '100%': { transform: 'scale(1.25)', opacity: '0' },
+        },
+        'fade-in-up': {
+          '0%': { opacity: '0', transform: 'translateY(24px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        'gold-shimmer': {
+          '0%': { backgroundPosition: '0% 50%' },
+          '100%': { backgroundPosition: '200% 50%' },
+        },
       },
       animation: {
         "marquee-left": "marqueeLeft 40s linear infinite",
         "marquee-right": "marqueeRight 40s linear infinite",
+        'enter-pulse': 'enter-pulse 2.5s ease-out infinite',
+        'fade-in-up': 'fade-in-up 0.7s ease forwards',
+        'gold-shimmer': 'gold-shimmer 3s linear infinite',
       },
     },
   },
