@@ -268,27 +268,23 @@ export default function RootLayout({
           />
         )}
 
-        {/* Google Ads global site tag (gtag.js) - used if you have direct Google Ads conversion ID */}
-        {process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_ID && (
-          <>
-            <Script
-              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_ID}`}
-              strategy="afterInteractive"
-            />
-            <Script
-              id="google-ads"
-              strategy="afterInteractive"
-              dangerouslySetInnerHTML={{
-                __html: `
-                  window.dataLayer = window.dataLayer || [];
-                  function gtag(){dataLayer.push(arguments);}
-                  gtag('js', new Date());
-                  gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_ID}');
-                `,
-              }}
-            />
-          </>
-        )}
+        {/* Google Ads global site tag (gtag.js) */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=AW-827036079"
+          strategy="afterInteractive"
+        />
+        <Script
+          id="google-ads"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'AW-827036079');
+            `,
+          }}
+        />
 
         <script
           type="application/ld+json"
