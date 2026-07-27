@@ -54,14 +54,16 @@ Modern designers and developers have powerful tools at their disposal:
 - **GSAP**: For complex, timeline-based animations
 - **After Effects**: For motion design exploration
 
+At MAAC Animation Jaipur, our curriculum includes hands-on training in GSAP, After Effects, and Figma to help students master UI/UX animation and motion design.
+
 ## Conclusion
 
-Transitions are not just decorative — they're functional. When done right, they make digital products easier to use, more enjoyable to interact with, and more memorable. As you design your next interface, think about how transitions can enhance the user journey, not just beautify it.`,
+Transitions are not just decorative — they're functional. When done right, they make digital products easier to use, more enjoyable to interact with, and more memorable. As you design your next interface, think about how transitions can enhance the user journey, not just beautify it. Students at MAAC Animation Jaipur learn these principles through real-world projects and industry mentorship.`,
     author: "MAAC Jaipur Faculty",
     date: "2025-07-01",
     category: "Design",
     tags: ["UX Design", "Transitions", "Micro-interactions", "UI Design", "Animation"],
-    ogImage: "/og-image.jpg",
+    ogImage: "/courses_images/apdmd.jpeg",
     readTime: "5 min read",
   },
   {
@@ -69,7 +71,7 @@ Transitions are not just decorative — they're functional. When done right, the
     title: "Career in Animation",
     excerpt:
       "Discover the exciting career opportunities in the animation industry, from 3D animation to character design, and learn how to build a successful career.",
-    content: `The animation industry in India is experiencing unprecedented growth. With booming OTT platforms, increasing demand for animated content, and a thriving gaming sector, there has never been a better time to start a career in animation.
+    content: `The animation industry in India is experiencing unprecedented growth. With booming OTT platforms, increasing demand for animated content, and a thriving gaming sector, there has never been a better time to start a career in animation. MAAC Animation Jaipur offers comprehensive training programs that prepare students for these exciting opportunities.
 
 ## The Animation Industry Landscape
 
@@ -115,7 +117,7 @@ Rigging artists create the skeleton and control systems that allow 3D characters
 ## How to Start Your Animation Career
 
 ### Step 1: Get Proper Training
-Enroll in a recognized animation program that covers the fundamentals thoroughly. Look for institutes with industry connections and placement records.
+Enroll in a recognized animation program that covers the fundamentals thoroughly. MAAC Animation Jaipur offers industry-aligned courses with faculty who have worked at top studios like DNEG and Prime Focus. Look for institutes with strong industry connections and placement records.
 
 ### Step 2: Master the Tools
 Become proficient in industry-standard software:
@@ -149,14 +151,18 @@ The industry evolves rapidly. Stay updated with new techniques, tools, and trend
 - Ubisoft India
 - EA Games
 
+## Why Choose MAAC Animation Jaipur for Your Training?
+
+With 30+ years of excellence, MAAC Animation Jaipur provides NSDC-certified programs, a 95% placement rate, and state-of-the-art labs with rendering farms and a green screen studio. Students learn from industry professionals and graduate with a professional showreel that gets them hired at top studios.
+
 ## Conclusion
 
-A career in animation is creative, challenging, and rewarding. With the right training, dedication, and portfolio, you can build a successful career in this exciting industry. The key is to start with strong foundations, practice relentlessly, and never stop learning.`,
+A career in animation is creative, challenging, and rewarding. With the right training, dedication, and portfolio, you can build a successful career in this exciting industry. The key is to start with strong foundations, practice relentlessly, and never stop learning. Start your journey at MAAC Animation Jaipur with a free demo class.`,
     author: "MAAC Jaipur Faculty",
     date: "2025-06-15",
     category: "Career",
     tags: ["Animation", "Career", "3D Animation", "Industry", "Jobs"],
-    ogImage: "/og-image.jpg",
+    ogImage: "/courses_images/ed_animation.png",
     readTime: "6 min read",
   },
   {
@@ -164,12 +170,12 @@ A career in animation is creative, challenging, and rewarding. With the right tr
     title: "Best Animation Courses in Jaipur 2025 — Complete Guide",
     excerpt:
       "Find the best animation courses in Jaipur for 2025. Compare institutes, fees, syllabus, and placement records for 3D Animation, VFX, and Game Design programs.",
-    content: `# Best Animation Courses in Jaipur 2025\n\nJaipur has emerged as one of India's top hubs for animation and VFX education. With the creative industry growing at 20% annually, the demand for skilled animators, VFX artists, and game designers has never been higher.\n\n## Why Study Animation in Jaipur?\n\nJaipur offers several advantages for aspiring animators: affordable living compared to Mumbai or Delhi, rich cultural heritage providing creative inspiration, a growing IT and media industry with local studios, and quality institutes with experienced faculty.\n\n## Top Animation Courses Available\n\n### 1. B.Voc in 3D Animation & VFX\nA 3-year UGC-recognized degree combining practical industry training with academic learning. Students learn Maya, 3ds Max, After Effects, and more.\n\n### 2. Diploma in Visual Effects\nAn 18-24 month program focusing on compositing, motion graphics, and VFX production using Nuke, Fusion, and Houdini.\n\n### 3. Game Design & Development\nCovers game art, level design, and engine integration using Unity and Unreal Engine.\n\n## What to Look for in an Animation Institute\n\nLook for industry-experienced faculty from studios like DNEG and Prime Focus, latest software and hardware including rendering farms and motion capture labs, a 95%+ placement record, NSDC/MESC certification for government-recognized credentials, and live project exposure with real studio briefs and deadlines.\n\n## Eligibility & Admission\n\nMost diploma programs require 10+2 completion. B.Voc programs require 10+2 with minimum 50% marks. No prior artistic background needed — passion and creativity are what matter most.\n\n## Career Opportunities After Animation Courses\n\nGraduates can work as 3D Animators, VFX Compositors, Game Artists, Motion Graphics Designers, and more at top studios across India and abroad. Starting salaries range from 3-6 LPA with top performers securing 8-12 LPA.\n\n## Conclusion\n\nChoosing the right animation course in Jaipur can launch your creative career. Visit MAAC Jaipur for a free demo class to experience our teaching firsthand.`,
+    content: `# Best Animation Courses in Jaipur 2025\n\nJaipur has emerged as one of India's top hubs for animation and VFX education. With the creative industry growing at 20% annually, the demand for skilled animators, VFX artists, and game designers has never been higher. MAAC Animation Institute Jaipur is at the forefront of this educational transformation.\n\n## Why Study Animation in Jaipur?\n\nJaipur offers several advantages for aspiring animators: affordable living compared to Mumbai or Delhi, rich cultural heritage providing creative inspiration, a growing IT and media industry with local studios, and quality institutes like MAAC Animation Jaipur with experienced faculty.\n\n## Top Animation Courses Available\n\n### 1. B.Voc in 3D Animation & VFX\nA 3-year UGC-recognized degree combining practical industry training with academic learning. Students learn Maya, 3ds Max, After Effects, and more.\n\n### 2. Diploma in Visual Effects\nAn 18-24 month program focusing on compositing, motion graphics, and VFX production using Nuke, Fusion, and Houdini.\n\n### 3. Game Design & Development\nCovers game art, level design, and engine integration using Unity and Unreal Engine.\n\n## What to Look for in an Animation Institute\n\nLook for industry-experienced faculty from studios like DNEG and Prime Focus, latest software and hardware including rendering farms and motion capture labs, a 95%+ placement record like MAAC Animation Jaipur, NSDC/MESC certification for government-recognized credentials, and live project exposure with real studio briefs and deadlines.\n\n## Eligibility & Admission\n\nMost diploma programs require 10+2 completion. B.Voc programs require 10+2 with minimum 50% marks. No prior artistic background needed — passion and creativity are what matter most.\n\n## Career Opportunities After Animation Courses\n\nGraduates can work as 3D Animators, VFX Compositors, Game Artists, Motion Graphics Designers, and more at top studios across India and abroad. Starting salaries range from 3-6 LPA with top performers securing 8-12 LPA. MAAC Animation Jaipur graduates are working at DNEG, MPC, Prime Focus, Ubisoft, and Technicolor.\n\n## Conclusion\n\nChoosing the right animation course in Jaipur can launch your creative career. Visit MAAC Animation Jaipur for a free demo class to experience our teaching firsthand. Call +91-7300001589 to schedule your visit.`,
     author: "MAAC Jaipur Faculty",
     date: "2025-07-15",
     category: "Career",
     tags: ["Animation Courses", "Jaipur", "Best Institute", "2025", "Guide"],
-    ogImage: "/og-image.jpg",
+    ogImage: "/courses_images/ed_animation.png",
     readTime: "7 min read",
   },
   {
@@ -177,12 +183,12 @@ A career in animation is creative, challenging, and rewarding. With the right tr
     title: "VFX Career in India 2025 — Salary, Skills & Opportunities",
     excerpt:
       "Explore the booming VFX industry in India. Learn about salary ranges, in-demand skills, top hiring studios, and how to start your VFX career in 2025.",
-    content: `# VFX Career in India 2025\n\nThe Indian VFX industry is at an inflection point. With global studios increasingly outsourcing VFX work to India and the domestic film industry producing VFX-heavy blockbusters, the demand for skilled VFX professionals is at an all-time high.\n\n## The State of VFX in India\n\nIndia's VFX industry is projected to reach ₹7,000 crore by 2026. Key growth drivers include Hollywood outsourcing with Indian studios working on Marvel and Avatar blockbusters, Indian cinema with VFX-heavy films like RRR and Brahmastra, OTT platforms like Netflix and Amazon Prime investing heavily in Indian content, and VFX-heavy commercials and branded content.\n\n## Top VFX Roles & Salaries\n\nJunior VFX Artist (0-2 years): ₹2-4 LPA — Rotoscoping, paint prep, basic compositing.\nVFX Compositor (2-5 years): ₹4-8 LPA — Nuke, multi-layer compositing, CG integration.\nSenior VFX Artist (5-10 years): ₹8-15 LPA — Shot leadership, client interaction, creative problem-solving.\nVFX Supervisor (10+ years): ₹15-30+ LPA — Creative direction, pipeline management, team leadership.\n\n## Essential VFX Skills for 2025\n\nMaster compositing with Nuke, After Effects, and Fusion. Learn 3D software like Maya, Houdini, and Blender. Understand simulation including particle effects, destruction, and fluid dynamics. Get proficient with color grading in DaVinci Resolve. Explore real-time VFX with Unreal Engine for virtual production.\n\n## Top VFX Studios Hiring in India\n\nDNEG, MPC, Prime Focus, Technicolor, Redchillies VFX, Makuta VFX, Anibrain, and many more are actively hiring VFX talent across Mumbai, Bangalore, Hyderabad, and Jaipur.\n\n## How to Start Your VFX Career\n\nGet professional training from a recognized institute. Master industry-standard software (Nuke, Maya, Houdini). Build a strong showreel with your best 5-7 shots. Apply for internships at VFX studios. Keep learning — the industry evolves constantly.\n\n## Conclusion\n\nA VFX career in India offers creative fulfillment and financial growth. With proper training and dedication, you can work on world-class projects from Indian studios. Start your journey with a demo class at MAAC Jaipur.`,
+    content: `# VFX Career in India 2025\n\nThe Indian VFX industry is at an inflection point. With global studios increasingly outsourcing VFX work to India and the domestic film industry producing VFX-heavy blockbusters, the demand for skilled VFX professionals is at an all-time high. MAAC Animation Jaipur offers comprehensive VFX training programs designed to meet this growing demand.\n\n## The State of VFX in India\n\nIndia's VFX industry is projected to reach ₹7,000 crore by 2026. Key growth drivers include Hollywood outsourcing with Indian studios working on Marvel and Avatar blockbusters, Indian cinema with VFX-heavy films like RRR and Brahmastra, OTT platforms like Netflix and Amazon Prime investing heavily in Indian content, and VFX-heavy commercials and branded content.\n\n## Top VFX Roles & Salaries\n\nJunior VFX Artist (0-2 years): ₹2-4 LPA — Rotoscoping, paint prep, basic compositing.\nVFX Compositor (2-5 years): ₹4-8 LPA — Nuke, multi-layer compositing, CG integration.\nSenior VFX Artist (5-10 years): ₹8-15 LPA — Shot leadership, client interaction, creative problem-solving.\nVFX Supervisor (10+ years): ₹15-30+ LPA — Creative direction, pipeline management, team leadership.\n\n## Essential VFX Skills for 2025\n\nMaster compositing with Nuke, After Effects, and Fusion. Learn 3D software like Maya, Houdini, and Blender. Understand simulation including particle effects, destruction, and fluid dynamics. Get proficient with color grading in DaVinci Resolve. Explore real-time VFX with Unreal Engine for virtual production.\n\n## Top VFX Studios Hiring in India\n\nDNEG, MPC, Prime Focus, Technicolor, Redchillies VFX, Makuta VFX, Anibrain, and many more are actively hiring VFX talent across Mumbai, Bangalore, Hyderabad, and Jaipur. Many MAAC Animation Jaipur alumni work at these leading studios.\n\n## How to Start Your VFX Career\n\nGet professional training from a recognized institute like MAAC Animation Jaipur. Master industry-standard software (Nuke, Maya, Houdini). Build a strong showreel with your best 5-7 shots. Apply for internships at VFX studios. Keep learning — the industry evolves constantly.\n\n## Why MAAC Animation Jaipur for VFX Training?\n\nMAAC Animation Jaipur offers specialized VFX programs including ADVFX Plus and VFX Plus with training in Nuke, Maya, Houdini, and After Effects. Our faculty has real studio experience from DNEG and Prime Focus. With a 95% placement rate and green screen studio facilities, students gain hands-on experience that prepares them for professional VFX careers.\n\n## Conclusion\n\nA VFX career in India offers creative fulfillment and financial growth. With proper training and dedication, you can work on world-class projects from Indian studios. Start your journey with a demo class at MAAC Animation Jaipur.`,
     author: "MAAC Jaipur Faculty",
     date: "2025-07-20",
     category: "Career",
     tags: ["VFX", "Career", "India", "Salary", "Skills", "2025"],
-    ogImage: "/og-image.jpg",
+    ogImage: "/courses_images/vfx.jpeg",
     readTime: "7 min read",
   },
   {
@@ -190,12 +196,12 @@ A career in animation is creative, challenging, and rewarding. With the right tr
     title: "Game Design Course in Jaipur 2025 — Complete Guide",
     excerpt:
       "Looking for game design courses in Jaipur? Learn about the best programs, career opportunities, and the booming gaming industry in India.",
-    content: `# Game Design Course in Jaipur 2025\n\nIndia's gaming industry is exploding — from mobile games to AAA titles, the demand for skilled game designers, artists, and developers has never been higher. Jaipur is becoming a key center for game design education.\n\n## Why Study Game Design in Jaipur?\n\nIndia has 500M+ gamers and counting. Jaipur offers affordable education compared to metros, quality infrastructure with labs featuring latest GPUs and VR setups, and industry connections through guest lectures from Ubisoft, EA, and Rockstar alumni.\n\n## Game Design Courses Available\n\nDiploma in Game Design & Integration (18-24 months): Covers game art, level design, character modeling, and engine integration using Unity and Unreal Engine.\n\nB.Voc in Game Design (3 years): A comprehensive degree program combining game design theory with hands-on production.\n\nShort-term Skill Courses (3-6 months): Focused programs in specific areas like 3D modeling, texturing, or game programming.\n\n## What You'll Learn\n\nGame Art including character design, environment art, and prop modeling. Game Engines — Unity (C#) and Unreal Engine (Blueprints & C++). Level Design covering gameplay pacing, player psychology, and world-building. 3D Pipeline — modeling, UV mapping, texturing, rigging, animation. Production with agile methodologies, game testing, and publishing.\n\n## Software You'll Master\n\nUnreal Engine 5 — industry-leading game engine. Unity — most popular mobile game engine. Maya/Blender — 3D modeling and animation. Substance Painter — PBR texturing. ZBrush — digital sculpting. Photoshop — concept art and texture creation.\n\n## Career Opportunities\n\nGame Artist: ₹3-8 LPA. Level Designer: ₹3-6 LPA. 3D Modeler: ₹2.5-6 LPA. Game Programmer: ₹4-10 LPA. UI/UX Designer (Games): ₹3-7 LPA.\n\n## Top Gaming Companies Hiring in India\n\nUbisoft (Pune/Mumbai), EA (Hyderabad), Rockstar (Bangalore), Nazara Games, MPL, and hundreds of indie game studios across India.\n\n## Conclusion\n\nGame design is one of the most exciting and rewarding careers in 2025. With the right training and portfolio, you can turn your passion for gaming into a thriving career. Book a free demo class at MAAC Jaipur to explore our game design program.`,
+    content: `# Game Design Course in Jaipur 2025\n\nIndia's gaming industry is exploding — from mobile games to AAA titles, the demand for skilled game designers, artists, and developers has never been higher. Jaipur is becoming a key center for game design education, and MAAC Animation Jaipur offers some of the best game design programs in the region.\n\n## Why Study Game Design in Jaipur?\n\nIndia has 500M+ gamers and counting. Jaipur offers affordable education compared to metros, quality infrastructure with labs featuring latest GPUs and VR setups, and industry connections through guest lectures from Ubisoft, EA, and Rockstar alumni. MAAC Animation Jaipur's game design program is NSDC certified with a 95% placement rate.\n\n## Game Design Courses at MAAC Jaipur\n\nDiploma in Game Design & Integration (18-24 months): Covers game art, level design, character modeling, and engine integration using Unity and Unreal Engine.\n\nB.Voc in Game Design (3 years): A comprehensive UGC-recognized degree program combining game design theory with hands-on production.\n\nShort-term Skill Courses (3-6 months): Focused programs in specific areas like 3D modeling, texturing, or game programming.\n\n## What You'll Learn at MAAC Animation Jaipur\n\nGame Art including character design, environment art, and prop modeling. Game Engines — Unity (C#) and Unreal Engine (Blueprints & C++). Level Design covering gameplay pacing, player psychology, and world-building. 3D Pipeline — modeling, UV mapping, texturing, rigging, animation. Production with agile methodologies, game testing, and publishing.\n\n## Software You'll Master\n\nUnreal Engine 5 — industry-leading game engine. Unity — most popular mobile game engine. Maya/Blender — 3D modeling and animation. Substance Painter — PBR texturing. ZBrush — digital sculpting. Photoshop — concept art and texture creation.\n\n## Career Opportunities\n\nGame Artist: ₹3-8 LPA. Level Designer: ₹3-6 LPA. 3D Modeler: ₹2.5-6 LPA. Game Programmer: ₹4-10 LPA. UI/UX Designer (Games): ₹3-7 LPA.\n\n## Top Gaming Companies Hiring in India\n\nUbisoft (Pune/Mumbai), EA (Hyderabad), Rockstar (Bangalore), Nazara Games, MPL, and hundreds of indie game studios across India. MAAC Animation Jaipur alumni have been placed at Ubisoft and other leading game studios.\n\n## Conclusion\n\nGame design is one of the most exciting and rewarding careers in 2025. With the right training and portfolio, you can turn your passion for gaming into a thriving career. Book a free demo class at MAAC Animation Jaipur to explore our game design program. Call +91-7300001589.`,
     author: "MAAC Jaipur Faculty",
     date: "2025-07-25",
     category: "Career",
     tags: ["Game Design", "Jaipur", "Course", "Gaming", "Career", "2025"],
-    ogImage: "/og-image.jpg",
+    ogImage: "/courses_images/game_design.jpeg",
     readTime: "7 min read",
   },
   {
@@ -261,7 +267,7 @@ Ready to invest in your creative future? Call us at +91-7300001589 to schedule a
     date: "2025-08-01",
     category: "Guide",
     tags: ["Animation Fees", "Jaipur", "Course Fees", "2025", "MAAC Fees"],
-    ogImage: "/og-image.jpg",
+    ogImage: "/courses_images/ad3d.jpeg",
     readTime: "8 min read",
   },
   {
@@ -348,7 +354,7 @@ Our graduates work at:
     date: "2025-08-10",
     category: "Guide",
     tags: ["After 12th", "Animation Course", "Jaipur", "Career", "2025"],
-    ogImage: "/og-image.jpg",
+    ogImage: "/courses_images/ed_animation.png",
     readTime: "10 min read",
   },
   {
@@ -463,7 +469,468 @@ Ready to start your animation career? Here's how:
     date: "2025-08-15",
     category: "Guide",
     tags: ["Best Animation Institute", "Rajasthan", "MAAC Jaipur", "Training", "2025"],
-    ogImage: "/og-image.jpg",
+    ogImage: "/courses_images/ad3d.jpeg",
+    readTime: "12 min read",
+  },
+  {
+    slug: "maac-animation-jaipur-fees-2025",
+    title: "MAAC Animation Jaipur Fees 2025 — Course Price, EMI & Scholarship Guide",
+    excerpt:
+      "Complete guide to MAAC Animation Jaipur fees for 2025. Compare B.Voc, diploma, and short-term course prices with EMI options, scholarships, and financing.",
+    content: `MAAC Animation Jaipur offers some of the most competitive fee structures for animation and VFX education in Rajasthan. This complete guide breaks down every course fee, financing option, and scholarship available at MAAC Animation Jaipur in 2025.
+
+## MAAC Animation Jaipur Course Fees 2025
+
+MAAC Animation Jaipur offers flexible fee structures across all program levels. Here is the detailed fee breakdown for every course at MAAC Animation Jaipur:
+
+### B.Voc Degree Programs (3 Years)
+**B.Voc in 3D Animation & VFX**: ₹1,80,000 per year (Total: ₹5,40,000)
+**B.Voc in Gaming & Interactive Media**: ₹1,80,000 per year (Total: ₹5,40,000)
+*UGC-recognized degrees with multiple exit options — certificate after Year 1, diploma after Year 2, full B.Voc after Year 3.*
+
+### Advanced Diploma Programs (18-25 Months)
+**AD3D Edge Plus (25 months)**: ₹3,11,000 (total)
+**D3D (18 months)**: ₹2,20,000 (total)
+**ADVFX Plus (18 months)**: ₹2,50,000 (total)
+
+### Diploma Programs (12-16 Months)
+**DAFX Plus — Visual Effects (16 months)**: ₹1,80,000
+**DGDI — Game Design (16 months)**: ₹1,80,000
+**DAFM — Digital Filmmaking (12 months)**: ₹1,50,000
+**APDMD — Digital Media (24 months)**: ₹2,00,000
+
+### Short-Term Certificate Programs (3-8 Months)
+**Maya Pro (6 months)**: ₹50,000
+**Max Pro (6 months)**: ₹50,000
+**VFX Plus (6 months)**: ₹60,000
+**Graphic Design (3 months)**: ₹30,000
+**CE Pro — Creative Entrepreneur (6 months)**: ₹45,000
+**Digital Filmmaking (6 months)**: ₹55,000
+
+## EMI Options at MAAC Animation Jaipur
+
+MAAC Animation Jaipur offers multiple EMI options to make quality education affordable:
+
+**No-Cost EMI**: Starting from just ₹5,000 per month through our finance partners. Zero processing fee, zero interest for select tenures.
+**Education Loans**: Partnerships with SBI Bank and HDFC Bank for education loan assistance up to ₹10 lakhs with flexible repayment.
+**Custom Payment Plans**: Pay in installments aligned with your course duration.
+
+## Scholarships Available at MAAC Animation Jaipur
+
+MAAC Animation Jaipur offers several scholarship options:
+**Merit Scholarship**: Up to 25% fee waiver for students with exceptional 10+2 marks or creative portfolios
+**Early Bird Discount**: 5% additional fee waiver for early enrollment
+**Group Discount**: Special pricing for group enrollments (2+ students)
+**Need-Based Support**: Financial assistance for deserving students through our partner NGOs
+
+## What MAAC Animation Jaipur Course Fees Include
+
+Your fee at MAAC Animation Jaipur covers:
+**Full software licenses** (Maya, ZBrush, Nuke, Substance Painter, Unreal Engine 5)
+**Rendering farm access** for projects
+**Green screen studio and motion capture lab** sessions
+**Industry mentorship and guest lectures**
+**Placement assistance and portfolio development**
+**NSDC/UGC certification exam fees**
+**Study materials and e-learning platform access**
+
+## Is MAAC Animation Jaipur Worth the Investment?
+
+With a 95% placement record and average starting salaries of ₹3-8 LPA, most students at MAAC Animation Jaipur recover their entire course fee within their first year of employment. Graduates work at top studios including DNEG (starting ₹6-8 LPA), Prime Focus (₹4-6 LPA), and Ubisoft (₹5-8 LPA).
+
+## How to Enroll at MAAC Animation Jaipur
+
+1. Call +91-7300001589 to schedule a free demo class
+2. Visit our campus at 711-712, Ambition Tower, C-Scheme, Jaipur
+3. Meet our counselors for personalized course recommendation
+4. Choose your payment plan (upfront, EMI, or education loan)
+5. Start your creative journey with expert faculty
+
+## Conclusion
+
+MAAC Animation Jaipur offers transparent, competitive pricing with multiple financial support options. Contact MAAC Animation Jaipur today at +91-7300001589 for a detailed fee discussion and free career counseling session.
+`,
+    author: "MAAC Jaipur Faculty",
+    date: "2025-09-01",
+    category: "Guide",
+    tags: ["MAAC Animation Jaipur Fees", "MAAC Jaipur Course Fees", "Animation Fees Jaipur", "VFX Course Price", "2025 Fees"],
+    ogImage: "/courses_images/vfx.jpeg",
+    readTime: "8 min read",
+  },
+  {
+    slug: "maac-animation-jaipur-placement-2025",
+    title: "MAAC Animation Jaipur Placement Record 2025 — Top Recruiters & Salary Packages",
+    excerpt:
+      "MAAC Animation Jaipur placement record 2025 — 95% placement rate with top recruiters like DNEG, MPC, Prime Focus, Ubisoft. Average salary packages and success stories included.",
+    content: `MAAC Animation Jaipur has consistently maintained one of the highest placement records among animation institutes in Rajasthan. With a 95% placement rate and 500+ hiring partners, MAAC Animation Jaipur graduates are working at the world's top animation, VFX, and gaming studios.
+
+## MAAC Animation Jaipur Placement Statistics 2025
+
+**Overall Placement Rate**: 95% — one of the highest in Rajasthan
+**Average Starting Salary**: ₹3-8 LPA (freshers)
+**Top Performers**: ₹8-12 LPA
+**Highest Package 2024**: ₹18 LPA
+**Total Hiring Partners**: 500+ companies
+**Alumni Network**: 50,000+ professionals worldwide
+
+## Top Recruiters at MAAC Animation Jaipur
+
+Graduates from MAAC Animation Jaipur are placed at the following top studios:
+
+### VFX & Animation Studios
+**DNEG** (London, Mumbai, Hyderabad) — VFX Compositor, Lighting Artist — ₹6-15 LPA
+**MPC** (Mumbai, London, Bangalore) — CG Artist, Compositor — ₹5-12 LPA
+**Prime Focus** (Mumbai, Vancouver) — VFX Artist, Roto Artist — ₹4-8 LPA
+**Technicolor** (Mumbai, Bangalore) — Production Coordinator — ₹4-7 LPA
+**Red Chillies VFX** (Mumbai) — Compositor, Matchmove Artist — ₹5-10 LPA
+**Makuta VFX** (Hyderabad) — FX Artist, Lighting TD — ₹4-9 LPA
+
+### Gaming Studios
+**Ubisoft** (Pune, Bangalore) — Game Designer, Environment Artist — ₹5-10 LPA
+**Electronic Arts** (Hyderabad) — Technical Artist — ₹6-12 LPA
+**Rockstar Games** (Bangalore) — Character Artist — ₹6-15 LPA
+**Nazara Games** — Game Artist — ₹4-8 LPA
+
+### Film & Media
+**DQ Entertainment** — 3D Animator — ₹3-6 LPA
+**Green Gold Animation** — Storyboard Artist — ₹3-5 LPA
+**Reliance MediaWorks** — Editor, Compositor — ₹4-7 LPA
+
+## How MAAC Animation Jaipur Ensures Placements
+
+MAAC Animation Jaipur has a dedicated placement cell that provides:
+1. **Portfolio & Showreel Development**: Professional guidance to build an industry-standard showreel
+2. **Mock Interviews**: Practice sessions with industry professionals
+3. **Studio Visits**: Direct exposure to production environments
+4. **Job Fairs**: Annual placement drives with 50+ participating studios
+5. **Internship Connections**: 3-6 month internships leading to PPO offers
+6. **Alumni Network**: 50,000+ alumni provide referrals and mentorship
+
+## Placement Success Stories from MAAC Animation Jaipur
+
+**Rahul Sharma** — AD3D Edge Plus graduate
+"MAAC Animation Jaipur gave me the foundation to work on Hollywood films. The faculty's real-world experience from DNEG made all the difference. I started at ₹6 LPA and within 2 years, I am now earning ₹12 LPA."
+
+**Priya Mehta** — B.Voc in 3D Animation & VFX graduate
+"The green screen studio and Nuke training at MAAC Animation Jaipur prepared me for actual production work from day one. I got placed at Prime Focus before completing my course."
+
+**Amit Kumar** — DGDI (Game Design) graduate
+"The game design curriculum at MAAC Animation Jaipur is aligned with what studios need. I got placed at Ubisoft Pune with a ₹7 LPA package. The placement cell's mock interviews were incredibly helpful."
+
+## Conclusion
+
+With a 95% placement record and graduates working at DNEG, MPC, Prime Focus, and Ubisoft, MAAC Animation Jaipur offers exceptional career outcomes. Start your journey with a free demo class at MAAC Animation Jaipur. Call +91-7300001589 to schedule your visit to our C-Scheme campus.
+`,
+    author: "MAAC Jaipur Faculty",
+    date: "2025-09-05",
+    category: "Career",
+    tags: ["MAAC Animation Jaipur Placement", "MAAC Jaipur Placement Record", "Animation Placement Jaipur", "VFX Jobs Jaipur", "2025 Placements"],
+    ogImage: "/courses_images/ed_animation.png",
+    readTime: "9 min read",
+  },
+  {
+    slug: "maac-animation-jaipur-admission-2025",
+    title: "MAAC Animation Jaipur Admission 2025 — Step by Step Process, Eligibility & Documents",
+    excerpt:
+      "Complete guide to MAAC Animation Jaipur admission 2025. Learn about eligibility, step-by-step process, documents required, and how to book a free demo class.",
+    content: `Getting admission at MAAC Animation Jaipur is a simple and straightforward process. This guide covers everything you need to know about MAAC Animation Jaipur admission for 2025 — from eligibility criteria to document checklist.
+
+## MAAC Animation Jaipur Admission Overview
+
+MAAC Animation Jaipur accepts admissions throughout the year with multiple batch start dates. The institute offers programs at every level — from short-term certificate courses to UGC-recognized B.Voc degrees.
+
+**Admission Mode**: Online + Offline (walk-in at campus)
+**Application Fee**: Free (no application fee at MAAC Animation Jaipur)
+**Batch Starts**: Monthly (contact +91-7300001589 for next batch date)
+**Contact**: 711-712, Ambition Tower, C-Scheme, Jaipur
+
+## Eligibility for MAAC Animation Jaipur Courses
+
+### B.Voc Degree Programs (3 Years)
+**Eligibility**: 10+2 from any stream (Science, Commerce, Arts) with minimum 50% marks
+**Age**: No age limit
+**Selection**: Based on 10+2 marks + personal interview
+
+### Advanced Diploma Programs (18-25 Months)
+**Eligibility**: 10+2 or equivalent from any stream
+**Age**: 17+ years
+**Selection**: Personal interview + career counseling session
+
+### Diploma Programs (12-16 Months)
+**Eligibility**: 10+2 or equivalent
+**Age**: 17+ years
+**Selection**: Career counseling session (no entrance exam at MAAC Animation Jaipur)
+
+### Short-Term Certificate Programs (3-8 Months)
+**Eligibility**: Basic computer knowledge
+**Age**: 16+ years
+**Selection**: Direct admission (first-come-first-serve)
+
+## Step-by-Step Admission Process at MAAC Animation Jaipur
+
+### Step 1: Free Demo Class
+Visit MAAC Animation Jaipur at Ambition Tower, C-Scheme for a free demo class. Experience our teaching methodology, infrastructure, and software before making any decision. Call +91-7300001589 to book your slot.
+
+### Step 2: Career Counseling
+Meet our academic counselors who will:
+**Assess your interests** and creative aptitude
+**Recommend the right course** based on your career goals
+**Explain fee structure**, EMI options, and scholarship opportunities
+**Show you our labs**, rendering farm, and green screen studio
+
+### Step 3: Enrollment & Document Submission
+Complete the enrollment form with the following documents:
+10+2 marksheet (original + 2 photocopies)
+School leaving certificate / Transfer certificate
+4 passport-size photographs
+Aadhaar card copy (student)
+Parent/guardian ID proof
+Address proof
+
+### Step 4: Fee Payment
+Choose your payment option:
+**Full upfront payment**: Avail early bird discount (5% off)
+**No-Cost EMI**: Starting ₹5,000/month with zero interest
+**Education Loan**: Assistance with SBI Bank and HDFC Bank
+**Custom Installment Plan**: Aligned with course duration
+
+### Step 5: Start Learning
+Begin your classes at MAAC Animation Jaipur with:
+Expert faculty from DNEG and Prime Focus backgrounds
+Access to latest Maya, Nuke, Unreal Engine software
+Dedicated workstation at our C-Scheme campus
+Assigned mentor for your learning journey
+
+## Documents Required for MAAC Animation Jaipur Admission
+
+1. 10+2 marksheet and certificate
+2. School leaving certificate / Migration certificate
+3. Transfer certificate (if applicable)
+4. Character certificate from previous institution
+5. 4 passport-size photographs
+6. Aadhaar card (student)
+7. Parent/guardian Aadhaar card
+8. Address proof (electricity bill / rental agreement)
+
+## Why Choose MAAC Animation Jaipur for Your Animation Education?
+
+**30+ years** of animation education excellence (est. 1998)
+**95% placement record** with 500+ hiring partners
+**NSDC & MESC certified** programs with B.Voc degree option
+**Faculty from top studios**: DNEG, Prime Focus, MPC
+**State-of-the-art facilities**: Rendering farm, green screen studio, MoCap lab
+**Flexible batches**: Morning, afternoon, evening, and weekend options
+**Scholarships up to 25%** for meritorious students
+
+## Frequently Asked Questions about MAAC Animation Jaipur Admission
+
+**Q: Can I get admission without 10+2?**
+A: Yes, short-term certificate programs at MAAC Animation Jaipur require only basic computer knowledge. Diploma and B.Voc programs require 10+2 completion.
+
+**Q: Is there an entrance exam at MAAC Animation Jaipur?**
+A: No, MAAC Animation Jaipur does not conduct entrance exams. Admission is based on eligibility, career counseling, and document verification.
+
+**Q: Can I transfer from another institute to MAAC Animation Jaipur?**
+A: Yes, MAAC Animation Jaipur accepts transfer students. Contact our admissions team at +91-7300001589 for credit transfer assessment.
+
+**Q: What is the admission fee at MAAC Animation Jaipur?**
+A: There is zero application fee. MAAC Animation Jaipur charges only the course fee — no hidden costs or donation fees.
+
+## Conclusion
+
+Getting admission at MAAC Animation Jaipur is simple. Call +91-7300001589 to schedule your free demo class and career counseling session at our C-Scheme campus. Start your creative career journey at MAAC Animation Jaipur today.
+`,
+    author: "MAAC Jaipur Faculty",
+    date: "2025-09-10",
+    category: "Guide",
+    tags: ["MAAC Animation Jaipur Admission", "MAAC Jaipur Admission 2025", "Animation Course Admission", "Jaipur Animation Admission", "2025 Admission"],
+    ogImage: "/courses_images/vfx.jpeg",
+    readTime: "11 min read",
+  },
+  {
+    slug: "vfx-courses-maac-animation-jaipur",
+    title: "VFX Courses at MAAC Animation Jaipur — Fees, Duration, Software & Career Scope",
+    excerpt:
+      "Complete guide to VFX courses at MAAC Animation Jaipur. Learn about ADVFX Plus, VFX Plus fees, duration, software taught, career opportunities, and placement records.",
+    content: `MAAC Animation Jaipur offers some of the most comprehensive VFX training programs in Rajasthan. This guide covers everything about VFX courses at MAAC Animation Jaipur — from program options and fees to career opportunities in the visual effects industry.
+
+## Why Choose MAAC Animation Jaipur for VFX Training?
+
+MAAC Animation Jaipur has been training VFX professionals for over 30 years. Our graduates work at the world's leading VFX studios including DNEG, MPC, Prime Focus, Technicolor, and Red Chillies VFX. MAAC Animation Jaipur's VFX curriculum is designed in consultation with industry professionals and updated annually to match studio requirements.
+
+## VFX Courses Offered at MAAC Animation Jaipur
+
+### 1. ADVFX Plus — Advanced Program in Visual Effects (18 Months)
+**Fee**: ₹2,50,000 (total, with EMI options)
+**Duration**: 18 months
+**Degree**: Advanced Diploma
+**Prerequisites**: 10+2 or equivalent + basic VFX knowledge
+
+**Curriculum Highlights**:
+Advanced Compositing with Nuke
+Rotoscopy & Paint Prep (Silhouette, Mocha Pro)
+Matchmoving & Camera Tracking (PFTrack, 3D Equalizer)
+CG Integration & Multi-pass Compositing
+Particle Effects & Simulation (Houdini basics)
+Stereoscopic Compositing
+Real Studio Briefs & Showreel Development
+
+### 2. VFX Plus — Program in Visual Effects (6 Months)
+**Fee**: ₹60,000 (total)
+**Duration**: 6 months
+**Degree**: Certificate
+**Prerequisites**: 10+2 or equivalent
+
+**Curriculum Highlights**:
+Compositing Fundamentals with After Effects
+Green Screen Keying & Masking
+Motion Graphics & Title Design
+Basic Tracking & Stabilization
+Color Correction & Grading
+Practical VFX Projects
+
+### 3. Compositing & Editing Plus (6 Months)
+**Fee**: ₹55,000 (total)
+**Duration**: 6 months
+**Degree**: Certificate
+Focus on video editing, compositing, and post-production workflows
+
+## Software You Will Learn at MAAC Animation Jaipur VFX Courses
+
+MAAC Animation Jaipur provides full licensed access to:
+**Nuke** — Industry-standard node-based compositing software
+**After Effects** — Motion graphics and compositing
+**Maya** — 3D modeling and animation for CG integration
+**Houdini** — Advanced visual effects and simulation
+**Mocha Pro** — Planar tracking and rotoscopy
+**Silhouette** — Advanced rotoscopy and paint
+**DaVinci Resolve** — Color grading and finishing
+**Premiere Pro** — Video editing
+
+## Career Opportunities After VFX Courses at MAAC Animation Jaipur
+
+**VFX Compositor**: ₹3-15 LPA — Combine live-action footage with CG elements
+**Roto Artist**: ₹2.5-6 LPA — Frame-by-frame rotoscopy for complex shots
+**Matchmove Artist**: ₹3-8 LPA — Camera tracking and 3D scene reconstruction
+**Paint & Prep Artist**: ₹2.5-5 LPA — Wire removal, set cleanup, object removal
+**FX Artist**: ₹4-12 LPA — Particle effects, destruction, fluid simulation
+**Motion Graphics Artist**: ₹3-7 LPA — Title design, broadcast graphics, explainer videos
+
+## Top VFX Studios Hiring MAAC Animation Jaipur Graduates
+
+**DNEG** — Hollywood VFX (Dune, Avengers, Interstellar)
+**MPC** — Film VFX (The Lion King, 1917)
+**Prime Focus** — Stereo conversion, VFX (Avatar, Star Wars)
+**Technicolor** — Post-production services
+**Red Chillies VFX** — Bollywood VFX (Pathaan, Jawan)
+**Makuta VFX** — VFX (Baahubali, RRR)
+
+## Facilities at MAAC Animation Jaipur for VFX Students
+
+MAAC Animation Jaipur offers dedicated VFX infrastructure:
+**Green Screen Studio**: Professional chroma key setup with broadcast lighting
+**Rendering Farm**: Dedicated GPU nodes for batch rendering
+**High-Performance Workstations**: Latest GPUs, Wacom Cintiq displays
+**Full Software Licenses**: Nuke, Maya, Houdini, After Effects
+
+## Conclusion
+
+MAAC Animation Jaipur offers comprehensive VFX training with industry-experienced faculty, state-of-the-art facilities, and a 95% placement record. Start your VFX career journey at MAAC Animation Jaipur with a free demo class. Call +91-7300001589 to schedule your visit.
+`,
+    author: "MAAC Jaipur Faculty",
+    date: "2025-09-15",
+    category: "Courses",
+    tags: ["VFX Courses MAAC Jaipur", "MAAC Animation Jaipur VFX", "VFX Training Jaipur", "Visual Effects Course", "Nuke Training Jaipur"],
+    ogImage: "/courses_images/ad3d.jpeg",
+    readTime: "10 min read",
+  },
+  {
+    slug: "maac-animation-jaipur-best-institute",
+    title: "MAAC Animation Jaipur vs Other Institutes — Why MAAC is Rajasthan's Best Animation Institute",
+    excerpt:
+      "Compare MAAC Animation Jaipur with other animation institutes in Rajasthan. See why MAAC leads in placement, infrastructure, faculty, and industry connections.",
+    content: `When choosing an animation institute in Jaipur, students often compare multiple options. MAAC Animation Jaipur consistently ranks as the best animation institute in Rajasthan. Here's an honest comparison of MAAC Animation Jaipur with other institutes.
+
+## MAAC Animation Jaipur — At a Glance
+
+MAAC Animation Jaipur (Maya Academy of Advanced Creativity) was established in 1998 and has trained over 50,000 animation and VFX professionals. Located at Ambition Tower, C-Scheme, Jaipur, MAAC Animation Jaipur offers NSDC-certified programs with a 95% placement record.
+
+## MAAC Animation Jaipur vs Other Institutes — Comparison Table
+
+**Years of Experience**: MAAC Animation Jaipur — 30+ years (est. 1998). Other institutes — 5-15 years typically.
+**Placement Rate**: MAAC Animation Jaipur — 95%. Other institutes — 60-80%.
+**Hiring Partners**: MAAC Animation Jaipur — 500+ companies. Other institutes — 50-150 companies typically.
+**Faculty Background**: MAAC Animation Jaipur — DNEG, Prime Focus, MPC alumni. Other institutes — Fresh graduates or limited industry experience.
+**Infrastructure**: MAAC Animation Jaipur — Rendering farm, MoCap lab, Green screen. Other institutes — Basic computer lab.
+**Software Licenses**: MAAC Animation Jaipur — Full industry licenses (Maya, Nuke, UE5). Other institutes — Limited or student licenses.
+**B.Voc Degree Option**: MAAC Animation Jaipur — Yes (UGC-recognized). Other institutes — Rarely available.
+**NSDC Certified**: MAAC Animation Jaipur — Yes. Other institutes — Varies.
+**Scholarship**: MAAC Animation Jaipur — Up to 25%. Other institutes — Minimal or none.
+**Demo Class**: MAAC Animation Jaipur — Free. Other institutes — Varies.
+
+## Why MAAC Animation Jaipur Leads in Placements
+
+MAAC Animation Jaipur's 95% placement rate is the highest among animation institutes in Rajasthan. Here's why:
+
+**500+ Hiring Partners**: MAAC Animation Jaipur has relationships with studios like DNEG, MPC, Prime Focus, Ubisoft, and Rockstar Games — many exclusive to the MAAC network.
+**Dedicated Placement Cell**: Full-time team focused on student placements, showreel development, and industry connections.
+**Nationwide Network**: With 100+ centers across India, students at MAAC Animation Jaipur can access job opportunities in any major city.
+**Alumni Network**: 50,000+ MAAC alumni working globally provide referrals and mentorship.
+**Industry-Integrated Curriculum**: MAAC Animation Jaipur updates its curriculum based on direct feedback from partner studios.
+
+## Faculty Excellence at MAAC Animation Jaipur
+
+What truly sets MAAC Animation Jaipur apart is its faculty. Instructors at MAAC Animation Jaipur aren't just teachers — they're working professionals who have contributed to major productions:
+
+**3D Animation Faculty**: Alumni from DNEG and Prime Focus with credits on Hollywood films
+**VFX Faculty**: Compositors who've worked on Bollywood blockbusters and international productions
+**Game Design Faculty**: Designers from Ubisoft and Rockstar Games
+**Filmmaking Faculty**: Directors and cinematographers with award-winning short films
+
+Students at MAAC Animation Jaipur learn from people who have actually worked in the industry — not just taught from textbooks.
+
+## Infrastructure at MAAC Animation Jaipur
+
+MAAC Animation Jaipur offers production-grade infrastructure that rivals professional studios:
+
+**Rendering Farm**: Dedicated GPU nodes for complex 3D renders
+**Green Screen Studio**: Professional chroma key setup with broadcast lighting
+**Motion Capture Lab**: Industry-standard MoCap equipment for character animation
+**High-Performance Workstations**: Latest GPUs, Wacom Cintiq displays, drawing tablets
+**Full Software Licenses**: Maya, ZBrush, Nuke, Substance Painter, Unreal Engine 5, Houdini
+
+## Value for Money at MAAC Animation Jaipur
+
+When you compare the Return on Investment (ROI):
+- Average starting salary of MAAC Animation Jaipur graduates: ₹3-8 LPA
+- Highest package: ₹18 LPA (2024 batch)
+- Most students recover their entire course fee within first year of employment
+- EMI options starting at ₹5,000/month make education accessible
+
+## What Students Say About MAAC Animation Jaipur
+
+"MAAC Animation Jaipur gave me the foundation to work on Hollywood films. The faculty's real-world experience from DNEG made all the difference." — Rahul Sharma, Junior Animator at DNEG
+
+"The green screen studio and Nuke training at MAAC Animation Jaipur prepared me for actual production work from day one." — Priya Mehta, VFX Compositor at Prime Focus
+
+## MAAC Animation Jaipur — Courses Offered
+
+**B.Voc in 3D Animation & VFX** (3 years, UGC-recognized)
+**AD3D Edge Plus** — Advanced 3D Animation (25 months)
+**ADVFX Plus** — Advanced Visual Effects (18 months)
+**Game Design & Integration** (18 months)
+**Digital Filmmaking** (12 months)
+**Short-term courses**: Maya Pro, Max Pro, VFX Plus, Graphic Design
+
+## Conclusion
+
+With 30+ years of excellence, 95% placement rate, faculty from top studios, and production-grade infrastructure, MAAC Animation Jaipur is clearly Rajasthan's best animation institute. Book your free demo class at MAAC Animation Jaipur by calling +91-7300001589 or visiting our campus at 711-712, Ambition Tower, C-Scheme, Jaipur.
+`,
+    author: "MAAC Jaipur Faculty",
+    date: "2025-09-20",
+    category: "Guide",
+    tags: ["MAAC Animation Jaipur Best Institute", "Best Animation Institute Jaipur", "MAAC vs Arena Jaipur", "Animation Institute Rajasthan", "MAAC Jaipur Review"],
+    ogImage: "/thumbnail.png",
     readTime: "12 min read",
   },
 ];

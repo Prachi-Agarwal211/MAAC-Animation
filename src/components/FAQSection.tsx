@@ -4,7 +4,7 @@ import FadeIn from "@/components/animations/FadeIn";
 import SplitTextReveal from "@/components/ui/SplitTextReveal";
 import FAQAccordion from "@/components/ui/FAQAccordion";
 
-const faqs = faqSchema.mainEntity.slice(0, 6);
+const faqs = faqSchema.mainEntity.slice(0, 10);
 
 export default function FAQSection() {
   return (

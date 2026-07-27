@@ -67,6 +67,7 @@ export default async function BlogPostPage({ params }: Props) {
     "headline": post.title,
     "description": post.excerpt,
     "datePublished": post.date,
+    "dateModified": post.date,
     "author": { "@type": "Person", "name": post.author },
     "publisher": {
       "@type": "EducationalOrganization",
@@ -77,10 +78,22 @@ export default async function BlogPostPage({ params }: Props) {
     "image": post.ogImage.startsWith("http") ? post.ogImage : `https://www.maacanimationjaipur.com${post.ogImage}`,
   };
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.maacanimationjaipur.com" },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.maacanimationjaipur.com/blog" },
+      { "@type": "ListItem", "position": 3, "name": post.title, "item": `https://www.maacanimationjaipur.com/blog/${post.slug}` },
+    ],
+  };
+
   return (
     <>
-      <h1 className="sr-only">{post.title}</h1>
-      <Script id="blogpost-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+      <Script id="blogpost-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@graph": [articleSchema, breadcrumbSchema]
+      }) }} />
       <BlogPostClient post={post} />
     </>
   );

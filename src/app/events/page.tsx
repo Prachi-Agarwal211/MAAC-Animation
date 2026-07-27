@@ -34,22 +34,104 @@ export default function EventsPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
-      <h1 className="sr-only">MAAC Events - Campus Life & Competitions at MAAC Animation Jaipur</h1>
+
       <Script
         id="events-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "CollectionPage",
-            name: "Events - MAAC Animation Jaipur",
-            description: "MAAC Events - At MAAC, our dedicated team works tirelessly throughout the year to organize exciting events across various locations.",
-            url: "https://www.maacanimationjaipur.com/events",
-            publisher: {
-              "@type": "Organization",
-              name: "MAAC Animation Jaipur",
-              sameAs: "https://www.maacanimationjaipur.com",
-            },
+            "@graph": [
+              {
+                "@type": "CollectionPage",
+                name: "Events - MAAC Animation Jaipur",
+                description: "MAAC Events - At MAAC Animation Jaipur, our dedicated team works tirelessly throughout the year to organize exciting events across various locations.",
+                url: "https://www.maacanimationjaipur.com/events",
+                publisher: {
+                  "@type": "Organization",
+                  name: "MAAC Animation Jaipur",
+                  sameAs: "https://www.maacanimationjaipur.com",
+                },
+              },
+              {
+                "@type": "Event",
+                "name": "CREATA & RAIN Awards - National Animation Competition",
+                "description": "National-level animation and creativity competition organized by MAAC Animation Jaipur for students across India.",
+                "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+                "eventStatus": "https://schema.org/EventScheduled",
+                "startDate": "2025-09-15",
+                "endDate": "2025-09-30",
+                "location": {
+                  "@type": "Place",
+                  "name": "MAAC Animation Jaipur",
+                  "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "711-712, Ambition Tower, 7th Floor, Subhash Marg, C Scheme",
+                    "addressLocality": "Jaipur",
+                    "addressRegion": "Rajasthan",
+                    "postalCode": "302001",
+                    "addressCountry": "IN"
+                  }
+                },
+                "organizer": {
+                  "@type": "EducationalOrganization",
+                  "name": "MAAC Animation Jaipur",
+                  "url": "https://www.maacanimationjaipur.com"
+                }
+              },
+              {
+                "@type": "Event",
+                "name": "100-Hour Film Marathon - MAAC Jaipur",
+                "description": "Annual filmmaking marathon where students create short films in 100 hours, organized by MAAC Animation Jaipur.",
+                "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+                "eventStatus": "https://schema.org/EventScheduled",
+                "startDate": "2025-10-10",
+                "endDate": "2025-10-14",
+                "location": {
+                  "@type": "Place",
+                  "name": "MAAC Animation Jaipur",
+                  "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "711-712, Ambition Tower, 7th Floor, Subhash Marg, C Scheme",
+                    "addressLocality": "Jaipur",
+                    "addressRegion": "Rajasthan",
+                    "postalCode": "302001",
+                    "addressCountry": "IN"
+                  }
+                },
+                "organizer": {
+                  "@type": "EducationalOrganization",
+                  "name": "MAAC Animation Jaipur",
+                  "url": "https://www.maacanimationjaipur.com"
+                }
+              },
+              {
+                "@type": "Event",
+                "name": "Industry Masterclass Series - MAAC Jaipur",
+                "description": "Regular masterclasses by industry professionals from DNEG, MPC, Prime Focus, and Ubisoft organized by MAAC Animation Jaipur.",
+                "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+                "eventStatus": "https://schema.org/EventScheduled",
+                "startDate": "2025-09-05",
+                "endDate": "2025-12-20",
+                "location": {
+                  "@type": "Place",
+                  "name": "MAAC Animation Jaipur",
+                  "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "711-712, Ambition Tower, 7th Floor, Subhash Marg, C Scheme",
+                    "addressLocality": "Jaipur",
+                    "addressRegion": "Rajasthan",
+                    "postalCode": "302001",
+                    "addressCountry": "IN"
+                  }
+                },
+                "organizer": {
+                  "@type": "EducationalOrganization",
+                  "name": "MAAC Animation Jaipur",
+                  "url": "https://www.maacanimationjaipur.com"
+                }
+              }
+            ]
           }),
         }}
       />

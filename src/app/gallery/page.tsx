@@ -15,7 +15,7 @@ export default function GalleryPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
-      <h1 className="sr-only">Photo Gallery - MAAC Animation Jaipur Campus & Student Work</h1>
+
       <GalleryClient />
     </>
   );
