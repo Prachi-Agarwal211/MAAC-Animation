@@ -304,7 +304,7 @@ const nextConfig = {
               "font-src 'self' https://fonts.gstatic.com",
               "img-src 'self' data: blob: https://www.maacanimationjaipur.com https://img.youtube.com https://i.ytimg.com https://www.facebook.com",
               "media-src 'self' blob:",
-              "connect-src 'self' https://www.google-analytics.com https://www.facebook.com https://graph.facebook.com",
+              "connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://www.googleadservices.com https://www.facebook.com https://graph.facebook.com",
               "frame-src 'self' https://www.googletagmanager.com https://www.youtube.com https://player.vimeo.com",
               "object-src 'none'",
               "base-uri 'self'",

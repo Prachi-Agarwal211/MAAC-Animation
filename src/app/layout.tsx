@@ -251,40 +251,27 @@ export default function RootLayout({
             Configure IDs in .env (see .env.example for full guide)
         ===================================================================== */}
 
-        {/* Google Tag Manager (Recommended for Google Ads + GA4) */}
-        {process.env.NEXT_PUBLIC_GTM_ID && (
-          <Script
-            id="gtm"
-            strategy="afterInteractive"
-            dangerouslySetInnerHTML={{
-              __html: `
-                (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-                })(window,document,'script','dataLayer','${process.env.NEXT_PUBLIC_GTM_ID}');
-              `,
-            }}
-          />
-        )}
-
         {/* Google Ads global site tag (gtag.js) */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=AW-827036079"
-          strategy="afterInteractive"
-        />
-        <Script
-          id="google-ads"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'AW-827036079');
-            `,
-          }}
-        />
+        {process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_ID && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script
+              id="google-ads"
+              strategy="afterInteractive"
+              dangerouslySetInnerHTML={{
+                __html: `
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_ID}');
+                `,
+              }}
+            />
+          </>
+        )}
 
         <script
           type="application/ld+json"
@@ -294,18 +281,6 @@ export default function RootLayout({
       <body
         className={`${manrope.variable} ${syne.variable} font-body antialiased text-[#F0EBE1] bg-[#0C0C0C]`}
       >
-        {/* Google Tag Manager noscript fallback (for users with JS disabled) */}
-        {process.env.NEXT_PUBLIC_GTM_ID && (
-          <noscript>
-            <iframe
-              src={`https://www.googletagmanager.com/ns.html?id=${process.env.NEXT_PUBLIC_GTM_ID}`}
-              height="0"
-              width="0"
-              style={{ display: "none", visibility: "hidden" }}
-            />
-          </noscript>
-        )}
-
         <Suspense fallback={<div className="fixed inset-0 bg-bg-primary" />}>
           <DynamicBackground />
         </Suspense>
