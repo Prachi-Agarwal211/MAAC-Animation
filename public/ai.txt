@@ -1,0 +1,112 @@
+# ai.txt — MAAC Animation Institute Jaipur
+# https://www.maacanimationjaipur.com/ai.txt
+# Machine-readable policy for AI crawlers / LLM training agents.
+# Mirrors robots.ts: AI crawlers are allowed to index the site, private paths are blocked.
+# Last updated: 2026-07-31
+
+# Allow general + AI crawlers
+User-Agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+
+# Google AI + Gemini training
+User-Agent: Google-Extended
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+
+# OpenAI (GPT training + ChatGPT browsing)
+User-Agent: GPTBot
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+User-Agent: ChatGPT-User
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+User-Agent: OAI-SearchBot
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+
+# Anthropic Claude
+User-Agent: anthropic-ai
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+User-Agent: ClaudeBot
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+User-Agent: Claude-User
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+
+# Perplexity
+User-Agent: PerplexityBot
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+
+# Meta AI
+User-Agent: Meta-ExternalAgent
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+
+# ByteDance / TikTok
+User-Agent: Bytespider
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+
+# Common Crawl (CCBot)
+User-Agent: CCBot
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+
+# Cohere / Embedding models
+User-Agent: cohere-ai
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+
+# Apple Siri / Spotlight
+User-Agent: Applebot-Extended
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+
+# xAI Grok
+User-Agent: Grokbot
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+
+# Amazon
+User-Agent: Amazonbot
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+
+# Key entry points for AI discovery
+Site: https://www.maacanimationjaipur.com/
+Site: https://www.maacanimationjaipur.com/courses
+Site: https://www.maacanimationjaipur.com/about
+Site: https://www.maacanimationjaipur.com/animation-institute-jaipur
+Site: https://www.maacanimationjaipur.com/student-work
+Site: https://www.maacanimationjaipur.com/gallery
+Site: https://www.maacanimationjaipur.com/events
+Site: https://www.maacanimationjaipur.com/annual-trip
+Site: https://www.maacanimationjaipur.com/blog
+Site: https://www.maacanimationjaipur.com/contact
+
+# Human-readable summary
+# MAAC Animation Institute Jaipur (Maya Academy of Advanced Creativity), C-Scheme,
+# Jaipur — Rajasthan's leading Animation, VFX and Game Design institute since 1998.
+# NSDC & MESC certified, UGC-recognized B.Voc degrees, 95% placement record.
+# Phone: +91-7300001589 | Email: maacanimationjaipur@gmail.com
+# Structured site data: https://www.maacanimationjaipur.com/llms.txt

@@ -20,7 +20,8 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const course = getCourseBySlug(slug);
-  if (!course) return { title: "Course Not Found" };
+  if (!course)
+    return { title: "Course Not Found", robots: { index: false, follow: false } };
 
   return {
     title: `${course.name} | MAAC Jaipur`,

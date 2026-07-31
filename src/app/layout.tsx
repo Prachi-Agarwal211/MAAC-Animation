@@ -125,6 +125,12 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: "https://www.maacanimationjaipur.com",
+    types: {
+      "text/plain": [
+        { url: "/llms.txt", title: "llms.txt" },
+        { url: "/ai.txt", title: "ai.txt" },
+      ],
+    },
   },
 };
 
@@ -241,8 +247,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
 
-        {/* Preload hero videos — highest priority, loads before anything else */}
-        <link rel="preload" as="video" href="/hero-video-compressed.mp4" fetchPriority="high" />
+        {/* Preload only the hero video — footer video lazy-loads itself (preload="none") */}
         <link rel="preload" as="video" href="/intro.mp4" fetchPriority="high" />
 
         {/* =====================================================================
@@ -299,9 +304,9 @@ export default function RootLayout({
           <a href="/courses">Courses</a>
           <a href="/courses/3d-animation">3D Animation</a>
           <a href="/courses/vfx">Visual Effects</a>
-          <a href="/courses/game-design">Game Design</a>
-          <a href="/courses/filmmaking-photo">Filmmaking</a>
-          <a href="/courses/specialized-boot">Bootcamp</a>
+          <a href="/courses/gaming-design">Game Design</a>
+          <a href="/courses/dfm">Filmmaking</a>
+          <a href="/courses/skill-enhancement">Bootcamp</a>
           <a href="/student-work">Student Work</a>
           <a href="/events">Events</a>
           <a href="/gallery">Gallery</a>

@@ -74,6 +74,43 @@ const nextConfig = {
         permanent: true,
       },
 
+      // Legacy category slugs → real course pages (were soft-404s served as 200)
+      {
+        source: "/courses/game-design",
+        destination: "/courses/gaming-design",
+        permanent: true,
+      },
+      {
+        source: "/courses/filmmaking-photo",
+        destination: "/courses/dfm",
+        permanent: true,
+      },
+      {
+        source: "/courses/specialized-boot",
+        destination: "/courses/skill-enhancement",
+        permanent: true,
+      },
+      {
+        source: "/courses/digital-content",
+        destination: "/courses/apdmd",
+        permanent: true,
+      },
+      {
+        source: "/courses/broadcast-motion",
+        destination: "/courses/vfx-plus",
+        permanent: true,
+      },
+      {
+        source: "/courses/specialized-bootcamp",
+        destination: "/courses/skill-enhancement",
+        permanent: true,
+      },
+      {
+        source: "/courses/filmmaking-photography",
+        destination: "/courses/dfm",
+        permanent: true,
+      },
+
       // Course redirects (WordPress → Next.js /courses/[slug])
       {
         source: "/3d-animation-course-in-jaipur/",
@@ -299,12 +336,12 @@ const nextConfig = {
             key: "Content-Security-Policy",
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://connect.facebook.net https://www.google-analytics.com https://www.googleadservices.com",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://connect.facebook.net https://www.google-analytics.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://www.gstatic.com https://adservice.google.com https://pagead2.googlesyndication.com",
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com",
-              "img-src 'self' data: blob: https://www.maacanimationjaipur.com https://img.youtube.com https://i.ytimg.com https://www.facebook.com",
+              "img-src 'self' data: blob: https://www.maacanimationjaipur.com https://img.youtube.com https://i.ytimg.com https://www.facebook.com https://static.xx.fbcdn.net https://lookaside.fbsbx.com https://pixel.facebook.com https://*.fbcdn.net https://www.google.com https://www.google.co.in https://googleads.g.doubleclick.net https://www.gstatic.com https://stats.g.doubleclick.net https://pagead2.googlesyndication.com https://adservice.google.com",
               "media-src 'self' blob:",
-              "connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://www.googleadservices.com https://www.facebook.com https://graph.facebook.com",
+              "connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://www.googleadservices.com https://www.facebook.com https://graph.facebook.com https://static.xx.fbcdn.net https://lookaside.fbsbx.com https://pixel.facebook.com https://*.fbcdn.net https://www.google.com https://www.google.co.in https://googleads.g.doubleclick.net https://stats.g.doubleclick.net https://www.gstatic.com https://pagead2.googlesyndication.com https://adservice.google.com",
               "frame-src 'self' https://www.googletagmanager.com https://www.youtube.com https://player.vimeo.com",
               "object-src 'none'",
               "base-uri 'self'",

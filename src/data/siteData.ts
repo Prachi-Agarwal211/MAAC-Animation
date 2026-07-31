@@ -213,47 +213,47 @@ export const courseMegaMenuJaipur: NavMegaGroup[] = [
   {
     title: "Digital Content Creation",
     links: [
-      { label: "APDMC Plus — Powered by CareerX | CreatorX", href: "/courses/digital-content" },
-      { label: "DGWA Plus", href: "/courses/digital-content" },
-      { label: "APDMD", href: "/courses/digital-content" },
-      { label: "UI/UX DESIGN PRO", href: "/courses/digital-content" },
+      { label: "APDMC Plus — Powered by CareerX | CreatorX", href: "/courses/apdmd" },
+      { label: "DGWA Plus", href: "/courses/apdmd" },
+      { label: "APDMD", href: "/courses/apdmd" },
+      { label: "UI/UX DESIGN PRO", href: "/courses/apdmd" },
     ],
   },
   {
     title: "Game Design",
     links: [
-      { label: "3DGAI", href: "/courses/game-design" },
-      { label: "APGDI", href: "/courses/game-design" },
-      { label: "PMGDI", href: "/courses/game-design" },
-      { label: "ADIDG Plus — Powered by CareerX | CreatorX NEW", href: "/courses/game-design" },
+      { label: "3DGAI", href: "/courses/gaming-design" },
+      { label: "APGDI", href: "/courses/gaming-design" },
+      { label: "PMGDI", href: "/courses/gaming-design" },
+      { label: "ADIDG Plus — Powered by CareerX | CreatorX NEW", href: "/courses/gaming-design" },
     ],
   },
   {
     title: "Motion Graphics & Broadcast",
     links: [
-      { label: "APMG", href: "/courses/broadcast-motion" },
-      { label: "BROADCAST PLUS", href: "/courses/broadcast-motion" },
+      { label: "APMG", href: "/courses/vfx-plus" },
+      { label: "BROADCAST PLUS", href: "/courses/vfx-plus" },
     ],
   },
   {
     title: "Skill Enhancement Courses",
     links: [
-      { label: "Blender Pro", href: "/courses/specialized-bootcamp" },
-      { label: "Cinema 4D Pro", href: "/courses/specialized-bootcamp" },
-      { label: "Max Pro", href: "/courses/specialized-bootcamp" },
-      { label: "Maya Pro", href: "/courses/specialized-bootcamp" },
-      { label: "Design Viz Pro", href: "/courses/specialized-bootcamp" },
-      { label: "Digital Photography", href: "/courses/specialized-bootcamp" },
+      { label: "Blender Pro", href: "/courses/skill-enhancement" },
+      { label: "Cinema 4D Pro", href: "/courses/skill-enhancement" },
+      { label: "Max Pro", href: "/courses/max-pro" },
+      { label: "Maya Pro", href: "/courses/maya-pro" },
+      { label: "Design Viz Pro", href: "/courses/design-viz-pro" },
+      { label: "Digital Photography", href: "/courses/skill-enhancement" },
       { label: "Advance Compositing", href: "/courses/vfx" },
       { label: "Compositing Plus", href: "/courses/vfx" },
-      { label: "GenAI for Digital Content Creators", href: "/courses/digital-content" },
+      { label: "GenAI for Digital Content Creators", href: "/courses/apdmd" },
     ],
   },
   {
     title: "Filmmaking",
     links: [
-      { label: "Digital Film Making", href: "/courses/filmmaking-photography" },
-      { label: "PPVP", href: "/courses/filmmaking-photography" },
+      { label: "Digital Film Making", href: "/courses/dfm" },
+      { label: "PPVP", href: "/courses/dfm" },
     ],
   },
   {
@@ -263,7 +263,7 @@ export const courseMegaMenuJaipur: NavMegaGroup[] = [
   {
     title: "Visual Arts & Design",
     links: [
-      { label: "IPVAD - XR — Powered by CareerX | CreatorX", href: "/courses/digital-content" },
+      { label: "IPVAD - XR — Powered by CareerX | CreatorX", href: "/courses/ipvad" },
     ],
   },
 ];

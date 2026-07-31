@@ -15,6 +15,7 @@ export default function MAACXHero({ onIntroReveal }: Props) {
   const bgRef = useRef<HTMLDivElement>(null);
   const heroVideoRef = useRef<HTMLVideoElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const introSignaledRef = useRef(false);
 
   const [isMuted, setIsMuted] = useState(true);
   const [loaded, setLoaded] = useState(false);
@@ -52,12 +53,22 @@ export default function MAACXHero({ onIntroReveal }: Props) {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const timer = setTimeout(() => setLoaded(true), 100);
-    return () => clearTimeout(timer);
+    // No delay gate — text is visible in first paint; entrance is transform-only
+    setLoaded(true);
   }, []);
 
   useEffect(() => {
     if (!loaded || !contentRef.current) return;
+
+    // Reduced motion: content is already visible (no opacity gate) — just signal done (once)
+    if (isReducedMotion) {
+      if (!introSignaledRef.current) {
+        introSignaledRef.current = true;
+        onIntroReveal?.();
+        window.dispatchEvent(new Event("maac:intro_revealed"));
+      }
+      return;
+    }
 
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
@@ -67,23 +78,21 @@ export default function MAACXHero({ onIntroReveal }: Props) {
         },
       });
 
-      tl.to(contentRef.current, { opacity: 1, duration: 0.1 })
-        .fromTo(
-          ".maacx-element",
-          { opacity: 0, y: 40 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 1.2,
-            ease: "expo.out",
-            stagger: 0.2,
-          }
-        )
+      // Transform-only entrance — never hides text, so LCP paints in first frame
+      tl.fromTo(
+        ".maacx-element",
+        { y: 24 },
+        {
+          y: 0,
+          duration: 1.2,
+          ease: "expo.out",
+          stagger: 0.2,
+        }
+      )
         .fromTo(
           ".hero-glass-card",
-          { opacity: 0, y: 30, scale: 0.95 },
+          { y: 20, scale: 0.97 },
           {
-            opacity: 1,
             y: 0,
             scale: 1,
             duration: 1,
@@ -94,7 +103,7 @@ export default function MAACXHero({ onIntroReveal }: Props) {
     }, contentRef);
 
     return () => ctx.revert();
-  }, [loaded, onIntroReveal]);
+  }, [loaded, onIntroReveal, isReducedMotion]);
 
   useEffect(() => {
     if (isReducedMotion) return;
@@ -142,6 +151,7 @@ export default function MAACXHero({ onIntroReveal }: Props) {
           playsInline
           loop
           autoPlay={!isDataSaver}
+          poster="/hero-poster.jpg"
           preload={isDataSaver ? "metadata" : "auto"}
         >
           <source src="/intro.mp4" type="video/mp4" />
@@ -151,7 +161,7 @@ export default function MAACXHero({ onIntroReveal }: Props) {
 
       <div
         ref={contentRef}
-        className="hero-content relative z-10 mx-auto flex min-h-[100svh] w-full max-w-content flex-col justify-end px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-[calc(4rem+env(safe-area-inset-top))] sm:px-8 sm:pb-10 sm:pt-[calc(5.5rem+env(safe-area-inset-top))] lg:px-16 lg:pb-12 xl:px-24 xl:pb-14 opacity-0 will-change-transform"
+        className="hero-content relative z-10 mx-auto flex min-h-[100svh] w-full max-w-content flex-col justify-end px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-[calc(4rem+env(safe-area-inset-top))] sm:px-8 sm:pb-10 sm:pt-[calc(5.5rem+env(safe-area-inset-top))] lg:px-16 lg:pb-12 xl:px-24 xl:pb-14 will-change-transform"
       >
         <div className="flex w-full flex-col gap-10 md:gap-16 lg:flex-row lg:items-end lg:justify-between lg:gap-12">
           {/* Left: Hero Text */}
