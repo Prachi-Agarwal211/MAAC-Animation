@@ -16,6 +16,7 @@ export const initLenis = () => {
     lerp: 0.08, // Slightly faster = less input lag
     smoothWheel: true,
     infinite: false,
+    anchors: true, // route <a href="#..."> through Lenis so CSS/JS never fight
   });
 
   // Hook ScrollTrigger to Lenis scroll event
@@ -37,6 +38,24 @@ export const initLenis = () => {
 };
 
 export const getLenis = () => lenis;
+
+// Single entry point for programmatic scrolling: Lenis when active, native otherwise.
+// ponytail: all scrollTo/scrollIntoView callers should use this so they never bypass Lenis.
+export const scrollToTarget = (
+  target: string | number | HTMLElement,
+  opts?: { offset?: number; immediate?: boolean }
+) => {
+  if (lenis) {
+    lenis.scrollTo(target, opts);
+    return;
+  }
+  if (typeof target === "number") {
+    window.scrollTo({ top: target, behavior: opts?.immediate ? "auto" : "smooth" });
+    return;
+  }
+  const el = typeof target === "string" ? document.querySelector(target) : target;
+  el?.scrollIntoView({ behavior: opts?.immediate ? "auto" : "smooth", block: "start" });
+};
 
 // NEW: Proper destroy function that resets singleton
 export const destroyLenis = () => {

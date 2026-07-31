@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { useGSAP } from "@gsap/react";
-import { initLenis, destroyLenis } from "@/lib/lenis";
+import { initLenis, destroyLenis, scrollToTarget } from "@/lib/lenis";
 import { ScrollTrigger } from "@/lib/gsap";
 
 export default function LenisProvider({
@@ -22,9 +22,9 @@ export default function LenisProvider({
     };
   }, []);
 
-  // Scroll to top on route change
+  // Scroll to top on route change (instant — Lenis immediate so ScrollTrigger stays in sync)
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "auto" });
+    scrollToTarget(0, { immediate: true });
   }, [pathname]);
 
   useGSAP(() => {

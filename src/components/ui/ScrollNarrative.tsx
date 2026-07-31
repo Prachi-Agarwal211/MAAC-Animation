@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect, useCallback } from "react";
+import { scrollToTarget } from "@/lib/lenis";
 
 const sections = [
   { id: "hero", label: "Home" },
@@ -46,10 +47,7 @@ export default function ScrollNarrative() {
   }, []);
 
   const scrollTo = useCallback((id: string) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+    scrollToTarget(`#${id}`);
   }, []);
 
   return (

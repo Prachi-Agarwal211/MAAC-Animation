@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { ArrowUp } from "lucide-react";
+import { scrollToTarget } from "@/lib/lenis";
 
 export default function ScrollIndicator() {
 
@@ -29,7 +30,7 @@ export default function ScrollIndicator() {
   }, [updateScrollProgress]);
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    scrollToTarget(0);
   };
 
   return (

@@ -1934,11 +1934,9 @@ select:focus-visible {
   transition: font-variation-settings 0.3s var(--ease-expo);
 }
 
-/* Desktop-only smooth scrolling to avoid iOS jank/heating */
-@media (min-width: 768px) {
-  html {
-    scroll-behavior: smooth;
-  }
+/* Lenis owns all smooth scrolling. CSS smooth + Lenis = double engine, fighting scrollTop every frame (jank). */
+html {
+  scroll-behavior: auto;
 }
 
 /* ═══════════════════════════════════════════════════════
