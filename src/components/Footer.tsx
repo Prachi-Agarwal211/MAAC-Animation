@@ -175,8 +175,13 @@ export default function Footer() {
             <Link href="/terms-of-service" className="text-white/85 hover:text-white text-[10px] font-medium tracking-wide transition-colors">Terms</Link>
             <Link href="/sitemap.xml" className="text-white/85 hover:text-white text-[10px] font-medium tracking-wide transition-colors">Sitemap</Link>
           </div>
-          <p className="text-white/85 text-[10px] font-medium tracking-wide">
-            Made by <a href="https://reverbex.in" target="_blank" rel="noopener noreferrer" className="text-white/85 hover:text-white transition-colors">Reverbex.in</a>
+          <p className="text-white/85 text-[10px] font-medium tracking-wide inline-flex items-center gap-1.5">
+            <span>Designed &amp; Engineered by</span>
+            <a href="https://reverbex.in" target="_blank" rel="noopener noreferrer" className="text-[#C4A882] hover:text-white font-semibold transition-colors inline-flex items-center gap-1.5">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/reverbex-logo.png" alt="Reverbex Technology" className="w-4 h-4 rounded object-contain" />
+              <span>Reverbex Technology</span>
+            </a>
           </p>
         </div>
       </div>

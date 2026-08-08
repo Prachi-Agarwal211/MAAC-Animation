@@ -5,6 +5,7 @@ import { Send, ShieldCheck } from "lucide-react";
 import { submitContactForm } from "@/app/actions";
 import { getUtmParams } from "@/lib/utm";
 import { trackLead } from "@/lib/tracking";
+import { saveLead, trackSectionClick } from "@/lib/metrics-store";
 
 export default function ApplyNowForm() {
   const formRef = useRef<HTMLFormElement>(null);
@@ -52,6 +53,17 @@ export default function ApplyNowForm() {
       const result = await submitContactForm(data);
       if (result.success) {
         setSubmitted(true);
+        try {
+          saveLead({
+            name: formData.name,
+            phone: formData.phone,
+            email: formData.email,
+            product: "Apply Now Form Submission",
+            message: formData.message,
+            sourcePage: window.location.pathname || "/"
+          });
+          trackSectionClick("sec-2");
+        } catch {}
         // Fire Lead event to Meta + Google Ads (unified)
         trackLead({
           content_name: "Apply Now Form",

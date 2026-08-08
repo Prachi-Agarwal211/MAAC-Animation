@@ -160,6 +160,12 @@ const jsonLd = {
       image: "https://www.maacanimationjaipur.com/thumbnail.png",
       description:
         "MAAC Jaipur C-Scheme is Rajasthan's leading Animation, VFX and Game Design institute. Offering B.Voc, Diploma and short-term courses. NSDC & MESC certified with 95% placement support.",
+      creator: {
+        "@type": "Organization",
+        name: "Reverbex Technology",
+        url: "https://reverbex.in",
+        description: "Elite Software Engineering, AI Automations, and Web Systems.",
+      },
       foundingDate: "1998",
       numberOfEmployees: { "@type": "QuantitativeValue", minValue: 20 },
       paymentAccepted: "Cash, Credit Card, Debit Card, UPI, Education Loan",

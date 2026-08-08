@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { getConsent, setConsent, revokeConsent } from "@/lib/cookie-consent";
 import { X } from "lucide-react";
+import { saveLead, trackSectionClick } from "@/lib/metrics-store";
 
 export default function CookieConsent() {
   const [visible, setVisible] = useState(false);
@@ -24,6 +25,16 @@ export default function CookieConsent() {
 
   const handleAcceptAll = useCallback(() => {
     setConsent({ analytics: true, marketing: true });
+    try {
+      saveLead({
+        name: "Website Visitor (Cookie Consent Accepted)",
+        phone: "+91 (Cookie Consent Given)",
+        product: "Full Cookie Consent Accepted",
+        message: "User accepted analytics & marketing tracking cookies.",
+        sourcePage: typeof window !== "undefined" ? window.location.pathname : "/"
+      });
+      trackSectionClick("sec-cookie-accept");
+    } catch {}
     setVisible(false);
   }, []);
 
