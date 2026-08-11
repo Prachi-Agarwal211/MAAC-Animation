@@ -90,10 +90,20 @@ export default function Footer() {
                 { Icon: SocialIcons.Instagram, url: contactInfo.social.instagram, label: "Instagram" },
                 { Icon: SocialIcons.Youtube, url: contactInfo.social.youtube, label: "YouTube" },
                 { Icon: SocialIcons.Linkedin, url: contactInfo.social.linkedin, label: "LinkedIn" },
-              ].map((social, i) => (                 <a key={i} href={social.url} className="w-10 h-10 rounded-full bg-white/[0.06] border border-white/10 flex items-center justify-center text-white/85 hover:text-[#C4A882] hover:border-[#C4A882]/40 transition-all duration-300" aria-label={social.label} target="_blank" rel="noopener noreferrer">
-                  <social.Icon />
-                </a>
-              ))}
+              ]
+                .filter((social) => Boolean(social.url))
+                .map((social) => (
+                  <a
+                    key={social.label}
+                    href={social.url}
+                    className="w-10 h-10 rounded-full bg-white/[0.06] border border-white/10 flex items-center justify-center text-white/85 hover:text-[#C4A882] hover:border-[#C4A882]/40 transition-all duration-300"
+                    aria-label={social.label}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <social.Icon />
+                  </a>
+                ))}
             </div>
           </div>
 
@@ -174,6 +184,18 @@ export default function Footer() {
             <Link href="/privacy-policy" className="text-white/85 hover:text-white text-[10px] font-medium tracking-wide transition-colors">Privacy</Link>
             <Link href="/terms-of-service" className="text-white/85 hover:text-white text-[10px] font-medium tracking-wide transition-colors">Terms</Link>
             <Link href="/sitemap.xml" className="text-white/85 hover:text-white text-[10px] font-medium tracking-wide transition-colors">Sitemap</Link>
+            <a href="https://www.maac.in" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white text-[10px] font-medium tracking-wide transition-colors inline-flex items-center gap-1">
+              MAAC India
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="shrink-0"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+            </a>
+            <a href="https://nsdcindia.org" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white text-[10px] font-medium tracking-wide transition-colors inline-flex items-center gap-1">
+              NSDC Certified
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="shrink-0"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+            </a>
+            <a href="https://mesc.gov.in" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white text-[10px] font-medium tracking-wide transition-colors inline-flex items-center gap-1">
+              MESC
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="shrink-0"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+            </a>
           </div>
           <p className="text-white/85 text-[10px] font-medium tracking-wide inline-flex items-center gap-1.5">
             <span>Designed &amp; Engineered by</span>

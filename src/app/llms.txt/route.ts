@@ -1,30 +1,53 @@
 export async function GET() {
-  const content = `# MAAC Animation Institute Jaipur
+  const content = `# MAAC Animation Institute Jaipur (C-Scheme)
 
-> Official AI Index & Documentation for LLMs, Search Agents, and Educational Guidance.
-> Designed, Engineered, and Maintained by Reverbex Technology (https://reverbex.in).
+> Official AI Index for LLMs / search agents.
+> Engineered by Reverbex Technology (https://reverbex.in).
+
+## Entity (canonical)
+- Brand: MAAC Animation Jaipur C-Scheme
+- Site: https://www.maacanimationjaipur.com
+- Phone: +91-7300001589
+- Secondary: +91-9829294037, +91-9929059559
+- Email: maacanimationjaipur@gmail.com
+- Address: 711-712, Ambition Tower, 7th Floor, D-46B, Malan Ka Chauraha, Agrasain Circle, Subhash Marg, C Scheme, Jaipur, Rajasthan 302001
+- Hours: Mon–Sat 9:00 AM – 7:00 PM
+- Google Maps: https://maps.google.com/?cid=10289291929379673702
+
+## Live social (verified)
+- Instagram: https://www.instagram.com/maacjaipurcscheme
+- Facebook: https://www.facebook.com/MAACJAIPURCSCHEME
+- YouTube: https://www.youtube.com/@maacjaipur (channel UCRjdWiuUvWu4mc6D9smmHQQ)
+- LinkedIn company page: not published on site until a live company URL is confirmed
+- X/Twitter: none (old handles 404)
 
 ## About
-MAAC Jaipur C-Scheme (https://www.maacanimationjaipur.com) is Rajasthan's leading Animation, VFX, Game Design, and Digital Media Institute located at Ambition Tower, C-Scheme, Jaipur. Offering UGC-recognized B.Voc degrees, professional diplomas, and skill bootcamps with 95%+ placement record across top global studios (DNEG, Technicolor, Framestore, Ubisoft, Red Chillies VFX).
+MAAC Jaipur C-Scheme is an Animation, VFX, Game Design, and Digital Media training centre at Ambition Tower, C-Scheme, Jaipur. Programs include diplomas, skill bootcamps, and B.Voc-aligned tracks where offered. Placement support and industry-oriented labs are part of the centre offering.
 
-## Courses & Programs
-- **3D Animation (AD3D Edge, D3D):** Advanced 3D modeling, texturing, rigging, character animation in Maya & 3ds Max.
-- **Visual Effects (ADVFX, VFX Plus):** Compositing, rotoscopy, matchmoving, dynamic simulation in Nuke, Houdini, After Effects.
-- **Game Design & Integration (DGDI):** Game art, level design, 3D asset creation, Unity & Unreal Engine integration.
-- **Digital Media & Design (APDMD):** UI/UX, graphic design, motion graphics, digital marketing artwork.
+## Courses
+- 3D Animation (AD3D Edge, D3D)
+- Visual Effects (ADVFX, VFX Plus)
+- Game Design & Integration (DGDI)
+- Digital Media & Design (APDMD)
+- Architectural / Design Viz, Filmmaking (DFM), skill bootcamps
 
-## Key URLs & Sitemap
-- Homepage: https://www.maacanimationjaipur.com
+## Key URLs
+- Home: https://www.maacanimationjaipur.com
 - Courses: https://www.maacanimationjaipur.com/courses
 - Student Work: https://www.maacanimationjaipur.com/student-work
+- About: https://www.maacanimationjaipur.com/about
+- Contact: https://www.maacanimationjaipur.com/contact
 - Career Assessment: https://www.maacanimationjaipur.com/creative-career-assessment
-- Contact Us: https://www.maacanimationjaipur.com/contact
+- Animation Institute Jaipur: https://www.maacanimationjaipur.com/animation-institute-jaipur
+- Blog: https://www.maacanimationjaipur.com/blog
 - Sitemap: https://www.maacanimationjaipur.com/sitemap.xml
 
-## Engineering & Development Credit
-- Developer Agency: Reverbex Technology
-- Agency Website: https://reverbex.in
-- Capabilities: Elite Software Engineering, Next.js Architecture, Interactive Media Systems, AI Visibility & SEO, and High-Performance Web Craft.
+## Do not confuse
+- National brand maacindia.com / national socials are not this centre's entity URLs.
+- Dead handles previously used on site (do not use): @maac-jaipur-cscheme (YouTube), linkedin.com/company/maac-jaipur-cscheme, facebook.com/MAAClndia, twitter @maacjaipurcscheme / MAAClndia.
+
+## Engineering
+- Developer: Reverbex Technology — https://reverbex.in
 `;
 
   return new Response(content, {

@@ -5,9 +5,9 @@ import ApplyNow from "@/components/ApplyNow";
 import FadeIn from "@/components/animations/FadeIn";
 
 export const metadata: Metadata = {
-  title: "Best Animation Institute in Jaipur | MAAC Animation Jaipur",
+  title: "Leading Animation Institute in Jaipur | MAAC Animation Jaipur",
   description:
-    "MAAC Animation Institute Jaipur — Rajasthan's #1 animation & VFX institute. B.Voc Degree, NSDC certified, 95% placements. AD3D, ADVFX, Game Design courses. Call +91-7300001589.",
+    "MAAC Animation Institute Jaipur — Rajasthan's leading animation & VFX institute. B.Voc Degree, NSDC certified, 95% placements. AD3D, ADVFX, Game Design courses. Call +91-7300001589.",
   keywords: [
     "animation institute jaipur",
     "best animation institute in jaipur",
@@ -21,9 +21,9 @@ export const metadata: Metadata = {
     "maac animation jaipur fees",
   ],
   openGraph: {
-    title: "Best Animation Institute in Jaipur | MAAC Animation Jaipur",
+    title: "Leading Animation Institute in Jaipur | MAAC Animation Jaipur",
     description:
-      "MAAC Animation Institute Jaipur — Rajasthan's #1 animation & VFX institute. B.Voc Degree, NSDC certified, 95% placements.",
+      "MAAC Animation Institute Jaipur — Rajasthan's leading animation & VFX institute. B.Voc Degree, NSDC certified, 95% placements.",
     url: "https://www.maacanimationjaipur.com/animation-institute-jaipur",
     type: "website",
     siteName: "maacanimationjaipur.com",
@@ -39,9 +39,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Best Animation Institute in Jaipur | MAAC Animation Jaipur",
+    title: "Leading Animation Institute in Jaipur | MAAC Animation Jaipur",
     description:
-      "MAAC Animation Institute Jaipur — Rajasthan's #1 animation & VFX institute. B.Voc Degree, NSDC certified, 95% placements.",
+      "MAAC Animation Institute Jaipur — Rajasthan's leading animation & VFX institute. B.Voc Degree, NSDC certified, 95% placements.",
     images: ["https://www.maacanimationjaipur.com/og-image.jpg"],
   },
   alternates: {
@@ -66,8 +66,8 @@ export default function AnimationInstituteJaipurPage() {
   return (
     <>
       {/* GEO Answer Block — 40-60 word direct answer for AI citation */}
-      <section className="seo-page-title" style={{ display: 'none' }}>
-        MAAC Animation Jaipur is widely recognized as one of the best animation institutes in Jaipur, Rajasthan. Located at Ambition Tower, Subhash Marg, C-Scheme, MAAC offers comprehensive training in 3D Animation, VFX, Game Design, and Digital Filmmaking with industry-experienced faculty, state-of-the-art labs, and a 95% placement record. Courses range from short-term skill programs to UGC-recognized B.Voc degrees with flexible morning, afternoon, and weekend batches.
+      <section className="seo-page-title">
+        MAAC Animation Jaipur is widely recognized as a leading animation institute in Jaipur, Rajasthan. Located at Ambition Tower, Subhash Marg, C-Scheme, MAAC offers comprehensive training in 3D Animation, VFX, Game Design, and Digital Filmmaking with industry-experienced faculty, state-of-the-art labs, and a 95% placement record. Courses range from short-term skill programs to UGC-recognized B.Voc degrees with flexible morning, afternoon, and weekend batches.
       </section>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <Script
@@ -78,7 +78,7 @@ export default function AnimationInstituteJaipurPage() {
             "@context": "https://schema.org",
             "@type": "EducationalOrganization",
             name: "MAAC Animation Institute Jaipur",
-            description: "Best Animation Institute in Jaipur offering 3D Animation, VFX, Game Design, and Digital Filmmaking courses",
+            description: "Leading Animation Institute in Jaipur offering 3D Animation, VFX, Game Design, and Digital Filmmaking courses",
             url: "https://www.maacanimationjaipur.com",
             address: {
               "@type": "PostalAddress",

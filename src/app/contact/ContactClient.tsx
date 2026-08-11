@@ -7,7 +7,7 @@ import { MapPin, Phone, Mail, Send, ShieldCheck, Globe } from "lucide-react";
 import MagneticButton from "@/components/ui/MagneticButton";
 import { submitContactForm } from "@/app/actions";
 import { getUtmParams } from "@/lib/utm";
-import { trackLead } from "@/lib/tracking";
+import { trackLead, fireGoogleAdsConversion } from "@/lib/tracking";
 
 export default function ContactClient() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -68,6 +68,9 @@ export default function ContactClient() {
           value: 1,
           currency: "INR",
         });
+        fireGoogleAdsConversion(
+          "AW-827036079/Q7pOCJnU_-4CEK-jrooD",
+        );
         form.reset();
         successTimerRef.current = setTimeout(() => setSubmitSuccess(false), 5000);
       }
@@ -110,7 +113,17 @@ export default function ContactClient() {
                <p className="text-white/85 leading-relaxed text-sm">
                  711-712, Ambition Tower, 7th Floor, Agrasain Circle, Subhash Marg, Jaipur, 302001
                </p>
-               <a href="https://maps.google.com/maps?q=MAAC+Animation+Jaipur+711+Ambition+Tower+Subhash+Marg&ll=26.9139,75.7842" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-white text-[10px] font-bold uppercase tracking-wider group/link">
+               <a
+                 href="https://maps.google.com/maps?q=MAAC+Animation+Jaipur+711+Ambition+Tower+Subhash+Marg&ll=26.9139,75.7842"
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 onClick={() =>
+                   fireGoogleAdsConversion(
+                     "AW-827036079/nJFhCO63v9UcEK-jrooD",
+                   )
+                 }
+                 className="inline-flex items-center gap-2 text-white text-[10px] font-bold uppercase tracking-wider group/link"
+               >
                  Get Directions <Globe size={12} className="group-hover/link:rotate-12 transition-transform" />
                </a>
             </div>

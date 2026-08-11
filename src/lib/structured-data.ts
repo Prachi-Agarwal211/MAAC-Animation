@@ -355,11 +355,11 @@ export const localBusinessSchema = {
     ]
   },
   "sameAs": [
-    "https://www.facebook.com/maacjaipurcscheme",
+    "https://www.facebook.com/MAACJAIPURCSCHEME",
     "https://www.instagram.com/maacjaipurcscheme",
-    "https://www.youtube.com/@maac-jaipur-cscheme",
-    "https://www.linkedin.com/company/maac-jaipur-cscheme",
-    "https://www.wikidata.org/wiki/Q140635643",
+    "https://www.youtube.com/@maacjaipur",
+    "https://www.youtube.com/channel/UCRjdWiuUvWu4mc6D9smmHQQ",
+    "https://maps.google.com/?cid=10289291929379673702",
   ],
   "aggregateRating": {
     "@type": "AggregateRating",

@@ -14,7 +14,7 @@ export default function AnnualTripPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
-      <h1 className="sr-only">Annual Trips at MAAC Animation Jaipur - Student Adventures</h1>
+      <h1>Annual Trips at MAAC Animation Jaipur - Student Adventures</h1>
       <AnnualTripClient />
     </>
   );

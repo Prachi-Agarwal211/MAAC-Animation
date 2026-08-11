@@ -7,7 +7,7 @@ import { Suspense } from "react";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { contactInfo } from "@/data/siteData";
+import { contactInfo, organizationSameAs } from "@/data/siteData";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import PageTransition from "@/components/PageTransition";
 import Navbar from "@/components/Navbar";
@@ -46,11 +46,11 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.maacanimationjaipur.com"),
   title: {
-    default: "MAAC Animation Institute Jaipur | Best Animation, VFX Courses",
+    default: "MAAC Jaipur | Animation, VFX & Game Design",
     template: "%s | MAAC Animation"
   },
   description:
-    "MAAC Jaipur C-Scheme — Rajasthan's #1 Animation Institute. B.Voc Degree in 3D Animation, VFX & Game Design. 95% Placements. NSDC Certified. Call " + contactInfo.phone + ".",
+    "MAAC Jaipur C-Scheme offers 3D Animation, VFX, Game Design and Filmmaking courses with industry-focused training, portfolio development and placement support.",
   icons: {
     icon: [
       { url: '/maac-logo.png', type: 'image/png' },
@@ -92,25 +92,25 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://www.maacanimationjaipur.com",
     siteName: "MAAC Animation Jaipur",
-    title: "MAAC Animation Institute Jaipur | Best Animation, VFX Courses",
+    title: "MAAC Jaipur | Animation, VFX & Game Design",
     description:
-      "MAAC Jaipur C-Scheme — Rajasthan's #1 Animation Institute. B.Voc Degree in 3D Animation, VFX & Game Design. 95% Placements. NSDC Certified.",
+      "MAAC Jaipur C-Scheme offers 3D Animation, VFX, Game Design and Filmmaking courses with industry-focused training, portfolio development and placement support.",
     images: [
       {
         url: "https://www.maacanimationjaipur.com/thumbnail.png",
         width: 1200,
         height: 630,
-        alt: "MAAC Animation Jaipur C-Scheme - Best Animation Institute in Rajasthan",
+        alt: "MAAC Animation Jaipur C-Scheme - Leading Animation Institute in Rajasthan",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "MAAC Animation Jaipur | Best Animation, VFX Courses",
+    title: "MAAC Jaipur | Animation, VFX & Game Design",
     description:
-      "MAAC Jaipur C-Scheme — Rajasthan's #1 Animation Institute. B.Voc Degree in 3D Animation, VFX & Game Design. 95% Placements.",
+      "MAAC Jaipur C-Scheme — Animation, VFX & Game Design institute. B.Voc & diploma programs. NSDC certified.",
     images: ["https://www.maacanimationjaipur.com/thumbnail.png"],
-    site: "@maacjaipurcscheme",
+    // No twitter:site — @maacjaipurcscheme / MAAClndia handles 404 as of 2026-08-08
   },
   robots: {
     index: true,
@@ -170,7 +170,7 @@ const jsonLd = {
       numberOfEmployees: { "@type": "QuantitativeValue", minValue: 20 },
       paymentAccepted: "Cash, Credit Card, Debit Card, UPI, Education Loan",
       aggregateRating: { "@type": "AggregateRating", ratingValue: "4.9", reviewCount: "422", bestRating: "5", worstRating: "1" },
-      award: "FICCI BAF Awards 2024 - Best Animation Institute",
+      award: "FICCI BAF Awards 2024 - Leading Animation Institute",
       department: { "@type": "EducationalOrganization", name: "Placement Cell", description: "Dedicated placement assistance with 95% success rate" },
       alumni: { "@type": "AlumniOrganization", name: "MAAC Alumni Network", description: "50,000+ professionals working at top studios worldwide" },
       telephone: contactInfo.phone,
@@ -196,15 +196,7 @@ const jsonLd = {
           closes: "19:00",
         },
       ],
-      sameAs: [
-        "https://www.facebook.com/maacjaipurcscheme",
-        "https://www.instagram.com/maacjaipurcscheme",
-        "https://www.youtube.com/@maac-jaipur-cscheme",
-        "https://www.linkedin.com/company/maac-jaipur-cscheme",
-        "https://maps.google.com/maps?q=MAAC+Animation+Jaipur+711+Ambition+Tower+Subhash+Marg&ll=26.9139,75.7842",
-        // Google Business Profile
-        "https://maps.google.com/?cid=10289291929379673702", // MAAC Animation GBP (4.9★, Ambition Tower Jaipur)
-      ],
+      sameAs: organizationSameAs,
       hasOfferCatalog: {
         "@type": "OfferCatalog",
         name: "Animation & VFX Courses",

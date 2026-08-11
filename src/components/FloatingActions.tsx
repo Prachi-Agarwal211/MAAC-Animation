@@ -3,6 +3,7 @@
 import { useRef, useState, useEffect } from "react";
 import { contactInfo } from "@/data/siteData";
 import Link from "next/link";
+import { fireGoogleAdsConversion } from "@/lib/tracking";
 
 interface FloatingActionsProps {
   variant?: "desktop" | "mobile";
@@ -67,6 +68,9 @@ function DesktopCTA() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat on WhatsApp"
+        onClick={() =>
+          fireGoogleAdsConversion("AW-827036079/oHxaCInpqO8CEK-jrooD")
+        }
         className="group flex items-center justify-end gap-3"
       >
         <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-[#25D366] opacity-0 translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 whitespace-nowrap">
@@ -145,6 +149,9 @@ function MobileBottomNav() {
           href={whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() =>
+            fireGoogleAdsConversion("AW-827036079/oHxaCInpqO8CEK-jrooD")
+          }
           className="flex-1 flex flex-col items-center justify-center py-4 bg-[#25D366]/10 text-[#25D366] rounded-[24px] gap-1 active:scale-[0.95] transition-all"
         >
           <WhatsAppIcon size={20} />

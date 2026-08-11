@@ -92,3 +92,21 @@ export function trackCustomEvent(eventName: string, params?: Record<string, unkn
     console.error("trackCustomEvent error:", e instanceof Error ? e.message : e);
   }
 }
+
+/**
+ * Fire a specific Google Ads conversion event with its send_to label.
+ * Use for named conversions (Get Directions, WhatsApp, Lead Form, etc.).
+ * Only fires if marketing consent has been given.
+ */
+export function fireGoogleAdsConversion(send_to: string, eventParams?: Record<string, unknown>): void {
+  if (typeof window === "undefined") return;
+  if (!hasMarketingConsent()) return;
+
+  try {
+    if (typeof w?.gtag === "function") {
+      w.gtag("event", "conversion", { send_to, ...(eventParams ?? {}) });
+    }
+  } catch (e) {
+    console.error("fireGoogleAdsConversion error:", e instanceof Error ? e.message : e);
+  }
+}

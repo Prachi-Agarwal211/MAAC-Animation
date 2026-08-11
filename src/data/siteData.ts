@@ -295,6 +295,15 @@ export const navLinks: NavLinkItem[] = [
   { label: "Contact", href: "/contact", mobileOnly: true },
 ];
 
+/**
+ * Canonical NAP + socials for MAAC Jaipur C-Scheme only.
+ * Verified 2026-08-08:
+ * - Instagram: maacjaipurcscheme (live)
+ * - Facebook: MAACJAIPURCSCHEME (live; not national MAAClndia)
+ * - YouTube: @maacjaipur / UCRjdWiuUvWu4mc6D9smmHQQ (live; NOT @maac-jaipur-cscheme 404)
+ * - LinkedIn company slug used on site was 404 — leave empty until real company URL confirmed
+ * - X/Twitter handles on site were 404 — omit until real
+ */
 export const contactInfo = {
   phone: "+91-7300001589",
   phoneSecondary: "+91-9829294037",
@@ -306,12 +315,23 @@ export const contactInfo = {
   googleMapsUrl: "https://maps.google.com/?cid=10289291929379673702",
   hours: "Mon–Sat 9:00 AM – 7:00 PM",
   social: {
-    instagram:
-      "https://www.instagram.com/maacjaipurcscheme?igsh=OGluNWQybHI2cjBv&utm_source=qr",
-    linkedin: "https://www.linkedin.com/company/maac-jaipur-cscheme",
-    youtube: "https://youtube.com/@maac-jaipur-cscheme?si=QiPdIu3guJaDr3cB",
-    facebook: "https://www.facebook.com/MAAClndia",
-    twitter: "https://twitter.com/MAAClndia",
+    instagram: "https://www.instagram.com/maacjaipurcscheme",
+    facebook: "https://www.facebook.com/MAACJAIPURCSCHEME",
+    youtube: "https://www.youtube.com/@maacjaipur",
+    youtubeChannelId: "UCRjdWiuUvWu4mc6D9smmHQQ",
+    /** Set only when a live company page exists (old slug 404'd). */
+    linkedin: "",
+    twitter: "",
   },
 };
+
+/** sameAs list for schema — only live entity URLs */
+export const organizationSameAs: string[] = [
+  contactInfo.social.facebook,
+  contactInfo.social.instagram,
+  contactInfo.social.youtube,
+  "https://www.youtube.com/channel/UCRjdWiuUvWu4mc6D9smmHQQ",
+  contactInfo.googleMapsUrl,
+  "https://maps.google.com/maps?q=MAAC+Animation+Jaipur+711+Ambition+Tower+Subhash+Marg&ll=26.9139,75.7842",
+].filter(Boolean);
 
