@@ -57,6 +57,18 @@ export default function MAACXHero({ onIntroReveal }: Props) {
     setLoaded(true);
   }, []);
 
+  // Hide poster image until video is ready — prevents 347KB flash on refresh
+  useEffect(() => {
+    const v = heroVideoRef.current;
+    if (!v) return;
+    const onReady = () => v.classList.add("video-ready");
+    // metadata loaded = poster can be replaced; data loaded = video can play
+    v.addEventListener("loadeddata", onReady, { once: true });
+    // Fallback: if video is already cached and ready, add class immediately
+    if (v.readyState >= 2) v.classList.add("video-ready");
+    return () => v.removeEventListener("loadeddata", onReady);
+  }, []);
+
   useEffect(() => {
     if (!loaded || !contentRef.current) return;
 

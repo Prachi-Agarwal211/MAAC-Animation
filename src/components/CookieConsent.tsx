@@ -33,7 +33,7 @@ export default function CookieConsent() {
         message: "User accepted analytics & marketing tracking cookies.",
         sourcePage: typeof window !== "undefined" ? window.location.pathname : "/"
       });
-      trackSectionClick("sec-cookie-accept");
+      trackSectionClick("sec-cookie-accept", "Cookie Consent Accepted");
     } catch {}
     setVisible(false);
   }, []);

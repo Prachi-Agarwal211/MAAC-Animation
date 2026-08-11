@@ -1874,6 +1874,24 @@ select:focus-visible {
   will-change: opacity;
 }
 
+/* Hide poster frame until video is ready — prevents 347KB image flash on refresh */
+.hero-video-fade-full[poster] {
+  opacity: 0;
+}
+.hero-video-fade-full.video-ready {
+  opacity: 1;
+}
+
+/* ═══════════════════════════════════════════════════════
+   HERO H1 — Override global tight typography
+   Global h1: line-height:0.9 letter-spacing:-0.04em crushes
+   the dual-layer outline/fill text. Restore breathing room.
+   ═══════════════════════════════════════════════════════ */
+.hero-content h1 {
+  line-height: 0.95;
+  letter-spacing: 0.02em;
+}
+
 .fab-pulse::before {
   content: '';
   position: absolute;

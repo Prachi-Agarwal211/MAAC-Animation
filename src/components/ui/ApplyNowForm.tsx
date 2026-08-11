@@ -62,7 +62,7 @@ export default function ApplyNowForm() {
             message: formData.message,
             sourcePage: window.location.pathname || "/"
           });
-          trackSectionClick("sec-2");
+          trackSectionClick("sec-2", "Apply Now Section");
         } catch {}
         // Fire Lead event to Meta + Google Ads (unified)
         trackLead({
