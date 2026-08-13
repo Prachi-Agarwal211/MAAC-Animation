@@ -4,6 +4,7 @@ import React, { useState, useMemo } from 'react';
 import { ChevronRight, RotateCcw, Award, CheckCircle2 } from 'lucide-react';
 import Link from 'next/link';
 import { fireGoogleAdsConversion } from '@/lib/tracking';
+import { GOOGLE_ADS_CONVERSIONS } from '@/lib/google-ads';
 
 // --- Quiz Data ---
 const QUIZ_QUESTIONS = [
@@ -372,7 +373,7 @@ export default function CareerAssessment() {
             <div className="flex flex-col md:flex-row gap-6 justify-center items-center py-12">
               <button
                 onClick={() => {
-                  fireGoogleAdsConversion("AW-827036079/oHxaCInpqO8CEK-jrooD");
+                  fireGoogleAdsConversion(GOOGLE_ADS_CONVERSIONS.whatsapp);
                   window.open("https://wa.me/917300001589?text=Hi%20MAAC%20Jaipur%2C%20I%27d%20like%20to%20book%201-on-1%20counseling", "_blank");
                 }}
                 className="w-full md:w-auto px-12 py-6 bg-white text-black font-bold uppercase tracking-[0.2em] text-xs text-center hover:bg-[#C4A882] transition-all hover:-translate-y-1 hover:brightness-110"

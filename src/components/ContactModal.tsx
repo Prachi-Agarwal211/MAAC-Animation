@@ -4,7 +4,8 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import { gsap } from "@/lib/gsap";
 import { submitContactForm } from "@/app/actions";
 import { getUtmParams } from "@/lib/utm";
-import { trackLead } from "@/lib/tracking";
+import { trackLead, fireGoogleAdsConversion } from "@/lib/tracking";
+import { GOOGLE_ADS_CONVERSIONS } from "@/lib/google-ads";
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -185,6 +186,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
           value: 1,
           currency: "INR",
         });
+        fireGoogleAdsConversion(GOOGLE_ADS_CONVERSIONS.leadForm);
         closeTimerRef.current = setTimeout(handleClose, 3000);
       } else {
         setErrors({ submit: result.message });

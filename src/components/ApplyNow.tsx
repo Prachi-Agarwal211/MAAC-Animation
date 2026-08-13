@@ -3,6 +3,7 @@ import MagneticButton from "@/components/ui/MagneticButton";
 import { Phone, MessageSquare, ShieldCheck, Sparkles, GraduationCap } from "lucide-react";
 import FadeIn from "@/components/animations/FadeIn";
 import ApplyNowForm from "@/components/ui/ApplyNowForm";
+import GoogleAdsLink from "@/components/GoogleAdsLink";
 
 export default function ApplyNow() {
   return (
@@ -66,9 +67,13 @@ export default function ApplyNow() {
                 <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/70 mb-4">Contact Us Directly</p>
                 <div className="flex flex-wrap gap-3">
                   <MagneticButton>
-                    <a href={contactInfo.whatsapp ? `https://wa.me/${contactInfo.whatsapp.replace(/[^0-9]/g, "")}` : "#"} className="flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-[#25D366]/5 border border-[#25D366]/15 text-[#25D366] text-[11px] font-bold uppercase tracking-widest hover:bg-[#25D366]/15 hover:border-[#25D366]/30 transition-all duration-300">
+                    <GoogleAdsLink
+                      adsEvent="whatsapp"
+                      href={contactInfo.whatsapp ? `https://wa.me/${contactInfo.whatsapp.replace(/[^0-9]/g, "")}` : "#"}
+                      className="flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-[#25D366]/5 border border-[#25D366]/15 text-[#25D366] text-[11px] font-bold uppercase tracking-widest hover:bg-[#25D366]/15 hover:border-[#25D366]/30 transition-all duration-300"
+                    >
                       <MessageSquare size={14} /> WhatsApp
-                    </a>
+                    </GoogleAdsLink>
                   </MagneticButton>
                   <MagneticButton>
                     <a href={`tel:${contactInfo.phone}`} className="flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-[#BF953F]/5 border border-[#BF953F]/15 text-[#C4A882] text-[11px] font-bold uppercase tracking-widest hover:bg-[#BF953F]/15 hover:border-[#BF953F]/30 transition-all duration-300">

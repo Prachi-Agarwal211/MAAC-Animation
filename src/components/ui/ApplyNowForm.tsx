@@ -4,7 +4,8 @@ import { useState, useRef, useEffect } from "react";
 import { Send, ShieldCheck } from "lucide-react";
 import { submitContactForm } from "@/app/actions";
 import { getUtmParams } from "@/lib/utm";
-import { trackLead } from "@/lib/tracking";
+import { trackLead, fireGoogleAdsConversion } from "@/lib/tracking";
+import { GOOGLE_ADS_CONVERSIONS } from "@/lib/google-ads";
 import { saveLead, trackSectionClick } from "@/lib/metrics-store";
 
 export default function ApplyNowForm() {
@@ -71,6 +72,7 @@ export default function ApplyNowForm() {
           value: 1,
           currency: "INR",
         });
+        fireGoogleAdsConversion(GOOGLE_ADS_CONVERSIONS.leadForm);
       } else {
         setSubmitError(result.message);
       }

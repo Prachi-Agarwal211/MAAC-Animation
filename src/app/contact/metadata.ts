@@ -1,7 +1,8 @@
 import { Metadata } from "next";
+import { clampTitle } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Contact MAAC Animation Jaipur | Free Demo Class | +91-7300001589",
+  title: clampTitle("Contact MAAC Jaipur | Free Demo Class | +91-7300001589"),
   description:
     "Contact MAAC Animation Jaipur. Visit us at Subhash Marg or call +91-7300001589. Book a free demo class. Career counseling available Mon-Sat 9AM-7PM.",
   robots: {
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Contact MAAC Animation Jaipur | Free Demo Class",
+    title: "Contact MAAC Jaipur | Free Demo Class",
     description:
       "Contact MAAC Animation Jaipur. Visit us at Subhash Marg or call +91-7300001589. Book a free demo class.",
     url: "https://www.maacanimationjaipur.com/contact",
@@ -34,7 +35,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Contact MAAC Animation Jaipur | Free Demo Class | +91-7300001589",
+    title: clampTitle("Contact MAAC Jaipur | Free Demo Class | +91-7300001589", 60),
     description:
       "Contact MAAC Animation Jaipur. Visit us at Subhash Marg or call +91-7300001589.",
     images: ["https://www.maacanimationjaipur.com/og-image.jpg"],

@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { contactInfo } from "@/data/siteData";
 import { ArrowUpRight, MapPin, Phone, Mail, MessageSquare } from "lucide-react";
+import GoogleAdsLink from "@/components/GoogleAdsLink";
 
 const currentYear = new Date().getFullYear();
 
@@ -54,14 +55,15 @@ export default function Footer() {
             >
               Book Free Demo
             </Link>
-            <a
+            <GoogleAdsLink
+              adsEvent="whatsapp"
               href="https://wa.me/917300001589"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-3 px-8 py-3.5 rounded-full border border-white/20 text-white font-bold tracking-[0.15em] text-[11px] uppercase hover:bg-white/5 hover:border-[#BF953F]/40 transition-all duration-300"
             >
               <MessageSquare size={16} className="text-[#25D366]" /> WhatsApp Us
-            </a>
+            </GoogleAdsLink>
           </div>
         </div>
       </div>

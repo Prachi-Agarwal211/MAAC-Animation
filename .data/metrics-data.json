@@ -3,6 +3,18 @@
   "metrics": [],
   "accessLog": [
     {
+      "timestamp": "2026-08-13T07:22:56.669Z",
+      "ip": "::1",
+      "action": "AUTH_FAILED",
+      "success": false
+    },
+    {
+      "timestamp": "2026-08-13T07:22:56.664Z",
+      "ip": "::1",
+      "action": "AUTH_FAILED",
+      "success": false
+    },
+    {
       "timestamp": "2026-08-11T16:59:29.261Z",
       "ip": "::1",
       "action": "AUTH_FAILED",

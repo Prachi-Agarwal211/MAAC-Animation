@@ -14,7 +14,7 @@ export const faqSchema = {
       "name": "What courses does MAAC Animation Jaipur offer?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "MAAC Animation Jaipur offers comprehensive courses in 3D Animation, Visual Effects (VFX), Game Design, Digital Filmmaking, Motion Graphics, and Digital Media & Design. We provide B.Voc degrees, diploma programs (18-24 months), and short-term skill enhancement courses. All programs are NSDC and MESC certified with 95% placement assistance."
+        "text": "MAAC Animation Jaipur offers courses in 3D Animation, Visual Effects (VFX), Game Design, Digital Filmmaking, Motion Graphics, and Digital Media & Design. Programs include B.Voc degrees, 18-24 month diplomas, and short skill courses. All programs are NSDC and MESC certified with dedicated placement assistance."
       }
     },
     {
@@ -38,7 +38,7 @@ export const faqSchema = {
       "name": "Does MAAC Animation Jaipur provide placement assistance?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, MAAC Animation Jaipur has a dedicated placement cell with a 95% placement record. Our students are placed at top studios including DNEG, Prime Focus, Redchillies VFX, MPC, Technicolor, Ubisoft, EA Games, and Rockstar Games. Average starting packages range from 3-6 LPA, with top performers securing 8-12 LPA. We provide resume building, portfolio development, mock interviews, and direct studio connections."
+        "text": "Yes, MAAC Animation Jaipur has a dedicated placement cell. Students are connected with studios including DNEG, Prime Focus, Redchillies VFX, MPC, Technicolor and Ubisoft. Support includes resume building, portfolio review, mock interviews, and studio introductions."
       }
     },
     {
@@ -75,10 +75,10 @@ export const faqSchema = {
     },
     {
       "@type": "Question",
-      "name": "What makes MAAC Animation Jaipur the best animation institute?",
+      "name": "What makes MAAC Animation Jaipur a strong animation institute?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "MAAC Animation Jaipur stands out with: 30+ years of excellence in animation education; 95% placement rate with 500+ hiring partners; NSDC and MESC government certification; B.Voc degree option; State-of-the-art labs with latest software; Expert faculty from top studios like DNEG and Prime Focus; Industry-integrated curriculum; Live studio projects; Strong alumni network of 50,000+ professionals; 100+ centers across India for placement mobility."
+        "text": "MAAC Animation Jaipur has trained students in C-Scheme since 1998. The centre offers NSDC and MESC certified programs, a UGC-recognized B.Voc option, production-grade labs, faculty with studio experience, and a placement cell that connects students with hiring partners across India."
       }
     },
     {
@@ -212,7 +212,7 @@ export const localBusinessSchema = {
     "width": 512,
     "height": 512
   },
-  "description": "Rajasthan's leading animation, VFX, and multimedia institute with 30+ years of excellence. Offering B.Voc degrees, diploma courses in 3D Animation, Visual Effects, Game Design, and Digital Filmmaking with 95% placement record.",
+  "description": "Animation, VFX and multimedia institute in C-Scheme, Jaipur. B.Voc degrees and diploma courses in 3D Animation, Visual Effects, Game Design and Digital Filmmaking with dedicated placement support.",
   "foundingDate": "1998",
   "numberOfEmployees": {
     "@type": "QuantitativeValue",
@@ -372,7 +372,7 @@ export const localBusinessSchema = {
   "department": {
     "@type": "EducationalOrganization",
     "name": "Placement Cell",
-    "description": "Dedicated placement assistance with 95% success rate"
+    "description": "Dedicated placement assistance with studio partners"
   },
   "alumni": {
     "@type": "AlumniOrganization",

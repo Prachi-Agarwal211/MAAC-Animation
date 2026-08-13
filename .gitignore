@@ -67,19 +67,5 @@ nul
 # dev scripts (local utilities, not part of app)
 /scripts
 /scratch
-
-# IDE/tool configs
-.kilo/
-.kilocode/
-.playwright-mcp/
-.qwen/
-.blackbox_mcp_settings.json
-mcp-inspector.config.json
 compress-hero-video.bat
 compress-videos.bat
-fix_hero.py
-fix2.py
-fix3.py
-npm-error.txt
-npm-output.txt
-nul

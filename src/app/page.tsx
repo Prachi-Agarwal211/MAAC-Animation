@@ -24,21 +24,6 @@ const StudentShowcase = dynamic(() => import("@/components/StudentShowcase"), { 
 
 export const revalidate = 3600;
 
-const homeSchema = () => {
-  const crumbs = breadcrumbSchema([
-    { name: "Home", url: "https://www.maacanimationjaipur.com" }
-  ]);
-  return {
-    "@context": "https://schema.org",
-    "@graph": [
-      localBusinessSchema,
-      videoSchema,
-      faqSchema,
-      crumbs,
-    ]
-  };
-};
-
 export default function Home() {
   const homeBreadcrumbs = breadcrumbSchema([
     { name: "Home", url: "https://www.maacanimationjaipur.com" }
@@ -47,6 +32,7 @@ export default function Home() {
   const homeStructuredData = {
     "@context": "https://schema.org",
     "@graph": [
+      localBusinessSchema,
       videoSchema,
       faqSchema,
       homeBreadcrumbs
@@ -55,13 +41,9 @@ export default function Home() {
 
   return (
     <div className="relative">
-      {/* GEO Answer Block — 40-60 word direct answer for AI citation boost */}
-      <section className="seo-page-title" style={{ display: 'none' }}>
-        MAAC Animation Jaipur is Rajasthan&apos;s leading animation and VFX institute located in C-Scheme, Jaipur. Established in 1998, MAAC Animation Jaipur offers B.Voc degrees, diploma courses in 3D Animation, Visual Effects, Game Design, and Digital Filmmaking with NSDC and MESC certification. MAAC Animation Institute Jaipur maintains a 95% placement record with graduates working at DNEG, MPC, Prime Focus, and Ubisoft. Contact MAAC Animation Jaipur at +91-7300001589 for admissions.
+      <section className="seo-answer-block speakable-summary">
+        MAAC Animation Jaipur is an animation and VFX institute in C-Scheme, Jaipur (est. 1998). The centre offers B.Voc, diploma and short courses in 3D Animation, Visual Effects, Game Design and Digital Filmmaking, with NSDC and MESC certification and dedicated placement support. Graduates work at studios including DNEG, MPC, Prime Focus and Ubisoft. Call +91-7300001589 for admissions.
       </section>
-      <h1 className="sr-only font-display text-[clamp(2rem,6vw,4rem)] leading-[0.9] text-white font-bold uppercase">
-        MAAC Animation Institute Jaipur - Leading Animation & VFX Institute in Rajasthan
-      </h1>
       <ScrollNarrative />
       <script
         type="application/ld+json"

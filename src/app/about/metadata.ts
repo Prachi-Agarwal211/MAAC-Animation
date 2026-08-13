@@ -1,9 +1,10 @@
 import { Metadata } from "next";
+import { clampTitle } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "About MAAC Animation Institute Jaipur | 30+ Years Excellence",
+  title: clampTitle("About MAAC Animation Institute Jaipur | 30+ Years Excellence"),
   description:
-    "Learn about MAAC Jaipur — Rajasthan's leading animation institute with 30+ years of excellence. Expert faculty, NSDC certified courses, 95% placement record.",
+    "Learn about MAAC Jaipur — animation institute in C-Scheme since 1998. Expert faculty, NSDC certified courses, dedicated placement support.",
   robots: {
     index: true,
     follow: true,
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "About MAAC Animation Institute Jaipur | 30+ Years Excellence",
     description:
-      "Learn about MAAC Jaipur — Rajasthan's leading animation institute with 30+ years of excellence. Expert faculty, NSDC certified courses, 95% placement record.",
+      "Learn about MAAC Jaipur — animation institute in C-Scheme since 1998. Expert faculty, NSDC certified courses, dedicated placement support.",
     url: "https://www.maacanimationjaipur.com/about",
     type: "website",
     siteName: "maacanimationjaipur.com",
@@ -36,7 +37,7 @@ export const metadata: Metadata = {
     card: "summary_large_image" as const,
     title: "About MAAC Jaipur | Leading Animation Institute in Rajasthan",
     description:
-      "Discover MAAC Jaipur – Rajasthan's leading animation, VFX & digital filmmaking institute with 30+ years of legacy, 5000+ alumni, and placement assistance.",
+      "Discover MAAC Jaipur — animation, VFX & filmmaking institute in C-Scheme with NSDC certification and placement support.",
     images: ["https://www.maacanimationjaipur.com/og-image.jpg"],
   },
   alternates: {

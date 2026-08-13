@@ -10,6 +10,8 @@ import { courseCategories } from "@/data/courses";
 import { useUIStore } from "@/lib/store";
 import { MessageSquare, ChevronDown, X, Menu, ArrowRight, ArrowUpRight } from "lucide-react";
 import { isTouchDevice as checkTouch } from "@/lib/constants";
+import { fireGoogleAdsConversion } from "@/lib/tracking";
+import { GOOGLE_ADS_CONVERSIONS } from "@/lib/google-ads";
 import ScrollIndicator from "./SideScroller";
 
 const categoryImageMap: Record<string, string> = {};
@@ -409,6 +411,7 @@ export default function Navbar() {
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => fireGoogleAdsConversion(GOOGLE_ADS_CONVERSIONS.whatsapp)}
               className="flex items-center justify-center gap-2 border border-white/15 text-white py-3 text-sm font-bold rounded-md hover:bg-white/5 transition-colors"
             >
               <MessageSquare size={18} /> WhatsApp us

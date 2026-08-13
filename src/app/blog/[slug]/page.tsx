@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Script from "next/script";
 import { getPostBySlug, getAllPostSlugs } from "@/data/blog";
 import BlogPostClient from "./BlogPostClient";
+import { clampTitle, clampDescription } from "@/lib/seo";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -18,12 +19,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!post) return { title: "Post Not Found" };
 
   return {
-    title: post.title,
-    description: post.excerpt,
+    title: clampTitle(post.title),
+    description: clampDescription(post.excerpt),
     keywords: post.tags,
     openGraph: {
-      title: post.title,
-      description: post.excerpt,
+      title: clampTitle(post.title, 60),
+      description: clampDescription(post.excerpt),
       url: `https://www.maacanimationjaipur.com/blog/${post.slug}`,
       type: "article",
       siteName: "maacanimationjaipur.com",
@@ -42,8 +43,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     twitter: {
       card: "summary_large_image",
-      title: post.title,
-      description: post.excerpt,
+      title: clampTitle(post.title, 60),
+      description: clampDescription(post.excerpt),
       images: [post.ogImage],
     },
     alternates: {

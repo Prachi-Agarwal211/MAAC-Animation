@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
+import { clampTitle } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Student Work Gallery | MAAC Animation Jaipur",
+  title: clampTitle("Student Work Gallery | MAAC Animation Jaipur"),
   description:
     "Explore outstanding student projects from MAAC Jaipur — 3D animations, VFX breakdowns, game art, motion graphics, and short films crafted by our talented students.",
   keywords: [

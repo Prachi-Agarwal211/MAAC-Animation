@@ -47,7 +47,6 @@ export default function CareerAssessmentPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
-      <h1>Creative Career Assessment - MAAC Animation Jaipur Quiz</h1>
       <CareerAssessmentClient />
     </>
   );

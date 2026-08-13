@@ -4,9 +4,10 @@ import Script from "next/script";
 import { coursesData, courseCategories } from "@/data/courses";
 import { contactInfo, statsData } from "@/data/siteData";
 import { Frown, Home, BookOpen, Users, Calendar, Phone, MapPin, Mail, ChevronRight, Search } from "lucide-react";
+import { clampTitle } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Page Not Found (404) - MAAC Animation Jaipur",
+  title: clampTitle("Page Not Found (404) - MAAC Animation Jaipur"),
   description: "The page you're looking for doesn't exist at MAAC Animation Jaipur. Explore our animation, VFX, and game design courses, or contact us for assistance.",
   robots: {
     index: false,

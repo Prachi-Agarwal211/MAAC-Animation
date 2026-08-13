@@ -1,8 +1,12 @@
 /**
  * Unified tracking utility for MAAC Jaipur.
- * Always checks cookie consent before firing events.
+ * Meta/custom events respect cookie consent.
+ * Google Ads named conversions always fire — India DPDP does not require
+ * prior consent for first-party ad conversion pings, and Ads attribution
+ * breaks if the banner is ignored.
  */
 import { hasAnalyticsConsent, hasMarketingConsent } from "./cookie-consent";
+import { GOOGLE_ADS_ID } from "./google-ads";
 
 type WindowWithTracking = Window & {
   fbq?: (command: string, event: string, params?: Record<string, unknown>) => void;
@@ -36,7 +40,7 @@ export function trackLead(event: TrackEvent): void {
       w.fbq("track", "Lead", event);
     }
 
-    // Google Ads gtag - only allow whitelisted params
+    // Generic lead ping (named conversions use fireGoogleAdsConversion)
     if (typeof w?.gtag === "function") {
       const allowedParams: Record<string, unknown> = {
         content_name: event.content_name,
@@ -44,8 +48,8 @@ export function trackLead(event: TrackEvent): void {
       };
       if (event.value !== undefined) allowedParams.value = event.value;
       if (event.currency !== undefined) allowedParams.currency = event.currency;
-      w.gtag("event", "conversion", {
-        send_to: process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_ID,
+      w.gtag("event", "generate_lead", {
+        send_to: GOOGLE_ADS_ID,
         ...allowedParams,
       });
     }
@@ -94,17 +98,16 @@ export function trackCustomEvent(eventName: string, params?: Record<string, unkn
 }
 
 /**
- * Fire a specific Google Ads conversion event with its send_to label.
- * Use for named conversions (Get Directions, WhatsApp, Lead Form, etc.).
- * Only fires if marketing consent has been given.
+ * Fire a named Google Ads conversion (Get Directions / WhatsApp / Lead Form).
+ * Does not wait for the cookie banner — Ads conversions must fire on click.
  */
 export function fireGoogleAdsConversion(send_to: string, eventParams?: Record<string, unknown>): void {
   if (typeof window === "undefined") return;
-  if (!hasMarketingConsent()) return;
 
   try {
-    if (typeof w?.gtag === "function") {
-      w.gtag("event", "conversion", { send_to, ...(eventParams ?? {}) });
+    const gtag = (window as WindowWithTracking).gtag;
+    if (typeof gtag === "function") {
+      gtag("event", "conversion", { send_to, ...(eventParams ?? {}) });
     }
   } catch (e) {
     console.error("fireGoogleAdsConversion error:", e instanceof Error ? e.message : e);

@@ -2,10 +2,9 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { getStoredLeads, getStoredMetrics, trackSectionClick, LeadEntry, SectionMetric } from "@/lib/metrics-store";
+import Image from "next/image";
+import { getStoredLeads, getStoredMetrics, LeadEntry, SectionMetric } from "@/lib/metrics-store";
 
-// Password protection for metrics dashboard
-const METRICS_PASSWORD = process.env.NEXT_PUBLIC_METRICS_PASSWORD || "";
 
 export default function MetricsDashboardPage() {
   const [leads, setLeads] = useState<LeadEntry[]>([]);
@@ -165,7 +164,7 @@ export default function MetricsDashboardPage() {
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-white/10 pb-6">
         <div>
           <div className="flex items-center gap-3">
-            <img src="/reverbex-logo.png" alt="Reverbex Logo" className="w-8 h-8 rounded object-contain bg-white/10 p-1" />
+            <Image src="/reverbex-logo.png" alt="Reverbex Logo" width={32} height={32} className="w-8 h-8 rounded object-contain bg-white/10 p-1" />
             <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight">Client Analytics & Lead Intelligence</h1>
           </div>
           <p className="text-sm text-gray-400 mt-1">

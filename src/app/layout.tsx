@@ -1,10 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import { Manrope, Syne } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
+
 
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
-import Script from "next/script";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { contactInfo, organizationSameAs } from "@/data/siteData";
@@ -71,7 +72,7 @@ export const metadata: Metadata = {
     "vfx training jaipur",
     "maac animation jaipur",
     "game design course jaipur",
-    "best animation institute rajasthan",
+    "animation institute rajasthan",
     "animation courses jaipur",
     "graphic design course jaipur",
     "filmmaking course jaipur",
@@ -142,7 +143,7 @@ const jsonLd = {
       "@id": "https://www.maacanimationjaipur.com/#website",
       "url": "https://www.maacanimationjaipur.com",
       "name": "MAAC Animation Institute Jaipur",
-      "description": "Rajasthan's leading animation, VFX and multimedia institute",
+      "description": "Animation, VFX and multimedia training centre in C-Scheme, Jaipur",
       "inLanguage": "en-US",
       "speakable": {
         "@type": "SpeakableSpecification",
@@ -159,7 +160,7 @@ const jsonLd = {
       logo: { "@type": "ImageObject", url: "https://www.maacanimationjaipur.com/maac-logo.png", width: 512, height: 512 },
       image: "https://www.maacanimationjaipur.com/thumbnail.png",
       description:
-        "MAAC Jaipur C-Scheme is Rajasthan's leading Animation, VFX and Game Design institute. Offering B.Voc, Diploma and short-term courses. NSDC & MESC certified with 95% placement support.",
+        "MAAC Jaipur C-Scheme is an Animation, VFX and Game Design institute offering B.Voc, Diploma and short-term courses. NSDC & MESC certified with dedicated placement support.",
       creator: {
         "@type": "Organization",
         name: "Reverbex Technology",
@@ -171,7 +172,7 @@ const jsonLd = {
       paymentAccepted: "Cash, Credit Card, Debit Card, UPI, Education Loan",
       aggregateRating: { "@type": "AggregateRating", ratingValue: "4.9", reviewCount: "422", bestRating: "5", worstRating: "1" },
       award: "FICCI BAF Awards 2024 - Leading Animation Institute",
-      department: { "@type": "EducationalOrganization", name: "Placement Cell", description: "Dedicated placement assistance with 95% success rate" },
+      department: { "@type": "EducationalOrganization", name: "Placement Cell", description: "Dedicated placement assistance with studio partners" },
       alumni: { "@type": "AlumniOrganization", name: "MAAC Alumni Network", description: "50,000+ professionals working at top studios worldwide" },
       telephone: contactInfo.phone,
       email: contactInfo.email,
@@ -245,36 +246,30 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
 
-        {/* Preload only the hero video — footer video lazy-loads itself (preload="none") */}
-        <link rel="preload" as="video" href="/intro.mp4" fetchPriority="high" />
+        {/* Google Ads global site tag — must sit in <head> for conversion attribution */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=AW-827036079"
+          strategy="afterInteractive"
+        />
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('consent', 'default', {
+                ad_storage: 'granted',
+                ad_user_data: 'granted',
+                ad_personalization: 'granted',
+                analytics_storage: 'denied'
+              });
+              gtag('config', 'AW-827036079');
+            `,
+          }}
+        />
 
-        {/* =====================================================================
-            ADVERTISING & ANALYTICS TAGS - Meta + Google Ads
-            These load early for accurate ad attribution and conversion tracking.
-            Configure IDs in .env (see .env.example for full guide)
-        ===================================================================== */}
-
-        {/* Google Ads global site tag (gtag.js) */}
-        {process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_ID && (
-          <>
-            <Script
-              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_ID}`}
-              strategy="afterInteractive"
-            />
-            <Script
-              id="google-ads"
-              strategy="afterInteractive"
-              dangerouslySetInnerHTML={{
-                __html: `
-                  window.dataLayer = window.dataLayer || [];
-                  function gtag(){dataLayer.push(arguments);}
-                  gtag('js', new Date());
-                  gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_ID}');
-                `,
-              }}
-            />
-          </>
-        )}
 
         <script
           type="application/ld+json"

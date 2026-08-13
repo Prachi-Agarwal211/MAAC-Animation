@@ -108,7 +108,7 @@ function authenticate(request: NextRequest): { authenticated: boolean; ip: strin
 }
 
 export async function GET(request: NextRequest) {
-  const { authenticated, ip } = authenticate(request);
+  const { authenticated } = authenticate(request);
   
   if (!authenticated) {
     return NextResponse.json(
@@ -118,8 +118,8 @@ export async function GET(request: NextRequest) {
   }
   
   const data = loadData();
-  // Don't expose access logs to client
-  const { accessLog, ...safeData } = data;
+  const safeData = { ...data };
+  delete (safeData as Record<string, unknown>).accessLog;
   
   return NextResponse.json(safeData);
 }

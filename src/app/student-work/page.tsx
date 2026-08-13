@@ -5,19 +5,22 @@ import ApplyNow from "@/components/ApplyNow";
 import StudentWorkGallery from "./StudentWorkGallery";
 import StudentWorkHeroClient from "./StudentWorkHeroClient";
 import ErrorBoundary from "@/components/ErrorBoundary";
+import { clampTitle } from "@/lib/seo";
+
+const OG_STUDENT = clampTitle("Student Work Gallery | MAAC Animation Jaipur", 60);
 
 export const metadata: Metadata = {
-  title: "Student Work Gallery | MAAC Animation Jaipur",
+  title: clampTitle("Student Work Gallery | MAAC Animation Jaipur"),
   description:
     "Explore outstanding student projects from MAAC Jaipur — 3D animations, VFX breakdowns, game art, motion graphics, and short films.",
   openGraph: {
-    title: "Student Work Gallery | MAAC Animation Jaipur",
+    title: OG_STUDENT,
     description:
       "Explore outstanding student projects from MAAC Jaipur — 3D animations, VFX breakdowns, game art, motion graphics, and short films.",
     url: "https://www.maacanimationjaipur.com/student-work",
     images: [{ url: "https://www.maacanimationjaipur.com/og-image.jpg", width: 1200, height: 630 }],
   },
-  twitter: { card: "summary_large_image", title: "Student Work Gallery | MAAC Animation Jaipur" },
+  twitter: { card: "summary_large_image", title: OG_STUDENT },
   alternates: { canonical: "https://www.maacanimationjaipur.com/student-work" },
   robots: { index: true, follow: true },
 };

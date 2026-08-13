@@ -4,7 +4,7 @@ import { getAllCourseSlugs } from "@/data/courses";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://www.maacanimationjaipur.com";
-  const now = new Date();
+  const reviewed = new Date("2026-08-11T00:00:00.000Z");
 
   // Auto-generate blog post URLs
   const blogUrls = blogPosts.map(post => ({
@@ -17,7 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Auto-generate individual course detail page URLs
   const courseUrls = getAllCourseSlugs().map(slug => ({
     url: `${base}/courses/${slug}`,
-    lastModified: now,
+    lastModified: reviewed,
     changeFrequency: "monthly" as const,
     priority: 0.8,
   }));
@@ -26,13 +26,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Core Pages
     {
       url: base,
-      lastModified: now,
+      lastModified: reviewed,
       changeFrequency: "weekly",
       priority: 1.0,
     },
     {
       url: `${base}/courses`,
-      lastModified: now,
+      lastModified: reviewed,
       changeFrequency: "weekly",
       priority: 0.9,
     },
@@ -40,69 +40,57 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...courseUrls,
     {
       url: `${base}/contact`,
-      lastModified: now,
+      lastModified: reviewed,
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${base}/about`,
-      lastModified: now,
+      lastModified: reviewed,
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
       url: `${base}/student-work`,
-      lastModified: now,
+      lastModified: reviewed,
       changeFrequency: "monthly",
       priority: 0.6,
     },
     {
       url: `${base}/gallery`,
-      lastModified: now,
+      lastModified: reviewed,
       changeFrequency: "monthly",
       priority: 0.6,
     },
     {
       url: `${base}/annual-trip`,
-      lastModified: now,
+      lastModified: reviewed,
       changeFrequency: "monthly",
       priority: 0.6,
     },
     {
       url: `${base}/events`,
-      lastModified: now,
+      lastModified: reviewed,
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${base}/animation-institute-jaipur`,
-      lastModified: now,
+      lastModified: reviewed,
       changeFrequency: "monthly",
       priority: 0.9,
     },
     {
       url: `${base}/creative-career-assessment`,
-      lastModified: now,
+      lastModified: reviewed,
       changeFrequency: "monthly",
       priority: 0.5,
-    },
-    {
-      url: `${base}/privacy-policy`,
-      lastModified: now,
-      changeFrequency: "yearly",
-      priority: 0.2,
-    },
-    {
-      url: `${base}/terms-of-service`,
-      lastModified: now,
-      changeFrequency: "yearly",
-      priority: 0.2,
     },
 
     // Blog Pages
     {
       url: `${base}/blog`,
-      lastModified: now,
+      lastModified: reviewed,
       changeFrequency: "weekly",
       priority: 0.8,
     },

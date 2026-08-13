@@ -8,6 +8,7 @@ import MagneticButton from "@/components/ui/MagneticButton";
 import { submitContactForm } from "@/app/actions";
 import { getUtmParams } from "@/lib/utm";
 import { trackLead, fireGoogleAdsConversion } from "@/lib/tracking";
+import { GOOGLE_ADS_CONVERSIONS } from "@/lib/google-ads";
 
 export default function ContactClient() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -68,9 +69,7 @@ export default function ContactClient() {
           value: 1,
           currency: "INR",
         });
-        fireGoogleAdsConversion(
-          "AW-827036079/Q7pOCJnU_-4CEK-jrooD",
-        );
+        fireGoogleAdsConversion(GOOGLE_ADS_CONVERSIONS.leadForm);
         form.reset();
         successTimerRef.current = setTimeout(() => setSubmitSuccess(false), 5000);
       }
@@ -118,9 +117,7 @@ export default function ContactClient() {
                  target="_blank"
                  rel="noopener noreferrer"
                  onClick={() =>
-                   fireGoogleAdsConversion(
-                     "AW-827036079/nJFhCO63v9UcEK-jrooD",
-                   )
+                   fireGoogleAdsConversion(GOOGLE_ADS_CONVERSIONS.directions)
                  }
                  className="inline-flex items-center gap-2 text-white text-[10px] font-bold uppercase tracking-wider group/link"
                >

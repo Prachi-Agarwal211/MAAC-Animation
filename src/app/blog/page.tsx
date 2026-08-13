@@ -46,11 +46,9 @@ export default function BlogIndexPage() {
         }}
       />
 
-      {/* GEO Answer Block — 40-60 word direct answer for AI citation boost */}
-      <section className="seo-page-title" style={{ display: 'none' }}>
-        MAAC Animation Jaipur offers career-oriented training in 3D Animation, VFX, Game Design, and Digital Filmmaking with a 95% placement record. Courses range from short-term skill programs to UGC-recognized B.Voc degrees. The institute has trained over 50,000 professionals working at top studios like DNEG, MPC, Prime Focus, and Ubisoft with flexible morning, afternoon, and weekend batches.
+      <section className="seo-answer-block speakable-summary">
+        Career notes from MAAC Animation Jaipur on 3D Animation, VFX, Game Design and Digital Filmmaking — course comparisons, studio roles, and how to build a showreel that hiring teams actually watch.
       </section>
-      {/* H1 removed - visible H1 exists in hero section below */}
       <main className="bg-[#080808] min-h-screen">
         {/* Hero Section */}
         <section 

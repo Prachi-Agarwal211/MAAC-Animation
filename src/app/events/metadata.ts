@@ -1,7 +1,8 @@
 import { Metadata } from "next";
+import { clampTitle } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Events & Campus Life | MAAC Animation Jaipur",
+  title: clampTitle("Events & Campus Life | MAAC Animation Jaipur"),
   description:
     "Experience the vibrant life at MAAC Jaipur. From national competitions like CREATA & RAIN Awards to 100-hour film marathons, masterclasses, and unforgettable campus moments from our events.",
   openGraph: {

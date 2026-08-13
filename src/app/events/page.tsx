@@ -3,20 +3,23 @@ import Script from "next/script";
 import IndustryPartners from "@/components/IndustryPartners";
 import ApplyNow from "@/components/ApplyNow";
 import EventsInteractive from "./EventsInteractive";
+import { clampTitle } from "@/lib/seo";
+
+const OG_EVENTS = clampTitle("Events & Campus Life | MAAC Animation Jaipur", 60);
 
 export const metadata: Metadata = {
-  title: "Events & Campus Life | MAAC Animation Jaipur",
+  title: clampTitle("Events & Campus Life | MAAC Animation Jaipur"),
   description:
     "Experience the vibrant life at MAAC Jaipur. From national competitions like CREATA & RAIN Awards to 100-hour film marathons, masterclasses, and campus moments.",
   openGraph: {
-    title: "Events & Campus Life | MAAC Animation Jaipur",
+    title: OG_EVENTS,
     description:
       "India's premier animation institute events: national competitions, industry masterclasses, student meets, photography expeditions.",
     url: "https://www.maacanimationjaipur.com/events",
     siteName: "MAAC Animation Jaipur",
     images: [{ url: "https://www.maacanimationjaipur.com/events/event-015.jpeg", width: 1200, height: 630 }],
   },
-  twitter: { card: "summary_large_image", title: "Events & Campus Life | MAAC Animation Jaipur" },
+  twitter: { card: "summary_large_image", title: OG_EVENTS },
   alternates: { canonical: "https://www.maacanimationjaipur.com/events" },
   robots: { index: true, follow: true },
 };

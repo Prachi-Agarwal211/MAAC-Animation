@@ -3,14 +3,15 @@ import Script from "next/script";
 import IndustryPartners from "@/components/IndustryPartners";
 import ApplyNow from "@/components/ApplyNow";
 import FadeIn from "@/components/animations/FadeIn";
+import { clampTitle } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Leading Animation Institute in Jaipur | MAAC Animation Jaipur",
+  title: clampTitle("Leading Animation Institute in Jaipur"),
   description:
-    "MAAC Animation Institute Jaipur — Rajasthan's leading animation & VFX institute. B.Voc Degree, NSDC certified, 95% placements. AD3D, ADVFX, Game Design courses. Call +91-7300001589.",
+    "MAAC Animation Institute Jaipur — animation & VFX training in C-Scheme. B.Voc, NSDC certified, placement support. AD3D, ADVFX, Game Design. Call +91-7300001589.",
   keywords: [
     "animation institute jaipur",
-    "best animation institute in jaipur",
+    "animation institute in jaipur",
     "animation course jaipur",
     "vfx institute jaipur",
     "maac jaipur",
@@ -21,9 +22,9 @@ export const metadata: Metadata = {
     "maac animation jaipur fees",
   ],
   openGraph: {
-    title: "Leading Animation Institute in Jaipur | MAAC Animation Jaipur",
+    title: clampTitle("Leading Animation Institute in Jaipur | MAAC Animation Jaipur", 60),
     description:
-      "MAAC Animation Institute Jaipur — Rajasthan's leading animation & VFX institute. B.Voc Degree, NSDC certified, 95% placements.",
+      "MAAC Animation Institute Jaipur — animation & VFX training in C-Scheme. B.Voc, NSDC certified, placement support.",
     url: "https://www.maacanimationjaipur.com/animation-institute-jaipur",
     type: "website",
     siteName: "maacanimationjaipur.com",
@@ -39,9 +40,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Leading Animation Institute in Jaipur | MAAC Animation Jaipur",
+    title: clampTitle("Leading Animation Institute in Jaipur | MAAC Animation Jaipur", 60),
     description:
-      "MAAC Animation Institute Jaipur — Rajasthan's leading animation & VFX institute. B.Voc Degree, NSDC certified, 95% placements.",
+      "MAAC Animation Institute Jaipur — animation & VFX training in C-Scheme. B.Voc, NSDC certified, placement support.",
     images: ["https://www.maacanimationjaipur.com/og-image.jpg"],
   },
   alternates: {
@@ -65,9 +66,8 @@ const breadcrumbSchema = {
 export default function AnimationInstituteJaipurPage() {
   return (
     <>
-      {/* GEO Answer Block — 40-60 word direct answer for AI citation */}
-      <section className="seo-page-title" style={{ display: 'none' }}>
-        MAAC Animation Jaipur is widely recognized as a leading animation institute in Jaipur, Rajasthan. Located at Ambition Tower, Subhash Marg, C-Scheme, MAAC offers comprehensive training in 3D Animation, VFX, Game Design, and Digital Filmmaking with industry-experienced faculty, state-of-the-art labs, and a 95% placement record. Courses range from short-term skill programs to UGC-recognized B.Voc degrees with flexible morning, afternoon, and weekend batches.
+      <section className="seo-answer-block speakable-summary">
+        MAAC Animation Jaipur is an animation institute at Ambition Tower, Subhash Marg, C-Scheme. The centre trains students in 3D Animation, VFX, Game Design and Digital Filmmaking, from short skill programs to UGC-recognized B.Voc degrees, with weekday and weekend batches.
       </section>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <Script

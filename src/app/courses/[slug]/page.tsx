@@ -8,6 +8,7 @@ import FadeIn from "@/components/animations/FadeIn";
 import CourseFAQ from "@/components/courses/CourseFAQ";
 import { getCourseBySlug, getAllCourseSlugs } from "@/data/courses";
 import { getCourseSchema, breadcrumbSchema } from "@/lib/structured-data";
+import { clampTitle, clampDescription } from "@/lib/seo";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -24,12 +25,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return { title: "Course Not Found", robots: { index: false, follow: false } };
 
   return {
-    title: `${course.name} | MAAC Jaipur`,
-    description: course.shortDescription,
+    title: clampTitle(`${course.name} | MAAC Jaipur`),
+    description: clampDescription(course.shortDescription),
 
     openGraph: {
-      title: `${course.name} | MAAC Jaipur`,
-      description: course.shortDescription,
+      title: clampTitle(`${course.name} | MAAC Jaipur`, 60),
+      description: clampDescription(course.shortDescription),
       url: `https://www.maacanimationjaipur.com/courses/${course.slug}`,
       type: "website",
       siteName: "maacanimationjaipur.com",
@@ -45,8 +46,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     twitter: {
       card: "summary_large_image",
-      title: `${course.name} | MAAC Jaipur`,
-      description: course.shortDescription,
+      title: clampTitle(`${course.name} | MAAC Jaipur`, 60),
+      description: clampDescription(course.shortDescription),
     },
     alternates: {
       canonical: `https://www.maacanimationjaipur.com/courses/${course.slug}`,

@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { fireGoogleAdsConversion } from "@/lib/tracking";
+import { GOOGLE_ADS_CONVERSIONS } from "@/lib/google-ads";
 
 // Map course slugs to relevant portfolio images
 const coursePortfolioImages: Record<string, string> = {
@@ -113,6 +115,7 @@ export default function CourseHero({ course }: { course: Course }) {
               href="https://wa.me/917300001589"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => fireGoogleAdsConversion(GOOGLE_ADS_CONVERSIONS.whatsapp)}
               className="btn bg-white/10 text-white border border-white/20 hover:bg-white/20 px-8 py-4 rounded-lg font-black text-center"
             >
               WhatsApp Us

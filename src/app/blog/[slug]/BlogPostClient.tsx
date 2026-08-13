@@ -57,6 +57,7 @@ function renderContent(content: string) {
       if (matchType === 'img') {
         const stableKey = `img-${match.index}-${match[2]}`;
         parts.push(
+          /* eslint-disable-next-line @next/next/no-img-element */
           <img
             key={stableKey}
             src={match[2]}

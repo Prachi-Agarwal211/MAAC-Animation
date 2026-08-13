@@ -4,6 +4,7 @@ import { useRef, useState, useEffect } from "react";
 import { contactInfo } from "@/data/siteData";
 import Link from "next/link";
 import { fireGoogleAdsConversion } from "@/lib/tracking";
+import { GOOGLE_ADS_CONVERSIONS } from "@/lib/google-ads";
 
 interface FloatingActionsProps {
   variant?: "desktop" | "mobile";
@@ -69,7 +70,7 @@ function DesktopCTA() {
         rel="noopener noreferrer"
         aria-label="Chat on WhatsApp"
         onClick={() =>
-          fireGoogleAdsConversion("AW-827036079/oHxaCInpqO8CEK-jrooD")
+          fireGoogleAdsConversion(GOOGLE_ADS_CONVERSIONS.whatsapp)
         }
         className="group flex items-center justify-end gap-3"
       >
@@ -150,7 +151,7 @@ function MobileBottomNav() {
           target="_blank"
           rel="noopener noreferrer"
           onClick={() =>
-            fireGoogleAdsConversion("AW-827036079/oHxaCInpqO8CEK-jrooD")
+            fireGoogleAdsConversion(GOOGLE_ADS_CONVERSIONS.whatsapp)
           }
           className="flex-1 flex flex-col items-center justify-center py-4 bg-[#25D366]/10 text-[#25D366] rounded-[24px] gap-1 active:scale-[0.95] transition-all"
         >

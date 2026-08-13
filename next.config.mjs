@@ -6,6 +6,7 @@ const nextConfig = {
   experimental: {
     optimizePackageImports: ['lucide-react'],
   },
+  poweredByHeader: false,
   // Enforce no trailing slashes everywhere (canonical URL consistency)
   trailingSlash: false,
   // Image optimization configuration

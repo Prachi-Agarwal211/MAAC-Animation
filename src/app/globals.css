@@ -9,6 +9,20 @@ body {
   width: 100%;
 }
 
+/* Answer-first block — accessible to screen readers & crawlers without breaking visual design */
+.seo-answer-block {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+
 /* ═══════════════════════════════════════════════════════
    MAAC DESIGN SYSTEM v2 — Awwwards-level
    ═══════════════════════════════════════════════════════ */
@@ -2983,3 +2997,65 @@ html {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* Section scroll narrative dot navigation */
+.scroll-narrative {
+  position: fixed;
+  left: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  pointer-events: auto;
+}
+
+@media (max-width: 1024px) {
+  .scroll-narrative {
+    display: none;
+  }
+}
+
+.scroll-narrative-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.25);
+  transition: all 0.3s ease;
+  position: relative;
+  display: flex;
+  align-items: center;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.scroll-narrative-dot:hover,
+.scroll-narrative-dot.active {
+  background-color: #C4A882;
+  transform: scale(1.4);
+}
+
+.scroll-narrative-dot .dot-label {
+  position: absolute;
+  left: 1.5rem;
+  white-space: nowrap;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #C4A882;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: all 0.3s ease;
+  pointer-events: none;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+.scroll-narrative-dot:hover .dot-label,
+.scroll-narrative-dot.active .dot-label {
+  opacity: 1;
+  transform: translateX(0);
+}
+

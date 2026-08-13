@@ -30,7 +30,7 @@ export const isPhoneDevice = (): boolean => {
  */
 export const isDataSaverMode = (): boolean => {
   if (typeof window === 'undefined') return false;
-  const nav = navigator as any;
+  const nav = navigator as Navigator & { connection?: { saveData?: boolean; effectiveType?: string } };
   if (nav.connection) {
     if (nav.connection.saveData) return true;
     if (nav.connection.effectiveType === 'slow-2g' || nav.connection.effectiveType === '2g') return true;

@@ -120,7 +120,7 @@ export async function clearAllData(password: string): Promise<void> {
   });
 }
 
-export async function getAccessLog(password: string): Promise<any[]> {
+export async function getAccessLog(password: string): Promise<Record<string, unknown>[]> {
   const response = await fetch(`${API_URL}`, {
     method: "POST",
     headers: {

@@ -49,7 +49,7 @@ export default function MAACXHero({ onIntroReveal }: Props) {
       setIsMuted(true);
       v.play().catch(() => {});
     });
-  }, [isMuted, isReducedMotion]);
+  }, [isMuted, isReducedMotion, isDataSaver]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -140,12 +140,6 @@ export default function MAACXHero({ onIntroReveal }: Props) {
     return () => cancelAnimationFrame(raf);
   }, [isReducedMotion]);
 
-  const toggleMute = useCallback(() => {
-    const next = !isMuted;
-    setIsMuted(next);
-    if (heroVideoRef.current) heroVideoRef.current.muted = next;
-  }, [isMuted]);
-
   const stats = [
     { icon: GraduationCap, value: "25+", label: "Programs" },
     { icon: Briefcase, value: "95%", label: "Placement" },
@@ -179,6 +173,9 @@ export default function MAACXHero({ onIntroReveal }: Props) {
           {/* Left: Hero Text */}
           <div className="maacx-content min-w-0 max-w-3xl flex-1">
               <h1 className="mb-6 sm:mb-12 maacx-element kinetic-weight" style={{ textShadow: "0 2px 20px rgba(0,0,0,0.8), 0 4px 40px rgba(0,0,0,0.5)" }}>
+              <span className="block font-display text-[clamp(0.7rem,1.6vw,0.95rem)] font-bold uppercase tracking-[0.28em] text-[#C4A882] mb-4">
+                MAAC Animation Institute Jaipur
+              </span>
               <span className="hero-dual-layer block">
                 <span className="hero-text-outline block font-display text-[clamp(1.8rem,4.5vw,3.2rem)] font-bold uppercase leading-[0.9] tracking-[0.1em]" aria-hidden="true">FROM BASICS</span>
                 <span className="hero-text-fill block font-display text-[clamp(1.8rem,4.5vw,3.2rem)] font-bold uppercase leading-[0.9] tracking-[0.1em] text-white">FROM BASICS</span>

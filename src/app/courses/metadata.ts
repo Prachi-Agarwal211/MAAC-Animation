@@ -1,9 +1,10 @@
 import { Metadata } from "next";
+import { clampTitle } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Animation & VFX Courses in Jaipur | MAAC Institute",
+  title: clampTitle("Animation & VFX Courses in Jaipur | MAAC Institute"),
   description:
-    "Explore MAAC Jaipur's courses: 3D Animation, VFX, Game Design, Filmmaking, Digital Media. B.Voc Degree + Diplomas. NSDC Certified. 95% Placement.",
+    "Explore MAAC Jaipur's courses: 3D Animation, VFX, Game Design, Filmmaking, Digital Media. B.Voc + diplomas. NSDC certified. Placement support.",
   keywords: [
     "animation courses jaipur",
     "vfx course fees jaipur",
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
     "game design course jaipur",
     "3d animation diploma",
     "digital filmmaking course",
-    "best animation institute rajasthan",
+    "animation institute rajasthan",
     "maac course fees",
   ],
   openGraph: {
