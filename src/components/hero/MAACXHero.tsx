@@ -172,7 +172,7 @@ export default function MAACXHero({ onIntroReveal }: Props) {
         <div className="flex w-full flex-col gap-10 md:gap-16 lg:flex-row lg:items-end lg:justify-between lg:gap-12">
           {/* Left: Hero Text */}
           <div className="maacx-content min-w-0 max-w-3xl flex-1">
-              <h1 className="mb-6 sm:mb-12 maacx-element kinetic-weight" style={{ textShadow: "0 2px 20px rgba(0,0,0,0.8), 0 4px 40px rgba(0,0,0,0.5)" }}>
+              <p className="mb-6 sm:mb-12 maacx-element kinetic-weight" style={{ textShadow: "0 2px 20px rgba(0,0,0,0.8), 0 4px 40px rgba(0,0,0,0.5)" }}>
               <span className="block font-display text-[clamp(0.7rem,1.6vw,0.95rem)] font-bold uppercase tracking-[0.28em] text-[#C4A882] mb-4">
                 MAAC Animation Institute Jaipur
               </span>
@@ -184,7 +184,7 @@ export default function MAACXHero({ onIntroReveal }: Props) {
                 <span className="hero-text-outline block font-display text-[clamp(1.8rem,4.5vw,3.2rem)] font-bold uppercase leading-[0.9] tracking-[0.1em] italic" aria-hidden="true">TO PORTFOLIO</span>
                 <span className="hero-text-fill block font-display text-[clamp(1.8rem,4.5vw,3.2rem)] font-bold uppercase leading-[0.9] tracking-[0.1em] metallic-gold-text italic">TO PORTFOLIO</span>
               </span>
-            </h1>
+            </p>
 
             <div className="flex flex-col gap-12">
               <a

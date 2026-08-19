@@ -227,7 +227,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${manrope.variable} ${syne.variable}`}>
+    <html lang="en-IN" className={`${manrope.variable} ${syne.variable}`}>
       <head>
         <script
           dangerouslySetInnerHTML={{

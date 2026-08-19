@@ -1,4 +1,4 @@
-{
+﻿{
   "name": "maac-website",
   "version": "0.1.0",
   "private": true,
@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "indexnow": "node scripts/submit-indexnow.mjs",
+    "validate:jsonld": "node scripts/validate-jsonld.mjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

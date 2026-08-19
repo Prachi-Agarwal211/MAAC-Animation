@@ -9,17 +9,16 @@ body {
   width: 100%;
 }
 
-/* Answer-first block — accessible to screen readers & crawlers without breaking visual design */
+/* Visible answer-first copy. Never clip or display:none — scanners drop hidden text. */
 .seo-answer-block {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
+  position: relative;
+  z-index: 20;
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 1.25rem 1.25rem 0;
+  color: rgba(240, 235, 225, 0.82);
+  font-size: 0.95rem;
+  line-height: 1.65;
 }
 
 

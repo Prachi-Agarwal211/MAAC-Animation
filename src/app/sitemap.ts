@@ -95,5 +95,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     ...blogUrls,
+
+    // Legal Pages
+    {
+      url: `${base}/privacy-policy`,
+      lastModified: reviewed,
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
+    {
+      url: `${base}/terms-of-service`,
+      lastModified: reviewed,
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
   ];
 }

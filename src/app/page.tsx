@@ -12,6 +12,7 @@ import ApplyNow from "@/components/ApplyNow";
 import FAQSection from "@/components/FAQSection";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import Placements from "@/components/Placements";
+import HomeCrawlContent from "@/components/HomeCrawlContent";
 
 // Client Components (Complex animations/state)
 import MAACXHero from "@/components/hero/MAACXHero";
@@ -41,9 +42,6 @@ export default function Home() {
 
   return (
     <div className="relative">
-      <section className="seo-answer-block speakable-summary">
-        MAAC Animation Jaipur is an animation and VFX institute in C-Scheme, Jaipur (est. 1998). The centre offers B.Voc, diploma and short courses in 3D Animation, Visual Effects, Game Design and Digital Filmmaking, with NSDC and MESC certification and dedicated placement support. Graduates work at studios including DNEG, MPC, Prime Focus and Ubisoft. Call +91-7300001589 for admissions.
-      </section>
       <ScrollNarrative />
       <script
         type="application/ld+json"
@@ -58,6 +56,7 @@ export default function Home() {
 
       <div className="relative z-10 bg-transparent">
         <ErrorBoundary>
+          <HomeCrawlContent />
 
           <div id="features" className="relative z-10 bg-transparent">
             <Suspense fallback={<div className="h-[100vh] bg-black/20 animate-pulse" />}>
